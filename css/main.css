@@ -1,6 +1,5 @@
-a         { color: black; }
+a, a:visited { color: black; }
 a:hover   { color: black; text-decoration: underline; }
-a:visited { color: black; }
 
 body {
   font-family: 'Cabin', sans-serif;
@@ -8,7 +7,7 @@ body {
 }
 
 header nav.navbar {
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 #main {
@@ -70,21 +69,14 @@ header nav .container div a {
 }
 
 footer {
-  font-size: 80%;
-  color: #666;
-  border-top: 4px solid #eee;
-  margin-top: 2em;
+  color: white;
+  background-color: black;
   overflow: hidden;
+  min-height: 2em;
 }
 
-footer .rss {
-  margin-top: 1.1em;
-  margin-right: -.2em;
-  float: right;
-}
-
-footer .rss img {
-  border: 0;
+footer a, footer a:visited, footer a:hover {
+  color: white;
 }
 
 .post {

@@ -3,6 +3,7 @@
     <head>
       <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
       <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{{ page.title }}</title>
@@ -50,6 +51,9 @@
               {{ content }}
           </div>
           <footer>
+            <div class="container">
+              <a id="footer-rss-link" href="/feed.xml"><i class="fa fa-rss"></i> Subscribe to RSS feed</a>
+            </div>
           </footer>
         <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
