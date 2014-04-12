@@ -1,6 +1,6 @@
-a         { color: #00a; }
-a:hover   { color: #000; }
-a:visited { color: #a0a; }
+a         { color: black; }
+a:hover   { color: black; text-decoration: underline; }
+a:visited { color: black; }
 
 body {
   font-family: 'Cabin', sans-serif;
@@ -61,12 +61,6 @@ article header > div span {
   line-height: 1.75em;
 }
 
-.posts span {
-  color: #aaa;
-  font-family: Monaco, "Courier New", monospace;
-  font-size: 80%;
-}
-
 header nav .container div {
   color: #aaa;
 }
@@ -81,15 +75,6 @@ footer {
   border-top: 4px solid #eee;
   margin-top: 2em;
   overflow: hidden;
-}
-
-footer .contact {
-  float: left;
-  margin-right: 3em;
-}
-
-footer .contact a {
-  color: #8085C1;
 }
 
 footer .rss {
