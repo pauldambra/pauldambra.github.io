@@ -1,0 +1,60 @@
+--- title: "Semantic Merge pushes my tree" layout: "post" permalink: "/Semantic-Merge-pushes-my-tree.html" uuid: "4017626981353819758" guid: "tag:blogger.com,1999:blog-6728560442491983758.post-4017626981353819758" date: "2013-09-04 20:24:00" updated:
+"2013-09-04 20:24:24" description: blogger: siteid: "6728560442491983758" postid: "4017626981353819758" comments: "0" categories: author: name: "Paul D'Ambra" url: "https://plus.google.com/114260096260757534167?rel=author" image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5Duf0/s512-c/photo.jpg"
+published: "false" ---
+
+<div>
+    <br />
+    <br />first tag v 0.1 =&gt; Added The Chorus
+    <br />
+    <br />then add verse one and short verse one at line 14
+    <br />p4merge has two conflicts - it can't tell between the two added methods
+    <br />semantic merge has one conflict - it knows the two methods are different. It just can't know how BringTheMagic should be resolved (although it has a damn good guess
+    <br />
+    <br />
+    <br />public string BringTheMagic() {
+    <br /><span class="Apple-tab-span" style="white-space: pre;"> </span>return new StringBuilder()
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(Chorus())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(FirstVerse())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(Chorus())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(ShortVerseOne())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(Chorus())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(Chorus())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(ShortVerseTwo())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.Append(Chorus())
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.ToString();
+    <br />}
+    <br />
+    <br />public string Chorus() {
+    <br /><span class="Apple-tab-span" style="white-space: pre;"> </span>return new StringBuilder()
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("Ag-a-doo-doo-doo, push pineapple, shake the tree")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("Aga-doo-doo-doo, push pineapple, grind coffee")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("To the left, to the right, jump up and down and to the knees")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("Come and dance every night, sing with a hula melody")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.ToString();
+    <br />}
+    <br />
+    <br />public string FirstVerse() {
+    <br /><span class="Apple-tab-span" style="white-space: pre;"> </span>return new StringBuilder()
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("I met a hula mistress somewhere in Waikiki")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("Well she was sellin' pineapple, playin' ukulele")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("And when I went to the girl, come on and teach me to sway")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("She laughed and whispered to me, yes come tonight to the bay")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("The lovely beach, in the sky the moon of Kauai")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("Around calypso sarong we'll all be singin' this song")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.ToString();
+    <br />}
+    <br />
+    <br />public string ShortVerseOne() {
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>return new StringBuilder()
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("And down on the shore they gather romance")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("She showed me much more, not only to dance...")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.ToString();
+    <br />}
+    <br />
+    <br />public string ShortVerseTwo() {
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>return new StringBuilder()
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("The lovely beach, in the sky the moon of Kauai")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.AppendLine("Around calypso sarong we'll all be singin' this song")
+    <br /><span class="Apple-tab-span" style="white-space: pre;">  </span>.ToString();
+    <br />}
+    </div>

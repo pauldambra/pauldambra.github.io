@@ -1,39 +1,47 @@
-/*****************************************************************************/
-/*
-/* Common
-/*
-/*****************************************************************************/
-
-/* Global Reset */
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html, body { height: 100%; }
-
-body {
-  background-color: #FFF;
-  font: 13.34px Helvetica, Arial, sans-serif;
-  font-size: small;
-  min-height: 600px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-size: 100%; }
-
-h1 { margin-bottom: 1em; }
-p { margin: 1em 0; }
-
 a         { color: #00a; }
 a:hover   { color: #000; }
 a:visited { color: #a0a; }
 
-/*****************************************************************************/
-/*
-/* Home
-/*
-/*****************************************************************************/
+body {
+  font-family: 'Cabin', sans-serif;
+}
+
+#sitename {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+article header {
+  border-bottom: black solid 2px;
+  height:75px;
+}
+
+article header h1 {
+  font-size: 150%;  
+  margin-top: 0;
+  margin-bottom: 0;
+  -webkit-margin-before:0;
+  -webkit-margin-after:0;
+}
+
+article header > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+article header #date {
+  margin-right: 25px;
+}
+
+article header #title {
+    line-height: 75px;
+}
+
+article header > div span {
+  display: block;
+  text-align: center;
+}
+
 .posts {
   list-style-type: none;
   margin-bottom: 2em;
@@ -49,16 +57,11 @@ a:visited { color: #a0a; }
   font-size: 80%;
 }
 
-header a.extra {
+header nav .container div {
   color: #aaa;
-  margin-left: 1em;
 }
 
-header a.extra:hover {
-  color: #000;
-}
-
-.meta {
+header nav .container div a {
   color: #aaa;
 }
 
@@ -89,13 +92,10 @@ footer .rss img {
   border: 0;
 }
 
-/*****************************************************************************/
-/*
-/* Posts
-/*
-/*****************************************************************************/
+.post {
+  margin-top: 5px;
+}
 
-/* standard */
 .post pre {
   border: 1px solid #ddd;
   background-color: #eef;
