@@ -4,6 +4,16 @@ a:visited { color: #a0a; }
 
 body {
   font-family: 'Cabin', sans-serif;
+  background-color: #aaa;
+}
+
+header nav.navbar {
+  margin-bottom: 5px;
+}
+
+#main {
+  background-color: white;
+  padding:20px 10px;
 }
 
 #sitename {
