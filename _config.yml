@@ -1,3 +1,5 @@
-name: Your New Jekyll Site
+name: Mindless Rambling Nonsense
 markdown: redcarpet
 pygments: true
+description: My thoughts are mindless and rambling so the best place for them is the internet
+url: http://pauldambra.github.io
