@@ -1,6 +1,11 @@
 a, a:visited { color: black; }
 a:hover   { color: black; text-decoration: underline; }
 
+#disqus_thread {
+  margin-top: 10px;
+  border-top: solid 1em #aaa;
+}
+
 body {
   font-family: 'Cabin', sans-serif;
   background-color: #aaa;
