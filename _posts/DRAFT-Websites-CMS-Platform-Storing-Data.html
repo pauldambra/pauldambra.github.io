@@ -18,32 +18,19 @@ image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5
 published: "false" 
 ---
 
-<div>
-    <br />This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS platform is comparable to building one with a known CMS. <a href="http://mindlessramblingnonsense.blogspot.co.uk/2014/02/websites-cms.html">See the first post for an explanation of why</a>
-    <br
-    />
-    <br />
-    <div style="text-align: right;"><a href="http://mindlessramblingnonsense.blogspot.co.uk/2014/03/website-cms-display-pages-part-2.html" style="float: left;">Previous Post</a><a href="https://www.blogger.com/blogger.g?blogID=6728560442491983758&amp;pli=1#" style="display: none; float: right;">Next Post</a>
-    </div>
-    <h1 style="clear: both;">Storing Data</h1>
-    <div>After a day writing DDL for a project that has manual schema versioning against MS SQL and is going through a lot of changes I feel honour bound to write a post about storing data in the Omniclopse site.</div>
-    <div>
-        <br />
-    </div>
-    <div>I'll be using MongoDB for two reasons.&nbsp;</div>
-    <div>
-        <br />
-    </div>
-    <div>
-        <ol>
-            <li>The implicit schema of a NoSQL database is awesome when you're not sure of the final shape of the data.</li>
-            <li>Storing a data structure that's almost definitely going to be sent over the wire as JSON as... JSON makes a lot of sense to me.</li>
-        </ol>
-    </div>
-    <h1>First Steps</h1>
-    <div>At least for now each view will have its own document in the database (At the moment there's only one view! so why complicate things).
-        <br />
-        <br />
-        <br />
-    </div>
-   </div>
+This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS platform is comparable to building one with a known CMS. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
+
+[Previous Post]({% 2014-03-25-testing-with-browserstack-and-selenium %})
+
+Storing Data
+============
+After a day writing DDL for a project that has manual schema versioning against MS SQL and is going through a lot of changes I feel honour bound to write a post about storing data in the Omniclopse site.
+
+I'll be using MongoDB for two reasons.
+    
+1. The implicit schema of a NoSQL database is awesome when you're not sure of the final shape of the data.
+2. Storing a data structure that's almost definitely going to be sent over the wire as JSON as... JSON makes a lot of sense to me.
+
+First Steps
+===========
+At least for now each view will have its own document in the database (At the moment there's only one view! so why complicate things).
