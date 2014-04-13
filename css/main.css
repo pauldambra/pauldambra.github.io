@@ -25,6 +25,10 @@ header nav.navbar {
   font-weight: bold;
 }
 
+article a {
+  text-decoration: underline;
+}
+
 article header {
   border-bottom: black solid 2px;
   height:75px;
