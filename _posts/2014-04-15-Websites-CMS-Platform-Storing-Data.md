@@ -11,7 +11,7 @@ keywords: mongojs express node nosql mongodb
 published: "false" 
 ---
 
-This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS platform is comparable to building one with a known CMS. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
+This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
 
 [Previous Post]({% post_url 2014-03-25-testing-with-browserstack-and-selenium %})
 
@@ -50,12 +50,6 @@ app.get('/', function(req, res){
     });
 });
 {% endhighlight %}
-
-This raises three points:
-
-1. An error page (and tests for it?) is required
-2. A 404 page (and tests for it) is required
-3. The app's tests will need to be able to mock the MongoDB.
 
 Error Pages
 ===========
@@ -108,10 +102,10 @@ Ah, but...
 
 Run Tests against a different database instance
 ===============================================
-Much simpler than mocking the DB is simply running against a test copy of the DB. Very little code to write and the best code is the code you (I?) don't write.
+Much simpler than mocking the DB (and because I couldn't figure out how to mock it without breaking SuperTest) is simply running against a test copy of the DB. Very little code to write and the best code is the code you (I?) don't write.
 
 The code to intialise the database becomes
-{% highlight js %}
+{% highlight js %}i
 var dbName = process.env.NODE_ENV === 'test' ? 'omnitest' : 'omniclopse';
 var db = mongojs(dbName, ['pages']);
 {% endhighlight %}
@@ -125,3 +119,49 @@ beforeEach(function() {
     server = require('../server').app;
 });
 {% endhighlight %}
+
+Now Mocha tests all pass and running the site gives
+<p><img src="/images/home404.png" alt="404 page" class="img-responsive img-thumbnail"/></p>
+
+After adding `{name:'home',carouselImages:[],panels:[]}` to the pages collection using the terminal and reloading the page
+<p><img src="/images/homeBare.png" alt="empty page" class="img-responsive img-thumbnail"/></p>
+
+Adding an array of carousel images to the home document:
+
+{% highlight json %}
+db.pages.update({name: 'home' },
+                {$set: {
+                          carouselImages: [
+                            {
+                              url:'http://www.fillmurray.com/900/300',
+                              alt:'Bill Murray',
+                              caption:'Bill Murray'
+                            },
+                            {
+                              url:'http://www.placecage.com/900/300',
+                              alt:'Nick Cage',
+                              caption:'Nick Cage'
+                            },
+                            {
+                              url:'http://www.nicenicejpg.com/900/300',
+                              alt:'Vanilla Ice',
+                              caption:'Vanilla Ice'
+                            }
+                          ]
+                        }
+                })
+{% endhighlight %}
+
+results in:
+<p><img src="/images/homeCarousel.png" alt="partial page" class="img-responsive img-thumbnail"/></p>
+
+Adding an array of panels to the home document results in the desired home page:
+<p><img src="/images/homeFull.png" alt="full page" class="img-responsive img-thumbnail"/></p>
+
+E Voila
+=======
+Very little code, very little effort and the page data is being loaded from the database. Hurrah!
+
+Next
+====
+I'll be adding authentication so that we can then allow an admin user at Omniclopse HQ to change and add data
