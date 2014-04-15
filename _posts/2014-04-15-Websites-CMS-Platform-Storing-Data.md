@@ -42,7 +42,7 @@ app.get('/', function(req, res){
         if (err) {
             res.render('500', {error: err});
         } 
-        if (doc) {
+        else if (doc) {
             res.render('home', doc);
         } else {
             res.render('404');
