@@ -105,7 +105,7 @@ Run Tests against a different database instance
 Much simpler than mocking the DB (and because I couldn't figure out how to mock it without breaking SuperTest) is simply running against a test copy of the DB. Very little code to write and the best code is the code you (I?) don't write.
 
 The code to intialise the database becomes
-{% highlight js %}i
+{% highlight js %}
 var dbName = process.env.NODE_ENV === 'test' ? 'omnitest' : 'omniclopse';
 var db = mongojs(dbName, ['pages']);
 {% endhighlight %}
