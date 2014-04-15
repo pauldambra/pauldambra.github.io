@@ -51,6 +51,8 @@ app.get('/', function(req, res){
 });
 {% endhighlight %}
 
+I think this code is a bit ugly but we'll be coming back to the server later on!
+
 Error Pages
 ===========
 Adding the 404 and 500 pages is straightforward. 
