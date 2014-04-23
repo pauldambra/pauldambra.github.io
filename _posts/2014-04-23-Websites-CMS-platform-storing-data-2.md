@@ -4,8 +4,8 @@ layout: "post"
 permalink: "/Websites-CMS-Platform-Storing-Data2.html" 
 uuid: "5203142603744123699" 
 guid: "tag:blogger.com,1999:blog-6728560442491983758.post-5203142603744123699" 
-date: "2014-04-12 08:11:00"
-updated: "2014-04-12 08:11:30" 
+date: "2014-04-23 08:11:00"
+updated: "2014-04-23 08:11:30" 
 description: storing data using mongo, mongojs and express
 keywords: mongojs express node nosql mongodb
 published: "false" 
