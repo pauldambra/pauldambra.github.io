@@ -1,9 +1,8 @@
 --- 
 title: "Websites != CMS Platform - Logging in to the site" 
 layout: "post" 
-permalink: "/logging-in.html" 
-date: "2014-04-23 08:11:00"
-updated: "2014-04-23 08:11:30" 
+permalink: "/websites-CMS-platform-logging-in.html" 
+date: "2014-04-27 08:11:00"
 description: user management and logging in with nodejs mongo and passport
 keywords: node mongo mongodb nodejs bcrypt passport cms logging-in
 published: "false" 
