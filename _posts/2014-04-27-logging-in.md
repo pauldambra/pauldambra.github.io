@@ -95,7 +95,7 @@ This function takes a database parameter so that the tests and the command line 
 
 (but not _right_ now)
 
-as an aside a [a colleague](https://twitter.com/LemoncogFoReal) just spotted how smelly this code is [in a screenshot on twitter from across a room!](https://twitter.com/LemoncogFoReal/status/468024884741013504) 
+as an aside - [a colleague](https://twitter.com/LemoncogFoReal) just spotted how smelly this code is [in a screenshot on twitter from across a room!](https://twitter.com/LemoncogFoReal/status/468024884741013504) 
 
 Logging in Tests
 ============
