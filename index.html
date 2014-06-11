@@ -4,12 +4,11 @@ title: Mindless Rambling Nonsense
 ---
 
 <div id="home" class="col-md-8 col-sm-12">
-  <h1>Posts</h1>
   <ul class="posts">
     {% for post in site.posts %}
       <li>
-      	<a href="{{ post.url }}">
-      		{{ post.date | date_to_string }}
+      	<a href="{{ post.url }}" class="post-list">
+      		<span class="post-date">{{ post.date | date_to_string }}</span>
       		&raquo; 
       		{{ post.title }}
       	</a>

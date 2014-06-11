@@ -1,3 +1,37 @@
+span.post-date {
+  color: white;
+  background-color: #222;
+  padding: 1px 3px;
+  border-radius: 8px;
+  width: 88px;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+a.post-list:hover {
+  color: white;
+  background-color: #222;
+  text-decoration: none;
+  padding: 1px 3px 1px 0;
+  border-radius: 4px;
+  -o-transition:.25s;
+  -ms-transition:.25s;
+  -moz-transition:.25s;
+  -webkit-transition:.25s;
+  transition:.25s;
+}
+
+figcaption {
+    margin: 10px 0 0 0;
+    font-variant: small-caps;
+    font-weight: bold;
+    text-align: center;
+}
+figure {
+  display:inline-block;
+}
+
 a, a:visited { color: black; }
 a:hover   { color: black; text-decoration: underline; }
 
