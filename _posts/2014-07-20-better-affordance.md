@@ -96,7 +96,10 @@ The important bits here are:
 ##The positioning
 Using the `[contenteditable]` rule to set `position:relative` on the editable elements means we can add an element as a child with `.editable-afforance` as one of its classes. That class has a rule that sets `position:absolute` and some positioning to put the element top left (but those positions are passed in so don't need to be top left).
 
-Positioning something absolutely inside something that is positioned relatively positions the child in relation to the parent. Giving an element that indicates something is editable but doesn't push its content out of the way. 
+Positioning something absolutely inside something that is positioned relatively positions the child in relation to the parent (<a href="http://www.amazon.co.uk/gp/product/B00EZ3Y5RW/ref=as_li_ss_tl?ie=UTF8&camp=1634&creative=19450&creativeASIN=B00EZ3Y5RW&linkCode=as2&tag=mindlramblnon-21">see - CSS is straight-forward</a><img src="http://ir-uk.amazon-adsystem.com/e/ir?t=mindlramblnon-21&l=as2&o=2&a=B00EZ3Y5RW" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+). 
+
+Giving an element that indicates something is editable but doesn't push that editable content out of its way. 
 
 #No blue outline
 Adding `user-select:none` means that when the editable element is selected the browser doesn't (shouldn't?) add its default outline that indicates the item is selected.
