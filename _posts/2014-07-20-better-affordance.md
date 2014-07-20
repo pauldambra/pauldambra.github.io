@@ -105,7 +105,7 @@ Giving an element that indicates something is editable but doesn't push that edi
 Adding `user-select:none` means that when the editable element is selected the browser doesn't (shouldn't?) add its default outline that indicates the item is selected.
 
 #The magic
-`@include animation('darkpulse 2.5s infinite ease-in');` is where the magic happens.
+The `@include animation('dark pulse...` is where the magic happens.
 
 [The animation.scss file](https://github.com/pauldambra/omniclopse/blob/1c99d8bd370132cad5c50ee6b0c97e5f4c9c4cdc/scss/animation.scss) has some scss goodness that pumps out browser specific versions of the rules required for the pulse effect. That complexity also hides what's going on somewhat.
 
