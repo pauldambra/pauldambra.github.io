@@ -16,8 +16,13 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 In the last post I wasn't happy with the visual affordance that a page element is editable.
 
 <figure>
-	<img src="/images/unhappiness.png" alt="proof if proof be need be" class="img-responsive img-thumbnail"/>
-	<figcaption>proof if proof be need be</figcaption>
+<figure>
+	<img src="/images/affordance-loggedout.png" alt="editable sections for anonymous users" class="img-responsive img-thumbnail"/>
+	<figcaption>Appearance when logged out</figcaption>
+</figure>
+<figure>
+	<img src="/images/affordance-loggedin.png" alt="editable sections for anonymous users" class="img-responsive img-thumbnail"/>
+	<figcaption>Appearance when logged in</figcaption>
 </figure>
 
 I also wasn't happy that the page elements shifted around as alerts were added to the screen.
