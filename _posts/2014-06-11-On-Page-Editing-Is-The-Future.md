@@ -139,7 +139,7 @@ The main HTML page is then set to include that JS **when a user is logged in**
 {% endraw %}  
 {% endhighlight %}
 
-### Monitor the page for changes
+### <a name="edit-event-js">Monitor the page for changes</a>
 The first task is to watch any contenteditable elements for changes to their content and to do _something_ when a change is detected
 
 {% highlight js %}
