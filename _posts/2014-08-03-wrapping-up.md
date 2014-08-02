@@ -39,7 +39,7 @@ My initial to-do list was to build a site that:
 #Aims
 
 ###No heavy frameworks need apply
-My initial aim was to prove to myself that there's a lot of avoidable friction using a big framework like Django when building a CMS site. I still feel that's true and I haven't discovered anything in this process that changes my mind (yeah, confirmation bias).
+My initial aim was to prove to myself that there's a lot of friction using a big framework like Django when building a CMS site and that can be avoided. I still feel that's true and I haven't discovered anything in this process that changes my mind (yeah, confirmation bias).
 
 * Implementing login was a pain - but it *always* is...
 * I switched backwards and forwards between view engines as I came to terms with express
