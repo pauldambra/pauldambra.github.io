@@ -1,5 +1,5 @@
 ---
-title: "Static Factories FTW"
+title: "Static Factory Methods FTW"
 layout: "post"
 permalink: "/static-factories.html"
 date: "2014-09-13"
@@ -7,7 +7,7 @@ description: using static factories to improve discoverability
 keywords: code pedanticism constructors readability
 ---
 
-# Static Factories FTW
+# Static Factory Methods FTW
 
 It is relatively common to find (or write) a line of code like this
 
