@@ -1,7 +1,7 @@
 ---
 title: "Static Factory Methods FTW"
 layout: "post"
-permalink: "/static-factories.html"
+permalink: "/static-factory-methods.html"
 date: "2014-09-13"
 description: using static factories to improve discoverability
 keywords: code pedanticism constructors readability
