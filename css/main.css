@@ -95,6 +95,7 @@ article header > div span {
 .posts {
   list-style-type: none;
   margin-bottom: 2em;
+  padding: 0;
 }
 
 .posts li {
