@@ -74,7 +74,7 @@ So...
 
 YAML
 ============
-YAML or YAML Ain't Markup Language is a ["YAML is a human friendly data serialization
+YAML or YAML Ain't Markup Language is a ["human friendly data serialization
   standard for all programming languages."](http://www.yaml.org/). There's more to learn about [yaml in ruby here](http://yaml4r.sourceforge.net/doc/)
 
 For each build config add a yaml file. In this example case I added a release.yaml file to the Build/templates folder:
