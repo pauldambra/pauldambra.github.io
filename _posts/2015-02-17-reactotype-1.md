@@ -3,8 +3,8 @@ title: "Reactotype Part 1"
 layout: "post" 
 permalink: "/reactotype/part-one.html" 
 date: "2015-02-17 14:00:00"
-description: "when and why to use a struct as a value object in C#"
-keywords: dotnet .net struct value objects
+description: "exploring ReactJS"
+keywords: reactjs js yeoman gulp html css web
 ---
 
 React Part 1
