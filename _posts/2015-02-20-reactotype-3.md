@@ -7,9 +7,6 @@ description: "exploring ReactJS"
 keywords: reactjs js yeoman gulp html css web tdd mocha
 ---
 
-React Part 3
-============
-
 At the end of the last post I realised I'd sacrificed some good practice in the blind rush to make it work (i.e. worked normally like all those other guilty software engineers everywhere everyday.)
 
 So earlier today I played with the kids to tire them out enough that I could distract them with television and write some #holidaycode because I am a good(-ish) parent.

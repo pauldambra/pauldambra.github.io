@@ -1,12 +1,7 @@
 span.post-date {
-  color: white;
-  background-color: #222;
+  color: darkgray;
   padding: 1px 3px;
-  border-radius: 8px;
-  width: 88px;
   display: inline-block;
-  text-align: center;
-  margin-bottom: 5px;
 }
 
 a.post-list:hover {
@@ -42,7 +37,6 @@ a:hover   { color: black; text-decoration: underline; }
 
 body {
   font-family: 'Cabin', sans-serif;
-  background-color: #aaa;
 }
 
 header nav.navbar {

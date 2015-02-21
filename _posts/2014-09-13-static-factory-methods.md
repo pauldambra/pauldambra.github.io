@@ -7,8 +7,6 @@ description: using static factories to improve discoverability
 keywords: code pedanticism constructors readability
 ---
 
-# Static Factory Methods FTW
-
 It is relatively common to find (or write) a line of code like this
 
 {% highlight csharp %}

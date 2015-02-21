@@ -7,9 +7,6 @@ description: "when and why to use a struct as a value object in C#"
 keywords: dotnet .net struct value objects
 ---
 
-Fun with Structs
-================
-
 We had a brief conversation at work the other day about extending a type to make our code clearer...
 
 {% highlight c# %}

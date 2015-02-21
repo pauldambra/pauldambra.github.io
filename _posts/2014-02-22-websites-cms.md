@@ -10,8 +10,6 @@ author:
     image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5Duf0/s512-c/photo.jpg"
 ---
 
-#What the wat?!
-
 I was once complaining about having difficulty setting up a very slightly unusual feature in a Drupal site that was taking forever to achieve. The framework made so many assumptions about what I should do that it wouldn't let me do what I wanted to.
 
 A freelancer commented that if he was quoting on a project that had a requirement that it use a given CMS he didn't quote any less than building from scratch. He had found it didn't make enough difference to the effort he'd spend...

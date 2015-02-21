@@ -4,20 +4,9 @@ title: Mindless Rambling Nonsense
 ---
 
 <div id="home" class="col-md-8 col-sm-12">
-  <ul class="posts">
     {% for post in site.posts %}
-      <li>
-      	<a href="{{ post.url }}" class="post-list">
-      		<span class="post-date">{{ post.date | date_to_string }}</span>
-      		&raquo; 
-      		{{ post.title }}
-      	</a>
-      </li>
+    <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
+    {{ post.excerpt }}
+    <span class="post-date">posted on: {{ post.date | date_to_string }}</span>
     {% endfor %}
-  </ul>
-</div>
-
-<div class="col-md-4 hidden-sm hidden-xs">
-	<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/pauldambra" data-widget-id="455007488622854144">Tweets by @pauldambra</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>

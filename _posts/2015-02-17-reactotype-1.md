@@ -7,9 +7,6 @@ description: "exploring ReactJS"
 keywords: reactjs js yeoman gulp html css web
 ---
 
-React Part 1
-=================
-
 ####part one because I've got a feeling this is a topic about which I'll be able to bang on.
 
 [React JS](http://facebook.github.io/react/index.html) was made by Facebook to be the V in MVC. In other words it only deals with the UI. It's sold as being fast - both for performance and development. A definitely contentious part of React is that it mushes JS and HTML together... More specifically you put HTML _inside_ the JS not vice versa.

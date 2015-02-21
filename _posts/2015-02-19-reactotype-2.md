@@ -7,9 +7,6 @@ description: "exploring ReactJS"
 keywords: reactjs js yeoman gulp html css web
 ---
 
-React Part 2
-============
-
 I posted about my [impressions of working with React](/reactotype/part-one.html) slowly building an HTML table and banging on about it. I ended that post with one of the more memorable cliff-hangers in recent time.
 
 > Sorting and Filtering the Table
