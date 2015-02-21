@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Khula:400,600,700);
+
 span.post-date {
   color: darkgray;
   padding: 1px 3px;
@@ -36,7 +38,7 @@ a:hover   { color: black; text-decoration: underline; }
 }
 
 body {
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Khula', sans-serif;
 }
 
 header nav.navbar {
