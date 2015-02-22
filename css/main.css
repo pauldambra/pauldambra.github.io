@@ -6,6 +6,19 @@ span.post-date {
   display: inline-block;
 }
 
+.excerpt {
+  -o-transition:1s;
+  -ms-transition:1s;
+  -moz-transition:1s;
+  -webkit-transition:1s;
+  transition:1s;
+}
+
+.excerpt:hover {
+  background-color: rgba(245,245,245, 0.5);
+  border-radius: 5px;
+}
+
 a.post-list:hover {
   color: white;
   background-color: #222;
@@ -39,6 +52,14 @@ a:hover   { color: black; text-decoration: underline; }
 
 body {
   font-family: 'Khula', sans-serif;
+}
+
+nav {
+  padding-top:5px;
+}
+
+nav p {
+  margin: 0;
 }
 
 header nav.navbar {
