@@ -22,9 +22,6 @@ This post is part of a series where I'm hoping to prove to myself that building 
 
 <a href="http://mindlessramblingnonsense.blogspot.co.uk/2014/03/websites-cms-displaying-pages.html">Previous Post</a>
 
-Page Design
-===========
-
 In his awesome book, "Don't Make Me Think"&nbsp;<a href="http://www.amazon.co.uk/gp/product/0321965515/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1634&amp;creative=6738&amp;creativeASIN=0321965515&amp;linkCode=as2&amp;tag=mindlramblnon-21" target="_blank">(shameless affiliate link)</a>,&nbsp;Steve Krug drives home the message that time spent figuring out how your site is supposed to work is not time spent deciding to engage with your site. So, we're not going to do any ground-breaking design work for this company web page.
 
 <!--more-->

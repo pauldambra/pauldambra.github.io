@@ -12,7 +12,6 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/better-affordance-js.html)
 
-#Wrapping Up
 I've been banging this drum into the internet's echo chamber for five months now and enough is enough!
 
 <!--more-->

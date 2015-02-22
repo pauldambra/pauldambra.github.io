@@ -26,11 +26,11 @@ Browserstack
 ============
 I love [Browserstack's awesome service](http://www.browserstack.com/). It allows you to test your websites on different browsers and operating systems. Helping reduce the need to have access to physical devices for testing and reproducing bugs.
 
-<!--more-->
-
 Selenium WebDriver
 ==================
 BrowserStack allow automation using a Selenium web driver. You can access this with Python, Ruby, Java, C#, Perl, PHP, or Node.js. It is also possible to test publicly or locally available sites using BrowserStack.
+
+<!--more-->
 
 However, after a couple of hours trying to write tests following <a href="http://www.browserstack.com/automate/node" target="_blank">the documentation</a> and attacking Google I wasn't getting very far. I was able to run tests on Browserstack and take screenshots to prove the page was loaded but I couldn't assert against the page. Frustration had begun to build!
 

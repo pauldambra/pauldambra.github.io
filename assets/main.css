@@ -17,6 +17,7 @@
   -moz-transition:1s;
   -webkit-transition:1s;
   transition:1s;
+  margin-bottom: 20px;
 }
 
 .excerpt:hover {
@@ -87,7 +88,6 @@ article a {
 
 article header {
   border-bottom: black solid 2px;
-  height:75px;
 }
 
 article header h1 {

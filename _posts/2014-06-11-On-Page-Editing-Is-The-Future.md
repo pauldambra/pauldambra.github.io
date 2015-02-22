@@ -13,8 +13,8 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/Websites-CMS-Platform-Storing-Data2.html)
 
-# On Page Editing of Data
-#### A.K.A. No More CMS-y Admin Section?
+A.K.A. No More CMS-y Admin Section?
+
 A traditional CMS framework or website has an admin section for logged in users. That section has a menu showing them which sections the user can edit and each section has a list of the pages they can edit and then the user can edit the text or upload images using a WYSIWYG editor. 
 
 Don't fix it if it aint broken but... but... HTML5 includes [the `contenteditable` attribute](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_Editable) which makes (the text of) almost any element editable. 

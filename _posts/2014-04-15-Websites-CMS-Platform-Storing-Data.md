@@ -15,8 +15,6 @@ This post is part of a series where I'm hoping to prove to myself that building 
 
 [Previous Post]({% post_url 2014-03-25-testing-with-browserstack-and-selenium %})
 
-Storing Data - Part 1
-=====================
 After a day writing DDL for a project that has manual schema versioning against MS SQL and is going through a lot of changes I feel honour bound to write a post about storing data in the Omniclopse site.
 
 <!--more-->

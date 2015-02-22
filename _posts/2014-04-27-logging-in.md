@@ -14,9 +14,6 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/Websites-CMS-Platform-Storing-Data2.html)
 
-Logging in and out of the site
-==============================
-
 This was the first part of the process which felt 'hard' so where I've felt the absence of a CMS platform but it's also only the second time I've ever implemented authentication using NodeJS. And still only boiled down to a few hours work.
 
 <!--more-->

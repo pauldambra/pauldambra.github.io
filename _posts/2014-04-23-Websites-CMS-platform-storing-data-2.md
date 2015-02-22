@@ -17,9 +17,6 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/Websites-CMS-Platform-Storing-Data.html)
 
-Storing Data - Part 2
-=====================
-
 The first step is always (or at least should be) to take a step back and decide what to actually do...
 
 <!--more-->

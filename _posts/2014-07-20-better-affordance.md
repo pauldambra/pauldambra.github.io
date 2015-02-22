@@ -12,7 +12,6 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/On-Page-Editing.html)
 
-#Better visual affordance
 In the last post I wasn't happy with the visual affordance that a page element is editable.
 
 <figure>

@@ -12,7 +12,6 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/better-affordance.html)
 
-#Better visual affordance with JS for great good
 In the last post a better visual affordance that a page element is editable was added. But didn't solve the problem that notifications of success or failure were obtrusive and disconnected from the edited element.
 
 <figure>
