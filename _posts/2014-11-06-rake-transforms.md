@@ -11,6 +11,8 @@ I've really been enjoying using Albacore Rake instead of MSBuild at work. It's e
 
 Today we were talking about reducing the number of build configurations we have... which we only have in order to support config transforms.
 
+<!--more-->
+
 NB: this is all with Albacore Rake version one.
 
 Here's a simple rakefile that will clean and build a .Net solution

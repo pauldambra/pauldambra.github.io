@@ -16,6 +16,8 @@ A freelancer commented that if he was quoting on a project that had a requiremen
 
 This stuck with me and matches my experience so far. (yeah, yeah, confirmation bias. I know)
 
+<!--more-->
+
 I spent this past week doing maintenance work on a Django website. The ceremony involved in the Django part has outweighed the time spent designing the new HTML and creating the new page significantly.
 
 Some of that delay is that I'm new to Django (and Python), sure, but at points, even when I'd come to understand what Django wanted, I still had to spend time poking it with a stick before it would allow me to display HTML in a browser.

@@ -17,6 +17,8 @@ Reading this line a person can know this is initialising a `Thingy` which takes 
 
 I'm really lazy and easily distracted so I don't like to have to think about anything except the one task I'm trying to not get distracted from. Having to think about what it means that something is false provides an opportunity for me to get distracted. 
 
+<!--more-->
+
 Also, this means there is some information or some decision that has been taken by a previous developer that they have kept in their brain - all the person reading this line sees is the result of that. Each time somebody comes to this class they may have to invest time reminding themselves what the boolean parameter means.
 
 # Can it be better?

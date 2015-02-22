@@ -20,10 +20,11 @@ image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5
 
 ...than just the <a href="http://en.wikipedia.org/wiki/Factory_method_pattern">Factory pattern</a>.
 
-So anyway I learn about design patterns and begin to use the factory pattern. And much like many other people I settle into a world where there are no other patterns. All is comfortable and fluffy and instantiated simply from calling code much as
-    it was in days gone by.
-    <br />
-    <br />Then comes the day I need to handle the responses to a monthly mailing to over 70,000 email addresses and so I write this bitchin' code. Well maybe not bitchin'... what would be the right word - oh yeah "messy".
+So anyway I learn about design patterns and begin to use the factory pattern. And much like many other people I settle into a world where there are no other patterns. All is comfortable and fluffy and instantiated simply from calling code much as it was in days gone by.
+
+<!--more-->
+
+Then comes the day I need to handle the responses to a monthly mailing to over 70,000 email addresses and so I write this bitchin' code. Well maybe not bitchin'... what would be the right word - oh yeah "messy".
     <br />
     <br />It all started out really nice and clean but then I realised I needed to handle a couple of more cases than I'd intended when I began... and lots and lots of mail servers have been configured to return non-standard responses to failed mailings which
     is great for a human but not so great for a piece of software trying to classify that response.

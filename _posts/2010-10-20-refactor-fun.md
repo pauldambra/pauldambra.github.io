@@ -19,10 +19,12 @@ image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5
 ---
 
 I've been using <a href="http://www.jetbrains.com/resharper/">JetBrains Resharper</a> for a while after a recommendation along the lines of "I can't stand to write code without it now" and...
-    <br />
-    <br />I can't stand to write code without it now!
 
-    <br />I've got a program that (in a moderately clunky way) gets all of the emails in a couple of mailboxes and checks to see if they are non-delivery reports, reports of address changes (which our customers consistently send in reply to newsletters), unsubscribe
+I can't stand to write code without it now!
+
+<!--more-->
+
+I've got a program that (in a moderately clunky way) gets all of the emails in a couple of mailboxes and checks to see if they are non-delivery reports, reports of address changes (which our customers consistently send in reply to newsletters), unsubscribe
     requests (despite a link in the mail) and so on...
     <br />
     <br />The class that handled the matching of text against rules had grown to be a real behemoth if not actually a spaghetti monster it was at the minimum a noodle demon. I won't post the code here the internet isn't big enough!

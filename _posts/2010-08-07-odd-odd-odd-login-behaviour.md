@@ -20,6 +20,8 @@ image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5
 
 I've got <a href="http://h20000.www2.hp.com/bizsupport/TechSupport/Home.jsp?lang=en&cc=us&prodTypeId=321957&prodSeriesId=3973865&lang=en&cc=us">a mini 5101</a>. A little HP netbook that I lurve. It runs Windows 7 and Ubuntu 10.04 with aplomb.
 
+<!--more-->
+
 My one gripe is that (much like my mac keyboard) the Function key functions are the main action of that key... so in Windows if you hit F5 to refresh a web page the laptop actually sleeps.
     <br />
     <br />If you hit F3 to search in chrome instead you dim the screen. Annoying, no?

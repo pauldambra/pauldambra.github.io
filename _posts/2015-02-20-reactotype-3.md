@@ -11,6 +11,14 @@ At the end of the last post I realised I'd sacrificed some good practice in the 
 
 So earlier today I played with the kids to tire them out enough that I could distract them with television and write some #holidaycode because I am a good(-ish) parent.
 
+I managed to 
+
+* switch from using magic strings in the messagebus channel and topic identifiers
+* kill some duplication
+* and get some tests around ReactJS
+
+<!--more-->
+
 Messagebus channels and topics
 ==============================
 

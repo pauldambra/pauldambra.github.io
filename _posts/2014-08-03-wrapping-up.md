@@ -15,6 +15,8 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 #Wrapping Up
 I've been banging this drum into the internet's echo chamber for five months now and enough is enough!
 
+<!--more-->
+
 My initial to-do list was to build a site that:
 
 * Displays Web pages

@@ -22,6 +22,8 @@ Storing Data - Part 2
 
 The first step is always (or at least should be) to take a step back and decide what to actually do...
 
+<!--more-->
+
 In the last post the decision was made to store one document per page, and to have a unique index on the documents name property. This fits with a PUT request
 
 [Callers of a PUT method should anticipate the calls are idempotent and made to the URL of a given resource](http://stackoverflow.com/a/630475/222163). That is we'll be sending data to `/pages/pageName` and not `/pages` and repeatedly sending the same document for storage means that the document should be updated not duplicated.

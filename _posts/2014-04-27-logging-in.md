@@ -19,6 +19,8 @@ Logging in and out of the site
 
 This was the first part of the process which felt 'hard' so where I've felt the absence of a CMS platform but it's also only the second time I've ever implemented authentication using NodeJS. And still only boiled down to a few hours work.
 
+<!--more-->
+
 Passport
 --------
 With an eye to future expansion of what authentication the site may do the choice of technology for managing login is a [Node module called PassPort](http://passportjs.org/). PassportJS is a flexible and modular authentication middleware foor NodeJs. 

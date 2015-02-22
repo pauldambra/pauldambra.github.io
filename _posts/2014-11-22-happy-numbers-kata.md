@@ -19,6 +19,8 @@ The Happy Numbers kata is defined as
 > 
 > Can you find all the happy numbers between 1 and 100?
 
+<!--more-->
+
 There is more info on [what a Happy Number is on wikipedia](http://en.wikipedia.org/wiki/Happy_number).
 
 The second link [above](http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/) has some spoilers in. Particularly that the order of the numbers doesn't matter, and that zeroes don't matter. I did previously rediscover that the order that you add numbers doesn't matter when working on some insurance software a few years back (although it took me a while :annoyedwithselfemoticon:) so let's be kind to me and assume I'd have got there on my own if I hadn't read the article first (although it was a _large_ whisky).

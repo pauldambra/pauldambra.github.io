@@ -20,6 +20,8 @@ author:
 
 Well obviously not but you can get close in some circumstances.
 
+<!--more-->
+
 <div>I've got a situation where when a timer ticks I want to change the background colour of a textbox on a windows form. Since I don't need to pass in any parameters if I was using c# I could use Control.Invoke and an anonymous method... especially since I know I'll always be accessing this control in this method from a different thread.</div><div><br /></div><div>but VB .Net doesn't support anonymous methods. Now I've seen all kinds of verbose ways around this on the web... google it - I dare you.</div><div><br /></div><div>But if you just use Action as below you're pretty close to hardly any extra code...</div><div><br /></div>
 <div>
 {% highlight vbnet %}

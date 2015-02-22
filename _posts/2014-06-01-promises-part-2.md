@@ -19,6 +19,8 @@ Promises - Part 2
 
  So I posted [a question on the code review stackexchange](http://codereview.stackexchange.com/questions/51712/is-this-a-reasonable-way-to-implement-promises-in-node-js) asking for feedback.
 
+<!--more-->
+
 Here's the code I had written: 
 
 {% highlight js %}

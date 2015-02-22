@@ -18,6 +18,8 @@ public class MeaningfulName : MathsName
 }
 {% endhighlight %}
 
+<!--more-->
+
 We're porting some code written by our maths wizards and there's lots of convention in their domain specific language which we were trying to capture (because we're not maths wizards and (maybe only I) get easily lost).
 
 In one case the prospective base class wasn't a class but a struct so we couldn't do this. And we briefly discussed whether we should convert it to a class. 

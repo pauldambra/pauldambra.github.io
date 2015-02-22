@@ -24,6 +24,8 @@ In the last post I wasn't happy with the visual affordance that a page element i
 	<figcaption>Appearance when logged in</figcaption>
 </figure>
 
+<!--more-->
+
 I also wasn't happy that the page elements shifted around as alerts were added to the screen.
 
 <figure>

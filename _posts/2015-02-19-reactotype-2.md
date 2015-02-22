@@ -22,6 +22,8 @@ Exciting! Right?
 
 I want to add a filter control and I don't want it to be bound to a particular table so that it can be easily re-used. 
 
+<!--more-->
+
 So, having squeezed the table to make space for a column for filter controls I needed to do two things 
 
 1. Add the filter controls

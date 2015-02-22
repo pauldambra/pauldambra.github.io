@@ -3,10 +3,10 @@ layout: default
 title: Mindless Rambling Nonsense
 ---
 
-<div id="home" class="col-md-8 col-sm-12">
-    {% for post in site.posts %}
+{% for post in site.posts %}
+<div class="col-md-offset-2 col-md-8 col-sm-12">
     <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
     {{ post.excerpt }}
     <span class="post-date">posted on: {{ post.date | date_to_string }}</span>
-    {% endfor %}
 </div>
+{% endfor %}

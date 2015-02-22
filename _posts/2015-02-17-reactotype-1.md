@@ -11,6 +11,8 @@ keywords: reactjs js yeoman gulp html css web
 
 [React JS](http://facebook.github.io/react/index.html) was made by Facebook to be the V in MVC. In other words it only deals with the UI. It's sold as being fast - both for performance and development. A definitely contentious part of React is that it mushes JS and HTML together... More specifically you put HTML _inside_ the JS not vice versa.
 
+<!--more-->
+
 I've played with it [very briefly while prototyping an Imgur comment generator](http://pauldambra.github.io/commenturion/) and saw a talk on it recently at [MancJS](http://mancjs.com/#react). 
 
 So I already had a few thoughts:

@@ -19,6 +19,8 @@ Storing Data - Part 1
 =====================
 After a day writing DDL for a project that has manual schema versioning against MS SQL and is going through a lot of changes I feel honour bound to write a post about storing data in the Omniclopse site.
 
+<!--more-->
+
 I'll be using MongoDB for two reasons.
     
 1. The implicit schema of a NoSQL database is awesome when you're not sure of the final shape of the data.

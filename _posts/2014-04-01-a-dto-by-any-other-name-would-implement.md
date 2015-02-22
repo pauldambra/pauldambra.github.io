@@ -22,6 +22,8 @@ published: true
 
 I've been thinking about what people call the objects they pass around and whether they are the right names and why... and when... and I feel like the dog running behind the television to see where the onscreen dog went - on the verge of a paradigm shifting change in perspective but not quite getting it (and possibly a bit smelly)
 
+<!--more-->
+
 DTO
 ===
 The most common is DTO or Data Transfer Object. [Fowler has a definition](http://martinfowler.com/eaaCatalog/dataTransferObject.html) "An object that carries data between processes in order to reduce the number of method calls." He extends this clarifying it should be an object that can be serialised.

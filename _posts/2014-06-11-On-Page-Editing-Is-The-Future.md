@@ -21,6 +21,8 @@ Don't fix it if it aint broken but... but... HTML5 includes [the `contenteditabl
 
 If the admin section exists (in large part) to allow editing of content and editing of content can be completed in the page itself could this replace the admin section?
 
+<!--more-->
+
 ### Could it?!
 
 The benefit I can see here is that your edits are in place. They're immediately reflected on screen so the editing user can see the impact they're having. A user may not grok why a developer has put a 25 character limit on a title field. But if they simply change a title and it pushes the rest of the page out then it's their call whether that's OK.

@@ -23,6 +23,8 @@ In a <a href="http://mindlessramblingnonsense.blogspot.com/2009/10/quack-quack-s
     <br />Having watched her play with it and having been <a href="http://stackoverflow.com/questions/2498609/handle-windows-mobile-click-event-so-that-it-doesnt-queue-while-my-program-is">reminded to K.I.S.S</a>. I've fixed a bug that highlighted the difference
     in expectations between myself and a toddler.
 
+<!--more-->
+
     <br />No not the world-weary pessimism I'm practising instead when I tested and used the app I would click and then wait for something to happen... whereas my toddler would bash at the screen having got the link between doing so and stuff happening.
     <br
     />

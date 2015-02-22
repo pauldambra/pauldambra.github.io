@@ -20,6 +20,8 @@ In the last post a better visual affordance that a page element is editable was 
 <figcaption>Pulsing editor indicator</figcaption>
 </figure>
 
+<!--more-->
+
 The desired behaviour is that when a change is made the entire current page is persisted to the server and the user is made aware of success or failure without interrupting their workflow unnecessarily.
 
 <figure>
