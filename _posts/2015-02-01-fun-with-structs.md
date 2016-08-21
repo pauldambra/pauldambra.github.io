@@ -187,7 +187,7 @@ I've learned something and that has value. However, the team still has the probl
 
 I can think of three.
 
-#### 1) Don't do anything
+#### 1) Don't do anything
 
 Maybe just leave it as structs and use variable names and some method & class extractiion refactorings to make what is happening clearer instead of leaning on the types to do that.
 
