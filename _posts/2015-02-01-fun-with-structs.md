@@ -187,13 +187,13 @@ I've learned something and that has value. However, the team still has the probl
 
 I can think of three.
 
-#### 0) Don't do anything
+#### 1) Don't do anything
 
 Maybe just leave it as structs and use variable names and some method & class extractiion refactorings to make what is happening clearer instead of leaning on the types to do that.
 
 This would be fine. My feeling is that the code in question leads itself to errors because it has multiple things with the same type but different semantics being used close together. It feels like it will be easier to introduce bugs as it is - but we should always be careful so this is an option.
 
-#### 1) Use a wrapper class
+#### 2) Use a wrapper class
 
 This can be a really useful way of extending a sealed object or struct.
 
@@ -218,7 +218,7 @@ If there was a requirement to extend the functionality of `MathsName` and we did
 
 So lots of the typing to implement but even more importantly it's possible that someone can alter `MathsName` without realising that they need to alter `MeaningfulName` too so there's the potential for bugs. It's better to help people fall into the pit of success and this solution doesn't do that.
 
-#### 2) Just change it to a class
+#### 3) Just change it to a class
 
 There'd not be very much of the typing. Just the addition of the equality methods (and probably some equality tests for safety). The struct in question is relatively well covered anyway so the change would be safe.
 
