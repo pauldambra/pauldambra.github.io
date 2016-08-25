@@ -22,12 +22,12 @@ This post is part of a series where I'm hoping to prove to myself that building 
 
 [Previous Post]({% post_url 2014-03-23-website-cms-display-pages-part-2 %})
 
-Browserstack
-============
+# Browserstack
+
 I love [Browserstack's awesome service](http://www.browserstack.com/). It allows you to test your websites on different browsers and operating systems. Helping reduce the need to have access to physical devices for testing and reproducing bugs.
 
-Selenium WebDriver
-==================
+# Selenium WebDriver
+
 BrowserStack allow automation using a Selenium web driver. You can access this with Python, Ruby, Java, C#, Perl, PHP, or Node.js. It is also possible to test publicly or locally available sites using BrowserStack.
 
 <!--more-->
@@ -36,14 +36,15 @@ However, after a couple of hours trying to write tests following <a href="http:/
 
 I haven't used Selenium before and I just didn't grok how to assert against the page. I'm sure it was how I was reading the documentation but I wasn't moving forward. And then I discovered <a href="http://nightwatchjs.org/" target="_blank">nightwatch</a> (by reading to the end of the documentation but still...)
 
-Nightwatch
-==========
+# Nightwatch
+
 Nightwatch is awesome! It only took a few minutes to get to the point where it was possible to run tests using it. The API is terse and expressive and it will output jUnit results so can be plugged into a CI pipeline.
 
 A nightwatch test for the front page looks like:
 <script src="http://gist-it.appspot.com/github/pauldambra/omniclopse/blob/ba6e169be1043f88ce5482eddd55a065648e9ba2/end-to-end-tests/homepageSpec.js"></script> This demonstrates a very clear API. Load the page, wait till the body is visible, then assert that the carousel is present. 
 
-##How to run the tests
+## How to run the tests
+
 Running this at the terminal using:
 `nightwatch -t end-to-end-tests/* -c end-to-end-tests/settings.json`
 
@@ -91,15 +92,18 @@ nightwatch -t end-to-end-tests/* -c end-to-end-tests/settingsAndroid.json
 
 Which would allow running all of the nightwatch tests against different operating systems and browsers on BrowserStack.
 
-##Viewing results
+## Viewing results
+
 <figure>
     <img src="/images/run-nightwatch.png" alt="Results from the tests are displayed in the console" class="img-responsive img-thumbnail"/>
     <figcaption>Results from the tests are displayed in the console</figcaption>
 </figure>
 
-##Some more realistic tests for the home page
+## Some more realistic tests for the home page
+
 Switching out the test for carousel by id and instead testing by class (as this is less likely to change) and adding in some other tests for the page contents gives:
 <div><script src="http://gist-it.appspot.com/github/pauldambra/omniclopse/blob/25217572b4b77a9b90d25bba69b37b2cb411b4a6/end-to-end-tests/homepageSpec.js"></script> </div>
-TL;DR
-=====
+
+## TL;DR
+
 The combination of BrowserStack and Nightwatch made for a fantastic experience. This is definitely going to be something I wrap into my day-to-day work.
