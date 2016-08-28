@@ -16,7 +16,7 @@ But as a task approaches some ill-defined level of complexity I switch to C#, Ru
 
 As a result I have barely written any Powershell on Windows and, as I've done more work on Linux over the last few years, I've also barely written any bash.
 
-So, while I think it's a good thing that MS are opening up and releasing cross platform tools I was underwhelemed. But some colleagues were excited and people I think of as being *nix people too
+So, while I think it's a good thing that MS are opening up and releasing cross platform tools I was underwhelmed. But some colleagues were excited and people I think of as being *nix people too
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/dhobsd">@dhobsd</a> It&#39;s hard to fit in 140 chars, but powershell is an incredible improvement over unix shells and is generally amazingsauce.</p>&mdash; @jordansissel (@jordansissel) <a href="https://twitter.com/jordansissel/status/766879364289957892">August 20, 2016</a></blockquote>
 <script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
