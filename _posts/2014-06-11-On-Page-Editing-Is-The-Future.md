@@ -111,8 +111,7 @@ If a WYSIWYG editor saves `{% raw %} <b>some bold text</b> {% endraw %}` then th
 
 returning a handlebars safeString instead means that handlebars will trust the content and render **some bold text**
 
-The JS
-======
+# The JS
 This is the first JS I've added to the client. So, while I initially wrote the JS directly in the HTML, I eventually moved it into its own files and hooked up gulp to concat and uglify it.
 
 ### Gulp
@@ -234,8 +233,7 @@ An addMessage function shows a bootstrap alert to keep the user informed of what
     }; 
 {% endhighlight %}
 
-Visual Affordance
-=================
+# Visual Affordance
 I found this a pretty hard design decision. I'm not sure I'm happy it really calls out what is happening to a user and I think I'll grab a designer the next time I'm next to one and ask their opinion but...
 
 <figure>
@@ -266,15 +264,13 @@ h1[contenteditable]:before {
 
 Since the site is already using bootstrap CSS was added that uses `:before` to add a pencil icon to any contenteditable div or H1.
 
-CKEditor
-========
+# CKEditor
 Another little bonus is that CKEditor is aware of contenteditable elements so including that in the page gives you WYSIWYG power directly on any contenteditable.
 
 All that was necessary to hook it up was to include it in the page and to switch from using the valid `{%raw%}<div content contenteditable/>{%endraw%}` to using `{%raw%}<div content contenteditable=true/>{%endraw%}` a change I can live with to get the power of WYSIWYG directly on page elements
 
 
-(How) does it work?
-================
+# (How) does it work?
 If you watch the GIF below it's clear this is a working prototype and not a finished product. But it does work!
 
 The page content is jumping about as alert messages are added and that's not OK so a better mechanism is necessary for highlighting that changes have been persisted.

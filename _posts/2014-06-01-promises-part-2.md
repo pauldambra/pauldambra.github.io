@@ -12,9 +12,6 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/Websites-CMS-Platform-promises.html)
 
-Promises - Part 2
-========
-
  So, in the last post I worked on switching some callback code to using promises with [Bluebird](https://www.npmjs.org/package/bluebird) library but as I've not seen much promisified (definitely a word!) code I wasn't sure whether it was any good.
 
  So I posted [a question on the code review stackexchange](http://codereview.stackexchange.com/questions/51712/is-this-a-reasonable-way-to-implement-promises-in-node-js) asking for feedback.
@@ -90,8 +87,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
 
 there are a couple of differences here that led to some great learning for me!
 
-Bind
-====
+# Bind
 
 The first is [the bind function](https://github.com/petkaantonov/bluebird/blob/master/API.md#binddynamic-thisarg---promise). 
 
@@ -133,8 +129,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
 });
 {% endhighlight %}
 
-Nodeify
-=======
+# Nodeify
 
 The other fantabulous feature is [nodeify](https://github.com/petkaantonov/bluebird/blob/master/API.md#nodeifyfunction-callback---promise). In the original code above the promisify functions convert code that expects to receive a callback into code that returns a promise. Nodeify does the reverse and returns a promise that when it is resolved will call the provided callback. Or as the bluebird docs explain it:
 
@@ -158,18 +153,15 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
 });
 {% endhighlight %}
 
-So
-==
+# So
 These were both transformative for me. I now have a way to plug promises into my code bit by bit and to carry on using libraries that know nothing about promises.
 
-But
-===
+# But
 Passport uses an optional third argument to populate the flash message so you can put a meaningful message in front of a user when they try to login and aren't successful.
 
 I poked at nodeify with a stick and a glass of wine and couldn't make that work... because nodeify only passes on the error object or the success value.
 
-Wonderful Community
-===================
+# Wonderful Community
 After reading the code for nodeify and realising I had far less idea how JS works than than I thought I did and much, much less than the library authors I [posted on StackOverflow](http://stackoverflow.com/questions/23920589/how-to-pass-a-third-argument-to-a-callback-using-bluebird-js-nodeify) with an example of what I wanted to achieve
 
 {% highlight js %}
@@ -210,8 +202,7 @@ I really love it when a project is responsive! Gives me confidence that they car
 
 (yes, I'm a massive hippy :-))
 
-And
-===
+# And
 So I forked Bluebird, cloned it, switched to the 2.0 branch and ran npm build. I (relatively lazily) copied the built js files over the v1.2.4 files that npm had installed in the project and changed the code to use the new feature (with some comments added for this post)...
 
 {% highlight js %}

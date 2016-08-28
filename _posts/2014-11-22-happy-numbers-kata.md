@@ -213,16 +213,14 @@ private static void TestForHappiness(int startingNumber, string happyNumberKey)
 
 This expresses the algorithm: take a number, get the sum of the square of its digits, test for a result, stop if you have one or do the same to that sum. I don't like the triple check of `HappyNumberIsCompleteFor`, `nextInChain==1`, and `TheCalculationChainHasLoopedAround` but I can't immediately see how to split that up without it being too meh.
 
-Results
-=======
+# Results
 My first naive implementation didn't order digits or strip zeroes and reached around 320,000 in five seconds. I added ordering of digits but (since I was drinking) I used an integer array as the key on the HappyNumbersResults dictionary - doh! At least when performance didn't improve I realised what I'd done.
 
 Switching to a string key for the short-cut dictionary had, as could be expected, no impact for unordered digits but pushes the maximum reached up to around 2,000,000 for ordered digits. 
 
 Removing zeroes from the digits array didn't have much impact - presumably because calculating the square of zero isn't very expensive.
 
-Can this be improved?
-=====================
+# Can this be improved?
 Processing two million numbers in five seconds is pretty good but I wondered if this could be improved on with some of the fangling available in the [TPL library](http://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx).
 
 First lesson here was that I don't get the TPL at all... _at all_

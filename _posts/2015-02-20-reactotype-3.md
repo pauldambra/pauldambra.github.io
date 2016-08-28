@@ -19,8 +19,7 @@ I managed to
 
 <!--more-->
 
-Messagebus channels and topics
-==============================
+# Messagebus channels and topics
 
 In the last post we (I) used magic strings to identify the channel and topic that messages were being published to.
 
@@ -61,8 +60,7 @@ postal.subscribe({
 }).context(this);
 {% endhighlight %}
 
-Kill duplication with fire
-==========================
+# Kill duplication with fire
 
 Then I componentised (ugh, is that a word?!) the input controls being used in the FilterBox so I could kill the duplication of handling their events.
 
@@ -146,8 +144,7 @@ Where previously the code replaced the state with the message body because we'd 
 
 This _should_ be better since, if I go on to fangle this much, it should handle change better as the `PayTable` makes fewer assumptions about the message payload.
 
-Testing
-=======
+# Testing
 
 It was already getting to be a pain going to the site and changing values in the boxes to check that things were working the way I expected... which means we need tests!
 
@@ -339,8 +336,7 @@ In the other test `TestUtils.Simulate.change` saves our bacon and handles the wo
 
 That change should have caused a message to be published and the test is subscribed to those messages so it can assert that the message body was received and matches expectation.
 
-But... But... Mocha can JSX?
-============================
+# But... But... Mocha can JSX?
 
 No, I found [this blog post](http://www.hammerlab.org/2015/02/14/testing-react-web-apps-with-mocha/) which borrowed [code from the Khan Academy](https://github.com/Khan/react-components/blob/7afcf35c921a2f984ddff71dead25217f8de3532/test/compiler.js) which can be passed to mocha as a compiler so that it can JSX when it needs to...
 
@@ -364,8 +360,7 @@ This required the final NPM of the day adding in react-tools so that the JSX tra
 
 And..
 
-Ta-da
-=====
+# Ta-da
 
 <figure>
 <img src="/images/tada.png" alt="passing tests" class="img-responsive img-thumbnail"/>

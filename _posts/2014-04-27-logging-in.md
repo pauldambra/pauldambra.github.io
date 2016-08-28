@@ -96,8 +96,7 @@ This function takes a database parameter so that the tests and the command line 
 
 as an aside - [a colleague](https://twitter.com/LemoncogFoReal) just spotted how smelly this code is [in a screenshot on twitter from across a room!](https://twitter.com/LemoncogFoReal/status/468024884741013504) 
 
-Logging in Tests
-============
+# Logging in Tests
 The test setup for the logging in tests is slightly different as it's necessary to grab the underlying SuperAgent instance that SuperTest wraps. SuperAgent will manage its cookies so you can extend the example below to allow tests of behaviour once logged in.
 
 {% highlight js %}

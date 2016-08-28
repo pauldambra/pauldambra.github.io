@@ -34,8 +34,7 @@ So, having squeezed the table to make space for a column for filter controls I n
 <figcaption>A screenshot of the desired filterable table</figcaption>
 </figure>
 
-Adding the filter controls
-==========================
+# Adding the filter controls
 
 Once I'd made a static HTML version of the filter controls and knew that I was aiming for a number input for the earliest year to display and one for the latest.
 
@@ -218,8 +217,7 @@ So, on channel 'filters' publish a message with the topic 'year.bounds.change' i
 
 This gives us a phenomenally useless pub/sub mechanism with no subscribers...
 
-Subscribing is even harder
-==========================
+# Subscribing is even harder
 
 {% highlight javascript %}
 componentWillMount: function() {
@@ -236,8 +234,7 @@ Postal's subscribe helper takes an object with the same properties as publish. H
 
 The [`componentWillMount`](http://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount) method of the React component is called once before initial rendering so it is perfect for this setup.
 
-Messy Pay Table Reacting to Filtering
-=====================================
+# Messy Pay Table Reacting to Filtering
 
 {% highlight javascript %}
 var PayTable = React.createClass({
@@ -319,7 +316,6 @@ The point here is how easy it was to use postal.js to hook these two components 
 <figcaption>TEH AWESOME</figcaption>
 </figure>
 
-Next Up
-=======
+# Next Up
 
 A little bit of tidying up and add a chart view. #holidaycode

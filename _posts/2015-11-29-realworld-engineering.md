@@ -31,13 +31,11 @@ So I just spent half an hour or so doing some emergency maintenance to get us th
 
 It's quite common to make comparisons between software engineering and real world engineering since they're both building things. I thought I'd explore whether that bore out here...
 
-1.0
-===
+# 1.0
 
 I approached rebuilding the run in an iterative fashion. So 1.0 was taking the parts of the roof that survived transportation to our house back on to the run. These only covered half of the area. So while the chickens had some protection from the weather it wasn't enough to stop the ground getting wet.
 
-2.0
-===
+# 2.0
 
 As the summer ended and the weather started to turn we moved to roof 2.0. The requirements from the PM (a.k.a. my wife) were that it be:
 
@@ -53,28 +51,24 @@ It didn't cost too much and while it didn't keep out all of the rain it was a go
 
 <p><img src="/images/run2.0.jpg" alt="chicken run 2.0" class="img-responsive img-thumbnail"/></p>
 
-3.0-alpha1
-==========
+# 3.0-alpha1
 
 The roof (or rather parts of it) are too damaged to stay in place so I'll definitely need to bump to 3.0.
 
 I've definitely learned that the slope of the roof wasn't high enough and rain tended to pool on it (I've got a feeling that roof slopes need to be 15 degrees to get rain and snow to run off). And that there needs to be less freedom of movement of and between the individual pieces of roof.
 
-How was iterating DIY like iterating software engineering?
-=======================================
+# How was iterating DIY like iterating software engineering?
 
 * Releasing early provided value - because the chickens have been protected from rain and predators.
 * We've minimised time spent because I haven't had to dedicate a weekend to building a roof. Although I haven't measured that so I don't _know_ for sure
 * And, since I'm not a natural DIYer, I've learnt a lot by having the roof in production.
 
-How was iterating DIY not like iterating in software engineering?
-===========================================
+# How was iterating DIY not like iterating in software engineering?
 
 * When the wind damaged the roof it wasn't possible to roll back the deployed chicken run to a known good state
 * When I come to work on it again I can't check out the resources for the project. I'll have to go to some hardware store and buy all the bits again
 
-In Conclusion
-=====
+# In Conclusion
 
 The cost of experimentation is much lower in software engineering than in DIY. I should embrace that more.
 

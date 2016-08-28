@@ -24,8 +24,7 @@ I'll be using MongoDB for two reasons.
 1. The implicit schema of a NoSQL database is awesome when you're not sure of the final shape of the data.
 2. Storing a data structure that's almost definitely going to be sent over the wire as JSON as... JSON makes a lot of sense to me.
 
-First Steps
-===========
+# First Steps
 At least for now each view will have its own document in the database (At the moment there's only one view! so why complicate things).
 
 First it is necessary to `npm install --save mongojs` and then require mongojs within the server module.
@@ -53,8 +52,7 @@ app.get('/', function(req, res){
 
 I think this code is a bit ugly but we'll be coming back to the server later on!
 
-Error Pages
-===========
+# Error Pages
 Adding the 404 and 500 pages is straightforward. 
 
 For example:
@@ -102,8 +100,7 @@ Ah, but...
 ----------
 ...the MongoDB pages collection is empty. Once this collection contains a match for `name: home` then this test will fail.
 
-Run Tests against a different database instance
-===============================================
+# Run Tests against a different database instance
 Much simpler than mocking the DB (and because I couldn't figure out how to mock it without breaking SuperTest) is simply running against a test copy of the DB. Very little code to write and the best code is the code you (I?) don't write.
 
 The code to intialise the database becomes
@@ -160,10 +157,8 @@ results in:
 Adding an array of panels to the home document results in the desired home page:
 <p><img src="/images/homeFull.png" alt="full page" class="img-responsive img-thumbnail"/></p>
 
-E Voila
-=======
+# E Voila
 Very little code, very little effort and the page data is being loaded from the database. Hurrah!
 
-Next
-====
+# Next
 I'll be adding authentication so that we can then allow an admin user at Omniclopse HQ to change and add data
