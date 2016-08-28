@@ -306,6 +306,33 @@ The POSIX definition states that a file ends with an empty line (see [this aweso
 
 You can see the code I ran [on github](https://github.com/pauldambra/bash_vs_powershell). Both powershell and bash are pretty new for me (for anything beyond trivial tasks). Also, I can count on the fingers of one hand the number of times I've had to directly process a large file like this so I might be doing something naive. As a result I'd really welcome feedback! 
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Run Time (s)</th>
+      <th>Lines per Second</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bash</td>
+      <td>581.57</td>
+      <td>181</td>
+    </tr>
+    <tr>
+      <td>PowerShell</td>
+      <td>279.78</td>
+      <td>376,373</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>59.06</td>
+      <td>1,784,775</td>
+    </tr>
+  </tbody>
+</table>
+
 PowerShell runs stably on Mac OS. And while it is slower than Python (for the given task) it runs significantly faster than bash.
 
 This was actually pretty good fun. Both bash and powershell are more complex than I imagined but not as hard to write as I thought. That said I _really_ missed being able to write tests - especially when the runs to prove the scripts against the full dataset took tens of minutes.
