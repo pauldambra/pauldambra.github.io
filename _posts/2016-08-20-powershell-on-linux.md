@@ -303,7 +303,7 @@ The POSIX definition states that a file ends with an empty line (see [this aweso
 
 ## So What?
 
-You can see the code I ran [on github](git remote add origin git@github.com:pauldambra/bash_vs_powershell.git). Both powershell and bash are pretty new for me (for anything beyond trivial tasks). Also, I can count on the fingers of one hand the number of times I've had to directly process a large file like this so I might be doing something naive. As a result I'd really welcome feedback! 
+You can see the code I ran [on github](https://github.com/pauldambra/bash_vs_powershell). Both powershell and bash are pretty new for me (for anything beyond trivial tasks). Also, I can count on the fingers of one hand the number of times I've had to directly process a large file like this so I might be doing something naive. As a result I'd really welcome feedback! 
 
 PowerShell runs stably on Mac OS. And while it is slower than Python (for the given task) it runs significantly faster than bash.
 
