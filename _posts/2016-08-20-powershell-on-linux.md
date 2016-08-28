@@ -27,13 +27,13 @@ I thought I'd spend some time to compare the two.
 
 # The Simple Test
 
-I've been watching [Gary Bernhardt's Destroy All Software screencasts](https://www.destroyallsoftware.com/screencasts) (which I heartily recommend) and enjoyed the examples he's used of looping over git revisions to carry out tasks in order to demonstrate either some git tool or bash itself.
+I've been watching [Gary Bernhardt's Destroy All Software screencasts](https://www.destroyallsoftware.com/screencasts) (which I heartily recommend). I enjoyed his use of looping over git revisions to carry out tasks to show either some git tool or bash itself.
 
-The fake scenario I came up with was that there is a Big-Data problem where the amount of data was suddenly, and unexpectedly increased as a result of human error and that's caused all our systems to explode (something I've seen happen too so not _that_ fake). My task was to investigate and find out when the error occurred
+I came up with a fake scenario of having a Big-Data problem. The amount of data was suddenly, and unexpectedly increased as a result of human error. And that’s caused all our systems to explode (something I’ve seen happen too so not that fake). My task was to investigate and find out when the error occurred.
 
 <p><img src="/images/initial-commit-log.png" alt="the initial commit log" class="img-responsive img-thumbnail"/></p>
 
-If you read that commit log you might be able to guess where the error occurred but let's pretend that the log is more complex and not so useful.
+If you read that commit log you might be able to guess where the error occurred. Let’s pretend that the log is more complex and not so useful.
 
 <aside>
 If you like that Git log output run:
@@ -103,9 +103,9 @@ foreach ($commit in iex "git rev-list master --reverse")
 iex "git checkout master" *> $null
 ```
 
-There were a couple of differences because PowerShell insisted on evaluating the command strings and it turns out '&' and '<' are reserved for future use. 
+There were a couple of differences because PowerShell insisted on evaluating the command strings. And it turns out ‘&’ and ‘<’ are "reserved for future use".
 
-Both were relatively easy to write, are relatively easy to read, run correctly, and give the correct output.
+Both were relatively easy to write, relatively easy to read, run correctly, and give the correct output.
 
 # More Complex Example
 
@@ -152,7 +152,7 @@ This script:
    * subtracting three because there are three lines that aren't vote data in the file
  * it also reads the lines in the file from 2010 one by one
  * then increments a count in an associative array if it can capture a VoteTypeId from the line
- * when finished it sums those VoteTypeIds in order to count the 2010 vites
+ * when finished it sums those VoteTypeIds to count the 2010 v0tes
  * finally it prints out some output
 
 running `time ./process-votes.sh ~/Downloads/Votes.xml` gives the following:
@@ -236,11 +236,11 @@ powershell ./process-votes.ps1 ~/Downloads/Votes.xml  279.78s user 7.00s system 
 
 At first I parsed every line as xml so I could access the CreationDate but that took nearly ten times as long.
 
-I also tried out the same approach of reading and counting every line and then checking if it was for 2010 in bash which slowed the bash implementation down even further.
+I also tried out the same approach of reading and counting every line instead of grepping just 2010 lines in bash. That slowed the bash implementation down even further.
 
 ## Confirmation Bias!
 
-Is my tendency to move away from scripts justified by these results? I know very little Python so it seemed a fair comparison to try a Python version.
+Is my tendency to move away from scripts justified by these results? I know little Python so it seemed a fair comparison to try a Python version.
 
 ```python
 import sys
@@ -290,7 +290,7 @@ python ./stack/process-votes.py ~/Downloads/Votes.xml  59.06s user 4.65s system 
 
 ```
 
-In the case of processing large files it seems well worth sticking to the practice of switching away from bash/powershell for bigger tasks.
+This supports switching away from scripting languages for complex tasks.
 
 ## Aside
 
