@@ -58,6 +58,7 @@ a:hover   { color: black; text-decoration: underline; }
 
 body {
   font-family: 'Khula', sans-serif;
+  font-size: 1.75em;
 }
 
 nav {
@@ -80,6 +81,14 @@ header nav.navbar {
 #sitename {
   font-size: 150%;
   font-weight: bold;
+}
+
+aside {
+  color: darkslateblue;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  border-left: 1px solid darkslateblue;
+  padding-left: 0.5em;
 }
 
 article a {
