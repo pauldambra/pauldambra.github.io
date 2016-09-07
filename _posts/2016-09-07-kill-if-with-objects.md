@@ -24,7 +24,7 @@ It's one of those subtle changes that has real power to tidy up and add to the e
 
 If (pun intended) you aren't familiar with it I'd definitely recommend trying it on for size by looking for an opportunity to apply it in your systems.
 
-<!-- more -->
+<!--more-->
 
 # Some Context
 
