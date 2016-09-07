@@ -5,6 +5,10 @@
        url('/assets/khula/Khula-ExtraBold.ttf');
 }
 
+h2 {
+  font-size: 25px;
+}
+
 .post-date {
   color: darkgray;
   padding: 1px 3px;
