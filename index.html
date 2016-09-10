@@ -9,7 +9,7 @@ title: Mindless Rambling Nonsense
     {{ post.excerpt }}
     <span class="post-metadata">posted on: {{ post.date | date_to_string }}</span>
     <span class="post-metadata post-category">
-    	<a href="/categories.html/#{{ post.category }}">in: {{ post.category }}</a>
+    	<a href="/categories.html#{{ post.category }}">in: {{ post.category }}</a>
     	<div class="tags">
             {% include tags.html tags=post.tags %}
     	</div>
