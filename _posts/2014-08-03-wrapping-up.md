@@ -5,6 +5,8 @@ permalink: "/wrapping_up.html"
 date: "2014-08-03 22:11:00"
 description: wrapping up the blog series
 keywords: CMS JS CSS HTML Handlebars
+category: cms
+tags: [learning, cms, design, web, series]
 ---
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
 

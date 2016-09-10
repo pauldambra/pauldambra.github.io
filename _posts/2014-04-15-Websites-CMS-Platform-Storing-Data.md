@@ -2,13 +2,12 @@
 title: "Websites != CMS Platform - Storing Data - Part 1" 
 layout: "post" 
 permalink: "/Websites-CMS-Platform-Storing-Data.html" 
-uuid: "5203142603744123699" 
-guid: "tag:blogger.com,1999:blog-6728560442491983758.post-5203142603744123699" 
 date: "2014-04-12 08:11:00"
 updated: "2014-04-12 08:11:30" 
 description: storing data using mongo, mongojs and express
 keywords: mongojs express node nosql mongodb
-published: "false" 
+category: cms
+tags: [nosql, learning, mongodb, cms, design, web, series]
 ---
 
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
@@ -28,14 +27,17 @@ I'll be using MongoDB for two reasons.
 At least for now each view will have its own document in the database (At the moment there's only one view! so why complicate things).
 
 First it is necessary to `npm install --save mongojs` and then require mongojs within the server module.
-{% highlight js %}
+
+```js 
 var mongojs = require('mongojs');
 var db = mongojs('omniclopse', ['pages']);
-{% endhighlight %}
+```
+
 Here the variable `db` connects to a MongoDB database called omniclopse and a collection called pages.
 
 Next the call to the DB to get the home page data is added to the home route.
-{% highlight js %}
+
+```js 
 app.get('/', function(req, res){
     db.pages.findOne({ name: 'home' }, function(err, doc) {
         if (err) {
@@ -48,7 +50,7 @@ app.get('/', function(req, res){
         }
     });
 });
-{% endhighlight %}
+```
 
 I think this code is a bit ugly but we'll be coming back to the server later on!
 
@@ -56,17 +58,19 @@ I think this code is a bit ugly but we'll be coming back to the server later on!
 Adding the 404 and 500 pages is straightforward. 
 
 For example:
-{% highlight html %}
+
+```html 
 <div class="container bg-danger">
 	<h1>404</h1>
 	<div>Dang! That doesn't seem to exist.</div>
 </div>
-{% endhighlight %}
+```
 
 There are two cases where the app will need to return a 404. 
 
 First, when the URL doesn't exist an HTTP status 400 should be returned
-{% highlight js %}
+
+```js 
 describe('GET unknown route sends 404 status', function(){
   it('respond with 404 html', function(done){
     request(server)
@@ -76,10 +80,11 @@ describe('GET unknown route sends 404 status', function(){
       .expect(404, done);
   });
 });
-{% endhighlight %}
+```
 
 Second, when the database has no entry for the page then the HTTP status should be 200 but the page should be a 404.
-{% highlight js %}
+
+```js 
 describe('GET known route with no data sends 404 page with 200 status', function(){
   it('respond with 404 html', function(done){
     request(server)
@@ -94,7 +99,7 @@ describe('GET known route with no data sends 404 page with 200 status', function
       });
   });
 });
-{% endhighlight %}
+```
 
 Ah, but...
 ----------
@@ -104,20 +109,22 @@ Ah, but...
 Much simpler than mocking the DB (and because I couldn't figure out how to mock it without breaking SuperTest) is simply running against a test copy of the DB. Very little code to write and the best code is the code you (I?) don't write.
 
 The code to intialise the database becomes
-{% highlight js %}
+
+```js 
 var dbName = process.env.NODE_ENV === 'test' ? 'omnitest' : 'omniclopse';
 var db = mongojs(dbName, ['pages']);
-{% endhighlight %}
+```
 
 and in the test spec files
-{% highlight js %}
+
+```js 
 var server;
 
 beforeEach(function() {
     process.env.NODE_ENV = 'test'; 
     server = require('../server').app;
 });
-{% endhighlight %}
+```
 
 Now Mocha tests all pass and running the site gives
 <p><img src="/images/home404.png" alt="404 page" class="img-responsive img-thumbnail"/></p>
@@ -127,7 +134,7 @@ After adding `{name:'home',carouselImages:[],panels:[]}` to the pages collection
 
 Adding an array of carousel images to the home document:
 
-{% highlight json %}
+```json 
 db.pages.update({name: 'home' },
                 {$set: {
                           carouselImages: [
@@ -149,7 +156,7 @@ db.pages.update({name: 'home' },
                           ]
                         }
                 })
-{% endhighlight %}
+```
 
 results in:
 <p><img src="/images/homeCarousel.png" alt="partial page" class="img-responsive img-thumbnail"/></p>

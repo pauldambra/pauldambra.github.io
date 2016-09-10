@@ -5,6 +5,8 @@ permalink: "/real-vs-soft.html"
 date: "2015-11-29 14:06:00"
 description: "real vs. software engineering"
 keywords: engineering agile analogy
+category: agile
+tags: [agile, bad-metaphors]
 ---
 
 I just had some "fun".

@@ -2,13 +2,12 @@
 title: "Websites != CMS Platform - Storing Data - Part 2" 
 layout: "post" 
 permalink: "/Websites-CMS-Platform-Storing-Data2.html" 
-uuid: "5203142603744123699" 
-guid: "tag:blogger.com,1999:blog-6728560442491983758.post-5203142603744123699" 
 date: "2014-04-23 08:11:00"
 updated: "2014-04-23 08:11:30" 
 description: storing data using mongo, mongojs and express
 keywords: mongojs express node nosql mongodb
-published: "false" 
+category: cms
+tags: [learning, cms, design, web, series, express, mongodb, nosql]
 ---
 
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
@@ -34,7 +33,8 @@ This feature requires a set of conditions are tested:
 	<li>if you PUT an existing page you receive a 200</li>
 	<li>the inserted or updated resource URL is in the location header of the response</li>
 </ul>
-{% highlight js %}
+
+```js 
 describe('PUTing pages', function() {
     it('should 400 when no body');
 
@@ -46,10 +46,11 @@ describe('PUTing pages', function() {
       it('respond with 200 status');
   });
 });
-{% endhighlight %}
+```
 
 After a little backwards and forwards the tests ended up as:
-{% highlight js %}
+
+```js 
 var request = require('supertest');
 var should = require('should');
 
@@ -107,11 +108,11 @@ describe('PUTing pages', function() {
 
     });
 });
-{% endhighlight %}
+```
 
 and an alteration to the server file to make those tests pass:
 
-{% highlight js %}
+```js 
 app.put('/pages/:page', function(req, res, next) {
     var pageName = req.params.page;
     if(!req.body || Object.getOwnPropertyNames(req.body).length === 0) {
@@ -135,7 +136,7 @@ app.put('/pages/:page', function(req, res, next) {
         }
     });
 });
-{% endhighlight %}
+```
 
 Again this code feels a bit ugly to me... there's a lot bunched up together - but it can be revisited easily as it's covered by tests. Importantly it works and allows storage of new pages and edits to existing pages
 

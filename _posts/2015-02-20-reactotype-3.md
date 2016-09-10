@@ -5,6 +5,8 @@ permalink: "/reactotype/part-three.html"
 date: "2015-02-20 22:41:00"
 description: "exploring ReactJS"
 keywords: reactjs js yeoman gulp html css web tdd mocha
+category: react
+tags: [learning, react, js, series]
 ---
 
 At the end of the last post I realised I'd sacrificed some good practice in the blind rush to make it work (i.e. worked normally like all those other guilty software engineers everywhere everyday.)
@@ -25,7 +27,7 @@ In the last post we (I) used magic strings to identify the channel and topic tha
 
 I'm not completely sold on this particular structure:
 
-{% highlight JS %}
+```JS 
 var messageBusStructure = {
 	channels: {
 		filters: 'filters'
@@ -36,11 +38,11 @@ var messageBusStructure = {
 		}
 	}
 };
-{% endhighlight %}
+```
 
 but the general idea holds since it should mean that the postal publish/subscribe code is less prone to tyoing errors.
 
-{% highlight JS %}
+```JS 
 postal.subscribe({
 	channel: bus.channels.filters,
 	topic : bus.topics.filters.yearBoundsChange,
@@ -58,13 +60,13 @@ postal.subscribe({
     	this.filterData(d);
   	}
 }).context(this);
-{% endhighlight %}
+```
 
 # Kill duplication with fire
 
 Then I componentised (ugh, is that a word?!) the input controls being used in the FilterBox so I could kill the duplication of handling their events.
 
-{% highlight JS %}
+```JS 
 var YearFilterInput = React.createClass({
 	publishOnChange: function(event) {
 		var eventData = {};
@@ -109,11 +111,11 @@ var FilterBox = React.createClass({
 		);
 	}
 });
-{% endhighlight %}
+```
 
 This changed the structure of the data that forms the message.
 
-{% highlight JS %}
+```JS 
 publishOnChange: function(event) {
 	var eventData = {};
 	eventData[this.props.name.toLowerCase()] = 
@@ -125,7 +127,7 @@ publishOnChange: function(event) {
 		data: eventData
 	});
 }
-{% endhighlight %}
+```
 
 Now, since the component only knows about itself, the eventdata is an object with this component's identifer as a property and the new integer value of the input control as the value for the property.
 
@@ -135,10 +137,10 @@ That does mean that the `PayTable` subscriber to this message had to change how 
 
 [React Add-ons](http://facebook.github.io/react/docs/addons.html) (which it turns out is an awesome thing) has an update helper which is used to [merge](http://facebook.github.io/react/docs/update.html#shallow-merge) the newly received filterBounds into the existing state. 
 
-{% highlight JS %}
+```JS 
 //the paytable now does
 var newState = React.addons.update(this.state, {$merge: filterBounds});
-{% endhighlight %}
+```
 
 Where previously the code replaced the state with the message body because we'd coupled everything up and implicitly the message body was known to match the state.
 
@@ -156,17 +158,17 @@ The steps I ended up taking were:
 
 easy!
 
-{% highlight bash %}
+```bash 
 npm install --save-dev mocha
 npm install --save-dev gulp-mocha
 npm install --save-dev should
-{% endhighlight %}
+```
 
 #2. Add a gulp task to run tests
 
 also easy!
 
-{% highlight JS %}
+```JS 
 gulp.task('test', function() {
     //this require line took me a while to figure out!
     //more below!
@@ -179,7 +181,7 @@ gulp.task('test', function() {
 		}
 	}));
 });
-{% endhighlight %}
+```
 
 If you don't Gulp this just says grab all of the javascript files in the tests folder whose names end with Spec and pass them into Mocha.
 
@@ -191,7 +193,7 @@ I had to `npm install` [jsdom](https://github.com/tmpvar/jsdom) since React has 
 
 The end result (snipped a little for clarity) was:
 
-{% highlight JS %}
+```JS 
 'use strict';
 
 var jsdom = require('jsdom');
@@ -256,11 +258,11 @@ describe('the filter box', function() {
 		// ..snip
 	});
 });
-{% endhighlight %}
+```
 
 So, just once, we subscribe to the message we're expecting our React component to publish and store the message body.
 
-{% highlight JS %}
+```JS 
 var handlerReceived;
 
 before(function() {
@@ -272,11 +274,11 @@ before(function() {
 		}
 	});
 });
-{% endhighlight %}
+```
 
 and then need to have a setup for each test:
 
-{% highlight JS %}
+```JS 
 var filterBoxInputs;
 
 beforeEach(function() {
@@ -292,7 +294,7 @@ beforeEach(function() {
 
 	filterBoxInputs = TestUtils.scryRenderedDOMComponentsWithTag(filterBox, 'input');
 });
-{% endhighlight %}
+```
 
 Here the handlerReceived is reset each time and then the global document and window variables that a browser would provide are setup.
 
@@ -304,7 +306,7 @@ Well, no, it grabs any React components that shadow input controls. Not DOM elem
 
 For each input in the Filter box, as it stands, I want to run the same tests and since there are only two inputs right now I'm happy to stand that duplication until I need to remove it. So there are two describe blocks that are basically the same:
 
-{% highlight JS %}
+```JS 
 describe('has a single earliest year input that', function() {
 	var earliestInput;
 
@@ -326,7 +328,7 @@ describe('has a single earliest year input that', function() {
 		earliestInput.props.value.should.be.exactly(1990);
 	});
 });
-{% endhighlight %}
+```
 
 In this block's `beforeEach` it grabs any input with the desired name, asserts there is only one, and stores that component so that it can be asserted against.
 
@@ -340,7 +342,7 @@ That change should have caused a message to be published and the test is subscri
 
 No, I found [this blog post](http://www.hammerlab.org/2015/02/14/testing-react-web-apps-with-mocha/) which borrowed [code from the Khan Academy](https://github.com/Khan/react-components/blob/7afcf35c921a2f984ddff71dead25217f8de3532/test/compiler.js) which can be passed to mocha as a compiler so that it can JSX when it needs to...
 
-{% highlight JS %}
+```JS 
 var fs = require('fs'),
     ReactTools = require('react-tools'),
     origJs = require.extensions['.js'];
@@ -354,7 +356,7 @@ require.extensions['.js'] = function(module, filename) {
   var compiled = ReactTools.transform(content, {harmony: true});
   return module._compile(compiled, filename);
 };
-{% endhighlight %}
+```
 
 This required the final NPM of the day adding in react-tools so that the JSX transformer was available.
 
@@ -362,7 +364,4 @@ And..
 
 # Ta-da
 
-<figure>
-<img src="/images/tada.png" alt="passing tests" class="img-responsive img-thumbnail"/>
-<figcaption>Ta-da!</figcaption>
-</figure>
+{% include image.html url="/image/tada.png" alt="passing tests" caption="Ta-da!" %}

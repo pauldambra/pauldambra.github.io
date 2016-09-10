@@ -5,6 +5,8 @@ permalink: "/happy-numbers-kata.html"
 date: "2014-11-22 23:00:00"
 description: The Happy Numbers Kata in Five Seconds
 keywords: tpl parallel happy numbers kata
+category: kata
+tags: [c#, kata, tdd, learning]
 ---
 
 I love C# but while we're trying to beat our deployment process into submission at work I'm only really writing Ruby and Powershell. So when a [few](http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/), [different](http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/) [articles](http://www.ryanwgough.com/blog/happy_numbers.html) about the Happy Numbers kata turned up on my twitter feed and I found myself with a large whisky and a sleeping family I thought I'd have a go.
@@ -27,7 +29,7 @@ The second link [above](http://silkandspinach.net/2014/11/13/happy-numbers-again
 
 After writing a just a couple of tests:
 
-{% highlight c# %}
+```c# 
 [Test]
 [TestCase(31, true)]
 [TestCase(4, false)]
@@ -36,13 +38,13 @@ public void CanIdentifyHappyNumber(int i, bool expected)
 {
     Assert.AreEqual(expected, i.IsAHappyNumber());
 }
-{% endhighlight %}
+```
 
 I realised that I really like Ruby's having a question mark on methods that return a boolean and miss that feature in C#.
 
 And that the sensible public API was just a call to `IsAHappyNumber` directly on the integer so I could crank out a large test pretty easily.
 
-{% highlight c# %}
+```c# 
 // Taken from http://oeis.org/A007770
 private static readonly int[] HappyNumbersUpTo1000 =
 {
@@ -63,11 +65,11 @@ public void CanTestAThousandNumbers()
         Assert.AreEqual(HappyNumbersUpTo1000.Contains(i), i.IsAHappyNumber());
     }
 }
-{% endhighlight %}
+```
 
 So, with a 1000 failing tests I could run through a few naive implementations to get to a reasonable one.
 
-{% highlight c# %}
+```c# 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -176,21 +178,21 @@ namespace HappyNumbers
     }
 }
 
-{% endhighlight %}
+```
 
 OK, there's a lot going on there. First there are two dictionaries: one which keeps track of the numbers generated while processing each number processed; the other which keeps track of the results for a key describing each number (not the number be being processed).
 
-{% highlight c# %}
+```c# 
 private static readonly Dictionary<int, HashSet<int>> NumberChain = new Dictionary<int, HashSet<int>>(); 
 private static readonly Dictionary<string, bool> HappyNumberResults = new Dictionary<string, bool>();
-{% endhighlight %}
+```
 
 The first dictionary is used for deciding when a number is sad - if a number is seen for a second time then either it was the start number or the process has started looping. The second dictionary is for shortcut results. That is since 123, 213, 321, 1203, 2130, 3021, etc all have the same result once we've seen 123 we can immediately return a result for all other numbers that have a single 1, 2, and 3 and any number of zeroes.
 
 Then `var happyNumberKey = string.Join(",", digitsToTest);` because two instances of `int[]` aren't equal based on their contents it is necessary to generate a key that from the arrays so that they can be compared when adding to the HappyNumberResults dictionary.
 
 There are a bunch of methods to help reveal intent - mainly for this method that does the meat of the work:
-{% highlight c# %}
+```c# 
 private static void TestForHappiness(int startingNumber, string happyNumberKey)
 {
     var nextInChain = startingNumber;
@@ -209,7 +211,7 @@ private static void TestForHappiness(int startingNumber, string happyNumberKey)
         }
     }
 }
-{% endhighlight %}
+```
 
 This expresses the algorithm: take a number, get the sum of the square of its digits, test for a result, stop if you have one or do the same to that sum. I don't like the triple check of `HappyNumberIsCompleteFor`, `nextInChain==1`, and `TheCalculationChainHasLoopedAround` but I can't immediately see how to split that up without it being too meh.
 
@@ -227,7 +229,7 @@ First lesson here was that I don't get the TPL at all... _at all_
 
 My first attempt at parallel processing of the list meant adding the cost of starting a thread for every number (as the Happy Numbers are processed one at a time) so I added an extension method to call `AreHappyNumbers` on a list of integers.
 
-{% highlight c# %}
+```c# 
 public static Dictionary<int, bool> AreHappyNumbers(
     this IEnumerable<int> numbersToProcess, 
     CancellationToken cancellationToken)
@@ -245,13 +247,13 @@ public static Dictionary<int, bool> AreHappyNumbers(
     }
     return results;
 } 
-{% endhighlight %}
+```
 
 This method takes a range of numbers and a cancellation token. It then loops over the numbers calculating if they are happy and testing for cancellation before each number.
 
 After quite a few false starts and confusions with the TPL I ended up with the following:
 
-{% highlight c# %}
+```c# 
 [Test]
 public void ParallelRunForFiveSeconds()
 {
@@ -286,7 +288,7 @@ public void ParallelRunForFiveSeconds()
 
     Debug.WriteLine("In five seconds the number of numbers was {0}", count);
 }
-{% endhighlight %}
+```
 
 So, yes that's not a test and it is probably awful TPL code but I'm pretty damn sure it doesn't run for more than 5 seconds and it calculates...
 

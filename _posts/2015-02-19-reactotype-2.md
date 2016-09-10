@@ -5,6 +5,8 @@ permalink: "/reactotype/part-two.html"
 date: "2015-02-19 22:00:00"
 description: "exploring ReactJS"
 keywords: reactjs js yeoman gulp html css web
+category: react
+tags: [learning, react, js, series]
 ---
 
 I posted about my [impressions of working with React](/reactotype/part-one.html) slowly building an HTML table and banging on about it. I ended that post with one of the more memorable cliff-hangers in recent time.
@@ -29,16 +31,13 @@ So, having squeezed the table to make space for a column for filter controls I n
 1. Add the filter controls
 2. Make them affect the table
 
-<figure>
-<img src="/images/reactotype_screenshot.png" alt="screenshot of the web page" class="img-responsive img-thumbnail"/>
-<figcaption>A screenshot of the desired filterable table</figcaption>
-</figure>
+{% include image.html url="/image/reactotype_screenshot.png" alt="screenshot of the web page" caption="A screenshot of the desired filterable table" %}
 
 # Adding the filter controls
 
 Once I'd made a static HTML version of the filter controls and knew that I was aiming for a number input for the earliest year to display and one for the latest.
 
-{% highlight html %}
+```html 
 <div className="col-xs-12">
 	<div className="form-group">
 		<label htmlFor="earliest">Earliest</label>
@@ -53,7 +52,7 @@ Once I'd made a static HTML version of the filter controls and knew that I was a
 			   className="form-control" />
 	</div>
 </div>
-{% endhighlight %}
+```
 
 Copying what I already had to turn this into a React component was a very short job. And then I moved onto a little research to see what approaches there were to solve my problem and I stumbled on [a blog exploring React](http://tech.pro/blog/2020/a-thrown-to-the-wolves-hands-on-introduction-to-react) that used a JS pub/sub library called [postal.js](https://github.com/postaljs/postal.js).
 
@@ -61,7 +60,7 @@ Copying what I already had to turn this into a React component was a very short 
 
 > Postal.js is an in-memory message bus - very loosely inspired by AMQP - written in JavaScript. Postal.js runs in the browser, or on the server using node.js. It takes the familiar "eventing-style" paradigm (of which most JavaScript developers are familiar) and extends it by providing "broker" and subscriber implementations which are more sophisticated than what you typically find in simple event emitting/aggregation.
 
-{% highlight javascript %}
+```javascript 
 /** @jsx React.DOM */
 'use strict';
 
@@ -122,14 +121,14 @@ var FilterBox = React.createClass({
 });
 
 module.exports = FilterBox;
-{% endhighlight %}
+```
 
 What do we have?
 ----------------
 
-####Render
+#### Render
 
-{% highlight javascript %}
+```javascript 
 render: function() {
     return (
     	<div className="col-xs-12">
@@ -156,21 +155,21 @@ render: function() {
     	</div>
     );
 }
-{% endhighlight %}
+```
 
 Here we've added a react specific attribute `defaultValue` to set the starting state of the inputs, added min and max validation using properties passed in to the component and an onChange handler specific to each number input.
 
 
 ####Initial state
 
-{% highlight javascript %}
+```javascript 
 getInitialState: function() {
     return {
         earliest: this.props.initialEarliest,
         latest: this.props.initialLatest
     };
 }
-{% endhighlight %}
+```
 
 Here the default values for the earliest and latest state are set.
 
@@ -182,7 +181,7 @@ Yes, yes, kill all duplication. But... the duplicate methods are next to each ot
 
 (I got all excited about postal.js and wrote this post before finishing the component)
 
-{% highlight javascript %}
+```javascript 
 handleLatestChange: function(event) {
 	this.setState(
 		{latest: parseInt(event.target.value, 10)}, 
@@ -195,7 +194,7 @@ handleLatestChange: function(event) {
 		}
 	);
 }
-{% endhighlight %}
+```
 
 Here when an event is received the function calls [`setState`](http://facebook.github.io/react/docs/component-api.html#setstate) on the React component. This merges the object provided as the first argument with the component's current state. 
 
@@ -203,13 +202,13 @@ Since that update doesn't necessarily occur immediately the method takes a callb
 
 In this case the callback uses postal to publish a message. Postal allows you to hold a reference to a channel but here we're using a convenience method that allows you to specify the channel.
 
-{% highlight javascript %}
+```javascript 
 postal.publish({
 	channel: 'filters',
 	topic: 'year.bounds.change', 
 	data: this.state
 });
-{% endhighlight %}
+```
 
 So, on channel 'filters' publish a message with the topic 'year.bounds.change' including the component's state as the message data.
 
@@ -219,7 +218,7 @@ This gives us a phenomenally useless pub/sub mechanism with no subscribers...
 
 # Subscribing is even harder
 
-{% highlight javascript %}
+```javascript 
 componentWillMount: function() {
 	postal.subscribe({
 	  channel: "filters",
@@ -228,7 +227,7 @@ componentWillMount: function() {
 	    this.filterData(data);
 	  }
 	}).context(this);
-{% endhighlight %}
+```
 
 Postal's subscribe helper takes an object with the same properties as publish. Here for messages posted to a given channel and topic it will call the provided callback.
 
@@ -236,7 +235,7 @@ The [`componentWillMount`](http://facebook.github.io/react/docs/component-specs.
 
 # Messy Pay Table Reacting to Filtering
 
-{% highlight javascript %}
+```javascript 
 var PayTable = React.createClass({
     getInitialState: function() {
         return {
@@ -303,7 +302,7 @@ var PayTable = React.createClass({
         );
     }
 });
-{% endhighlight %}
+```
 
 `PayTable` now has a `preparePayData` method which has the responsibility of taking some data and the component's current state and setting the state's data property correctly.
 
@@ -311,10 +310,7 @@ Now all the `filterData` and `sortData` methods need to do is update state and t
 
 The point here is how easy it was to use postal.js to hook these two components together. I _lurve_ this!
 
-<figure>
-<img src="/images/reactotype.gif" alt="demo of the web page" class="img-responsive img-thumbnail"/>
-<figcaption>TEH AWESOME</figcaption>
-</figure>
+{% include image.html url="/image/reactotype.gif" alt="demo of the web page" caption="TEH AWESOME" %}
 
 # Next Up
 

@@ -5,7 +5,8 @@ permalink: "/websites-CMS-platform-logging-in.html"
 date: "2014-04-27 08:11:00"
 description: user management and logging in with nodejs mongo and passport
 keywords: node mongo mongodb nodejs bcrypt passport cms logging-in
-published: "false" 
+category: cms
+tags: [learning, cms, design, web, series, mongodb, nosql, express]
 ---
 
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
@@ -30,7 +31,7 @@ In order to test login the site will need to allow creation of users, GETing /lo
 
 There's no need to support registration now but it's *so* similar to login and creation that implementation would be trivial.
 
-{% highlight js %}
+```js 
 describe('creating users', function() {
   it('should be possible to create a user');
   it('should not be possible to create a duplicate user');
@@ -52,11 +53,11 @@ describe('logging out by GETing /logout', function() {
   it('should log out the logged in user');
   it('should throw no errors if there is no user logged in');
 });
-{% endhighlight %}
+```
 
 Firstly in order to create users it's necessary to `npm install --save bcrypt` and then (borrowing liberally from StackOverflow) create a module that hashes and salts a given password and saves a user with that hash into the database.
 
-{% highlight js %}
+```js 
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
@@ -88,7 +89,7 @@ module.exports = function(db) {
     }
   };
 };
-{% endhighlight %}
+```
 
 This function takes a database parameter so that the tests and the command line runner that exercise it can pass in different databases. It also demonstrates the smelliness of nested callbacks that I've put off dealing with three times now... hitting the same problem three times is a definite flag it's time to deal with it!
 
@@ -99,7 +100,7 @@ as an aside - [a colleague](https://twitter.com/LemoncogFoReal) just spotted how
 # Logging in Tests
 The test setup for the logging in tests is slightly different as it's necessary to grab the underlying SuperAgent instance that SuperTest wraps. SuperAgent will manage its cookies so you can extend the example below to allow tests of behaviour once logged in.
 
-{% highlight js %}
+```js 
 var request = require('supertest');
 var expect = require('chai').expect;
 
@@ -115,11 +116,11 @@ beforeEach(function() {
     server = require('../server').app;
     agent = request.agent(server);
 });
-{% endhighlight %}
+```
 
 Having access to the agent and the server application then allows test that look like 
 
-{% highlight js %}
+```js 
     it('without valid username cannot login', function(done) {
         agent
           .post('/login')
@@ -130,6 +131,6 @@ Having access to the agent and the server application then allows test that look
             done();
           });
     });
-{% endhighlight %}
+```
 
 Not hugely different in syntax to the SuperTest tests but necessary in order to interact with the session.

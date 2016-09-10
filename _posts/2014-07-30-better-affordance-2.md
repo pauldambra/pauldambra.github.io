@@ -5,6 +5,8 @@ permalink: "/better-affordance-js.html"
 date: "2014-07-30 22:11:00"
 description: using funky js magic to make a better visual affordance
 keywords: js ux visual affordance
+category: cms
+tags: [learning, cms, design, web, series]
 ---
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
 
@@ -14,19 +16,13 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 In the last post a better visual affordance that a page element is editable was added. But didn't solve the problem that notifications of success or failure were obtrusive and disconnected from the edited element.
 
-<figure>
-<img src="/images/pulse.gif" alt="pulsing affordance" class="img-responsive img-thumbnail"/>
-<figcaption>Pulsing editor indicator</figcaption>
-</figure>
+{% include image.html url="/images/pulse.gif" alt="pulsing affordance" caption="Pulsing editor indicator" %}
 
 <!--more-->
 
 The desired behaviour is that when a change is made the entire current page is persisted to the server and the user is made aware of success or failure without interrupting their workflow unnecessarily.
 
-<figure>
-	<img src="/images/affordance-with-state.gif" alt="editable indicator changing state" class="img-responsive img-thumbnail"/>
-	<figcaption>Editable indicator changing state</figcaption>
-</figure>
+{% include image.html url="/images/affordance-with-state.gif" alt="Editable indicator changing state" caption="Editable indicator changing state" %}
 
 So here as the text is changed the indicator changes to the save icon. On success to a tick and after a short delay back to the editable icon.
 
@@ -35,7 +31,7 @@ But how?!
 # Changing the icon
 The actual switch is really simple
 
-{% highlight js %}
+```js 
 (function(omniclopse) {
   'use strict';
 
@@ -61,7 +57,7 @@ The actual switch is really simple
     switchIcons(element, 'fa-save', 'fa-times');
   };
 }(window.omniclopse = window.omniclopse || {}));
-{% endhighlight %}
+```
 
 Since the site is using the well-named [Font-awesome icon library](http://fortawesome.github.io/Font-Awesome/) all that is needed to change the icon is to alter the fa classes on the element. 
 
@@ -77,7 +73,7 @@ Right now this behaviour on fail is pretty rubbish as the user doesn't get an er
 
 # Wiring it up
 
-{% highlight js %}
+```js 
 (function(omniclopse, $) {
     'use strict';
     
@@ -113,7 +109,7 @@ Right now this behaviour on fail is pretty rubbish as the user doesn't get an er
     };
 
 }(window.omniclopse = window.omniclopse || {}, $));
-{% endhighlight %}
+```
 
 When the onContentEdited event is fired for an element 
 
@@ -125,7 +121,7 @@ When the onContentEdited event is fired for an element
 
 This did need a slight change to the JS that watches for changes to the page that was introduced [in a previous article](/On-Page-Editing.html#edit-event-js)
 
-{% highlight js %}
+```js 
 (function(omniclopse, $, ckedit) {
     'use strict';
 
@@ -153,7 +149,7 @@ This did need a slight change to the JS that watches for changes to the page tha
 
     };    
 }(window.omniclopse = window.omniclopse || {}, $, CKEDITOR));
-{% endhighlight %}
+```
 
 This now adds the i child element which indicates that a particular element is editable which is necessary because of how ckeditor alters the DOM when it picks up on a contenteditable element.
 
@@ -161,10 +157,8 @@ And, rather than simply calling `omniclopse.onContentEdited` it now passes in th
 
 # The result
 is a pretty, funky, pulsing indicator that shows an element is editable and changes state with the element to keep the user informed of what is happening in the background.
-<figure>
-	<img src="/images/affordance-with-delay.gif" alt="editable indicator changing state after typing finishes" class="img-responsive img-thumbnail"/>
-	<figcaption>Editable indicator changing state *after typing finishes*</figcaption>
-</figure>
+
+{% include image.html url="/image/affordance-with-delay.gif" alt="editable indicator changing state after typing finishes" caption="editable indicator changing state after typing finishes" %}
 
 # Doh-stscript
 ## a postscript but also doh
@@ -178,10 +172,10 @@ When I had to pass in the element so its state could be updated I made the simpl
 
 Even without viewing these side-by-side JS ninjas might see what I did...
 
-{% highlight js %}
+```js 
 timer = setTimeout(omniclopse.onContentEdited, 500);
 timer = setTimeout(omniclopse.onContentEdited($(this)[0]), 500);
-{% endhighlight %}
+```
 
 Because the second version has brackets against the function name JS evaluates the function as soon as it parses it which isn't what we want to happen.
 
@@ -191,12 +185,12 @@ What this meant was as soon as the HTML changed and even while the user is still
 
 This code should read (as it does above)...
 
-{% highlight js %}
+```js 
     var el = $(this)[0];
     timer = setTimeout(function() {
       omniclopse.onContentEdited(el);
     }, 500);
-{% endhighlight %}
+```
 
 This now captures the element that is being edited in the `el` variable and then passes a function to setTimeout which *when SetTimeout actually runs* calls onContentEdited.
 

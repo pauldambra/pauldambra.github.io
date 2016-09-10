@@ -5,6 +5,8 @@ permalink: "/better-affordance.html"
 date: "2014-07-20 22:11:00"
 description: using funky css3 magic to make a better visual affordance
 keywords: css3 keyframes ux visual affordance
+category: cms
+tags: [learning, cms, design, web, series]
 ---
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
 
@@ -14,23 +16,15 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 In the last post I wasn't happy with the visual affordance that a page element is editable.
 
-<figure>
-	<img src="/images/affordance-loggedout.png" alt="editable sections for anonymous users" class="img-responsive img-thumbnail"/>
-	<figcaption>Appearance when logged out</figcaption>
-</figure>
-<figure>
-	<img src="/images/affordance-loggedin.png" alt="editable sections for anonymous users" class="img-responsive img-thumbnail"/>
-	<figcaption>Appearance when logged in</figcaption>
-</figure>
+{% include image.html url="/images/affordance-loggedout.png" alt="editable sections for anonymous users" caption="Appearance when logged out" %}
+
+{% include image.html url="/images/affordance-loggedin.png" alt="editable sections for anonymous users" caption="Appearance when logged in" %}
 
 <!--more-->
 
 I also wasn't happy that the page elements shifted around as alerts were added to the screen.
 
-<figure>
-<img src="/images/editing.gif" alt="editing the page" class="img-responsive img-thumbnail"/>
-<figcaption>Hmmm...</figcaption>
-</figure>
+{% include image.html url="/images/editing.gif" alt="editing the page" caption="Hmmm...." %}
 
 #So...
 ###That's what a proof of concept is for, right?
@@ -51,12 +45,9 @@ The indicator that an element is editable has to be on the element itself otherw
 
 By using CSS3 keyframes we can cock a snoot at older browsers (without breaking them) and get the desired behaviour.
 
-<figure>
-<img src="/images/pulse.gif" alt="pulsing affordance" class="img-responsive img-thumbnail"/>
-<figcaption>Pulsing editor indicator</figcaption>
-</figure>
+{% include image.html url="/images/pulse.gif" alt="Pulsing editor indicator" caption="Pulsing editor indicator" %}
 
-{% highlight scss %}
+```scss 
 @mixin editorAffordance($size, $pos, $glow) {
 	position: absolute;
 	left: $pos;
@@ -91,13 +82,13 @@ h1[contenteditable] {
     	@include animation('goldpulse 2.5s infinite ease-in');
 	}
 }
-{% endhighlight %}
+```
 
 The important bits here are:
 ##The positioning
 Using the `[contenteditable]` rule to set `position:relative` on the editable elements means we can add an element as a child with `.editable-afforance` as one of its classes. That class has a rule that sets `position:absolute` and some positioning to put the element top left (but those positions are passed in so don't need to be top left).
 
-Positioning something absolutely inside something that is positioned relatively positions the child in relation to the parent (<a href="http://www.amazon.co.uk/gp/product/B00EZ3Y5RW/ref=as_li_ss_tl?ie=UTF8&camp=1634&creative=19450&creativeASIN=B00EZ3Y5RW&linkCode=as2&tag=mindlramblnon-21">see - CSS is straight-forward</a><img src="http://ir-uk.amazon-adsystem.com/e/ir?t=mindlramblnon-21&l=as2&o=2&a=B00EZ3Y5RW" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+Positioning something absolutely inside something that is positioned relatively positions the child in relation to the parent ([see - CSS is straight-forward](http://www.amazon.co.uk/gp/product/B00EZ3Y5RW/ref=as_li_ss_tl?ie=UTF8&camp=1634&creative=19450&creativeASIN=B00EZ3Y5RW&linkCode=as2&tag=mindlramblnon-21)
 ). 
 
 Giving an element that indicates something is editable but doesn't push that editable content out of its way. 
@@ -115,7 +106,7 @@ As always the [Mozilla Developer Network](https://developer.mozilla.org/en-US/do
 So, if 2s is set as the animation-duration then a keyframe rule for 50% applies after 1 second.
 
 Here there are three rules that set a cycling box shadow inside and outside of the element 
-{% highlight scss %}
+```scss 
 @include keyframes(darkpulse) {
   0% { 
 	box-shadow: inset 0px 0px 5px rgb(61,28,79),
@@ -130,7 +121,7 @@ Here there are three rules that set a cycling box shadow inside and outside of t
   		0px 0px 15px rgb(61,28,79); 
   	}
 }
-{% endhighlight %}
+```
 
 And here a codepen so you can play with the CSS that generates the effect
 <p data-height="129" data-theme-id="7380" data-slug-hash="gIseG" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/pauldambra/pen/gIseG/'>gIseG</a> by Paul D'Ambra (<a href='http://codepen.io/pauldambra'>@pauldambra</a>) on <a href='http://codepen.io'>CodePen</a>.</p>

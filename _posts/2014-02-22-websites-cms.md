@@ -4,10 +4,8 @@ layout: "post"
 permalink: "/2014/02/websites-cms.html"
 date: "2014-02-22 18:59:00"
 updated: "2014-04-11 18:23:57"
-author: 
-    name: "Paul D'Ambra"
-    url: "https://plus.google.com/114260096260757534167?rel=author"
-    image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5Duf0/s512-c/photo.jpg"
+category: cms
+tags: [learning, cms, design, web, series]
 ---
 
 I was once complaining about having difficulty setting up a very slightly unusual feature in a Drupal site that was taking forever to achieve. The framework made so many assumptions about what I should do that it wouldn't let me do what I wanted to.
@@ -22,12 +20,11 @@ I spent this past week doing maintenance work on a Django website. The ceremony 
 
 Some of that delay is that I'm new to Django (and Python), sure, but at points, even when I'd come to understand what Django wanted, I still had to spend time poking it with a stick before it would allow me to display HTML in a browser.
 
-#So?
+# So?
 
 My position is that a CMS can be overkill. They speed up the initial setup for a website but then can slow down subsequent features. I'd argue you can provide the features of most CMS with relatively little effort by embracing modularity and the capabilities of modern JS.
 
-<h3><a href="http://mindlessramblingnonsense.blogspot.co.uk/2014/02/websites-cms.html#addendum">Edit/Addendum</a>
-</h3>
+### Edit/Addendum
 
 As [Dan](https://plus.google.com/u/0/+DanielDrummond) points out in the comments Django != CMS either. I call out above that I'm not experienced with Django. I've worked with it twice. And both times Django had been used to build a CMS.
 
@@ -41,20 +38,17 @@ I'm primarily a .Net developer. I love C# - I think the language is powerful and
 
 Really all I'm saying is that I've discovered I heart JS for making web things because I've found it gets out of the way and lets me build things.
 
-<figure>
-<img src="/images/ABC.png" alt="always be punning" class="img-responsive img-thumbnail"/>
-<figcaption>You might just be able to see where I edited this image</figcaption>
-</figure>
+{% include image.html caption="You might just be able to see where I edited this image" url="/images/ABC.png" alt="always be punning" %}
 
 The basic idea for this blog series had been bouncing around in my head for a while... and the recent work with Django was the kick I needed to actually bother to write it.
 
-####Never say never but sometimes say no
+#### Never say never but sometimes say no
     
 So I wondered if I really could build an editable website as easily as I thought I could.
     
 Proof, in other words, if proof be need be.
 
-#What is it?!
+# What is it?!
 
 Wikipedia has a reasonable definition of a Web CMS (right now at least) as:
 

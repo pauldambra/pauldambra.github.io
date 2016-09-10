@@ -5,6 +5,8 @@ permalink: "/rake-transforms.html"
 date: "2014-11-06 23:00:00"
 description: transforming web.config with rake
 keywords: rake web.config transforming
+category: continuous-integration
+tags: [rake, CI, ruby]
 ---
 
 I've really been enjoying using Albacore Rake instead of MSBuild at work. It's enabled us to get everyone involved (because ugh, msbuild xml) and to improve our CI/CD pipeline.
@@ -17,7 +19,7 @@ NB: this is all with Albacore Rake version one.
 
 Here's a simple rakefile that will clean and build a .Net solution
 
-{% highlight ruby %}
+```ruby 
 require 'albacore'
 
 SOLUTION_FILE = "../SolutionName.sln"
@@ -43,15 +45,15 @@ msbuild :build=>[:clean] do |msb|
     msb.solution = SOLUTION_FILE
     msb.verbosity = :normal
 end
-{% endhighlight %}
+```
 
 In this scenario I want to replace the value of an app setting key. The section in the web.config in question:
 
-{% highlight xml %}
+```xml 
   <appSettings>
     <add key="TheSetting" value="value that needs to change"/>
   </appSettings>
-{% endhighlight %}
+```
 
 ###aside: don't always do this!
 The web.config transform to replace one or two values is pretty straightforward so if you don't have many different configurations or many things to change then you can probably stick with that. 
@@ -67,11 +69,11 @@ In this file any value that needs changing can be replaced with a [ruby string i
 
 So...
 
-{% highlight xml %}
+```xml 
   <appSettings>
     <add key="TheSetting" value="%{the_setting}"/>
   </appSettings>
-{% endhighlight %}
+```
 
 # YAML
 YAML or YAML Ain't Markup Language is a ["human friendly data serialization
@@ -79,9 +81,9 @@ YAML or YAML Ain't Markup Language is a ["human friendly data serialization
 
 For each build config add a yaml file. In this example case I added a release.yaml file to the Build/templates folder:
 
-{% highlight yaml %}
+```yaml 
 :the_setting: altered-value
-{% endhighlight %}
+```
 
 Complex, right? Wrong! If anything there's too little text in here for my tastes (although I'm unfamiliar with yaml so it may just be the effort I have to expend to parse it)
 
@@ -89,7 +91,7 @@ The important thing here is that the yaml key begins with a colon to support the
 
 # The rake task
 The rakefile should look like this:
-{% highlight ruby %}
+```ruby 
 require 'albacore'
 require 'yaml'
 
@@ -124,7 +126,7 @@ task :transform_config do
   newConfig = templateConfig % configHash
   File.write(WEBCONFIG_PATH, newConfig)
 end
-{% endhighlight %}
+```
 
 This file has a new task which loads the settings from the yaml file into a hash. And then loads the contents of the web.config template as a string.
 

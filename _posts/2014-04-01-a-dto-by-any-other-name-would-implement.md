@@ -2,21 +2,12 @@
 title: A DTO by any other name would implement ISweetSmellEquality
 layout: post
 permalink: "/2014/04/a-dto-by-any-other-name-would-implement.html"
-uuid: "3050421991067581519"
-guid: "tag:blogger.com,1999:blog-6728560442491983758.post-3050421991067581519"
 date: "2014-04-01 20:44:00"
 updated: "2014-04-02 23:03:07"
 description: a discussion of the practice of calling the objects passed between application layers DTOs
 keywords: DTO data transfer object anemic domain model value DDD domain driven design
-blogger: 
-  siteid: "6728560442491983758"
-  postid: "3050421991067581519"
-  comments: "0"
-categories: null
-author: 
-  name: "Paul D'Ambra"
-  url: "https://plus.google.com/114260096260757534167?rel=author"
-  image: "//lh5.googleusercontent.com/-nN3yNuaSWDs/AAAAAAAAAAI/AAAAAAAABQU/ESeyTW5Duf0/s512-c/photo.jpg"
+category: software-engineering
+tags: [learning, dto, cargo-cult, domain]
 published: true
 ---
 

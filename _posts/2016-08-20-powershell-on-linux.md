@@ -6,6 +6,8 @@ date: "2016-08-28 09:55:00"
 description: "initial investigation of powershell on linux"
 keywords: powershell bash linux
 comments: true
+category: software-engineering
+tags: [learning, powershell, bash, linux, python]
 ---
 
 MS have open-sourced [powershell](https://github.com/PowerShell/PowerShell) and made it work on many platforms. Kudos to them - I'm loving the "new MS".

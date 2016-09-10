@@ -5,13 +5,15 @@ permalink: "/static-factory-methods.html"
 date: "2014-09-13"
 description: using static factories to improve discoverability
 keywords: code pedanticism constructors readability
+category: software-engineering
+tags: [c#, design-patterns]
 ---
 
 It is relatively common to find (or write) a line of code like this
 
-{% highlight csharp %}
+```csharp 
 	var thingy = new Thingy(_someDependency, false);
-{% endhighlight %}
+```
 
 Reading this line a person can know this is initialising a `Thingy` which takes a dependency on something... and something else is false.
 
@@ -25,9 +27,9 @@ Also, this means there is some information or some decision that has been taken 
 
 Well, C# (as well as other languages) allows [named parameters](http://msdn.microsoft.com/en-gb/library/dd264739.aspx) so this `Thingy` could be instantiated by using
 
-{% highlight csharp %}
+```csharp 
 	var thingy = new Thingy(_someDependency, disableUnexpectedBehaviour: false);
-{% endhighlight %}
+```
 
 Now when a person reads this line of code they know more about what is happening and that should support them in introducing correct code. Here they learn that there is a mode where this class can do something in an unexpected way. Since the named parameter makes the intent clearer a developer can make a decision about how to instantiate the class with a reasonable idea of what will happen. 
 
@@ -39,7 +41,7 @@ It is possible to hide the constructor and provide [static factory methods](http
 
 These are my latest obsession - so I recommend taking the time to jump to the declaration of `Thingy` and do something like this:
 
-{% highlight csharp %}
+```csharp 
 
 class Thingy 
 {
@@ -71,6 +73,6 @@ class Thingy
 	var thingy =  Thingy.WithExpectedBehaviour(_someDependency);
 	var crazyThingy =  Thingy.WithUnexpectedBehaviour(_someDependency);
 
-{% endhighlight %}
+```
 
 Now you can't construct a `Thingy` without using one of these methods. This means that your decision to use a `Thingy` includes an explicit decision about what it means for it to be included in your code. Yay for clarity!

@@ -5,6 +5,8 @@ permalink: "/On-Page-Editing.html"
 date: "2014-06-11 08:11:00"
 description: using contenteditable in HTML5 to make page management easy
 keywords: contenteditable cms html5 jquery ajax
+category: cms
+tags: [learning, cms, design, web, series]
 ---
 
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
@@ -43,17 +45,17 @@ I'm well out of my depth as far as design goes right now! If this was a real pro
 # so how does it work? 
 As part of this piece of development I switched view engine to the [hbs engine](https://github.com/donpark/hbs). I wanted partials and handlebars and this appears to offer both with little pain.	
 
-{% highlight js %}
+```js 
 require('./server/handlebars').init(hbs, app.locals);
 hbs.registerPartials(__dirname + '/views/partials');
 app.engine('html', hbs.__express);
-{% endhighlight %}
+```
 
 This setup allows .hbs files stored in `/views/partials` to be used in `{% raw %}{{>partialName }}{% endraw %}` handlebars blocks
 
 The feature here is to have three columns of editable content. That's pretty easily expressed in the home page layout...
 
-{% highlight html %}
+```html 
 {% raw %}
   <div class="row info">
     {{>panel panels.[0]}}
@@ -61,13 +63,13 @@ The feature here is to have three columns of editable content. That's pretty eas
     {{>panel panels.[2]}}
   </div>
 {% endraw %}
-{% endhighlight %}
+```
 
 Each line calls for the panel partial and passes the given element from the panels array (or undefined)
 
 and a panel partial is simple too
 
-{% highlight html %}
+```html 
 {% raw %}
 	<div class="col-md-4">
     <div class="panel panel-info">
@@ -82,32 +84,32 @@ and a panel partial is simple too
     </div>
   </div>
 {% endraw %}  
-{% endhighlight %}
+```
 
 Each element that should be editable is marked with an `{% raw %}{{elementShouldBeEditable}}{% endraw %}` handlebars helper and the content from the model is marked as `safeString` so that any HTML entered in the WYSIWYG editor is not escaped.
 
 ## The Helpers
 ### An editable element
 
-{% highlight js %}
+```js 
     handlebars.registerHelper('elementShouldBeEditable', 
                         function() {
                             if (appLocals.user) {
                                 return 'contenteditable=true';
                             }
                         });
-{% endhighlight %}
+```
 
 This is just a standard Handlebars helper which checks if a user is set and if it is renders `contenteditable=true` in place. 
 
 ### Safe Strings
 If a WYSIWYG editor saves `{% raw %} <b>some bold text</b> {% endraw %}` then that is exactly what will be printed on screen as handlebars will escape the HTML to protect you from l33t haxxors. 
 
-{% highlight js %}
+```js 
     handlebars.registerHelper('safeString', function(value) {
         return new handlebars.handlebars.SafeString(value);
     });
-{% endhighlight %}
+```
 
 returning a handlebars safeString instead means that handlebars will trust the content and render **some bold text**
 
@@ -116,7 +118,7 @@ This is the first JS I've added to the client. So, while I initially wrote the J
 
 ### Gulp
 
-{% highlight js %}
+```js 
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
@@ -126,24 +128,24 @@ gulp.task('processJS', function(){
     .pipe(uglify())
     .pipe(gulp.dest('./public/js/'));
 });
-{% endhighlight %}
+```
 
 The gulp task is straightforward. On any change in a JS file in the public/js folder  concat all the js files in that folder into a file called app.js, uglify that file and save it.
 
 The main HTML page is then set to include that JS **when a user is logged in**
 
-{% highlight html %}
+```html 
 {% raw %}
     {{#if user}}
         <script src="/js/app.js"></script>
     {{/if}}
 {% endraw %}  
-{% endhighlight %}
+```
 
 ### <a name="edit-event-js">Monitor the page for changes</a>
 The first task is to watch any contenteditable elements for changes to their content and to do _something_ when a change is detected
 
-{% highlight js %}
+```js 
 (function(omniclopse, $) {
     'use strict';
     
@@ -162,7 +164,7 @@ The first task is to watch any contenteditable elements for changes to their con
         });
     };    
 }(window.omniclopse = window.omniclopse || {}, $));
-{% endhighlight %}
+```
 
 This JS watched any element with a contenteditable attribute and if an element gets focus stores the HTML content as it was on focus. On keyup or paste if the content has changed then queue a call to the onContentEdited event handler.
 
@@ -171,7 +173,7 @@ This has a 500 millisecond delay so that the system waits until a person has sto
 ### Respond to changes
 When a change is detected then the page is PUT to the server to persist those changes
 
-{% highlight js %}
+```js 
 (function(omniclopse, $) {
     'use strict';
 
@@ -202,13 +204,13 @@ When a change is detected then the page is PUT to the server to persist those ch
     };
 
 }(window.omniclopse = window.omniclopse || {}, $));
-{% endhighlight %}
+```
 
 So here the page object expected by the server is gathered from the page and PUT using `$.ajax`. This bit of code is bound directly to the Home page at the moment but that's easily remedied when necessary.
 
 An addMessage function shows a bootstrap alert to keep the user informed of what is happening. This is a pretty dull piece of code!
 
-{% highlight js %}
+```js 
     function alertTimeout(wait){
         setTimeout(function(){
             $('#messageHolder').children('.alert:first-child').alert().alert('close');
@@ -231,21 +233,16 @@ An addMessage function shows a bootstrap alert to keep the user informed of what
       $('#messageHolder').append(outer);
       alertTimeout(3000);
     }; 
-{% endhighlight %}
+```
 
 # Visual Affordance
 I found this a pretty hard design decision. I'm not sure I'm happy it really calls out what is happening to a user and I think I'll grab a designer the next time I'm next to one and ask their opinion but...
 
-<figure>
-	<img src="/images/affordance-loggedout.png" alt="editable sections for anonymous users" class="img-responsive img-thumbnail"/>
-	<figcaption>Appearance when logged out</figcaption>
-</figure>
-<figure>
-	<img src="/images/affordance-loggedin.png" alt="editable sections for anonymous users" class="img-responsive img-thumbnail"/>
-	<figcaption>Appearance when logged in</figcaption>
-</figure>
+{% include image.html url="/images/affordance-loggedout.png" alt="editable sections for anonymous users" caption="Appearance when logged out" %}
 
-{% highlight scss %}
+{% include image.html url="/images/affordance-loggedin.png" alt="editable sections for anonymous users" caption="Appearance when logged in" %}
+
+```scss 
 @mixin editorPencil($size) {
 	content: "\270f  ";
 	font-family: 'Glyphicons Halflings';
@@ -260,7 +257,7 @@ div[contenteditable]:before {
 h1[contenteditable]:before {
 	@include editorPencil(0.5em);
 }
-{% endhighlight %}
+```
 
 Since the site is already using bootstrap CSS was added that uses `:before` to add a pencil icon to any contenteditable div or H1.
 
@@ -277,7 +274,4 @@ The page content is jumping about as alert messages are added and that's not OK 
 
 But this was really fun to add and it needed very little code to do so.
 
-<figure>
-<img src="/images/editing.gif" alt="editing the page" class="img-responsive img-thumbnail"/>
-<figcaption>editing the page</figcaption>
-</figure>
+{% include image.html url="/images/editing.gif" alt="editing the page" caption="editing the page" %}

@@ -1,0 +1,73 @@
+---
+layout: default
+title: Categories
+---
+
+{% comment %}
+=======================
+The following part extracts all the categories from your posts and sort categories, so that you do not need to manually collect your categories to a place.
+=======================
+{% endcomment %}
+{% assign categories = "" %}
+{% for post in site.posts %}
+	{% assign currentCategory = post.category | append:'|' %}
+	{% assign categories = categories | append:currentCategory %}
+{% endfor %}
+
+{% assign categories = categories | split:'|' | sort %}
+
+{% comment %}
+=======================
+The following part removes dulpicated categories and invalid categories like blank category.
+=======================
+{% endcomment %}
+{% assign uniqueCategories = "" %}
+{% for category in categories %}
+	{% if category != "" %}
+		{% if uniqueCategories == "" %}
+			{% assign uniqueCategories = category | split:'|' %}
+		{% endif %}
+		{% unless uniqueCategories contains category %}
+			{% assign uniqueCategories = uniqueCategories | join:'|' | append:'|' | append:category | split:'|' %}
+		{% endunless %}
+	{% endif %}
+{% endfor %}
+
+{% comment %}
+=======================
+The purpose of this snippet is to list all the categories you have in your site.
+=======================
+{% endcomment %}
+
+<h1> Categories </h1>
+<div class="link-list">
+{% for category in uniqueCategories %}
+	<a class="post-metadata post-category" href="#{{ category | slugify }}"> 
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		{{ category }} 
+	</a>
+{% endfor %}
+</div>
+<hr>
+{% comment %}
+=======================
+The purpose of this snippet is to list all your posts posted with a certain category.
+=======================
+{% endcomment %}
+{% for category in uniqueCategories %}
+	<h2 id="{{ category | slugify }}">{{ category }}</h2>
+	<ul>
+	 {% for post in site.posts %}
+		 {% if post.category == category %}
+		 <li>
+		 <h3>
+		 <a href="{{ post.url }}">
+		 {{ post.title }}
+		 <small>{{ post.date | date_to_string }}</small>
+		 </a>
+		 </h3>
+		 </li>
+		 {% endif %}
+	 {% endfor %}
+	</ul>
+{% endfor %}

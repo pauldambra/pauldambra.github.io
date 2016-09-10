@@ -5,6 +5,8 @@ permalink: "/Websites-CMS-Platform-promises-part-2.html"
 date: "2014-06-01 08:11:00"
 description: bluebird and stack exchange communities are awesome
 keywords: node nodejs promises javascript bluebird stackexchange stackoverflow community
+category: cms
+tags: [js, learning, cms, design, web, series, promises]
 ---
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
 
@@ -20,7 +22,7 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 Here's the code I had written: 
 
-{% highlight js %}
+```js 
 //I'm using bluebird.js for promises
 var users = Promise.promisifyAll(db.users);
 var compare = Promise.promisify(bcrypt.compare);
@@ -53,11 +55,11 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
       return done(err);
     });
 });
-{% endhighlight %}
+```
 
 and here's the code that was suggested
 
-{% highlight js %}
+```js 
 //I'm using bluebird.js for promises
 var users = Promise.promisifyAll(db.users);
 var compare = Promise.promisify(bcrypt.compare);
@@ -83,7 +85,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
     })
     .nodeify(done);
 });
-{% endhighlight %}
+```
 
 there are a couple of differences here that led to some great learning for me!
 
@@ -93,7 +95,7 @@ The first is [the bind function](https://github.com/petkaantonov/bluebird/blob/m
 
 In JS there is [a method on the function prototype called bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind). Bind returns a new function identical to the original except that the first argument to bind sets the `this` context for the function and any subsequent arguments are 'stored' and precede any arguments given when the new function is eventually called.
 
-{% highlight js %}
+```js 
 var original = function() {
     console.log(this);
     console.log(arguments);
@@ -105,12 +107,12 @@ withNoParameters(); //logs Object {ada: "lovelace"} and an empty array
 var withParameters = withNoParameters.bind({ada:'lovelace'},34)
 withParameters(); //logs Object {ada: "lovelace"} and then [34]
 withParameters('Hedy Lamarr'); //logs Object {ada: "lovelace"} and then [34, "Hedy Lamarr"] 
-{% endhighlight %}
+```
 
 The bluebird bind function doesn't allow you to add arguments but does provide the ability to bind the context. Or rather of returning a promise bound to the given context. That context follows the promise down the chain (unless a new `Promise` is created)
 
 So here we can use it to simplify the code:
-{% highlight js %}
+```js 
 var users = Promise.promisifyAll(db.users);
 var compare = Promise.promisify(bcrypt.compare);
 
@@ -127,7 +129,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
       }
     });
 });
-{% endhighlight %}
+```
 
 # Nodeify
 
@@ -135,7 +137,7 @@ The other fantabulous feature is [nodeify](https://github.com/petkaantonov/blueb
 
 > Register a node-style callback on this promise. When this promise is is either fulfilled or rejected, the node callback will be called back with the node.js convention where error reason is the first argument and success value is the second argument. The error argument will be `null` in case of success.
 
-{% highlight js %}
+```js 
 var users = Promise.promisifyAll(db.users);
 var compare = Promise.promisify(bcrypt.compare);
 
@@ -151,7 +153,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
       }
     }).nodefiy(done); //on success calls done(null, this.user)
 });
-{% endhighlight %}
+```
 
 # So
 These were both transformative for me. I now have a way to plug promises into my code bit by bit and to carry on using libraries that know nothing about promises.
@@ -164,7 +166,7 @@ I poked at nodeify with a stick and a glass of wine and couldn't make that work.
 # Wonderful Community
 After reading the code for nodeify and realising I had far less idea how JS works than than I thought I did and much, much less than the library authors I [posted on StackOverflow](http://stackoverflow.com/questions/23920589/how-to-pass-a-third-argument-to-a-callback-using-bluebird-js-nodeify) with an example of what I wanted to achieve
 
-{% highlight js %}
+```js 
 module.exports.localStrategy = new LocalStrategy(function(username, password, done) {
   users.findOneAsync({username: username}).bind({})
     .then(function(user) {
@@ -190,7 +192,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
     })
     .nodeify(done);
 });
-{% endhighlight %}
+```
 
 Apart from a message confirming that it wasn't currently possible to use nodeify that way I also got comments from one of the Bluebird project committers that he thought this was a decent use-case and could I log an issue...
 
@@ -205,7 +207,7 @@ I really love it when a project is responsive! Gives me confidence that they car
 # And
 So I forked Bluebird, cloned it, switched to the 2.0 branch and ran npm build. I (relatively lazily) copied the built js files over the v1.2.4 files that npm had installed in the project and changed the code to use the new feature (with some comments added for this post)...
 
-{% highlight js %}
+```js 
 module.exports.localStrategy = new LocalStrategy(function(username, password, done) {
   users.findOneAsync({ username: username })
     .bind([]) //now the context needs to be an array
@@ -233,6 +235,6 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
     })
     .nodeify(done, {spread:true}); // Yay! 
 });
-{% endhighlight %}
+```
 
 My code looks how I wanted, does what I wanted, I grok promises much more, and I've learned that the bluebird developers are lovely. Awesomeness! 

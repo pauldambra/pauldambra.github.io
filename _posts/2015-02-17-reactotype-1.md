@@ -5,6 +5,8 @@ permalink: "/reactotype/part-one.html"
 date: "2015-02-17 14:00:00"
 description: "exploring ReactJS"
 keywords: reactjs js yeoman gulp html css web
+category: react
+tags: [learning, react, js, series]
 ---
 
 ####part one because I've got a feeling this is a topic about which I'll be able to bang on.
@@ -45,12 +47,12 @@ As I sat down and thought about what this would mean (writing a build script to 
 ####Setup
 I remembered [Yeoman.io](yeoman.io) and a quick search found a ReactJS with Gulp yeoman generator was available so I grabbed them:
 
-{% highlight bash %}
+```bash 
 mkdir reactotype && cd reactotype
 npm install -g yo
 npm install -g generator-react-gulp-browserify
 yo react-gulp-browserify
-{% endhighlight %}
+```
 
 Fast, simple, easy, and...
 
@@ -58,7 +60,7 @@ The [gulp setup](https://github.com/pauldambra/reactotype/blob/776d915fb9138532d
 
 And [gulp webserver](https://www.npmjs.com/package/gulp-webserver)! I love finding new (to me), awesome (to me) things 
 
-{% highlight javascript %}
+```javascript 
 gulp.task('serve', function () {
     gulp.src('./dist')
         .pipe($.webserver({
@@ -66,7 +68,7 @@ gulp.task('serve', function () {
             port: 9000
         }));
 });
-{% endhighlight %}
+```
 
 Seems like overkill when I can just do `python -m SimpleHTTPServer` since I'm only making static HTML with some JS but... I have to remember to type that in and it means I need a terminal window just for running that. This way I can `gulp watch` and it re-smooshes file changes and serves them up for me.
 
@@ -81,14 +83,15 @@ All the code is up [on Github](https://github.com/pauldambra/reactotype).
 
 So I created a module which just gives out a list of `PayYear`s. 
 
-{% highlight javascript %}
+```javascript 
 {'year': '1997', 'all': 27.5, 'fulltime': 17.4, 'parttime': 0.6 } 
-{% endhighlight %}
+```
 
 A `PayYear` has a year, the percentage pay gap between genders for all employment, for fulltime and for parttime.
 
 # Rendering the table
-{% highlight javascript %}
+
+```javascript 
 /** @jsx React.DOM */
 'use strict';
 
@@ -130,14 +133,15 @@ var PayTable = React.createClass({
 });
 
 module.exports = PayTable;
-{% endhighlight %}
+```
 
 So...
 `/** @jsx React.DOM */`
 This is so that the [JSX magic](http://facebook.github.io/react/docs/jsx-in-depth.html) can turn this into real Javascript. JSX is the thing that let's you mix HTML into your JS.
 
 Looking just at the code that creates a table row.
-{% highlight javascript %}
+
+```javascript 
 var PayRow = React.createClass({
     render: function() {
         return (
@@ -150,7 +154,8 @@ var PayRow = React.createClass({
         );
     }
 });
-{% endhighlight %}
+```
+
 [`createClass`](http://facebook.github.io/react/docs/top-level-api.html#react.createclass) is a helper to construct an instance of a component class for you. That class has a render function which returns HTML.
 
 Call JS, get HTML. Looks funky but is straightforward.
@@ -160,7 +165,8 @@ It's saying that in order to have a PayRow you have to have something providing 
 That's pretty straightforward. 
 
 Having said what a row of the table is we can say what the table is
-{% highlight javascript %}
+
+```javascript 
 var PayTable = React.createClass({
     render: function() {
         return (
@@ -182,7 +188,8 @@ var PayTable = React.createClass({
         );
     }
 });
-{% endhighlight %}
+```
+
 So this says that to render a table you need a bunch of HTML and then take `this.props.payYears` and map it into a set of `PayRow`s that make up the table body.
 
 Oh, and cause I only skimmed the docs, at first I missed that you have to add classes to HTML in JSX using className (since class is a reserved word in JS). 
@@ -197,7 +204,7 @@ This was probably the hardest bit for me to wrap my head around. Because this is
 
 The only part to change was the PayTable code.
 
-{% highlight javascript %}
+```javascript 
 function sortAscending(a,b) {
   if (a.year < b.year)
      return -1;
@@ -258,7 +265,7 @@ var PayTable = React.createClass({
         );
     }
 });
-{% endhighlight %}
+```
 
 First I had to come to terms with properties and state. So...
 

@@ -5,18 +5,20 @@ permalink: "/fun-with-structs.html"
 date: "2015-02-01 14:00:00"
 description: "when and why to use a struct as a value object in C#"
 keywords: dotnet .net struct value objects
+category: software-engineering
+tags: [c#, learning]
 ---
 
 We had a brief conversation at work the other day about extending a type to make our code clearer...
 
-{% highlight c# %}
+```c# 
 public class MeaningfulName : MathsName
 {
     public MeaningfulName(double w, double x, double y, double z) : base(w, x, y, z)
     {
     }
 }
-{% endhighlight %}
+```
 
 <!--more-->
 
@@ -42,7 +44,7 @@ TLDR;
 
 [Quoting from MSDN](https://msdn.microsoft.com/en-gb/library/aa664472(v=vs.71).aspx) "A variable of a struct type directly contains the data of the struct, whereas a variable of a class type contains a reference to the data, the latter known as an object."
 
-{% highlight c# %}
+```c# 
 
 public class NotValueSemantics
 {
@@ -59,12 +61,12 @@ var second = first;
 second.X = 100;
 Console.WriteLine(first.X); //writes 100
 
-{% endhighlight %}
+```
 
 in the example above the line `var second = first` just adds another reference to the memory that holds the `first` Object so operations on `second` affect `first`. The assignment of 100 to `second.X` is reflected in `first.X`.
 
 
-{% highlight c# %}
+```c# 
 
 public struct ValueSemantics
 {
@@ -81,7 +83,7 @@ var second = first;
 second.X = 100;
 Console.WriteLine(first.X); //writes *10*
 
-{% endhighlight %}
+```
 
 Instead if we declare it as a struct (other than requiring a call through to the base parameterless constructor) the difference is that `var second = first` copies the data not a reference to it. As a result operations on `second` don't affect `first` so the assignment `second.X = 100;` is not reflected in `first.X`.
 
@@ -93,7 +95,7 @@ The key fact about a [value object](http://martinfowler.com/bliki/ValueObject.ht
 
 So here are the tests I wrote to check my understanding of structs...
 
-{% highlight c# %}
+```c# 
 [Test] //this test passes!
 public void structs_with_equal_properties_are_equal()
 {
@@ -122,7 +124,7 @@ private struct ValueObject
         Y = y;
     }
 }
-{% endhighlight %}
+```
 
 Both of those tests pass. I'd have confidently put money on those tests failing. As above I'm certain I've written basically the same tests in the past and seen them fail - clearly I should trust my memory even less than I currently do!
 
@@ -130,7 +132,7 @@ So a struct in C# appears to be a pretty cheap way (in terms of typing) to defin
 
 The equivalent... i.e. a class which acts as a value object.
 
-{% highlight c# %}
+```c# 
 public class ValueObject : IEquatable<ValueObject>
 {
     public int X { get; private set; }
@@ -175,7 +177,7 @@ public class ValueObject : IEquatable<ValueObject>
         return !Equals(left, right);
     }
 }
-{% endhighlight %}
+```
 
 Much more code to read than the equivalent struct! Although I used resharper's code generation to add the equality methods so actually not that much more of the typing.
 
@@ -197,7 +199,7 @@ This would be fine. My feeling is that the code in question leads itself to erro
 
 This can be a really useful way of extending a sealed object or struct.
 
-{% highlight c# %}
+```c# 
 public class MeaningfulName 
 {
 	private MathsName _mathsThing;
@@ -212,7 +214,7 @@ public class MeaningfulName
 		return _mathsThing.DoAMathsThing(a);
 	}
 }
-{% endhighlight %}
+```
 
 If there was a requirement to extend the functionality of `MathsName` and we didn't own that object then this would be a good solution but this wrapper would just be calling the wrapped method with no alterations. And `MathsName` has a lot of methods :(
 
@@ -229,7 +231,7 @@ Class vs. Struct - the big fight
 
 I created a console application that creates a bunch of objects and structs and then calls a method on them. You can [see the full program here](https://gist.github.com/pauldambra/e3fb07f73e151152fa3c).
 
-{% highlight c# %}
+```c# 
 public class ValueClass : IEquatable<ValueClass>
 {
     public double Z { get; private set; }
@@ -267,11 +269,11 @@ public struct ValueStruct
         return new ValueStruct(left.W + right.W, left.X + right.X, left.Y + right.Y, left.Z + right.Z);
     }
 }
-{% endhighlight %}
+```
 
 and then doing something like
 
-{% highlight c# %}
+```c# 
 private static void AddObjectsTogether()
 {
     var endValues = new List<ValueClass>(Capacity);
@@ -281,7 +283,7 @@ private static void AddObjectsTogether()
         endValues.Add(value + MakeRandomValueClass());
     }
 }
-{% endhighlight %}
+```
 
 #### Profiling
 First I profiled the application running with a `Capacity` of 25 million. The code spent a little less than 10% of its time dealing with the structs and a little more than 12% of its time dealing with classes. Running with a capacity of 250,000 showed the reverse. 
