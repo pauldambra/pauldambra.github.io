@@ -1,0 +1,18 @@
+{% assign wordcount = include.content | number_of_words %}
+
+<script type="application/ld+json">
+{ "@context": "http://schema.org", 
+ "@type": "BlogPosting",
+ "headline": "{{ include.headline }}",
+ "genre": "{{ include.category }}", 
+ "keywords": "{{ include.keywords }}", 
+ "wordcount": "{{ wordcount }}",
+ "url": "{{ include.link }}",
+ "datePublished": "{{ include.date }}",
+ "author": {
+    "@type": "Person",
+    "name": "Paul D'Ambra"
+  }
+ "articleBody": {{ include.content | xml_escape | textilize }}
+ }
+</script>
