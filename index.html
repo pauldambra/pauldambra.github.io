@@ -3,6 +3,18 @@ layout: default
 title: Mindless Rambling Nonsense
 ---
 
+<script type="application/ld+json">
+{ "@context": "http://schema.org", 
+ "@type": "Blog",
+ "keywords": "software engineering agile refactoring c# ruby javascript", 
+ "url": "http://pauldambra.github.io",
+ "author": {
+    "@type": "Person",
+    "name": "Paul D'Ambra"
+  }
+ }
+</script>
+
 {% for post in site.posts %}
 <div class="col-sm-12 excerpt">
     <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
