@@ -18,13 +18,17 @@
     ]
   },
   "publisher": {
-    "@type": "Person",
+    "@type": "Organization",
     "name": "Paul D'Ambra",
     "sameAs": [
         "https://twitter.com/pauldambra",
         "https://github.com/pauldambra"
     ],
-    "logo": "/images/logo.png"
+    "logo": {
+    	"@context": "http://schema.org",
+  		"@type": "ImageObject",
+  		"contentUrl": "https://pauldambra.github.io/images/logo.png",
+    }
   },
   "image": "",
  "articleBody": "{{ include.content | xml_escape | textilize }}"
