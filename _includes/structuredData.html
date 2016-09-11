@@ -8,7 +8,7 @@
  "keywords": "{{ include.keywords }}", 
  "wordcount": "{{ wordcount }}",
  "url": "https://pauldambra.github.io{{ include.link }}",
- "datePublished": "{{ include.date }}",
+ "datePublished": "{{ include.date | | date: '%Y-%m-%d' }}",
  "author": {
     "@type": "Person",
     "name": "Paul D'Ambra",
