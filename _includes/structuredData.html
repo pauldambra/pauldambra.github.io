@@ -41,6 +41,6 @@
     "@type": "WebPage",
     "@id": "https://pauldambra.github.io{{ include.link }}"
   },
- "articleBody": "{{ include.content | strip_html | xml_escape | normalize_whitepace }}"
+ "articleBody": "{{ include.content | strip_html | xml_escape | normalize_whitepace | strip_newlines }}"
  }
 </script>
