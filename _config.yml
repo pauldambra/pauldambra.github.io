@@ -5,3 +5,4 @@ description: My thoughts are mindless and rambling so the best place for them is
 url: http://pauldambra.github.io
 plusProfile: https://plus.google.com/114260096260757534167?rel=author
 excerpt_separator: <!--more-->
+include: ['_site/test.html']

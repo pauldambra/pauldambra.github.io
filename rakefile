@@ -18,10 +18,10 @@ task :deploy_site do
 		return
 	end
 
-	`git config user.name "Travis CI"`
-	`git add _site`
-	`git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"`
-	`git push -fq origin master`
+	sh('git config user.name "Travis CI"')
+	sh('git add _site')
+	sh('git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"')
+	sh('git push -fq origin master')
 end
 
 task default: [:build]
