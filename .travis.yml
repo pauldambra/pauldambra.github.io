@@ -1,16 +1,12 @@
 language: ruby
 cache: bundler
-
 install:
- - bundle install
-script: 
- - ./build.sh
-
+- bundle install
+script:
+- "./build.sh"
 branches:
   only:
   - master
-
-  env:
+env:
   global:
-    secure: PItID0Y7CxZVty85qgqmhxStGAlFylG+I4qDIAtnWMwKKX+chslM4kiIaBivJqWF2Txhvxaqw009Q7Ceote4GWSBlBDJKKLmqwLShL2FShVE+ApspW7nZ7TI1FqCM59nqZcnqXyKZZegChUDG7U7NC32TQ0TFtMKV2INwSwOLSw=
-
+    secure: ZP7TcRTG8g6KjOmmDWwvUZU24wKlTekwCKFIhzLmm+mhNX6CW+M4XEi0MGkOtbFqK7knXiq9kPAECc9z+YFZ/UhZvvK8lJ0y5dqmeXg1/ONkXV5kjxorisu8/MvfG3K0qROZL3/sHHM0HE+z3Hn4d6SdH52ZHaLY8fdKMTi+l1w=
