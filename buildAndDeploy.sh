@@ -2,7 +2,7 @@
 
 set -e
 
-DEPLOY_REPO="git@github.com:pauldambra/pauldambra.github.io.git"
+DEPLOY_REPO="${GH_TOKEN}@github.com:pauldambra/pauldambra.github.io.git"
 
 function main {
 	clean
