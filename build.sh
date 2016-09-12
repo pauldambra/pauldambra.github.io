@@ -40,7 +40,8 @@ function deploy {
 	fi
 
 	cd _site
-	git config user.name "Travis CI"
+	git config --global user.name "Travis CI"
+    git config --global user.email paul.dambra+ttravis@gmail.com
 	git add -A
 	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
 	git push $DEPLOY_REPO origin master
