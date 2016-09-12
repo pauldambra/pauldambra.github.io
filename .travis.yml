@@ -1,12 +1,11 @@
 language: ruby
 cache: bundler
-dist: trusty
+
 install:
  - bundle install
 script: 
- - bundle exec rake
-after_success: 
- - bundle exec rake deploy_site
+ - build.sh
+
 branches:
   only:
   - master
