@@ -41,6 +41,7 @@ function deploy {
 
 	cd _site
 	git config user.name "Travis CI"
+	git add -A
 	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
 	git push $DEPLOY_REPO origin master
 }
