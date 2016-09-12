@@ -1,8 +1,13 @@
 language: ruby
-
+cache: bundler
 dist: trusty
-
 install:
-  - bundle install
-
+- bundle install
 script: bundle exec rake
+deploy: bundle exec rake deploy_site
+branches:
+  only:
+  - master
+env:
+  global:
+    secure: PItID0Y7CxZVty85qgqmhxStGAlFylG+I4qDIAtnWMwKKX+chslM4kiIaBivJqWF2Txhvxaqw009Q7Ceote4GWSBlBDJKKLmqwLShL2FShVE+ApspW7nZ7TI1FqCM59nqZcnqXyKZZegChUDG7U7NC32TQ0TFtMKV2INwSwOLSw=

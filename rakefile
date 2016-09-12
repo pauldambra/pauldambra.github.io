@@ -7,4 +7,21 @@ task build: [:clean] do
 	`jekyll build`
 end
 
+task :deploy_site do
+	if ENV["$TRAVIS_PULL_REQUEST"] then
+		puts "don't publish site for pull requests"
+		return
+	end
+
+	if ENV["$TRAVIS_BRANCH"] != "master" then
+		puts "only publish the master branch"
+		return
+	end
+
+	`git config user.name "Travis CI"`
+	`git add _site`
+	`git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"`
+	`git push -fq origin master`
+end
+
 task default: [:build]
