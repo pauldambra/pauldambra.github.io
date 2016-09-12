@@ -34,7 +34,7 @@ I can think of two problems with this:
 #### 1. Users expect an admin interface. 
 ##### They don't expect to edit in the page
 	
-I've previously referenced "Don't Make Me Think" [(shameless affiliate link)](<http://www.amazon.co.uk/gp/product/0321965515/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1634&amp;creative=6738&amp;creativeASIN=0321965515&amp;linkCode=as2&amp;tag=mindlramblnon-21) and that approach would drive the position that there's no point confusing a user just to be funky. This may be doing just that...
+I've previously referenced "Don't Make Me Think" [(shameless affiliate link)](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&ie=UTF8&qid=1473701528&sr=1-1&keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29) and that approach would drive the position that there's no point confusing a user just to be funky. This may be doing just that...
 
 #### 2. Is it discoverable?
 ##### The visual affordance to indicate that a user is able to edit an element needs to be worked in to the design 

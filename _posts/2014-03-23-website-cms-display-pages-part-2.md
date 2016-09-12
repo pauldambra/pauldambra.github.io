@@ -12,7 +12,7 @@ This post is part of a series where I'm hoping to prove to myself that building 
 
 [Previous Post](http://mindlessramblingnonsense.blogspot.co.uk/2014/03/websites-cms-displaying-pages.html)
 
-In his awesome book, "Don't Make Me Think"&nbsp;[(shameless affiliate link)](http://www.amazon.co.uk/gp/product/0321965515/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1634&amp;creative=6738&amp;creativeASIN=0321965515&amp;linkCode=as2&amp;tag=mindlramblnon-21" target="_blank),&nbsp;Steve Krug drives home the message that time spent figuring out how your site is supposed to work is not time spent deciding to engage with your site. So, we're not going to do any ground-breaking design work for this company web page.
+In his awesome book, "Don't Make Me Think"&nbsp;[(shameless affiliate link)](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&ie=UTF8&qid=1473701528&sr=1-1&keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29), Steve Krug drives home the message that time spent figuring out how your site is supposed to work is not time spent deciding to engage with your site. So, we're not going to do any ground-breaking design work for this company web page.
 
 <!--more-->
 
