@@ -4,24 +4,45 @@ set -e
 
 DEPLOY_REPO="git@github.com:pauldambra/pauldambra.github.io.git"
 
-rm -rf _site
-if [ -d "_site" ]; then rm -Rf _site; fi
+function main {
+	clean
+	get_current_site
+	build_site
+	deploy
+}
 
-git clone --depth 1 $DEPLOY_REPO _site
+function clean { 
+	echo "cleaning _site folder"
+	if [ -d "_site" ]; then rm -Rf _site; fi 
+}
 
-bundle exec jekyll build
+function get_current_site { 
+	echo "getting latest site"
+	git clone --depth 1 $DEPLOY_REPO _site 
+}
 
-if [ -z "$TRAVIS_PULL_REQUEST" ]; then
-    echo "don't publish site for pull requests"
-    exit 0
-fi  
+function build_site { 
+	echo "building site"
+	bundle exec jekyll build 
+}
 
-if [ -z "$TRAVIS_BRANCH" ]; then
-    echo "only publish the master branch"
-    exit 0
-fi
+function deploy {
+	echo "deploying changes"
 
-cd _site
-git config user.name "Travis CI"
-git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-git push origin master
+	if [ -z "$TRAVIS_PULL_REQUEST" ]; then
+	    echo "except don't publish site for pull requests"
+	    exit 0
+	fi  
+
+	if [ -z "$TRAVIS_BRANCH" ]; then
+	    echo "except only publish the master branch"
+	    exit 0
+	fi
+
+	cd _site
+	git config user.name "Travis CI"
+	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
+	git push origin master
+}
+
+main
