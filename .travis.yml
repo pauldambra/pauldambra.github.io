@@ -5,7 +5,7 @@ install:
  - bundle install
 script: 
  - bundle exec rake
-deploy: 
+after_success: 
  - bundle exec rake deploy_site
 branches:
   only:
