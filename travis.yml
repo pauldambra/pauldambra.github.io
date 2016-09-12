@@ -1,0 +1,8 @@
+language: ruby
+
+dist: trusty
+
+install:
+  - bundle install
+
+script: bundle exec rake
