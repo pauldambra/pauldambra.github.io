@@ -2,7 +2,7 @@
 
 set -e
 
-DEPLOY_REPO="${GH_TOKEN}@github.com:pauldambra/pauldambra.github.io.git"
+DEPLOY_REPO="https://${GH_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
 
 function main {
 	clean
@@ -42,7 +42,7 @@ function deploy {
 	cd _site
 	git config user.name "Travis CI"
 	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-	git push origin master
+	git push $DEPLOY_REPO origin master
 }
 
 main
