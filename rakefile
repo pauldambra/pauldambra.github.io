@@ -1,0 +1,10 @@
+
+task :clean do
+	`jekyll clean`
+end
+
+task build: [:clean] do
+	`jekyll build`
+end
+
+task default: [:build]
