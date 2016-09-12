@@ -3,10 +3,10 @@
 set -e
 
 echo "delete this token"
-echo $GH_TOKEN
-echo "string iternpolated ${GH_TOKEN}"
+echo $DEPLOY_BLOG_TOKEN
+echo "string iternpolated ${DEPLOY_BLOG_TOKEN}"
 
-DEPLOY_REPO="https://${GH_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
+DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
 
 function main {
 	clean
