@@ -21,7 +21,7 @@ So, it's relatively easy to get an Hello World page displaying...
 
 The steps I take when I'm setting up a new project look like:
 
-{% include image.html url="http://1.bp.blogspot.com/-bOVBV3wcEbE/Uya7PQnFeMI/AAAAAAAANOA/Hz_2p5XZpOY/s1600/Screenshot+2014-03-17+09.05.33.png" alt="" caption="" %}
+![](http://1.bp.blogspot.com/-bOVBV3wcEbE/Uya7PQnFeMI/AAAAAAAANOA/Hz_2p5XZpOY/s1600/Screenshot+2014-03-17+09.05.33.png)
 
 I should probably start using [Yeoman](http://yeoman.io/" target="_blank) but I don't start enough projects to feel the need to automate this step of the setup.
 
@@ -91,7 +91,7 @@ app.get('/', function(req, res){
 
 Running `node server` at the terminal I can point my browser at it:
 
-{% include image.html url="http://2.bp.blogspot.com/-8RKwf5NLHDc/UybPd8r9L0I/AAAAAAAANQA/rb_3_4W-22c/s1600/Screenshot+2014-03-17+10.32.47.png" alt="" caption="" %}
+![](http://2.bp.blogspot.com/-8RKwf5NLHDc/UybPd8r9L0I/AAAAAAAANQA/rb_3_4W-22c/s1600/Screenshot+2014-03-17+10.32.47.png)
 
 All of which has us set up to test our server and ready to display something meaningful with very little work at all.
 

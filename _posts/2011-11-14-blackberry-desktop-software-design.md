@@ -8,7 +8,7 @@ category: rant
 tags: [ux, blackberry, fuck-wits]
 ---
 
-{% include image.html url="http://2.bp.blogspot.com/-ofU0Oil-WBQ/TsEpmFgqK6I/AAAAAAAAAWQ/F1_qTKqpzV4/s1600/Screen+shot+2011-11-14+at+13.45.32.png" alt="blackberry screenshot" caption="the awful dialogue" %}
+![blackberry screenshot](http://2.bp.blogspot.com/-ofU0Oil-WBQ/TsEpmFgqK6I/AAAAAAAAAWQ/F1_qTKqpzV4/s1600/Screen+shot+2011-11-14+at+13.45.32.png)
 
 OK, so maybe the title is an overstatement but here's the steps to reach that mindset.
 
@@ -20,7 +20,7 @@ But, come on Blackberry - it *never*&nbsp;occurred&nbsp;to you that someone migh
 
 You don't think that something like this might be in order...
 
-{% include image.html url="http://2.bp.blogspot.com/-zq2sOQ7Lrfo/TsEty-rHITI/AAAAAAAAAWg/q3GtHED8V1I/s1600/mockup_5.png" alt="using a dash in an input" caption="using a dash in an input" %}
+![using a dash in an input](http://2.bp.blogspot.com/-zq2sOQ7Lrfo/TsEty-rHITI/AAAAAAAAAWg/q3GtHED8V1I/s1600/mockup_5.png)
 
 Honestly, it's no skin off my nose. I don't like the UI of Blackberries and I think the whole infrastructure is a bit too crappy. But my boss? Well, at one point he was pushing for all business mobiles to be Blackberries. Now he's looking at my iPhone and asking interested questions.
 

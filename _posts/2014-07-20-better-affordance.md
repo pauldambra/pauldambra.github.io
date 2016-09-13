@@ -16,15 +16,15 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 In the last post I wasn't happy with the visual affordance that a page element is editable.
 
-{% include image.html url="/images/affordance-loggedout.png" alt="editable sections for anonymous users" caption="Appearance when logged out" %}
+![editable sections for anonymous users](/images/affordance-loggedout.png)
 
-{% include image.html url="/images/affordance-loggedin.png" alt="editable sections for anonymous users" caption="Appearance when logged in" %}
+![editable sections for anonymous users](/images/affordance-loggedin.png)
 
 <!--more-->
 
 I also wasn't happy that the page elements shifted around as alerts were added to the screen.
 
-{% include image.html url="/images/editing.gif" alt="editing the page" caption="Hmmm...." %}
+![editing the page](/images/editing.gif)
 
 #So...
 ###That's what a proof of concept is for, right?
@@ -45,7 +45,7 @@ The indicator that an element is editable has to be on the element itself otherw
 
 By using CSS3 keyframes we can cock a snoot at older browsers (without breaking them) and get the desired behaviour.
 
-{% include image.html url="/images/pulse.gif" alt="Pulsing editor indicator" caption="Pulsing editor indicator" %}
+![Pulsing editor indicator](/images/pulse.gif)
 
 ```scss 
 @mixin editorAffordance($size, $pos, $glow) {

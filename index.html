@@ -2,7 +2,6 @@
 layout: default
 title: Mindless Rambling Nonsense
 ---
-
 <script type="application/ld+json">
 { "@context": "http://schema.org", 
  "@type": "Blog",
@@ -24,15 +23,23 @@ title: Mindless Rambling Nonsense
 </script>
 
 {% for post in site.posts %}
-<div class="col-sm-12 excerpt">
-    <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
-    {{ post.excerpt }}
-    <span class="post-metadata">posted on: {{ post.date | date_to_string }}</span>
-    <span class="post-metadata post-category">
-    	<a href="/categories.html#{{ post.category }}">in: {{ post.category }}</a>
-    	<div class="tags">
-            {% include tags.html tags=post.tags %}
-    	</div>
-    </span>
-</div>
+    <div class="post-item">
+        <div class="excerpt">
+            <a href="{{ post.url }}">
+                <h1>{{ post.title }}</h1>
+            </a>
+            {{ post.excerpt }}
+        </div>
+        <div class="metadata">
+            <div class="post-metadata">
+                posted on: {{ post.date | date_to_string }}
+            </div>
+            <div class="post-metadata post-category">
+                <a href="/categories.html#{{ post.category }}">in: {{ post.category }}</a>
+                <div class="tags">
+                    {% include tags.html tags=post.tags %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endfor %}

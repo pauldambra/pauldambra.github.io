@@ -364,4 +364,4 @@ And..
 
 # Ta-da
 
-{% include image.html url="/image/tada.png" alt="passing tests" caption="Ta-da!" %}
+![passing tests](/images/tada.png)

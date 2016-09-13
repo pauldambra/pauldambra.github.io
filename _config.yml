@@ -2,8 +2,8 @@ name: Mindless Rambling Nonsense
 markdown: kramdown
 highlighter: rouge
 description: My thoughts are mindless and rambling so the best place for them is the internet
-url: http://pauldambra.github.io
+url: http://pauldambra.github.io/
 plusProfile: https://plus.google.com/114260096260757534167?rel=author
 excerpt_separator: <!--more-->
 exclude: ['Guardfile', .gitgnore', '.ruby-version', 'build.sh', 'Gemfile', 'Gemfile.lock', 'README.md']
-ampdir: amp-posts
+ampdir: amp

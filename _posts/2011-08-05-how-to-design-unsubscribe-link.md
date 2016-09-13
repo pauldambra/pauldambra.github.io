@@ -42,7 +42,7 @@ That way although you could sit and guess the email addresses of members to unsu
 
 Except the [HTTP RFC](http://t.co/xH5nYHf) says that a GET request should be idempotent.
 
-{% include image.html url="http://1.bp.blogspot.com/-uEF-Zso3K5M/Tju1K8hAhrI/AAAAAAAAAVk/Vi_WggM_FEY/s1600/1095675-futurama_fry_looking_squint_super.jpg" alt="not sure if meme is appropriate or you should feel bad" caption="No me neither..." %}
+![not sure if meme is appropriate or you should feel bad](http://1.bp.blogspot.com/-uEF-Zso3K5M/Tju1K8hAhrI/AAAAAAAAAVk/Vi_WggM_FEY/s1600/1095675-futurama_fry_looking_squint_super.jpg)
 
 <blockquote>["Idempotence is the property of certain operations in mathematics and computer science, that they can be applied multiple times without changing the result."](http://en.wikipedia.org/wiki/Idempotence)</blockquote>
 
@@ -64,4 +64,4 @@ unsubscribe.somewhere.co.uk/areas/email@person.com<br />unsubscribe.somewhere.co
 
 When you hit the page you can just click a big button to confirm the action (which ajax-ily updates your displayed state and we can track how many people hit the page without doing anything).
 
-{% include image.html url="http://4.bp.blogspot.com/-olQbQBRHcak/Tju4pxILv1I/AAAAAAAAAVs/jizlCCsfz1M/s1600/mockup.png" alt="mockup of UI" %}
+![mockup of UI](http://4.bp.blogspot.com/-olQbQBRHcak/Tju4pxILv1I/AAAAAAAAAVs/jizlCCsfz1M/s1600/mockup.png)

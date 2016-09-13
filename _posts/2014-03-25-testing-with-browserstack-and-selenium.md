@@ -100,7 +100,7 @@ Which would allow running all of the nightwatch tests against different operatin
 
 ## Viewing results
 
-{% include image.html caption="Results from the tests are displayed in the console" url="/images/run-nightwatch.png" alt="Results from the tests are displayed in the console" %}
+![Results from the tests are displayed in the console](/images/run-nightwatch.png)
 
 ## Some more realistic tests for the home page
 

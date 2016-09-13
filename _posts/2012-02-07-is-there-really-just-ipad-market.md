@@ -22,7 +22,7 @@ I am fickle and this is enough to sway me to an evens opinion between the two OS
 
 One brill feature is when the browser isn't certain what link you meant to click
 
-{% include image.html url="http://4.bp.blogspot.com/-uzlphZanh9k/TzF8dUNmjRI/AAAAAAAAAbs/BjhbqhoQIE4/s1600/Screenshot_2012-02-07-19-24-21.jpg" alt="link zoom" caption="" %}
+![link zoom](http://4.bp.blogspot.com/-uzlphZanh9k/TzF8dUNmjRI/AAAAAAAAAbs/BjhbqhoQIE4/s1600/Screenshot_2012-02-07-19-24-21.jpg)
 
 A pop up is launched to give you a bigger target. As always with Chrome impeccable attention to detail
 <hr />I wanted to make a "proper", "empirical" comparison between Android and iOS. So I got a Transformer Prime. 
@@ -49,7 +49,7 @@ The first time I picked up an Android device I had to have it explained to me so
 
 But that was Honeycomb and in ICS Google (or whichever genius did it) have sorted the problem I had...
 
-{% include image.html url="http://2.bp.blogspot.com/-2M-IxfjEhzk/TzDA6T-sHCI/AAAAAAAAAac/4vc6orMDJGI/s1600/android-icons.jpg" alt="android UI" caption="" %}
+![android UI](http://2.bp.blogspot.com/-2M-IxfjEhzk/TzDA6T-sHCI/AAAAAAAAAac/4vc6orMDJGI/s1600/android-icons.jpg)
 
 In Honeycomb my eyes didn't immediately get that metaphor. I read it as Left, Up, Windows. Not &nbsp;as; Back, Home, "Windows" i.e. multi-tasking. So I had a tiny barrier to using the system. And in the MTV-diseased, Radio-1-attention-span world a tiny usability barrier is actually a big usability barrier (you know what I mean - don't confound user's expectations)
 

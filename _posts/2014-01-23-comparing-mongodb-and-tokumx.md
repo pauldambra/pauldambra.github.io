@@ -28,15 +28,15 @@ The first set of tests were run against a collection with no indexes set.
 
 ### This first test showed that TokuMX query time was much better when searching on a non-indexed field.
 
-{% include image.html url="http://2.bp.blogspot.com/-VHYm1IS6ML4/UukQH1-OxNI/AAAAAAAAK0w/2TsX0rj48aE/s1600/chart_1.png" alt="Mongo DB vs Toku MX graph" caption="" %}
+![Mongo DB vs Toku MX graph](http://2.bp.blogspot.com/-VHYm1IS6ML4/UukQH1-OxNI/AAAAAAAAK0w/2TsX0rj48aE/s1600/chart_1.png)
 
-{% include image.html url="http://1.bp.blogspot.com/-Oi1_rzWdpTY/UukQH7w0qmI/AAAAAAAAK0s/nSYB97cQe2c/s1600/chart_2.png" alt="Mongo DB vs Toku MX graph" caption="" %}
+![Mongo DB vs Toku MX graph](http://1.bp.blogspot.com/-Oi1_rzWdpTY/UukQH7w0qmI/AAAAAAAAK0s/nSYB97cQe2c/s1600/chart_2.png)
 
 ### This performance difference larger disappeared when querying an indexed property.
 
-{% include image.html url="http://3.bp.blogspot.com/-XdZ1UOxNU1M/UukQH1N4B9I/AAAAAAAAK0o/Vq-oyBG2Zwo/s1600/chart_3.png" alt="Mongo DB vs Toku MX graph" caption="" %}
+![Mongo DB vs Toku MX graph](http://3.bp.blogspot.com/-XdZ1UOxNU1M/UukQH1N4B9I/AAAAAAAAK0o/Vq-oyBG2Zwo/s1600/chart_3.png)
 
-{% include image.html url="http://1.bp.blogspot.com/-P5tL71I5HEY/UukQIZtcGYI/AAAAAAAAK1A/889-PAMtc0U/s1600/chart_4.png" alt="Mongo DB vs Toku MX graph" caption="" %}
+![Mongo DB vs Toku MX graph](http://1.bp.blogspot.com/-P5tL71I5HEY/UukQIZtcGYI/AAAAAAAAK1A/889-PAMtc0U/s1600/chart_4.png)
 
 TokuMX was still slightly ahead and across all of these datasets was much less affected by the level of concurrency in use.
 
