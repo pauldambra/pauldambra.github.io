@@ -56,6 +56,7 @@ In this scenario I want to replace the value of an app setting key. The section 
 ```
 
 ###aside: don't always do this!
+
 The web.config transform to replace one or two values is pretty straightforward so if you don't have many different configurations or many things to change then you can probably stick with that. 
 
 But if you want to be able to apply the transform outside of packaging/deploying or if things are getting gnarly then I definitely recommend exploring [albacore](https://github.com/Albacore/albacore)
@@ -76,6 +77,7 @@ So...
 ```
 
 # YAML
+
 YAML or YAML Ain't Markup Language is a ["human friendly data serialization
   standard for all programming languages."](http://www.yaml.org/). There's more to learn about [yaml in ruby here](http://yaml4r.sourceforge.net/doc/)
 
@@ -90,7 +92,9 @@ Complex, right? Wrong! If anything there's too little text in here for my tastes
 The important thing here is that the yaml key begins with a colon to support the string replacement method used below.
 
 # The rake task
+
 The rakefile should look like this:
+
 ```ruby 
 require 'albacore'
 require 'yaml'
@@ -135,6 +139,7 @@ It then uses the `string % hash` method of string interpolation that has been av
 This mechanism requires that the hash keys are symbols and not strings which is why the keys in the yaml file have to begin with a colon.
 
 # Does this solve my problems?
+
 More config yaml files can be added. Whole sections can be excluded from configs by being replaced with empty strings. And more importantly the project and solution files don't need to know about these configurations just to support different values in different deployments.
 
 There might be pain points here I haven't discovered in this (admittedly super simple) example but I like what I see so far!
