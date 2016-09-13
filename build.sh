@@ -2,10 +2,6 @@
 
 set -e
 
-echo "delete this token"
-echo $DEPLOY_BLOG_TOKEN
-echo "string iternpolated ${DEPLOY_BLOG_TOKEN}"
-
 DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
 
 function main {
@@ -47,6 +43,7 @@ function deploy {
 	git config --global user.name "Travis CI"
     git config --global user.email paul.dambra+ttravis@gmail.com
 	git add -A
+	git status
 	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
 	git push $DEPLOY_REPO origin master
 }
