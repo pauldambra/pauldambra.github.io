@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="/assets/syntax.css">
     <link rel="stylesheet" href="/assets/main.css">
 
+{% if page.path contains '_posts' %}
+  <link rel="amphtml" href="{{ page.id | prepend: site.ampdir | prepend: site.baseurl | prepend: site.url }}">
+{% endif %}
+
         <!-- Google Analytics -->
         <script>
         window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

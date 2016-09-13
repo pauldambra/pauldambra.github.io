@@ -6,3 +6,4 @@ url: http://pauldambra.github.io
 plusProfile: https://plus.google.com/114260096260757534167?rel=author
 excerpt_separator: <!--more-->
 exclude: ['Guardfile', .gitgnore', '.ruby-version', 'build.sh', 'Gemfile', 'Gemfile.lock', 'README.md']
+ampdir: amp-posts
