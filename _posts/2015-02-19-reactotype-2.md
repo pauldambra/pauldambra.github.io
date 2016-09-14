@@ -160,7 +160,7 @@ render: function() {
 Here we've added a react specific attribute `defaultValue` to set the starting state of the inputs, added min and max validation using properties passed in to the component and an onChange handler specific to each number input.
 
 
-####Initial state
+#### Initial state
 
 ```javascript 
 getInitialState: function() {
@@ -173,7 +173,7 @@ getInitialState: function() {
 
 Here the default values for the earliest and latest state are set.
 
-####Event Handlers
+#### Event Handlers
 
 These two handlers are basically the same except for operating on a different property of the state object.
 
