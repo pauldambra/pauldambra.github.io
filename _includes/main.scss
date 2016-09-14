@@ -20,7 +20,7 @@ body {
   margin: 0;
       line-height: 1.42857143;
 }
-#main {
+.main {
   background-color: white;
   padding: 20px 10px;
     /* flex: 1; would be enough but it looks bad in IE */
@@ -237,7 +237,17 @@ footer {
   overflow: hidden;
   height: 30px;
   a, a:visited, a:hover {
-    color:white;
+    color: white;
+    line-height: 25px;
+    vertical-align: bottom;
+    text-decoration: none;
+    img {
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      vertical-align: bottom;
+      text-decoration: none;
+    }
   }
 }
 .post {
