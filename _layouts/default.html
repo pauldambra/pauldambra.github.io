@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" conten="{{page.description}}">
     <meta name="keywords" conten="{{page.keywords}}">
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
 
 {% if page.path contains '_posts' %}
-  <link rel="amphtml" href="{{ page.id | prepend: site.ampdir | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}/{{page.id}}">
 {% endif %}
 
     <style amp-custom>
@@ -37,7 +37,7 @@
 
 {% include header.html %}
 
-    <div id="main">
+    <div class="main">
       {{ content }}
     </div>
 

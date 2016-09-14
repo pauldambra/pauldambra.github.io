@@ -43,8 +43,11 @@ h3 {
 hr {
   clear: both;
 }
-a, a:visited {
+a {
   color: black;
+  &:visited {
+    color:black;
+  }
   &:hover {
     color:black;
     text-decoration: underline;
@@ -172,8 +175,11 @@ ul {
 }
 .post-category {
   float: right;
-  img {
+  img, amp-img {
     fill: darkgray;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
   }
 }
 .post-item {
@@ -203,7 +209,7 @@ ul {
   }
 }
 
-img {
+img, amp-img {
   display: inline-block;
   max-width: 100%;
 }
@@ -241,7 +247,7 @@ footer {
     line-height: 25px;
     vertical-align: bottom;
     text-decoration: none;
-    img {
+    img, amp-img {
       width: 25px;
       height: 25px;
       line-height: 25px;

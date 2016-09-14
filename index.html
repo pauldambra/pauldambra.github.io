@@ -28,7 +28,7 @@ title: Mindless Rambling Nonsense
             <a href="{{ post.url }}">
                 <h1>{{ post.title }}</h1>
             </a>
-            {{ post.excerpt }}
+            {{ post.excerpt | amp_images }}
         </div>
         <div class="metadata">
             <div class="post-metadata">

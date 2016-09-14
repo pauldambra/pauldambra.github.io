@@ -29,8 +29,15 @@ module Jekyll
           # TODO: find a better solution.
           begin
             size = FastImage.size(src)
-            image['width']  = size[0]
-            image['height'] = size[1]
+            if size then
+              image['width']  = size[0]
+              image['height'] = size[1]
+            else 
+              # hacky accounting for tag.svg
+              image['width'] = 24
+              image['height'] = 24
+              responsive = false
+            end
           rescue Exception => e
             puts 'Unable to get image dimensions for "' + src + '". For local files, build the site with \'--skip-initial-build\' for better results. [Error: ' + e.to_s + ']'
           end

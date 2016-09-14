@@ -32,15 +32,16 @@
   %}
    
   <article>
-  {% include post_header.html %}
+  {% capture post_header %}{% include post_header.html %}{% endcapture %}
+  {{ post_header | amp_images }}
       <div class="post">
-      {{ page.body | markdownify }} 
+      {{ page.body | markdownify | amp_images }} 
     </div>
   </article> 
 
   </div>
 
   {% capture footer %}{% include footer.html %}{% endcapture %}
-{{ footer }}
+{{ footer | amp_images: false, 25, 25 }}
 </body>
 </html>
