@@ -28,25 +28,24 @@ function build_site {
 
 function deploy {
 	echo "deploying changes"
-	echo $TRAVIS_BRANCH
-	echo $TRAVIS_PULL_REQUEST
+
 	if [ -z "$TRAVIS_PULL_REQUEST" ]; then
 	    echo "except don't publish site for pull requests"
 	    exit 0
 	fi  
 
-	if [ -z "$TRAVIS_BRANCH" ]; then
+	if [ "$TRAVIS_BRANCH" != "master" ]; then
 	    echo "except only publish the master branch"
 	    exit 0
 	fi
 
-	# cd _site
-	# git config --global user.name "Travis CI"
- #    git config --global user.email paul.dambra+ttravis@gmail.com
-	# git add -A
-	# git status
-	# git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-	# git push $DEPLOY_REPO master:master
+	cd _site
+	git config --global user.name "Travis CI"
+    git config --global user.email paul.dambra+ttravis@gmail.com
+	git add -A
+	git status
+	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
+	git push $DEPLOY_REPO master:master
 }
 
 main
