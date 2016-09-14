@@ -16,13 +16,13 @@ The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 In the last post a better visual affordance that a page element is editable was added. But didn't solve the problem that notifications of success or failure were obtrusive and disconnected from the edited element.
 
-{% include image.html url="/images/pulse.gif" alt="pulsing affordance" caption="Pulsing editor indicator" %}
+![pulsing affordance](/images/pulse.gif)
 
 <!--more-->
 
 The desired behaviour is that when a change is made the entire current page is persisted to the server and the user is made aware of success or failure without interrupting their workflow unnecessarily.
 
-{% include image.html url="/images/affordance-with-state.gif" alt="Editable indicator changing state" caption="Editable indicator changing state" %}
+![Editable indicator changing state](/images/affordance-with-state.gif)
 
 So here as the text is changed the indicator changes to the save icon. On success to a tick and after a short delay back to the editable icon.
 
@@ -158,7 +158,7 @@ And, rather than simply calling `omniclopse.onContentEdited` it now passes in th
 # The result
 is a pretty, funky, pulsing indicator that shows an element is editable and changes state with the element to keep the user informed of what is happening in the background.
 
-{% include image.html url="/image/affordance-with-delay.gif" alt="editable indicator changing state after typing finishes" caption="editable indicator changing state after typing finishes" %}
+![editable indicator changing state after typing finishes](/images/affordance-with-delay.gif)
 
 # Doh-stscript
 ## a postscript but also doh

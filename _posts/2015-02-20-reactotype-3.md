@@ -154,7 +154,7 @@ Facebook have created Jest which is (I think) a wrapper around Jasmine. I tend t
 
 The steps I ended up taking were:
 
-#1. Install Mocha
+# 1. Install Mocha
 
 easy!
 
@@ -164,7 +164,7 @@ npm install --save-dev gulp-mocha
 npm install --save-dev should
 ```
 
-#2. Add a gulp task to run tests
+# 2. Add a gulp task to run tests
 
 also easy!
 
@@ -185,7 +185,7 @@ gulp.task('test', function() {
 
 If you don't Gulp this just says grab all of the javascript files in the tests folder whose names end with Spec and pass them into Mocha.
 
-#3. Actually have some tests
+# 3. Actually have some tests
 
 Not actually quite so easy!
 
@@ -364,4 +364,4 @@ And..
 
 # Ta-da
 
-{% include image.html url="/image/tada.png" alt="passing tests" caption="Ta-da!" %}
+![passing tests](/images/tada.png)

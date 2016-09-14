@@ -55,7 +55,7 @@ In this scenario I want to replace the value of an app setting key. The section 
   </appSettings>
 ```
 
-###aside: don't always do this!
+### aside: don't always do this!
 
 The web.config transform to replace one or two values is pretty straightforward so if you don't have many different configurations or many things to change then you can probably stick with that. 
 

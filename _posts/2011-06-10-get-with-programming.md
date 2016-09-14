@@ -12,7 +12,7 @@ Twice recently I've hit the same problem with two different mobile phone vendor'
 
 <!--more-->
 
-{% include image.html url="http://1.bp.blogspot.com/-5j1jDK3JAss/TfIK0Q-_reI/AAAAAAAAAO0/LyikHIbRnj0/s1600/idiots.png" alt="using a dash in an input" caption="using a dash in an input" %}
+![using a dash in an input](http://1.bp.blogspot.com/-5j1jDK3JAss/TfIK0Q-_reI/AAAAAAAAAO0/LyikHIbRnj0/s1600/idiots.png)
 
  nor is it odd to use a dash.
 

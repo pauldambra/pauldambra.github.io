@@ -8,13 +8,19 @@
     <meta name="description" conten="{{page.description}}">
     <meta name="keywords" conten="{{page.keywords}}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="/assets/bootstrap-3.3.1/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
-    <!-- <link rel="stylesheet" href="/assets/font-awesome-4.2.0/css/font-awesome.min.css" > -->
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/main.css">
+
+{% if page.path contains '_posts' %}
+  <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}/{{page.id}}">
+{% endif %}
+
+    <style amp-custom>
+      {% capture include_to_scssify %}
+        {% include main.scss %}
+      {% endcapture %}
+      {{ include_to_scssify | scssify }}
+
+      {% include syntax.css %}
+    </style>
 
         <!-- Google Analytics -->
         <script>
@@ -28,46 +34,13 @@
         <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-6">
-              <a id="sitename" href="/">Mindless Rambling Nonsense</a>
-            </div>
-            <div class="col-xs-6 col-sm-3 text-right">
-              <p>
-                Paul D'ambra<br />
-                Fangler<br />
-              </p>
-            </div>
-            <div class="col-sm-3 hidden-xs text-right">
-              <p>
-                <a href="https://github.com/pauldambra">github.com/pauldambra</a><br />
-                <a href="https://twitter.com/pauldambra">twitter.com/pauldambra</a><br />
-              </p>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <div class="container" id="main">
+
+{% include header.html %}
+
+    <div class="main">
       {{ content }}
     </div>
-    <footer>
-      <div class="container">
-        <a id="footer-rss-link" href="/feed.xml"><i class="fa fa-rss"></i> Subscribe to RSS feed</a>
-      </div>
-    </footer>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
-    <!-- <script>window.jQuery || document.write('<script src="/assets/jquery.min.js"><\/script>')</script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
-    <!-- <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/assets/bootstrap-3.3.1/js/bootstrap.min.js"><\/script>')}</script> -->
+
+{% include footer.html %}
   </body>
 </html>

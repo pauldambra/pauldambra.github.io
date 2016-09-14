@@ -1,0 +1,15 @@
+<header>
+	<div class="date">
+		{{ page.date | date: "%a %b %d %Y" }}
+	</div>
+	<h1 class="title">{{ page.title }}</h1>
+	<div class="more-like-this">
+		<a class="post-metadata post-category"
+			href="/categories.html#{{ page.category | slugify }}">
+			in: {{ page.category }}
+		</a>
+		<div>
+			{% include tags.html tags=page.tags %}
+		</div>
+	</div>
+</header>

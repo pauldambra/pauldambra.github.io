@@ -9,7 +9,7 @@ category: react
 tags: [learning, react, js, series]
 ---
 
-####part one because I've got a feeling this is a topic about which I'll be able to bang on.
+#### part one because I've got a feeling this is a topic about which I'll be able to bang on.
 
 [React JS](http://facebook.github.io/react/index.html) was made by Facebook to be the V in MVC. In other words it only deals with the UI. It's sold as being fast - both for performance and development. A definitely contentious part of React is that it mushes JS and HTML together... More specifically you put HTML _inside_ the JS not vice versa.
 
@@ -44,7 +44,8 @@ Simple to represent as a table and a chart so a good starting point. Plus I've g
 
 As I sat down and thought about what this would mean (writing a build script to mush the jsx into js, grabbing bootstrap et al from the interweb, etc) I was overcome with ennui (which is a lot to cope with for something that should be #holidaycode levels of fun). I've done that set up so many times it seemed like wasted time.
 
-####Setup
+#### Setup
+
 I remembered [Yeoman.io](yeoman.io) and a quick search found a ReactJS with Gulp yeoman generator was available so I grabbed them:
 
 ```bash 
@@ -269,10 +270,12 @@ var PayTable = React.createClass({
 
 First I had to come to terms with properties and state. So...
 
-####Properties
+#### Properties
+
 Passed in to the component when you create it. Should be immutable (this is JS so they aren't immutable but you're supposed to treat them as immutable).
 
-####State
+#### State
+
 Not passed in. Not immutable. It's the, erm, well, the state.
 
 So in addition to a `render` function we add a [`getInitialState` function](http://facebook.github.io/react/docs/component-specs.html#getinitialstate). This provides the initial state of the component. It should be idempotent - i.e. no matter how many times the component is created, all other things being equal, the initial state is the same. 

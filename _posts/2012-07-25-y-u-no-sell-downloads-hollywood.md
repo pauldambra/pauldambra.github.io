@@ -14,11 +14,11 @@ I guess I'm not unusual in that when I want to find something I google it...
 
 <!--more-->
 
-{% include image.html url="http://2.bp.blogspot.com/-2moIX7EhwMQ/UBA-qiJkRVI/AAAAAAAAAjk/6fICqxqk6Vs/s1600/Screen+Shot+2012-07-25+at+19.44.35.png" alt="google listings" caption="" %}
+![google listings](http://2.bp.blogspot.com/-2moIX7EhwMQ/UBA-qiJkRVI/AAAAAAAAAjk/6fICqxqk6Vs/s1600/Screen+Shot+2012-07-25+at+19.44.35.png)
 
 Notice anything about those results... yup, only one of them is legal (I guess). iTunes is in 6th place there. This means they're likely to only get about 4% of clicks on this result set.
 
-{% include image.html url="http://3.bp.blogspot.com/-0Mwwuw91Jss/UBA_IiFV6fI/AAAAAAAAAjs/LBYZsFVgEu4/s1600/Screen+Shot+2012-07-25+at+19.40.23.png" alt="likelihood of link being clicked based on page" caption="" %}
+![likelihood of link being clicked based on page](http://3.bp.blogspot.com/-0Mwwuw91Jss/UBA_IiFV6fI/AAAAAAAAAjs/LBYZsFVgEu4/s1600/Screen+Shot+2012-07-25+at+19.40.23.png)
 
 source: <a href="http://www.optify.net/inbound-marketing-resources/new-study-how-the-new-face-of-serps-has-altered-the-ctr-curve">Optify Study</a>
 
@@ -26,7 +26,7 @@ My aim here is to buy the film... not to pirate it. To buy it. Google gives me o
 
 I get myself a stiff drink so I can wash away the taste afterwards and search using Bing (I refuse to use it as a verb) and it doesn't even have iTunes as an option...
 
-{% include image.html url="http://2.bp.blogspot.com/-9ZwBGJJE9vk/UBBCAU7DEnI/AAAAAAAAAj4/3Xiwp2Drvxw/s1600/Screen+Shot+2012-07-25+at+19.58.44.png" alt="bing results" caption="" %}
+![bing results](http://2.bp.blogspot.com/-9ZwBGJJE9vk/UBBCAU7DEnI/AAAAAAAAAj4/3Xiwp2Drvxw/s1600/Screen+Shot+2012-07-25+at+19.58.44.png)
 
 Am I unusual in that I want to buy downloads of movies? Is it just my choice of search terms?
 

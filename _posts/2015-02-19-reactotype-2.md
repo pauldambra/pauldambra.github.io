@@ -31,7 +31,7 @@ So, having squeezed the table to make space for a column for filter controls I n
 1. Add the filter controls
 2. Make them affect the table
 
-{% include image.html url="/image/reactotype_screenshot.png" alt="screenshot of the web page" caption="A screenshot of the desired filterable table" %}
+![screenshot of the web page](/images/reactotype_screenshot.png)
 
 # Adding the filter controls
 
@@ -160,7 +160,7 @@ render: function() {
 Here we've added a react specific attribute `defaultValue` to set the starting state of the inputs, added min and max validation using properties passed in to the component and an onChange handler specific to each number input.
 
 
-####Initial state
+#### Initial state
 
 ```javascript 
 getInitialState: function() {
@@ -173,7 +173,7 @@ getInitialState: function() {
 
 Here the default values for the earliest and latest state are set.
 
-####Event Handlers
+#### Event Handlers
 
 These two handlers are basically the same except for operating on a different property of the state object.
 
@@ -310,7 +310,7 @@ Now all the `filterData` and `sortData` methods need to do is update state and t
 
 The point here is how easy it was to use postal.js to hook these two components together. I _lurve_ this!
 
-{% include image.html url="/image/reactotype.gif" alt="demo of the web page" caption="TEH AWESOME" %}
+![demo of the web page](/images/reactotype.gif)
 
 # Next Up
 

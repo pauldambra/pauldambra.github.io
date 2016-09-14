@@ -1,0 +1,290 @@
+
+@font-face {
+  font-family: 'Khula';
+  src: url('/assets/khula/Khula-Regular.ttf'),
+       url('/assets/khula/Khula-Bold.ttf'),
+       url('/assets/khula/Khula-ExtraBold.ttf');
+}
+html {
+  height: 100%;
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+body {
+  min-height:100%;
+  font-family: 'Khula', sans-serif;
+  font-size: 2em;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+      line-height: 1.42857143;
+}
+.main {
+  background-color: white;
+  padding: 20px 10px;
+    /* flex: 1; would be enough but it looks bad in IE */
+  flex: 1 0 auto;
+  width: 95%;
+  margin: auto;
+}
+h2 {
+  font-size: 25px;
+}
+h3 {
+  font-size: 20px;
+  .post-metadata {
+    font-size: 15px;
+  }
+  &.tag-list {
+    font-size: 16px;
+  }
+}
+hr {
+  clear: both;
+}
+a {
+  color: black;
+  &:visited {
+    color:black;
+  }
+  &:hover {
+    color:black;
+    text-decoration: underline;
+  }
+}
+article {
+  a {
+    text-decoration: underline;
+  }
+  header {
+    display: block;
+    border-bottom: black solid 2px;
+    background-color: white;
+    color: black;
+    .more-like-this {
+      text-align: right;
+    }
+    .post-category {
+      float: none;
+    }
+  }
+  #title {
+    line-height: 75px;
+    padding-top: 10px;
+  }
+  h1 {
+    -webkit-margin-after: 0;
+    -webkit-margin-before: 5px;
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
+  blockquote {
+    padding: 5px 10px;
+    margin: 0 0 20px;
+    border-left: 5px solid #eee;
+  }
+}
+header {
+  display: flex;
+  background-color: #222;
+  color:#aaa;
+  padding: 5px 15px 10px 15px;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+  }
+
+  .title {
+    flex: 3 0 auto;
+    a { text-decoration: none; }
+    @media (min-width:550px) {
+      font-size: 150%;
+      font-weight: bold;
+    }
+  }
+  .name {
+    flex: 2 0 auto;
+    text-align: right;
+    padding-right: 15px;
+  }
+  .externals {
+    flex: 1 0 auto;
+    text-align: right;
+
+    @media (max-width: 750px) {
+      display: none;
+    }
+  }
+  p {margin: 0;}
+  a, a:visited {
+    color:#aaa;
+    &:hover {
+      color:#aaa;
+      text-decoration:underline;
+    }
+  }
+} 
+ul {
+  @media screen and (max-width: 500px) {
+    padding: 0;
+  }
+}
+.tag-list {
+  li {
+    list-style: none;
+  }
+  .post-category {
+    float:none;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  font-weight: normal;
+}
+.link-list {
+  .post-category {
+    float: left;
+    padding: 5px;
+  }
+}
+
+.category-link {
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  font-weight: normal;
+}
+
+.post-metadata {
+  color: darkgray;
+  display: inline-block;
+  padding: 1px 3px;
+  a, a:hover, a:visited {
+    color: darkgray;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+.post-category {
+  float: right;
+  img, amp-img {
+    fill: darkgray;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+  }
+}
+.post-item {
+  -moz-transition: 0.25s;
+  -ms-transition: 0.25s;
+  -o-transition: 0.25s;
+  -webkit-transition: 0.25s;
+  margin-bottom: 20px;
+  transition: 0.25s;
+  display:flex;
+  flex-direction: column;
+  flex: 4 0 auto;
+  &:hover {
+    background-color: rgba(245,245,245, 0.7);
+    border-radius: 5px;
+  }
+
+  .metadata {
+    display: flex;
+    .post-metadata {
+      align-self: flex-end;
+    }
+    .post-category {
+      text-align: right;
+          flex: 4 0 auto;
+    }
+  }
+}
+
+img, amp-img {
+  display: inline-block;
+  max-width: 100%;
+}
+#disqus_thread {
+  border-top: solid 1em #aaa;
+  margin-top: 10px;
+}
+aside {
+  border-left: 1px solid darkslateblue;
+  color: darkslateblue;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  padding-left: 0.5em;
+}
+.posts {
+  list-style-type: none;
+  margin-bottom: 2em;
+  padding: 0;
+}
+.posts li {
+  line-height: 1.75em;
+}
+
+footer {
+  padding: 5px 15px;
+  margin: 0 auto;
+  width:100%;
+  background-color: black;
+  color: white;
+  min-height: 2em;
+  overflow: hidden;
+  height: 30px;
+  a, a:visited, a:hover {
+    color: white;
+    line-height: 25px;
+    vertical-align: bottom;
+    text-decoration: none;
+    img, amp-img {
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      vertical-align: bottom;
+      text-decoration: none;
+    }
+  }
+}
+.post {
+  margin-top: 5px;
+  pre {
+    background-color: #eef;
+    border: 1px solid #ddd;
+    padding: 0 .4em;
+    font-size: 13px;
+    overflow: auto;
+    code {
+      border: none;
+    }
+
+    &.terminal {
+      background-color: #333;
+      border: 1px solid #000;
+      color: #FFF;
+      code {
+        background-color: #333;
+      }
+    }
+  }
+
+  ul, ol {
+    margin-left: 1.35em;
+  }
+
+  code {
+    background-color: #eef;
+    border: 1px solid #ddd;
+    padding: 0 .2em;
+  }
+}

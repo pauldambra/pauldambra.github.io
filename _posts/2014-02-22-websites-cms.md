@@ -38,7 +38,7 @@ I'm primarily a .Net developer. I love C# - I think the language is powerful and
 
 Really all I'm saying is that I've discovered I heart JS for making web things because I've found it gets out of the way and lets me build things.
 
-{% include image.html caption="You might just be able to see where I edited this image" url="/images/ABC.png" alt="always be punning" %}
+![always be punning](/images/ABC.png)
 
 The basic idea for this blog series had been bouncing around in my head for a while... and the recent work with Django was the kick I needed to actually bother to write it.
 
