@@ -8,39 +8,32 @@
     <meta name="description" conten="{{page.description}}">
     <meta name="keywords" conten="{{page.keywords}}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
-
-{% if page.path contains '_posts' %}
-  <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}/{{page.id}}">
-{% endif %}
-
+    {% if page.path contains '_posts' %}
+      <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}/{{page.id}}">
+    {% endif %}
     <style amp-custom>
+      {% include syntax.css %}
       {% capture include_to_scssify %}
         {% include main.scss %}
       {% endcapture %}
       {{ include_to_scssify | scssify }}
-
-      {% include syntax.css %}
     </style>
-
-        <!-- Google Analytics -->
-        <script>
-        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-        ga('create', 'UA-49969634-1', 'pauldambra.github.io');
-        ga('send', 'pageview');
-        </script>
-        <script async src='https://www.google-analytics.com/analytics.js'></script>
-        <!-- End Google Analytics -->
-        <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
-        <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <!-- Google Analytics -->
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-49969634-1', 'pauldambra.github.io');
+    ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
   </head>
   <body>
-
-{% include header.html %}
-
+    {% include header.html %}
     <div class="main">
       {{ content }}
     </div>
-
-{% include footer.html %}
+    {% include footer.html %}
   </body>
 </html>

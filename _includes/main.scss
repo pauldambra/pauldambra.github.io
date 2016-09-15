@@ -9,23 +9,25 @@ html {
   height: 100%;
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  * {
+    box-sizing: border-box;
+  }
 }
 body {
-  min-height:100%;
   font-family: 'Khula', sans-serif;
   font-size: 2em;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   margin: 0;
-      line-height: 1.42857143;
+  line-height: 1.42857143;
 }
 .main {
   background-color: white;
-  padding: 20px 10px;
+  padding: 10px 5px;
     /* flex: 1; would be enough but it looks bad in IE */
-  flex: 1 0 auto;
-  width: 95%;
+  flex: 1 1 auto;
+  width: 94%;
   margin: auto;
 }
 h2 {
@@ -130,6 +132,12 @@ ul {
     padding: 0;
   }
 }
+.excerpt {
+  h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 .tag-list {
   li {
     list-style: none;
@@ -198,13 +206,8 @@ ul {
   }
 
   .metadata {
-    display: flex;
-    .post-metadata {
-      align-self: flex-end;
-    }
     .post-category {
       text-align: right;
-          flex: 4 0 auto;
     }
   }
 }
@@ -256,13 +259,11 @@ footer {
     }
   }
 }
-.post {
-  margin-top: 5px;
-  pre {
+  pre, .highlighter-rouge, .highlight {
     background-color: #eef;
-    border: 1px solid #ddd;
     padding: 0 .4em;
     font-size: 13px;
+    padding: 0 .2em;
     overflow: auto;
     code {
       border: none;
@@ -276,15 +277,11 @@ footer {
         background-color: #333;
       }
     }
+.post {
+  margin-top: 5px;
   }
 
   ul, ol {
     margin-left: 1.35em;
-  }
-
-  code {
-    background-color: #eef;
-    border: 1px solid #ddd;
-    padding: 0 .2em;
   }
 }
