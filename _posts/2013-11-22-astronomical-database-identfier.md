@@ -100,6 +100,8 @@ Entity Framework is not yet ready for storing an identifier for every proton in 
 
 ### And straight from the Magic Unicorns mouth
 
-<blockquote class="twitter-tweet" lang="en"><a href="https://twitter.com/pauldambra">@pauldambra</a> As you concluded, it's not possible to map BigInt with EF. Easiest solution is probably to bypass EF for that data.
+<div class="tweet-wrapper">
+	<blockquote class="twitter-tweet" lang="en"><a href="https://twitter.com/pauldambra">@pauldambra</a> As you concluded, it's not possible to map BigInt with EF. Easiest solution is probably to bypass EF for that data.
 
-— Entity Framework (@efmagicunicorns) <a href="https://twitter.com/efmagicunicorns/statuses/403996143677235200">November 22, 2013</a></blockquote><script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>
+	— Entity Framework (@efmagicunicorns) <a href="https://twitter.com/efmagicunicorns/statuses/403996143677235200">November 22, 2013</a></blockquote><script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>
+</div>
