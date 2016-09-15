@@ -118,7 +118,10 @@ header {
       display: none;
     }
   }
-  p {margin: 0;}
+  p {
+    margin: 0;
+    word-wrap: break-word;
+  }
   a, a:visited {
     color:#aaa;
     &:hover {

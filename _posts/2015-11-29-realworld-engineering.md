@@ -11,9 +11,10 @@ tags: [agile, bad-metaphors]
 
 I just had some "fun".
 
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">iterating on design of chicken run roof while the wind tries to rip it off highlights the difference between real &amp; software engineering</p>&mdash; Paul D&#39;Ambra (@pauldambra) <a href="https://twitter.com/pauldambra/status/670958192596242432">November 29, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+<div class="tweet-wrapper">
+	<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">iterating on design of chicken run roof while the wind tries to rip it off highlights the difference between real &amp; software engineering</p>&mdash; Paul D&#39;Ambra (@pauldambra) <a href="https://twitter.com/pauldambra/status/670958192596242432">November 29, 2015</a></blockquote>
+	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
 <!--more-->
 
 Earlier this year we got a great deal on two ducks, three chickens, a coop, a run, and Gary the Rescue Cockerel
