@@ -90,8 +90,31 @@ blockquote {
 header {
   display: flex;
   background-color: #222;
-  color:#aaa;
+  color:white;
   padding: 5px 15px 10px 15px;
+
+  &.home {
+    @media (max-width: 778px) {
+      background-image: url('images/cardboard.jpg');
+      height: 370px;
+      background-position: -222px -76px;
+    }
+
+    @media (min-width: 778px) {
+      background-image: url("images/cardboard.jpg");
+      height: 437px;
+      background-size: 100%;
+    }
+  }
+
+  a, a:visited {
+    color:white;
+    text-decoration:underline;
+    &:hover {
+      color:white;
+      text-decoration:underline;
+    }
+  }
 
   @media (max-width: 450px) {
     flex-direction: column;
@@ -109,6 +132,14 @@ header {
     flex: 2 0 auto;
     text-align: right;
     padding-right: 15px;
+    position:relative;
+    p {
+      @media (max-width: 750px) {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+    }
   }
   .externals {
     flex: 1 0 auto;
@@ -121,13 +152,6 @@ header {
   p {
     margin: 0;
     word-wrap: break-word;
-  }
-  a, a:visited {
-    color:#aaa;
-    &:hover {
-      color:#aaa;
-      text-decoration:underline;
-    }
   }
 } 
 ul {
