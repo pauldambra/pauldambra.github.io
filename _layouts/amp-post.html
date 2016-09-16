@@ -20,7 +20,7 @@
   <body>
 
   {% capture header %}{% include header.html %}{% endcapture %}
-  {{ header | amp_images }}
+  {{ header | amp_images: false, 32, 32 }}
 <div class="main">
 
 {% 
