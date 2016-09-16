@@ -106,7 +106,12 @@ header {
     @media (min-width: 778px) {
       background-image: url("images/cardboard.jpg");
       height: 437px;
-      background-size: 100%;
+    }
+
+    @media (min-width: 984px) {
+      background-image: url("images/cardboard.jpg");
+      height: 437px;
+      background-size:100%;
     }
 
     a, a:visited {
@@ -132,7 +137,7 @@ header {
   }
 
   .title {
-    flex: 3 0 auto;
+    flex: 23 0 auto;
     a { text-decoration: none; }
     @media (min-width:550px) {
       font-size: 150%;
@@ -141,23 +146,25 @@ header {
   }
   .name {
     flex: 2 0 auto;
-    text-align: right;
-    padding-right: 15px;
-    position:relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
     p {
       @media (max-width: 750px) {
-        position: absolute;
-        bottom: 0;
-        right: 0;
+        justify-content: flex-end;
       }
     }
-  }
-  .externals {
-    flex: 1 0 auto;
-    text-align: right;
+    .row {
+      display: flex;
+      align-items: center;
 
-    @media (max-width: 750px) {
-      display: none;
+      div {
+        margin-right: 15px;
+      }
+      a {
+        height:32px;
+      }
     }
   }
   p {
