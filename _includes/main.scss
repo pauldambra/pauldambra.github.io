@@ -105,14 +105,14 @@ header {
       height: 437px;
       background-size: 100%;
     }
-  }
 
-  a, a:visited {
-    color:white;
-    text-decoration:underline;
-    &:hover {
+    a, a:visited {
       color:white;
       text-decoration:underline;
+      &:hover {
+        color:white;
+        text-decoration:underline;
+      }
     }
   }
 
@@ -120,6 +120,14 @@ header {
     flex-direction: column;
   }
 
+  a, a:visited {
+    color:#aaa;
+    &:hover {
+      color:#aaa;
+      text-decoration:underline;
+    }
+  }
+  
   .title {
     flex: 3 0 auto;
     a { text-decoration: none; }
