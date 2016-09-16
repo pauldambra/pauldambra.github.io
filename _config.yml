@@ -7,3 +7,9 @@ plusProfile: https://plus.google.com/114260096260757534167?rel=author
 excerpt_separator: <!--more-->
 exclude: ['Guardfile', .gitgnore', '.ruby-version', 'build.sh', 'Gemfile', 'Gemfile.lock', 'README.md']
 ampdir: amp
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      header_class: "hero"

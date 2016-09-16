@@ -98,7 +98,7 @@ header {
 
   &.hero {
     @media (max-width: 778px) {
-      background-image: url('images/cardboard.jpg');
+      background-image: url('/images/cardboard.jpg');
       height: 370px;
       background-position: -222px -76px;
     }
