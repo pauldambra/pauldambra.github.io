@@ -19,7 +19,8 @@
   </head>
   <body>
 
-  {% include header.html %}
+  {% capture header %}{% include header.html %}{% endcapture %}
+  {{ header | amp_images }}
 <div class="main">
 
 {% 
