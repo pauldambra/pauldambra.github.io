@@ -32,12 +32,15 @@ The benefit I can see here is that your edits are in place. They're immediately 
 I can think of two problems with this:
 
 #### 1. Users expect an admin interface. 
-##### They don't expect to edit in the page
+
+They don't expect to edit in the page
 	
 I've previously referenced "Don't Make Me Think" [(shameless affiliate link)](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&ie=UTF8&qid=1473701528&sr=1-1&keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29) and that approach would drive the position that there's no point confusing a user just to be funky. This may be doing just that...
 
 #### 2. Is it discoverable?
-##### The visual affordance to indicate that a user is able to edit an element needs to be worked in to the design 
+
+The visual affordance to indicate that a user is able to edit an element needs to be worked in to the design.
+
 If the user can't find what to edit then this doesn't work. Also, since part of the benefit is that the edits are in the page and the page has to change to indicate where edits are possible does that water down the benefit.
 
 I'm well out of my depth as far as design goes right now! If this was a real project I'd want to get a real designer or some actual users at this point and find out if this is a developer only idea... 
@@ -89,7 +92,8 @@ and a panel partial is simple too
 Each element that should be editable is marked with an `{% raw %}{{elementShouldBeEditable}}{% endraw %}` handlebars helper and the content from the model is marked as `safeString` so that any HTML entered in the WYSIWYG editor is not escaped.
 
 ## The Helpers
-### An editable element
+
+## An editable element
 
 ```js 
     handlebars.registerHelper('elementShouldBeEditable', 

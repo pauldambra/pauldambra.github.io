@@ -12,7 +12,7 @@ Disclaimer: I use and love an iPad (1). I've got an iPhone, mac mini, a MBP and 
 
 TL;DR The transformer prime is a beautiful computer but it might be true there's an iPad market and not a tablet market.
 
-#### UPDATE
+## UPDATE
 
 And then today Google release Chrome for Ice Cream Sandwich. BEST. TABLET. BROWSER. EVAR.
 
