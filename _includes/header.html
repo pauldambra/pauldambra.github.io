@@ -1,9 +1,5 @@
-{% assign header_class = '' %}
-{% if page.url == "/" or page.url == "" %}
-	{% assign header_class = 'home' %}
-{% endif %}
 
-<header class="{{ header_class }}">
+<header class="{{ page.header_class }}">
 	<div class="title">
 		<a href="/">Mindless Rambling Nonsense</a>
 	</div>

@@ -55,6 +55,9 @@ a {
     text-decoration: underline;
   }
 }
+li {
+  margin-left: 1em;
+}
 article {
   a {
     text-decoration: underline;
@@ -93,7 +96,7 @@ header {
   color:white;
   padding: 5px 15px 10px 15px;
 
-  &.home {
+  &.hero {
     @media (max-width: 778px) {
       background-image: url('images/cardboard.jpg');
       height: 370px;
@@ -127,7 +130,7 @@ header {
       text-decoration:underline;
     }
   }
-  
+
   .title {
     flex: 3 0 auto;
     a { text-decoration: none; }
@@ -173,9 +176,18 @@ ul {
     text-overflow: ellipsis;
   }
 }
+
+.categories-list {
+  li {
+    list-style: none;
+    margin: 0.2em;
+  }
+}
+
 .tag-list {
   li {
     list-style: none;
+    margin: 0.2em;
   }
   .post-category {
     float:none;

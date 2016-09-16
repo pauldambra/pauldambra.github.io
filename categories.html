@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Categories
+header_class: hero
 ---
 
 {% comment %}
@@ -56,7 +57,7 @@ The purpose of this snippet is to list all your posts posted with a certain cate
 {% endcomment %}
 {% for category in uniqueCategories %}
 	<h2 id="{{ category | slugify }}">{{ category }}</h2>
-	<ul>
+	<ul class="categories-list">
 	 {% for post in site.posts %}
 		 {% if post.category == category %}
 		 <li>
