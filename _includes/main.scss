@@ -1,3 +1,22 @@
+$lightest: #fff;
+$light: #aaa;
+
+$dark: darkgray;
+$darkest: #000;
+
+@mixin links ($color: inherit, $decoration: underline) {
+  a {
+    color: $color;
+    text-decoration: $decoration;
+    &:visited {
+      color: $color;
+    }
+    &:hover {
+      color: $color;
+      text-decoration: underline;
+    }
+  }
+}
 
 @font-face {
   font-family: 'Khula';
@@ -7,7 +26,7 @@
 }
 html {
   height: 100%;
-  font-size: 10px;
+  font-size: 20px;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   * {
     box-sizing: border-box;
@@ -15,7 +34,7 @@ html {
 }
 body {
   font-family: 'Khula', sans-serif;
-  font-size: 2em;
+  font-size: 1em;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -23,50 +42,42 @@ body {
   line-height: 1.42857143;
 }
 .main {
-  background-color: white;
+  background-color: $lightest;
   padding: 10px 5px;
     /* flex: 1; would be enough but it looks bad in IE */
   flex: 1 1 auto;
   width: 94%;
   margin: auto;
 }
+h1 {
+  font-size: 2em;
+}
 h2 {
-  font-size: 25px;
+  font-size: 1.5em;
 }
 h3 {
-  font-size: 20px;
   .post-metadata {
-    font-size: 15px;
+    font-size: 1.2em;
   }
   &.tag-list {
-    font-size: 16px;
+    font-size: 1.2em;
   }
 }
 hr {
   clear: both;
 }
-a {
-  color: black;
-  &:visited {
-    color:black;
-  }
-  &:hover {
-    color:black;
-    text-decoration: underline;
-  }
-}
+
+@include links($darkest);
+
 li {
-  margin-left: 1em;
+  margin-left: 0.5em;
 }
 article {
-  a {
-    text-decoration: underline;
-  }
   header {
     display: block;
-    border-bottom: black solid 2px;
-    background-color: white;
-    color: black;
+    border-bottom: $darkest solid 2px;
+    background-color: $lightest;
+    color: $darkest;
     .more-like-this {
       text-align: right;
     }
@@ -93,48 +104,34 @@ blockquote {
 header {
   display: flex;
   background-color: #222;
-  color:white;
+  color:$lightest;
   padding: 5px 15px 10px 15px;
 
   &.hero {
+    background-image: url('/images/cardboard.jpg');
+
     @media (max-width: 778px) {
-      background-image: url('/images/cardboard.jpg');
       height: 370px;
       background-position: -222px -76px;
     }
 
     @media (min-width: 778px) {
-      background-image: url("/images/cardboard.jpg");
       height: 437px;
     }
 
     @media (min-width: 984px) {
-      background-image: url("/images/cardboard.jpg");
       height: 437px;
       background-size:100%;
     }
 
-    a, a:visited {
-      color:white;
-      text-decoration:underline;
-      &:hover {
-        color:white;
-        text-decoration:underline;
-      }
-    }
+    @include links($lightest);
   }
 
   @media (max-width: 450px) {
     flex-direction: column;
   }
 
-  a, a:visited {
-    color:#aaa;
-    &:hover {
-      color:#aaa;
-      text-decoration:underline;
-    }
-  }
+  @include links($light);
 
   .title {
     flex: 23 0 auto;
@@ -199,12 +196,11 @@ ul {
   .post-category {
     float:none;
   }
-  a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
+  h3 { 
+    @include links($darkest, none);
   }
+  @include links($light, none);
+
   font-weight: normal;
 }
 .link-list {
@@ -215,30 +211,20 @@ ul {
 }
 
 .category-link {
-  a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  @include links ($darkest, none);
   font-weight: normal;
 }
 
 .post-metadata {
-  color: darkgray;
+  color: $dark;
   display: inline-block;
   padding: 1px 3px;
-  a, a:hover, a:visited {
-    color: darkgray;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
+  @include links ($dark, none);
 }
 .post-category {
   float: right;
   img, amp-img {
-    fill: darkgray;
+    fill: $dark;
     width: 24px;
     height: 24px;
     display: inline-block;
@@ -269,9 +255,10 @@ ul {
 img, amp-img {
   display: inline-block;
   max-width: 100%;
+  vertical-align: middle;
 }
 #disqus_thread {
-  border-top: solid 1em #aaa;
+  border-top: solid 1em $light;
   margin-top: 10px;
 }
 aside {
@@ -294,13 +281,13 @@ footer {
   padding: 5px 15px;
   margin: 0 auto;
   width:100%;
-  background-color: black;
-  color: white;
+  background-color: $darkest;
+  color: $lightest;
   min-height: 2em;
   overflow: hidden;
   height: 30px;
   a, a:visited, a:hover {
-    color: white;
+    color: $lightest;
     line-height: 25px;
     vertical-align: bottom;
     text-decoration: none;

@@ -55,14 +55,14 @@ The purpose of this snippet is to list all your posts posted with a certain tag.
 	 {% for post in site.posts %}
 		 {% if post.tags contains tag %}
 		 <li>
-		 <h3 class="tag-list">
-		 <a href="{{ post.url }}">
-		 {{ post.title }} - ({{ post.date | date_to_string }})
-		 </a>
-		 <div>
-		 	{% include tags.html tags=post.tags %}	
-		 </div>
-		 </h3>
+			 <h3 class="tag-list">
+				 <a href="{{ post.url }}">
+				 {{ post.title }} - ({{ post.date | date_to_string }})
+				 </a>
+			 </h3>
+			 <div>
+			 	{% include tags.html tags=post.tags %}	
+			 </div>
 		 </li>
 		 {% endif %}
 	 {% endfor %}
