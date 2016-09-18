@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{ page.title }}</title>
+    {% include openGraph.html %}
     <meta name="viewport" content="width=device-width">
-    <meta name="description" conten="{{page.description}}">
-    <meta name="keywords" conten="{{page.keywords}}">
+    <meta name="description" content="{{page.description}}">
+    <meta name="keywords" content="{{page.keywords}}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
     {% if page.path contains '_posts' %}
-      <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}/{{page.id}}">
+      <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}{{page.id}}">
     {% endif %}
     <style amp-custom>
       {% include syntax.css %}
