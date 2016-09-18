@@ -49,7 +49,7 @@
           hitType: 'social',
           socialNetwork: 'twitter',
           socialAction: 'tweet',
-          socialTarget: window.location.href
+          socialTarget: "{{site.url}}{{page.url}}"
         });
       });
 
@@ -59,7 +59,7 @@
           hitType: 'social',
           socialNetwork: 'facebook',
           socialAction: 'share',
-          socialTarget: window.location.href
+          socialTarget: "{{site.url}}{{page.url}}"
         });
       });
     </script>
