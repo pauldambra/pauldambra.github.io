@@ -67,6 +67,10 @@ hr {
   clear: both;
 }
 
+p {
+  word-wrap: break-word;
+}
+
 @include links($darkest);
 
 li {
