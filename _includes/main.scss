@@ -94,6 +94,10 @@ article {
       display: flex;
       flex-direction: row;
 
+      @media (max-width: 450px) {
+        flex-direction: column;
+      }
+  
       .more-like-this {
         text-align: right;
         align-content: flex-end;
