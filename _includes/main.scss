@@ -74,16 +74,46 @@ li {
 }
 article {
   header {
-    display: block;
+    display: flex;
+    flex-direction: column;
+
     border-bottom: $darkest solid 2px;
     background-color: $lightest;
     color: $darkest;
-    .more-like-this {
-      text-align: right;
+    
+    .heading {
+      flex:3 0 auto;
     }
-    .post-category {
-      float: none;
+
+    .meta {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: row;
+
+      .more-like-this {
+        text-align: right;
+        align-content: flex-end;
+        flex: 3 0 auto;
+      }
+      .post-category {
+        float: none;
+      }
+
+      .share-this {
+        display:flex;
+        align-self: flex-end;
+
+        a {
+          margin-right: 5px;
+        }
+
+        img, amp-image {
+          width: 32px;
+          height: 32px;
+        }
+      }
     }
+
   }
   #title {
     line-height: 75px;

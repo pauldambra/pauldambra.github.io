@@ -1,15 +1,31 @@
 <header>
-	<div class="date">
-		{{ page.date | date: "%a %b %d %Y" }}
+	<div class="heading">
+		<div class="date">
+			{{ page.date | date: "%a %b %d %Y" }}
+		</div>
+		<h1 class="title">{{ page.title }}</h1>
 	</div>
-	<h1 class="title">{{ page.title }}</h1>
-	<div class="more-like-this">
-		<a class="post-metadata post-category"
-			href="/categories.html#{{ page.category | slugify }}">
-			in: {{ page.category }}
-		</a>
-		<div>
-			{% include tags.html tags=page.tags %}
+	<div class="meta">
+		<div class="share-this">
+			<a class="social-share" 
+			   target="_blank"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href={{site.url}}{{page.url}}">
+				<img src="/images/facebook-black-32.png">
+			</a>
+			<a class="social-share" 
+			   target="_blank"
+			   href="https://twitter.com/intent/tweet?text={{page.title}}&via=pauldambra&url={{site.url}}{{page.url}}">
+				<img src="/images/twitter-black-32.png">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#{{ page.category | slugify }}">
+				in: {{ page.category }}
+			</a>
+			<div>
+				{% include tags.html tags=page.tags %}
+			</div>
 		</div>
 	</div>
 </header>
