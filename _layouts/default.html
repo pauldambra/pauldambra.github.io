@@ -9,9 +9,11 @@
     <meta name="description" content="{{page.description}}">
     <meta name="keywords" content="{{page.keywords}}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+    
     {% if page.path contains '_posts' %}
       <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}{{page.id}}">
     {% endif %}
+
     <style amp-custom>
       {% include syntax.css %}
       {% capture include_to_scssify %}
@@ -25,7 +27,9 @@
     ga('create', 'UA-49969634-1', 'pauldambra.github.io');
     ga('send', 'pageview');
     </script>
+
     <script async src='https://www.google-analytics.com/analytics.js'></script>
+
     <!-- End Google Analytics -->
     <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
     <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
@@ -36,5 +40,27 @@
       {{ content }}
     </div>
     {% include footer.html %}
+
+    {% if page.path contains '_posts' %}
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet'
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share'
+        });
+      });
+    </script>
+{% endif %}
   </body>
 </html>

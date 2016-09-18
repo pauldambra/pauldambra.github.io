@@ -15,11 +15,73 @@
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
     <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+    <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     {% include openGraph.html %}
   </head>
   <body>
+
+<amp-analytics type="googleanalytics" id="amp-analytics-pageview">
+  <script type="application/json">
+  {
+    "vars": {
+      "account": "{{site.amp_googleanalytics_id}}"
+    },
+    "triggers": {
+      "trackPageview": {
+        "on": "visible",
+        "request": "pageview"
+      }
+    }
+  }
+  </script>
+</amp-analytics>
+
+<amp-analytics type="googleanalytics" id="amp-analytics-tweet-share">
+<script type="application/json">
+{
+  "vars": {
+    "account": "{{site.amp_googleanalytics_id}}"
+  },
+  "triggers": {
+    "trackClickOnTwitterLink" : {
+      "on": "click",
+      "selector": "#twitter-share-link",
+      "request": "social",
+      "vars": {
+          "socialNetwork": "twitter",
+          "socialAction": "tweet",
+          "socialTarget": "{{site.url}}{{page.url}}"
+      }
+    }
+  }
+}
+</script>
+</amp-analytics>
+
+<amp-analytics type="googleanalytics" id="amp-analytics-facebook-share">
+<script type="application/json">
+{
+  "vars": {
+    "account": "{{site.amp_googleanalytics_id}}"
+  },
+  "triggers": {
+    "trackClickOnFacebookLink" : {
+      "on": "click",
+      "selector": "#facebook-share-link",
+      "request": "social",
+      "vars": {
+          "socialNetwork": "facebook",
+          "socialAction": "share",
+          "socialTarget": "{{site.url}}{{page.url}}"
+      }
+    }
+  }
+}
+</script>
+</amp-analytics>
 
   {% capture header %}{% include header.html %}{% endcapture %}
   {{ header | amp_images: false, 32, 32 }}

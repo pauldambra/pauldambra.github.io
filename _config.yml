@@ -8,6 +8,7 @@ excerpt_separator: <!--more-->
 exclude: ['Guardfile', .gitgnore', '.ruby-version', 'build.sh', 'Gemfile', 'Gemfile.lock', 'README.md']
 ampdir: amp
 facebook_id: 305449093152216
+amp_googleanalytics_id: UA-49969634-2
 defaults:
   -
     scope:
