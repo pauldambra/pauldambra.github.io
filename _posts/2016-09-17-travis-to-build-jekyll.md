@@ -6,8 +6,18 @@ date: "2016-09-18 16:00:00"
 description: "using Travis CI to build a Jekyll site"
 keywords: recursion blog travisci travis jekyll
 category: "continuous delivery"
-tags: [travisci, jekyll, recursion, blog]
+tags: [travisci, jekyll, recursion, blog, series]
 ---
+
+<aside class="series">
+	<h1>This post is part of a series on improving this blog #recursion</h1>
+	<div class="links">
+		<div class="previous"></div>
+		<div class="next">
+			<a href="/structured-data-with-jekyll.html">Next Post</a>
+		</div>
+	</div>
+</aside>
 
 I recently had a conversation where I said that I couldn't build an AMP version of my blog because I use Github Pages to build and serve it. Github don't allow any Jekyll plugins to run.
 

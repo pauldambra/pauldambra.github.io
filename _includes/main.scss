@@ -97,7 +97,7 @@ article {
       @media (max-width: 450px) {
         flex-direction: column;
       }
-  
+
       .more-like-this {
         text-align: right;
         align-content: flex-end;
@@ -217,6 +217,10 @@ ul {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .series {
+    display:none;
+  }
 }
 
 .categories-list {
@@ -305,6 +309,27 @@ aside {
   margin-bottom: 1em;
   margin-left: 2em;
   padding-left: 0.5em;
+
+  &.series {
+    border-left: none;
+    margin: 0 0 1.5em 0;
+
+    h1 {
+      font-size: 1em;
+    }
+
+    .links { 
+      display:flex; 
+      .previous {
+        text-align: left;
+        flex: 1 0 auto;
+      }
+      .next {
+        text-align: right;
+        flex: 1 0 auto;
+      }
+    }
+  }
 }
 .posts {
   list-style-type: none;

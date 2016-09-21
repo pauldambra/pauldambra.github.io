@@ -8,10 +8,10 @@ category: cms
 tags: [learning, cms, design, web, series]
 ---
 
-This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. [See the first post for an explanation of why](http://mindlessramblingnonsense.blogspot.co.uk/2014/02/websites-cms.html)
+This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. [See the first post for an explanation of why](/2014/02/websites-cms.html)
 
-[Previous Post](http://mindlessramblingnonsense.blogspot.co.uk/2014/02/websites-cms.html)
-[Next Post](http://mindlessramblingnonsense.blogspot.co.uk/2014/03/website-cms-display-pages-part-2.html)
+[Previous Post](/2014/02/websites-cms.html)
+[Next Post](/2014/03/website-cms-display-pages-part-2.html)
 
 # Setup
 
@@ -95,4 +95,4 @@ Running `node server` at the terminal I can point my browser at it:
 
 All of which has us set up to test our server and ready to display something meaningful with very little work at all.
 
-In [the next part of the series](http://mindlessramblingnonsense.blogspot.co.uk/2014/03/website-cms-display-pages-part-2.html) we'll look at adding a simple template and making this look a little more like a real website
+In [the next part of the series](/2014/03/website-cms-display-pages-part-2.html) we'll look at adding a simple template and making this look a little more like a real website

@@ -1,46 +1,49 @@
 {% assign wordcount = include.content | number_of_words %}
 
 <script type="application/ld+json">
-{ "@context": "http://schema.org", 
- "@type": "BlogPosting",
- "headline": "{{ include.headline }}",
- "genre": "{{ include.category }}", 
- "keywords": "{{ include.keywords }}", 
- "wordCount": "{{ wordcount }}",
- "url": "https://pauldambra.github.io{{ include.link }}",
- "datePublished": "{{ include.date | | date: '%Y-%m-%d' }}",
- "author": {
-    "@type": "Person",
-    "name": "Paul D'Ambra",
-	"sameAs": [
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"{{ include.headline }}",
+   "genre":"{{ include.category }}",
+   "keywords":"{{ include.keywords }}",
+   "wordCount":"{{ wordcount }}",
+   "url":"https://pauldambra.github.io{{ include.link }}",
+   "datePublished":"{{ include.date | | date: '%Y-%m-%d' }}",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
         "https://twitter.com/pauldambra",
-        "https://github.com/pauldambra"
-    ]
-  },
-  "publisher": {
-    "@type": "Organization",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
     "name": "Paul D'Ambra",
     "sameAs": [
         "https://twitter.com/pauldambra",
-        "https://github.com/pauldambra"
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
     ],
     "logo": {
-  		"@type": "ImageObject",
-  		"contentUrl": "https://pauldambra.github.io/images/logo.png",
-  		  "url": "https://pauldambra.github.io"
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.github.io/images/logo.png",
+        "url": "https://pauldambra.github.io"
     }
-  },
-  "image": {
-  		"@type": "ImageObject",
-  		"contentUrl": "https://pauldambra.github.io/images/cardboard.jpg",
-  		  "url": "https://pauldambra.github.io",
-  		  "height": "450",
-  		  "width": "1000"
-    },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://pauldambra.github.io{{ include.link }}"
-  },
- "articleBody": "{{ include.content | strip_html | xml_escape | normalize_whitepace | strip_newlines }}"
- }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.github.io/images/cardboard.jpg",
+      "url":"https://pauldambra.github.io",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.github.io{{ include.link }}"
+   },
+   "articleBody":"{{ include.content | strip_html | xml_escape | normalize_whitepace | strip_newlines | strip }}"
+}
 </script>

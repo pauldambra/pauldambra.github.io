@@ -17,10 +17,37 @@ header_class: hero
     "name": "Paul D'Ambra",
     "sameAs": [
         "https://twitter.com/pauldambra",
-        "https://github.com/pauldambra"
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
     ]
   }
  }
+</script>
+
+  {% assign items = "" %}
+  {% for post in site.posts %}
+    {% capture list_item %}
+        {% 
+            include blogListItem.html 
+            index=forloop.index
+            url=post.url
+            title=post.title
+            date=post.date
+        %}
+    {% endcapture %}
+    {% assign items = items | append: list_item | append: "|||" %}
+  {% endfor %}
+    
+  {% assign items = items | split: "|||" | join: ',' %}
+  
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+  {{ items }}
+  ]
+}
 </script>
 
 {% for post in site.posts %}
