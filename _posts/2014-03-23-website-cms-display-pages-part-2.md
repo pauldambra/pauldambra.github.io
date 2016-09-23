@@ -58,7 +58,23 @@ installs the [Express3 Handlebars view engine](https://github.com/ericf/express3
 
 Add the view engine's config to the server.js file:
 
-<script src="http://gist-it.appspot.com/github/pauldambra/omniclopse/blob/87ebfa822e3ea29a0df4d36f310c5405f8eaeb85/server.js"></script> 
+```javascript
+var express = require('express');
+var app = express();
+var exp3hbs  = require('express3-handlebars');
+
+app.use('/libs', express.static(__dirname + '/bower_components'));
+app.engine('handlebars', exp3hbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.get('/', function(req, res){
+  res.render('home');
+});
+
+app.listen(1337);
+
+exports.app = app;
+```
 
 This requires two layout files be added to the site:
 
@@ -86,7 +102,22 @@ npm install --save-dev gulp-sass
 
 Then a little fangling to generate the gulp file.
 
-<script src="http://gist-it.appspot.com/github/pauldambra/omniclopse/blob/98a9370bad803256fcfd6e18e3e641b5ee8d81bc/gulpfile.js"></script> 
+```javascript
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+
+gulp.task('sass', function () {
+    gulp.src('./scss/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('watch', function() {
+    gulp.watch('./scss/*.scss', ['sass']);
+});
+
+gulp.task('default', ['sass', 'watch']);
+```
 
 Typing gulp into the terminal now leaves a task running which watches for changes to .scss files and transpiles them to .css files
 
