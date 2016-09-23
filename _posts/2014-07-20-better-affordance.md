@@ -130,8 +130,14 @@ Here there are three rules that set a cycling box shadow inside and outside of t
 }
 ```
 
-And here a codepen so you can play with the CSS that generates the effect
+{% if page.path contains '_posts' %}
+  And here is a codepen so you can play with the CSS that generates the effect
 <p data-height="129" data-theme-id="7380" data-slug-hash="gIseG" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/pauldambra/pen/gIseG/'>gIseG</a> by Paul D'Ambra (<a href='http://codepen.io/pauldambra'>@pauldambra</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//codepen.io/assets/embed/ei.js"></script>
+{% else %}
+  And [here is a codepen](http://codepen.io/pauldambra/pen/gIseG/) so you can play with the CSS that generates the effect
+{% endif %}
+
+
 
 The next post will cover the second objective of making the editable affordance give information about whether saving edits was successful.
