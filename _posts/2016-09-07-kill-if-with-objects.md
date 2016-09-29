@@ -101,7 +101,7 @@ Then over a few weeks we added a few more types that we needed to handle and unc
 
     private ConvertedThing ConvertThing(Thing thing)
     {
-      // ommitted for brevity
+      // omitted for brevity
       // uses _replacements
       return new ConvertedThing();
     }
@@ -134,7 +134,7 @@ Sandi Metz proposed the squint test ([see this talk](https://www.youtube.com/wat
 
 ## Say what you see
 
-If you are talking about the code and you aren't using the words on the screen. Or if you can't succintly explain what the conditionals are. Then you should be looking at whether there's information in your brain or elsewhere in the system that would help clarify what is happening. It's really easy to not be aware of what you have to know to understand some code - it's why i <3 code reviews.
+If you are talking about the code and you aren't using the words on the screen. Or if you can't succinctly explain what the conditionals are. Then you should be looking at whether there's information in your brain or elsewhere in the system that would help clarify what is happening. It's really easy to not be aware of what you have to know to understand some code - it's why i <3 code reviews.
 
 # The Refactored Code
 
@@ -207,7 +207,7 @@ As we talked about it we both realised that what we had was difficult to express
 
     private static ConvertedThing ConvertThing(Thing thing)
     {
-      // ommitted for brevity
+      // omitted for brevity
       //much simpler factory method
       return new ConvertedThing();
     }
