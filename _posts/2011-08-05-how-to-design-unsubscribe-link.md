@@ -44,7 +44,7 @@ Except the [HTTP RFC](http://t.co/xH5nYHf) says that a GET request should be ide
 
 ![not sure if meme is appropriate or you should feel bad](http://1.bp.blogspot.com/-uEF-Zso3K5M/Tju1K8hAhrI/AAAAAAAAAVk/Vi_WggM_FEY/s1600/1095675-futurama_fry_looking_squint_super.jpg)
 
-<blockquote>["Idempotence is the property of certain operations in mathematics and computer science, that they can be applied multiple times without changing the result."](http://en.wikipedia.org/wiki/Idempotence)</blockquote>
+> ["Idempotence is the property of certain operations in mathematics and computer science, that they can be applied multiple times without changing the result."](http://en.wikipedia.org/wiki/Idempotence)
 
 In short someone clicking a link can get information from the database but shouldn't update information.
 
@@ -54,9 +54,11 @@ But what is the solution since people are not going to want to spend time readin
 
 I'm a google fanboy so [what do they say](https://mail.google.com/support/bin/answer.py?answer=81126#unsub)
 
-<blockquote><span style="font-weight:bold;">Unsubscribing</span><br />A user must be able to unsubscribe from your mailing list through one of the following means:
+> Unsubscribing</span><br />A user must be able to unsubscribe from your mailing list through one of the following means:
+> 
+> 1) A prominent link in the body of an email leading users to a page confirming his or her unsubscription (no input from the user, other than confirmation, should be required).<br />2) By replying to your email with an unsubscribe request.
 
-1) A prominent link in the body of an email leading users to a page confirming his or her unsubscription (no input from the user, other than confirmation, should be required).<br />2) By replying to your email with an unsubscribe request.<br /></blockquote><br />So I think that we're going to shufty this all around a bit.
+So I think that we're going to shufty this all around a bit.
 
 Two types of mailings = two types of link
 
