@@ -1,0 +1,34 @@
+---
+layout: null
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
+    <link>{{ site.url }}{{ site.baseurl }}/</link>
+    <atom:link href="{{ site.url }}/facebook-instant-feed.xml" rel="self" type="application/rss+xml" />
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <id>{{ site.url }}</id>
+    <author>
+      <name>{{ site.owner.name }}</name>
+    </author>
+    {% for post in site.posts limit:10 %}
+      <item>
+        <title>{{ post.title | xml_escape }}</title>
+        {% capture page_url %}{{ site.url | append: post.url | replace:  "//", "" }}{% endcapture %}
+        <link>{{ page_url }}</link>
+        <guid isPermaLink="true">{{ page_url }}</guid>
+        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+        <author>{{ site.author }}</author>
+        <description>{{ post.content | xml_escape }}</description>
+        <content:encoded>
+            <![CDATA[
+            {{post.content}}
+        	]]>
+        </content:encoded>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>⁄
