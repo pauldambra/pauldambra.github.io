@@ -25,7 +25,7 @@ layout: null
         <description>{{ post.description | xml_escape }}</description>
         <content:encoded>
             <![CDATA[
-            {{post.content}}
+            test
         	]]>
         </content:encoded>
       </item>
