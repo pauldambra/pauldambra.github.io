@@ -8,9 +8,9 @@ category: testing
 tags: [browserstack, selenium, testing, js]
 ---
 
-This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
+This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why](/2014/02/websites-cms.html)
 
-[Previous Post]({% post_url 2014-03-23-website-cms-display-pages-part-2 %})
+[Previous Post]({/2014/03/website-cms-display-pages-part-2.html)
 
 # Browserstack
 

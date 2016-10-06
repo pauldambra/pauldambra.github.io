@@ -10,9 +10,9 @@ category: cms
 tags: [nosql, learning, mongodb, cms, design, web, series]
 ---
 
-This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why]({% post_url 2014-02-22-websites-cms %})
+This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why](/2014/02/websites-cms.html)
 
-[Previous Post]({% post_url 2014-03-25-testing-with-browserstack-and-selenium %})
+[Previous Post](/2014/03/testing-with-browserstack-and-selenium.html)
 
 After a day writing DDL for a project that has manual schema versioning against MS SQL and is going through a lot of changes I feel honour bound to write a post about storing data in the Omniclopse site.
 
