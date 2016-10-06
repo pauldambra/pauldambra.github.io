@@ -15,7 +15,7 @@ layout: null
 				<title>{{ post.title | xml_escape }}</title>
 				<description>{{ post.content | xml_escape }}</description>
 				<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-				{% capture page_url %}{{ site.url | append: post.url | replace:  "//", "" }}{% endcapture %}
+				{% capture page_url %}{{ site.url | append: post.url }}{% endcapture %}
 				<link>
 					{{ page_url }}
 				</link>
