@@ -18,31 +18,12 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/">
       {% capture page_url %}{{ site.url | append: post.url }}{% endcapture %}
       <guid isPermaLink="true">{{ page_url }}</guid>
 
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+      <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
       <author>{{ site.author }}</author>
       <content:encoded>
         <![CDATA[
         <!doctype html>
-        <html lang="en" prefix="op: http://media.facebook.com/op#">
-          <head>
-            <meta charset="utf-8">
-            <link rel="canonical" href="http://example.com/article.html">
-            <meta property="op:markup_version" content="v1.0">
-          </head>
-          <body>
-            <article>
-              <header>
-                <!— Article header goes here -->
-              </header>
-
-              <!— Article body goes here -->
-
-              <footer>
-                <!— Article footer goes here -->
-              </footer>
-            </article>
-          </body>
-        </html>
+        {{post.content}}
         ]]>
       </content:encoded>
     </item>
