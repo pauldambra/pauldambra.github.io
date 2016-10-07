@@ -7,16 +7,20 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/">
   	<title>{{ site.name | xml_escape }}</title>
     <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
     <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <language>en-gb</language>
+    <atom:link href="{{ site.url }}/facebook-instant-feed.rss" rel="self" type="application/rss+xml" />
     {% for post in site.posts limit:10 %}
     <item>
     	<title>{{ site.name | xml_escape }}</title>
     	<description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
       <link>{{ site.url }}{{ site.baseurl }}</link>
+
+      {% capture page_url %}{{ site.url | append: post.url }}{% endcapture %}
       <guid isPermaLink="true">{{ page_url }}</guid>
+
         <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-      <author>{{ site.owner.name }}</author>
+      <author>{{ site.author }}</author>
       <content:encoded>
         <![CDATA[
         <!doctype html>
