@@ -11,7 +11,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <language>en-gb</language>
     {% for post in site.posts limit:10 %}
     <item>
-    	<title>{{ site.name | xml_escape }}</title>
+    	<title>{{ post.title | xml_escape }}</title>
     	<description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
       <link>{{ site.url }}{{ site.baseurl }}</link>
 
@@ -23,7 +23,52 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/">
       <content:encoded>
         <![CDATA[
         <!doctype html>
-        {{post.content}}
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="{{ page_url }}">
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="{{ site.url }}{{ post.url }}" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="{{ post.title }}" />
+			<meta property="og:description"  content="{{ post.description }}" />
+			<meta property="og:image"        content="{{ site.url }}/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="{{ site.facebook_id }}" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="{{ site.url }}/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        {{ post.excerpt }}
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %d, %Y' }}</time>
+			      <time class="op-modified" dateTime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %d, %Y' }}</time>
+			    </header>
+			  </article>
+			</body>
+        </html
         ]]>
       </content:encoded>
     </item>
