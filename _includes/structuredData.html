@@ -44,6 +44,6 @@
       "@type":"WebPage",
       "@id":"https://pauldambra.github.io{{ include.link }}"
    },
-   "articleBody":"{{ include.content | strip_html | xml_escape | normalize_whitepace | strip_newlines | strip }}"
+   "articleBody":{{ include.content | strip_html | jsonify | normalize_whitepace | strip_newlines | strip | replace: ' ', '  ' }}
 }
 </script>
