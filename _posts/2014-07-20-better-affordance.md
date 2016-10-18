@@ -8,6 +8,7 @@ keywords: css3 keyframes ux visual affordance
 category: cms
 tags: [learning, cms, design, web, series]
 ---
+
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why](/2014/02/websites-cms.html)
 
 The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
@@ -131,11 +132,15 @@ Here there are three rules that set a cycling box shadow inside and outside of t
 ```
 
 {% if page.path contains '_posts' %}
+  
   And here is a codepen so you can play with the CSS that generates the effect
 <p data-height="129" data-theme-id="7380" data-slug-hash="gIseG" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/pauldambra/pen/gIseG/'>gIseG</a> by Paul D'Ambra (<a href='http://codepen.io/pauldambra'>@pauldambra</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//codepen.io/assets/embed/ei.js"></script>
+
 {% else %}
+
   And [here is a codepen](http://codepen.io/pauldambra/pen/gIseG/) so you can play with the CSS that generates the effect
+
 {% endif %}
 
 
