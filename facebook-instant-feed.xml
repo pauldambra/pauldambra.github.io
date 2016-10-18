@@ -67,7 +67,7 @@ xmlns:content="http://purl.org/rss/1.0/modules/content/">
 			      <time class="op-modified" dateTime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %d, %Y' }}</time>
 			    </header>
 			  </article>
-			</body>
+            </body>
         </html
         ]]>
       </content:encoded>
