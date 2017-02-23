@@ -76,6 +76,18 @@ p {
 li {
   margin-left: 0.5em;
 }
+
+.pagination {
+  text-align: center;
+  word-spacing: 0.75em;
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 article {
   header {
     display: flex;
