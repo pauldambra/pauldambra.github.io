@@ -41,15 +41,19 @@ I came up with a fake scenario of having a Big-Data problem. The amount of data 
 
 If you read that commit log you might be able to guess where the error occurred. Let’s pretend that the log is more complex and not so useful.
 
-<aside>
+#### Aside
+
 If you like that Git log output run:
-<pre>
-git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"</pre>
 
-<i>NB scroll to the right to copy that text it's really long.</i>
+```
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+```
 
-<p>And then use <pre>git lg</pre> to run it </p>
-</aside>
+_NB scroll to the right to copy that text it's really long._
+
+And then use `git lg` to run it
+
+#### Carrying on
 
 This particular big data company use a venerable, and well-trusted database technology - a file. I decided on a pretty simple approach
 
