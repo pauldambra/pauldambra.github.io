@@ -46,7 +46,7 @@ As I sat down and thought about what this would mean (writing a build script to 
 
 #### Setup
 
-I remembered [Yeoman.io](yeoman.io) and a quick search found a ReactJS with Gulp yeoman generator was available so I grabbed them:
+I remembered [Yeoman.io](http://yeoman.io) and a quick search found a ReactJS with Gulp yeoman generator was available so I grabbed them:
 
 ```bash 
 mkdir reactotype && cd reactotype
