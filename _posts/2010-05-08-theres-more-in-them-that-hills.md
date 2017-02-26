@@ -6,7 +6,7 @@ date: "2010-05-08 19:12:00"
 updated: "2010-05-08 20:42:26" 
 comments: "0" 
 category: software-engineering
-tags: [design-patterns, c#, java]
+tags: [design-patterns, c-sharp, java]
 ---
 
 ...than just the [Factory pattern](http://en.wikipedia.org/wiki/Factory_method_pattern).

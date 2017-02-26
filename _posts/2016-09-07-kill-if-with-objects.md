@@ -6,7 +6,7 @@ date: "2016-09-07 18:00:00"
 description: "refactoring at the right time is super fun"
 keywords: refactor refactoring behaviour objects
 category: software-engineering
-tags: [refactoring, c#]
+tags: [refactoring, c-sharp]
 ---
 
 Today I had super-fun spotting the oportunity for a refactoring and figuring out how to apply it. I wanted to think it through while it was fresh in my mind to try to cement any learning opportunity

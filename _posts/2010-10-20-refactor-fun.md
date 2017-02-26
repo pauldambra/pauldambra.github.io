@@ -5,7 +5,7 @@ permalink: "/2010/10/refactor-fun.html"
 date: "2010-10-20 13:43:00" 
 updated: "2010-10-20 16:05:46" 
 category: refactoring
-tags: [c#, refactoring, dictionary]
+tags: [c-sharp, refactoring, dictionary]
 ---
 
 I've been using [JetBrains Resharper](http://www.jetbrains.com/resharper/) for a while after a recommendation along the lines of "I can't stand to write code without it now" and...
