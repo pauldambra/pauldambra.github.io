@@ -20,7 +20,7 @@ Notice anything about those results... yup, only one of them is legal (I guess).
 
 ![likelihood of link being clicked based on page](http://3.bp.blogspot.com/-0Mwwuw91Jss/UBA_IiFV6fI/AAAAAAAAAjs/LBYZsFVgEu4/s1600/Screen+Shot+2012-07-25+at+19.40.23.png)
 
-source: <a href="http://www.optify.net/inbound-marketing-resources/new-study-how-the-new-face-of-serps-has-altered-the-ctr-curve">Optify Study</a>
+This was taken from `http://www.optify.net/inbound-marketing-resources/new-study-how-the-new-face-of-serps-has-altered-the-ctr-curve` an Optify Study that is no longer available.
 
 My aim here is to buy the film... not to pirate it. To buy it. Google gives me one option.
 

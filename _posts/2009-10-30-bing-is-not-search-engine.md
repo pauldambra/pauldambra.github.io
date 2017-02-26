@@ -20,13 +20,13 @@ So I thought I'd run with it. After all I'm searching for Microsoft technologies
 
 The first hit from the string "BDD 2007 download" in Google is:
 
-[http://www.microsoft.com/downloads/details.aspx?FamilyId=02A2605D-51E8-469F-BE4A-1DD2AF580502&displaylang=en](http://www.microsoft.com/downloads/details.aspx?FamilyId=02A2605D-51E8-469F-BE4A-1DD2AF580502&displaylang=en)
+`http://www.microsoft.com/downloads/details.aspx?FamilyId=02A2605D-51E8-469F-BE4A-1DD2AF580502&displaylang=en`
 
-That's the download page for BDD 2007 on Microsoft's site.
+That used to be the download page for BDD 2007 on Microsoft's site.
 
 The first hit from the same string on Bing.com is:
 
-[http://technet.microsoft.com/en-us/desktopdeployment/default.aspx](http://technet.microsoft.com/en-us/desktopdeployment/default.aspx)
+`http://technet.microsoft.com/en-us/desktopdeployment/default.aspx`
 
 That's not the BDD 2007 page and I can't even see a BDD link on there.
 
