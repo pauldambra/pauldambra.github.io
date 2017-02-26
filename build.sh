@@ -2,6 +2,8 @@
 
 set -eu
 
+DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
+
 function main {
 	clean
 	get_current_site
