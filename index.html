@@ -64,7 +64,7 @@ paginate: true
                 posted on: {{ post.date | date_to_string }}
             </div>
             <div class="post-metadata post-category">
-                <a href="/categories.html#{{ post.category }}">in: {{ post.category }}</a>
+                <a href="/categories.html#{{ post.category | slugify }}">in: {{ post.category }}</a>
                 <div class="tags">
                     {% include tags.html tags=post.tags %}
                 </div>
