@@ -4,8 +4,8 @@ layout: "post"
 permalink: "/2009/12/c-background-worker.html"
 date: "2009-12-01 13:15:00"
 updated: "2009-12-01 13:17:01"
-category: c-sharp
-tags: [dotnet, microsoft, c-sharp, background-workers]
+category: c#
+tags: [dotnet, microsoft, c#, background-workers]
 ---
 
 I've been meaning to get around to writing a good tutorial on c# background workers. Mainly because I use them to separate the GUI from all the heavy lifting and I always forget how to update things.

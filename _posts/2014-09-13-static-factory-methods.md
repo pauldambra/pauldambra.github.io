@@ -6,7 +6,7 @@ date: "2014-09-13"
 description: using static factories to improve discoverability
 keywords: code pedanticism constructors readability
 category: software-engineering
-tags: [c-sharp, design-patterns]
+tags: [c#, design-patterns]
 ---
 
 It is relatively common to find (or write) a line of code like this

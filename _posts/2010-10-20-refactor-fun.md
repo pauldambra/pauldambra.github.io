@@ -5,7 +5,7 @@ permalink: "/2010/10/refactor-fun.html"
 date: "2010-10-20 13:43:00" 
 updated: "2010-10-20 16:05:46" 
 category: refactoring
-tags: [c-sharp, refactoring, dictionary]
+tags: [c#, refactoring, dictionary]
 ---
 
 I've been using [JetBrains Resharper](http://www.jetbrains.com/resharper/) for a while after a recommendation along the lines of "I can't stand to write code without it now" and...
@@ -18,7 +18,7 @@ I've got a program that (in a moderately clunky way) gets all of the emails in a
     
 The class that handled the matching of text against rules had grown to be a real behemoth if not actually a spaghetti monster it was at the minimum a noodle demon. I won't post the code here the internet isn't big enough!
     
-But it consisted of an enum, five List&lt;string&gt; and then a set of methods that took an email object compared the body and subject to the 5 phrase lists and returned an appropriate result from the enum.
+But it consisted of an enum, five `List<string>` and then a set of methods that took an email object compared the body and subject to the 5 phrase lists and returned an appropriate result from the enum.
 
 I realised that I didn't want a list per result...
         
@@ -31,7 +31,7 @@ it was getting difficult to manage, there was no checking for duplication of the
 
 So I went through two stages and Resharper helped by being awesome at supporting my laziness.
 
-First I combined the many lists into one Dictionary&lt;string,phrasecheckresult&gt; to link my candidate strings with my enum result types.
+First I combined the many lists into one D`ictionary<string, phrasecheckresult>` to link my candidate strings with my enum result types.
 
 I used a little of Notepadd++'s Find and replace magic to wholesale convert my list initialisation into a Dictionary initialisation and ended up with
 
@@ -47,12 +47,11 @@ _phraseMap = new Dictionary<string, phrasecheckresult>
 };
 ```
 
-cut short for brevity as there are nearly 300 phrases now... Using an object initialiser meant I had nowhere to go when the program failed at runtime adding duplicate keys to the dictionary. Catching the exception didn't help since I couldn't
-            see what key was duplicated to tidy up my code.
+cut short for brevity as there are nearly 300 phrases now... Using an object initialiser meant I had nowhere to go when the program failed at runtime adding duplicate keys to the dictionary. Catching the exception didn't help since I couldn't see what key was duplicated to tidy up my code.
 
 So I highlighted all the rows of initalisation and what did I see?
 
-![](http://1.bp.blogspot.com/_u8J81ttOSD8/TL8LrjgRXsI/AAAAAAAAAL4/U86PBLyzzZM/s400/ResharperToAddCall.jpg)
+![what did i see?](http://1.bp.blogspot.com/_u8J81ttOSD8/TL8LrjgRXsI/AAAAAAAAAL4/U86PBLyzzZM/s400/ResharperToAddCall.jpg)
 
 Resharper's context menu lets me switch the object initialiser out to a series of .Add() calls. I could quickly find the duplicates and then switch back to an object initialiser. Yay!
 
@@ -85,6 +84,5 @@ public ProcessPhraseList()
     };
 }
 ```
-
 
 A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could just shift Delete to be first in the enum and your program's behaviour would change. Bonzer!

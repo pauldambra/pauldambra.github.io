@@ -20,9 +20,9 @@ My test machine was a MBP with an SSD and 16GB RAM (Hear me roar!). I created a 
 
 I installed MongoDB on one and TokuMX on the other.
 
-A NodeJS script was used to repetitively insert 6000 records and then query over the data in a single collection while only one of the two servers was powered on. I didn't clear out the databases beteen runs although this didn't appear to impact on the results. The script used is available [on GitHub](https://github.com/pauldambra/mongotest" target="_blank)&nbsp;and feedback on better tests or mechanism for performing them is welcome!
+A NodeJS script was used to repetitively insert 6000 records and then query over the data in a single collection while only one of the two servers was powered on. I didn't clear out the databases beteen runs although this didn't appear to impact on the results. The script used is available [on GitHub](https://github.com/pauldambra/mongotest)and feedback on better tests or mechanism for performing them is welcome!
 
-The tests were run using asynchronous queues with varying levels of concurrency in order to try and simulate a relatively realistic load. The data gathered can be found [on Google Docs](http://goo.gl/6a9qfl" target="_blank)
+The tests were run using asynchronous queues with varying levels of concurrency in order to try and simulate a relatively realistic load. The data gathered can be found [on Google Docs](http://goo.gl/6a9qfl)
 
 The first set of tests were run against a collection with no indexes set.
 

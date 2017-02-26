@@ -10,7 +10,7 @@ tags: [browserstack, selenium, testing, js]
 
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. [See the first post for an explanation of why](/2014/02/websites-cms.html)
 
-[Previous Post]({/2014/03/website-cms-display-pages-part-2.html)
+[Previous Post](/2014/03/website-cms-display-pages-part-2.html)
 
 # Browserstack
 
@@ -22,9 +22,9 @@ BrowserStack allow automation using a Selenium web driver. You can access this w
 
 <!--more-->
 
-However, after a couple of hours trying to write tests following [the documentation](http://www.browserstack.com/automate/node" target="_blank) and attacking Google I wasn't getting very far. I was able to run tests on Browserstack and take screenshots to prove the page was loaded but I couldn't assert against the page. Frustration had begun to build!
+However, after a couple of hours trying to write tests following [the documentation](http://www.browserstack.com/automate/node) and attacking Google I wasn't getting very far. I was able to run tests on Browserstack and take screenshots to prove the page was loaded but I couldn't assert against the page. Frustration had begun to build!
 
-I haven't used Selenium before and I just didn't grok how to assert against the page. I'm sure it was how I was reading the documentation but I wasn't moving forward. And then I discovered [nightwatch](http://nightwatchjs.org/" target="_blank) (by reading to the end of the documentation but still...)
+I haven't used Selenium before and I just didn't grok how to assert against the page. I'm sure it was how I was reading the documentation but I wasn't moving forward. And then I discovered [nightwatch](http://nightwatchjs.org/) (by reading to the end of the documentation but still...)
 
 # Nightwatch
 

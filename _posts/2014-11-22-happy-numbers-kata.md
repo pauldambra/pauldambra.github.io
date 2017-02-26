@@ -6,7 +6,7 @@ date: "2014-11-22 23:00:00"
 description: The Happy Numbers Kata in Five Seconds
 keywords: tpl parallel happy numbers kata
 category: kata
-tags: [c-sharp, kata, tdd, learning]
+tags: [c#, kata, tdd, learning]
 ---
 
 I love C# but while we're trying to beat our deployment process into submission at work I'm only really writing Ruby and Powershell. So when a [few](http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/), [different](http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/) [articles](http://www.ryanwgough.com/blog/happy_numbers.html) about the Happy Numbers kata turned up on my twitter feed and I found myself with a large whisky and a sleeping family I thought I'd have a go.
