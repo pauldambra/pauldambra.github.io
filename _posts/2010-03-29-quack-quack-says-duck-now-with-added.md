@@ -5,7 +5,7 @@ permalink: "/2010/03/quack-quack-says-duck-now-with-added.html"
 date: "2010-03-29 12:01:00" 
 updated: "2010-03-29 12:42:39" 
 category: windows-mobile
-tags: [parenting, microsoft, vb-net, ux]
+tags: [parenting, microsoft, vb.net, ux]
 ---
 
 In a [previous post](http://mindlessramblingnonsense.blogspot.com/2009/10/quack-quack-says-duck.html) I advertised an application I'd made for WinMo to entertain my toddler.
