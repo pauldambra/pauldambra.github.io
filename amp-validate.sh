@@ -4,8 +4,6 @@ set -eu
 
 npm install -g amphtml-validator
 
-AMPFILES=`find _site/amp -type f -name '*.html'`
-
-for f in $AMPFILES; do
+for f in `find _site/amp -type f -name '*.html'`; do
   amphtml-validator $f
 done
