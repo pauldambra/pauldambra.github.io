@@ -66,4 +66,4 @@ That might be a bit hacky and there might be a better way but since that seems t
 
 And now I have a slightly more toddler-proof toddler game.
 
-At the time of writing you could view all of the source code and download an install cab at codeplex `qqstd.codeplex.com` but that site is dead now :(
+At the time of writing you could view all of the source code and download an install cab at codeplex `qqstd.codeplex.com` but that site is dead now :( You can see it [in the wayback machine](https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/)

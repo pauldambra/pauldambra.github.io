@@ -10,7 +10,7 @@ category: windows-mobile
 tags: [vb.net, code, parenting]
 ---
 
-I've released a piece of software that I made for my 18 month old daughter on Codeplex [http://qqstd.codeplex.com/](http://qqstd.codeplex.com/). 
+I've released a piece of software that I made for my 18 month old daughter on Codeplex [http://qqstd.codeplex.com/](https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/). 
 
 It's a small dotNet app for Windows Mobile that creates sound-image pairs by scanning a resource folder and then randomly displays one of the images. When the image is touched the sound associated with the image is played.
 
