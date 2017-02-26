@@ -54,7 +54,7 @@ Once I'd made a static HTML version of the filter controls and knew that I was a
 </div>
 ```
 
-Copying what I already had to turn this into a React component was a very short job. And then I moved onto a little research to see what approaches there were to solve my problem and I stumbled on [a blog exploring React](http://tech.pro/blog/2020/a-thrown-to-the-wolves-hands-on-introduction-to-react) that used a JS pub/sub library called [postal.js](https://github.com/postaljs/postal.js).
+Copying what I already had to turn this into a React component was a very short job. And then I moved onto a little research to see what approaches there were to solve my problem and I stumbled on a JS pub/sub library called [postal.js](https://github.com/postaljs/postal.js).
 
 > What is it?
 
