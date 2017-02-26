@@ -131,7 +131,7 @@ For the imaginary company we're making a site for we can [generate a colour pale
 
 and after a bit of fangling to build out the (admittedly ugly) page:
 
-![](http://3.bp.blogspot.com/-52O3oytmg_E/Uy7SVJgQ-JI/AAAAAAAAPg4/jNbYLNIcXI8/s1600/home-one.png)
+![screenshot of the built page](http://3.bp.blogspot.com/-52O3oytmg_E/Uy7SVJgQ-JI/AAAAAAAAPg4/jNbYLNIcXI8/s1600/home-one.png)
 
 The code for this page can be found [tagged on github](https://github.com/pauldambra/omniclopse/tree/v0.1) and at this point there's nothing groundbreaking (nor should there be). You can visit the site [here on Heroku](http://omniclopse-v0-1.herokuapp.com/).
 
