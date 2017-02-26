@@ -30,7 +30,7 @@ The task is to set my client.local machine to be able to SSH onto server.remote 
 
 This was relatively straight forward on my Mac and on my ubuntu box but of course my main dev machine is Windows 7...
 
-<span style="font-style:italic;">As an aside switching from Mac, to vmware fusion Windows, to vmware fusion, to Windows 7 and remoting between them means I *never* know which key is going to be @ and which " and the windows machines get reset to US keyboard every so often by the Macs which throws a spanner in the works.</span>
+_As an aside switching from Mac, to vmware fusion Windows, to vmware fusion, to Windows 7 and remoting between them means I *never* know which key is going to be @ and which " and the windows machines get reset to US keyboard every so often by the Macs which throws a spanner in the works._
 
 On a linux or unix machine this turned out to be pretty straight forward
 
@@ -59,7 +59,9 @@ on your Windows clinet.local fire up puttygen.exe and hit generate. As a bit of 
 Once this is generated you'll see a box marked "Public key for pasting into authorized_keys file". Can you guess what that's for?
 
 So grab that text in your clipboard, fire up ssh and connect to server.remote as the user you want to log in as.
-Then run echo "<paste text here>" ~/.ssh/authorized_keys
+Then 
+
+`run echo "YOURKEYHERE" ~/.ssh/authorized_keys`
 
 Now we need to configure PuTTy. So open PuTTy and either load a profile or start a new one. First we scroll down in the tree view to Connection > Data and put in the username we want to connect as...
 
