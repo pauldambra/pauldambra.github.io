@@ -154,9 +154,13 @@ header {
   &.hero {
     background-image: url('/images/cardboard.jpg');
 
+  &.beach {
+    background-image: url('/images/beach.jpg');
+  }
+
     @media (max-width: 778px) {
       height: 370px;
-      background-position: -222px -76px;
+      background-position: -442px -23px;
     }
 
     @media (min-width: 778px) {
