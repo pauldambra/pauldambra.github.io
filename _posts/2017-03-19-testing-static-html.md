@@ -75,7 +75,7 @@ script elements:
  * Whether external scripts are loading
  * Whether CORS/SRI is enabled
 
-## #Favicon
+### Favicon
 
  * Whether your favicons are valid.
 
