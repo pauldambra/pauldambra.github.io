@@ -86,6 +86,33 @@ Whether your HTML markup is valid. This is done via Nokogiri, to ensure well-for
 
 ------
 
+If I add the following invalid elements and run htmlproofer.
+
+```
 <img src="foo.png"/>
 
 <a href="/does-not-exist">invalid link</a>
+```
+
+then the output highlights three errors.
+
+```
+Running ["HtmlCheck", "FaviconCheck", "ImageCheck", "LinkCheck", "ScriptCheck", "OpenGraphCheck"] on ["_site"] on *.html... 
+Checking 310 external links...
+Ran on 55 files!
+- _site/2017/testing-static-sites.html
+  *  External link http://pauldambra.github.io/2017/testing-static-sites.html failed: 404 No error
+  *  External link http://pauldambra.github.io/amp/2017/testing-static-html failed: 404 No error
+  *  image foo.png does not have an alt attribute (line 678)
+  *  internal image foo.png does not exist (line 678)
+  *  internally linking to /does-not-exist, which does not exist (line 680)
+     <a href="/does-not-exist">invalid link</a>
+htmlproofer 3.5.0 | Error:  HTML-Proofer found 5 failures!
+The command "./htmltest.sh" exited with 1.
+```
+
+ * that the image element doesn't have an alt attribute
+ * that foo.png does not exist
+ * and that the internal link to `/does-not-exist` does not, erm ,exist
+
+ 
