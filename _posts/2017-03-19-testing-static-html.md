@@ -27,7 +27,9 @@ One of the benefits of generating a site as a static artefact (here using [Jekyl
 
 <!--more-->
 
-I chose a wonderful tool called [htmlproofer](https://github.com/gjtorikian/html-proofer) which since it has a CLI can be invoked as part of the build.
+# Test the generated HTML
+
+I chose a wonderful tool called [htmlproofer](https://github.com/gjtorikian/html-proofer) which, since it has a CLI, can be invoked as part of the build.
 
 ```
 #! /bin/bash
@@ -42,11 +44,11 @@ bundle exec htmlproofer \
   --check-opengraph
 ```
 
-This checks the generated site directory. Ignoring the AMP folder. The list of checks this carries out (reproduced here from [the project readme](https://github.com/gjtorikian/html-proofer/blob/c95d21dd5221243c7a7cfb1218fd6fd853381765/README.md))
+This checks the generated site directory. Ignoring the AMP folder. The list of checks this carries out (reproduced here from [the project readme](https://github.com/gjtorikian/html-proofer/blob/c95d21dd5221243c7a7cfb1218fd6fd853381765/README.md)):
 
 ------
 
-## Images
+### Images
 
 img elements:
 
@@ -55,7 +57,7 @@ img elements:
  * Whether external images are showing
  * Whether your images are HTTP
 
-## Links
+### Links
 
 a, link elements:
 
@@ -65,7 +67,7 @@ a, link elements:
  * Whether your links are HTTPS
  * Whether CORS/SRI is enabled
 
-## Scripts
+### Scripts
 
 script elements:
 
@@ -73,11 +75,11 @@ script elements:
  * Whether external scripts are loading
  * Whether CORS/SRI is enabled
 
-## Favicon
+## #Favicon
 
  * Whether your favicons are valid.
 
-## OpenGraph
+### OpenGraph
 
 Whether the images and URLs in the OpenGraph metadata are valid.
 HTML
@@ -86,7 +88,7 @@ Whether your HTML markup is valid. This is done via Nokogiri, to ensure well-for
 
 ------
 
-If I add the following invalid elements and run htmlproofer.
+If the following invalid elements are added to the page and the htmlproofer script run...
 
 ```
 <img src="foo.png"/>
@@ -94,7 +96,7 @@ If I add the following invalid elements and run htmlproofer.
 <a href="/does-not-exist">invalid link</a>
 ```
 
-then the output highlights three errors.
+...then the output highlights five errors.
 
 ```
 Running ["HtmlCheck", "FaviconCheck", "ImageCheck", "LinkCheck", "ScriptCheck", "OpenGraphCheck"] on ["_site"] on *.html... 
@@ -111,6 +113,8 @@ htmlproofer 3.5.0 | Error:  HTML-Proofer found 5 failures!
 The command "./htmltest.sh" exited with 1.
 ```
 
+Three of these I expected:
+
  * that the image element doesn't have an alt attribute
  * that foo.png does not exist
  * and that the internal link to `/does-not-exist` does not, erm ,exist
@@ -124,7 +128,9 @@ The command "./htmltest.sh" exited with 1.
   *  External link http://pauldambra.github.io/amp/2017/testing-static-html failed: 404 No errors
 ```
 
- I've only run this process on existing blog posts since adding it. This is the first time that it has run against a new blog post and it's correctly highlighting that the open graph URL for this article and the amplhtml link rel for this article don't exist. And they don't - this article hasn't been published yet. 
+Grepping the generated html for those two external links finds them in the HEAD of the document.
+
+I'd only run this process on existing, _published_ blog posts since adding it. This is the first time that it has run against a repo with a new, _unpublished_ blog post and it's correctly highlighting that the open graph URL for this article and the amplhtml link rel for this article don't exist. Because they don't - this article hasn't been published yet. 
 
 The site's .travis.yml file currently has:
 
@@ -147,3 +153,44 @@ after_success:
   - "./deploy.sh"
   - "./htmltest.sh"
 ```
+
+so that the HTML test only runs after the deploy has occurred. Ideally any published documents would be tested before deploy and could fail the build and newly published documents only after their first deploy as a smoke test. But this will do for now.
+
+# Test the generated AMP
+
+An AMP version of the site is generated at build time too. HTML-Proofer can't test the AMP site so these pages could be broken and that test doesn't protect us.
+
+AMP is a dream to work with because the AMP debugger is well built and provides clear, actionable errors. Brilliantly that online debugger is available as an NPM package so as can be seen above there is an `amp-validate.sh` as part of the build.
+
+```
+#! /bin/bash
+
+set -eu
+
+npm install -g amphtml-validator
+
+for f in `find _site/amp -type f -name '*.html'`; do
+  amphtml-validator $f
+done
+```
+
+Because the AMP debugger was so helpful when adding AMP generation the only warning this generated when it was added to build was many instances of
+
+```
+_site/amp/2009/05/anonymous-methods-when-invoking-in-vb/index.html:633:6 The extension 'amp-twitter extension .js script' was found on this page, but is unused (no 'amp-twitter' tag seen). This may become an error in the future. (see https://www.ampproject.org/docs/reference/extended/amp-twitter.html)
+```
+
+Each AMP page had the amp-twitter extension included whether or not there was a tweet embedded in the page. [This was easily fixed.](https://github.com/pauldambra/blog_source/commit/4329b333aa15c3e71827ba0a5c42e608616d881a)
+
+And a single, old page which the AMP generator couldn't handle and so
+
+```
+_site/amp/2011/04/ssh-without-password/index.html:636:3 The attribute 'style' may not appear in tag 'span'.
+_site/amp/2011/04/ssh-without-password/index.html:667:15 The tag 'paste' is disallowed.
+```
+
+[Again easily fixed by updating the HTML of the non-AMP post.](https://github.com/pauldambra/blog_source/commit/c82542fec278d97c2749f6c09961efae15df175c#diff-b584697099c805190a2a5cfaae07bfc1)
+
+# And so?
+
+When these two types of test were added there were 237 HTML errors and 9 AMP warnings and 2 AMP errors. From as simple as missing a favicon through to genuinely malformed pages. Adding these tests was straight-forward, added value to the CI for this blog, and is another good indication of the benefits of statically generated sites. 
