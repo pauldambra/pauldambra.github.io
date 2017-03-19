@@ -2,7 +2,7 @@
 title: "Testing Static HTML!" 
 layout: "post" 
 permalink: "/2017/testing-static-sites.html" 
-date: "2016-10-19 18:40:00"
+date: "2017-03-19 18:40:00"
 description: "Testing the generated site is one of the benefits of static HTML generators"
 keywords: jekyll static html testing
 category: "continuous delivery"
@@ -176,8 +176,8 @@ done
 
 Because the AMP debugger was so helpful when adding AMP generation the only warning this generated when it was added to build was many instances of
 
-```
-_site/amp/2009/05/anonymous-methods-when-invoking-in-vb/index.html:633:6 The extension 'amp-twitter extension .js script' was found on this page, but is unused (no 'amp-twitter' tag seen). This may become an error in the future. (see https://www.ampproject.org/docs/reference/extended/amp-twitter.html)
+
+> _site/amp/2009/05/anonymous-methods-when-invoking-in-vb/index.html:633:6 The extension 'amp-twitter extension .js script' was > found on this page, but is unused (no 'amp-twitter' tag seen). This may become an error in the future. (see https://www.ampproject.org/docs/reference/extended/amp-twitter.html)
 ```
 
 Each AMP page had the amp-twitter extension included whether or not there was a tweet embedded in the page. [This was easily fixed.](https://github.com/pauldambra/blog_source/commit/4329b333aa15c3e71827ba0a5c42e608616d881a)
