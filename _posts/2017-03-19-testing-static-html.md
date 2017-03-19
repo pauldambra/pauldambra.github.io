@@ -113,7 +113,7 @@ htmlproofer 3.5.0 | Error:  HTML-Proofer found 5 failures!
 The command "./htmltest.sh" exited with 1.
 ```
 
-Three of these I expected:
+Three of these were expected:
 
  * that the image element doesn't have an alt attribute
  * that foo.png does not exist
