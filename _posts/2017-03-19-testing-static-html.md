@@ -1,7 +1,7 @@
 --- 
 title: "Testing Static HTML!" 
 layout: "post" 
-permalink: "/2017/testing-static-html.html" 
+permalink: "/2017/testing-static-sites.html" 
 date: "2016-10-19 18:40:00"
 description: "Testing the generated site is one of the benefits of static HTML generators"
 keywords: jekyll static html testing
@@ -88,4 +88,4 @@ Whether your HTML markup is valid. This is done via Nokogiri, to ensure well-for
 
 <img src="foo.png"/>
 
-<<a href="/does-not-exist">invalid link</a>
+<a href="/does-not-exist">invalid link</a>

@@ -18,7 +18,7 @@ tags: [jekyll, recursion, seo, json+ld]
 			<a href="/using-travis-to-build-jekyll.html">Previous Post</a>
 		</div>
 		<div class="next">
-      <a href="/2017/testing-static-html.html">Previous Post</a>
+      <a href="/2017/testing-static-sites.html">Next Post</a>
 		</div>
 	</div>
 </aside>
