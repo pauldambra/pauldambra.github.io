@@ -115,4 +115,35 @@ The command "./htmltest.sh" exited with 1.
  * that foo.png does not exist
  * and that the internal link to `/does-not-exist` does not, erm ,exist
 
- 
+## ruh roh
+
+ Interestingly this also reveals a bug in the setup. 
+
+```
+  *  External link http://pauldambra.github.io/2017/testing-static-sites.html failed: 404 No error
+  *  External link http://pauldambra.github.io/amp/2017/testing-static-html failed: 404 No errors
+```
+
+ I've only run this process on existing blog posts since adding it. This is the first time that it has run against a new blog post and it's correctly highlighting that the open graph URL for this article and the amplhtml link rel for this article don't exist. And they don't - this article hasn't been published yet. 
+
+The site's .travis.yml file currently has:
+
+```
+script:
+  - "./build.sh"
+  - "./htmltest.sh"
+  - "./amp-validate.sh"
+after_success:
+  - "./deploy.sh"
+```
+
+this will have to become
+
+```
+script:
+  - "./build.sh"
+  - "./amp-validate.sh"
+after_success:
+  - "./deploy.sh"
+  - "./htmltest.sh"
+```

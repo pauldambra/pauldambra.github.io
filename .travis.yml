@@ -4,10 +4,10 @@ install:
 - bundle install
 script:
   - "./build.sh"
-  - "./htmltest.sh"
   - "./amp-validate.sh"
 after_success:
   - "./deploy.sh"
+  - "./htmltest.sh"
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
