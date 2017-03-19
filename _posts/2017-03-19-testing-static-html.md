@@ -117,7 +117,7 @@ Three of these were expected:
 
  * that the image element doesn't have an alt attribute
  * that foo.png does not exist
- * and that the internal link to `/does-not-exist` does not, erm ,exist
+ * and that the internal link to `/does-not-exist` does not, erm, exist
 
 ## ruh roh
 
