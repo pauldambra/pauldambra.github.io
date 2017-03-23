@@ -18,7 +18,7 @@ tags: [series, blog, recursion, testing, jekyll, travisci]
       <a href="/structured-data-with-jekyll.html">Previous Post</a>
     </div>
     <div class="next">
-      
+      <a href="/2017/generating-static-amp.html">Next Post</a>
     </div>
   </div>
 </aside>

@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'fastimage'
 
+# based on https://github.com/juusaw/amp-jekyll/
 module Jekyll
   module AmpFilter
     # Filter for HTML 'img' elements.
