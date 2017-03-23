@@ -31,7 +31,7 @@ The major discovery was that the validation tooling around AMP is awesome. Compa
 
 This didn't feel like a topic that justified several posts so to avoid taking too long this is a bit of a whistle-stop tour of adding AMP pages to this blog.
 
-<!-- more -->
+<!--more-->
 
 # Jekyll Plugin
 
