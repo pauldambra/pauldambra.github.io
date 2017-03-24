@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2010/05/theres-more-in-them-that-hills.html" 
 date: "2010-05-08 19:12:00"
 updated: "2010-05-08 20:42:26" 
-comments: "0" 
 category: software-engineering
 tags: [design-patterns, c#, java]
 ---

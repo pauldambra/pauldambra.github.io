@@ -349,7 +349,24 @@ aside {
 .posts li {
   line-height: 1.75em;
 }
-
+.comments-wrapper {
+  text-align: center;
+  button {
+    background-color: $darkest;
+    color:white;
+    padding:15px;
+    -moz-transition: 0.25s;
+    -ms-transition: 0.25s;
+    -o-transition: 0.25s;
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+    border-style: none;
+    cursor: pointer;
+    &:hover {
+      background-color:$dark;
+    }
+  }
+}
 footer {
   padding: 5px 15px;
   margin: 0 auto;
