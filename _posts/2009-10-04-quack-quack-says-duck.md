@@ -18,11 +18,13 @@ I developed it to occupy my daughter and teach her animal noises but the app doe
 
 <!--more-->
 
-Just drop images and .wav files into the \My Documents\qqstd\resources folder and restart the app.
+Just drop images and .wav files into the `\My Documents\qqstd\resources` folder and restart the app.
 
 So if you want to add a leopard:
 
-1) you'd add as many leopard pictures as you want named leopard1, leopard2, etc<br />2) you'd add as many leopard noise WAV files as you like named (yep you guessed it) leopard1, leopard2, etc<br />3)restart the app if it's already running
+ * you'd add as many leopard pictures as you want named leopard1, leopard2, etc
+ * you'd add as many leopard noise WAV files as you like named (yep you guessed it) leopard1, leopard2, etc
+ * restart the app if it's already running
 
 and you're good to go...
 

@@ -60,7 +60,7 @@ before the image finally refreshed.
 
 I guess the UI was blocking briefly as processing control passed from the spawned thread back to the UI thread.
 
-So I added a short timer that is started by the refreshScreen method and which stops itself and resets the isPlaying flag on its first tick.
+So I added a short timer that is started by the `refreshScreen` method and which stops itself and resets the `isPlaying` flag on its first tick.
 
 That might be a bit hacky and there might be a better way but since that seems to work I'm happy with it.
 

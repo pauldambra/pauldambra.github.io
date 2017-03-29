@@ -1,0 +1,30 @@
+# markdown-spellcheck spelling configuration file
+# Format - lines beginning # are comments
+# global dictionary is at the start, file overrides afterwards
+# one word per line, to define a file override use ' - filename'
+# where filename is relative to this configuration file
+npm
+dotnet
+WinMo
+whitepapers
+microsoft
+vb.net
+ux
+hacky
+wayback
+ - _posts/2014-05-18-promises.md
+js
+nodejs
+javascript
+bcrypt
+cms
+50am
+ - _posts/2009-10-04-quack-quack-says-duck.md
+Codeplex
+leopard1
+leopard2
+codeplex
+ - _posts/2009-10-30-bing-is-not-search-engine.md
+Bing.com
+ - _posts/2010-03-29-quack-quack-says-duck-now-with-added.md
+K.I.S.S

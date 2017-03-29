@@ -30,6 +30,6 @@ The first hit from the same string on Bing.com is:
 
 That's not the BDD 2007 page and I can't even see a BDD link on there.
 
-Bad, bad, bad and bad. I think that's a reasonable search string when I want to download BDD 2007 and clearly so does google whereas Bing seems to think I want to hit some generic gront end and read lots of whitepapers... 
+Bad, bad, bad and bad. I think that's a reasonable search string when I want to download BDD 2007 and clearly so does google whereas Bing seems to think I want to hit some generic front end and read lots of whitepapers... 
 
 That's why I think of Google as a productivity tool.
