@@ -1,5 +1,7 @@
 language: ruby
-cache: bundler
+cache:
+  yarn: true
+  bundler: true
 install:
 - bundle install
 script:
