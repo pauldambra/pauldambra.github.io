@@ -3,7 +3,8 @@ cache:
   bundler: true
 install:
 - bundle install
-- nvm use 6
+- nvm list
+- nvm use 4.4.7
 script:
   - "./build.sh"
   - "./amp-validate.sh"
