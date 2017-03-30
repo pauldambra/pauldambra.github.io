@@ -2,6 +2,8 @@ language: ruby
 cache:
   yarn: true
   bundler: true
+before_script:
+  yarn
 install:
 - bundle install
 script:
