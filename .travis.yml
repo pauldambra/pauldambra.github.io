@@ -1,4 +1,6 @@
 language: ruby
+node_js:
+  - "4"
 cache:
   yarn: true
   bundler: true
