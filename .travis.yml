@@ -1,10 +1,9 @@
 language: ruby
 cache:
-  yarn: true
   bundler: true
 install:
 - bundle install
-- nvm use 6.10.1
+- nvm use 6
 script:
   - "./build.sh"
   - "./amp-validate.sh"
