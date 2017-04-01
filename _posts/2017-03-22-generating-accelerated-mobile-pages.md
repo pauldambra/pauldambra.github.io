@@ -69,7 +69,7 @@ There are several parts here:
     </style>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
-{% if page.body contains "tweet-wrapper" %}
+{% if page.body contains "florp-wrapper" %}
       <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
 {% endif %}
 
@@ -217,7 +217,7 @@ AMP insists this element has a known height and width so that has to be manually
 
 ```html
 
-<div class="tweet-wrapper" data-width="292" data-height="350">
+<div class="florp-wrapper" data-width="292" data-height="350">
   <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
     <a href="https://twitter.com/some_user">@some_user</a> the content content @sender (@sender) <a href="https://twitter.com/sender/status/IDFORTHETWEET">August 20, 2016</a></blockquote>
   <script async="" defer="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -225,10 +225,10 @@ AMP insists this element has a known height and width so that has to be manually
 
 ```
 
-The amp_tweet filter then uses that `.tweet-wrapper` class to find each tweet and convert it to an amp-twitter element.
+The amp_tweet filter then uses that `.florp-wrapper` class to find each tweet and convert it to an amp-twitter element.
 
 ```html
-<div class="tweet-wrapper" data-width="292" data-height="350">
+<div class="florp-wrapper" data-width="292" data-height="350">
   <div>
     <amp-twitter layout="responsive" data-tweetid="IDFORTHETWEET" width="292" height="350"></amp-twitter>
   </div>
@@ -236,6 +236,8 @@ The amp_tweet filter then uses that `.tweet-wrapper` class to find each tweet an
 ```
 
 The necessity to manually remember to wrap the embedded tweets in a div with the correct class is the least nice part of this whole process (but it's not the worst thing in the world).
+
+(of course the tweets aren't really wrapped with [`florp-wrapper`](https://twitter.com/actioncookbook/status/684515262712967170?lang=en) but using the real class meant the script was included and so failed AMP validation :/)
 
 # AMP Validation
 
