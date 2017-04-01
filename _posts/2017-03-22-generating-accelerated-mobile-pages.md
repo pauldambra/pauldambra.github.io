@@ -25,7 +25,7 @@ tags: [series, blog, recursion, AMP, jekyll]
 
 [AMP or Accelerated Mobile Pages](https://www.ampproject.org/learn/overview/) is a Google-backed project that allows you to use restricted HTML to delivery static content quickly. Since AMP HTML is restricted it isn't a fit for every site.
 
-Since this blog is published as static HTML artiles it is a good candidate for publishing an AMP version. An open source AMP jekyll plugin was amended to add AMP versions of pages. 
+Since this blog is published as static HTML articles it is a good candidate for publishing an AMP version. An open source AMP jekyll plugin was amended to add AMP versions of pages. 
 
 The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is basically no valdiation tooling (that I could discover at least)...
 
