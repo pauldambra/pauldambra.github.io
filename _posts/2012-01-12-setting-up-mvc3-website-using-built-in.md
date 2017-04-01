@@ -20,9 +20,12 @@ Anyway - I'll forget how to do this before I have to do it again
 
 So
 
-<ul><li>fire up a new MVC3 web application</li><li>Jump into nuget and Install-Package System.Web.Providers&nbsp;</li><li>Sort out a connection string for SQL CE</li><li>Add a key to make sure the login link always points to LogOn</li></ul>
+ * fire up a new MVC3 web application
+ * Jump into nuget and Install-Package System.Web.Providers&nbsp;
+ * Sort out a connection string for SQL CE
+ * Add a key to make sure the login link always points to `LogOn`
 
-Now my web.config looks like this (edited out parts I haven't touched for something approximating brevity)
+Now my `web.config` looks like this (edited out parts I haven't touched for something approximating brevity)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -114,7 +117,7 @@ namespace AcrHack.Models
 }
 ```
 
-<pre class="c#"></pre>Now a quick edit to the web config above so that the providers opening tag becomes
+Now a quick edit to the web config above so that the providers opening tag becomes
 
 ```xml
 <profile defaultprovider="DefaultProfileProvider" inherits="AcrHack.Models.CustomProfile"/>
@@ -122,7 +125,7 @@ namespace AcrHack.Models
 
 which makes the Profile Provider aware of the new Profile class
 
-Next step is to find the RegisterModel (this could just as easily be the CreateModel or some other model) and add an Address field
+Next step is to find the `RegisterModel` (this could just as easily be the `CreateModel` or some other model) and add an Address field
 
 ```csharp
 public class RegisterModel
@@ -188,7 +191,7 @@ public ActionResult Register(RegisterModel model)
 }
 ```
 
-*and* finally edit the view to add an editor field for the new propery. (I'll leave that as an exercise for the reader)
+*and* finally edit the view to add an editor field for the new property. (I'll leave that as an exercise for the reader)
 
 Now we can go back to the Register page
 
@@ -202,11 +205,11 @@ Ta da!
 
 So there's a mechanism for extending the default profile. 
 
-Honestly, it feels messy and since at this point if there's a need for any data access layer then since there'll be a link on user name or user id anyway it's likely a better idea to have the additional data in the DAL and fangle the authentication and user models together in a ViewModel.
+Honestly, it feels messy and since at this point if there's a need for any data access layer then since there'll be a link on user name or user id anyway it's likely a better idea to have the additional data in the DAL and fangle the authentication and user models together in a `ViewModel`.
 
-Having gone away and checked some code committed on another project by the lovely <a href="http://www.orangetentacle.co.uk/">OrangeTentacle</a>&nbsp;that's just what he's done. So having figured it out for myself I'll probably just go and crib off his much tidier code
+Having gone away and checked some code committed on another project by the lovely [OrangeTentacle](http://www.orangetentacle.co.uk/) that's just what he's done. So having figured it out for myself I'll probably just go and crib off his much tidier code
 
 Additional Reading:
 
-[Simple.Web.Providers announcement](http://www.hanselman.com/blog/IntroducingSystemWebProvidersASPNETUniversalProvidersForSessionMembershipRolesAndUserProfileOnSQLCompactAndSQLAzure.aspx)
+[`Simple.Web.Providers` announcement](http://www.hanselman.com/blog/IntroducingSystemWebProvidersASPNETUniversalProvidersForSessionMembershipRolesAndUserProfileOnSQLCompactAndSQLAzure.aspx)
 

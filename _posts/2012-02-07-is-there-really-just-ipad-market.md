@@ -18,7 +18,7 @@ And then today Google release Chrome for Ice Cream Sandwich. BEST. TABLET. BROWS
 
 <!--more-->
 
-I am fickle and this is enough to sway me to an evens opinion between the two OSs. The keyboard keeps switching back to uppercase But it is chrome beta 
+I am fickle and this is enough to sway me to an evens opinion between the two OSs. The keyboard keeps switching back to upper case But it is chrome beta 
 
 One brill feature is when the browser isn't certain what link you meant to click
 
@@ -39,7 +39,7 @@ A) iOS is a consumer operating system in a way that Android isn't
 
 The first time I was handed an iPad I fell in love. I immediately grokked how to use it. I bought one. My kids use it (18 months and 4 year old). They've tried but they haven't broken it. I've seen children and adults with little or no experience of computers pick iOS up super-fast.
 
-I handed the Transformer to my 18-month old and with two-screen presses she had turned off wifi. <b>This device isn't kid proof in the way that an iPad is.</b> My eldest when she under three taught my Dad how to use YouTube on iOS.
+I handed the Transformer to my 18 month old and with two-screen presses she had turned off wifi. <b>This device isn't kid proof in the way that an iPad is.</b> My eldest when she under three taught my Dad how to use YouTube on iOS.
 
 But a lot of this ease of use isn't specific to iOS. Touch-screen visual metaphors more closely mimic how we interact with the physical world - so a touchscreen OS doesn't need explanation in the way that a traditional desktop OS does. And&nbsp;neither Apple nor Google invented touch-screen gestures. Although that's not say they haven't patented them.
 
@@ -69,7 +69,7 @@ So in my scientific and empirical&nbsp;appraisal&nbsp;of ease-of-use iOS wins. T
 
 **&nbsp;<b>IT departments want their staff constrained but enabled. **</b>
 
-You constrain them because you don't want them hacking away and inventing methods of doing things because that's when they delete all the files or map a share to some level of hell and release a demonic file-type that ruins your afternoon.On the flipside constrain them too much and they will figure out the most&nbsp;convoluted and surprising mechanism for completing a task (almost always in Excel with VB macros) and then expect you to support the jawless hound they've created because (and here I'm stretching the metaphor): "My dogs tongue keeps getting muddy"
+You constrain them because you don't want them hacking away and inventing methods of doing things because that's when they delete all the files or map a share to some level of hell and release a demonic file-type that ruins your afternoon. On the flip-side constrain them too much and they will figure out the most&nbsp;convoluted and surprising mechanism for completing a task (almost always in Excel with VB macros) and then expect you to support the jawless hound they've created because (and here I'm stretching the metaphor): "My dogs tongue keeps getting muddy"
 
 I'm really not sure which tablet OS (and yes there are only two players) has hit the right mix of constraining and enabling.
 

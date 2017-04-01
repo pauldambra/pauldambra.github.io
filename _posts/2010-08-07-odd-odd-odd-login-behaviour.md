@@ -17,7 +17,7 @@ My one gripe is that (much like my mac keyboard) the Function key functions are 
 
 If you hit F3 to search in chrome instead you dim the screen. Annoying, no?
 
-So I travel the dusty highways to the BIOS settings and there's an option to switch the function, erm, function. Some BIOS' refer to this as switching "media keys". I switch this to enable, boot up and my Fn keys are my own again.
+So I travel the dusty highways to the BIOS settings and there's an option to switch the function, erm, function. Some BIOS' refer to this as switching "media keys". I switch this to enable, boot up and my function keys are my own again.
 
 All is well...
            ...

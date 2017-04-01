@@ -28,7 +28,7 @@ Except someone malicious could
 ```
  and unsubscribe every member. 
 
-No it isn't that likely since this is for a climbing organisation but then you'd be surprised how many smart-alec programmers also climb!
+No it isn't that likely since this is for a climbing organisation but then you'd be surprised how many smart alec programmers also climb!
 
 Alright we don't need to make it into
 

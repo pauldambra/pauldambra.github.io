@@ -33,7 +33,7 @@ So I went through two stages and Resharper helped by being awesome at supporting
 
 First I combined the many lists into one D`ictionary<string, phrasecheckresult>` to link my candidate strings with my enum result types.
 
-I used a little of Notepadd++'s Find and replace magic to wholesale convert my list initialisation into a Dictionary initialisation and ended up with
+I used a little of Notepad++'s Find and replace magic to wholesale convert my list initialisation into a Dictionary initialisation and ended up with
 
 ```c# 
 _phraseMap = new Dictionary<string, phrasecheckresult>
@@ -49,7 +49,7 @@ _phraseMap = new Dictionary<string, phrasecheckresult>
 
 cut short for brevity as there are nearly 300 phrases now... Using an object initialiser meant I had nowhere to go when the program failed at runtime adding duplicate keys to the dictionary. Catching the exception didn't help since I couldn't see what key was duplicated to tidy up my code.
 
-So I highlighted all the rows of initalisation and what did I see?
+So I highlighted all the rows of initialisation and what did I see?
 
 ![what did i see?](http://1.bp.blogspot.com/_u8J81ttOSD8/TL8LrjgRXsI/AAAAAAAAAL4/U86PBLyzzZM/s400/ResharperToAddCall.jpg)
 
@@ -85,4 +85,4 @@ public ProcessPhraseList()
 }
 ```
 
-A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could just shift Delete to be first in the enum and your program's behaviour would change. Bonzer!
+A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could just shift Delete to be first in the enum and your program's behaviour would change. Bonza!

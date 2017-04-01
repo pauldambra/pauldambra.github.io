@@ -30,7 +30,7 @@ The task is to set my client.local machine to be able to SSH onto server.remote 
 
 This was relatively straight forward on my Mac and on my ubuntu box but of course my main dev machine is Windows 7...
 
-_As an aside switching from Mac, to vmware fusion Windows, to vmware fusion, to Windows 7 and remoting between them means I *never* know which key is going to be @ and which " and the windows machines get reset to US keyboard every so often by the Macs which throws a spanner in the works._
+_As an aside switching from Mac, to VMWare fusion Windows, to VMWare fusion, to Windows 7 and remoting between them means I *never* know which key is going to be @ and which " and the windows machines get reset to US keyboard every so often by the Macs which throws a spanner in the works._
 
 On a linux or unix machine this turned out to be pretty straight forward
 

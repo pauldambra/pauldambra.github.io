@@ -54,7 +54,7 @@ I dig [separation of responsibility](http://en.wikipedia.org/wiki/Single_respons
     
 But of course that pretty tightly couples everything together. If I manage to strip a lot of code out of something (as I did when I bought the excellent [Outlook redemption library](http://www.dimastr.com/redemption/) recently) then there's more to change.
     
-Here all of the logic for the command is bound up within it even though CommandManager class is still separate. I like that and I hadn't realised you could do this kind of thing by declaring something as static... I like to find a nice little elegant bit of sugar like that.
+Here all of the logic for the command is bound up within it even though `CommandManager` class is still separate. I like that and I hadn't realised you could do this kind of thing by declaring something as static... I like to find a nice little elegant bit of sugar like that.
 
 ```java
 public class MyClass{
