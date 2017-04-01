@@ -27,7 +27,7 @@ Later that day my subconscious prompted me to realise that, since Github pages w
 
 # Travis CI
 
-[Travis](https://travis-ci.org/) is an online continous integration system that hooks very neatly into Github. It's free for open source projects and adds build status to commits. It can be set to automatically build pull requests and adds output to those PRs so that people can see if it is safe to merge a request without building it locally themselves
+[Travis](https://travis-ci.org/) is an online continuous integration system that hooks very neatly into Github. It's free for open source projects and adds build status to commits. It can be set to automatically build pull requests and adds output to those PRs so that people can see if it is safe to merge a request without building it locally themselves
 
 ![Travis integrates with Github](/images/integrates-with-github.png)
 

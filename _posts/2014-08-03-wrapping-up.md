@@ -60,6 +60,6 @@ And, yes, Node is great to work with. My Node style isn't there yet but this has
 
 # Killing the series
 
-But I'm a bit bored with this now and I've got more children than when I started the series. It feels like a drag and an obligation to carry on which definitely isn't why I'm blogging (that's because I don't have any real hobbies anymore).
+But I'm a bit bored with this now and I've got more children than when I started the series. It feels like a drag and an obligation to carry on which definitely isn't why I'm blogging (that's because I don't have any real hobbies any more).
 
 So I'm stopping here...

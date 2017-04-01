@@ -85,7 +85,7 @@ Running this at the terminal using:
 }
 ```
 
-Here the settings file sets the location of the tests folder(s), how and where to start Selenium and the capabilities of the browser to use for tests. Also my, fiendishly obduscated, browserstack credentials
+Here the settings file sets the location of the tests folder(s), how and where to start Selenium and the capabilities of the browser to use for tests. Also my, fiendishly obfuscated, BrowserStack credentials
 
 Passing in a settings file like this means that different browser settings can be setup and run separately. For example:
 

@@ -9,7 +9,7 @@ category: software-engineering
 tags: [refactoring, c#]
 ---
 
-Today I had super-fun spotting the oportunity for a refactoring and figuring out how to apply it. I wanted to think it through while it was fresh in my mind to try to cement any learning opportunity
+Today I had super-fun spotting the opportunity for a refactoring and figuring out how to apply it. I wanted to think it through while it was fresh in my mind to try to cement any learning opportunity
 
 The refactoring in question is ["Replace Conditional Dispatcher with Command"](https://www.industriallogic.com/xp/refactoring/conditionDispatcherWithCommand.html).
 

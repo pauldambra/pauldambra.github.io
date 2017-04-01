@@ -130,7 +130,7 @@ Three of these were expected:
 
 Grepping the generated html for those two external links finds them in the HEAD of the document.
 
-I'd only run this process on existing, _published_ blog posts since adding it. This is the first time that it has run against a repo with a new, _unpublished_ blog post and it's correctly highlighting that the open graph URL for this article and the amplhtml link rel for this article don't exist. Because they don't - this article hasn't been published yet. 
+I'd only run this process on existing, _published_ blog posts since adding it. This is the first time that it has run against a repo with a new, _unpublished_ blog post and it's correctly highlighting that the open graph URL for this article and the amphtml link rel for this article don't exist. Because they don't - this article hasn't been published yet. 
 
 The site's .travis.yml file currently has:
 

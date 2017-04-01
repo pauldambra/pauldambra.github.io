@@ -34,7 +34,7 @@ It seems like the cool-kids hold the position we should ditch everything for Rea
 
 # What
 
-Most of my front-end work for the last eight months and most for the forseeable future is data-visualisation heavy so that's what I wanted to riff on.
+Most of my front-end work for the last eight months and most for the foreseeable future is data-visualisation heavy so that's what I wanted to riff on.
 
 I grabbed some data on the gender pay gap in the UK from the [Annual Survey of Hours and Earnings, 2014 Provisional Results.](http://www.ons.gov.uk/ons/dcp171778_385428.pdf) And decided to use a simplified version of [the source for Figure 8](http://www.ons.gov.uk/ons/rel/ashe/annual-survey-of-hours-and-earnings/2014-provisional-results/chd-8-gpg.xls). Showing the gender pay gap for median gross hourly earnings (excluding overtime), UK, April 1997 to 2014
 
@@ -308,7 +308,7 @@ That's the thing I've really enjoyed about working with React (on this admittedl
 
 # Sorting and Filtering the Table
 
-That we will leave till part two... because I introduced a relatively artifical constraint that I didn't want the filtering control to be a part of the table.
+That we will leave till part two... because I introduced a relatively artificial constraint that I didn't want the filtering control to be a part of the table.
 
 Imagine that there will be many tables with the same filter. I don't want to bind the filter to any one table or insist that every table has it.
 

@@ -40,7 +40,7 @@ var messageBusStructure = {
 };
 ```
 
-but the general idea holds since it should mean that the postal publish/subscribe code is less prone to tyoing errors.
+but the general idea holds since it should mean that the postal publish/subscribe code is less prone to typing errors.
 
 ```JS 
 postal.subscribe({
@@ -129,7 +129,7 @@ publishOnChange: function(event) {
 }
 ```
 
-Now, since the component only knows about itself, the eventdata is an object with this component's identifer as a property and the new integer value of the input control as the value for the property.
+Now, since the component only knows about itself, the eventdata is an object with this component's identifier as a property and the new integer value of the input control as the value for the property.
 
 I didn't want to read both Year filter values in order to send the (currently) two filter inputs as the last version of the code did. There's little point it being a component if it has to know about other components on the page to work.
 
@@ -332,7 +332,7 @@ describe('has a single earliest year input that', function() {
 
 In this block's `beforeEach` it grabs any input with the desired name, asserts there is only one, and stores that component so that it can be asserted against.
 
-One test is straighforward and asserts that the default value matches expectation.
+One test is straightforward and asserts that the default value matches expectation.
 
 In the other test `TestUtils.Simulate.change` saves our bacon and handles the work of changing the value of the input box. A little bit magic-incantation-y but readable enough that I can live with it.
 

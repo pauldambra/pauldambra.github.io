@@ -27,7 +27,7 @@ tags: [series, blog, recursion, AMP, jekyll]
 
 Since this blog is published as static HTML articles it is a good candidate for publishing an AMP version. An open source AMP jekyll plugin was amended to add AMP versions of pages. 
 
-The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is basically no valdiation tooling (that I could discover at least)...
+The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is basically no validation tooling (that I could discover at least)...
 
 This didn't feel like a topic that justified several posts so to avoid taking too long this is a bit of a whistle-stop tour of adding AMP pages to this blog.
 
@@ -88,7 +88,7 @@ So, there's an `<style amp-boilerplate/>` element which has to be included and t
 
 `script` elements are declared async. Not just any javascript can be included. Here the amp-analytics script is loaded to allow adding google analytics to the page.
 
-Currently the AMP validator considers including an unecessary script a warning and not an error but that could change in future. So the amp-twitter script is loaded but only if there is an embedded tweet in the page.
+Currently the AMP validator considers including an unnecessary script a warning and not an error but that could change in future. So the amp-twitter script is loaded but only if there is an embedded tweet in the page.
 
 ### Styles
 

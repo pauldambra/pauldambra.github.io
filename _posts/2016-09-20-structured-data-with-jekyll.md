@@ -31,7 +31,7 @@ This blog is only authoritative for being unread but I've not worked with struct
 
 <!--more-->
 
-There are several formats with which you can add structured data which typically use the [schema.org](http://schema.org/docs/schemas.html) vocabulary. Google prefers [JSON-LD](http://json-ld.org/) which is added to the page in a script tag as opposed to, for example, Microdatawhich decorates the HTML.
+There are several formats with which you can add structured data which typically use the [schema.org](http://schema.org/docs/schemas.html) vocabulary. Google prefers [JSON-LD](http://json-ld.org/) which is added to the page in a script tag as opposed to, for example, Microdata which decorates the HTML.
 
 Here is an ([example taken from schema.org](https://schema.org/Movie)): 
 
