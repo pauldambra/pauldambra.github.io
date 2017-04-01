@@ -38,6 +38,8 @@ iPlayer
 movies
 satnav
 mockups
+JetBrains
+enum
  - _posts/2014-05-18-promises.md
 js
 nodejs
@@ -56,11 +58,14 @@ Bing.com
 K.I.S.S
  - _posts/2010-05-08-theres-more-in-them-that-hills.md
 thar
+theres-more-in-them-that-hills
+bitchin
  - _posts/2010-08-07-odd-odd-odd-login-behaviour.md
 lurve
 Voila
  - _posts/2010-10-20-refactor-fun.md
 Resharper
+SingleOrDefault
  - _posts/2011-04-11-ssh-without-password.md
 client.local
 server.remote
@@ -85,12 +90,15 @@ nn-nn-nn-n
 unsubscribe.somewhere.co.uk
 person.com
 ajax-ily
+alec
  - _posts/2011-09-20-unusbscribey-follow-up.md
 Rogers-esque
  - _posts/2012-01-12-setting-up-mvc3-website-using-built-in.md
 ove
 RoR
 web.config
+System.Web.Providers
+OrangeTentacle
  - _posts/2012-02-07-is-there-really-just-ipad-market.md
 OSs
 5am
