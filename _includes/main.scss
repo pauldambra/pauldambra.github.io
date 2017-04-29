@@ -160,6 +160,12 @@ header {
 
     @media (max-width: 778px) {
       height: 370px;
+    }
+
+    @media 
+    (-webkit-max-device-pixel-ratio: 1.5) and (max-width: 778px), 
+    (max-resolution: 191dpi) and (max-width: 778px) { 
+      /* non Retina-specific stuff here */
       background-position: -442px -23px;
     }
 
