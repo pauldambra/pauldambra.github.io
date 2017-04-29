@@ -154,19 +154,16 @@ header {
   &.hero {
     background-image: url('/images/cardboard.jpg');
 
-  &.beach {
-    background-image: url('/images/beach.jpg');
-  }
+    &.beach {
+      background-image: url('/images/beach.jpg');
+    }
+
+    @media (max-width: 600px) {
+      background-position: -400px -23px;
+    }
 
     @media (max-width: 778px) {
       height: 370px;
-    }
-
-    @media 
-    (-webkit-max-device-pixel-ratio: 1.5) and (max-width: 778px), 
-    (max-resolution: 191dpi) and (max-width: 778px) { 
-      /* non Retina-specific stuff here */
-      background-position: -442px -23px;
     }
 
     @media (min-width: 778px) {
@@ -174,8 +171,15 @@ header {
     }
 
     @media (min-width: 984px) {
-      height: 437px;
       background-size:100%;
+    }
+
+    @media (min-width: 1440px) {
+      height: 600px;
+    }
+
+    @media (max-height: 320px) {
+      height: 250px;
     }
 
     @include links($lightest);
