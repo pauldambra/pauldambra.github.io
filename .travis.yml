@@ -6,13 +6,13 @@ install:
 - nvm install 4.4.7
 - nvm use 4.4.7
 script:
-  - "./build.sh"
-  - "./amp-validate.sh"
+- "./build.sh"
+- "./amp-validate.sh"
 after_success:
-  - "./deploy.sh"
-  - "./htmltest.sh"
-  - "./verify.sh"
+- "./deploy.sh"
+- "./htmltest.sh"
+- "./verify.sh"
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-  - secure: i9LmdFCgCex33PxN0WWpVWEQvm7O5QfBMFR+LRt0KlzpEdjS0AbmYQKi2xuwm0Xx0NQ+7lCKWe9Nj2T8DS23chjVNLcQa/cTFKlBhJ2PjAAQxST1xHj6zpnjQAbasvVsk/jymy7csss7G8OAGlGg/qViL50SQ8IuOcEUGoj2vKKlEBf8cxQwxRSFRYR/S1c+pVJQy7KUQEl4skKuMD/sRa3WfiJJUXy/Bto96lUCYCYd0QDBbpq2T45sJTvgMlfPIv0Iho/RZ9MFhvNIHWY518bRnhdnbZ9Gp+8Ta8NvpfVKm/mDIkr5YDRPINbj6zwkfl5ah9o/Fhl/LxyYZc6nDc3b09ZSofcFZ4/8EYUrH/X7faTkiGW4vp6eqKq/MZBQXEgWoOQg9RQbyvXBZyy9ssVifa1tRvmF25J7fP/2UNuS76109EA3j0fLSZKsre+SskuD6mELWKrQSFYFZFvtR7O2/E8w6FAXvFc/QwYZbUHJmdqbUtsP/xzHplHbYUeHIjy+uGctIlXV3wtjeHF76PV103jUuJpoH/uUofmfLmiAN4RuTH/MdsmQ6WM+aopCrh3NNbUj+t/auiauFXSY71Nx+RlGy6+proS4DXb7YtI1qDJLurrYQ5YtOTnBGTdLBQVjM/OT9HNUHGEqSdiDSMZebAN6KUdSptMPGqIA13A=
+  - secure: ch7EtBI/c6W1bDTitff5KZR4MHbXcKvNg7kVzBatoVeTESiOVzVNEA3JrJ/9Ec4jqFve7zKN8pzifjqRmN6Nu0wfKEmZza/3WGmMgx0g5b9363uDX1oz7Cc3nrXrmcaar2dPCysm/VGS8cVtLE0jgR7HKUTaFfQcfFvjOebYLnvK9WvfJseSXYOE+QbAAUzKh+ybpsAkUiu6JadVPP2p30k+ZR1Or5B5sSqgjujYcBi2UC/mbUb8T7q6N8K3oGJtQKlLVyNXaSfoSvwPZUZfNupdDHEbK6bqd+jkrQVgTomWIhxJUMLV3ZCg75D+V1YaHohHjzxmpkDhZc9ODXhSmCUUhhIIwnMuoFe4jKb+7I+SSwBgD35MuxjiLdoZg/r+PIwY7EwhZ9VKjf5OwDCQ7LnJuKBDgp3EDqJRxP+x1ujTJ+rIyENKiT8TyLL1MLqF+5vzOLl5ex0OxIV2GqNdAjn2k4gu1pmh6EojQiiUn0xyoCAi9UOm6gPYlVt5mN3+VIkVNun3M4yKhDFsG1/WvuXwaMj4vWo2YPS91RKXKGxRKPT1tNNuT3zD2rcLFgKLxy4RY/TazbzUSfIDJWrb+X5Z3n7E6xHLK1nLdlXoQsdhQ5/3lQzX8Cn41yhXrgK+gxIlNMiqdN02Gh9ZzUus/BDQMJTGNhmQeCex2XW0SBE=
