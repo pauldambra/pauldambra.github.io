@@ -2,7 +2,7 @@
 
 set -eu
 
-$AMPDIRECTORY='_site/amp'
+AMPDIRECTORY='_site/amp'
 
 if [ ! -d "$AMPDIRECTORY" ]; then
   echo "$AMPDIRECTORY doesn't exist"
