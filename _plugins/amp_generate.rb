@@ -28,7 +28,10 @@ module Jekyll
     def generate(site)
       dir = site.config['ampdir'] || 'amp'
 
-      thread_count = ENV['THREADCOUNT'].to_i || 4
+      thread_count = (ENV['THREADCOUNT'] || 4).to_i
+
+      puts "using #{thread_count} threads for processing to AMP pages"
+      puts "there are #{site.posts.length} articles to process"
 
       queue = Queue.new
       threads = []
