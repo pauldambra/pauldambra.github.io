@@ -1,8 +1,8 @@
 --- 
 title: "Ubictionary" 
 layout: "post" 
-permalink: "/2017/ubictionary.html" 
-date: "2017-05-09 17:40:00"
+permalink: "/2017/05/ubictionary.html" 
+date: "2017-05-10 19:58:00"
 description: "The right language shared with the right people"
 keywords: language naming
 category: "naming"
