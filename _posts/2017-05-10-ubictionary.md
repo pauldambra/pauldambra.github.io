@@ -1,4 +1,4 @@
---- 
+---
 title: "Ubictionary" 
 layout: "post" 
 permalink: "/2017/05/ubictionary.html" 
