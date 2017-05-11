@@ -31,7 +31,7 @@ _The shoppers' phones not the wizards'._
 
 The maths wizards had a complex language and so did retailers and we wanted to make sure that the retailers and shoppers didn't have to care about or understand the maths wizards' language in order to use the system.
 
-We spent time trying to track our language use even publishing a "ubictionary". A portmanteau of 'Dictionary' and '[Ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)'. It didn't always work but we felt we were doing ok.
+We spent time trying to track our language use even publishing an "ubictionary". A portmanteau of 'Dictionary' and '[Ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)'. It didn't always work but we felt we were doing ok.
 
 As we were dealing with physical retail one of the names we struggled with was 'site' vs 'store'. The maths wizards didn't need to think about the outside world so they called the indoor shopping area the 'site'. Whereas we cared about the physical location of the 'store' which we called the 'site', using 'store' to mean the indoor shopping area.
 
