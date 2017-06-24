@@ -5,6 +5,7 @@ gem 'github-pages'
 gem 'nokogiri'
 gem 'fastimage'
 gem 'html-proofer'
+gem 'parallel'
 gem 'faraday', '0.9.2'
 
 group :jekyll_plugins do

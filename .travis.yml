@@ -10,7 +10,7 @@ script:
 - "./amp-validate.sh"
 after_success:
 - "./deploy.sh"
-- "./htmltest.sh"
+- "bundle exec ruby ./htmltest.rb"
 - "./verify.sh"
 env:
   global:
