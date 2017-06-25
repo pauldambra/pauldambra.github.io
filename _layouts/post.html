@@ -21,10 +21,16 @@ comments: false
 </article>
 
 	<div class="comments-wrapper">
-		<button>Click here to load comments</button>
+		<button>
+			<span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{page.permalink}}">0 comments</span>
+			 - Click here to join the conversation
+		</button>
 	</div>
 
+	<script id="dsq-count-scr" src="//pauldambragithubio.disqus.com/count.js" async></script>
+
 	<script>
+
 		var el = document.querySelector('.comments-wrapper');
 
 		var loadDisqus = function() {
