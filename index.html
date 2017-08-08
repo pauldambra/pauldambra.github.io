@@ -25,32 +25,6 @@ paginate: true
  }
 </script>
 
-  {% assign items = "" %}
-  {% for post in paginator.posts %}
-    {% capture list_item %}
-        {% 
-            include blogListItem.html 
-            index=forloop.index
-            url=post.url
-            title=post.title
-            date=post.date
-        %}
-    {% endcapture %}
-    {% assign items = items | append: list_item | append: "|||" %}
-  {% endfor %}
-    
-  {% assign items = items | split: "|||" | join: ',' %}
-  
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "ItemList",
-  "itemListElement": [
-  {{ items }}
-  ]
-}
-</script>
-
 {% for post in paginator.posts %}
     <div class="post-item">
         <div class="excerpt">
