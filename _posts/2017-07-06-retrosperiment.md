@@ -29,11 +29,11 @@ We've recently had several discussions trying to focus on the real and perceived
 
 We first drew axes on a white-board
 
-![The axes of the retro graph](/images/the-graph)
+![The axes of the retro graph](/images/the-graph.png)
 
 Since any and all software communication must take the form of some set of quadrants 
 
-![the quadrants this describes](/images/the-quadrants)
+![the quadrants this describes](/images/the-quadrants.png)
 
 Then the whole team wrote on post-it notes what they thought our principles and practices were and then put them on the board.
 
@@ -41,7 +41,7 @@ The faster that practice helps us move the further right it goes. The more value
 
 ## So what did this look like in practice?
 
-![the post-its](/images/the-chart-1)
+![the post-its](/images/the-chart-1.png)
 
 This let us see straight away where we had different opinions across the team
 
@@ -54,7 +54,7 @@ And where, when we agreed roughly on position, we needed to focus on if we could
 
 This was a very different discussion than we would usually have. Anchored more in what we could change and how we might change it than how we feel about things...
 
-![the discussion](/images/the-discussion)
+![the discussion](/images/the-discussion.png)
 
 It's obviously still important to address the team's morale and individual concerns but this list of discussion points felt more focused, as we'd hoped, on what we can change to deliver more value faster.
 
