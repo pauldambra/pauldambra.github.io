@@ -25,13 +25,17 @@ What could we experiment with ?
 
 We've recently had several discussions trying to focus on the real and perceived progress of our work and thought it would be beneficial to run the retro with a focus on the impact of our team's principles and practices. Specifically how they relate to delivery of value and speed of delivery.
 
-Since any and all software communication must take the form of some set of quadrants we first drew axes on a white-board
+<!--more-->
+
+We first drew axes on a white-board
 
 ![The axes of the retro graph](/images/the-graph)
 
-Then the whole team wrote on post-it notes what they thought our principles and practices were and then put them on the board.
+Since any and all software communication must take the form of some set of quadrants 
 
 ![the quadrants this describes](/images/the-quadrants)
+
+Then the whole team wrote on post-it notes what they thought our principles and practices were and then put them on the board.
 
 The faster that practice helps us move the further right it goes. The more value it lets us deliver the higher it goes.
 
