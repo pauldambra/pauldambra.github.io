@@ -31,13 +31,11 @@ We first drew axes on a white-board
 
 ![The axes of the retro graph](/images/the-graph.png)
 
-Since any and all software communication must take the form of some set of quadrants 
+Since any and all software communication must take the form of some set of quadrants... The faster that practice helps us move the further right it goes. The more value it lets us deliver the higher it goes.
 
 ![the quadrants this describes](/images/the-quadrants.png)
 
 Then the whole team wrote on post-it notes what they thought our principles and practices were and then put them on the board.
-
-The faster that practice helps us move the further right it goes. The more value it lets us deliver the higher it goes.
 
 ## So what did this look like in practice?
 
