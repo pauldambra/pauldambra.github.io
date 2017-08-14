@@ -19,32 +19,3 @@ comments: false
 		{{ content }}
 	</div>
 </article>
-
-	<div class="comments-wrapper">
-		<button>
-			<span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{page.permalink}}">0 comments</span>
-			 - Click here to join the conversation
-		</button>
-	</div>
-
-	<script id="dsq-count-scr" src="//pauldambragithubio.disqus.com/count.js" async></script>
-
-	<script>
-
-		var el = document.querySelector('.comments-wrapper');
-
-		var loadDisqus = function() {
-			el.innerHTML = '';
-			var d = document.createElement('div');
-			d.id = 'disqus_thread';
-			el.appendChild(d);
-			/* * * DON'T EDIT BELOW THIS LINE * * */
-			
-			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-			dsq.src = '//pauldambragithubio.disqus.com/embed.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		};
-
-		el.addEventListener('click', loadDisqus);
-
-	</script>

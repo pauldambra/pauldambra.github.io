@@ -319,10 +319,7 @@ img, amp-img {
   max-width: 100%;
   vertical-align: middle;
 }
-#disqus_thread {
-  border-top: solid 1em $light;
-  margin-top: 10px;
-}
+
 aside {
   border-left: 1px solid darkslateblue;
   color: darkslateblue;
@@ -359,24 +356,7 @@ aside {
 .posts li {
   line-height: 1.75em;
 }
-.comments-wrapper {
-  text-align: center;
-  button {
-    background-color: $darkest;
-    color:white;
-    padding:15px;
-    -moz-transition: 0.25s;
-    -ms-transition: 0.25s;
-    -o-transition: 0.25s;
-    -webkit-transition: 0.25s;
-    transition: 0.25s;
-    border-style: none;
-    cursor: pointer;
-    &:hover {
-      background-color:$dark;
-    }
-  }
-}
+
 footer {
   padding: 5px 15px;
   margin: 0 auto;
