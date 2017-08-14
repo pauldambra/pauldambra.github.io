@@ -23,7 +23,7 @@ function get_current_site {
 
 function update_service_worker {
   echo "updating service worker"
-  yarn
+  npm install
   ./node_modules/.bin/sw-precache --config sw-config.js
 }
 
