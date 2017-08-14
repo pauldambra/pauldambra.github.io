@@ -7,6 +7,7 @@ DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.githu
 function main {
 	clean
 	get_current_site
+  update_service_worker
 	build_site
 }
 
@@ -18,6 +19,12 @@ function clean {
 function get_current_site { 
 	echo "getting latest site"
 	git clone --depth 1 $DEPLOY_REPO _site 
+}
+
+function update_service_worker {
+  echo "updating service worker"
+  yarn
+  ./node_modules/.bin/sw-precache --config sw-config.js
 }
 
 function build_site { 
