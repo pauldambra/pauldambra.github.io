@@ -22,3 +22,14 @@ defaults:
       header_class: "hero"
 gems:
   - octopress-paginate
+exclude:
+  - node_modules
+  - sw-config.js
+  - "*.sh"
+  - htmltest.rb
+  - package.json
+  - yarn.lock
+  - Gemfile
+  - Gemfile.lock
+  - Guardfile
+  - README.md
