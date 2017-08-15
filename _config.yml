@@ -22,6 +22,7 @@ defaults:
       header_class: "hero"
 gems:
   - octopress-paginate
+  - octopress-minify-html
 exclude:
   - node_modules
   - sw-config.js

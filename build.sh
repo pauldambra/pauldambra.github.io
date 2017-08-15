@@ -24,7 +24,7 @@ function get_current_site {
 function update_service_worker {
   echo "updating service worker"
   npm install sw-precache
-  ./node_modules/.bin/sw-precache --config sw-config.js
+  ./node_modules/.bin/sw-precache --config service-worker-config.js
 }
 
 function build_site { 
