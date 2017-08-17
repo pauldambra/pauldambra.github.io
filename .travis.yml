@@ -1,17 +1,22 @@
 language: ruby
 cache:
   bundler: true
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install libjpeg-progs
+  - sudo apt-get install optipng
 install:
-- bundle install
-- nvm install 4.4.7
-- nvm use 4.4.7
+  - bundle install
+  - nvm install 8.4.0
+  - nvm use 8.4.0
 script:
-- "./build.sh"
-- "./amp-validate.sh"
+  - "./imageOptimisation.sh"
+  - "./build.sh"
+  - "./amp-validate.sh"
 after_success:
-- "./deploy.sh"
-- "bundle exec ruby ./htmltest.rb"
-- "./verify.sh"
+  - "./deploy.sh"
+  - "bundle exec ruby ./htmltest.rb"
+  - "./verify.sh"
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
