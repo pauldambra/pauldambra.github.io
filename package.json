@@ -16,5 +16,8 @@
     "remark-cli": "^3.0.0",
     "remark-lint": "^6.0.0",
     "sw-precache": "^5.2.0"
+  },
+  "dependencies": {
+    "html-minifier": "^3.5.3"
   }
 }

@@ -9,7 +9,6 @@ url: http://pauldambra.github.io
 author: paul.dambra+fb-instant@gmail.com
 plusProfile: https://plus.google.com/114260096260757534167?rel=author
 excerpt_separator: <!--more-->
-exclude: ['Guardfile', .gitgnore', '.ruby-version', 'build.sh', 'Gemfile', 'Gemfile.lock', 'README.md']
 ampdir: amp
 facebook_id: 1029758320473951
 amp_googleanalytics_id: UA-49969634-2
@@ -22,7 +21,6 @@ defaults:
       header_class: "hero"
 plugins:
   - octopress-paginate
-  - octopress-minify-html
 exclude:
   - node_modules
   - sw-config.js

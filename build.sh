@@ -9,6 +9,7 @@ function main {
 	get_current_site
   update_service_worker
 	build_site
+  minify_site
 }
 
 function clean { 
@@ -30,6 +31,25 @@ function update_service_worker {
 function build_site { 
 	echo "building site"
 	bundle exec jekyll build 
+}
+
+function minify_site {
+  npm install html-minifier
+
+  ./node_modules/.bin/html-minifier \
+    --html5 \
+    --case-sensitive \
+    --keep-closing-slash \
+    --collapse-inline-tag-whitespace \
+    --collapse-whitespace \
+    --minify-css \
+    --minify-js \
+    --input-dir _site \
+    --output-dir _site2 \
+    --file-ext html
+
+  rm -rf _site/
+  mv _site2 _site
 }
 
 main
