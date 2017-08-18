@@ -80,6 +80,14 @@ lifecycle
 webpage
 async
 stylesheet
+startup
+ubictionary
+ok
+RailsConf
+refactorings
+ThoughtWorks
+kanban
+colocated
  - _posts/2014-05-18-promises.md
 js
 nodejs
@@ -392,3 +400,7 @@ c400
 AmpPost
 img
 _tweet
+ - _posts/2017-07-06-retrosperiment.md
+computerlove
+c2.wiki
+Retroception

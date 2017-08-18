@@ -15,20 +15,20 @@ So anyway I learn about design patterns and begin to use the factory pattern. An
 <!--more-->
 
 Then comes the day I need to handle the responses to a monthly mailing to over 70,000 email addresses and so I write this bitchin' code. Well maybe not bitchin'... what would be the right word - oh yeah "messy".
-    
+
 It all started out really nice and clean but then I realised I needed to handle a couple of more cases than I'd intended when I began... and lots and lots of mail servers have been configured to return non-standard responses to failed mailings which is great for a human but not so great for a piece of software trying to classify that response.
     
 So time passes and I'm correctly responding to over 90% of the returns we get (all of which stops evil companies like Yahoo for blacklisting us because we're mailing to non-existent addresses) but my code has got really, really messy.
     
 Really messy.
-    
+
 Oh God it's awful.
     
 I decide to refactor but no matter what I think of I can't get a Factory to solve my problem. Yeah, yeah I know but if you're gonna have a hammer it might as well be [shiny](http://en.wikipedia.org/wiki/Golden_hammer). Now, I could go ahead and invent my own solution but as far as I'm concerned writing software is about having to do less and that sounds like too much work.
     
 A little thought later and I decide it's time to add the command pattern to my arsenal. After all, I'm categorising mail, potentially selecting from a database, potentially updating a database, potentially replying to or forwarding an email and then deleting the mail I just dealt with. Wrap that up and then bash out the various alternatives I need. [Bazinga](http://www.urbandictionary.com/define.php?term=bazinga)!
     
-I also like to be sure about what I'm doing before I start. Well, sometimes... So I dig out [Patterns in Java Volume 1](http://www.amazon.com/Patterns-Catalog-Reusable-Design-Illustrated/dp/0471258393) and do a little reading and what I saw was such a great idea I realised I had to do everything I could not to forget... it is important to note that I am an idiot savant and it is possible that this is covered in most people's coding 101 and is adding nothing to the grand total of the internet. If that is the case then this blog is (as intended) the same as almost every other single one :-) read only by its writer.
+I also like to be sure about what I'm doing before I start. Well, sometimes... So I dig out [Patterns in Java Volume 1](http://www.amazon.com/Patterns-Catalog-Reusable-Design-Illustrated/dp/0471258393) and do a little reading and what I saw was such a great idea I realised I had to do everything I could not to forget... 
 
 
 ```java

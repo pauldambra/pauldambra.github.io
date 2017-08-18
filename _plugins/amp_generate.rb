@@ -28,7 +28,7 @@ module Jekyll
     def generate(site)
       dir = site.config['ampdir'] || 'amp'
 
-      thread_count = (ENV['THREADCOUNT'] || 6).to_i
+      thread_count = (ENV['THREADCOUNT'] || 8).to_i
 
       puts "using #{thread_count} threads for processing to AMP pages"
       puts "there are #{site.posts.docs.length} articles to process"
@@ -42,7 +42,8 @@ module Jekyll
 
       thread_count.times do
         threads << Thread.new do
-          until queue.empty?
+          loop do
+            break if queue.empty?
             post = queue.pop(true) rescue nil
             if post
               index = AmpPost.new(site, site.source, File.join(dir, post.id), post)
@@ -54,8 +55,8 @@ module Jekyll
           # when there is no more work, the thread will stop
         end
       end
-
-      ThreadsWait.all_waits(*threads)
+      threads.each{|t| t.join}
+      puts "all AMP posts generated"
     end
   end
 end

@@ -18,7 +18,7 @@ tags: [series, blog, recursion, AMP, jekyll]
       <a href="/2017/testing-static-sites.html">Previous Post</a>
     </div>
     <div class="next">
-      
+      <a href="/2017/testing-meaning.html">Next Post</a>
     </div>
   </div>
 </aside>

@@ -20,7 +20,7 @@ defaults:
       path: "" # an empty string here means all files in the project
     values:
       header_class: "hero"
-gems:
+plugins:
   - octopress-paginate
   - octopress-minify-html
 exclude:
