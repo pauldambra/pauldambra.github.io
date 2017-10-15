@@ -4,7 +4,7 @@ Uses github pages flavour of Jekyll with guard and live-reload added in for loca
 
 ## to run:
 
-`BUNDLE_ENV='dev' bundle install && bundle exec guard`
+`BUNDLE_ENV=dev bundle install && BUNDLE_ENV=dev bundle exec guard`
 
 NB gems necessary for running locally wih guard are only installed when `BUNDLE_ENV='dev`
 
