@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -eu
+set -eux
 
 TRAVIS_BLOG_TOKEN=${DEPLOY_BLOG_TOKEN:-''}
 
@@ -27,7 +27,7 @@ cd _site
 git config --global user.name "Travis CI"
 git config --global user.email paul.dambra+ttravis@gmail.com
 git add -A
-git fetch
+git fetch --progress
 git status
 git commit -m "Lastest site built on successful travis build ${TRAVIS_BUILD_NUMBER:-'unknown'} auto-pushed to github"
 git push $DEPLOY_REPO master:master
