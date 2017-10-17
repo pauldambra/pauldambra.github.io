@@ -22,4 +22,4 @@ git config --global user.email paul.dambra+ttravis@gmail.com
 git add -A
 git status
 git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-exit `git push $DEPLOY_REPO master:master`
+exit `git push --force $DEPLOY_REPO master:master`
