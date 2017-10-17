@@ -14,15 +14,14 @@ fi
 function main {
 	clean
 	get_current_site
- #  update_service_worker
-	# build_site
- #  minify_site
+  update_service_worker
+	build_site
+  minify_site
 }
 
 function clean { 
 	echo "cleaning _site folder"
 	if [ -d "_site" ]; then rm -Rf _site; fi 
-  if [ -d "git.log" ]; then rm git.log; fi 
 }
 
 function get_current_site { 
