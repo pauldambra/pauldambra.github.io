@@ -2,14 +2,21 @@
 
 set -eu
 
-DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
+TRAVIS_BLOG_TOKEN=${DEPLOY_BLOG_TOKEN:-''}
+
+if [ -z $TRAVIS_BLOG_TOKEN ]
+then
+  DEPLOY_REPO="git@github.com:pauldambra/blog_source.git"
+else
+  DEPLOY_REPO="https://${TRAVIS_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
+fi
 
 function main {
 	clean
 	get_current_site
-  update_service_worker
-	build_site
-  minify_site
+ #  update_service_worker
+	# build_site
+ #  minify_site
 }
 
 function clean { 
@@ -20,8 +27,7 @@ function clean {
 
 function get_current_site { 
 	echo "getting latest site"
-	git clone --progress --depth 1 $DEPLOY_REPO _site > git.log 2>&1
-  cat git.log | echo
+	git clone --progress --depth 1 $DEPLOY_REPO _site
 }
 
 function update_service_worker {
