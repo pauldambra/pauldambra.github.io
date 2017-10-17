@@ -18,11 +18,12 @@ deploy:
   provider: pages
   skip_cleanup: true
   local_dir: _site
-  repo: pauldambra/blog_source.git
+  repo: pauldambra/blog_source
   github_token: $DEPLOY_BLOG_TOKEN
+  target_branch: master
   on:
     branch: master
-after_success:
+after_deploy:
   - "bundle exec ruby ./htmltest.rb"
   - "./verify.sh"
 env:
