@@ -14,8 +14,15 @@ script:
   - "./imageOptimisation.sh"
   - "./build.sh"
   - "./amp-validate.sh"
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: _site
+  repo: pauldambra/blog_source.git
+  github_token: $DEPLOY_BLOG_TOKEN
+  on:
+    branch: master
 after_success:
-  - "./deploy.sh"
   - "bundle exec ruby ./htmltest.rb"
   - "./verify.sh"
 env:
