@@ -1,11 +1,10 @@
-dist: trusty
 language: ruby
 cache:
   bundler: true
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install libjpeg-progs
-  - sudo apt-get install optipng
+  - apt-get -qq update
+  - apt-get install libjpeg-progs
+  - apt-get install optipng
 install:
   - bundle install
   - nvm install 8.4.0
