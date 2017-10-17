@@ -15,11 +15,13 @@ function main {
 function clean { 
 	echo "cleaning _site folder"
 	if [ -d "_site" ]; then rm -Rf _site; fi 
+  if [ -d "git.log" ]; then rm git.log; fi 
 }
 
 function get_current_site { 
 	echo "getting latest site"
-	git clone --depth 1 $DEPLOY_REPO _site 
+	git clone --depth 1 $DEPLOY_REPO _site > git.log 2>&1
+  cat git.log
 }
 
 function update_service_worker {
