@@ -21,7 +21,7 @@ function clean {
 function get_current_site { 
 	echo "getting latest site"
 	git clone --depth 1 $DEPLOY_REPO _site > git.log 2>&1
-  cat git.log
+  cat git.log | echo
 }
 
 function update_service_worker {
