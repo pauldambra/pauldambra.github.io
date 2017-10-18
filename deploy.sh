@@ -20,6 +20,7 @@ cd _site
 git config --global user.name "Travis CI"
 git config --global user.email paul.dambra+ttravis@gmail.com
 git add -A
+git fetch --progress
 git status
-git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-exit `git push $DEPLOY_REPO master:master`
+git commit -m "Latest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
+exit `git push --force $DEPLOY_REPO master:master`

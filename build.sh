@@ -20,8 +20,8 @@ function clean {
 
 function get_current_site { 
 	echo "getting latest site"
-	git clone --progress --depth 1 $DEPLOY_REPO _site > git.log 2>&1
-  cat git.log | echo
+	git clone --progress --depth 1 $DEPLOY_REPO _site
+  git checkout master
 }
 
 function update_service_worker {
