@@ -25,7 +25,7 @@ For example
 
 > we have to agree up front what we're going to do so that we know we're building the right thing... now go plan 19 sprints
 
-(guess whether the client was certain the knew what they wanted)
+(guess whether the client was certain they knew what they wanted)
 
 ### So, why, do we have to agree up front what we're doing? 
 
