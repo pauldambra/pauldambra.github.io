@@ -27,4 +27,4 @@ git add -A
 git status
 git commit -m "Latest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
 git push $DEPLOY_REPO master:master
-exit $_
+exit $?
