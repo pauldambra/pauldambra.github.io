@@ -19,6 +19,7 @@ fi
 cd _site
 git config --global user.name "Travis CI"
 git config --global user.email paul.dambra+ttravis@gmail.com
+git diff
 git add -A
 git fetch --progress
 git status
