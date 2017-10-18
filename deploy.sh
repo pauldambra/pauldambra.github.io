@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -eu
+set -exu
 
 DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
 
@@ -17,8 +17,12 @@ if [ "$TRAVIS_BRANCH" != "master" ]; then
 fi
 
 cd _site
+pwd
 git config --global user.name "Travis CI"
 git config --global user.email paul.dambra+ttravis@gmail.com
+
+git remote -v
+
 git diff
 git add -A
 git fetch --progress
