@@ -23,4 +23,4 @@ git add -A
 git fetch --progress
 git status
 git commit -m "Latest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-exit `git push --force $DEPLOY_REPO master:master`
+exit `git push $DEPLOY_REPO`
