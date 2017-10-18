@@ -2,14 +2,19 @@
 
 set -eu
 
-DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
+if [[ -z ${DEPLOY_BLOG_TOKEN:-''} ]]
+then
+  DEPLOY_REPO='git@github.com:pauldambra/pauldambra.github.io.git'
+else
+  DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
+fi
 
 function main {
 	clean
 	get_current_site
   update_service_worker
 	build_site
-  minify_site
+  # minify_site
 }
 
 function clean { 
@@ -21,7 +26,6 @@ function clean {
 function get_current_site { 
 	echo "getting latest site"
 	git clone --progress --depth 1 $DEPLOY_REPO _site
-  git checkout master
 }
 
 function update_service_worker {
@@ -35,6 +39,7 @@ function build_site {
 	bundle exec jekyll build 
 }
 
+# ugh this breaks the build!
 function minify_site {
   npm install html-minifier
 

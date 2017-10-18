@@ -17,15 +17,14 @@ if [ "$TRAVIS_BRANCH" != "master" ]; then
 fi
 
 cd _site
-pwd
+
 git config --global user.name "Travis CI"
 git config --global user.email paul.dambra+ttravis@gmail.com
 
-git remote -v
-
 git diff
 git add -A
-git fetch --progress
+
 git status
 git commit -m "Latest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-exit `git push $DEPLOY_REPO`
+git push $DEPLOY_REPO master:master
+exit $_
