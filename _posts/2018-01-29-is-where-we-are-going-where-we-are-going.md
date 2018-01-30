@@ -134,8 +134,8 @@ Maybe I've not worked it out completely yet... [toot me and tell me what you thi
 
  * We can remember that we have low visibility and work closely together to make sure we aren't trying to move too far in one go. Slicing work as thinly as our context tells us makes sense.
 
- * We can use metrics from our software and more user research as our compass to check whether we strayed from our desired path.
+ * We can use data from people using our software and more user research as our compass to check whether we strayed from our desired path.
 
 We can and should care if we're being asked to do something meaningful. And we mustn't treat it as somebody else's work to check where we should go or whether we got there.
 
-The whole team is responsible for quality and [you can't have a quality result if you're just doing the wrong thing harder](https://www.goodreads.com/quotes/29838-there-is-nothing-quite-so-useless-as-doing-with-great).
+The whole team is responsible for quality and [you can't have a quality result if you're just doing the wrong thing faster](https://www.goodreads.com/quotes/29838-there-is-nothing-quite-so-useless-as-doing-with-great).
