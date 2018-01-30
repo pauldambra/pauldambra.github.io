@@ -16,7 +16,7 @@ function main {
 	get_current_site
   update_service_worker
 	build_site
-  minify_site
+  # minify_site
 }
 
 function clean { 
@@ -40,6 +40,7 @@ function build_site {
 	bundle exec jekyll build 
 }
 
+# ugh this breaks the build!
 function minify_site {
   npm install html-minifier
 
