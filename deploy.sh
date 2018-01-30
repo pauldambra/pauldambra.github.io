@@ -11,8 +11,6 @@ else
   DEPLOY_REPO="https://${TRAVIS_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git"
 fi
 
-echo "deploying changes"
-
 if [ -z "${TRAVIS_PULL_REQUEST:-''}" ]; then
     echo "except don't publish site for pull requests"
     exit 0
@@ -23,6 +21,8 @@ if [ "${TRAVIS_BRANCH:-''}" != "master" ]; then
     exit 0
 fi
 
+echo "deploying changes: ${TRAVIS_BUILD_NUMBER:-'unknown'}"
+
 cd _site
 
 git config --global user.name "Travis CI"
@@ -32,6 +32,6 @@ git checkout master
 git add -A
 git fetch --progress
 git status
-git commit -m "Lastest site built on successful travis build ${TRAVIS_BUILD_NUMBER:-'unknown'} auto-pushed to github"
+git commit -m "${TRAVIS_BUILD_NUMBER:-'unknown'} auto-pushed to github"
 git push $DEPLOY_REPO master:master
 exit $?
