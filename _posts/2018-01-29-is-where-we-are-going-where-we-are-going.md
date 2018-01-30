@@ -105,7 +105,7 @@ Because the landscape you're building software in probably doesn't look like thi
 
 ![a picture of the peak district with great visibility](/images/sunny-day.jpg)
 
-Since we're generally operating under imperfect conditions it's more like:
+Since we're generally operating under imperfect conditions. Trying to figure out where we are is more like being in the fog:
 
 ![a picture of the peak in foggy conditions](/images/foggy-day.jpg)
 
