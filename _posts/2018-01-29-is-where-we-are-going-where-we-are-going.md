@@ -13,6 +13,8 @@ tags: ["physics", "software", "agile", "cargo-cult", "rant"]
 
 A way of measuring the progress being made by a software team. Not all teams use velocity. I've been on quite a few that do. So at least some teams still use it as a measure.
 
+<!--more-->
+
 > Velocity is the number of story points completed by a team in an iteration.
 [scrum alliance 2014](https://www.scrumalliance.org/community/articles/2014/february/velocity)
 
