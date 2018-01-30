@@ -93,7 +93,7 @@ Otherwise, like the cyclist that chooses random directions you can't expect to e
 
 In reality you aren't given random tickets to work on (or at least for your sake I hope not). Instead, with what we all know right now some group of us choose what to work on next.
 
-You're being pointed randomly but instead probably in roughly the right direction. 
+You're not being pointed randomly but instead in roughly the right direction.
 
 Taking the cyclist example again - If you can stop and re-assess your roughly correct destination you'll get there eventually but you'll still take longer than a cyclist that has better directions provided than you.
 
