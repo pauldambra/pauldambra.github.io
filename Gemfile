@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'github-pages'
+gem 'github-pages', '155'
 
 #for amp generation
 gem 'nokogiri'
