@@ -1,0 +1,18 @@
+<div class="further-reading">
+  {% assign similar_posts = site.posts | where_exp:"item",
+"item.tags contains page.category" | where_exp:"item", "item.url != page.url" %}
+
+  {% if similar_posts.size == 0 %}
+    <h1>Some other articles...</h1>
+      {% assign random_posts = site.posts | where_exp:"item", "item.url != page.url" | sample:4 %}
+
+      {% for rando in random_posts limit:3 %}
+        {% include article_tile.html article=rando %}
+      {% endfor %}
+  {% else %}
+    <h1>More like this...</h1>
+      {% for similar_post in similar_posts limit:3 %}
+          {% include article_tile.html article=similar_post %}
+      {% endfor %}
+   {% endif %}
+</div>

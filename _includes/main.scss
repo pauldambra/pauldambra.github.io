@@ -406,3 +406,27 @@ footer {
     margin-left: 1.35em;
   }
 }
+
+.further-reading {
+  a {
+    text-decoration: none;
+  }
+  
+  .article-tile {
+    display: inline-block;
+    width: 30%;
+    margin-right: 1%;
+    border: 1px solid $light;
+    padding: 5px;
+    min-height: 10em;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    position: relative;
+
+    small {
+      bottom: 5px;
+      position: absolute;
+      right: 5px;
+    }
+  }
+}
