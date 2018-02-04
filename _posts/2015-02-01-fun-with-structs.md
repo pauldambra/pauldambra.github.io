@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/fun-with-structs.html" 
 date: "2015-02-01 14:00:00"
 description: "when and why to use a struct as a value object in C#"
-keywords: dotnet .net struct value objects
 category: software-engineering
 tags: [c#, learning]
 ---

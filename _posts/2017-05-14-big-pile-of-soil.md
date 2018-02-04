@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2017/05/big-pile-of-soil.html" 
 date: "2017-05-14 19:58:00"
 description: "A big pile of mud is a clear sign of dirt"
-keywords: design clean code metaphor
 category: "Tortured Metaphors"
 tags: [design, clean-code, metaphor]
 ---

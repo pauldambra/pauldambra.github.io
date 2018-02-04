@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2017/05/ubictionary.html" 
 date: "2017-05-10 19:58:00"
 description: "The right language shared with the right people"
-keywords: language naming
 category: "naming"
 tags: [language, names, ddd, misunderstandings, agilemanc]
 ---

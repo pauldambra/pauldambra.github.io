@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2017/10/constructiphor.html" 
 date: "2017-10-15 10:00:00"
 description: "Construction might not be the best metaphor"
-keywords: metaphors software
 category: "metaphors"
 tags: [metaphors, software]
 ---

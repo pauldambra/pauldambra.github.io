@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/happy-numbers-kata.html" 
 date: "2014-11-22 23:00:00"
 description: The Happy Numbers Kata in Five Seconds
-keywords: tpl parallel happy numbers kata
 category: kata
 tags: [c#, kata, tdd, learning]
 ---

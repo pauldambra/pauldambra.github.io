@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/better-affordance.html" 
 date: "2014-07-20 22:11:00"
 description: using funky css3 magic to make a better visual affordance
-keywords: css3 keyframes ux visual affordance
 category: cms
 tags: [learning, cms, design, web, series]
 ---

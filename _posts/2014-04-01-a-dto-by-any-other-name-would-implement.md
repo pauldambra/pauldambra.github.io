@@ -5,7 +5,6 @@ permalink: "/2014/04/a-dto-by-any-other-name-would-implement.html"
 date: "2014-04-01 20:44:00"
 updated: "2014-04-02 23:03:07"
 description: a discussion of the practice of calling the objects passed between application layers DTOs
-keywords: DTO data transfer object anemic domain model value DDD domain driven design
 category: software-engineering
 tags: [learning, dto, cargo-cult, domain]
 published: true

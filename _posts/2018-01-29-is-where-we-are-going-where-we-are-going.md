@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2018/01/direction.html" 
 date: "2018-01-29 10:00:00"
 description: "Direction is more important than speed"
-keywords: physics software agile cargo-cult
 category: "agile"
 tags: ["physics", "software", "agile", "cargo-cult", "rant"]
 ---

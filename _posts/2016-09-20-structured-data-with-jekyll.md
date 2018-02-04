@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/structured-data-with-jekyll.html" 
 date: "2016-09-20 17:00:00"
 description: "how to add structured data to a jekyll site"
-keywords: jekyll structured data ld+json
 category: "Structured Data"
 tags: [jekyll, recursion, seo, json+ld]
 ---

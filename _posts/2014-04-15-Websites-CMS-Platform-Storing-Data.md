@@ -5,7 +5,6 @@ permalink: "/Websites-CMS-Platform-Storing-Data.html"
 date: "2014-04-12 08:11:00"
 updated: "2014-04-12 08:11:30" 
 description: storing data using mongo, mongojs and express
-keywords: mongojs express node nosql mongodb
 category: cms
 tags: [nosql, learning, mongodb, cms, design, web, series]
 ---

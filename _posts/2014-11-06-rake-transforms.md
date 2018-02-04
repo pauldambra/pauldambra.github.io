@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/rake-transforms.html" 
 date: "2014-11-06 23:00:00"
 description: transforming web.config with rake
-keywords: rake web.config transforming
 category: continuous-integration
 tags: [rake, CI, ruby]
 ---

@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/better-affordance-js.html" 
 date: "2014-07-30 22:11:00"
 description: using funky js magic to make a better visual affordance
-keywords: js ux visual affordance
 category: cms
 tags: [learning, cms, design, web, series]
 ---

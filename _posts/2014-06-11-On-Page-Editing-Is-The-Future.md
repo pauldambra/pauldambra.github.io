@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/On-Page-Editing.html" 
 date: "2014-06-11 08:11:00"
 description: using contenteditable in HTML5 to make page management easy
-keywords: contenteditable cms html5 jquery ajax
 category: cms
 tags: [learning, cms, design, web, series]
 ---

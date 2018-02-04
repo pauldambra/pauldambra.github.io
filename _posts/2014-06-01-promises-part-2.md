@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/Websites-CMS-Platform-promises-part-2.html" 
 date: "2014-06-01 08:11:00"
 description: bluebird and stack exchange communities are awesome
-keywords: node nodejs promises javascript bluebird stackexchange stackoverflow community
 category: cms
 tags: [js, learning, cms, design, web, series, promises]
 ---

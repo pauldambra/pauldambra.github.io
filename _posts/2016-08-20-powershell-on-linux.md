@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/powershell-on-linux.html"
 date: "2016-08-28 09:55:00"
 description: "initial investigation of powershell on linux"
-keywords: powershell bash linux
 category: software-engineering
 tags: [learning, powershell, bash, linux, python]
 ---

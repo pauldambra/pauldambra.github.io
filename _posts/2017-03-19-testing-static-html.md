@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2017/testing-static-sites.html" 
 date: "2017-03-19 18:40:00"
 description: "Testing the generated site is one of the benefits of static HTML generators"
-keywords: jekyll static html testing
 category: "continuous delivery"
 tags: [series, blog, recursion, testing, jekyll, travisci]
 ---

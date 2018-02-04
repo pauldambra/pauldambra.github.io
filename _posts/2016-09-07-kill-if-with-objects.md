@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/kill-if-with-objects.html" 
 date: "2016-09-07 18:00:00"
 description: "refactoring at the right time is super fun"
-keywords: refactor refactoring behaviour objects
 category: software-engineering
 tags: [refactoring, c#]
 ---

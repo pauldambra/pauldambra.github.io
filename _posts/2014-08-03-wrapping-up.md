@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/wrapping_up.html" 
 date: "2014-08-03 22:11:00"
 description: wrapping up the blog series
-keywords: CMS JS CSS HTML Handlebars
 category: cms
 tags: [learning, cms, design, web, series]
 ---

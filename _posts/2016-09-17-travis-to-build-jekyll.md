@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/using-travis-to-build-jekyll.html" 
 date: "2016-09-18 16:00:00"
 description: "using Travis CI to build a Jekyll site"
-keywords: recursion blog travisci travis jekyll
 category: "continuous delivery"
 tags: [travisci, jekyll, recursion, blog, series]
 ---

@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2017/07/retrosperiment.html" 
 date: "2017-07-06 10:00:00"
 description: "A retrospective experiment"
-keywords: agile xp retrospective
 category: "agile"
 tags: [agile, xp, retrospective]
 ---

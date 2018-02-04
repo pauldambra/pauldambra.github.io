@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/2017/generating-static-amp.html" 
 date: "2017-03-22 22:40:00"
 description: "Using Jekyll plugins to generate AMP version of pages"
-keywords: jekyll static AMP
 category: "AMP"
 tags: [series, blog, recursion, AMP, jekyll]
 ---

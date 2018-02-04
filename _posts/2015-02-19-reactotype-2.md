@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/reactotype/part-two.html" 
 date: "2015-02-19 22:00:00"
 description: "exploring ReactJS"
-keywords: reactjs js yeoman gulp html css web
 category: react
 tags: [learning, react, js, series]
 ---

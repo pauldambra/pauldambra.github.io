@@ -4,7 +4,6 @@ layout: "post"
 permalink: "/websites-CMS-platform-logging-in.html" 
 date: "2014-04-27 08:11:00"
 description: user management and logging in with nodejs mongo and passport
-keywords: node mongo mongodb nodejs bcrypt passport cms logging-in
 category: cms
 tags: [learning, cms, design, web, series, mongodb, nosql, express]
 ---
