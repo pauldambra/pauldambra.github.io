@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Categories
-header_class: hero
 ---
 
 {% comment %}
@@ -43,9 +42,9 @@ The purpose of this snippet is to list all the categories you have in your site.
 <h1> Categories </h1>
 <div class="link-list">
 {% for category in uniqueCategories %}
-	<a class="post-metadata post-category" href="#{{ category | slugify }}"> 
+	<a class="post-metadata post-category" href="#{{ category | slugify }}">
 		<img src="/images/tag.svg" alt="tag-icon"/>
-		{{ category }} 
+		{{ category }}
 	</a>
 {% endfor %}
 </div>

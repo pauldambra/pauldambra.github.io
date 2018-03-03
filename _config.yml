@@ -13,12 +13,6 @@ ampdir: amp
 facebook_id: 1029758320473951
 amp_googleanalytics_id: UA-49969634-2
 future: true
-defaults:
-  -
-    scope:
-      path: "" # an empty string here means all files in the project
-    values:
-      header_class: "hero"
 plugins:
   - octopress-paginate
 exclude:

@@ -90,7 +90,7 @@ article {
     border-bottom: $darkest solid 2px;
     background-color: $lightest;
     color: $darkest;
-    
+
     .heading {
       flex:3 0 auto;
     }
@@ -153,10 +153,6 @@ header {
 
   &.hero {
     background-image: url('/images/cardboard.jpg');
-
-    &.beach {
-      background-image: url('/images/beach.jpg');
-    }
 
     @media (max-width: 600px) {
       background-position: -400px -23px;
@@ -226,7 +222,7 @@ header {
     margin: 0;
     word-wrap: break-word;
   }
-} 
+}
 ul {
   @media screen and (max-width: 500px) {
     padding: 0;
@@ -258,7 +254,7 @@ ul {
   .post-category {
     float:none;
   }
-  h3 { 
+  h3 {
     @include links($darkest, none);
   }
   @include links($light, none);
@@ -315,9 +311,11 @@ ul {
 }
 
 img, amp-img {
-  display: inline-block;
-  max-width: 100%;
+  display: block;
+  max-width: 1000px;
   vertical-align: middle;
+  width: 100%;
+  margin: auto;
 }
 
 aside {
@@ -335,8 +333,8 @@ aside {
       font-size: 1em;
     }
 
-    .links { 
-      display:flex; 
+    .links {
+      display:flex;
       .previous {
         text-align: left;
         flex: 1 0 auto;
@@ -408,10 +406,12 @@ footer {
 }
 
 .further-reading {
+  margin-top: 60px;
+
   a {
     text-decoration: none;
   }
-  
+
   .article-tile {
     display: inline-block;
     width: 30%;
