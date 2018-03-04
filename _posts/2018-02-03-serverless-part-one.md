@@ -51,7 +51,7 @@ One system registers with another. That system raises an event: `PersonChangedAd
 
  3) Command Query Responsibility Segregation (CQRS)
 
-An application that seperates writing to the system (commands) from reading from it (queries).
+An application that separates writing to the system (commands) from reading from it (queries).
 
 Arguably not an event-driven architecture since it can be achieved without events. But Greg Young asserts it was a necessary step to a world that has EventSourcing (in [this video](https://www.youtube.com/watch?v=LDW0QWie21s) IIRC).
 
