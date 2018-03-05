@@ -289,6 +289,8 @@ With 39 lines of YAML we've created a walking skeleton to prove we can write cod
 
 We've had to learn a little about the details of dynamodb and AWS lambda where they leak their underlying infrastructure into our worlds - although presumably there's a setting equivalent to "I care less about how much I spend than how much resource you use - charge me what you like and don't bother me again". I don't want to turn that on (yet).
 
+All the code for this stage can be found [on github](https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-two)
+
 And we're **finally** ready to write some tests. In the next post we'll look at some tests, talk about the final state of the handler, and look at how to set up locally to run integration tests.
 
 # And delete
