@@ -1,7 +1,6 @@
 ---
 title: "Serverless - Part One"
 layout: "post"
-hero_url: "/images/cables.jpg"
 permalink: "/2018/02/serverless-1.html"
 date: "2018-02-03 10:00:00"
 description: "Examining event driven serverless systems"
