@@ -8,7 +8,7 @@ category: "serverless"
 tags: ["serverless", "series", "events", "eventdriven"]
 ---
 
-After describing event-driven and serverless systems in [part one](/2018/02/severless-2.html) it is time to write some code. Well, almost. The first task is a [walking skeleton](http://alistair.cockburn.us/Walking+skeleton): some code that runs on production infrastructure to prove we could have a CI pipeline.
+After describing event-driven and serverless systems in [part one](/2018/02/severless-1.html) it is time to write some code. Well, almost. The first task is a [walking skeleton](http://alistair.cockburn.us/Walking+skeleton): some code that runs on production infrastructure to prove we could have a CI pipeline.
 
 I think I'll roll my AWS credentials pretty frequently now - since I can't imagine I'll get through this series without leaking my keys somehow
 
