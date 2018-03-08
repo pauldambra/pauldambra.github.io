@@ -14,7 +14,7 @@ tags: ["serverless", "series", "events", "eventdriven"]
 
 In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a `ProposeDestination` command and write a `DestinationProposed` event to the eventstream.
 
-"[SAM Local]((https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md)) can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."
+"[SAM Local](https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md) can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."
 
 <!--more-->
 
