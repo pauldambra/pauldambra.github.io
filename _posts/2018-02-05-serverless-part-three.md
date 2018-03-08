@@ -266,3 +266,5 @@ At this point the code is still coming together but demonstrates that there is a
 # Extending the system
 
 So now POSTing to Lambda can write events to dynamodb. In the next post we will look at subscribing to and responding to that event stream.
+
+All the code for this stage can be found [on github](https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-three)
