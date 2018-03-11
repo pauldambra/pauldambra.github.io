@@ -8,9 +8,9 @@ category: "serverless"
 tags: ["serverless", "series", "events", "eventdriven"]
 ---
 
-[Part One](/2018/02/severless-1.html) - describing event-driven and serverless systems
+[Part One](/2018/02/serverless-1.html) - describing event-driven and serverless systems
 
-[Part Two](/2018/02/severless-2.html) - Infrastructure as code walking skeleton
+[Part Two](/2018/02/serverless-2.html) - Infrastructure as code walking skeleton
 
 In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a `ProposeDestination` command and write a `DestinationProposed` event to the eventstream.
 
