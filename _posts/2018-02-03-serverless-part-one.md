@@ -12,9 +12,7 @@ Anyone who knows me knows that I like to talk about Event-driven systems. And th
 
 I started my career in I.T. having to order network cables, care about fuses, and plan storage and compute capacity. It was slow, frustrating, and if you got it wrong it could take (best case scenario!) days to correct.
 
-I've actively been moving away from this for at least ten years. To managing virtual machines with vSphere, and then to virtual machines in EC2. All to try and avoid that hard, slow, work. Work that doesn't actually deliver value but has to be done before you can.
-
-Serverless continues this journey. [It obviously doesn't mean there aren't _any_ servers.](https://twitter.com/search?q=serverless%20AND%20%22no%20servers%22&src=typd) But it does mean that you hardly have to care there are servers.
+Over a few articles I hope to communicate what serverless is, why you should find it exciting, and how to start using it.
 
 Let's start by defining our terms...
 
@@ -93,6 +91,8 @@ This additive approach means that every application that only reads from the str
 Ok, never say never, the chance of introducing a defect at the system level exists but is far, far lower than in a change that directly affects the already deployed application's code.
 
 ## Serverless
+
+Serverless continues this journey. [It obviously doesn't mean there aren't _any_ servers.](https://twitter.com/search?q=serverless%20AND%20%22no%20servers%22&src=typd) But it does mean that you hardly have to care there are servers.
 
 Before I started this I was conflating "Serverless" with "Functions-as-a-service" (FaaS).
 
