@@ -375,8 +375,9 @@ footer {
       width: 25px;
       height: 25px;
       line-height: 25px;
-      vertical-align: bottom;
+      vertical-align: sub;
       text-decoration: none;
+      display: inline;
     }
   }
 }
