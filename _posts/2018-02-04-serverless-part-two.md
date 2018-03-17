@@ -56,7 +56,7 @@ It can read and write JSON, and allows you to subscribe to the stream of changes
 
 A header describing this template and the versions of the language used:
 
-```
+```yaml
 AWSTemplateFormatVersion : '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
@@ -67,13 +67,13 @@ Description: |
 
 a list of the resources to be created:
 
-```
+```yaml
 Resources:
 ```
 
 ## A dynamodb table definition:
 
-```
+```yaml
 EventsTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
@@ -122,7 +122,7 @@ And worth saying that on Prime Day 2017 [Amazon's own use of DynamoDB peaked at 
 
 ## The lambda _and_ API gateway definition:
 
-```
+```yaml
   ProposeDestinationFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -150,7 +150,8 @@ With 39 lines of YAML SAM will provision an API gateway, a lambda function, and 
 
 # The handler code
 
-```
+```js
+
 exports.handler = (event, context, callback) => {
   console.log(`received event: ${JSON.stringify(event)}`)
   callback(null, {
@@ -158,6 +159,7 @@ exports.handler = (event, context, callback) => {
     body: 'OK'
   })
 }
+
 ```
 
 First things first:
@@ -171,7 +173,8 @@ This is a [lambda function](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-
 
 After incurring the incredible cost of $0.02 because I kept forgetting to strip chai and mocha from the bundle I wrote a deployment script.
 
-```
+```bash
+
 #! /bin/bash
 
 set -eux
@@ -229,13 +232,16 @@ And finally, the cloudwatch logs show the output from running the lambda.
 
 That
 
-```
+```js
+
 console.log(`received event: ${JSON.stringify(event)}`)
+
 ```
 
 results in logging:
 
 ```
+
 2018-03-04T22:45:26.854Z  bb57cb6c-1ffd-11e8-b4a3-d7ae7c406190  received event:
 {
     "resource": "/destination",
@@ -263,6 +269,7 @@ results in logging:
     "body": "{\n    \"test\": \"this endpoint\"\n}",
     "isBase64Encoded": false
 }
+
 ```
 
 and each invocation also logs a line like:

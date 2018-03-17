@@ -68,12 +68,14 @@ An event-sourced system doesn't just respond to events but builds its state by r
 
  You would store events:
 
- ```
+ ```json
+
  [
   {"type": "userStartedOrder", "user": "12345"},
   {"type": "userAddedItemToBasket", "item": {"sku", "54321"}},
   {"type": "userPaidInFull", amount: "£1.23"}
 ]
+
 ```
 
 An application can now read all three of those events to generate the state of the order.
