@@ -44,7 +44,7 @@ There are three steps to this:
 
 DynamoDB needs to be run as a named container and on the same Docker network as SAM local
 
-```
+```bash
 docker network create lambda-local
 sam local start-api --docker-network lambda-local
 docker run -d -v "$PWD":/dynamodb_local_db -p 8000:8000 --network lambda-local --name dynamodb cnadiminti/dynamodb-local
@@ -56,7 +56,7 @@ SAM local can't create DynamoDB tables from the template.yaml in the way that Cl
 
 The following AWS CLI command will create the table as defined in the template.yaml:
 
-```
+```bash
 aws dynamodb create-table \
   --table-name visitplannr-events \
   --attribute-definitions \
@@ -71,7 +71,8 @@ aws dynamodb create-table \
 
 The client connection code is:
 
-```
+```js
+
 const AWS = require('aws-sdk')
 const awsRegion = process.env.AWS_REGION || 'eu-west-2'
 
@@ -90,6 +91,7 @@ const makeClient = () => {
 module.exports = {
   connect: () => dynamoDbClient || makeClient()
 }
+
 ```
 
 This module exposes a connect method that lazily initializes the db client.
@@ -104,7 +106,7 @@ The handler should act as a [composition root](http://blog.ploeh.dk/2011/07/28/C
 
 The handler ends up looking like this:
 
-```
+```js
 
 const httpResponse = require('./destinations/httpResponse')
 const mapCommand = require('./destinations/mapCommand')
@@ -153,7 +155,7 @@ Then also that dynamodb is running:
 
 Then write a test to exercise the system:
 
-```
+```js
 
 const request = require('supertest')
 var exec = require('child_process').exec
@@ -215,7 +217,8 @@ The devil is always in the detail so this test wouldn't be good enough for a rea
 
 The composition root approach means that the handler can be unit tested without relying on the dynamodb client. As an example testing the behaviour in the repository against a fake dynamodb, here the test locks in that the repository adds a correlation id to the item written to the stream:
 
-```
+```js
+
 const streamRepoFactory = require('../destinations/make-stream-repository')
 const expect = require('chai').expect
 
@@ -253,6 +256,7 @@ describe('the stream repository', function () {
       .catch(done)
   })
 })
+
 ```
 
 Writing to the event stream can be tested with a guid generator that always generates the same guid, and a dynamodb client that doesn't connect to dynamodb. This lets other behaviour be tested without those dependencies complicating or slowing down the tests.

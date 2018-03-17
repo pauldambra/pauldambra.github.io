@@ -2,7 +2,6 @@ name: Mindless Rambling Nonsense
 markdown: kramdown
 kramdown:
     smart_quotes: ["apos", "apos", "quot", "quot"]
-highlighter: rouge
 description: My thoughts are mindless and rambling so the best place for them is the internet
 encoding: UTF-8
 url: http://pauldambra.github.io

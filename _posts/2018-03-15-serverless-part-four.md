@@ -43,7 +43,7 @@ Notice here that the validator doesn't need to know what happens in case of succ
 
 The first iteration will be a validator that confirms that an event has a `geolocation` key which has a numeric latitude and longitude.
 
-```
+```json
 {
   "geolocation": {
     "latitude": 1.23,
@@ -58,7 +58,7 @@ This is obviously a bit silly but the point here isn't to see what useful locati
 
 As discussed in [part two](/2018/02/serverless-2.html) DynamoDb already has the concept of streams of changes to tables as triggers for lambdas. Updating the SAM template to add the stream changes the definition to:
 
-```
+```yml
   EventsTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
@@ -99,7 +99,7 @@ Referring back to Fowler's four types of event driven systems from [part One](/2
 
 ... is again a simple composition root to allow unit testing without the external dependencies.
 
-```
+```js
 const mapDomainEvent = require('./destinations/location-validation/dynamoDbMap')
 
 const guid = require('./GUID')
@@ -133,7 +133,7 @@ It maps from the list of DynamoDB events received to a list of domain events and
 
 The event subscriber is only interesting because it does some Promise fangling:
 
-```
+```js
 module.exports = {
   for: (geolocationValidator, eventWriter) => ({
     apply: (events, callback) => {
@@ -163,7 +163,7 @@ Both the validator and the event writer return promises. The validator only to p
 
 This naive version does just that:
 
-```
+```js
 module.exports = {
   for: (geolocationValidator, eventWriter) => ({
     apply: (events, callback) => {
@@ -191,7 +191,7 @@ Instead each Promise is captured and [`Promise.all`](https://developer.mozilla.o
 
 Testing that takes a bit of juggling but is relatively straight-forward:
 
-```
+```js
 const chai = require('chai')
 const dirtyChai = require('dirty-chai')
 chai.use(dirtyChai)
@@ -262,7 +262,7 @@ describe('the event subscriber can handle multiple events', function () {
 
 Here a fake, slow write is introduced and captures a count of completed writes.
 
-```
+```js
 let writesCompleted = 0
 
 const fakeSlowStreamRepo = {
@@ -284,7 +284,7 @@ Running `deploy.sh` and pushing a test API event in results in a DynamoDB table 
 
 ![two events in a dynamodb table](/images/events/2-events-written.png)
 
-```
+```json
 {
   "event": {
     "correlationId": "2237661b-851b-4e78-3dfd-efe2436717d4",
@@ -300,7 +300,7 @@ Running `deploy.sh` and pushing a test API event in results in a DynamoDB table 
 }
 ```
 
-```
+```json
 {
   "event": {
     "correlationId": "2237661b-851b-4e78-3dfd-efe2436717d4",

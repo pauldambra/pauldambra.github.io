@@ -1,3 +1,5 @@
+@import "syntax.css";
+
 $lightest: #fff;
 $light: #aaa;
 
@@ -378,33 +380,6 @@ footer {
     }
   }
 }
-  pre, .highlighter-rouge, .highlight {
-    background-color: #eef;
-    padding: 0 .4em;
-    font-size: 13px;
-    padding: 0 .2em;
-    overflow: auto;
-    code {
-      border: none;
-    }
-
-    &.terminal {
-      background-color: #333;
-      border: 1px solid #000;
-      color: #FFF;
-      code {
-        background-color: #333;
-      }
-    }
-.post {
-  margin-top: 5px;
-  }
-
-  ul, ol {
-    margin-left: 1.35em;
-  }
-}
-
 .further-reading {
   margin-top: 60px;
 
