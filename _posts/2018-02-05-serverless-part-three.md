@@ -22,7 +22,7 @@ In this post we will look at how SAM local let's you develop locally and write t
 
 You have to have Docker running locally and then you can `npm install -g aws-sam-local`.
 
-To start the API Gateway and Lambda example from [part two](/2018/02/severless-2.html) navigate to the directory containing the template.yaml file and run `sam local start-api`
+To start the API Gateway and Lambda example from [part two](/2018/02/serverless-2.html) navigate to the directory containing the template.yaml file and run `sam local start-api`
 
 This starts lambda in Docker and shows what endpoints are mounted:
 
