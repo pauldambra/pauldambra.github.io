@@ -1,7 +1,7 @@
 ---
-title: "Is where we're going where we're going" 
-layout: "post" 
-permalink: "/2018/01/direction.html" 
+title: "Is where we're going where we're going"
+layout: "post"
+permalink: "/2018/01/direction.html"
 date: "2018-01-29 10:00:00"
 description: "Direction is more important than speed"
 category: "agile"
@@ -26,7 +26,7 @@ In fact both of those articles go on to expand on the physical metaphor...
 
 # A little physics
 
-Notice that in the quote above there is a switch between "velocity" and "speedometer". 
+Notice that in the quote above there is a switch between "velocity" and "speedometer".
 
 If you were driving too fast you don't get a velociting ticket for exceeding the velocity limit.
 
@@ -45,7 +45,7 @@ You can't say *anything* about when and where they will arrive just from their s
 ### So, what do we need?
 
 Simplistically (let's not stretch the metaphor to routing on a map) you need:
- 
+
  * a destination
  * a starting point
  * a direction of travel
@@ -82,7 +82,7 @@ I assume a few things:
  * you don't want to waste your own or somebody else's time or money
 
 In which case you have to regularly measure
- 
+
  * where you are
  * where you're going
  * the direction you're travelling
@@ -136,5 +136,3 @@ Maybe I've not worked it out completely yet... [toot me and tell me what you thi
  * We can use data from people using our software and more user research as our compass to check whether we strayed from our desired path.
 
 We can and should care if we're being asked to do something meaningful. And we mustn't treat it as somebody else's work to check where we should go or whether we got there.
-
-The whole team is responsible for quality and [you can't have a quality result if you're just doing the wrong thing faster](https://www.goodreads.com/quotes/29838-there-is-nothing-quite-so-useless-as-doing-with-great).
