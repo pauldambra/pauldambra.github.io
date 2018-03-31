@@ -22,7 +22,7 @@
     <title>{{ page.title }}</title>
     {% include openGraph.html %}
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content="{{page.description}}">
+    <meta name="description" content="{{page.description | default: 'a blog about software engineering' }}">
     <meta property="fb:pages" content="1029758320473951" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
