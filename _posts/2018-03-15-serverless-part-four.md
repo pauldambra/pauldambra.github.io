@@ -16,7 +16,7 @@ tags: ["serverless", "series", "events", "eventdriven"]
 
 In this post we start to see how we can build a stream of events that lets us create state. We'll do this by adding an event subscrber that waits until a user proposes a destination to visit and validates the location they've provided.
 
-![the slice being built in this article](/images/events/c4/second-slice-4.jp2)
+![the slice being built in this article](/images/events/c4/second-slice-4.jpg)
 
 <!--more-->
 
