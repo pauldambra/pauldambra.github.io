@@ -14,7 +14,7 @@ tags: [metaphors, software]
 
 > I've never really got on with construction metaphors for software. The cost of mistakes and rework is high in construction
 
-![the toot itself](/images/toot.png)
+![the toot itself](/images/toot.jpeg)
 
 This isn't saying that Software isn't putting things together but rather I've seen people justify not 'being agile' by using construction metaphors.
 
