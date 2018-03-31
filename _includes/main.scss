@@ -398,10 +398,19 @@ footer {
     vertical-align: top;
     position: relative;
 
+    @media screen and (max-width: 425px) {
+      width: 100%;
+      margin-bottom: 1%;
+    }
+
     small {
       bottom: 5px;
       position: absolute;
       right: 5px;
     }
   }
+}
+
+.highlight {
+  overflow-x: scroll;
 }
