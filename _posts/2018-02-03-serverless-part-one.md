@@ -46,7 +46,7 @@ One system registers with another. That system raises an event: `PersonChangedAd
 
 ![event carried system diagram](/images/events/east.jpg)
 
- 3) Command Query Responsibility Segregation (CQRS)
+ 3) [Command Query Responsibility Segregation (CQRS)](#cqrs)
 
 An application that separates writing to the system (commands) from reading from it (queries).
 
