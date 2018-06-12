@@ -28,13 +28,13 @@ In a CRUD SQL system the application would have been maintaining the most up-to-
 
 > As an aside a lot of people don't realise that CRUD SQL stands for __*C*__ an we __*R*__ eally not __*U*__ se SQL __*D*__ atabases they may __*S*__ eem familiar but all the ORM stuff is well over our __*Q*__ uota for comp __*L*__ icated dependencies.
 
-In an event driven system applications subscribe to be notified when new events occur. They can create read models as the events arrive. Those read models are what the application uses to, erm, read data. So they're used in place many applications make SQL queries. Now this visit plannr application needs a read model for recently updated destinations.
+In an event driven system applications subscribe to be notified when new events occur. They can create read models as the events arrive. Those read models are what the application uses to, erm, read data. So they're used in places many applications make SQL queries. Now this visit plannr application needs a read model for recently updated destinations.
 
 <!--more-->
 
 # What even is a Read Model?
 
- > The query (or read) model is a denormalized data model. It is not meant to deliver the domain behaviour, only data for display (and possiby reporting).
+ > The query (or read) model is a denormalized data model. It is not meant to deliver the domain behaviour, only data for display (and possibly reporting).
 
  > CQRS-based views can be both cheap and disposable ... any single view could be rewritten from scratch in isolation or the entire query model be switched to completely different persistence technology
 
@@ -231,6 +231,8 @@ module.exports = {
 Building the read model involves taking each event and updating a model based on the event type. Here you can see how this code is tolerant of events it isn't expecting - it will just ignore them.
 
 There's no validation that the data being read from the events is present. Whether there should be validation at this stage is context dependent. Here we wrote the event producers and know that for there to be a `geolocationValidationSucceeded` event both name and geolocation have to be present. We can trust that the read model will be good enough for now.
+
+
 
 # What's next?
 
