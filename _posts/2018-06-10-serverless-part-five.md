@@ -38,7 +38,7 @@ In an event driven system applications subscribe to be notified when new events 
 
  > CQRS-based views can be both cheap and disposable ... any single view could be rewritten from scratch in isolation or the entire query model be switched to completely different persistence technology
 
-<div style="text-align: right">Both from Page 141 Implementing Domain Driven Design by Vaughn Vernon</div>
+ - both from Page 141 Implementing Domain Driven Design by Vaughn Vernon
 
 A CQRS system ([see part 1](/2018/02/serverless-1.html#cqrs)) separates the parts of the application(s) that receives commands to change from those that receive queries for data. Read models are the data models for the read side of the application. This lets you optimise different areas for their specific tasks.
 
