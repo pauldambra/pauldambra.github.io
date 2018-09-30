@@ -1,0 +1,13 @@
+---
+layout: default
+title: Dear Diary Year One
+---
+
+{% assign diary_entries = site.dear_diary_year_one | sort: 'order' %}
+  {% for diary_entry in diary_entries %}
+
+      <h2>{{diary_entry.title}}</h2>
+      <img src="{{diary_entry.picture}}">
+
+  {% endfor %}
+
