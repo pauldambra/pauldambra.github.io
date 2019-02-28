@@ -4,7 +4,7 @@ kramdown:
     smart_quotes: ["apos", "apos", "quot", "quot"]
 description: My thoughts are mindless and rambling so the best place for them is the internet
 encoding: UTF-8
-url: http://pauldambra.github.io
+url: http://pauldambra.dev
 author: paul.dambra+fb-instant@gmail.com
 plusProfile: https://plus.google.com/114260096260757534167?rel=author
 excerpt_separator: <!--more-->
