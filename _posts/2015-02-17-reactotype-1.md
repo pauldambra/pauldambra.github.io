@@ -14,7 +14,7 @@ tags: [learning, react, js, series]
 
 <!--more-->
 
-I've played with it [very briefly while prototyping an Imgur comment generator](http://pauldambra.github.io/commenturion/) and saw a talk on it recently at [MancJS](http://mancjs.com/#react). 
+I've played with it [very briefly while prototyping an Imgur comment generator](https://pauldambra.github.io/commenturion/) and saw a talk on it recently at [MancJS](http://mancjs.com/#react). 
 
 So I already had a few thoughts:
 

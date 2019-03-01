@@ -8,7 +8,7 @@
    "genre":"{{ include.category }}",
    "keywords":"{{ include.keywords }}",
    "wordCount":"{{ wordcount }}",
-   "url":"https://pauldambra.github.io{{ include.link }}",
+   "url":"https://pauldambra.dev{{ include.link }}",
    "datePublished":"{{ include.date | | date: '%Y-%m-%d' }}",
    "author":{  
       "@type":"Person",
@@ -29,20 +29,20 @@
     ],
     "logo": {
       "@type": "ImageObject",
-      "contentUrl": "https://pauldambra.github.io/images/logo.png",
-        "url": "https://pauldambra.github.io"
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
     }
    },
    "image":{  
       "@type":"ImageObject",
-      "contentUrl":"https://pauldambra.github.io/images/cardboard.jpg",
-      "url":"https://pauldambra.github.io",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
       "height":"450",
       "width":"1000"
    },
    "mainEntityOfPage":{  
       "@type":"WebPage",
-      "@id":"https://pauldambra.github.io{{ include.link }}"
+      "@id":"https://pauldambra.dev{{ include.link }}"
    },
    "articleBody":{{ include.content | strip_html | jsonify | normalize_whitepace | strip_newlines | strip | replace: ' ', '  ' }}
 }
