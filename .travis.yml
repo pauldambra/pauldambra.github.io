@@ -14,10 +14,8 @@ script:
   - ./imageOptimisation.sh
   - ./build.sh
   - ./amp-validate.sh
-deploy:
-  skip_cleanup: true
-  - ./deploy.sh 
-after_deploy:
+after_success:
+  - ./deploy.sh
   - bundle exec ruby ./htmltest.rb
   - ./verify.sh
 env:
