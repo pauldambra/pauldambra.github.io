@@ -11,9 +11,15 @@ install:
   - nvm install 8.4.0
   - nvm use 8.4.0
 script:
-  - ./imageOptimisation.sh && ./build.sh && ./amp-validate.sh
-after_script:
-  - ./deploy.sh && bundle exec ruby ./htmltest.rb && ./verify.sh
+  - ./imageOptimisation.sh
+  - ./build.sh
+  - ./amp-validate.sh
+deploy:
+  skip_cleanup: true
+  - ./deploy.sh 
+after_deploy:
+  - bundle exec ruby ./htmltest.rb
+  - ./verify.sh
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
