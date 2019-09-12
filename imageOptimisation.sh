@@ -5,6 +5,8 @@ set -u
 echo "optimising jpegs"
 find ./images -name "*.jpg" -type f -exec jpegtran -copy none -optimize -progressive -perfect -outfile {} {} \;
 
-# echo "optimising PNGs"
-# optipng exits with 1 even when it works :(
-# find ./images/ -name "*.png" -type f -print0 |xargs -n 1 -P 4 -0 optipng -o4 | grep "% decrease"
+echo "optimising PNGs"
+optipng exits with 1 even when it works :(
+find ./images/ -name "*.png" -type f -print0 |xargs -n 1 -P 4 -0 optipng -o4 | grep "% decrease"
+
+exit 0
