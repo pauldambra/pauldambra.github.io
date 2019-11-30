@@ -69,11 +69,11 @@ Instead of concentrating on not having servers. Concentrate on making best use o
 
 In a serviceful system you should default to consuming the service. The service doesn't come with the provisioning and maintenance burden of the not-service. Even if the not-service is in some way better it needs to be _a lot_ better to justify its cost.
 
-Yes, NFS is great but use S3
-Yes, RabbitMQ is great but use SQS
-Yes, ${MVC Framework of choice} is great but use API Gateway and Lambda
-etc
-etc
+ * Yes, NFS is great but use S3
+ * Yes, RabbitMQ is great but use SQS
+ * Yes, ${MVC Framework of choice} is great but use API Gateway and Lambda
+ * etc
+ * etc
 
 # Technical debt vs Accidental complexity
 
