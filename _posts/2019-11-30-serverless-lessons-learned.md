@@ -103,7 +103,7 @@ I work with a team that build customer, member, and offers systems for the Co-op
 
 200 people working to a short deadline even bringing their best selves every day can introduce an awful lot of technical debt and accidental complexity.
 
-Dealing with that debt while adding to and fixing our systems was making us very slow. We chose the principle of preferring immutability and composability at every level. Choosing serverless systems has meant that we make most of our work such that it can be added alongside what already exists. *Without adding to the already high maintenance burden of the serverful systems that exist*. 
+Dealing with that debt while adding to and fixing our systems was making us very slow. We chose the principle of preferring immutability and composability at every level. Choosing serviceful systems has enabled that and meant that we make most things such that they can be added alongside what already exists. That means we can work *without adding to the already high maintenance burden of the serverful systems that exist*. 
 
 That lets us deal with technical debt and accidental complexity at a different cadence than we deal with our customers' needs. We already run in AWS so we chose to use AWS lambda for FaaS and DynamoDB for (sort of) key-value storage. We were already using SQS (queue), SES (email), and S3 (storage).
 
