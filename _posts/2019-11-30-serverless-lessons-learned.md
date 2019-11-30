@@ -30,7 +30,7 @@ Seeking to build "a constellation of high-quality projects that orchestrate cont
 
 So, cloud native functions are (container based) systems that allow you to run functions as a service (Faas).
 
-# Functionas as a Service (FaaS)
+# Function as as a Service (FaaS)
 
 These are compute environments that let someone deploy a function that will run in response to events triggered by the environment.
 
@@ -44,9 +44,9 @@ If I only convince you of one thing in this post I want it to be this: none of t
 
 There's quite a bit of [definition of serverless in a previous post](/2018/02/serverless-1.html).
 
-Boil it down to this: there is no installation, configuration, or maintenance of servers for the users of a service in a Serverless system.
+Boil it down to this: there is no installation, configuration, or maintenance of servers for the owners, and builders of a service in a Serverless system.
 
-In most cases your team (or worse a different team in your organisation) will provision, manage, patch, security scan, and deploy servers either physical or virtual. Unless you sell the compute those servers represent to your customers then you don't make money just by running those servers.
+In most cases your team (or worse a different team in your organisation) will provision, manage, patch, security scan, and deploy servers either physical or virtual. Unless you sell the compute those servers represent then you don't make money just by running those servers.
 
 ![what you do and don't manage in a serverless system](/images/serverless-maintenance.png)
 
