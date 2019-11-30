@@ -50,7 +50,7 @@ In most cases your team (or worse a different team in your organisation) will pr
 
 ![what you do and don't manage in a serverless system](/images/serverless-maintenance.png)
 
-In this image we can see that adding containers or kubernetes might make your systems "Serverless" to a traditional development team, one that has no access to or responsibility for infrastructure. But it increases the amount of infrastructure to provision, patch, and scan for vulnerabilities for your organisation.
+In this image we can see that adding containers or kubernetes might make your systems "Serverless" to a traditional development team, one that has no access to or responsibility for infrastructure. But it increases the amount of infrastructure to provision, patch, and scan for vulnerabilities for your organisation. It _increases_ the amount of things to manage that don't directly add value.
 
 It's only as you move to a system like EC2 fargate or GCP cloud run where you only bring the containers that you start to reduce the amount of infrastructure management you need to carry out.
 
