@@ -89,7 +89,7 @@ A lot of teams call this "technical debt" without distinguishing it from "techni
 
 E.g. we wrote a tax processor which handles complex tax rules... and we wrote our own queueing software to do it. The essential complexity of the tax rules might be swamped by the accidental complexity of the home grown queue.
 
-Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed bu the workrarounds needed to make an analytical DB look like an online transaction processing DB, 
+Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed bu the workrarounds needed to make an analytical DB look like an online transaction processing DB.
 
 (not that I've been burned by inheriting decisions that look like either of those two ;))
 
