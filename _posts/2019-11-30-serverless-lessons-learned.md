@@ -105,7 +105,7 @@ I work with a team that build customer, member, and offers systems for the Co-op
 
 Dealing with that debt while adding to and fixing our systems was making us very slow. We chose the principle of preferring immutability and composability at every level. Choosing serviceful systems has enabled that and meant that we make most things such that they can be added alongside what already exists. That means we can work *without adding to the already high maintenance burden of the serverful systems that exist*. 
 
-That lets us deal with technical debt and accidental complexity at a different cadence than we deal with our customers' needs. We already run in AWS so we chose to use AWS lambda for FaaS and DynamoDB for (sort of) key-value storage. We were already using SQS (queue), SES (email), and S3 (storage).
+That lets us deal with technical debt and accidental complexity at a different cadence than we deal with our sponsors' and users' needs. We already run in AWS so we chose to use AWS lambda for FaaS and DynamoDB for (sort of) key-value storage. We were already using SQS (queue), SES (email), and S3 (storage).
 
 # Event driven and asynchronous or GTFO
 
@@ -123,7 +123,7 @@ When I joined this team only QAs were allowed to deploy to production and only p
 
 The stability, reduced complexity, and reduced attack surface of Serviceful systems has helped give us the confidence to collapse those silos. Software engineers now regularly write terraform, platform engineers and QAs join the mob, and folk sit together.
 
-We also noticed people starting to thank each other as they got to know each other and understand the work being done. Of all the things we've achieved together this is the one I'm most proud of so while I wouldn't argue the behaviours are unique to serviceful systems I wouldn't want to leave out the contribution they made.
+We also noticed people starting to thank each other as they got to know each other and understand the work being done. Of all the things we've achieved together this is the one I'm most proud of. So while I wouldn't argue the behaviours are unique to serviceful systems I wouldn't want to leave out the contribution they made.
 
 # Cheap and fast and slow
 
@@ -131,7 +131,7 @@ We also noticed people starting to thank each other as they got to know each oth
 
 Cost isn't the most important thing - developers can cost much more than infrastructure. But we've been building entirely servicefully for more than a year now and our systems do more than they used to but at worst our AWS bill has been flat over that year. We use [cloudability](https://www.cloudability.com/) to track our spending and that predicts a 10-20% drop in bill over the next 12 months based on change over the last year.
 
-In fact [one of our engineers](https://twitter.com/IllCopeSomehow) has paid his salary in cost reductions on our inherited Serverful systems. That almost certainly means we've invested upwards of $200,000 since the team was launched that could have been avoided. Engineers are more expensive than infrastructure so let's guess that we invested $1.5M to create that avoidable $200k. 
+In fact [one of our engineers](https://twitter.com/IllCopeSomehow) has paid his salary in cost reductions on our inherited Serverful systems. That almost certainly means we've invested upwards of $200,000 since the team was launched that could have been avoided. Engineers are more expensive than infrastructure so let's guess that we invested $1.5M to create that avoidable $200k. Arguably, that's going on for $2M invested not to achieve any value _at all_. At best it was scaffolding that enabled the valuable work. At worst, avoidable in its entirety.
 
 Serviceful systems were less mature back when that investment was being made so it may well have been the right investment then... but they're much more mature now. To the point that it should be yor default choice that your specific needs might make you move away from.
 
