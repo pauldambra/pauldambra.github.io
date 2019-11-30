@@ -133,11 +133,11 @@ Cost isn't the most important thing - developers can cost much more than infrast
 
 In fact [one of our engineers](https://twitter.com/IllCopeSomehow) has paid his salary in cost reductions on our inherited Serverful systems. That almost certainly means we've invested upwards of $200,000 since the team was launched that could have been avoided. Engineers are more expensive than infrastructure so let's guess that we invested $1.5M to create that avoidable $200k. Arguably, that's going on for $2M invested not to achieve any value _at all_. At best it was scaffolding that enabled the valuable work. At worst, avoidable in its entirety.
 
-Serviceful systems were less mature back when that investment was being made so it may well have been the right investment then... but they're much more mature now. To the point that it should be yor default choice that your specific needs might make you move away from.
+Serviceful systems were less mature back when that investment was being made so it may well have been the right investment then... but they're much more mature now. To the point that it should be your default choice. Your context might force a different choice. But my assertion is that teams should assume they're building Servicefully and discover where they can't.
 
 S3 and dynamo are our highest serverless cost. Lambda is effectively free still despite running production workloads and underpinning the majority of our scheduled infrastructure tasks. 
 
-DynamoDB was rising in cost because we were setting tables to fixed provisioned capacities. In order to fix a performance issue we set Dynamo to "on demand" i.e. serverless mode. Not only did that fix our performance problems but also reduced cost by about 80%. The moral of the tale here is you get forensic visibility into the cost of what you're running. But you have to make sure you're using a service like cloudability and are checking what you're spending.
+DynamoDB was rising in cost. We discovered this was because we were setting tables to fixed provisioned capacities. In order to fix a performance issue we set Dynamo to "on demand" i.e. serverless mode. Not only did that fix our performance problems but also reduced cost by about 80%. The moral of the tale here is you get forensic visibility into the cost of what you're running. But you have to make sure you're using a service like cloudability and are checking what you're spending.
 
 ![https://twitter.com/pauldambra/status/1180157778419179523](/images/dynamo-cheap-perf.png)
 
@@ -157,13 +157,13 @@ But you are also accepting that you are leaning on a framework that you can't pl
 
 At the time of our first implementations cold start of a lambda function in a VPC took a pretty consistent ten seconds. For an offline batch process that doesn't really matter but if you connect that up to an API that's abysmal.
 
-Since JManc AWS have released a fix to that performance issue. But it's a great example of how you may have to accept the tradeoff of not being able to build exactly what you want in the way you want in order to get the benefits of the Serverless approach.
+Since that JManc discussion AWS have released a fix to that performance issue. But it's a great example of how you may have to accept the tradeoff of not being able to build exactly what you want in the way you want in order to get the benefits of the serviceful approach.
 
 It's also a great example of why I'd recommend AWS for Serviceful/utility hosting. The speed at which they iterate and improve based on customer feedback is startling.
 
 # Commit to learning
 
-This is an relatively new way of making systems and pushes you into less familiar approaches. If you start down this road you should make a point of introducing protected time for individual and group learning. We definitely missed a trick here and it took longer than necessary to get good at this. 
+This is a relatively new way of making systems and pushes you into less familiar approaches. If you start down this road you should make a point of introducing protected time for individual and group learning. We definitely missed a trick here and it took longer than necessary to get good at this. 
 
 You should have protected learning time anyway but especially while you introduce something so new to everyone.
 
