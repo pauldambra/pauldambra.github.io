@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-gem 'github-pages', '175'
+gem 'github-pages'
 
 #for amp generation
 gem 'nokogiri'
 gem 'fastimage'
 gem 'html-proofer'
 gem 'parallel'
-gem 'faraday', '0.9.2'
+gem 'faraday'
 
 group :jekyll_plugins do
   gem 'octopress-paginate'

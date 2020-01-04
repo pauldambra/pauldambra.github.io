@@ -8,8 +8,8 @@ before_install:
   - sudo apt-get install optipng
 install:
   - bundle install
-  - nvm install 8.4.0
-  - nvm use 8.4.0
+  - nvm install 12
+  - nvm use 12
 script:
   - ./imageOptimisation.sh
   - ./build.sh
