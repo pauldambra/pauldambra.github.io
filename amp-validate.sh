@@ -9,8 +9,6 @@ if [ ! -d "$AMPDIRECTORY" ]; then
   exit 1
 fi
 
-npm install -g amphtml-validator
-
 for f in `find $AMPDIRECTORY -type f -name '*.html'`; do
-  amphtml-validator $f
+  npx amphtml-validator $f
 done
