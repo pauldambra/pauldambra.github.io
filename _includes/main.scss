@@ -311,12 +311,16 @@ ul {
   }
 }
 
-img, amp-img {
+figure, img, amp-img {
   display: block;
   max-width: 1000px;
   vertical-align: middle;
   width: 100%;
   margin: auto;
+}
+
+figcaption {
+  text-align: right;
 }
 
 aside {
