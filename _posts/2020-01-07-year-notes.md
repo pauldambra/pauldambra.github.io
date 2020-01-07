@@ -2,15 +2,15 @@
 title: "2019 Year Notes"
 layout: "post"
 permalink: "/2020/01/year-notes.html"
-date: "2020-01-04 10:00:00"
-description: "year notes for 2019"
+date: "2020-01-07 08:00:00"
+description: "My year notes for 2019"
 category: "year-notes"
 tags: ["dear-diary", "working-out-loud"]
 ---
 
 Since [October 2017](https://twitter.com/pauldambra/status/916336773566992384) I've been keeping week notes. I've found them a fantastic tool to track my focus and to remember to reflect on success (or lack of it).
 
-Some [colleagues](https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe) and [tooters](https://alicebartlett.co.uk/blog/yearnotes-2019) have written year notes as 2019 ends. And here are mine... It feels egotistical... but hopefully it's useful to me in the future even if it isn't to anyone else.
+Some [colleagues](https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe) and [some](https://twitter.com/tekin/status/1213878853560651776) [tooters](https://alicebartlett.co.uk/blog/yearnotes-2019) have written year notes as 2019 ends. And here are mine... It feels egotistical... but hopefully it's useful to me in the future even if it isn't to anyone else.
 
 <!--more-->
 
