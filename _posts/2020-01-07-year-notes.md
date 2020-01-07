@@ -16,7 +16,7 @@ Some [colleagues](https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe) and
 
 # Being a Principal Engineer
 
-I spent 2018 seconded into this role and 2019 officially in it. The teams I work with are achieving great things: reduced complexity, reduced cost, increased stability and throughput, and regularly deliver same day fixes (down from 10 days for simple fixes). But even two years in I find it hard to see the value I'm providing and unlearn a lot of the not-principal-engineer habits I'd worked hard to learn.
+I spent 2018 seconded into this role and 2019 officially in it. The teams I work with are achieving great things: reduced complexity, reduced cost, increased stability and throughput, and regularly deliver same day fixes (down from 10 days for simple fixes). [Check the Customer and Member section in this Co-op blog](https://digitalblog.coop.co.uk/2019/12/17/2019-highlights-theres-a-lot-to-be-proud-of/). But even two years in I find it hard to see the value I'm providing and to unlearn a lot of the not-principal-engineer habits I'd worked hard to learn.
 
 The biggest being...
 
