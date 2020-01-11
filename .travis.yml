@@ -1,11 +1,13 @@
+dist: bionic
+sudo: required
 language: ruby
 cache:
   bundler: true
 before_install:
-  - apt-get -qq update
-  - apt-get install libjpeg-progs
-  - apt-get install optipng
-  - apt-get install fonts-noto-color-emoji
+  - sudo apt-get -qq update
+  - sudo apt-get install libjpeg-progs
+  - sudo apt-get install optipng
+  - sudo apt-get install fonts-noto-color-emoji
 install:
   - bundle install
   - nvm install 12
