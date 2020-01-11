@@ -8,8 +8,8 @@ def render_note(html_path, image_path)
   @driver = Selenium::WebDriver.for :chrome, options: options
   @driver.navigate.to "file:///" + html_path
 
-  @driver.manage.window.resize_to(720, 1000)
-  
+  @driver.manage.window.resize_to(720, 600)
+
   @driver.save_screenshot image_path
 
   @driver.quit
