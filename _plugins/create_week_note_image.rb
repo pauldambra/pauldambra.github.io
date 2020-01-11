@@ -13,7 +13,7 @@ def launch_chrome
   Selenium::WebDriver.for :chrome, options: options
 end
 
-def render_note(browser, html_path, image_path)
+def render_note(html_path, image_path)
   browser = launch_chrome
   browser.navigate.to "file:///" + html_path
   browser.manage.window.resize_to(720, 600)
