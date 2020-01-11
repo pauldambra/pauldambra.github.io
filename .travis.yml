@@ -6,6 +6,7 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install libjpeg-progs
   - sudo apt-get install optipng
+  - sudo apt-get install fonts-noto-color-emoji
 install:
   - bundle install
   - nvm install 12
