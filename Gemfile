@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 gem 'github-pages'
 
+gem 'webdrivers'
+
 #for amp generation
 gem 'nokogiri'
 gem 'fastimage'

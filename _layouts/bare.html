@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49969634-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-49969634-1');
+    </script>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{ page.title }}</title>
+    <link rel="canonical" href="{{ page.canonical_url | prepend: site.url }}" />
+    {% include weeknote_opengraph.html %}
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="{{page.description | default: 'a blog about software engineering' }}">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <style amp-custom>
+      {% include syntax.css %}
+      {% capture include_to_scssify %}
+        {% include main.scss %}
+      {% endcapture %}
+      {{ include_to_scssify | scssify }}
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+  </head>
+  <body>
+    <header class="hero short"></header>
+    <div class="main">
+      {{ content }}
+    </div>
+
+    <script src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet">
+  </body>
+</html>
