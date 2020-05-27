@@ -20,5 +20,8 @@
     "sinon": "^8.0.2",
     "sw-precache": "^5.2.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "alex": {
+    "noBinary": true
+  }
 }
