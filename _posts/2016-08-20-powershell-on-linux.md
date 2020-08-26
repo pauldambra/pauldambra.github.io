@@ -12,7 +12,7 @@ MS have open-sourced [powershell](https://github.com/PowerShell/PowerShell) and 
 
 I've never really _got_ powershell. Although it's definitely an improvement on vbscript so I have used it when I've needed to automate windows. 
 
-But as a task approaches some ill-defined level of complexity I switch to C#, Ruby, or Node rather than writing a script. Not that those are the only options just I don't know Perl, or Python, or $yourFavouriteTool.
+But as a task approaches some ill-defined level of complexity I switch to C#, Ruby, or Node rather than writing a script. Not that those are the only options but I don't know Perl, or Python, or $yourFavouriteTool.
 
 As a result I have barely written any Powershell on Windows and, as I've done more work on Linux over the last few years, I've also barely written any bash.
 

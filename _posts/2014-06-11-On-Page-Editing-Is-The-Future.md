@@ -3,7 +3,7 @@ title: "Websites != CMS Platform - On Page Editing"
 layout: "post" 
 permalink: "/On-Page-Editing.html" 
 date: "2014-06-11 08:11:00"
-description: using contenteditable in HTML5 to make page management easy
+description: using contenteditable in HTML5 to make pages editable
 category: cms
 tags: [learning, cms, design, web, series]
 ---

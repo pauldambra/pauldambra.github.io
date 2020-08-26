@@ -1,5 +1,5 @@
 --- 
-title: "Kill If With Objects" 
+title: "Remove If With Objects" 
 layout: "post" 
 permalink: "/kill-if-with-objects.html" 
 date: "2016-09-07 18:00:00"

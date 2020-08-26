@@ -9,7 +9,7 @@ tags: [learning, cms, design, web, series]
 ---
 
 I was once complaining about having difficulty setting up a very slightly unusual feature in a Drupal site that was taking forever to achieve. The framework made so many assumptions about what I should do that it wouldn't let me do what I wanted to.
-
+<!--alex ignore he-she --->
 A freelancer commented that if he was quoting on a project that had a requirement that it use a given CMS he didn't quote any less than building from scratch. He had found it didn't make enough difference to the effort he'd spend...
 
 This stuck with me and matches my experience so far. (yeah, yeah, confirmation bias. I know)
