@@ -58,7 +58,7 @@ jobs:
       run: |
         cd _site && \
         git add -A && \
-        git commit -m "${(GITHUB_RUN_NUMBER}} auto-pushed to github" && \
+        git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github" && \
         git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master
     - name: test html # has to come after deploy so new links are valid
       run: bundle exec ruby ./htmltest.rb
