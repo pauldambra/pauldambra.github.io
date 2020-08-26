@@ -25,18 +25,18 @@ In this post we start to see how we can build a stream of events that lets us cr
 This slice will prove that the system can subscribe to events occurring, react to them, and write new events back to the stream. That would only leave authentication, and a read model website to build to provide all the parts needed.
 
 Subscribing and reacting to events demonstrates one of the benefits mentioned in [part one](/2018/02/serverless-1.html). That these systems are composable. The additional code added here won't need any changes to the existing deployed applications. But can still add new behaviour to the system as a whole.
-
+<!--alex ignore kids --->
 In part three we added a command handler that could write `ProposedDestination` events. Here a user is saying they think there is a place that parents would like to take their kids. The application accepts this to smooth their experience (and capture any proposal) and then responds to that event by checking the provided details before listing the new destination.
 
 ![the event flow](/images/events/part-four-flow.jpg)
 
 So:
-
+<!--alex ignore failure --->
  * one or more ProposedDestination events occur
  * The Location Validator is subscribed to those events
  * It reads each one and validates the provided location
  * Writing the success or failure event to the stream
-
+<!--alex ignore failure --->
 Notice here that the validator doesn't need to know what happens in case of success or failure. It doesn't even need to know whether there are applications that do something - there's no coupling of config or orchestration.
 
 # Twee Example
@@ -52,7 +52,7 @@ The first iteration will be a validator that confirms that an event has a `geolo
 }
 ```
 
-This is obviously a bit silly but the point here isn't to see what useful location validation looks like. Think of it as a walking skeleton into which more realistic geolocation like checking the coordinate is in the UK could be placed.
+This is a bit silly but the point here isn't to see what useful location validation looks like. Think of it as a walking skeleton into which more realistic geolocation like checking the coordinate is in the UK could be placed.
 
 # Infrastructure Changes
 
@@ -97,7 +97,7 @@ Referring back to Fowler's four types of event driven systems from [part One](/2
 
 # The Lambda...
 
-... is again a simple composition root to allow unit testing without the external dependencies.
+... is again a composition root to allow unit testing without the external dependencies.
 
 ```js
 const mapDomainEvent = require('./destinations/location-validation/dynamoDbMap')
@@ -161,7 +161,7 @@ module.exports = {
 
 Both the validator and the event writer return promises. The validator only to provide a nicer API. The writer because it is IO. Because of JavaScript's single-threaded "helpfulness" this could mean that your code finishes before the promises finish handing back to the Lambda's callback and terminating your code before it can complete.
 
-This naive version does just that:
+This naive version does that:
 
 ```js
 module.exports = {

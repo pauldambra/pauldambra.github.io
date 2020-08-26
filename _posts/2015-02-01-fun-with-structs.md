@@ -20,7 +20,7 @@ public class MeaningfulName : MathsName
 ```
 
 <!--more-->
-
+<!--alex ignore easy --->
 We're porting some code written by our maths wizards and there's lots of convention in their domain specific language which we were trying to capture (because we're not maths wizards and (maybe only I) get easily lost).
 
 In one case the prospective base class wasn't a class but a struct so we couldn't do this. And we briefly discussed whether we should convert it to a class. 
@@ -62,7 +62,7 @@ Console.WriteLine(first.X); //writes 100
 
 ```
 
-in the example above the line `var second = first` just adds another reference to the memory that holds the `first` Object so operations on `second` affect `first`. The assignment of 100 to `second.X` is reflected in `first.X`.
+in the example above the line `var second = first` adds another reference to the memory that holds the `first` Object so operations on `second` affect `first`. The assignment of 100 to `second.X` is reflected in `first.X`.
 
 
 ```c# 
@@ -125,7 +125,7 @@ private struct ValueObject
 }
 ```
 
-Both of those tests pass. I'd have confidently put money on those tests failing. As above I'm certain I've written basically the same tests in the past and seen them fail - clearly I should trust my memory even less than I currently do!
+Both of those tests pass. I'd have confidently put money on those tests failing. As above I'm certain I've written similar tests in the past and seen them fail - I should trust my memory even less than I currently do!
 
 So a struct in C# appears to be a pretty cheap way (in terms of typing) to define a value object. 
 
@@ -190,7 +190,7 @@ I can think of three.
 
 #### 1) Don't do anything
 
-Maybe just leave it as structs and use variable names and some method & class extractiion refactorings to make what is happening clearer instead of leaning on the types to do that.
+Maybe leave it as structs and use variable names and some method & class extractiion refactorings to make what is happening clearer instead of leaning on the types to do that.
 
 This would be fine. My feeling is that the code in question leads itself to errors because it has multiple things with the same type but different semantics being used close together. It feels like it will be easier to introduce bugs as it is - but we should always be careful so this is an option.
 
@@ -215,16 +215,16 @@ public class MeaningfulName
 }
 ```
 
-If there was a requirement to extend the functionality of `MathsName` and we didn't own that object then this would be a good solution but this wrapper would just be calling the wrapped method with no alterations. And `MathsName` has a lot of methods :(
+If there was a requirement to extend the functionality of `MathsName` and we didn't own that object then this would be a good solution but this wrapper would be calling the wrapped method with no alterations. And `MathsName` has a lot of methods :(
 
 So lots of the typing to implement but even more importantly it's possible that someone can alter `MathsName` without realising that they need to alter `MeaningfulName` too so there's the potential for bugs. It's better to help people fall into the pit of success and this solution doesn't do that.
 
-#### 3) Just change it to a class
+#### 3) Change it to a class
 
-There'd not be very much of the typing. Just the addition of the equality methods (and probably some equality tests for safety). The struct in question is relatively well covered anyway so the change would be safe.
+There'd not be very much of the typing. Only the addition of the equality methods (and probably some equality tests for safety). The struct in question is relatively well covered anyway so the change would be safe.
 
 But we create tens of thousands of these structs and pass them around. What would the impact of converting this to a class _be_.
-
+<!--alex ignore fight --->
 Class vs. Struct - the big fight
 ----------
 
@@ -285,6 +285,7 @@ private static void AddObjectsTogether()
 ```
 
 #### Profiling
+
 First I profiled the application running with a `Capacity` of 25 million. The code spent a little less than 10% of its time dealing with the structs and a little more than 12% of its time dealing with classes. Running with a capacity of 250,000 showed the reverse. 
 
 What this told me was I don't really understand profiling... Doh! 
@@ -292,6 +293,7 @@ What this told me was I don't really understand profiling... Doh!
 *And* you can create *seventy five million* structs in 2.8 seconds and *seventy five million* object in 2.3 seconds. That's orders of magnitude higher than I care about. 
 
 #### Memory
+
 When running the program to generate the structs it ran for about five seconds, preallocated around 790MB memory and kept that amount of memory in use until the end
 <img src="/images/structs.png" alt="just generating structs" class="img-responsive center-block" />
 

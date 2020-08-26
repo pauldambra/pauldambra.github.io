@@ -86,7 +86,7 @@ HTML
 Whether your HTML markup is valid. This is done via Nokogiri, to ensure well-formed markup.
 
 ------
-
+<!--alex ignore invalid --->
 If the following invalid elements are added to the page and the htmlproofer script run...
 
 ```
@@ -175,21 +175,18 @@ done
 
 Because the AMP debugger was so helpful when adding AMP generation the only warning this generated when it was added to build was many instances of
 
-
 > _site/amp/2009/05/anonymous-methods-when-invoking-in-vb/index.html:633:6 The extension 'amp-twitter extension .js script' was > found on this page, but is unused (no 'amp-twitter' tag seen). This may become an error in the future. (see https://www.ampproject.org/docs/reference/extended/amp-twitter.html)
-```
 
-Each AMP page had the amp-twitter extension included whether or not there was a tweet embedded in the page. [This was easily fixed.](https://github.com/pauldambra/blog_source/commit/4329b333aa15c3e71827ba0a5c42e608616d881a)
+Each AMP page had the amp-twitter extension included whether or not there was a tweet embedded in the page. [This was fixed.](https://github.com/pauldambra/blog_source/commit/4329b333aa15c3e71827ba0a5c42e608616d881a)
 
 And a single, old page which the AMP generator couldn't handle and so
 
-```
-_site/amp/2011/04/ssh-without-password/index.html:636:3 The attribute 'style' may not appear in tag 'span'.
-_site/amp/2011/04/ssh-without-password/index.html:667:15 The tag 'paste' is disallowed.
-```
+>_site/amp/2011/04/ssh-without-password/index.html:636:3 The attribute 'style' may not appear in tag 'span'.
+>_site/amp/2011/04/ssh-without-password/index.html:667:15 The tag 'paste' is disallowed.
 
-[Again easily fixed by updating the HTML of the non-AMP post.](https://github.com/pauldambra/blog_source/commit/c82542fec278d97c2749f6c09961efae15df175c#diff-b584697099c805190a2a5cfaae07bfc1)
+
+[Again fixed by updating the HTML of the non-AMP post.](https://github.com/pauldambra/blog_source/commit/c82542fec278d97c2749f6c09961efae15df175c#diff-b584697099c805190a2a5cfaae07bfc1)
 
 # And so?
 
-When these two types of test were added there were 237 HTML errors and 9 AMP warnings and 2 AMP errors. From as simple as missing a favicon through to genuinely malformed pages. Adding these tests was straight-forward, added value to the CI for this blog, and is another good indication of the benefits of statically generated sites. 
+When these two types of test were added there were 237 HTML errors and 9 AMP warnings and 2 AMP errors. From as little as missing a favicon through to genuinely malformed pages. Adding these tests was straight-forward, added value to the CI for this blog, and is another good indication of the benefits of statically generated sites. 

@@ -45,7 +45,7 @@ There are two steps
 
 The indicator that an element is editable has to be on the element itself otherwise how is a user to know what they can edit - but what we had didn't draw the eye. 
 
-By using CSS3 keyframes we can cock a snoot at older browsers (without breaking them) and get the desired behaviour.
+By using CSS3 keyframes we can cock-a-snoot at older browsers (without breaking them) and get the desired behaviour.
 
 ![Pulsing editor indicator](/images/pulse.gif)
 

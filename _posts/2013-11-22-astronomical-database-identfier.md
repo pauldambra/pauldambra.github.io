@@ -26,7 +26,7 @@ I've never really used Oracle so I had to dig around to discover that [a NUMBER(
 
 OK, that's a big number. Let's put it into context - [the ESA estimates there are something like 10<sup>22</sup>&nbsp;to 10<sup>24&nbsp;</sup>&nbsp;stars in the known universe](http://www.esa.int/Our_Activities/Space_Science/Herschel/How_many_stars_are_there_in_the_Universe)
 
-These IDs are used in the MS SQL DB Schema that we're importing into so I can't just ignore the possibility of an ID coming in with this massive value. So there're three distinct problems here...
+These IDs are used in the MS SQL DB Schema that we're importing into so I can't ignore the possibility of an ID coming in with this massive value. So there're three distinct problems here...
 
  1. How do I represent these numbers in .Net (C# 4.5 to be precise)
  2. How do I have Entity Framework 6 map these potentially massive IDs
@@ -95,7 +95,7 @@ Decimal has the largest precision of the .Net value types and ["only" offers 28-
 so unless there is some funkiness possible with NHibernate (which I've never used in anger) then I'm guessing they've made a similar design decision to the EF team. And it wouldn't be possible there either...
 
 ### In conclusion
-
+<!--alex ignore daughter-son fairies --->
 Entity Framework is not yet ready for storing an identifier for every proton in the universe and if you might want to be storing 38 digit identifiers (a phrase which I'm assured by my five-year old daughter actually kills `int32.MaxValue` fairies every time it is uttered) then you aren't going to be using Entity Framework and I'd guess you aren't going to be having a good time.
 
 ### And straight from the Magic Unicorns mouth

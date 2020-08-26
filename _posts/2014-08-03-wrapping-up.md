@@ -12,7 +12,7 @@ This post is part of a series where I'm hoping to prove to myself that building 
 The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/better-affordance-js.html)
-
+<!--alex ignore banging --->
 I've been banging this drum into the internet's echo chamber for five months now and enough is enough!
 
 <!--more-->
@@ -36,7 +36,7 @@ My initial to-do list was to build a site that:
 * Has Server side caching
 	* does anything not have server side caching these days?! ExpressJS does...
 * Can be used by someone non-technical
-	* totally subjective... I think this could be used by just about anyone but it would need polish and user-testing to really determine that.
+	* totally subjective... I think this could be used by just-about-anyone but it would need polish and user-testing to really determine that.
 
 # Aims
 
@@ -57,6 +57,7 @@ I've learnt an amazing amount. I'd meant to explore Selenium, Browserstack, Prom
 
 And, yes, Node is great to work with. My Node style isn't there yet but this has helped bring me closer to writing Node code I'm happy with.
 
+<!--alex ignore killing --->
 # Killing the series
 
 But I'm a bit bored with this now and I've got more children than when I started the series. It feels like a drag and an obligation to carry on which definitely isn't why I'm blogging (that's because I don't have any real hobbies any more).

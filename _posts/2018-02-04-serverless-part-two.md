@@ -96,7 +96,7 @@ EventsTable:
 
 There are two types of primary key in dynamodb. And this is the first design decision which will need validation in future. In fact in a "real" project this would need a [lightweight architecture decision record](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions). So let's add one [here](https://github.com/pauldambra/visit-plannr/blob/0d563ec26c7fd7920c1da5f1e67d1f70693016d5/doc/ladr/0002-dynamodb-composite-primary-key-design.md).
 
-The first kind of primary key in DynamoDB is having just a partition key. The partition key is hashed and determines where on physical storage the item is placed. The partition key must be unique.
+The first kind of primary key in DynamoDB is having only a partition key. The partition key is hashed and determines where on physical storage the item is placed. The partition key must be unique.
 
 The second kind is a composite primary key. It consists of a partition key and a sort key. The partition key no longer needs to be unique in isolation. Rather the sort key/partition key pair must be unique.
 

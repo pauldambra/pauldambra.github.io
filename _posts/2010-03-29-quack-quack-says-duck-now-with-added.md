@@ -10,8 +10,7 @@ tags: [parenting, microsoft, vb.net, ux]
 
 In a [previous post](http://mindlessramblingnonsense.blogspot.com/2009/10/quack-quack-says-duck.html) I advertised an application I'd made for WinMo to entertain my toddler.
 
-
-
+<!--alex ignore her-him-->
 Having watched her play with it and having been [reminded to K.I.S.S](http://stackoverflow.com/questions/2498609/handle-windows-mobile-click-event-so-that-it-doesnt-queue-while-my-program-is). I've fixed a bug that highlighted the difference in expectations between myself and a toddler.
 
 <!--more-->
@@ -66,4 +65,4 @@ That might be a bit hacky and there might be a better way but since that seems t
 
 And now I have a slightly more toddler-proof toddler game.
 
-At the time of writing you could view all of the source code and download an install cab at codeplex `qqstd.codeplex.com` but that site is dead now :( You can see it [in the wayback machine](https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/)
+At the time of writing you could view all of the source code and download an install cab at codeplex `qqstd.codeplex.com` but that site is unavailable now :( You can see it [in the wayback machine](https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/)

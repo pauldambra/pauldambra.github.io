@@ -14,7 +14,7 @@ It's a good job so few websites want to authenticate users and collect data on t
 
 <!--more-->
 
-Jesus no wonder people bang on about RoR. It makes this *easy* in comparison
+Jesus no wonder people bang on about RoR. It makes this *easier* in comparison
 
 Anyway - I'll forget how to do this before I have to do it again
 
@@ -125,7 +125,7 @@ Now a quick edit to the web config above so that the providers opening tag becom
 
 which makes the Profile Provider aware of the new Profile class
 
-Next step is to find the `RegisterModel` (this could just as easily be the `CreateModel` or some other model) and add an Address field
+Next step is to find the `RegisterModel` (this could be the `CreateModel` or some other model) and add an Address field
 
 ```csharp
 public class RegisterModel
@@ -206,8 +206,8 @@ Ta da!
 So there's a mechanism for extending the default profile. 
 
 Honestly, it feels messy and since at this point if there's a need for any data access layer then since there'll be a link on user name or user id anyway it's likely a better idea to have the additional data in the DAL and fangle the authentication and user models together in a `ViewModel`.
-
-Having gone away and checked some code committed on another project by the lovely [OrangeTentacle](http://www.orangetentacle.co.uk/) that's just what he's done. So having figured it out for myself I'll probably just go and crib off his much tidier code
+<!--alex ignore he-she her-him--->
+Having gone away and checked some code committed on another project by the lovely [OrangeTentacle](http://www.orangetentacle.co.uk/) that's what he's done. So having figured it out for myself I'll probably go and crib off that much tidier code
 
 Additional Reading:
 

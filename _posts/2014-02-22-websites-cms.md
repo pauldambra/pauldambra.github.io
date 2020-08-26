@@ -44,7 +44,7 @@ The basic idea for this blog series had been bouncing around in my head for a wh
 
 #### Never say never but sometimes say no
     
-So I wondered if I really could build an editable website as easily as I thought I could.
+So I wondered if I really could build an editable website
     
 Proof, in other words, if proof be need be.
 
@@ -57,13 +57,13 @@ Wikipedia has a reasonable definition of a Web CMS (right now at least) as:
 > Most systems use a content repository or a database to store page content, metadata, and other information assets that might be needed by the system.
 
 > A presentation layer (template engine) displays the content to website visitors based on a set of templates, which are sometimes XSLT files. Most systems use server side caching to improve performance. This works best when the WCMS is not changed often but visits happen regularly.
- 
+ <!--alex ignore fat --->
 > Administration is also typically done through browser-based interfaces, but some systems require the use of a fat client
 
 > A WCMS allows non-technical users to make changes to a website with little training. A WCMS typically requires a systems administrator and/or a web developer to set up and add features, but it is primarily a website maintenance tool for non-technical staff.
 
 
-I'm not trying to build a CMS... something that could be packaged and distributed. I'm just interested in how long it would actually take me to build a web site that:
+I'm not trying to build a CMS... something that could be packaged and distributed. I'm only interested in how long it would actually take me to build a web site that:
 
 * Displays Web pages
 	* [part 1](/2014/03/websites-cms-displaying-pages.html)

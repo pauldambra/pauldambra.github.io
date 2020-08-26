@@ -18,8 +18,7 @@ I've played with it [very briefly while prototyping an Imgur comment generator](
 
 So I already had a few thoughts:
 
-* It seems pretty easy to get things done
-	* I found I grokked things quicker with React than Angular when I built the commenturion examples. And I had zero React experience and reasonable Angular when I built those.
+* I found I grokked things quicker with React than Angular when I built the commenturion examples. And I had zero React experience and reasonable Angular when I built those.
 * (It might be that) you have to do things the React way 
 	* I don't think this distinguishes it from other things
 * JS & Code & HTML all mushed up together... 
@@ -34,10 +33,10 @@ It seems like the cool-kids hold the position we should ditch everything for Rea
 # What
 
 Most of my front-end work for the last eight months and most for the foreseeable future is data-visualisation heavy so that's what I wanted to riff on.
-
+<!--alex ignore gross --->
 I grabbed some data on the gender pay gap in the UK from the [Annual Survey of Hours and Earnings, 2014 Provisional Results.](http://www.ons.gov.uk/ons/dcp171778_385428.pdf) And decided to use a simplified version of [the source for Figure 8](http://www.ons.gov.uk/ons/rel/ashe/annual-survey-of-hours-and-earnings/2014-provisional-results/chd-8-gpg.xls). Showing the gender pay gap for median gross hourly earnings (excluding overtime), UK, April 1997 to 2014
-
-Simple to represent as a table and a chart so a good starting point. Plus I've got three daughters so it's a subject close to my heart.
+<!--alex ignore daughters-sons --->
+Now to represent as a table and a chart so a good starting point. Plus I've got three daughters so it's a subject close to my heart.
 
 # How
 
@@ -56,7 +55,7 @@ yo react-gulp-browserify
 
 Fast, simple, easy, and...
 
-The [gulp setup](https://github.com/pauldambra/reactotype/blob/776d915fb9138532df21b2ac97518ba90f152543/gulpfile.js) was _sooooo_ much better than I could have managed myself. Browserify & reactify so that I can just use CommonJS modules and it all ends up in the browser correctly. 
+The [gulp setup](https://github.com/pauldambra/reactotype/blob/776d915fb9138532df21b2ac97518ba90f152543/gulpfile.js) was _sooooo_ much better than I could have managed myself. Browserify & reactify so that I can use CommonJS modules and it all ends up in the browser correctly. 
 
 And [gulp webserver](https://www.npmjs.com/package/gulp-webserver)! I love finding new (to me), awesome (to me) things 
 
@@ -70,18 +69,18 @@ gulp.task('serve', function () {
 });
 ```
 
-Seems like overkill when I can just do `python -m SimpleHTTPServer` since I'm only making static HTML with some JS but... I have to remember to type that in and it means I need a terminal window just for running that. This way I can `gulp watch` and it re-smooshes file changes and serves them up for me.
-
+Seems like overkill when I can do `python -m SimpleHTTPServer` since I'm only making static HTML with some JS but... I have to remember to type that in and it means I need a terminal window for running that. This way I can `gulp watch` and it re-smooshes file changes and serves them up for me.
+<!--alex ignore simple --->
 Simple! And simple is my favourite thing (that I find hard to achieve).
 
-I like Gulp for the same reason that I prefer Rake to MSBuild. I can read & write code so I can figure out what it's doing (or force it do something crazy if I don't know the sensible thing). Whereas with Grunt or MSBuild unless you know the JSON/XML magic incantation you're stuck.
+I like Gulp for the same reason that I prefer Rake to MSBuild. I can read & write code so I can figure out what it's doing (or force it do something undesirable if I don't know the sensible thing). Whereas with Grunt or MSBuild unless you know the JSON/XML magic incantation you're stuck.
 
 # Approach
 I started with a static HTML file and [bit-by-bit](https://github.com/pauldambra/reactotype/tags) added features using React. First rendering the table, then sorting it, then allowing sorting and filtering by year.
 
 All the code is up [on Github](https://github.com/pauldambra/reactotype).
 
-So I created a module which just gives out a list of `PayYear`s. 
+So I created a module which gives out a list of `PayYear`s. 
 
 ```javascript 
 {'year': '1997', 'all': 27.5, 'fulltime': 17.4, 'parttime': 0.6 } 
@@ -139,7 +138,7 @@ So...
 `/** @jsx React.DOM */`
 This is so that the [JSX magic](http://facebook.github.io/react/docs/jsx-in-depth.html) can turn this into real Javascript. JSX is the thing that let's you mix HTML into your JS.
 
-Looking just at the code that creates a table row.
+Looking at the code that creates a table row.
 
 ```javascript 
 var PayRow = React.createClass({
@@ -159,7 +158,7 @@ var PayRow = React.createClass({
 [`createClass`](http://facebook.github.io/react/docs/top-level-api.html#react.createclass) is a helper to construct an instance of a component class for you. That class has a render function which returns HTML.
 
 Call JS, get HTML. Looks funky but is straightforward.
-
+<!--alex ignore spit --->
 It's saying that in order to have a PayRow you have to have something providing `this.props.payYear`, which has to have a minimum set of properties, and you spit out a table row as HTML.
 
 That's pretty straightforward. 
@@ -193,14 +192,14 @@ var PayTable = React.createClass({
 So this says that to render a table you need a bunch of HTML and then take `this.props.payYears` and map it into a set of `PayRow`s that make up the table body.
 
 Oh, and cause I only skimmed the docs, at first I missed that you have to add classes to HTML in JSX using className (since class is a reserved word in JS). 
-
+<!--alex ignore spits --->
 Elsewhere in the code we call `React.render(<PayTable payYears={data} />, document.getElementById('idOfContainer'));` and this spits the generated HTML into the page.
 
-That's not weird... _really_. If you can HTML & JS then you can follow what is happening. Other than glossing over the magic JSX incantation, and what React.createClass does there's nothing new or complex here. It's just mashing one or more JS data structures into HTML templates. 
+That's not weird... _really_. If you can HTML & JS then you can follow what is happening. Other than glossing over the magic JSX incantation, and what React.createClass does there's nothing new or complex here. It's only mashing one or more JS data structures into HTML templates. 
 
 # Sorting
 
-This was probably the hardest bit for me to wrap my head around. Because this isn't a framework this isn't provided for me. So, the horror, I simply had to write the code.
+This was probably the hardest bit for me to wrap my head around. Because this isn't a framework this isn't provided for me. So, the horror, I had to write the code.
 
 The only part to change was the PayTable code.
 
@@ -279,14 +278,14 @@ Not passed in. Not immutable. It's the, erm, well, the state.
 
 So in addition to a `render` function we add a [`getInitialState` function](http://facebook.github.io/react/docs/component-specs.html#getinitialstate). This provides the initial state of the component. It should be idempotent - i.e. no matter how many times the component is created, all other things being equal, the initial state is the same. 
 
-I've spotted a "problem" with this just now... In the docs it is described as an [antipattern to assign a foo property to foo state](http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html). You can do it but instead you should have an intialFoo property that is assigned to the foo state. That change of calling out that the link between the two is that the property is the initial value and shouldn't be mutated within the component's state seems important to being in the React mindset.
+I've spotted a "problem" with this... In the docs it is described as an [antipattern to assign a foo property to foo state](http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html). You can do it but instead you should have an intialFoo property that is assigned to the foo state. That change of calling out that the link between the two is that the property is the initial value and shouldn't be mutated within the component's state seems important to being in the React mindset.
 
 Anyhoo, having decided that a user would be able to click on the Year column header and that interaction would sort the column and that the Year header would have a visual affordance to show the data is sortable and in which direction it currently is. This means that the initial state is the direction of the sort and the sorted data.
 
-On the table header we assign an onClick handler that calls a `sortData` function. That function just checks the current direction of sorting and uses that to pick the new direction and resort the data. Those two new items are assigned to the component's state.
+On the table header we assign an onClick handler that calls a `sortData` function. That function checks the current direction of sorting and uses that to pick the new direction and resort the data. Those two new items are assigned to the component's state.
 
-In order to sort the data we just call sort with a comparator function. So I wrote two dumb comparators `sortAscending` and `sortDescending`.
-
+In order to sort the data we call sort with a comparator function. So I wrote two comparators `sortAscending` and `sortDescending`.
+<!--alex ignore devil --->
 # OnClick is the work of the devil, though
 
 Well, in a world where the JS that the onclick handler calls could be anywhere so maintaining the code is made harder, I totally agree. But here... the `sortData` function is six lines away. And will always be in the same file, nearby. 
@@ -298,12 +297,12 @@ And, why should `<th onClick={this.sortData}>` be different from `<th ng-click="
 I don't know, right now, where I stand on this.
 
 # But
+<!--alex ignore easy --->
+Other than the dance to _get_ how to coordinate state so that the table would update this felt pretty easy and almost none of the typing. I could grok enough of React to do this in one sitting. 
 
-Other than the dance to _get_ how to coordinate state so that the table would update this was pretty easy and almost none of the typing. I could grok enough of React to do this in one sitting. 
+As a result I (think I) could explain it to people and have a good expectation that they would be able to work with it, extend it, use the idea elsewhere.
 
-As a result I (think I) could explain it to just about any dev and have a good expectation that they would be able to work with it, extend it, use the idea elsewhere.
-
-That's the thing I've really enjoyed about working with React (on this admittedly simple example). It seems like the application is going to be simpler and that stuff that acts together has to live together.
+That's the thing I've really enjoyed about working with React (on this admittedly small example). It seems like the application is going to be simpler and that stuff that acts together has to live together.
 
 # Sorting and Filtering the Table
 

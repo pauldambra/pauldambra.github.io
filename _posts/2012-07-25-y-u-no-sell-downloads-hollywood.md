@@ -7,7 +7,7 @@ updated: "2012-07-25 19:06:12"
 category: rant
 tags: [netflix, streaming, hollywood]
 ---
-
+<!--alex ignore kids king-queen --->
 So it&nbsp;occurred&nbsp;to me that my kids might enjoy The Lion King (they like roaring). Our TV is really a computer and is hooked up to the internets allowing all kinds of iPlayer and similar streaming goodness.
 
 I guess I'm not unusual in that when I want to find something I google it...
@@ -28,12 +28,12 @@ I get myself a stiff drink so I can wash away the taste afterwards and search us
 
 ![bing results](http://2.bp.blogspot.com/-9ZwBGJJE9vk/UBBCAU7DEnI/AAAAAAAAAj4/3Xiwp2Drvxw/s1600/Screen+Shot+2012-07-25+at+19.58.44.png)
 
-Am I unusual in that I want to buy downloads of movies? Is it just my choice of search terms?
+Am I unusual in that I want to buy downloads of movies? Is it only my choice of search terms?
 
 Or are the content owners getting it ass-backwards?
 
 Surely if the content was available cheaply for single-use streams there would be at least hundreds of thousands of regular customers... do they not want that? Am I being naive?&nbsp;
-
+<!--alex ignore hook kids --->
 Do people still have no way to hook the internet up to their TV?! Oh god - that might be true! What an awful, weird idea. My kids have absolutely no idea what is going on when we visit someone and they can't choose what to watch or adverts come on.
 
 I'd love to be able to get content through a Netflix (or some other subscription). I'd pay more in order to get access to a wider range of content.

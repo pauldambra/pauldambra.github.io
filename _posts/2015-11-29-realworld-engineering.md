@@ -8,7 +8,7 @@ category: agile
 tags: [agile, bad-metaphors]
 ---
 
-I just had some "fun".
+I recently had some "fun".
 
 Earlier this year we got a great deal on two ducks, three chickens, a coop, a run, and Gary the Rescue Cockerel
 
@@ -22,14 +22,14 @@ Earlier this year we got a great deal on two ducks, three chickens, a coop, a ru
 <p><img src="/images/chickens.jpg" alt="the chickens" class="img-responsive img-thumbnail"/></p>
 
 The ducks we gave to a local small-holding because they turned out to be too much work and we didn't like duck eggs.
-
+<!--alex ignore kids --->
 But we rebuilt the chicken run and kept the chickens (and Gary the Rescue Cockerel). The kids love them, they're good company in the garden (bizarrely), and we get two or three eggs a day.
 
 This afternoon I looked outside and saw two things...
 
 1) it was really windy
 2) the wind had started to rip off the roof from the coop
-
+<!--alex ignore just --->
 So I just spent half an hour or so doing some emergency maintenance to get us through this weather, learnt that using wet, wooden chairs as impromptu step ladders is dangerous, and got annoyed that I hadn't built a better roof last time. This got me to wondering if iterating on the chicken run had been a good idea.
 
 It's quite common to make comparisons between software engineering and real world engineering since they're both building things. I thought I'd explore whether that bore out here...
@@ -39,7 +39,7 @@ It's quite common to make comparisons between software engineering and real worl
 I approached rebuilding the run in an iterative fashion. So 1.0 was taking the parts of the roof that survived transportation to our house back on to the run. These only covered half of the area. So while the chickens had some protection from the weather it wasn't enough to stop the ground getting wet.
 
 # 2.0
-
+<!--alex ignore husband-wife --->
 As the summer ended and the weather started to turn we moved to roof 2.0. The requirements from the PM (a.k.a. my wife) were that it be:
 
 * cheap
@@ -47,7 +47,7 @@ As the summer ended and the weather started to turn we moved to roof 2.0. The re
 * effective
 
 So far, so exactly like a software project.
-
+<!--alex ignore slope --->
 For 2.0 I wanted the roof to be sloped so that rain would run off, and I wanted the entire area covered. We had quite a lot of timber left over from various DIY projects so I built up one side of the roof to provide the slope and bought some more corrugated plastic sheets to cover the rest of the roof area.
 
 It didn't cost too much and while it didn't keep out all of the rain it was a good improvement.
@@ -57,7 +57,7 @@ It didn't cost too much and while it didn't keep out all of the rain it was a go
 # 3.0-alpha1
 
 The roof (or rather parts of it) are too damaged to stay in place so I'll definitely need to bump to 3.0.
-
+<!--alex ignore slope slopes --->
 I've definitely learned that the slope of the roof wasn't high enough and rain tended to pool on it (I've got a feeling that roof slopes need to be 15 degrees to get rain and snow to run off). And that there needs to be less freedom of movement of and between the individual pieces of roof.
 
 # How was iterating DIY like iterating software engineering?

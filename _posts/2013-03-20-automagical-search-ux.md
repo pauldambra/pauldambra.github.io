@@ -14,7 +14,7 @@ Some assumptions:
 
 * If you're using the app you are already familiar with the "things"
 * You've clicked "Find Things" and so you're expecting, as a minimum, to type something into a box (to tell the app what things you want to find)
-* You're a busy mofo and [you don't want to have to think](http://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758)
+* You're a busy person and [you don't want to have to think](http://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758)
 
 <!--more-->
 
@@ -24,7 +24,7 @@ I'd like the search function to be as unobtrusive as possible and to my mind tha
 
 The problem I have is that sometimes the name of the thing *is* the name of a place. When you type in that text expecting to search in the context of it being a place I currently have no way of letting you override the context of it being the name of a "thing".
 
-The question is do I catch just that scenario - as in this first set of mockups...
+The question is do I catch only that scenario - as in this first set of mockups...
 
 ![Mockup](http://2.bp.blogspot.com/-h1Xm0j1c0wQ/UUlrqBaznwI/AAAAAAAACyQ/TK1bmf7zZUk/s1600/rad+app+search.png)
 

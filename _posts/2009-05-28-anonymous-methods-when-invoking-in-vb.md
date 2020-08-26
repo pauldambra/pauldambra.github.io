@@ -8,7 +8,7 @@ category: programming
 tags: [vb.net, code]
 ---
 
-Well obviously not but you can get close in some circumstances.
+Well maybe not but you can get close in some circumstances.
 
 <!--more-->
 
@@ -16,7 +16,7 @@ I've got a situation where when a timer ticks I want to change the background co
 
 But VB .Net doesn't support anonymous methods. Now I've seen all kinds of verbose ways around this on the web... google it - I dare you.
 
-But if you just use Action as below you're pretty close to hardly any extra code...
+But if you use Action as below you're pretty close to hardly any extra code...
 
 ```vbnet 
 Public Sub removeHighlight() Handles timer.Elapsed

@@ -144,8 +144,6 @@ So that I can spend more money
 
 ```
 
-Easy!
-
 ```kotlin
 
 abstract class Drink(
@@ -286,7 +284,7 @@ fun main(args: Array<String>) {
 
 But, something is bothering you. It was hard to spot this bug because even though there's no duplication of code there's actually lots of duplication of names. This lovely DRY code uses the word milk nine times. In fact each of the ingredients is mentioned nine times. So any new ingredient means edits in nine places.
 
-And the call through to the base class constructor just duplicates the constructor on the line above. Any changes to the ingredients and you'll need to change both constructors.
+And the call through to the base class constructor duplicates the constructor on the line above. Any changes to the ingredients and you'll need to change both constructors.
 
 You meet a friend for coffee and, since it's on your mind, ask how they would remove this last duplication?!
 
@@ -298,7 +296,7 @@ They offer to help you rewrite your code with that in mind.
 
 The first idea that's missing is that there are types of ingredients.
 
-The second idea is that each drink is just a collection of ingredients that should be printed out for the baristas.
+The second idea is that each drink is a collection of ingredients that should be printed out for the baristas.
 
 So you start with a marker interface and a set of data classes. Each drink then allows you to add a subset of the possible interfaces and prints out the barista's instructions.
 
@@ -420,7 +418,7 @@ Now the word milk is only in the code three times. Once when it is declared and 
 
 But there is still duplication of the idea that a drink can have ingredients added. In fact each drink has almost the same method repeated for each ingredient. All to avoid being able to put chocolate sprinkles in tea.
 
-So the _idea_ that chocolate sprinkles aren't a tea ingredient is implicit in the fact that there's no method for it. It isn't represented [once and only once](http://wiki.c2.com/?OnceAndOnlyOnce). It just isn't represented
+So the _idea_ that chocolate sprinkles aren't a tea ingredient is implicit in the fact that there's no method for it. It isn't represented [once and only once](http://wiki.c2.com/?OnceAndOnlyOnce). 
 
 One option is to accept any ingredient to the method but explicitly refuse ones that shouldn't be added
 
@@ -673,7 +671,7 @@ fun main(args: Array<String>) {
 }
 
 ```
-
+<!--alex ignore simple --->
 This is about twice as much code as the original DRY version. But is much more flexible for adding new ingredients without changing existing code. What DRY misses is the much more expressive [four rules of simple design](https://martinfowler.com/bliki/BeckDesignRules.html).
 
  1. Runs all the tests
@@ -683,7 +681,7 @@ This is about twice as much code as the original DRY version. But is much more f
 
 These are in order of importance. The code in this article is manually tested but doesn't pass this as the rule is *runs* all the tests. Before fixing anything else my fictional friend should have made me write tests.
 
-Rules 2, 3 and 4 are in tension with each other. If I want to state every intention to the future reader I can't just remove as many classes and methods as possible. The wonderful design pressure as I tried to show here is that you want the smallest amount of code to communicate the largest amount of the ideas it represents.
+Rules 2, 3 and 4 are in tension with each other. If I want to state every intention to the future reader I can't only remove as many classes and methods as possible. The wonderful design pressure as I tried to show here is that you want the smallest amount of code to communicate the largest amount of the ideas it represents.
 
 So, stop looking for duplicated lines of code. Stop automatically making every string a constant. And start having empathy for the future reader of your code. Leave as little of the information needed to change the code in your brain as possible by putting it in the code.
 

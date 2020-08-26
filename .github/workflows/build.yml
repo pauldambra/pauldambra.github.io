@@ -42,8 +42,6 @@ jobs:
         path: _site
     - name: update service worker
       run: npx sw-precache --config service-worker-config.js
-    - name: build site
-      run: bundle exec jekyll build
     - name: lint markdown
       run: npx remark . --use lint --frail
     - name: lint spelling
@@ -54,6 +52,8 @@ jobs:
         --report
     - name: lint with alex
       run: npx alex _posts --diff --why
+    - name: build site
+      run: bundle exec jekyll build
     - name: deploy
       run: |
         cd _site && \

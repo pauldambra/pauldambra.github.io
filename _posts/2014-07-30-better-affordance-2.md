@@ -12,13 +12,13 @@ This post is part of a series where I'm hoping to prove to myself that building 
 The code can be found on [GitHub](https://github.com/pauldambra/omniclopse)
 
 [Previous Post](/better-affordance.html)
-
+<!--alex ignore failure --->
 In the last post a better visual affordance that a page element is editable was added. But didn't solve the problem that notifications of success or failure were obtrusive and disconnected from the edited element.
 
 ![pulsing affordance](/images/pulse.gif)
 
 <!--more-->
-
+<!--alex ignore failure --->
 The desired behaviour is that when a change is made the entire current page is persisted to the server and the user is made aware of success or failure without interrupting their workflow unnecessarily.
 
 ![Editable indicator changing state](/images/affordance-with-state.gif)
@@ -28,7 +28,8 @@ So here as the text is changed the indicator changes to the save icon. On succes
 But how?!
 
 # Changing the icon
-The actual switch is really simple
+
+The actual switch is
 
 ```js 
 (function(omniclopse) {
@@ -152,7 +153,7 @@ This did need a slight change to the JS that watches for changes to the page tha
 
 This now adds the i child element which indicates that a particular element is editable which is necessary because of how ckeditor alters the DOM when it picks up on a contenteditable element.
 
-And, rather than simply calling `omniclopse.onContentEdited` it now passes in the page element that triggered the event so its editable indicator can be updated.
+And, rather than calling `omniclopse.onContentEdited` it now passes in the page element that triggered the event so its editable indicator can be updated.
 
 # The result
 is a pretty, funky, pulsing indicator that shows an element is editable and changes state with the element to keep the user informed of what is happening in the background.
@@ -160,9 +161,11 @@ is a pretty, funky, pulsing indicator that shows an element is editable and chan
 ![editable indicator changing state after typing finishes](/images/affordance-with-delay.gif)
 
 # Doh-stscript
-## a postscript but also doh
-The eagle-eyed will notice a difference between the first example gif of the end result and this one. Which is the result of a really simple (and stupid) bug I introduced.
 
+## a postscript but also doh
+
+The eagle-eyed will notice a difference between the first example gif of the end result and this one. Which is the result of a bug I introduced.
+<!--alex ignore fires --->
 The code above which actually fires the onContentEdited event uses a timeout so that the event doesn't fire until after content has finished changing.
 
 In the original version it looked like `timer = setTimeout(omniclopse.onContentEdited, 500);` which says call the `omniclopse.onContentEdited` event after 500 milliseconds.

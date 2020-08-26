@@ -15,7 +15,7 @@ I can't stand to write code without it now!
 <!--more-->
             
 I've got a program that (in a moderately clunky way) gets all of the emails in a couple of mailboxes and checks to see if they are non-delivery reports, reports of address changes (which our customers consistently send in reply to newsletters), unsubscribe requests (despite a link in the mail) and so on...
-    
+<!--alex ignore demon-->    
 The class that handled the matching of text against rules had grown to be a real behemoth if not actually a spaghetti monster it was at the minimum a noodle demon. I won't post the code here the internet isn't big enough!
     
 But it consisted of an enum, five `List<string>` and then a set of methods that took an email object compared the body and subject to the 5 phrase lists and returned an appropriate result from the enum.
@@ -27,7 +27,7 @@ _badAddresses.add("no user by that name");
 _outOfOffice.add("on my hols");
 ```
 
-it was getting difficult to manage, there was no checking for duplication of the strings, there was no obvious or easy way to keep the enum return and phrase list linked and all the looping was getting confusing.
+it was getting difficult to manage, there was no checking for duplication of the strings, there was no apparent way to keep the enum return and phrase list linked and all the looping was getting confusing.
 
 So I went through two stages and Resharper helped by being awesome at supporting my laziness.
 
@@ -46,7 +46,7 @@ _phraseMap = new Dictionary<string, phrasecheckresult>
     {"user invalid", PhraseCheckResult.BadAddress}
 };
 ```
-
+<!--alex ignore failed-->
 cut short for brevity as there are nearly 300 phrases now... Using an object initialiser meant I had nowhere to go when the program failed at runtime adding duplicate keys to the dictionary. Catching the exception didn't help since I couldn't see what key was duplicated to tidy up my code.
 
 So I highlighted all the rows of initialisation and what did I see?
@@ -57,7 +57,7 @@ Resharper's context menu lets me switch the object initialiser out to a series o
 
 I *should* be writing unit tests but then that's always being put off to the next project and could I check if I've added a key already during an object initialisers run? I guess not but...
 
-Second I wrote a couple of if braces that checked the subject and body and returned the appropriate results... up pops Resharper and suggests I can convert that to a Linq expression and I get the sexy end result of...
+Second I wrote a couple of if braces that checked the subject and body and returned the appropriate results... up pops Resharper and suggests I can convert that to a Linq expression and I get the end result of...
 
 ```csharp
 public enum PhraseCheckResult
@@ -85,4 +85,4 @@ public ProcessPhraseList()
 }
 ```
 
-A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could just shift Delete to be first in the enum and your program's behaviour would change. Bonza!
+A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could shift Delete to be first in the enum and your program's behaviour would change. Bonza!

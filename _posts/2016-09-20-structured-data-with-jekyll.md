@@ -109,7 +109,7 @@ The above can be dropped straight into the index.html that the home page is gene
 
 It says that it use schema.org, is describing a blog, which has a bunch of keywords and is at a particular URL. It advertises that the main thing about this webpage is the page itself. And lists that I'm the author and that I can be identified at a set of other locations (twitter, github, and google+)
 
-Pretty straightforward and easy to add since it is totally static information.
+Pretty straightforward since it is totally static information.
 
 # Next, each blog post
 
@@ -194,7 +194,7 @@ BlogPosts (i.e. those items in the _posts folder) have a bunch of variables eith
 
 The home page now has some data about the site itself but there's nothing in the markup to indicate that it is made up of a list of the site's published blog posts.
 
-My solution to this highlights nicely just how powerful the [liquid templating language](https://shopify.github.io/liquid/) can be with a very limited set of operators and filters.
+My solution to this highlights nicely how powerful the [liquid templating language](https://shopify.github.io/liquid/) can be with a very limited set of operators and filters.
 
 ```HTML 
 {% raw %}
@@ -212,7 +212,7 @@ My solution to this highlights nicely just how powerful the [liquid templating l
 
 This adds a second script tag to hold the item list of blog postings. It is then necessary to loop over each post in `site.posts` and add an entry for that item. 
 
-But an array with a trailing comma is not valid JSON+LD and just including a template here ends up with a trailing comma.
+But an array with a trailing comma is not valid JSON+LD and including a template here ends up with a trailing comma.
 
 The solution is led by two things:
 
@@ -256,10 +256,10 @@ so...
 I've submitted the site for crawling since adding structured data and Google has so far picked up the home page and four of the articles.
 
 ![structured data crawled by Google](/images/structured-data-crawled.png)
-
+<!--alex ignore obvious --->
 Several days on and there's no obvious change in how my site places in search rankings or how Google displays it but... 
 
 * their documentation says it can take some time and I've seen other people talking about it taking more than 10 days
-* as above this site isn't authoritative for anything so I may not be crossing a threshold of importance for processing or just be at the back of a very long queue.
+* as above this site isn't authoritative for anything so I may not be crossing a threshold of importance for processing or be at the back of a very long queue.
 
 Anyway, I think Structured Data, as well as being interesting, is a prerequisite for getting AMP set up and that's next up...

@@ -13,11 +13,11 @@ Today I had super-fun spotting the opportunity for a refactoring and figuring ou
 The refactoring in question is ["Replace Conditional Dispatcher with Command"](https://www.industriallogic.com/xp/refactoring/conditionDispatcherWithCommand.html).
 
 Quoting that source the opportunity for this refactoring is when:
-
+<!--alex ignore execute --->
 > Conditional logic is used to dispatch requests and execute actions.
 
 And the solution is: 
-
+<!--alex ignore execute --->
 > Create a Command for each action. Store the Commands in a collection and
 replace the conditional logic with code to fetch and execute Commands.
 
@@ -111,15 +111,15 @@ Then over a few weeks we added a few more types that we needed to handle and unc
 
 # At this point
 
-It's worth being clear (and not just because I was partially responsible for it) that I'm not saying that this code is _wrong_. 
+It's worth being clear (and not only because I was partially responsible for it) that I'm not saying that this code is _wrong_. 
 
 We were learning about and from the system as we went so trying to write the "right" code would have definitely been wasteful previously.
 
 When we hit this class to modify it today, however, there were a few signals that set off my spidey-senses:
-
+<!--alex ignore clearly --->
 * we were making the fourth change
 * it didn't pass the squint test
-* say what you see
+* say what you see 
   * when we were talking about it neither my colleague nor I could clearly express what we thought it did
   * when we were expressing what it did we were talking about things implicit in the code not things explicit
 
@@ -132,7 +132,7 @@ I like to have several examples within a system before I start to look for an ab
 Sandi Metz proposed the squint test ([see this talk](https://www.youtube.com/watch?v=8bZh5LMaSmE)) as a quick way to see if the shape of your code or the grouping of colours in your editor suggests any problems with your code. Amusingly there's a [package for Atom](https://atom.io/packages/squint-test) to save you having to actually squint.
 
 ## Say what you see
-
+<!--alex ignore easy --->
 If you are talking about the code and you aren't using the words on the screen. Or if you can't succinctly explain what the conditionals are. Then you should be looking at whether there's information in your brain or elsewhere in the system that would help clarify what is happening. It's really easy to not be aware of what you have to know to understand some code - it's why i <3 code reviews.
 
 # The Refactored Code
@@ -223,6 +223,6 @@ there are concepts explicitly in the code that were hidden or accidental beforeh
   * these we always save so maybe the name could be even better
 * other types we don't always save, and when we do save them we change them first
 
-The beauty in this code is that not only should it be easier to grok for somebody new to it (or us in a few weeks) now if we need to add additional rules that don't break the `MaybeSave` contract we can do that easily and in one place. And changes that break the contract are obvious and prompt us to think about what the change means for the code.
+The beauty in this code is that not only should it be easier to grok for somebody new to it (or us in a few weeks) now if we need to add additional rules that don't break the `MaybeSave` contract we can do that in one place. And changes that break the contract do so visibly and prompt us to think about what the change means for the code.
 
-And we didn't just improve the code... we had a lot of fun (within context) realising it and fixing it.
+And we didn't only improve the code... we had a lot of fun (within context) realising it and fixing it.

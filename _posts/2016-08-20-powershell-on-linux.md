@@ -29,8 +29,8 @@ So, while I think it's a good thing that MS are opening up and releasing cross p
 
 I thought I'd spend some time to compare the two.
 
-# The Simple Test
-
+# The Test
+<!--alex ignore destroy her-him --->
 I've been watching [Gary Bernhardt's Destroy All Software screencasts](https://www.destroyallsoftware.com/screencasts) (which I heartily recommend). I enjoyed his use of looping over git revisions to carry out tasks to show either some git tool or bash itself.
 
 I came up with a fake scenario of having a Big-Data problem. The amount of data was suddenly, and unexpectedly increased as a result of human error. And that’s caused all our systems to explode (something I’ve seen happen too so not that fake). My task was to investigate and find out when the error occurred.
@@ -53,7 +53,7 @@ And then use `git lg` to run it
 
 #### Carrying on
 
-This particular big data company use a venerable, and well-trusted database technology - a file. I decided on a pretty simple approach
+This particular big data company use a venerable, and well-trusted database technology - a file. I decided on this approach
 
 * get a list of commits
 * loop over them checking each one out
@@ -113,6 +113,7 @@ iex "git checkout master" *> $null
 
 There were a couple of differences because PowerShell insisted on evaluating the command strings. And it turns out ‘&’ and ‘<’ are "reserved for future use".
 
+<!--alex ignore easy --->
 Both were relatively easy to write, relatively easy to read, run correctly, and give the correct output.
 
 # More Complex Example
@@ -244,7 +245,7 @@ powershell ./process-votes.ps1 ~/Downloads/Votes.xml  279.78s user 7.00s system 
 
 At first I parsed every line as xml so I could access the CreationDate but that took nearly ten times as long.
 
-I also tried out the same approach of reading and counting every line instead of grepping just 2010 lines in bash. That slowed the bash implementation down even further.
+I also tried out the same approach of reading and counting every line instead of grepping only 2010 lines in bash. That slowed the bash implementation down even further.
 
 ## Confirmation Bias!
 

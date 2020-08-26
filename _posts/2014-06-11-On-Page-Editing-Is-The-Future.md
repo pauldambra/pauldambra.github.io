@@ -26,7 +26,7 @@ If the admin section exists (in large part) to allow editing of content and edit
 
 ### Could it?!
 
-The benefit I can see here is that your edits are in place. They're immediately reflected on screen so the editing user can see the impact they're having. A user may not grok why a developer has put a 25 character limit on a title field. But if they simply change a title and it pushes the rest of the page out then it's their call whether that's OK.
+The benefit I can see here is that your edits are in place. They're immediately reflected on screen so the editing user can see the impact they're having. A user may not grok why a developer has put a 25 character limit on a title field. But if they only change a title and it pushes the rest of the page out then it's their call whether that's OK.
 
 I can think of two problems with this:
 
@@ -34,7 +34,7 @@ I can think of two problems with this:
 
 They don't expect to edit in the page
 	
-I've previously referenced "Don't Make Me Think" [(shameless affiliate link)](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&ie=UTF8&qid=1473701528&sr=1-1&keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29) and that approach would drive the position that there's no point confusing a user just to be funky. This may be doing just that...
+I've previously referenced "Don't Make Me Think" [(shameless affiliate link)](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&ie=UTF8&qid=1473701528&sr=1-1&keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29) and that approach would drive the position that there's no point confusing a user only to be funky. This may be doing that...
 
 #### 2. Is it discoverable?
 
@@ -55,7 +55,7 @@ app.engine('html', hbs.__express);
 
 This setup allows .hbs files stored in `/views/partials` to be used in `{% raw %}{{>partialName }}{% endraw %}` handlebars blocks
 
-The feature here is to have three columns of editable content. That's pretty easily expressed in the home page layout...
+The feature here is to have three columns of editable content. That's expressed in the home page layout...
 
 ```html 
 {% raw %}
@@ -69,7 +69,7 @@ The feature here is to have three columns of editable content. That's pretty eas
 
 Each line calls for the panel partial and passes the given element from the panels array (or undefined)
 
-and a panel partial is simple too
+and a panel partial would be
 
 ```html 
 {% raw %}
@@ -103,7 +103,7 @@ Each element that should be editable is marked with an `{% raw %}{{elementShould
                         });
 ```
 
-This is just a standard Handlebars helper which checks if a user is set and if it is renders `contenteditable=true` in place. 
+This is a standard Handlebars helper which checks if a user is set and if it is renders `contenteditable=true` in place. 
 
 ### Safe Strings
 If a WYSIWYG editor saves `{% raw %} <b>some bold text</b> {% endraw %}` then that is exactly what will be printed on screen as handlebars will escape the HTML to protect you from l33t haxxors. 
@@ -209,7 +209,7 @@ When a change is detected then the page is PUT to the server to persist those ch
 }(window.omniclopse = window.omniclopse || {}, $));
 ```
 
-So here the page object expected by the server is gathered from the page and PUT using `$.ajax`. This bit of code is bound directly to the Home page at the moment but that's easily remedied when necessary.
+So here the page object expected by the server is gathered from the page and PUT using `$.ajax`. This bit of code is bound directly to the Home page at the moment but that can be remedied when necessary.
 
 An addMessage function shows a bootstrap alert to keep the user informed of what is happening. This is a pretty dull piece of code!
 
@@ -266,7 +266,7 @@ Since the site is already using bootstrap CSS was added that uses `:before` to a
 
 # CKEditor
 Another little bonus is that CKEditor is aware of contenteditable elements so including that in the page gives you WYSIWYG power directly on any contenteditable.
-
+<!--alex ignore hook --->
 All that was necessary to hook it up was to include it in the page and to switch from using the valid `{%raw%}<div content contenteditable/>{%endraw%}` to using `{%raw%}<div content contenteditable=true/>{%endraw%}` a change I can live with to get the power of WYSIWYG directly on page elements
 
 

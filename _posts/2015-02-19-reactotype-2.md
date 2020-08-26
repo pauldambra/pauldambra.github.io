@@ -7,7 +7,7 @@ description: "exploring ReactJS"
 category: react
 tags: [learning, react, js, series]
 ---
-
+<!--alex ignore banging --->
 I posted about my [impressions of working with React](/reactotype/part-one.html) slowly building an HTML table and banging on about it. I ended that post with one of the more memorable cliff-hangers in recent time.
 
 > Sorting and Filtering the Table
@@ -21,7 +21,7 @@ I posted about my [impressions of working with React](/reactotype/part-one.html)
 
 Exciting! Right?
 
-I want to add a filter control and I don't want it to be bound to a particular table so that it can be easily re-used. 
+I want to add a filter control and I don't want it to be bound to a particular table so that it can be re-used. 
 
 <!--more-->
 
@@ -57,7 +57,7 @@ Copying what I already had to turn this into a React component was a very short 
 
 > What is it?
 
-> Postal.js is an in-memory message bus - very loosely inspired by AMQP - written in JavaScript. Postal.js runs in the browser, or on the server using node.js. It takes the familiar "eventing-style" paradigm (of which most JavaScript developers are familiar) and extends it by providing "broker" and subscriber implementations which are more sophisticated than what you typically find in simple event emitting/aggregation.
+> Postal.js is an in-memory message bus - very loosely inspired by AMQP - written in JavaScript. Postal.js runs in the browser, or on the server using node.js. It takes the familiar "eventing-style" paradigm (of which most JavaScript developers are familiar) and extends it by providing "broker" and subscriber implementations which are more sophisticated than what you typically find in event emitting/aggregation.
 
 ```javascript 
 /** @jsx React.DOM */
@@ -174,9 +174,9 @@ Here the default values for the earliest and latest state are set.
 
 #### Event Handlers
 
-These two handlers are basically the same except for operating on a different property of the state object.
+These two handlers are the same except for operating on a different property of the state object.
 
-Yes, yes, kill all duplication. But... the duplicate methods are next to each other and I've half a mind to make each control a React component which would remove this duplication so why do that work twice.
+Yes, yes, remove all duplication. But... the duplicate methods are next to each other and I've half a mind to make each control a React component which would remove this duplication so why do that work twice.
 
 (I got all excited about postal.js and wrote this post before finishing the component)
 
@@ -211,7 +211,7 @@ postal.publish({
 
 So, on channel 'filters' publish a message with the topic 'year.bounds.change' including the component's state as the message data.
 
-(and yes the first thing I did when subscribing was type in one of those magic strings incorrectly so there's an obvious improvement to be made in my usage there!)
+(and yes the first thing I did when subscribing was type in one of those magic strings incorrectly so there's an improvement to be made in my usage there!)
 
 This gives us a phenomenally useless pub/sub mechanism with no subscribers...
 
@@ -306,8 +306,8 @@ var PayTable = React.createClass({
 `PayTable` now has a `preparePayData` method which has the responsibility of taking some data and the component's current state and setting the state's data property correctly.
 
 Now all the `filterData` and `sortData` methods need to do is update state and then call `preparePayData`.
-
-The point here is how easy it was to use postal.js to hook these two components together. I _lurve_ this!
+<!--alex ignore hook --->
+The point here is how useful it was to use postal.js to hook these two components together. I _lurve_ this!
 
 ![demo of the web page](/images/reactotype.gif)
 

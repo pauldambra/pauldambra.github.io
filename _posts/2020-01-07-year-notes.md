@@ -15,7 +15,7 @@ Some [colleagues](https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe) and
 <!--more-->
 
 # Being a Principal Engineer
-
+<!--alex ignore simple --->
 I spent 2018 seconded into this role and 2019 officially in it. The teams I work with are achieving great things: reduced complexity, reduced cost, increased stability and throughput, and regularly deliver same day fixes (down from 10 days for simple fixes). [Check the Customer and Member section in this Co-op blog](https://digitalblog.coop.co.uk/2019/12/17/2019-highlights-theres-a-lot-to-be-proud-of/). But even two years in I find it hard to see the value I'm providing and to unlearn a lot of the not-principal-engineer habits I'd worked hard to learn.
 
 The biggest being...
@@ -39,7 +39,7 @@ Knowing which gear to change into so I'm letting the teams be creative but keepi
 Making time to write code with the teams has been critical for my sanity (and I think my effectiveness). Recently I spent time with the folk building [offers](https://coop.co.uk/offers).
 
 Partly because a tight opportunity/deadline needed support, partly because it was fun, partly because my instinct was that was the next important thing for me to do. 
-
+<!--alex ignore simple --->
 But it gave me space to talk to them about the four rules of simple design, get confidence in their abilities, help them get used to a new (to them) codebase, and expand some of our design decisions while in context. Plus I 💖 cutting some code.
 
 I have to figure out a way to make this a regular part of my role without using it as a mechanism for procrastination. And I should ask that group for feedback on how it felt for them!
@@ -47,7 +47,7 @@ I have to figure out a way to make this a regular part of my role without using 
 # WeekNotes
 
 I've really valued the focus on reflection. Particularly around trying to find a new feedback loop I can lean on. I started them without any plan and now realise it's a shame they're images on twitter. I can't even find the first one :(
-
+<!--alex ignore easy --->
 At the moment they're really in google docs. Cos I can make them on the train home. I need to find a train-friendly way to be able to write and publish them easily without relying on a walled garden.
 
 ![weeknotes image](/images/weeknotes.png)
@@ -57,9 +57,9 @@ At the moment they're really in google docs. Cos I can make them on the train ho
 Sometimes you can get a glimpse of how a tiny improvement in a big organisation can have a huge impact and that keeps me going. Things like visiting one of our food distribution centres and realising the massive technological and human effort that we're a tiny supporting player to. Or being part of the systems that have helped [Co-op members give £17m](https://www.coop.co.uk/local-causes) to local causes.
 
 We started a monthly conference instead of our weekly community of practice. I was worried that the extra time commitment would mean people didn't attend and I was so wrong. There are enough of us that the monthly unconference is one of the best things about working at Co-op. Kudos to [Gemma Cameron](https://twitter.com/ruby_gem/) for having the vision and making it happen.
-
+<!--alex ignore beast --->
 But, despite the openness and willingness to improve we see in colleagues across this massive beast of a company, large organisations are inherently pathological. Some groups work in such a way that shows they see the plan as the goal. A thing being on-time and on-budget becomes more important than it being valuable. And that thing being valuable is a side note. Things are made that are either not measurable or not measured.
-
+<!--alex ignore easy --->
 I'm not sure how best to contribute to improving that. It's easy to fall into an agile echo chamber - thinking if you turn up with some post-its, a whiteboard, and a jenkins server everything is solved. It'll be hard, but important, to hold true to our principles while showing the same willingness to listen and change that we're asking of folks in the "Enterprise" (disappointingly not a spaceship).
 
 For now I'll concentrate on moving to a place where we deliver frequently and show commitment to measuring value. Tidying our own house before we complain about someone else's. 
@@ -89,10 +89,10 @@ Week 45: "💪 Deployed a new system to replace part of another system while tha
 That week 4 release was the end of 9 months and more of at least two people working full time. It was a significant change and affected multiple business units.
 
 Go-live was announced at standup with: "oh yeah, MODS is primary for reads and writes now". Running in production as soon as and as meaningfully as possible is a forking super power.
-
+<!--alex ignore master black blacklist --->
 # Master, Black list, Guys, and more
-
-I've consistently spent time trying to refocus my use of language this year. Things like using primary or trunk instead of master, exclusion list instead of blacklist, folk or just skipping the word instead of guys.
+<!--alex ignore master black blacklist gals-men --->
+I've consistently spent time trying to refocus my use of language this year. Things like using primary or trunk instead of master, exclusion list instead of blacklist, folk or skipping the word instead of guys.
 
 This seems like the least I can do to promote inclusion. It's not enough but it's something.
 
@@ -111,7 +111,7 @@ Which suggests my maths need to improve since there aren't 70 weeks in the year.
 I'll also give up shaming myself for not cycling 27km to work and aim to go for some rides for fun when the weather picks up.
 
 # Walking
-
+<!--alex ignore baby --->
 This is the first full year I've had a dog since I was a teenager. Best decision in a long time. As much work as having a baby but it adds joy to life.
 
 ### dog on new years day 2019
@@ -119,11 +119,11 @@ This is the first full year I've had a dog since I was a teenager. Best decision
 
 ### dog on new years day 2020
   ![dog on new years day 2020](/images/dog-2020-01-01.jpg)
-
+<!--alex ignore kids --->
 # Kids
-
+<!--alex ignore death --->
 ![god of death](/images/god-of-death.png)
-
+<!--alex ignore kids --->
 All three kids have said they don't want to be on social media so I won't mention much here. Watching them growing into sensible, curious, wonderful, talented nerds despite my terrible parenting is the most incredible thing.
 
 They also have learned to amuse themselves by saying: "blink and I'll be in college" when I'm distracted by my phone and they want my attention. 
@@ -131,7 +131,7 @@ They also have learned to amuse themselves by saying: "blink and I'll be in coll
 They deserve my attention. We used to have "family screen-free day" once a week. That's coming back!
 
 # What writing this taught me I want to do in 2020
-
+<!--alex ignore kids white easy --->
  * decide what feedback loops I want to shorten
  * find others that want to do that and work with them
  * expect to find better ways of doing it by including others

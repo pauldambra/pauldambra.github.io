@@ -22,9 +22,9 @@ Let's start by defining our terms...
 
 As a name, "The Cloud™️" is terrible. It's meaningless. It totally fails to communicate what it is. Maybe it's a place you put computers? Maybe it's because applications can "scale" there?
 
-Far better to think of "Utility Computing". United Utilities provides water as a utility to properties. Their customers know, vaguely, that there are water mains, and reservoirs, water treatment plants, and more but don't have to care. They don't think about that detail, they just turn on a tap.
+Far better to think of "Utility Computing". United Utilities provides water as a utility to properties. Their customers know, vaguely, that there are water mains, and reservoirs, water treatment plants, and more but don't have to care. They don't think about that detail, they turn on a tap.
 
-*That's* the cloud. Computing as a utility. You don't have to care if the provider is running servers or containers, if they have enough fuses in stock, or what model of switch they bought. You just turn on your application and let it run.
+*That's* the cloud. Computing as a utility. You don't have to care if the provider is running servers or containers, if they have enough fuses in stock, or what model of switch they bought. You turn on your application and let it run.
 
 ## Event-driven systems
 
@@ -62,7 +62,7 @@ CQRS is a _big_ topic. [Fowler's description](https://martinfowler.com/bliki/CQR
 
  4) EventSourcing
 
-An event-sourced system doesn't just respond to events but builds its state by replaying the events. For example instead of storing an order:
+An event-sourced system doesn't only respond to events but builds its state by replaying the events. For example instead of storing an order:
 
  `{"user": "12345", "items": [{"sku": "54321", "paid": "£1.23"}]}`.
 
@@ -94,7 +94,7 @@ Ok, never say never, the chance of introducing a defect at the system level exis
 
 ## Serverless
 
-Serverless continues this journey. [It obviously doesn't mean there aren't _any_ servers.](https://twitter.com/search?q=serverless%20AND%20%22no%20servers%22&src=typd) But it does mean that you hardly have to care there are servers.
+Serverless continues this journey. [It doesn't mean there aren't _any_ servers.](https://twitter.com/search?q=serverless%20AND%20%22no%20servers%22&src=typd) But it does mean that you hardly have to care there are servers.
 
 Before I started this I was conflating "Serverless" with "Functions-as-a-service" (FaaS).
 
@@ -102,7 +102,7 @@ FaaS is a system where a utility compute provider runs arbitrary code on your be
 
 Serverless *implies* event-driven!
 
-Also serverless isn't just functions!
+Also serverless isn't only functions!
 
 Storage, database, queues, and more can be provided in such a way that they are distributed, highly available, elastic, *and you don't have to manage, or maintain any infrastructure*. Well, ish, you have to create the serverless components and their connections... but not the infrastructure they're going to run on (and it's patches, and new versions, and foibles, and ...)
 
@@ -117,7 +117,7 @@ I'm sold!
 # Let's use a toy system to explore it?
 
 I _love_ building event-driven systems but they're not the norm so it's a long time since I've had one in production. While I was off work recently I thought I'd practice. Since Serverless is _the future_ I decided to make a serverless system. Because I know how to have fun.
-
+<!--alex ignore kids --->
 Finding somewhere to take your kids can be difficult and, since it was half-term, was on my mind. It seems like there are no websites that are aware of where you are, where you could go, and what the weather might be like when you get there...
 
 So let's make that.

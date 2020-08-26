@@ -7,13 +7,13 @@ description: "The right language shared with the right people"
 category: "naming"
 tags: [language, names, ddd, misunderstandings, agilemanc]
 ---
-
-I've just spent a great first day at [Agile Manchester 2017](http://agilemanchester.net/2017/). One of the slides at a talk from [Anna Dick](https://twitter.com/Dixi_chick) was the stand-out point of the day for me.
+<!--alex ignore dick --->
+I've spent a great first day at [Agile Manchester 2017](http://agilemanchester.net/2017/). One of the slides at a talk from [Anna Dick](https://twitter.com/Dixi_chick) was the stand-out point of the day for me.
 
 "Find a common language, don't rely on agile jargon"
 
 <!--more-->
-
+<!--alex ignore dick --->
 ![slide from of Anna Dick and Co-Op Digital](/images/common-language.jpg)
 
 George Washington was the first to say that "the hardest problem in computer science is naming things and cache invalidation" (citation needed). 
@@ -24,7 +24,7 @@ As a trivial example don't call something `ChangeJobTitle` when your users are l
 
 ## This reminded me of...
 
-A recent job where I was at a startup working with maths wizards to try and track shoppers around physical retail stores using just their smartphones. 
+A recent job where I was at a startup working with maths wizards to try and track shoppers around physical retail stores using only their smartphones. 
 
 _The shoppers' phones not the wizards'._ 
 
@@ -42,7 +42,7 @@ They knew what I meant but there was a clear moment of friction as they had to t
 
 ## Five minutes with an actual customer had invalidated one of our most basic uses of language.
 
-That's why I was really pleased to see this talk call out not just that we should avoid jargon and find the right language but that it needs to be a common language.
+That's why I was really pleased to see this talk call out not only that we should avoid jargon and find the right language but that it needs to be a common language.
 
 ### In other words (pun intended)
 

@@ -22,7 +22,7 @@ Passport
 --------
 With an eye to future expansion of what authentication the site may do the choice of technology for managing login is a [Node module called PassPort](http://passportjs.org/). PassportJS is a flexible and modular authentication middleware foor NodeJs. 
 
-Initially the site will only support logging in using users stored in the database but Passport once setup is easily extended to allow login via oauth, openid, twitter, facebook, and more. Passport uses Strategies to manage the login process.
+Initially the site will only support logging in using users stored in the database but Passport once setup is extendable to allow login via oauth, openid, twitter, facebook, and more. Passport uses Strategies to manage the login process.
 
 Tests
 -----
@@ -94,7 +94,7 @@ This function takes a database parameter so that the tests and the command line 
 
 (but not _right_ now)
 
-as an aside - [a colleague](https://twitter.com/LemoncogFoReal) just spotted how smelly this code is [in a screenshot on twitter from across a room!](https://twitter.com/LemoncogFoReal/status/468024884741013504) 
+as an aside - [a colleague](https://twitter.com/LemoncogFoReal) spotted how smelly this code is [in a screenshot on twitter from across a room!](https://twitter.com/LemoncogFoReal/status/468024884741013504) 
 
 # Logging in Tests
 The test setup for the logging in tests is slightly different as it's necessary to grab the underlying SuperAgent instance that SuperTest wraps. SuperAgent will manage its cookies so you can extend the example below to allow tests of behaviour once logged in.
