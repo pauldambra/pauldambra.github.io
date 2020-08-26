@@ -21,7 +21,7 @@ jobs:
         node-version: '12'
     - name: setup dependencies
       run: |
-          - sudo apt-get install libjpeg-progs
-          - sudo apt-get install optipng
-          - sudo apt-get install fonts-noto-color-emoji
+          sudo apt-get install libjpeg-progs && \
+          sudo apt-get install optipng && \
+          sudo apt-get install fonts-noto-color-emoji
 
