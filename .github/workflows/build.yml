@@ -40,5 +40,8 @@ jobs:
         repository: pauldambra/pauldambra.github.io
         token: ${{ secrets.blog_repo_access }}
         path: _site
-    - name: proof
-      run: ls _site
+    - name: update service worker
+      run: npx sw-precache --config service-worker-config.js
+    - name: build site
+      run: bundle exec jekyll build
+
