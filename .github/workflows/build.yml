@@ -44,6 +44,16 @@ jobs:
       run: npx sw-precache --config service-worker-config.js
     - name: build site
       run: bundle exec jekyll build
-    - name: proof
-      run: cd _site && git diff
+    - name: test html
+      run: bundle exec ruby ./htmltest.rb
+    - name: lint markdown
+      run: npx remark . --use lint --frail
+    - name: lint spelling
+      run: npx mdspell _posts/**.md \
+        --en-gb \
+        --ignore-numbers \
+        --ignore-acronyms \
+        --report
+    - name: lint with alex
+      run: npx alex _posts --diff --why
 
