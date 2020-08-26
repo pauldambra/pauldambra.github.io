@@ -24,7 +24,7 @@ jobs:
     - uses: marceloprado/has-changed-path@v1
       id: changed-images
       with:
-        paths: /images/**/*.*
+        paths: images/**/*.*
     - name: setup dependencies
       run: sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
     - name: pre build
