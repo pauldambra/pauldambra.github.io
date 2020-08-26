@@ -20,12 +20,15 @@ jobs:
       with:
         node-version: '12'
     - name: setup dependencies
-      run: |
-          sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
+      run: sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
     - name: pre build
-      run: |
-          bundle install
+      run: bundle install
     - name: image optimisation
-      run: |
-          ./imageOptimisation.sh
-
+      run: ./imageOptimisation.sh
+    - name: clean
+      run: if [ -d "_site" ]; then rm -Rf _site; fi
+    - name: get the current state of the site
+        uses: actions/checkout@master
+        with:
+          repository: pauldambra/pauldambra.github.io
+          token: ${{ secrets.github_blog_access }}
