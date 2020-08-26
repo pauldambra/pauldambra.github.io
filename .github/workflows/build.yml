@@ -38,4 +38,4 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: pauldambra/pauldambra.github.io
-        token: ${{ secrets.github_blog_access }}
+        token: ${{ secrets.blog_repo_access }}
