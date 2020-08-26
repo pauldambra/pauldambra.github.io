@@ -22,4 +22,10 @@ jobs:
     - name: setup dependencies
       run: |
           sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
+    - name: pre build
+      run: |
+          bundle install
+    - name: image optimisation
+      run: |
+          ./imageOptimisation.sh
 
