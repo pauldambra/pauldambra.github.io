@@ -89,7 +89,7 @@ A lot of teams call this "technical debt" without distinguishing it from "techni
 
 E.g. we wrote a tax processor which handles complex tax rules... and we wrote our own queueing software to do it. The essential complexity of the tax rules might be swamped by the accidental complexity of the home grown queue.
 
-Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed bu the workrarounds needed to make an analytical DB look like an online transaction processing DB.
+Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed by the workrarounds needed to make an analytical DB look like an online transaction processing DB.
 
 (not that I've been burned by inheriting decisions that look like either of those two ;))
 
@@ -119,7 +119,7 @@ In most cases you should already be thinking of your system as little, independe
 
 # Empowering if you empower
 
-When I joined this team only QAs were allowed to deploy to production and only platform engineers made any infrastructure changes. It was inherited behaviour and it was crippling for productivity. It also meant that folk with deep expertise in important tasks were snowed under with trivial tasks that didn't require their expertise. Because they were siloed the different groups sat separately and worked separately so shared very little understanding of each others needs and difficulties.
+When I joined this team only QAs were allowed to deploy to production and only platform engineers made any infrastructure changes. It was inherited behaviour and it was debilitating for productivity. It also meant that folk with deep expertise in important tasks were snowed under with trivial tasks that didn't require their expertise. Because they were siloed the different groups sat separately and worked separately so shared very little understanding of each others needs and difficulties.
 
 The stability, reduced complexity, and reduced attack surface of Serviceful systems has helped give us the confidence to collapse those silos. Software engineers now regularly write terraform, platform engineers and QAs join the mob, and folk sit together.
 
