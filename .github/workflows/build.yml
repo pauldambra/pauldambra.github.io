@@ -44,4 +44,6 @@ jobs:
       run: npx sw-precache --config service-worker-config.js
     - name: build site
       run: bundle exec jekyll build
+    - name: proof
+      run: cd _site && git diff
 
