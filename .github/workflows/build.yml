@@ -44,8 +44,6 @@ jobs:
       run: npx sw-precache --config service-worker-config.js
     - name: build site
       run: bundle exec jekyll build
-    - name: test html
-      run: bundle exec ruby ./htmltest.rb
     - name: lint markdown
       run: npx remark . --use lint --frail
     - name: lint spelling
@@ -56,4 +54,12 @@ jobs:
         --report
     - name: lint with alex
       run: npx alex _posts --diff --why
+    - name: deploy
+      run: |
+        cd _site && \
+        git add -A && \
+        git commit -m "${(GITHUB_RUN_NUMBER}} auto-pushed to github" && \
+        git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master
+    - name: test html # has to come after deploy so new links are valid
+      run: bundle exec ruby ./htmltest.rb
 
