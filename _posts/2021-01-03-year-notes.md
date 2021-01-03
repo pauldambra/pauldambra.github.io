@@ -47,6 +47,7 @@ I ran 644km in 2020. That's 12.4km a week on average. I'm _really_ pleased with 
 # ...Lockdown
 
 I suppose it would be weird not to mention lockdown and COVID this year. I'm lucky to live close to the countryside, in a house with space, and to have a job I can do remotely. Not everyone is that lucky but lockdown has been nice for me. Instead of 2 hours a day crammed on a train I've seen my family, played the guitar, or walked the dog. 
+
 <!--alex ignore husband-wife-->
 Because I'm in the house I could help with the kids more. We realised that because I could do the school run my wife could work more. 
 
@@ -73,6 +74,7 @@ Every year we should routinely chop a third out of what we aim to do. (obvs peop
 # Context, direction, and measurement
 
 I need to get better at clarifying and measuring things. And at talking to people about that. My colleague [Nathan Langley](https://twitter.com/_digin8) was *incredible* at that this year. They stuck at it. From day-to-day influencing, to rolling their sleeves up and making prototypes, months locked in a room working to make things better. Finally pushing through adoption of a way of communicating strategy and vision and linking them to concrete activities. Such a cool thing. And now other teams are picking it up. It is scary how rare it is for people to communicate the basics. And it's amazing how powerful it is.
+
 <!--alex ignore he-she-->
 For most of my time on Membership there was no communicated and agreed vision. Many of us believed we knew what it was, some of us even agreed. But we couldn't write it down and point at it. Nate changed that. 🔥💖 (like, loads of people were involved but he was influential and consistent)
 
@@ -98,12 +100,15 @@ I love [the accelerate metrics](https://www.goodreads.com/en/book/show/35747076-
 * and change fail percentage
 
 But if you're not measuring value then you don't need the accelerate metrics. They might help you [do the wrong thing faster](/2018/01/direction.html).
+
 <!--alex ignore black-->
 # Black lives matter
 
 Supporting and growing inclusion is the most important thing I can do
+
 <!--alex ignore racist he-she killed-->
 This year was already raw. And then George Floyd was murdered by the police in America and something broke. He wasn't the first or last person killed by America's racist system but something caught fire. Doing nothing, saying nothing wasn't ok. I said something about it at our weekly show and tell. I wanted folk on the team to know that their BAME colleagues hurting and for those BAME colleagues to know that if they needed time or support we'd try to help them. It was the hardest public speaking I've ever done.
+
 <!--alex ignore gal-guy-->
 A couple of times over the last few years I've been asked to come to a meeting to repeat something a woman has been trying to have heard with my man-voice so people will hear it. I'd not given the feedback to the people not listening. I promised myself I'd used up my feeling-too-awkward-to-say-something credit and the next time I saw misogyny or exclusion I'd say something. And the next time I saw misogyny it was on a call with hundreds of other people. So, I said something... I nearly didn't because I wasn't comfortable. Luckily I was able to "say something" with text which made it easier. But I'm glad I did. It was the right thing to do. 
 
@@ -146,6 +151,7 @@ shutting up and asking questions is really hard (for me). knowing when to stop a
 Twice in the last few years people have told me they feel safe on the team. Very few things feel as good as that
 
 Once someone was brave and told me how I was achieving my goals made their job harder. That didn't feel good, but I value it as much, if not more
+
 <!--alex ignore just-->
 leadership (maybe just how I do it) magnifies your reach but so also your mistakes. A bad decision I made in Jan of 2018 is still sat in need of defuckulation now. It's hard not to obsess about those mistakes
 
@@ -198,6 +204,7 @@ We’ve seen over the last year folk giving the teams space to make things in th
 Our work is not only about making great things, it’s about keeping them great. Learning from and reacting to what really happens is a super power
 
 ### Take part in design
+
 <!--alex ignore simple-->
 We have an incredible design team. If you haven’t worked somewhere that doesn’t value design you might not realise what a wonderful gift it is. Take every opportunity to work with the designers in the team. When there’s user research go along and take notes. Ask them about the designs. The nuance and depth that goes into seemingly simple things is fascinating and can help you understand why you should put in the extra effort (cos sometimes that detail is *hard* engineering)
 
