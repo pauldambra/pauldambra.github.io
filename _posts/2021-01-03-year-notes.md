@@ -102,7 +102,7 @@ But if you're not measuring value then you don't need the accelerate metrics. Th
 # Black lives matter
 
 Supporting and growing inclusion is the most important thing I can do
-<!--alex ignore racist he-she-->
+<!--alex ignore racist he-she killed-->
 This year was already raw. And then George Floyd was murdered by the police in America and something broke. He wasn't the first or last person killed by America's racist system but something caught fire. Doing nothing, saying nothing wasn't ok. I said something about it at our weekly show and tell. I wanted folk on the team to know that their BAME colleagues were affected by what was happening and for those BAME colleagues to know that if they needed time or support we'd try to help them. It was the hardest public speaking I've ever done.
 <!--alex ignore gal-guy-->
 A couple of times over the last few years I've been asked to come to a meeting to repeat something a woman has been trying to have heard with my man-voice so people will hear it. I'd not given the feedback to the people not listening. I promised myself I'd used up my feeling-too-awkward-to-say-something credit and the next time I saw misogyny or exclusion I'd say something. And the next time I saw misogyny it was on a call with hundreds of other people. So, I said something... I nearly didn't because I wasn't comfortable. Luckily I was able to "say something" with text which made it easier. But I'm glad I did. It was the right thing to do. 
