@@ -8,9 +8,9 @@ category: design
 tags: [iOS6]
 ---
 
-For years now I've not bothered buying a satnav because maps on my iPhone has been just good enough... sometimes a bit dodgy (once taking a route more fitted for a mountain bike) but generally serviceable.
+For years now I've not bothered buying a satnav because maps on my iPhone has been good enough... sometimes a bit dodgy (once taking a route more fitted for a mountain bike) but generally serviceable.
 
-Taking a trip from Manchester to Kettering this weekend with just my iPhone on iOS6 and the missus' on iOS5 was eye opening. Also, bleedin' awful... just awful - 'drive around a roundabout twice in confusion' awful.
+Taking a trip from Manchester to Kettering this weekend with only my iPhone on iOS6 and the missus' on iOS5 was eye opening. Also, bleedin' awful... - 'drive around a roundabout twice in confusion' awful.
 
 I really did give it a good go but this image sums up the difficulty faced using iOS6 maps.
 
@@ -22,6 +22,6 @@ Above you can see the difference. Google's maps app on the left has natural feat
 
 Apple's maps app (on the right) let's me see I'm where I am... apparently a desert. And that I'm near the A14. Missing roads, very little detail and difficult to read.
 
-On first sight I thought that iOS6 maps looked clean and fresh in comparison to Google maps and I bet a lot of people who don't really use it will never be disabused of that impression. Unfortunately it's clean and fresh because it doesn't have any stuff on it. And a map without stuff on it is just a square.
+On first sight I thought that iOS6 maps looked clean and fresh in comparison to Google maps and I bet a lot of people who don't really use it will never be disabused of that impression. Unfortunately it's clean and fresh because it doesn't have any stuff on it. And a map without stuff on it is a square.
 
 This really is a dreadful setback to my one device dream.

@@ -10,7 +10,7 @@ tags: [GET, idempotence, detail, follow-up]
 
 So recently I [blogged a bloggy thing ](http://mindlessramblingnonsense.blogspot.com/2011/08/how-to-design-unsubscribe-link.html)here about unsubscribe links.
 
-I know a lot of people are of the opinion that an unsubscribe link should just unsubscribe you and require no further action and that the whole idempotency thing is software design flim-flam and I was tempted to agree until I was introduced to the concept of pre-fetching...
+I know a lot of people are of the opinion that an unsubscribe link should unsubscribe you and require no further action and that the whole idempotency thing is software design flim-flam and I was tempted to agree until I was introduced to the concept of pre-fetching...
 
 <!--more-->
 

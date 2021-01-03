@@ -8,7 +8,7 @@ category: rant
 tags: [design, ux]
 ---
 
-Twice recently I've hit the same problem with two different mobile phone vendor's websites. Vodafone (displayed here) and 3. When I type a phone number I split it into three sections using white space. "nnnn nnn nnnn" that's how I remember numbers. That's not uncommon I don't think...
+Twice recently I've hit the same problem with two different mobile phone vendor's websites. Vodafone (displayed here) and 3. When I type a phone number I split it into three sections using white-space. "nnnn nnn nnnn" that's how I remember numbers. That's not uncommon I don't think...
 
 <!--more-->
 
@@ -22,7 +22,7 @@ Twice recently I've hit the same problem with two different mobile phone vendor'
 
  `var correctedNumber = numberTypedOnForm.replace(" ","").replace("-","");`
 
- and with that massive development cost you aren't going to make someone type a number twice just to satisfy your database server. Yes, not everyone will have javascript turned on and it won't catch everyone's weird way of typing phone numbers
+ and with that massive development cost you aren't going to make someone type a number twice only to satisfy your database server. Yes, not everyone will have javascript turned on and it won't catch everyone's weird way of typing phone numbers
 
  > "(nnnn)-nn-nn-nn-n" 
 
@@ -33,5 +33,3 @@ Twice recently I've hit the same problem with two different mobile phone vendor'
  `var correctedNumber = numberTypedOnForm.replace("/\D/g","");`
 
  Computers are supposed to make our lives easier but it's up to *you* website developers to help them help us.
-
- Arseholes!

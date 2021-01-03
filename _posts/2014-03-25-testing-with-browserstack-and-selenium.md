@@ -24,7 +24,7 @@ BrowserStack allow automation using a Selenium web driver. You can access this w
 
 However, after a couple of hours trying to write tests following [the documentation](http://www.browserstack.com/automate/node) and attacking Google I wasn't getting very far. I was able to run tests on Browserstack and take screenshots to prove the page was loaded but I couldn't assert against the page. Frustration had begun to build!
 
-I haven't used Selenium before and I just didn't grok how to assert against the page. I'm sure it was how I was reading the documentation but I wasn't moving forward. And then I discovered [nightwatch](http://nightwatchjs.org/) (by reading to the end of the documentation but still...)
+I haven't used Selenium before and I didn't grok how to assert against the page. I'm sure it was how I was reading the documentation but I wasn't moving forward. And then I discovered [nightwatch](http://nightwatchjs.org/) (by reading to the end of the documentation but still...)
 
 # Nightwatch
 

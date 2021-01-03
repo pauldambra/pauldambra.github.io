@@ -7,8 +7,8 @@ updated: "2011-04-11 12:49:19"
 category: ssh
 tags: [linux, windows, git, ssh, learning]
 ---
-
-I've resolved to learn more about linux and have been slowly boggling at how easy some tasks are in comparison to the MS world...
+<!--alex ignore easy-->
+I've resolved to learn more about linux and have been slowly boggling at how easy I find some tasks are in comparison to the MS world...
 
 Recently I've been working on what was intended to be a small and straight-forward website that has rapidly grown to be a large behemoth that will take credit card payments. 
 
@@ -16,7 +16,7 @@ Recently I've been working on what was intended to be a small and straight-forwa
 
 So I need revision control. 
 
-Also, the site uses Drupal and Drupal use GIT for revision control. We're building a custom module and we'd like to contribute it back once it is done so we may as well use GIT now to make life easy.
+Also, the site uses Drupal and Drupal use GIT for revision control. We're building a custom module and we'd like to contribute it back once it is done so we may as well use GIT now to make life easier.
 
 Pretty exciting I can commit my changes and they are automatically pushed over to my test server on commit and then if I like them I can push them to my live server. Both pushes are by SSH and both times I have to type in a different, long, complex password.
 
@@ -28,7 +28,7 @@ But the interwebs tell me that you can set up SSH so you don't need a password. 
 
 The task is to set my client.local machine to be able to SSH onto server.remote without any passwords changing hands.
 
-This was relatively straight forward on my Mac and on my ubuntu box but of course my main dev machine is Windows 7...
+This was relatively straight forward on my Mac and on my ubuntu box but my main dev machine is Windows 7...
 
 _As an aside switching from Mac, to VMWare fusion Windows, to VMWare fusion, to Windows 7 and remoting between them means I *never* know which key is going to be @ and which " and the windows machines get reset to US keyboard every so often by the Macs which throws a spanner in the works._
 
@@ -40,12 +40,12 @@ On a linux or unix machine this turned out to be pretty straight forward
  4) `ssh-copy-id -i ~/.ssh/rsa_server.remote.pub '-p 8901 dinglehopper@server.remote'`
     * here note that I had to surround with single quotes the -p etc section of the command in order to use a non standard port
  5) still on client.local edit `~/.ssh/config` to add
-
+<!--alex ignore host-hostess-->
 > Host server.remote
 > IdentityFile ~/.ssh/rsa_server.remote
 
  6) type `ssh dinglehopper@server.remote -p 8901` and watch in awe and wonder
-
+<!--alex ignore remain-->
 Things aren't quite so straightforward on Windows but the basic steps remain.
 
 On Windows I use the excellent PuTTy to enable all things SSHy and I'm going to behave as if you do to...
@@ -71,8 +71,8 @@ Then you move to Connection > SSH > Auth and enter the private key file that put
 
 ![putty config](http://2.bp.blogspot.com/-mGRlfc_0eTc/TaL3rW1MmOI/AAAAAAAAAOg/yXxVcK29u1s/s1600/identity-file.png)
 
-Now save this profile so you can just fire up the connection in future and away you go...
+Now save this profile so you can fire up the connection in future and away you go...
 
 Now my git push doesn't bother me for a password.
 
-There are obvious security concerns with passwordlessness so be mindful!
+There are security concerns with passwordlessness so be mindful!

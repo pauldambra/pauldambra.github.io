@@ -138,7 +138,7 @@ exports.handler = (event, context, callback) => {
 ```
 
 Here the handler converts the API gateway event to a `ProposeDestination` command. It then either uses the existing stream repository or creates one currying the dynamodb client and guid generator.
-
+<!--alex ignore invalid --->
 The command handler is then called. It either converts the command to a `destinationProposed` event and returns an HTTP 200 success. Or fails and returns an HTTP 400 invalid request.
 
 # Testing this with SAM local
@@ -210,7 +210,7 @@ describe('propose destination', function () {
 ```
 
 This is not a great example of a test for a number of reasons but it does demonstrate that the running system can receive an HTTP post after which there is one more item in the dynamodb table.
-
+<!--alex ignore devil --->
 The devil is always in the detail so this test wouldn't be good enough for a real system. But it does show that the lambda functions can be integration tested locally with real HTTP calls, writing to a local dynamodb.
 
 # Unit testing

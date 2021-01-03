@@ -23,7 +23,7 @@ Let's spend a little while defining our terms...
 [The Cloud Native Computing foundation](https://www.cncf.io/) is a group of companies seeking to define open standards for systems built to run on "the cloud".
 
 > Cloud native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.
-
+<!--alex ignore master --->
 from: https://github.com/cncf/foundation/blob/master/charter.md
 
 Seeking to build "a constellation of high-quality projects that orchestrate containers as part of a microservices architecture."
@@ -46,7 +46,7 @@ There's quite a bit of [definition of serverless in a previous post](/2018/02/se
 
 Boil it down to this: there is no installation, configuration, or maintenance of servers for the owners, and builders of a service in a Serverless system.
 
-In most cases your team (or worse a different team in your organisation) will provision, manage, patch, security scan, and deploy servers either physical or virtual. Unless you sell the compute those servers represent then you don't make money just by running those servers.
+In most cases your team (or worse a different team in your organisation) will provision, manage, patch, security scan, and deploy servers either physical or virtual. Unless you sell the compute those servers represent then you don't make money only by running those servers.
 
 ![what you do and don't manage in a serverless system](/images/serverless-maintenance.png)
 
@@ -55,17 +55,16 @@ In this image we can see that adding containers or kubernetes might make your sy
 It's only as you move to a system like EC2 fargate or GCP cloud run where you only bring the containers that you start to reduce the amount of infrastructure management you need to carry out.
 
 I'm partly excluding managed kubernetes from that or at least withholding judgement. A little because I'm not familiar enough to say if it meets this definition but also partly because in Amazon EKS you are still responsible for bring the machine images that kubernetes worker nodes run on. So you're still responsible for the scanning and patching of those images.
-
+<!--alex ignore obvious --->
 On the right you then have what most people think of when you say Serverless which is something that should probably be called "Serverless with FaaS compute". Serverless has existed (if not named) since tools like S3 became available. FaaS allows you to more obviously include your business logic to tie together the various available serverless services.
 
 Here you tradeoff not being able to bring your own application framework with the freedom of having an almost zero maintenance load. So long as you scan your dependencies, and perform some static or dynamic analysis of your code you can offload the responsibility for the rest of the maintenance and management of the system to the utility provider.
 
-
 # Serviceful Systems
 
 Some folk don't get on with the name serverless. Myself it is because of the confusion between FaaS and Serverless making it hard for people to understand how to approach building these systems. My colleague Chris Sewart introduced me to the idea of calling it "serviceful" instead. [The earliest reference for the name I can find is Patrick Debois at Serverlessconf](https://twitter.com/JoeEmison/status/1147825424615059456). A 30 minute video here: [https://www.youtube.com/watch?v=bYCPbKHivMA](https://www.youtube.com/watch?v=bYCPbKHivMA)
-
-Instead of concentrating on not having servers. Concentrate on making best use of services. The example my colleague uses is that if you want a file system you almost certainly want NFS because it's an excellent file system. But that generally speaking you don't really want a file system you just want somewhere it is easy to put files. As a result you should use S3 (if you're in AWS) because that's a really easy way to store files.
+<!--alex ignore easy --->
+Instead of concentrating on not having servers. Concentrate on making best use of services. The example my colleague uses is that if you want a file system you almost certainly want NFS because it's an excellent file system. But that generally speaking you don't really want a file system you only want somewhere it is easy to put files. As a result you should use S3 (if you're in AWS) because that's a really easy way to store files.
 
 In a serviceful system you should default to consuming the service. The service doesn't come with the provisioning and maintenance burden of the not-service. Even if the not-service is in some way better it needs to be _a lot_ better to justify its cost.
 
@@ -89,7 +88,7 @@ A lot of teams call this "technical debt" without distinguishing it from "techni
 
 E.g. we wrote a tax processor which handles complex tax rules... and we wrote our own queueing software to do it. The essential complexity of the tax rules might be swamped by the accidental complexity of the home grown queue.
 
-Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed bu the workrarounds needed to make an analytical DB look like an online transaction processing DB.
+Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed by the workrarounds needed to make an analytical DB look like an online transaction processing DB.
 
 (not that I've been burned by inheriting decisions that look like either of those two ;))
 
@@ -111,7 +110,7 @@ That lets us deal with technical debt and accidental complexity at a different c
 
 The first thing to accept is that this is an event-driven approach. You have to approach the design of your system as lots of little things talking to each other by raising events (albeit implicitly). If you can't or don't want to then you're not going to get on with this way of building things.
 
-Where something is synchronous (e.g. an API call) you have to know that you can process and respond in a short enough time or that you can fake a synchronous system. For example if you can always succeed (at least after retry) then just return 20x to the calling client, put their request into SQS, and move on.
+Where something is synchronous (e.g. an API call) you have to know that you can process and respond in a short enough time or that you can fake a synchronous system. For example if you can always succeed (at least after retry) then return 20x to the calling client, put their request into SQS, and move on.
 
 In most cases you should already be thinking of your system as little, independent things talking to each other by sending messages. However, it was fascinating to have someone in the JManc discussion group that worked at Elastic on ElasticSearch. Such a different development context and you could see that things that were absolutely true for them didn't make sense for me and vice versa.
 
@@ -119,8 +118,8 @@ In most cases you should already be thinking of your system as little, independe
 
 # Empowering if you empower
 
-When I joined this team only QAs were allowed to deploy to production and only platform engineers made any infrastructure changes. It was inherited behaviour and it was crippling for productivity. It also meant that folk with deep expertise in important tasks were snowed under with trivial tasks that didn't require their expertise. Because they were siloed the different groups sat separately and worked separately so shared very little understanding of each others needs and difficulties.
-
+When I joined this team only QAs were allowed to deploy to production and only platform engineers made any infrastructure changes. It was inherited behaviour and it was debilitating for productivity. It also meant that folk with deep expertise in important tasks were snowed under with trivial tasks that didn't require their expertise. Because they were siloed the different groups sat separately and worked separately so shared very little understanding of each others needs and difficulties.
+<!--alex ignore attack --->
 The stability, reduced complexity, and reduced attack surface of Serviceful systems has helped give us the confidence to collapse those silos. Software engineers now regularly write terraform, platform engineers and QAs join the mob, and folk sit together.
 
 We also noticed people starting to thank each other as they got to know each other and understand the work being done. Of all the things we've achieved together this is the one I'm most proud of. So while I wouldn't argue the behaviours are unique to serviceful systems I wouldn't want to leave out the contribution they made.
@@ -130,7 +129,7 @@ We also noticed people starting to thank each other as they got to know each oth
 ## Cheap
 
 Cost isn't the most important thing - developers can cost much more than infrastructure. But we've been building entirely servicefully for more than a year now and our systems do more than they used to but at worst our AWS bill has been flat over that year. We use [cloudability](https://www.cloudability.com/) to track our spending and that predicts a 10-20% drop in bill over the next 12 months based on change over the last year.
-
+<!--alex ignore her-him --->
 In fact [one of our engineers](https://twitter.com/IllCopeSomehow) has paid his salary in cost reductions on our inherited Serverful systems. That almost certainly means we've invested upwards of $200,000 since the team was launched that could have been avoided. Engineers are more expensive than infrastructure so let's guess that we invested $1.5M to create that avoidable $200k. Arguably, that's going on for $2M invested not to achieve any value _at all_. At best it was scaffolding that enabled the valuable work. At worst, avoidable in its entirety.
 
 Serviceful systems were less mature back when that investment was being made so it may well have been the right investment then... but they're much more mature now. To the point that it should be your default choice. Your context might force a different choice. But my assertion is that teams should assume they're building Servicefully and discover where they can't.
@@ -143,7 +142,7 @@ DynamoDB was rising in cost. We discovered this was because we were setting tabl
 
 You have to make sure you are looking at the cost profile of the services... AWS Cognito is cheap as chips, AWS Cognito with Advanced Security suuuuupeeerrrrrr expensive. 
 
-AWS API Gateway is super cheap and has _per request_ pricing. While Azure API Management service you pay to reserve capacity so at much lower traffic levels (comparitively) you could end up spending more than running an API gateway yourself. You can't just assume Serviceful is cheaper but when you cut with the grain there's a good chance it is.
+AWS API Gateway is super cheap and has _per request_ pricing. While Azure API Management service you pay to reserve capacity so at much lower traffic levels (comparitively) you could end up spending more than running an API gateway yourself. You can't assume Serviceful is cheaper but when you cut with the grain there's a good chance it is.
 
 ## and fast
 

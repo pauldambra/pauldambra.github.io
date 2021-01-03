@@ -9,16 +9,16 @@ updated: "2009-10-04 12:04:55"
 category: windows-mobile
 tags: [vb.net, code, parenting]
 ---
-
+<!--alex ignore daughter-son-->
 I've released a piece of software that I made for my 18 month old daughter on Codeplex [http://qqstd.codeplex.com/](https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/). 
 
 It's a small dotNet app for Windows Mobile that creates sound-image pairs by scanning a resource folder and then randomly displays one of the images. When the image is touched the sound associated with the image is played.
-
+<!--alex ignore daughter-son her-him-->
 I developed it to occupy my daughter and teach her animal noises but the app doesn't care what if finds so you could use pictures of family and friends and their names said out-loud; Vehicles and their engine noises or anything that enters your transom. 
 
 <!--more-->
 
-Just drop images and .wav files into the `\My Documents\qqstd\resources` folder and restart the app.
+Drop images and .wav files into the `\My Documents\qqstd\resources` folder and restart the app.
 
 So if you want to add a leopard:
 

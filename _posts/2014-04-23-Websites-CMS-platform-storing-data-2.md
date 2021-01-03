@@ -137,6 +137,6 @@ app.put('/pages/:page', function(req, res, next) {
 });
 ```
 
-Again this code feels a bit ugly to me... there's a lot bunched up together - but it can be revisited easily as it's covered by tests. Importantly it works and allows storage of new pages and edits to existing pages
+Again this code feels a bit ugly to me... there's a lot bunched up together - but it can be revisited as it's covered by tests. Importantly it works and allows storage of new pages and edits to existing pages
 
 And, yes, I know that any unauthorised user can edit with this... authentication is still to come!

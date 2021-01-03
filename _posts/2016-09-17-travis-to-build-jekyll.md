@@ -25,7 +25,7 @@ Later that day my subconscious prompted me to realise that, since Github pages w
 <!--more-->
 
 # Travis CI
-
+<!--alex ignore hooks --->
 [Travis](https://travis-ci.org/) is an online continuous integration system that hooks very neatly into Github. It's free for open source projects and adds build status to commits. It can be set to automatically build pull requests and adds output to those PRs so that people can see if it is safe to merge a request without building it locally themselves
 
 ![Travis integrates with Github](/images/integrates-with-github.png)
@@ -35,7 +35,7 @@ Travis is configured by placing a YAML file in the root of the project. You can 
 Continuous integration is the process of automating build and verification of your software. It's they way you avoid having to say "Works on my machine. ¯\_(ツ)_/¯". I <3 CI so being able to fold it into my hobby workflow like this is super satisfying.
 
 # Desired outcome
-
+<!--alex ignore host-hostess --->
 I decided to have one repository called `blog_source` which would build the static site into a folder. And a second repository (the original one `pauldambra.github.io`) that would host the actual site. Previously I pushed the jekyll source to that repository for Github to build now I'll be pushing HTML for Github to host. 
 
 The process will be: 
@@ -137,7 +137,7 @@ Here we tell Travis that
 * and finally to add the secure variable to the environment.
 
 # Deploying the built output
-
+<!--alex ignore master --->
 The final step in the script is to push the changed code to the output repository, when we're on master and not in a pull request.
 
 ```bash
@@ -163,10 +163,10 @@ function deploy {
 	git push $DEPLOY_REPO master:master
 }
 ```
+<!--alex ignore master --->
+Travis adds several convenience environment variables two of which which can be checked here to confirm that we don't want to deploy pull requests or branches other than master.
 
-This, again, is simple. Travis adds several convenience environment variables two of which which can be checked here to confirm that we don't want to deploy pull requests or branches other than master.
-
-Then the script ensures that the commit is identified clearly and has a message that can be tracked back to this Travis build. Before pushing to Github.
+Then the script ensures that the commit is identified and has a message that can be tracked back to this Travis build. Before pushing to Github.
 
 # Finally
 

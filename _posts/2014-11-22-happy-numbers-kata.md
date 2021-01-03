@@ -26,7 +26,7 @@ There is more info on [what a Happy Number is on wikipedia](http://en.wikipedia.
 
 The second link [above](http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/) has some spoilers in. Particularly that the order of the numbers doesn't matter, and that zeroes don't matter. I did previously rediscover that the order that you add numbers doesn't matter when working on some insurance software a few years back (although it took me a while :annoyedwithselfemoticon:) so let's be kind to me and assume I'd have got there on my own if I hadn't read the article first (although it was a _large_ whisky).
 
-After writing a just a couple of tests:
+After writing a couple of tests:
 
 ```c# 
 [Test]
@@ -41,7 +41,7 @@ public void CanIdentifyHappyNumber(int i, bool expected)
 
 I realised that I really like Ruby's having a question mark on methods that return a boolean and miss that feature in C#.
 
-And that the sensible public API was just a call to `IsAHappyNumber` directly on the integer so I could crank out a large test pretty easily.
+And that the sensible public API was a call to `IsAHappyNumber` directly on the integer so I could crank out a large test.
 
 ```c# 
 // Taken from http://oeis.org/A007770
@@ -288,7 +288,7 @@ public void ParallelRunForFiveSeconds()
     Debug.WriteLine("In five seconds the number of numbers was {0}", count);
 }
 ```
-
+<!--alex ignore damn --->
 So, yes that's not a test and it is probably awful TPL code but I'm pretty damn sure it doesn't run for more than 5 seconds and it calculates...
 
 `<drumroll/>`
@@ -298,7 +298,7 @@ around *SEVEN AND A HALF MILLION NUMBERS* in those five seconds. Yes, they're no
 # So...
 
 I thought the Happy Numbers kata would be a little diversion for an evening but the addition of a five second limit suggested [in Kevin Rutherford's post](http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/) made for a really interesting challenge.
-
+<!--alex ignore ball --->
 I don't tend to work on problems that lead me to need to optimise as heavily as I have done here. That meant I had to think very differently about what I was doing and that's always a good thing (I think). Although it has lead to some pretty ugly code. Maybe after a little rest I'll see if I can keep the performance and make it smell less - it's definitely ended up as a ball of mud!
 
 If anyone does grok the TPL and can point out what I've done badly or could be improved [the code is on GitHub](https://github.com/pauldambra/HappyNumbersKata) and I'd appreciate any pointers.

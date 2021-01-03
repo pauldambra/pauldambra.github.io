@@ -16,7 +16,7 @@ A way of measuring the progress being made by a software team. Not all teams use
 
 > Velocity is the number of story points completed by a team in an iteration.
 [scrum alliance 2014](https://www.scrumalliance.org/community/articles/2014/february/velocity)
-
+<!--alex ignore simple --->
 > define velocity as simply a measure of how fast a team is going
 [mountain goat software 2014](https://www.mountaingoatsoftware.com/blog/know-exactly-what-velocity-means-to-your-scrum-team)
 
@@ -40,7 +40,7 @@ If you are told someone is moving 30mph can you tell me how long it will take th
 
 No! You don't know where they are and you don't know which way they're travelling. You need to know they are, for example, due south from your house and travelling north.
 
-You can't say *anything* about when and where they will arrive just from their speed.
+You can't say *anything* about when and where they will arrive only from their speed.
 
 ### So, what do we need?
 
@@ -53,7 +53,7 @@ Simplistically (let's not stretch the metaphor to routing on a map) you need:
 
 Let's, for now, assume we're talking about a fixed destination and starting point (spoiler: we're not).
 
-(Most?) Teams that measure velocity do so as if direction doesn't exist. It's just a count of the work completed... it assumes you know where you are, where you're going, and that you're heading in the right direction.
+(Most?) Teams that measure velocity do so as if direction doesn't exist. It's a count of the work completed... it assumes you know where you are, where you're going, and that you're heading in the right direction.
 
 It assumes that every `(task|story|ticket|feature)` you are asked to complete is the correct thing to do.
 
@@ -108,7 +108,7 @@ Since we're generally operating under imperfect conditions. Trying to figure out
 
 ![a picture of the peak in foggy conditions](/images/foggy-day.jpg)
 
-A friend was for a while a member of mountain rescue (who are incidentally incredible - [you should give them money](http://www.kmrt.org.uk/fundraising/other-ways-to-give/)). He once described to me how they navigate when they have very low visibility.
+A friend was for a while a member of mountain rescue (who are incidentally incredible - [you should give them money](http://www.kmrt.org.uk/fundraising/other-ways-to-give/)). They once described to me how they navigate when they have very low visibility.
 
 ![a lost Lego hiker](/images/lost.jpg)
 

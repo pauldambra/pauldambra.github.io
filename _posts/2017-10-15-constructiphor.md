@@ -38,7 +38,7 @@ The bricklayers that built on top of the foundations couldn't start before the f
 In short they have to agree up front what they're doing.
 
 In comparison I could run infrastructure scripts to create complex utility computing environments, test the results, tear down the infrastructure, and repeat. All for the cost of the compute time. AWS recently started billing by the second so if that only takes minutes to run it's even cheaper than before.
-
+<!--alex ignore just --->
 I can reset the state of the software to just about any point in history to see what it was like. I can experiment with swingeing changes cheaply and without impacting other people's work.
 
  * We don't have to work in series
@@ -58,7 +58,7 @@ That's all the confirmation bias I need :)
 
 # And so...
 
-... in construction the cost of the work, or the cost of the work being wrong is higher than the cost of planning the work. Measure twice, cut once remains good advice.
+... in construction the cost of the work, or the cost of the work being wrong is higher than the cost of planning the work. Measure twice, cut once is still good advice.
 
 That *was* true in Software but isn't anymore.
 

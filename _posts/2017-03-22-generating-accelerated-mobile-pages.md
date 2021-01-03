@@ -26,7 +26,7 @@ tags: [series, blog, recursion, AMP, jekyll]
 
 Since this blog is published as static HTML articles it is a good candidate for publishing an AMP version. An open source AMP jekyll plugin was amended to add AMP versions of pages. 
 
-The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is basically no validation tooling (that I could discover at least)...
+The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is almost no validation tooling (that I could discover at least)...
 
 This didn't feel like a topic that justified several posts so to avoid taking too long this is a bit of a whistle-stop tour of adding AMP pages to this blog.
 
@@ -84,18 +84,18 @@ There are several parts here:
 ```
 
 So, there's an `<style amp-boilerplate/>` element which has to be included and the `<html amp lang="en">` declaration.
-
+<!--alex ignore just --->
 `script` elements are declared async. Not just any javascript can be included. Here the amp-analytics script is loaded to allow adding google analytics to the page.
 
 Currently the AMP validator considers including an unnecessary script a warning and not an error but that could change in future. So the amp-twitter script is loaded but only if there is an embedded tweet in the page.
 
 ### Styles
 
-All styles are included in the head in the `<style amp-custom/>` element. It was found to be easier to just load all styles that way *even on non-AMP pages*. There was no measurable difference in page rendering with styles in a linked stylesheet versus in a style tag in the head. 
+All styles are included in the head in the `<style amp-custom/>` element. It was found to be easier to load all styles that way *even on non-AMP pages*. There was no measurable difference in page rendering with styles in a linked stylesheet versus in a style tag in the head. 
 
 Previously the site used [bootstrap v3](http://getbootstrap.com/) for styling (which is burned into my muscle memory). But assessing how much of bootstrap was being used (hardly any) vs. how much was being copied into the head of the page (oodles) for AMP made bootstrap a difficult choice to keep.
 
-[Bootstrap is MIT licensed](https://github.com/twbs/bootstrap/blob/9c469cd0e8abaac19c163622ed68b6783dfa366c/LICENSE) so just the used styles were copied into the site's scss file. Mixed in with the custom styles there are only c400 lines of styles.
+[Bootstrap is MIT licensed](https://github.com/twbs/bootstrap/blob/9c469cd0e8abaac19c163622ed68b6783dfa366c/LICENSE) so only the used styles were copied into the site's scss file. Mixed in with the custom styles there are only c400 lines of styles.
 
 Presumably it is not true for all sites that there is no performance difference between an in-page style element and a linked sheet but there's only 12Kb of SCSS to be compiled for this site... and a third of that is for syntax highlighting of code blocks.
 
@@ -235,12 +235,12 @@ The amp_tweet filter then uses that `.florp-wrapper` class to find each tweet an
 ```
 
 The necessity to manually remember to wrap the embedded tweets in a div with the correct class is the least nice part of this whole process (but it's not the worst thing in the world).
-
-(of course the tweets aren't really wrapped with [`florp-wrapper`](https://twitter.com/actioncookbook/status/684515262712967170?lang=en) but using the real class meant the script was included and so failed AMP validation :/)
+<!--alex ignore failed --->
+(the tweets aren't really wrapped with [`florp-wrapper`](https://twitter.com/actioncookbook/status/684515262712967170?lang=en) but using the real class meant the script was included and so failed AMP validation :/)
 
 # AMP Validation
 
-The [AMP validator](https://validator.ampproject.org/) is fudging awesome! It was invaluable in figuring out if I'd set this all up correctly and then identifying old posts which were just imported HTML and not Markdown that Jekyll was building. Those old posts held the majority of the AMP issues identified.
+The [AMP validator](https://validator.ampproject.org/) is fudging awesome! It was invaluable in figuring out if I'd set this all up correctly and then identifying old posts which were only imported HTML and not Markdown that Jekyll was building. Those old posts held the majority of the AMP issues identified.
 
 You can 
 

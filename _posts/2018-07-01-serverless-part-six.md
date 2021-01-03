@@ -53,8 +53,8 @@ This change adds two new lambdas (or subscribers, or consumers).
 ## Creating HTML
 
 The `destination` stored to DynamoDB is our read model but in the beauty of an event driven system can also be subscribed to. This means we don't have to read from DynamoDB when somebody wants to put that data into HTML to display to a user.
-
-Because the system is event driven we know whether the data has changed so we have an easy hook for cache invalidation. That means the system can generate HTML whenever the set of destinations changes.
+<!--alex ignore hook --->
+Because the system is event driven we know whether the data has changed so we have an hook for cache invalidation. That means the system can generate HTML whenever the set of destinations changes.
 
 The handler should look familar now:
 
@@ -131,7 +131,7 @@ So now whenever there's an event the HTML is templated and written to S3.
 
 The bucket that the templated HTML is written to is being served as a static site behind the [CloudFront CDN](https://aws.amazon.com/cloudfront/). A CDN is a bunch of computers that cache a copy of your content close to the edge of the network so that it can be delivered to users as quickly as possible.
 
-Because the HTML is behind a CDN just writing to the bucket isn't enough. The CDN carries on serving the old cached content. So writing to S3 will also need to invalidate the CDN's cache.
+Because the HTML is behind a CDN writing to the bucket isn't enough. The CDN carries on serving the old cached content. So writing to S3 will also need to invalidate the CDN's cache.
 
 That _could_ be done in the same lambda as writes the event to S3 but writing to S3 is itself a lambda trigger. So we can encode the behaviour "when the static content changes invalidate the cache" instead of "when this particular reason for the content to change happens invalidate the cache".
 
@@ -162,9 +162,9 @@ exports.handler = async event => {
   return Promise.all(invalidations)
 }
 ```
-
+<!--alex ignore failure --->
 In what should be a familiar pattern now the dependencies are gathered, curried into the actual application code, invoked, and the results passed back out to the lambda environment to signal success or failure.
-
+<!--alex ignore simple --->
 The notable difference here is the introduction of a new AWS dependency: AWS SSM. [Simple Systems Manager (SSM)](https://docs.aws.amazon.com/systems-manager/latest/APIReference/Welcome.html) is a wide set of services to let you manage and configure Amazon AWS systems. The piece being used is [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html).
 
 This is a service that allows you to store plain text or encrypted config. Used here to store and provide the cloudfront distribution id. Why Parameter Store is being used is covered below.
@@ -180,7 +180,7 @@ Almost everything necessary already existed
  * test mechanism
  * event streams
  * CloudFormation templates
-
+<!--alex ignore simple --->
 Continuing to bang the drum for why event driven systems are so productive... Almost the entire change was the functional code to read, transform, and then write. Because the system complexity has been pushed up to the architecture the individual blocks can be simple.
 
 Both lambdas were written in an evening.
@@ -190,8 +190,8 @@ Both lambdas were written in an evening.
 CloudFormation was not happy with what I was trying to do... In setting out the template to add the CloudFront distribution, static site bucket, policies allowing public read from the bucket, and the two lambdas I created a circular dependency.
 
 And had no idea what to do next :(
-
-Luckily I [know how to toot](https://twitter.com/pauldambra/status/1010216895155527686)! And the lovely Heitor Lessa from AWS gave me [some pointers](https://twitter.com/pauldambra/status/1009929768920371200). I particularly love that he laid out part of the path without just giving me the solution - I didn't have the tools to investigate myself but will do next time now.
+<!--alex ignore he-she laid --->
+Luckily I [know how to toot](https://twitter.com/pauldambra/status/1010216895155527686)! And the lovely Heitor Lessa from AWS gave me [some pointers](https://twitter.com/pauldambra/status/1009929768920371200). I particularly love that he laid out part of the path without giving me the solution - I didn't have the tools to investigate myself but will do next time now.
 
 In the CloudFormation template the cloud front distribution ID was being set as an environment variable on the lambda that would need it. But [from the help provided](https://gist.github.com/heitorlessa/6cf10d8591ccdc8b9219b6fad8d16d5c#file-template-yaml-L62)
 
@@ -211,7 +211,7 @@ My colleagues were particularly helpful
 ![advice on twitter to not use cloudformation](/images/events/6/helpful-advice.png)
 
 The best solution (we could think of) was to put the ID into parameter store from the cloudformation template to break the circular dependency.
-
+<!--alex ignore nuts --->
 I've been avoiding abstractions like [terraform](https://www.terraform.io/) or [the confusingly named serverless framework](https://serverless.com/) while writing this series so that I understood the nuts and bolts and this was the first time I came close to regretting this decision. Always frustrating to have things broken without knowing what to do next :'(
 
 Two standout pieces of advice I received:

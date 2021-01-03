@@ -63,9 +63,9 @@ I can build two readmodels from this:
 {peopleHelping: ["Sam", "Jamie"]}
 ```
 
-So each read model in a system is just a different way of representing written data in order to serve a particular need. Think of them as different SQL projections or views over tables. They aren't the data they're something built from the data that lets you show it to someone.
+So each read model in a system is a different way of representing written data in order to serve a particular need. Think of them as different SQL projections or views over tables. They aren't the data they're something built from the data that lets you show it to someone.
 
-A wonderful thing about read models (in an eventsourced system at least) is that you can throw them away. Imagine a SQL database that you can just delete once you don't like its shape. In a system with read models you can change your code, reset the system that builds the read model to start at the beginning of history, and let it create the new read model.
+A wonderful thing about read models (in an eventsourced system at least) is that you can throw them away. Imagine a SQL database that you can delete once you don't like its shape. In a system with read models you can change your code, reset the system that builds the read model to start at the beginning of history, and let it create the new read model.
 
 ## Work an example
 
@@ -90,7 +90,7 @@ So a new read model is built and deployed to track order cancellations. The exis
 (important to note that no other applications had to change at all to support this!)
 
 ![when the new read model is caught up](/images/events/5/5-caught-up.jpg)
-
+<!--alex ignore period --->
 The new application reads through the event stream until it has caught up. There's a period of time where it is reading through the event stream and performing any calculations or running any logic where it isn't caught up with the other read models or with the write side of the applications.
 
 This is 'eventual consistency'. An event sourced system embraces the benefits of not trying to force all the parts of the application to stay exactly in sync with each other all the time.
@@ -117,7 +117,7 @@ Serverless systems only run for the lifetime of each request and so need to star
 
 ## The lambda
 
-This is kept as simple as possible a port into the system
+This is kept as a port into the system
 
 ```javascript
 exports.handler = async event => {
@@ -144,7 +144,7 @@ exports.handler = async event => {
 
 It initialises a stream reader and a model writer then curries a handler function which receives the event that triggered the lambda. Accepting a `terminalEventType` so destinations that shouldn't be shown to users yet can be filtered out. Finally waiting for any dynamodb writes to be gathered and passes those promises back to the executing environment so it can wait for them to complete.
 
-The handler is relatively simple too.
+The handler is small.
 
 ```javascript
 const destinationReadModel = require('./destinationReadModel.js')
@@ -228,7 +228,7 @@ module.exports = {
 
 ```
 
-Building the read model involves taking each event and updating a model based on the event type. Here you can see how this code is tolerant of events it isn't expecting - it will just ignore them.
+Building the read model involves taking each event and updating a model based on the event type. Here you can see how this code is tolerant of events it isn't expecting - it will ignore them.
 
 There's no validation that the data being read from the events is present. Whether there should be validation at this stage is context dependent. Here we wrote the event producers and know that for there to be a `geolocationValidationSucceeded` event both name and geolocation have to be present. We can trust that the read model will be good enough for now.
 

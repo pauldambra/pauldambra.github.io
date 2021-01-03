@@ -8,14 +8,14 @@ category: react
 tags: [learning, react, js, series]
 ---
 
-At the end of the last post I realised I'd sacrificed some good practice in the blind rush to make it work (i.e. worked normally like all those other guilty software engineers everywhere everyday.)
-
+At the end of the last post I realised I'd sacrificed some good practice in the rush to make it work (i.e. worked normally like all those other guilty software engineers everywhere everyday.)
+<!--alex ignore kids --->
 So earlier today I played with the kids to tire them out enough that I could distract them with television and write some #holidaycode because I am a good(-ish) parent.
 
 I managed to 
 
 * switch from using magic strings in the messagebus channel and topic identifiers
-* kill some duplication
+* remove some duplication
 * and get some tests around ReactJS
 
 <!--more-->
@@ -61,9 +61,9 @@ postal.subscribe({
 }).context(this);
 ```
 
-# Kill duplication with fire
+# Remove duplication with fire
 
-Then I componentised (ugh, is that a word?!) the input controls being used in the FilterBox so I could kill the duplication of handling their events.
+Then I componentised (ugh, is that a word?!) the input controls being used in the FilterBox so I could remove the duplication of handling their events.
 
 ```JS 
 var YearFilterInput = React.createClass({
@@ -155,8 +155,6 @@ The steps I ended up taking were:
 
 # 1. Install Mocha
 
-easy!
-
 ```bash 
 npm install --save-dev mocha
 npm install --save-dev gulp-mocha
@@ -164,8 +162,6 @@ npm install --save-dev should
 ```
 
 # 2. Add a gulp task to run tests
-
-also easy!
 
 ```JS 
 gulp.task('test', function() {
@@ -182,11 +178,9 @@ gulp.task('test', function() {
 });
 ```
 
-If you don't Gulp this just says grab all of the javascript files in the tests folder whose names end with Spec and pass them into Mocha.
+If you don't Gulp this says grab all of the javascript files in the tests folder whose names end with Spec and pass them into Mocha.
 
 # 3. Actually have some tests
-
-Not actually quite so easy!
 
 I had to `npm install` [jsdom](https://github.com/tmpvar/jsdom) since React has to have a DOM to work against. And then figure out (read largely copy from other people on the Google) how to have React render into that DOM. The secret-sauce was in the [React.addons.TestUtils](http://facebook.github.io/react/docs/test-utils.html) which continues the React.addons reign of awesome.
 
@@ -259,7 +253,7 @@ describe('the filter box', function() {
 });
 ```
 
-So, just once, we subscribe to the message we're expecting our React component to publish and store the message body.
+So, only once, we subscribe to the message we're expecting our React component to publish and store the message body.
 
 ```JS 
 var handlerReceived;
@@ -303,7 +297,7 @@ Then a second use of `TestUtils`, with my first meeting of the word "scry" outsi
 
 Well, no, it grabs any React components that shadow input controls. Not DOM elements as you might get from `document.getElementById` but the React equivalent.
 
-For each input in the Filter box, as it stands, I want to run the same tests and since there are only two inputs right now I'm happy to stand that duplication until I need to remove it. So there are two describe blocks that are basically the same:
+For each input in the Filter box, as it stands, I want to run the same tests and since there are only two inputs right now I'm happy to stand that duplication until I need to remove it. So there are two describe blocks that are almost the same:
 
 ```JS 
 describe('has a single earliest year input that', function() {

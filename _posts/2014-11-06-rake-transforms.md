@@ -16,7 +16,7 @@ Today we were talking about reducing the number of build configurations we have.
 
 NB: this is all with Albacore Rake version one.
 
-Here's a simple rakefile that will clean and build a .Net solution
+Here's a rakefile that will clean and build a .Net solution
 
 ```ruby 
 require 'albacore'
@@ -86,7 +86,7 @@ For each build config add a yaml file. In this example case I added a release.ya
 :the_setting: altered-value
 ```
 
-Complex, right? Wrong! If anything there's too little text in here for my tastes (although I'm unfamiliar with yaml so it may just be the effort I have to expend to parse it)
+Complex, right? Wrong! If anything there's too little text in here for my tastes (although I'm unfamiliar with yaml so it may be because of the effort I have to expend to parse it)
 
 The important thing here is that the yaml key begins with a colon to support the string replacement method used below.
 
@@ -139,7 +139,7 @@ This mechanism requires that the hash keys are symbols and not strings which is 
 
 # Does this solve my problems?
 
-More config yaml files can be added. Whole sections can be excluded from configs by being replaced with empty strings. And more importantly the project and solution files don't need to know about these configurations just to support different values in different deployments.
+More config yaml files can be added. Whole sections can be excluded from configs by being replaced with empty strings. And more importantly the project and solution files don't need to know about these configurations to support different values in different deployments.
 
-There might be pain points here I haven't discovered in this (admittedly super simple) example but I like what I see so far!
+There might be pain points here I haven't discovered in this example but I like what I see so far!
  

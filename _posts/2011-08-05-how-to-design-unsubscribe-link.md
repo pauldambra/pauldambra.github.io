@@ -34,7 +34,7 @@ Alright we don't need to make it into
 
 `http://unsubscribe.somewhere.co.uk/{encrypted_something}`
 
-I think that would be overkill so let's just
+I think that would be overkill so let's
 
 `http://unsubscribe.somewhere.co.uk/email_address`
 
@@ -64,6 +64,6 @@ Two types of mailings = two types of link
 
 unsubscribe.somewhere.co.uk/areas/email@person.com<br />unsubscribe.somewhere.co.uk/monthly/email@person.com
 
-When you hit the page you can just click a big button to confirm the action (which ajax-ily updates your displayed state and we can track how many people hit the page without doing anything).
+When you hit the page you can click a big button to confirm the action (which ajax-ily updates your displayed state and we can track how many people hit the page without doing anything).
 
 ![mockup of UI](http://4.bp.blogspot.com/-olQbQBRHcak/Tju4pxILv1I/AAAAAAAAAVs/jizlCCsfz1M/s1600/mockup.png)

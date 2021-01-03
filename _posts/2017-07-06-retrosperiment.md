@@ -55,7 +55,7 @@ This was a very different discussion than we would usually have. Anchored more i
 
 ![the discussion](/images/the-discussion.png)
 
-It's obviously still important to address the team's morale and individual concerns but this list of discussion points felt more focused, as we'd hoped, on what we can change to deliver more value faster.
+It's still important to address the team's morale and individual concerns but this list of discussion points felt more focused, as we'd hoped, on what we can change to deliver more value faster.
 
 # Retroception
 

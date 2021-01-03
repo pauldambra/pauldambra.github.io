@@ -1,0 +1,67 @@
+name: Jekyll site CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    - uses: marceloprado/has-changed-path@v1
+      id: changed-images
+      with:
+        paths: images/**/*.*
+    - name: setup dependencies
+      run: sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
+    - name: pre build
+      run: bundle install && npm ci
+    - name: image optimisation
+      if: steps.changed-images.outputs.changed == 'true'
+      run: ./imageOptimisation.sh
+    - name: clean
+      run: if [ -d "_site" ]; then rm -Rf _site; fi
+    - name: get the current state of the site
+      uses: actions/checkout@master
+      with:
+        repository: pauldambra/pauldambra.github.io
+        token: ${{ secrets.blog_repo_access }}
+        path: _site
+    - name: update service worker
+      run: npx sw-precache --config service-worker-config.js
+    - name: lint markdown
+      run: npx remark . --use lint --frail
+    - name: lint spelling
+      run: npx mdspell _posts/**.md \
+        --en-gb \
+        --ignore-numbers \
+        --ignore-acronyms \
+        --report
+    - name: lint with alex
+      run: npx alex _posts --diff --why
+    - name: build site
+      run: bundle exec jekyll build
+    - name: deploy
+      run: |
+        cd _site && \
+        git add -A && \
+        git config --global user.name "Github Actions CI" && \
+        git config --global user.email paul.dambra+github@actions.com && \
+        git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github" && \
+        git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master
+    - name: test html # has to come after deploy so new links are valid
+      run: bundle exec ruby ./htmltest.rb
+

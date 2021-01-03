@@ -14,7 +14,7 @@ This post is part of a series where I'm hoping to prove to myself that building 
 [Next Post](/2014/03/website-cms-display-pages-part-2.html)
 
 # Setup
-
+<!--alex ignore easy --->
 So, it's relatively easy to get an Hello World page displaying... 
 
 <!--more-->
@@ -95,4 +95,4 @@ Running `node server` at the terminal I can point my browser at it:
 
 All of which has us set up to test our server and ready to display something meaningful with very little work at all.
 
-In [the next part of the series](/2014/03/website-cms-display-pages-part-2.html) we'll look at adding a simple template and making this look a little more like a real website
+In [the next part of the series](/2014/03/website-cms-display-pages-part-2.html) we'll look at adding a basic template and making this look a little more like a real website

@@ -15,7 +15,7 @@ It is relatively common to find (or write) a line of code like this
 ```
 
 Reading this line a person can know this is initialising a `Thingy` which takes a dependency on something... and something else is false.
-
+<!--alex ignore easy --->
 I'm really lazy and easily distracted so I don't like to have to think about anything except the one task I'm trying to not get distracted from. Having to think about what it means that something is false provides an opportunity for me to get distracted. 
 
 <!--more-->

@@ -11,12 +11,12 @@ tags: [learning, cms, design, web, series]
 This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. [See the first post for an explanation of why](/2014/02/websites-cms.html)
 
 [Previous Post](/2014/03/websites-cms-displaying-pages.html)
-
+<!--alex ignore her-him --->
 In his awesome book, "Don't Make Me Think" [(shameless affiliate link)](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&ie=UTF8&qid=1473701528&sr=1-1&keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29), Steve Krug drives home the message that time spent figuring out how your site is supposed to work is not time spent deciding to engage with your site. So, we're not going to do any ground-breaking design work for this company web page.
 
 <!--more-->
 
-When people visit the site they should understand straight away how they're supposed to use it. An image search for ['company website'](https://www.google.co.uk/search?q=company+website&amp;safe=off&amp;espv=210&amp;es_sm=119&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=dNwmU8XBKu6y0AW144GgBQ&amp;ved=0CAkQ_AUoAQ&amp;biw=1246&amp;bih=658#pws=0&amp;q=company+website&amp;safe=off&amp;tbm=isch) shows basically the same design over and over again - and, I expect, you'll be instantly familiar with it.
+When people visit the site they should understand straight away how they're supposed to use it. An image search for ['company website'](https://www.google.co.uk/search?q=company+website&amp;safe=off&amp;espv=210&amp;es_sm=119&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=dNwmU8XBKu6y0AW144GgBQ&amp;ved=0CAkQ_AUoAQ&amp;biw=1246&amp;bih=658#pws=0&amp;q=company+website&amp;safe=off&amp;tbm=isch) shows the same design over and over again - and, I expect, you'll be instantly familiar with it.
 
 A logo, a navigation bar, a large carousel or image area, some content in columns below, and a footer.
 
@@ -38,7 +38,7 @@ I haven't used a Handlebars view engine with Express before so I'll need to do a
 
 # So!
 
-To grab bootstrap and jQuery (which bootstrap depends on) I'll use [Bower](http://bower.io/). If you're playing along you can just download them directly (but that's no fun, right).
+To grab bootstrap and jQuery (which bootstrap depends on) I'll use [Bower](http://bower.io/). If you're playing along you can download them directly (but that's no fun, right).
 
 At the terminal: `bower install bootstrap -Sa`
 
@@ -82,7 +82,7 @@ This requires two layout files be added to the site:
 
 Here main.handlebars is the default base layout and home.handlebars is rendered by the method that responds to the root route.
 
-At this point what the site does hasn't changed just how it does what it does so the single test (useless as it is) still passes.
+At this point what the site does hasn't changed how it does what it does so the single test (useless as it is) still passes.
 
 # Building out the Base Template
 
