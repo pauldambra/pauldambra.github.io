@@ -12,7 +12,7 @@ Since [October 2017](https://twitter.com/pauldambra/status/916336773566992384) I
 
 I wrote [year notes last year](/2020/01/year-notes.html). Surprisingly that was the only blog post I wrote last year 😱
 
-Here are mine for 2020... It feels egotistical... but it's intended to be a hook to remind me to reflect. Hopefully it's useful to me in the future even if it isn't to anyone else.
+Here are mine for 2020... It feels egotistical... but it's intended to remind me to reflect. Hopefully it's useful to me in the future even if it isn't to anyone else.
 
 <!--more-->
 
@@ -25,10 +25,12 @@ and whether I achieved them or not
  * ✅ expect to find better ways of doing it by including others
  * ½ read about leadership and get over myself
  * ½ make time to write code and find out from the teams how they'd like me to do that
+ <!--alex ignore easy-->
  * ✅ figure out how I can write weeknotes as easily without images in twitter being the main record
  * ❌ move to a place where we regularly measure and report on our work
  * 🤣 speak face-to-face with individuals instead of in big meetings
  * ½ practice Italian every day
+ <!--alex ignore white-->
  * ❓use the unfair super power of being a white, middle-class, middle-aged, straight man to lift others up
  * ✅ 10km running on average over 40 weeks of the year
  * ❌ 4 leisurely cycle rides
@@ -45,7 +47,7 @@ I ran 644km in 2020. That's 12.4km a week on average. I'm _really_ pleased with 
 # ...Lockdown
 
 I suppose it would be weird not to mention lockdown and COVID this year. I'm lucky to live close to the countryside, in a house with space, and to have a job I can do remotely. Not everyone is that lucky but lockdown has been nice for me. Instead of 2 hours a day crammed on a train I've seen my family, played the guitar, or walked the dog. 
-
+<!--alex ignore husband-wife-->
 Because I'm in the house I could help with the kids more. We realised that because I could do the school run my wife could work more. 
 
 It's definitely affected the "speak face-to-face" with individuals goal 🤣. But I've been for a walk a couple of times with colleagues who live nearby and both times that was golden.
@@ -70,8 +72,8 @@ Every year we should routinely chop a third out of what we aim to do. (obvs peop
 
 # Context, direction, and measurement
 
-I need to get better at clarifying and measuring things. And at talking to people about that. My colleague [Nathan Langley](https://twitter.com/_digin8) was *incredible* at that this year. He stuck at it. From day-to-day influencing, to rolling his sleeves up and making prototypes, months locked in a room wearing himself away to keep focus on it. Finally pushing through adoption of a way of communicating strategy and vision and linking them to concrete activities. Such a cool thing. And now other teams are picking it up. It is scary how rare it is for poeople to communicate the basics. And it's amazing how powerful it is.
-
+I need to get better at clarifying and measuring things. And at talking to people about that. My colleague [Nathan Langley](https://twitter.com/_digin8) was *incredible* at that this year. They stuck at it. From day-to-day influencing, to rolling their sleeves up and making prototypes, months locked in a room working to make things better. Finally pushing through adoption of a way of communicating strategy and vision and linking them to concrete activities. Such a cool thing. And now other teams are picking it up. It is scary how rare it is for people to communicate the basics. And it's amazing how powerful it is.
+<!--alex ignore he-she-->
 For most of my time on Membership there was no communicated and agreed vision. Many of us believed we knew what it was, some of us even agreed. But we couldn't write it down and point at it. Nate changed that. 🔥💖 (like, loads of people were involved but he was influential and consistent)
 
 I'm joining a new team in the new year. Finding a way to orient myself, choose action, and check the outcome is still going to be as important. But will be even more in a new (to me) business where I don't have years of context. 
@@ -95,14 +97,14 @@ I love [the accelerate metrics](https://www.goodreads.com/en/book/show/35747076-
 * mean time to restore (MTTR) 
 * and change fail percentage
 
-But if you're not measuring value then you don't need the accelerate metrics. They might just help you [do the wrong thing faster](/2018/01/direction.html).
-
+But if you're not measuring value then you don't need the accelerate metrics. They might help you [do the wrong thing faster](/2018/01/direction.html).
+<!--alex ignore black-->
 # Black lives matter
 
 Supporting and growing inclusion is the most important thing I can do
-
+<!--alex ignore racist he-she-->
 This year was already raw. And then George Floyd was murdered by the police in America and something broke. He wasn't the first or last person killed by America's racist system but something caught fire. Doing nothing, saying nothing wasn't ok. I said something about it at our weekly show and tell. I wanted folk on the team to know that their BAME colleagues were affected by what was happening and for those BAME colleagues to know that if they needed time or support we'd try to help them. It was the hardest public speaking I've ever done.
-
+<!--alex ignore gal-guy-->
 A couple of times over the last few years I've been asked to come to a meeting to repeat something a woman has been trying to have heard with my man-voice so people will hear it. I'd not given the feedback to the people not listening. I promised myself I'd used up my feeling-too-awkward-to-say-something credit and the next time I saw misogyny or exclusion I'd say something. And the next time I saw misogyny it was on a call with hundreds of other people. So, I said something... I nearly didn't because I wasn't comfortable. Luckily I was able to "say something" with text which made it easier. But I'm glad I did. It was the right thing to do. 
 
 I'm not claiming some expertise or moral high ground on this. I'm sharing some of the small things that I have done cos I want a world where we all do the small things. They add up to impact if enough people do them.
@@ -135,8 +137,8 @@ This year we made 600 changes, at a higher change success rate, and with better 
 
 We used to have very slow deploy pipelines and joke we could deploy in-between visits to our sites. In an emergency we can now get (some) changes tested and to prod in minutes. And we have hundreds of thousands of active users
 
-I still feel a bit uncomfortable thinking of myself as a leader but I'm not (completely) scared of it anymore. Maybe time to stop winging it and learn something. I'm lucky to have great peers to learn from
-
+I still feel a bit uncomfortable thinking of myself as a leader but I'm not (completely) scared of it any more. Maybe time to stop winging it and learn something. I'm lucky to have great peers to learn from
+<!--alex ignore just-->
 I'm increasingly convinced that giving positive feedback is a super power, and that it pays back much more than negative feedback. But I can see times where I've avoided giving negative feedback and things have been much harder than just having the "difficult conversation"
 
 shutting up and asking questions is really hard (for me). knowing when to stop asking questions and make statements is even harder. But the times when I've got that balance right have been incredible
@@ -144,7 +146,7 @@ shutting up and asking questions is really hard (for me). knowing when to stop a
 Twice in the last few years people have told me they feel safe on the team. Very few things feel as good as that
 
 Once someone was brave and told me how I was achieving my goals made their job harder. That didn't feel good, but I value it as much, if not more
-
+<!--alex ignore just-->
 leadership (maybe just how I do it) magnifies your reach but so also your mistakes. A bad decision I made in Jan of 2018 is still sat in need of defuckulation now. It's hard not to obsess about those mistakes
 
 Building a culture of celebration and sharing is really hard and really, really important
@@ -171,7 +173,7 @@ We have to have a job, it’s up to us to make sure we enjoy it
 
 ### people and interactions over process and tools
 
-Process isn’t a good in and of itself. scrum, kanban, user stories, squads, and more are all just attempts by people to describe what worked for them. There’s a risk you’re taking advice from a pastry chef while making a casserole. 
+Process isn’t a good in and of itself. scrum, kanban, user stories, squads, and more are all attempts by people to describe what worked for them. There’s a risk you’re taking advice from a pastry chef while making a casserole. 
 
 We should be *being* agile not *doing* it. 
 
@@ -193,13 +195,13 @@ We’ve seen over the last year folk giving the teams space to make things in th
 
 ### Take part in service and support
 
-Our work is not just about making great things, it’s about keeping them great. Learning from and reacting to what really happens is a super power
+Our work is not only about making great things, it’s about keeping them great. Learning from and reacting to what really happens is a super power
 
 ### Take part in design
-
+<!--alex ignore simple-->
 We have an incredible design team. If you haven’t worked somewhere that doesn’t value design you might not realise what a wonderful gift it is. Take every opportunity to work with the designers in the team. When there’s user research go along and take notes. Ask them about the designs. The nuance and depth that goes into seemingly simple things is fascinating and can help you understand why you should put in the extra effort (cos sometimes that detail is *hard* engineering)
 
-There aren’t many investments guaranteed to pay back but this is one that will pay back in spades.
+There aren’t many investments guaranteed to pay back but this is one that will pay back.
 
 ### Keep being amazing
 
