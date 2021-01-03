@@ -18,11 +18,11 @@ Then comes the day I need to handle the responses to a monthly mailing to over 7
 
 It all started out really nice and clean but then I realised I needed to handle a couple of more cases than I'd intended when I began... and lots and lots of mail servers have been configured to return non-standard responses to unsuccessful mailings which is great for a human but not so great for a piece of software trying to classify that response.
     
-So time passes and I'm correctly responding to over 90% of the returns we get (all of which stops evil companies like Yahoo for blacklisting us because we're mailing to non-existent addresses) but my code has got really, really messy.
+So time passes and I'm correctly responding to over 90% of the returns we get (all of which stops evil companies like Yahoo for blocklisting us because we're mailing to non-existent addresses) but my code has got really, really messy.
     
 Really messy.
 
-Oh God it's awful.
+Oh, it's awful.
     
 I decide to refactor but no matter what I think of I can't get a Factory to solve my problem. Yeah, yeah I know but if you're gonna have a hammer it might as well be [shiny](http://en.wikipedia.org/wiki/Golden_hammer). Now, I could go ahead and invent my own solution but as far as I'm concerned writing software is about having to do less and that sounds like too much work.
     

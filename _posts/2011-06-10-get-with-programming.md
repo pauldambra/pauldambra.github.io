@@ -7,7 +7,7 @@ updated: "2011-06-10 12:26:02"
 category: rant
 tags: [design, ux]
 ---
-
+<!--alex ignore whitespace-->
 Twice recently I've hit the same problem with two different mobile phone vendor's websites. Vodafone (displayed here) and 3. When I type a phone number I split it into three sections using white-space. "nnnn nnn nnnn" that's how I remember numbers. That's not uncommon I don't think...
 
 <!--more-->
