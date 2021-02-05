@@ -157,6 +157,10 @@ header {
     padding: 0.5em 1em;
   }
 
+  nav a + a {
+    margin-left: 1em;
+  }
+
   .top {
     display: flex;
     flex-direction: row;
