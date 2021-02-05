@@ -1,11 +1,10 @@
-
 $lightest: #fff;
 $light: #aaa;
 
 $dark: #575757;
 $darkest: #000;
 
-@mixin links ($color: inherit, $decoration: underline) {
+@mixin links($color: inherit, $decoration: underline) {
   a {
     color: $color;
     text-decoration: $decoration;
@@ -22,13 +21,13 @@ $darkest: #000;
 html {
   height: 100%;
   font-size: 20px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   * {
     box-sizing: border-box;
   }
 }
 body {
-  font-family: 'Khula', sans-serif;
+  font-family: "Khula", sans-serif;
   font-size: 1em;
   min-height: 100%;
   display: flex;
@@ -39,7 +38,7 @@ body {
 .main {
   background-color: $lightest;
   padding: 10px 5px;
-    /* flex: 1; would be enough but it looks bad in IE */
+  /* flex: 1; would be enough but it looks bad in IE */
   flex: 1 1 auto;
   width: 94%;
   margin: auto;
@@ -93,7 +92,7 @@ article {
     color: $darkest;
 
     .heading {
-      flex:3 0 auto;
+      flex: 3 0 auto;
     }
 
     .meta {
@@ -115,20 +114,20 @@ article {
       }
 
       .share-this {
-        display:flex;
+        display: flex;
         align-self: flex-end;
 
         a {
           margin-right: 5px;
         }
 
-        img, amp-image {
+        img,
+        amp-image {
           width: 32px;
           height: 32px;
         }
       }
     }
-
   }
   #title {
     line-height: 75px;
@@ -149,11 +148,11 @@ blockquote {
 header {
   display: flex;
   background-color: #222;
-  color:$lightest;
+  color: $lightest;
   padding: 5px 15px 10px 15px;
 
   &.hero {
-    background-image: url('/images/cardboard.jpg');
+    background-image: url("/images/cardboard.jpg");
 
     @media (max-width: 600px) {
       background-position: -400px -23px;
@@ -168,7 +167,7 @@ header {
     }
 
     @media (min-width: 984px) {
-      background-size:100%;
+      background-size: 100%;
     }
 
     @media (min-width: 1440px) {
@@ -190,8 +189,10 @@ header {
 
   .title {
     flex: 23 0 auto;
-    a { text-decoration: none; }
-    @media (min-width:550px) {
+    a {
+      text-decoration: none;
+    }
+    @media (min-width: 550px) {
       font-size: 150%;
       font-weight: bold;
     }
@@ -215,7 +216,7 @@ header {
         margin-right: 15px;
       }
       a {
-        height:32px;
+        height: 32px;
       }
     }
   }
@@ -236,7 +237,7 @@ ul {
   }
 
   .series {
-    display:none;
+    display: none;
   }
 }
 
@@ -257,7 +258,7 @@ ul {
     margin: 0.2em;
   }
   .post-category {
-    float:none;
+    float: none;
   }
   h3 {
     @include links($darkest, none);
@@ -274,7 +275,7 @@ ul {
 }
 
 .category-link {
-  @include links ($darkest, none);
+  @include links($darkest, none);
   font-weight: normal;
 }
 
@@ -282,11 +283,12 @@ ul {
   color: $dark;
   display: inline-block;
   padding: 1px 3px;
-  @include links ($dark, none);
+  @include links($dark, none);
 }
 .post-category {
   float: right;
-  img, amp-img {
+  img,
+  amp-img {
     fill: $dark;
     width: 24px;
     height: 24px;
@@ -300,11 +302,11 @@ ul {
   -webkit-transition: 0.25s;
   margin-bottom: 20px;
   transition: 0.25s;
-  display:flex;
+  display: flex;
   flex-direction: column;
   flex: 4 0 auto;
   &:hover {
-    background-color: rgba(245,245,245, 0.7);
+    background-color: rgba(245, 245, 245, 0.7);
     border-radius: 5px;
   }
 
@@ -315,7 +317,8 @@ ul {
   }
 }
 
-img, amp-img {
+img,
+amp-img {
   display: block;
   max-width: 1000px;
   vertical-align: middle;
@@ -339,7 +342,7 @@ aside {
     }
 
     .links {
-      display:flex;
+      display: flex;
       .previous {
         text-align: left;
         flex: 1 0 auto;
@@ -363,18 +366,21 @@ aside {
 footer {
   padding: 5px 15px;
   margin: 0 auto;
-  width:100%;
+  width: 100%;
   background-color: $darkest;
   color: $lightest;
   min-height: 2em;
   overflow: hidden;
   height: 30px;
-  a, a:visited, a:hover {
+  a,
+  a:visited,
+  a:hover {
     color: $lightest;
     line-height: 25px;
     vertical-align: bottom;
     text-decoration: none;
-    img, amp-img {
+    img,
+    amp-img {
       width: 25px;
       height: 25px;
       line-height: 25px;
@@ -384,6 +390,13 @@ footer {
     }
   }
 }
+
+.paged-weeknotes {
+  a {
+    text-decoration: none;
+  }
+}
+
 .further-reading {
   margin-top: 60px;
 
