@@ -35,7 +35,7 @@ body {
   margin: 0;
   line-height: 1.42857143;
 }
-.main {
+main {
   background-color: $lightest;
   padding: 10px 5px;
   /* flex: 1; would be enough but it looks bad in IE */
@@ -150,8 +150,9 @@ header {
   display: flex;
   flex-direction: column;
 
-  nav {
-    background-color: rgba(245, 245, 255, 0.2);
+  nav,
+  .top {
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 0.5em 1em;
   }
 
