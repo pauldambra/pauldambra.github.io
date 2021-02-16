@@ -135,4 +135,9 @@ Maybe I've not worked it out completely yet... [toot me and tell me what you thi
 
  * We can use data from people using our software and more user research as our compass to check whether we strayed from our desired path.
 
+# TL;DR
+
 We can and should care if we're being asked to do something meaningful. And we mustn't treat it as somebody else's work to check where we should go or whether we got there.
+
+The number of tickets you complete is not a measure of progress by itself. Start by measuring value and only then, if ever, start counting tickets or points
+
