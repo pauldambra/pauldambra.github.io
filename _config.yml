@@ -26,6 +26,7 @@ exclude:
   - README.md
   - make_collection.py
   - weeknote.rb
+  - .vscode
 collections:
   dear_diary_year_one:
     output: false
