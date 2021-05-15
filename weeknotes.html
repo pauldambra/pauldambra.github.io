@@ -4,6 +4,7 @@ title: Mindless Rambling Nonsense
 paginate: 
     collection: weeknotes
     reversed: true
+    limit: false
 ---
 <script type="application/ld+json">
 { "@context": "http://schema.org",
@@ -26,16 +27,16 @@ paginate:
  }
 </script>
 
-{% for post in paginator.weeknotes %}
+{% for weeknote in paginator.weeknotes %}
     <div class="post-item paged-weeknotes">
         <div class="excerpt">
-            <a href="{{ post.url }}">
-                {{ post.excerpt }}
+            <a href="{{ weeknote.url }}">
+                {{ weeknote.excerpt }}
             </a>
         </div>
         <div class="metadata">
             <div class="post-metadata">
-                posted on: {{ post.date | date_to_string }}
+                posted on: {{ weeknote.date | date_to_string }}
             </div>
         </div>
     </div>
