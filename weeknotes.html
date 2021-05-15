@@ -5,6 +5,7 @@ paginate:
     collection: weeknotes
     reversed: true
     limit: false
+    permalink: /weeknotes/page:num/
 ---
 <script type="application/ld+json">
 { "@context": "http://schema.org",
@@ -54,9 +55,9 @@ paginate:
       {% if page == paginator.page %}
         <strong>{{ page }}</strong>
       {% elsif page == 1 %}
-        <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+        <a href="{{ '/index.html' | prepend: '/weeknotes' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
       {% else %}
-        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        <a href="{{ site.paginate_path | prepend: '/weeknotes' | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
       {% endif %}
     {% endfor %}
 
