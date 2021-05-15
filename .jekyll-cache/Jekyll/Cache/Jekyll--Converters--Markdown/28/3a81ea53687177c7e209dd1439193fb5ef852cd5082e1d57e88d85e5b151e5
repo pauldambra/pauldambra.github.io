@@ -1,7 +1,0 @@
-I"<h1 id="dry-or-wet">DRY or WET?</h1>
-
-<p>DRY, in software developement, stands for Don't Repeat Yourself. This is often taken to mean remove any duplication of lines of code. Take <a href="https://www.codementor.io/joshuaaroke/dry-code-vs-wet-code-89xjwv11w">this article</a> from the <a href="https://www.google.co.uk/search?q=software+dry&amp;oq=software+dry">front page of Google results</a>. Or on <a href="http://programmer.97things.oreilly.com/wiki/index.php/Don't_Repeat_Yourself">this page</a> that says "Every line of code that goes into an application must be maintained, and is a potential source of future bugs. Duplication needlessly bloats the codebase"</p>
-
-<p>Often this is compared to WET code - which stands for Write Everything Twice. Reinforcing the idea that this is about the amount you type. Below we're going to look at what the impact of removing duplication of lines of code does to some software, hopefully demonstrate that it isn't desirable as an absolute rule, and show what the better way might be.</p>
-
-:ET

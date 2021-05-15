@@ -1,9 +1,0 @@
-I"><p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
-
-<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
-
-<p>In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command and write a <code class="language-plaintext highlighter-rouge">DestinationProposed</code> event to the eventstream.</p>
-
-<p>"<a href="https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md">SAM Local</a> can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."</p>
-
-:ET

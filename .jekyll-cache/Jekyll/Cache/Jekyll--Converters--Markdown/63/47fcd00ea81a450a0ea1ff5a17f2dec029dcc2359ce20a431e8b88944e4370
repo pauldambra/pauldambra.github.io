@@ -1,9 +1,0 @@
-I"ù<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
-
-<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
-
-<p><a href="/Websites-CMS-Platform-Storing-Data2.html">Previous Post</a></p>
-
-<p>This was the first part of the process which felt 'hard' so where I've felt the absence of a CMS platform but it's also only the second time I've ever implemented authentication using NodeJS. And still only boiled down to a few hours work.</p>
-
-:ET
