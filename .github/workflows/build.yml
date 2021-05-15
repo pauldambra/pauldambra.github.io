@@ -32,8 +32,6 @@ jobs:
     - name: image optimisation
       if: steps.changed-images.outputs.changed == 'true'
       run: ./imageOptimisation.sh
-    - name: clean
-      run: if [ -d "_site" ]; then rm -Rf _site; fi
     - name: get the current state of the site
       uses: actions/checkout@master
       with:
