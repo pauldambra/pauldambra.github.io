@@ -1,0 +1,256 @@
+I"�c<aside class="series">
+  <h1>
+    This post is part of a series on improving this blog #recursion
+  </h1>
+  <div class="links">
+    <div class="previous">
+      <a href="/2017/testing-static-sites.html">Previous Post</a>
+    </div>
+    <div class="next">
+      <a href="/2017/testing-meaning.html">Next Post</a>
+    </div>
+  </div>
+</aside>
+
+<p><a href="https://www.ampproject.org/learn/overview/">AMP or Accelerated Mobile Pages</a> is a Google-backed project that allows you to use restricted HTML to delivery static content quickly. Since AMP HTML is restricted it isn't a fit for every site.</p>
+
+<p>Since this blog is published as static HTML articles it is a good candidate for publishing an AMP version. An open source AMP jekyll plugin was amended to add AMP versions of pages.</p>
+
+<p>The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is almost no validation tooling (that I could discover at least)…</p>
+
+<p>This didn't feel like a topic that justified several posts so to avoid taking too long this is a bit of a whistle-stop tour of adding AMP pages to this blog.</p>
+
+<!--more-->
+
+<h1 id="jekyll-plugin">Jekyll Plugin</h1>
+
+<p>The basic idea is adapted from a <a href="https://github.com/juusaw/amp-jekyll/">Jekyll plugin on github</a>.</p>
+
+<p>There are several parts here:</p>
+
+<ul>
+  <li>Adding an AMP layout to the site</li>
+  <li>Adding a 'generator' to the Jekyll module</li>
+  <li>Adding an 'amp_images' filter</li>
+  <li>Adding an 'amp_tweets' filter</li>
+</ul>
+
+<p>This was a very manual process but not particularly onerous. Jekyll proved to be well-made for extension.</p>
+
+<h2 id="adding-an-amp-layout">Adding an AMP layout</h2>
+
+<p>AMP has some <a href="https://www.ampproject.org/docs/get_started/create/basic_markup">required markup</a>. So an <a href="https://github.com/pauldambra/blog_source/blob/7a39e7851dfb2cdf93ae28464d5f97ed7c1ad4c1/_layouts/amp-post.html">amp-post.html</a> was added to the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">amp</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>{{ page.title }}<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"canonical"</span> <span class="na">href=</span><span class="s">"{{ page.canonical_url | prepend: site.url }}"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width,minimum-scale=1,initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://fonts.googleapis.com/css?family=Khula"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">amp-custom</span><span class="nt">&gt;</span>
+      <span class="p">{</span><span class="err">%</span> <span class="err">include</span> <span class="err">syntax.css</span> <span class="err">%</span><span class="p">}</span>
+      <span class="p">{</span><span class="err">%</span> <span class="err">capture</span> <span class="err">include_to_scssify</span> <span class="err">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="err">%</span> <span class="err">include</span> <span class="err">main.scss</span> <span class="err">%</span><span class="p">}</span>
+      <span class="p">{</span><span class="err">%</span> <span class="err">endcapture</span> <span class="err">%</span><span class="p">}</span>
+      <span class="p">{</span><span class="err">{</span> <span class="err">include_to_scssify</span> <span class="err">|</span> <span class="err">scssify</span> <span class="p">}</span><span class="err">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">amp-boilerplate</span><span class="nt">&gt;body</span><span class="p">{</span><span class="nl">-webkit-animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">;</span><span class="nl">-moz-animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">;</span><span class="nl">-ms-animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">;</span><span class="nl">animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">}</span><span class="k">@-webkit-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@-moz-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@-ms-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@-o-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="nt">&lt;/style&gt;&lt;noscript&gt;&lt;style </span><span class="na">amp-boilerplate</span><span class="nt">&gt;body</span><span class="p">{</span><span class="nl">-webkit-animation</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span><span class="nl">-moz-animation</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span><span class="nl">-ms-animation</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span><span class="nl">animation</span><span class="p">:</span><span class="nb">none</span><span class="p">}</span><span class="nt">&lt;/style&gt;&lt;/noscript&gt;</span>
+
+{% if page.body contains "florp-wrapper" %}
+      <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">custom-element=</span><span class="s">"amp-twitter"</span> <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0/amp-twitter-0.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+{% endif %}
+
+    <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">custom-element=</span><span class="s">"amp-analytics"</span>
+    <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0/amp-analytics-0.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"shortcut icon"</span> <span class="na">href=</span><span class="s">"/favicon.ico"</span> <span class="nt">/&gt;</span>
+
+    {% include openGraph.html %}
+  <span class="nt">&lt;/head&gt;</span>
+  
+</code></pre></div></div>
+
+<p>So, there's an <code class="language-plaintext highlighter-rouge">&lt;style amp-boilerplate/&gt;</code> element which has to be included and the <code class="language-plaintext highlighter-rouge">&lt;html amp lang="en"&gt;</code> declaration.
+<!--alex ignore just --->
+<code class="language-plaintext highlighter-rouge">script</code> elements are declared async. Not just any javascript can be included. Here the amp-analytics script is loaded to allow adding google analytics to the page.</p>
+
+<p>Currently the AMP validator considers including an unnecessary script a warning and not an error but that could change in future. So the amp-twitter script is loaded but only if there is an embedded tweet in the page.</p>
+
+<h3 id="styles">Styles</h3>
+
+<p>All styles are included in the head in the <code class="language-plaintext highlighter-rouge">&lt;style amp-custom/&gt;</code> element. It was found to be easier to load all styles that way <em>even on non-AMP pages</em>. There was no measurable difference in page rendering with styles in a linked stylesheet versus in a style tag in the head.</p>
+
+<p>Previously the site used <a href="http://getbootstrap.com/">bootstrap v3</a> for styling (which is burned into my muscle memory). But assessing how much of bootstrap was being used (hardly any) vs. how much was being copied into the head of the page (oodles) for AMP made bootstrap a difficult choice to keep.</p>
+
+<p><a href="https://github.com/twbs/bootstrap/blob/9c469cd0e8abaac19c163622ed68b6783dfa366c/LICENSE">Bootstrap is MIT licensed</a> so only the used styles were copied into the site's scss file. Mixed in with the custom styles there are only c400 lines of styles.</p>
+
+<p>Presumably it is not true for all sites that there is no performance difference between an in-page style element and a linked sheet but there's only 12Kb of SCSS to be compiled for this site… and a third of that is for syntax highlighting of code blocks.</p>
+
+<h2 id="the-body">The Body</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  {% capture header %}{% include header.html %}{% endcapture %}
+  {{ header | amp_images: false, 32, 32 }}
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+
+  {% 
+    include structuredData.html 
+    headline=page.title
+    genre=page.category
+    keywords=page.keywords
+    content=page.body
+    link=page.permalink
+    date=page.date
+  %}
+   
+  <span class="nt">&lt;article&gt;</span>
+  {% capture post_header %}{% include post_header.html %}{% endcapture %}
+  {{ post_header | amp_images }}
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+      {{ page.body | markdownify | amp_images | amp_tweets }} 
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/article&gt;</span> 
+
+  <span class="nt">&lt;/div&gt;</span>
+
+  {% capture footer %}{% include footer.html %}{% endcapture %}
+  {{ footer | amp_images: false, 25, 25 }}
+
+</code></pre></div></div>
+
+<p>All images have to be fed to the <code class="language-plaintext highlighter-rouge">amp_images</code> filter (see below).</p>
+
+<p>Structured data is apparently not required for AMP but Google's webmaster tools were unhappy if it was not present so the structured data include is added.</p>
+
+<p>The main content is also passed through the <code class="language-plaintext highlighter-rouge">amp_tweets</code> filter as well as the <code class="language-plaintext highlighter-rouge">amp_images</code> filter.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>` {{ page.body</td>
+      <td>markdownify</td>
+      <td>amp_images</td>
+      <td>amp_tweets }} `</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So far so straightforward</p>
+
+<h1 id="adding-a-generator">Adding a generator</h1>
+
+<p>Jekyll <a href="https://jekyllrb.com/docs/plugins/#generators">generators</a> run as part of Jekyll's build and "create additional content based on your own rules".</p>
+
+<p>This generator is almost exactly the same as found on Github.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'thread'</span>
+<span class="nb">require</span> <span class="s1">'thwait'</span>
+
+  <span class="c1"># Generates a new AMP post for each existing post</span>
+  <span class="k">class</span> <span class="nc">AmpGenerator</span> <span class="o">&lt;</span> <span class="no">Generator</span>
+    <span class="n">priority</span> <span class="ss">:low</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+      <span class="n">dir</span> <span class="o">=</span> <span class="n">site</span><span class="p">.</span><span class="nf">config</span><span class="p">[</span><span class="s1">'ampdir'</span><span class="p">]</span> <span class="o">||</span> <span class="s1">'amp'</span>
+      <span class="n">threads</span> <span class="o">=</span> <span class="n">site</span><span class="p">.</span><span class="nf">posts</span><span class="p">.</span><span class="nf">docs</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+        <span class="no">Thread</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span>
+          <span class="n">index</span> <span class="o">=</span> <span class="no">AmpPost</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">site</span><span class="p">.</span><span class="nf">source</span><span class="p">,</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">post</span><span class="p">.</span><span class="nf">id</span><span class="p">),</span> <span class="n">post</span><span class="p">)</span>
+          <span class="n">index</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="n">site</span><span class="p">.</span><span class="nf">layouts</span><span class="p">,</span> <span class="n">site</span><span class="p">.</span><span class="nf">site_payload</span><span class="p">)</span>
+          <span class="n">index</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">site</span><span class="p">.</span><span class="nf">dest</span><span class="p">)</span>
+          <span class="n">site</span><span class="p">.</span><span class="nf">pages</span> <span class="o">&lt;&lt;</span> <span class="n">index</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+      <span class="no">ThreadsWait</span><span class="p">.</span><span class="nf">all_waits</span><span class="p">(</span><span class="o">*</span><span class="n">threads</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>For each of the posts in the site this initializes an <code class="language-plaintext highlighter-rouge">AmpPost</code> as a copy of that non AMP post and adds that new post into an amp folder in the output.</p>
+
+<p>Site build was taking around 18 seconds after adding this generator (and the image and twitter filters). Amending the generator so that it creates a new thread for each AmpPost and then waits for all of those threads to finish reduce build time to around 7 seconds!</p>
+
+<h1 id="adding-an-amp_images-filter">Adding an 'amp_images' filter</h1>
+
+<p><a href="https://www.ampproject.org/docs/reference/components/media/amp-img">AMP images must be given an explicit size</a>. And this filter, which is unchanged from that found on github, uses nokogiri to find each img element and convert it to an amp-image element.</p>
+
+<p>So markup like</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/images/yarn-desc.png"</span> <span class="na">alt=</span><span class="s">"Yarn description"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<p>becomes</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;amp-img</span> <span class="na">src=</span><span class="s">"/images/yarn-desc.png"</span> 
+           <span class="na">alt=</span><span class="s">"Yarn description"</span> 
+           <span class="na">width=</span><span class="s">"900"</span> 
+           <span class="na">height=</span><span class="s">"304"</span> 
+           <span class="na">layout=</span><span class="s">"responsive"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/amp-img&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<h1 id="adding-an-amp_tweets-filter">Adding an 'amp_tweets' filter</h1>
+
+<p>If you want to embed a tweet in a blog post (and I, for my sins, often do) then twitter provide HTML something like</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;blockquote</span> <span class="na">class=</span><span class="s">"twitter-tweet"</span> <span class="na">data-lang=</span><span class="s">"en"</span><span class="nt">&gt;&lt;p</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">dir=</span><span class="s">"ltr"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/some_user"</span><span class="nt">&gt;</span>@some_user<span class="nt">&lt;/a&gt;</span> the content content @sender (@sender) <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/sender/status/IDFORTHETWEET"</span><span class="nt">&gt;</span>August 20, 2016<span class="nt">&lt;/a&gt;&lt;/blockquote&gt;</span>
+<span class="nt">&lt;script </span><span class="na">async=</span><span class="s">""</span> <span class="na">defer=</span><span class="s">""</span> <span class="na">src=</span><span class="s">"//platform.twitter.com/widgets.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+</code></pre></div></div>
+
+<p>AMP insists this element has a known height and width so that has to be manually edited to</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"florp-wrapper"</span> <span class="na">data-width=</span><span class="s">"292"</span> <span class="na">data-height=</span><span class="s">"350"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;blockquote</span> <span class="na">class=</span><span class="s">"twitter-tweet"</span> <span class="na">data-lang=</span><span class="s">"en"</span><span class="nt">&gt;&lt;p</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">dir=</span><span class="s">"ltr"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/some_user"</span><span class="nt">&gt;</span>@some_user<span class="nt">&lt;/a&gt;</span> the content content @sender (@sender) <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/sender/status/IDFORTHETWEET"</span><span class="nt">&gt;</span>August 20, 2016<span class="nt">&lt;/a&gt;&lt;/blockquote&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">async=</span><span class="s">""</span> <span class="na">defer=</span><span class="s">""</span> <span class="na">src=</span><span class="s">"//platform.twitter.com/widgets.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+</code></pre></div></div>
+
+<p>The amp_tweet filter then uses that <code class="language-plaintext highlighter-rouge">.florp-wrapper</code> class to find each tweet and convert it to an amp-twitter element.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"florp-wrapper"</span> <span class="na">data-width=</span><span class="s">"292"</span> <span class="na">data-height=</span><span class="s">"350"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;amp-twitter</span> <span class="na">layout=</span><span class="s">"responsive"</span> <span class="na">data-tweetid=</span><span class="s">"IDFORTHETWEET"</span> <span class="na">width=</span><span class="s">"292"</span> <span class="na">height=</span><span class="s">"350"</span><span class="nt">&gt;&lt;/amp-twitter&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>The necessity to manually remember to wrap the embedded tweets in a div with the correct class is the least nice part of this whole process (but it's not the worst thing in the world).
+<!--alex ignore failed --->
+(the tweets aren't really wrapped with <a href="https://twitter.com/actioncookbook/status/684515262712967170?lang=en"><code class="language-plaintext highlighter-rouge">florp-wrapper</code></a> but using the real class meant the script was included and so failed AMP validation :/)</p>
+
+<h1 id="amp-validation">AMP Validation</h1>
+
+<p>The <a href="https://validator.ampproject.org/">AMP validator</a> is fudging awesome! It was invaluable in figuring out if I'd set this all up correctly and then identifying old posts which were only imported HTML and not Markdown that Jekyll was building. Those old posts held the majority of the AMP issues identified.</p>
+
+<p>You can</p>
+
+<ul>
+  <li>paste the generated AMP html <a href="https://validator.ampproject.org/">directly to the validator</a>.</li>
+  <li><a href="https://validator.ampproject.org/#url=http%3A%2F%2Fpauldambra.github.io%2Famp%2F2011%2F04%2Fssh-without-password%2Findex.html">load via URL</a></li>
+  <li>have it as a <a href="https://chrome.google.com/webstore/detail/amp-validator/nmoffdblmcmgeicmolmhobpoocbbmknc?hl=en">browser extension</a></li>
+  <li>and <a href="/2017/testing-static-sites.html">run it as part of a script</a></li>
+</ul>
+
+<h1 id="google-webmaster-tools">Google Webmaster tools</h1>
+
+<p><img src="/images/AMP-webmaster.png" alt="Webmaster tools AMP pages" /></p>
+
+<p>Google webmaster tools are also, slowly, picking up that the AMP pages are present. Highlighting warnings and errors and linking out to the validator.</p>
+
+<h1 id="and-so">And so…</h1>
+
+<p>If you're already generating articles using Jekyll it's well worth investigating a little time to get this setup. Either because it'll be interesting to do or because you believe you enough traffic from mobile devices to justify not making those readers wait before they can consume your awesome content.</p>
+:ET

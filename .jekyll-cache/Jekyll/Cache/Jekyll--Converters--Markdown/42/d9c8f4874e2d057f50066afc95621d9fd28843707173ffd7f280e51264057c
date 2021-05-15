@@ -1,0 +1,58 @@
+I")<p>In a <a href="http://mindlessramblingnonsense.blogspot.com/2009/10/quack-quack-says-duck.html">previous post</a> I advertised an application I'd made for WinMo to entertain my toddler.</p>
+
+<!--alex ignore her-him-->
+<p>Having watched her play with it and having been <a href="http://stackoverflow.com/questions/2498609/handle-windows-mobile-click-event-so-that-it-doesnt-queue-while-my-program-is">reminded to K.I.S.S</a>. I've fixed a bug that highlighted the difference in expectations between myself and a toddler.</p>
+
+<!--more-->
+
+<p>No not the world-weary pessimism I'm practising instead when I tested and used the app I would click and then wait for something to happen… whereas my toddler would bash at the screen having got the link between doing so and stuff happening.</p>
+
+<p>While the UI was blocking the OS would register all the clicks and then process them before updating the screen.</p>
+
+<p>In the context of this application that meant that you could have a sheep on screen that was barking like a dog…. not teaching my kid the lessons I was hoping!</p>
+
+<p>I moved the actual sound playing onto a background thread and set a boolean flag to try to control the click event</p>
+
+<div class="language-visualbasic highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Private</span> <span class="k">Sub</span> <span class="nf">picBox_Click</span><span class="p">(</span><span class="k">ByVal</span> <span class="n">sender</span> <span class="ow">As</span> <span class="kt">Object</span><span class="p">,</span> <span class="k">ByVal</span> <span class="n">e</span> <span class="ow">As</span> <span class="n">EventArgs</span><span class="p">)</span> <span class="k">Handles</span> <span class="n">picBox</span><span class="p">.</span><span class="n">Click</span>
+    <span class="k">If</span> <span class="k">Not</span> <span class="n">isPlaying</span> <span class="k">Then</span>
+        <span class="n">isPlaying</span> <span class="o">=</span> <span class="k">True</span>
+        <span class="k">Dim</span> <span class="nv">t</span> <span class="ow">As</span> <span class="n">Threading</span><span class="p">.</span><span class="n">Thread</span> <span class="o">=</span> <span class="k">New</span> <span class="n">Threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">(</span><span class="k">New</span> <span class="n">Threading</span><span class="p">.</span><span class="n">ThreadStart</span><span class="p">(</span><span class="ow">AddressOf</span> <span class="n">playSound</span><span class="p">))</span>
+        <span class="n">t</span><span class="p">.</span><span class="n">Start</span><span class="p">()</span>
+        <span class="n">t</span><span class="p">.</span><span class="n">Join</span><span class="p">()</span>
+        <span class="c1">'playSound has finished now so...</span>
+        <span class="n">refreshScreen</span><span class="p">()</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Private</span> <span class="k">Sub</span> <span class="nf">playSound</span><span class="p">()</span>
+    <span class="k">If</span> <span class="n">currentObject</span><span class="p">.</span><span class="n">getSoundLocation</span><span class="p">()</span> <span class="o">&lt;&gt;</span> <span class="s">""</span> <span class="k">Then</span>
+        <span class="n">currentObject</span><span class="p">.</span><span class="n">playSound</span><span class="p">()</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Private</span> <span class="k">Sub</span> <span class="nf">refreshScreen</span><span class="p">()</span>
+    <span class="n">picBox</span><span class="p">.</span><span class="n">Image</span> <span class="o">=</span> <span class="k">Nothing</span>
+    <span class="n">currentObject</span> <span class="o">=</span> <span class="n">thisCollectionOfThings</span><span class="p">.</span><span class="n">getNextObject</span><span class="p">()</span>
+    <span class="k">If</span> <span class="k">Not</span> <span class="n">currentObject</span> <span class="ow">Is</span> <span class="k">Nothing</span> <span class="k">Then</span> <span class="n">addImage</span><span class="p">()</span>
+    <span class="n">playTimer</span><span class="p">.</span><span class="n">Enabled</span> <span class="o">=</span> <span class="k">True</span>
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Private</span> <span class="k">Sub</span> <span class="nf">playTimer_Tick</span><span class="p">(</span><span class="k">ByVal</span> <span class="n">sender</span> <span class="ow">As</span> <span class="n">System</span><span class="p">.</span><span class="n">Object</span><span class="p">,</span> <span class="k">ByVal</span> <span class="n">e</span> <span class="ow">As</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span><span class="p">)</span> <span class="k">Handles</span> <span class="n">playTimer</span><span class="p">.</span><span class="n">Tick</span>
+    <span class="n">playTimer</span><span class="p">.</span><span class="n">Enabled</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">isPlaying</span> <span class="o">=</span> <span class="k">False</span>
+<span class="k">End</span> <span class="k">Sub</span>
+</code></pre></div></div>
+
+<p>The astute among you (pat yourselves on the back) will notice that there's also a timer in there… I found that if I hit the screen 5 times (for example) during the sound playing the last one or two clicks would be picked up and their audio played
+before the image finally refreshed.</p>
+
+<p>I guess the UI was blocking briefly as processing control passed from the spawned thread back to the UI thread.</p>
+
+<p>So I added a short timer that is started by the <code class="language-plaintext highlighter-rouge">refreshScreen</code> method and which stops itself and resets the <code class="language-plaintext highlighter-rouge">isPlaying</code> flag on its first tick.</p>
+
+<p>That might be a bit hacky and there might be a better way but since that seems to work I'm happy with it.</p>
+
+<p>And now I have a slightly more toddler-proof toddler game.</p>
+
+<p>At the time of writing you could view all of the source code and download an install cab at codeplex <code class="language-plaintext highlighter-rouge">qqstd.codeplex.com</code> but that site is unavailable now :( You can see it <a href="https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/">in the wayback machine</a></p>
+:ET

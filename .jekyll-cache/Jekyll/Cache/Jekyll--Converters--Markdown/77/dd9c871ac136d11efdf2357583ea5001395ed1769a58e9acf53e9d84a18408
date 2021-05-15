@@ -1,0 +1,13 @@
+I"ê<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/03/website-cms-display-pages-part-2.html">Previous Post</a></p>
+
+<h1 id="browserstack">Browserstack</h1>
+
+<p>I love <a href="http://www.browserstack.com/">Browserstack's awesome service</a>. It allows you to test your websites on different browsers and operating systems. Helping reduce the need to have access to physical devices for testing and reproducing bugs.</p>
+
+<h1 id="selenium-webdriver">Selenium WebDriver</h1>
+
+<p>BrowserStack allow automation using a Selenium web driver. You can access this with Python, Ruby, Java, C#, Perl, PHP, or Node.js. It is also possible to test publicly or locally available sites using BrowserStack.</p>
+
+:ET

@@ -1,0 +1,11 @@
+I"Ÿ<p>We had a brief conversation at work the other day about extending a type to make our code clearerâ€¦</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MeaningfulName</span> <span class="p">:</span> <span class="n">MathsName</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">MeaningfulName</span><span class="p">(</span><span class="kt">double</span> <span class="n">w</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">z</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET

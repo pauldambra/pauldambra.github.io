@@ -1,0 +1,127 @@
+I"�#<p>A few years ago while waiting for a user group to start at the Manchester ThoughtWorks office I bothered a couple of the devs there about their board. That conversation, after a bit of fangling, led to my convincing the team I was on at the time to use a radar board to represent our backlog.</p>
+
+<p>It allowed us to combine a fluid representation of the business's priorities with a physical representation of the cost of reorganising those priorities. But also, in a way you don't get with a columnar board, gave an immediate feedback mechanism when too much work had been proposed or accepted.</p>
+
+<p>Apologies to the two ThoughtWorks devs if I misrepresent any of their good ideas as mine or my bad ideas as theirs.</p>
+
+<!--more-->
+<!--alex ignore simple --->
+<p>The board was really simple. At the top right there was a small quarter circle labelled "now". Then a slightly larger one labelled "next". After that a slightly larger one labelled whatever you like to mean not-next-but-after-that. We experimented with a fourth quadrant but it covered ground so far away in time that it didn't add much distinction to the plan.</p>
+
+<p>By chance I still have a photo I took as we drew an early version of the quadrants on the board.</p>
+
+<p><img src="/images/radar.jpg" alt="Very early version of the board" /></p>
+
+<p>You can see it's very straight-forward.</p>
+
+<p>The radar board had the kanban board alongside it so you could see work getting closer to "now" until it was promoted onto the kanban board. We called it: radarban</p>
+
+<p><img src="/images/ideal-board.jpg" alt="A diagram showing the board" /></p>
+
+<p>Several points here:
+<!--alex ignore clearly ---></p>
+<ul>
+  <li>I am well known for my incredible artistic skills and ability at writing clearly. As this diagram shows.</li>
+  <li>Bugs are a separate stream of work. You pull preferentially from that row running across the top of the board.</li>
+  <li>The radar doesn't have to be huge. We had room for hand-recorded metrics alongside.</li>
+  <li>The 'value' column is an obsession of mine. We didn't always have it. We didn't really get it to work. I think it's probably the most important thing most teams don't do.</li>
+</ul>
+
+<h1 id="what-is-it">What is it?!</h1>
+
+<h3 id="now">Now</h3>
+
+<p>When there is capacity the team commits to work on something and moves it into 'Now'. For the team in question that's when we'd have the kick-off meeting and split it out into various tasks and stories (see below).</p>
+
+<p>The quadrant represents in broad brushstrokes (what some would call 'epic' level) what the team is working on right, erm, now.</p>
+
+<p>If someone has been out of the office they should be able to see at a glance what's happening.</p>
+
+<h3 id="next">Next</h3>
+
+<p>The 'Next' quadrant is whatever the business has prioritised to happen as soon as any current piece of work is signed off. Something getting into 'Next' is not a commitment to work on it.</p>
+
+<p>Tracking cycle time let's you see when the tickets in Next should start.</p>
+
+<h3 id="later--maybe--possibly--probably">Later / Maybe / Possibly / Probably</h3>
+
+<p>The third quadrant is weeks if not months out (all depends on your flow). And these tickets should be very vague because items here might never be worked on, or might change significantly before they start. If you're spending effort in this part of the board then something is wrong.</p>
+
+<p>So far, so exactly like a backlog column, right?</p>
+
+<h2 id="what-goes-on-it">What goes on it?</h2>
+
+<p>Everything goes on this board. Recruitment, holidays, business trips, when the new printer is arriving… (the list by virtue of being everything could keep going).</p>
+
+<p>… …. Well, not everything, if nobody cares that a particular thing is on there stop putting it on.</p>
+
+<h2 id="why-a-radar">Why a radar?</h2>
+
+<h3 id="physical-feedback">Physical feedback</h3>
+
+<p>The 'Now' quadrant is small. Those three tickets in the image above are pretty high-level and they're all that will fit in there. If somebody tried to add more work to that quadrant they'd have to overlap tickets, or crowd then together, turn them sideways… In other words they get immediate, visceral, physical feedback that they are overloading the team.</p>
+
+<p>** So it would promote the conversation about the cost of a change to work in-flight or a higher load on the team. **</p>
+
+<h3 id="expresses-fluidity">Expresses fluidity</h3>
+<!--alex ignore nuts --->
+<p>It seemed that there was less mental barrier to reorganising proposed work when it was a set of concentric clouds of tickets than when it was a series of columns.</p>
+
+<p>We had <em>two</em>. <em>whole</em>. <em>whiteboards</em>. <em>of</em>. <em>backlog</em>. at one point - guess how many people cared about the backlog when it was that big… In contrast it was a frequent sight to see the CEO and CTO stood by the radar reorganising the quadrants based on what had changed for them since it was last looked at.</p>
+
+<p>Because there wasn't the implied (or explicit) priority of something being at the top of a column of tickets we avoided effort prioritising or discussing work until we were ready to move one or more of the tickets closer to 'now'. When we were ready to move a ticket we only moved whichever was best right now.</p>
+
+<p>** So it would promote the conversation about what the priorities were. **</p>
+
+<h3 id="not-every-idea-is-equal">Not every idea is equal</h3>
+
+<p>Backlogs have a tendency to attract ideas that will never be worked on (for one reason or another). Limiting the amount of space for the backlog. And as a result limiting what can go in it forces you to maintain the backlog.</p>
+
+<p>Keeping it incredibly low fidelity means people aren't invested in the idea as much and makes this process easier</p>
+
+<p>** So it would promote the conversation about whether we need to or would ever work on an item **</p>
+
+<h1 id="it-always-works">It always works!</h1>
+
+<p>No, there are no golden bullets (or boards).</p>
+
+<p>The context where I propose it helps is when business priorities are fluid, where they're not clear to everyone, or where the business doesn't feel the cost of changing work in-flight.</p>
+
+<p>It's ok for needs and priorities to change but when they change frequently making sure everybody knows what is going on can be very difficult.</p>
+
+<p>It's (sometimes) OK to drop everything because of emergencies or opportunities but it can also become the norm. It can be hard to notice that happening and to communicate the cost of that to the people asking for the changes. Walking over to the radar to say "we can move it in but we have to move something out" helps clarify this and let's everyone make a concrete decision.</p>
+
+<h2 id="kick-off-and-split---as-an-aside">Kick-off and split - as an aside</h2>
+
+<p>That 'kick-off and split' process was moving us towards a single-piece flow approach introduced to us by one of our colleagues <a href="https://twitter.com/quezlatch">Michael Dickens</a>. There's an <a href="https://twitter.com/andylongshaw/status/788775269788155904">example here on Twitter</a> where you can see in the centre the various tasks required to finish this piece of work stuck over a diagram of the moving pieces.</p>
+
+<p>Or similarly <a href="https://silkandspinach.net/2017/01/18/evolving-the-kanban-board/">described here by Kevin Rutherford</a> where a diagram helps guide and frame the discussion of what work needs doing.</p>
+
+<p>That should give you an idea of the scope of the tickets in now. Up to several pieces of work for several developers for several days.</p>
+
+<p>At one point we did erase the kanban board, draw a complex process flow we needed to implement in its place, and stick post-its over that. It worked really well!</p>
+
+<h2 id="what-do-you-absolutely-need">What do you absolutely need?</h2>
+
+<h3 id="you-need-lots-of-space">You need lots of space.</h3>
+
+<p>We had more than one whiteboard per person. So could afford three boards to describe our current and upcoming work. We were also colocated so we didn't need an electronic board (although we did have to have one and it was never up-to-date :/)</p>
+
+<p>I've tried this recently with a different team. We have very little whiteboard space. We were trying to convey a lot of information in one place - it didn't work for everyone so we've moved away from it</p>
+
+<p><img src="/images/one-board.jpg" alt="All crammed into one board" /></p>
+
+<p>It's a shame we couldn't make it work because even with a lack of space it was great for communicating what was coming towards the team, focussing on what we were working on, and promoting conversation about the things we were doing.</p>
+
+<h3 id="you-need-to-talk-to-each-other">You need to talk to each other</h3>
+
+<p>Ultimately that's what this is about - if I haven't laboured that point enough.</p>
+
+<p>This is a planning mechanism intended to force the right people to stand next to each other and agree about what is happening.</p>
+
+<h1 id="if-you-try-this">If you try this…</h1>
+
+<p>… I'd love to hear about it.</p>
+
+<p>Tell me what worked and didn't, send me a picture, ask me questions.</p>
+:ET

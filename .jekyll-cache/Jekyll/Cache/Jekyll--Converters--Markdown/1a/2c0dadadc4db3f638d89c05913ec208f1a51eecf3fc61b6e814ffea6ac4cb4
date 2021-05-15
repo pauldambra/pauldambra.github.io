@@ -1,0 +1,5 @@
+I"2<h4 id="part-one-because-ive-got-a-feeling-this-is-a-topic-about-which-ill-be-able-to-bang-on">part one because I've got a feeling this is a topic about which I'll be able to bang on.</h4>
+
+<p><a href="http://facebook.github.io/react/index.html">React JS</a> was made by Facebook to be the V in MVC. In other words it only deals with the UI. It's sold as being fast - both for performance and development. A definitely contentious part of React is that it mushes JS and HTML together… More specifically you put HTML <em>inside</em> the JS not vice versa.</p>
+
+:ET

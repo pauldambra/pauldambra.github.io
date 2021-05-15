@@ -1,0 +1,11 @@
+I"{<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/Websites-CMS-Platform-promises.html">Previous Post</a></p>
+
+<p>So, in the last post I worked on switching some callback code to using promises with <a href="https://www.npmjs.org/package/bluebird">Bluebird</a> library but as I've not seen much promisified (definitely a word!) code I wasn't sure whether it was any good.</p>
+
+<p>So I posted <a href="http://codereview.stackexchange.com/questions/51712/is-this-a-reasonable-way-to-implement-promises-in-node-js">a question on the code review stackexchange</a> asking for feedback.</p>
+
+:ET

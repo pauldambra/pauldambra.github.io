@@ -1,0 +1,11 @@
+I"è<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p>In this post we start to see how we can build a stream of events that lets us create state. We'll do this by adding an event subscrber that waits until a user proposes a destination to visit and validates the location they've provided.</p>
+
+<p><img src="/images/events/c4/second-slice-4.jpg" alt="the slice being built in this article" /></p>
+
+:ET

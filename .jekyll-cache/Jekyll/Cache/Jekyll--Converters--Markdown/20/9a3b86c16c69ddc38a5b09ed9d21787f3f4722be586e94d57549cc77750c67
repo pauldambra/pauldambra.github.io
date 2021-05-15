@@ -1,0 +1,22 @@
+I"Y<p>Today I had super-fun spotting the opportunity for a refactoring and figuring out how to apply it. I wanted to think it through while it was fresh in my mind to try to cement any learning opportunity</p>
+
+<p>The refactoring in question is <a href="https://www.industriallogic.com/xp/refactoring/conditionDispatcherWithCommand.html">"Replace Conditional Dispatcher with Command"</a>.</p>
+
+<p>Quoting that source the opportunity for this refactoring is when:
+<!--alex ignore execute ---></p>
+<blockquote>
+  <p>Conditional logic is used to dispatch requests and execute actions.</p>
+</blockquote>
+
+<p>And the solution is: 
+<!--alex ignore execute ---></p>
+<blockquote>
+  <p>Create a Command for each action. Store the Commands in a collection and
+replace the conditional logic with code to fetch and execute Commands.</p>
+</blockquote>
+
+<p>It's one of those subtle changes that has real power to tidy up and add to the expressiveness of your code.</p>
+
+<p>If (pun intended) you aren't familiar with it I'd definitely recommend trying it on for size by looking for an opportunity to apply it in your systems.</p>
+
+:ET

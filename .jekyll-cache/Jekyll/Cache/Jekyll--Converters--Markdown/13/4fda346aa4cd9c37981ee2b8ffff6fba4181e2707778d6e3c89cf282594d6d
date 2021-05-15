@@ -1,0 +1,85 @@
+I"9<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/02/websites-cms.html">Previous Post</a>
+<a href="/2014/03/website-cms-display-pages-part-2.html">Next Post</a></p>
+
+<h1 id="setup">Setup</h1>
+<!--alex ignore easy --->
+<p>So, it's relatively easy to get an Hello World page displaying…</p>
+
+<!--more-->
+
+<p>The steps I take when I'm setting up a new project look like:</p>
+
+<p><img src="http://1.bp.blogspot.com/-bOVBV3wcEbE/Uya7PQnFeMI/AAAAAAAANOA/Hz_2p5XZpOY/s1600/Screenshot+2014-03-17+09.05.33.png" alt="project setup steps" /></p>
+
+<p>I should probably start using <a href="http://yeoman.io/">Yeoman</a> but I don't start enough projects to feel the need to automate this step of the setup.</p>
+
+<p>I already know I want to use express for the server, that I want to test express using mocha, and to use the awesome <a href="https://github.com/visionmedia/supertest">supertest</a> module, so I can run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save</span> express
+
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> supertest
+
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
+</code></pre></div></div>
+
+<p>Before I carry on I grab the Node .gitignore file</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.github.com/github/gitignore/master/Node.gitignore
+
+<span class="nb">mv </span>Node.gitignore .gitignore
+</code></pre></div></div>
+
+<p>and can make an empty but initialised commit</p>
+
+<h1 id="the-first-test">The First Test</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">supertest</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../server</span><span class="dl">'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">GET /</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+
+ <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">respond with html</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+
+   <span class="nx">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">text/html</span><span class="dl">'</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">,</span> <span class="sr">/html/</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
+
+   <span class="p">});</span>
+
+   <span class="p">});</span>
+</code></pre></div></div>
+
+<p>There's quite a lot going on there if you haven't used Mocha or Supertest then head off and read about them. How they work is out of the scope of this post. But what we're asserting here is that if you ask our server application for the root route then you get some HTML and HTTP status 200.</p>
+
+<p>The simplest express server that makes this test pass is:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="p">});</span>
+
+  <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span>
+
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="nx">app</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">node server</code> at the terminal I can point my browser at it:</p>
+
+<p><img src="http://2.bp.blogspot.com/-8RKwf5NLHDc/UybPd8r9L0I/AAAAAAAANQA/rb_3_4W-22c/s1600/Screenshot+2014-03-17+10.32.47.png" alt="screenshot of hello world response" /></p>
+
+<p>All of which has us set up to test our server and ready to display something meaningful with very little work at all.</p>
+
+<p>In <a href="/2014/03/website-cms-display-pages-part-2.html">the next part of the series</a> we'll look at adding a basic template and making this look a little more like a real website</p>
+:ET

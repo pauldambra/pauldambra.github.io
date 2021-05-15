@@ -1,0 +1,82 @@
+I"�<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/better-affordance-js.html">Previous Post</a>
+<!--alex ignore banging --->
+I've been banging this drum into the internet's echo chamber for five months now and enough is enough!</p>
+
+<!--more-->
+
+<p>My initial to-do list was to build a site that:</p>
+
+<ul>
+  <li>Displays Web pages
+    <ul>
+      <li><a href="/2014/03/websites-cms-displaying-pages.html">part 1</a></li>
+      <li><a href="/2014/03/website-cms-display-pages-part-2.html">part 2</a></li>
+    </ul>
+  </li>
+  <li>Stores data
+    <ul>
+      <li><a href="/Websites-CMS-Platform-Storing-Data.html">part 1</a></li>
+      <li><a href="/Websites-CMS-Platform-Storing-Data2.html">part 2</a></li>
+    </ul>
+  </li>
+  <li>Edits web pages / Has an Admin section
+    <ul>
+      <li><a href="/On-Page-Editing.html">on page editing</a></li>
+      <li><a href="/better-affordance.html">UX part 1</a></li>
+      <li><a href="/better-affordance-js.html">UX part 2</a></li>
+    </ul>
+  </li>
+  <li>Has templating
+    <ul>
+      <li><a href="/2014/03/website-cms-display-pages-part-2.html">Handlebars</a></li>
+    </ul>
+  </li>
+  <li>Allows more than one author
+    <ul>
+      <li><a href="/websites-CMS-platform-logging-in.html">Logging in</a></li>
+    </ul>
+  </li>
+  <li>Has Server side caching
+    <ul>
+      <li>does anything not have server side caching these days?! ExpressJS does…</li>
+    </ul>
+  </li>
+  <li>Can be used by someone non-technical
+    <ul>
+      <li>totally subjective… I think this could be used by just-about-anyone but it would need polish and user-testing to really determine that.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="aims">Aims</h1>
+
+<h3 id="no-heavy-frameworks-need-apply">No heavy frameworks need apply</h3>
+
+<p>My initial aim was to prove to myself that there's a lot of friction using a big framework like Django when building a CMS site and that can be avoided. I still feel that's true and I haven't discovered anything in this process that changes my mind (yeah, confirmation bias).</p>
+
+<ul>
+  <li>Implementing login was a pain - but it <em>always</em> is…</li>
+  <li>I switched backwards and forwards between view engines as I came to terms with express</li>
+</ul>
+
+<p>This series of posts has 12 instalments. Each of which represents around 4 hours of work <em>including typing up the posts</em> so turning out a fairly straight-forward business website in 10 actual days would be gigantically achievable.</p>
+
+<p>That doesn't mean you can't make websites with a big framework or even that you shouldn't… it does mean I won't and I hope it helps demonstrate why…</p>
+
+<h3 id="nodejs-is-super-fun-development-for-the-purposes-of">NodeJS is super fun, development, for the purposes of</h3>
+
+<p>I've learnt an amazing amount. I'd meant to explore Selenium, Browserstack, Promises, and contenteditable for ages - this series was the push to do that.</p>
+
+<p>And, yes, Node is great to work with. My Node style isn't there yet but this has helped bring me closer to writing Node code I'm happy with.</p>
+
+<!--alex ignore killing --->
+<h1 id="killing-the-series">Killing the series</h1>
+
+<p>But I'm a bit bored with this now and I've got more children than when I started the series. It feels like a drag and an obligation to carry on which definitely isn't why I'm blogging (that's because I don't have any real hobbies any more).</p>
+
+<p>So I'm stopping here…</p>
+:ET

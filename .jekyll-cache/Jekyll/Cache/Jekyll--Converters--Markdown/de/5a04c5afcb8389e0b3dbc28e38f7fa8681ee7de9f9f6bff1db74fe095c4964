@@ -1,0 +1,7 @@
+I"%<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/03/testing-with-browserstack-and-selenium.html">Previous Post</a></p>
+
+<p>After a day writing DDL for a project that has manual schema versioning against MS SQL and is going through a lot of changes I feel honour bound to write a post about storing data in the Omniclopse site.</p>
+
+:ET

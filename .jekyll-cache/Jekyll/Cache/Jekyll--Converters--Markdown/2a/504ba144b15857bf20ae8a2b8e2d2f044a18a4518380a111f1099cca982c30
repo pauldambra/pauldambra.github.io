@@ -1,0 +1,9 @@
+I"<p>At <a href="https://mcrjava.github.io/jmanc/">Manchester Java Unconference 2019</a> I attended a discussion on "Cloud Native Functions". It turned out nobody in the group had used "cloud native" but I've been working with teams using serviceful systems.</p>
+
+<p>I have a bad habit of talking more than I should but, despite my best efforts, the group expressed interest in hearing what teams at Co-op Digital had learned in the last ten months or so of working with serviceful systems in AWS.</p>
+
+<p>We defined some terms, covered some pitfalls and gotchas, some successes, and most of all our key learning: that once you can deploy one serviceful system into production you can move faster than you ever have before.</p>
+
+<p>Let's spend a little while defining our terms…</p>
+
+:ET

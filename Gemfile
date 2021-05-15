@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'github-pages'
+gem 'jekyll'
 
 gem 'webdrivers'
 
@@ -8,6 +8,7 @@ gem 'fastimage'
 gem 'html-proofer'
 gem 'parallel'
 gem 'faraday'
+gem 'kramdown-parser-gfm'
 
 group :jekyll_plugins do
   gem 'octopress-paginate'

@@ -1,0 +1,21 @@
+I"„<aside class="series">
+	<h1>
+		This post is part of a series on improving this blog #recursion
+	</h1>
+	<div class="links">
+		<div class="previous">
+			<a href="/using-travis-to-build-jekyll.html">Previous Post</a>
+		</div>
+		<div class="next">
+      <a href="/2017/testing-static-sites.html">Next Post</a>
+		</div>
+	</div>
+</aside>
+
+<p>Structured Data is a way of adding context to files served on the web so that computers (primarily but not only search engines) can respond to what your content means.</p>
+
+<p>Google, for example, will alter and improve how your site appears in search results based on the context you give your data. And if your site is considered authoritative can use the data to build the knowledge cards it sits alongside other search results.</p>
+
+<p>This blog is only authoritative for being unread but I've not worked with structured data and thought I'd investigate.</p>
+
+:ET

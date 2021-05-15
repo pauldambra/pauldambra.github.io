@@ -1,0 +1,9 @@
+I"m<p><a href="http://www.tokutek.com/tokumx-for-mongodb/">TokuMX</a> is an</p>
+
+<blockquote>
+  <p>"open source, high-performance distribution of MongoDB".</p>
+</blockquote>
+
+<p>On a current project we're using MongoDB and, as the system is likely to scale fairly heavily, worrying (primarily) about storage. So, I picked up a task to compare MongoDB and TokuMX.</p>
+
+:ET

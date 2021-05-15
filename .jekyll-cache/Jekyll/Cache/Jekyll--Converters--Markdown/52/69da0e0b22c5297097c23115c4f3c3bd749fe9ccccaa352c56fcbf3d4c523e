@@ -1,0 +1,163 @@
+I"D<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/websites-CMS-platform-logging-in.html">Previous Post</a></p>
+
+<blockquote>
+  <p>A promise represents the eventual result of an asynchronous operation.</p>
+</blockquote>
+
+<p>The basic idea is that you can swap in a promise where you would normally pass in a callback.</p>
+
+<p>The primary interaction is that you call a method which returns a promise which will eventually return a result (it <em>can</em> immediately return the result if it's available) and you chain a call to <code class="language-plaintext highlighter-rouge">.then()</code> onto that method call.</p>
+
+<p>The call to then is equivalent to passing in the callback function.</p>
+
+<p>Clear as mud?</p>
+
+<!--more-->
+
+<p>There's (much) more at the <a href="http://promisesaplus.com/">Promises specification website</a>.</p>
+
+<h1 id="bluebird">Bluebird</h1>
+<p>This is JavaScript so there are a bazillion npm packages that could be used to switch the project's code to using promises. A (relatively small) bit of <del>googling</del> research suggested that the <a href="https://www.npmjs.org/package/bluebird">Bluebird</a> library was a good bet.</p>
+
+<p>In their words:</p>
+
+<blockquote>
+  <p>Bluebird is a fully featured promise library with focus on innovative features and performance</p>
+</blockquote>
+
+<h1 id="before">Before</h1>
+<p>Here's the code from the <a href="/websites-CMS-platform-logging-in.html">previous Post</a> which shows the smelly, <a href="http://c2.com/cgi/wiki?ArrowAntiPattern">arrow anti-pattern</a></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="k">return</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hash</span>
+                <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nx">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This took a bit of faff to translate to promises almost entirely as a result of this being the first ever promises code I've written and I didn't RTFM.</p>
+
+<p>I did have this code covered by tests so I could leave mocha running in the background and poke the code with a stick (Yay TDD!)</p>
+
+<h1 id="after">After</h1>
+<p>The first pass at implementing promises generated:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nb">Promise</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bluebird</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">genSalt</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">genSalt</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">genHash</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+	        <span class="k">return</span> <span class="nx">genHash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">);</span>
+	    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">saveAsync</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hash</span>
+            <span class="p">});</span>
+        <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>All tests still pass at this point and there's fewer levels of arrow to wade through but it still feels a bit pointy and not massively clear so…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nb">Promise</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bluebird</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">genSalt</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">genSalt</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">genHash</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">hashPassword</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">genHash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">};</span>
+
+        <span class="kd">var</span> <span class="nx">persistUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">hashedPassword</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">saveAsync</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hashedPassword</span>
+            <span class="p">});</span>
+        <span class="p">};</span>
+
+        <span class="nx">hashPassword</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">persistUser</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">callback</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>skipping over the setup code you can get to the meat of the module</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hashPassword</span><span class="p">()</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">persistUser</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">callback</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Which is a huge amount clearer than the starting point! I do like a method to be a sentence! 'Hash password then persist user'!</p>
+
+<p>A very high count of exclamation marks in this post but that was much easier and more fun than I anticipated - winner!</p>
+
+<p>At this point I either need to pass through the code to implement promises more widely… or I could choose to leave everything as it is and improve each code file as it's touched.</p>
+
+<p>As it is it's nearly midnight and my alarm goes off at 5:50am so…</p>
+:ET

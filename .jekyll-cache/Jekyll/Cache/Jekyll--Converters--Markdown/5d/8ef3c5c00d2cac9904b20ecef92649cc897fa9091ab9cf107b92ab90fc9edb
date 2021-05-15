@@ -1,0 +1,259 @@
+I"Mo<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/Websites-CMS-Platform-Storing-Data2.html">Previous Post</a></p>
+
+<p>A.K.A. No More CMS-y Admin Section?</p>
+
+<p>A traditional CMS framework or website has an admin section for logged in users. That section has a menu showing them which sections the user can edit and each section has a list of the pages they can edit and then the user can edit the text or upload images using a WYSIWYG editor.</p>
+
+<p>Don't fix it if it aint broken but… but… HTML5 includes <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_Editable">the <code class="language-plaintext highlighter-rouge">contenteditable</code> attribute</a> which makes (the text of) almost any element editable.</p>
+
+<p>If the admin section exists (in large part) to allow editing of content and editing of content can be completed in the page itself could this replace the admin section?</p>
+
+<!--more-->
+
+<h3 id="could-it">Could it?!</h3>
+
+<p>The benefit I can see here is that your edits are in place. They're immediately reflected on screen so the editing user can see the impact they're having. A user may not grok why a developer has put a 25 character limit on a title field. But if they only change a title and it pushes the rest of the page out then it's their call whether that's OK.</p>
+
+<p>I can think of two problems with this:</p>
+
+<h4 id="1-users-expect-an-admin-interface">1. Users expect an admin interface.</h4>
+
+<p>They don't expect to edit in the page</p>
+
+<p>I've previously referenced "Don't Make Me Think" <a href="https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1473701528&amp;sr=1-1&amp;keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29">(shameless affiliate link)</a> and that approach would drive the position that there's no point confusing a user only to be funky. This may be doing that…</p>
+
+<h4 id="2-is-it-discoverable">2. Is it discoverable?</h4>
+
+<p>The visual affordance to indicate that a user is able to edit an element needs to be worked in to the design.</p>
+
+<p>If the user can't find what to edit then this doesn't work. Also, since part of the benefit is that the edits are in the page and the page has to change to indicate where edits are possible does that water down the benefit.</p>
+
+<p>I'm well out of my depth as far as design goes right now! If this was a real project I'd want to get a real designer or some actual users at this point and find out if this is a developer only idea…</p>
+
+<h1 id="so-how-does-it-work">so how does it work?</h1>
+<p>As part of this piece of development I switched view engine to the <a href="https://github.com/donpark/hbs">hbs engine</a>. I wanted partials and handlebars and this appears to offer both with little pain.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./server/handlebars</span><span class="dl">'</span><span class="p">).</span><span class="nx">init</span><span class="p">(</span><span class="nx">hbs</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">);</span>
+<span class="nx">hbs</span><span class="p">.</span><span class="nx">registerPartials</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">/views/partials</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">engine</span><span class="p">(</span><span class="dl">'</span><span class="s1">html</span><span class="dl">'</span><span class="p">,</span> <span class="nx">hbs</span><span class="p">.</span><span class="nx">__express</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This setup allows .hbs files stored in <code class="language-plaintext highlighter-rouge">/views/partials</code> to be used in <code class="language-plaintext highlighter-rouge">{{&gt;partialName }}</code> handlebars blocks</p>
+
+<p>The feature here is to have three columns of editable content. That's expressed in the home page layout…</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row info"</span><span class="nt">&gt;</span>
+    {{&gt;panel panels.[0]}}
+    {{&gt;panel panels.[1]}}
+    {{&gt;panel panels.[2]}}
+  <span class="nt">&lt;/div&gt;</span>
+
+</code></pre></div></div>
+
+<p>Each line calls for the panel partial and passes the given element from the panels array (or undefined)</p>
+
+<p>and a panel partial would be</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel panel-info"</span><span class="nt">&gt;</span>
+		  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-heading"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1</span> <span class="err">{{</span><span class="na">elementShouldBeEditable</span><span class="err">}}</span><span class="nt">&gt;</span>
+          {{safeString title}}
+        <span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-body"</span> <span class="err">{{</span><span class="na">elementShouldBeEditable</span><span class="err">}}</span><span class="nt">&gt;</span>
+  		  {{safeString body}}
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  
+</code></pre></div></div>
+
+<p>Each element that should be editable is marked with an <code class="language-plaintext highlighter-rouge">{{elementShouldBeEditable}}</code> handlebars helper and the content from the model is marked as <code class="language-plaintext highlighter-rouge">safeString</code> so that any HTML entered in the WYSIWYG editor is not escaped.</p>
+
+<h2 id="the-helpers">The Helpers</h2>
+
+<h2 id="an-editable-element">An editable element</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="dl">'</span><span class="s1">elementShouldBeEditable</span><span class="dl">'</span><span class="p">,</span> 
+                        <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                            <span class="k">if</span> <span class="p">(</span><span class="nx">appLocals</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="k">return</span> <span class="dl">'</span><span class="s1">contenteditable=true</span><span class="dl">'</span><span class="p">;</span>
+                            <span class="p">}</span>
+                        <span class="p">});</span>
+</code></pre></div></div>
+
+<p>This is a standard Handlebars helper which checks if a user is set and if it is renders <code class="language-plaintext highlighter-rouge">contenteditable=true</code> in place.</p>
+
+<h3 id="safe-strings">Safe Strings</h3>
+<p>If a WYSIWYG editor saves ` <b>some bold text</b> ` then that is exactly what will be printed on screen as handlebars will escape the HTML to protect you from l33t haxxors.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="dl">'</span><span class="s1">safeString</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">handlebars</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">.</span><span class="nx">SafeString</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div></div>
+
+<p>returning a handlebars safeString instead means that handlebars will trust the content and render <strong>some bold text</strong></p>
+
+<h1 id="the-js">The JS</h1>
+<p>This is the first JS I've added to the client. So, while I initially wrote the JS directly in the HTML, I eventually moved it into its own files and hooked up gulp to concat and uglify it.</p>
+
+<h3 id="gulp">Gulp</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">concat</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp-concat</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">uglify</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp-uglify</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="dl">'</span><span class="s1">processJS</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">([</span><span class="dl">'</span><span class="s1">./public/js/*.js</span><span class="dl">'</span><span class="p">])</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">concat</span><span class="p">(</span><span class="dl">'</span><span class="s1">app.js</span><span class="dl">'</span><span class="p">))</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">uglify</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="dl">'</span><span class="s1">./public/js/</span><span class="dl">'</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The gulp task is straightforward. On any change in a JS file in the public/js folder  concat all the js files in that folder into a file called app.js, uglify that file and save it.</p>
+
+<p>The main HTML page is then set to include that JS <strong>when a user is logged in</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    {{#if user}}
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    {{/if}}
+  
+</code></pre></div></div>
+
+<h3 id="monitor-the-page-for-changes"><a name="edit-event-js">Monitor the page for changes</a></h3>
+<p>The first task is to watch any contenteditable elements for changes to their content and to do <em>something</em> when a change is detected</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="c1">//shamelessly borrowed from http://stackoverflow.com/a/14027188/222163</span>
+    <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">bindEvents</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">before</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">*[contenteditable]</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">before</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">html</span><span class="p">();</span>
+        <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">keyup paste</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+          <span class="k">if</span> <span class="p">(</span><span class="nx">before</span> <span class="o">!=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">html</span><span class="p">())</span> <span class="p">{</span> 
+            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+            <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">};</span>    
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">$</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>This JS watched any element with a contenteditable attribute and if an element gets focus stores the HTML content as it was on focus. On keyup or paste if the content has changed then queue a call to the onContentEdited event handler.</p>
+
+<p>This has a 500 millisecond delay so that the system waits until a person has stopped editing before taking any action.</p>
+
+<h3 id="respond-to-changes">Respond to changes</h3>
+<p>When a change is detected then the page is PUT to the server to persist those changes</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="c1">//snip out addMessage for clarity of example</span>
+    
+    <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">panels</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.panel</span><span class="dl">'</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">.panel-body</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">title</span><span class="p">:</span> <span class="nx">title</span> <span class="p">?</span> <span class="nx">title</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+          <span class="na">body</span><span class="p">:</span> <span class="nx">body</span><span class="p">?</span> <span class="nx">body</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span>
+        <span class="p">};</span>
+      <span class="p">}).</span><span class="kd">get</span><span class="p">();</span>
+
+      <span class="kd">var</span> <span class="nx">putData</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">panels</span><span class="dl">'</span><span class="p">:</span> <span class="nx">panels</span><span class="p">};</span>
+      <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span><span class="dl">'</span><span class="s1">/pages/home</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">dataType</span><span class="p">:</span><span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">putData</span><span class="p">),</span>
+        <span class="na">type</span><span class="p">:</span><span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span>
+      <span class="p">}).</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span><span class="nx">status</span><span class="p">){</span>
+        <span class="nx">addMessage</span><span class="p">(</span><span class="dl">'</span><span class="s1">could not save your changes</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">alert-danger</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">addMessage</span><span class="p">(</span><span class="dl">'</span><span class="s1">saved changes</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">alert-success</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">$</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>So here the page object expected by the server is gathered from the page and PUT using <code class="language-plaintext highlighter-rouge">$.ajax</code>. This bit of code is bound directly to the Home page at the moment but that can be remedied when necessary.</p>
+
+<p>An addMessage function shows a bootstrap alert to keep the user informed of what is happening. This is a pretty dull piece of code!</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">alertTimeout</span><span class="p">(</span><span class="nx">wait</span><span class="p">){</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#messageHolder</span><span class="dl">'</span><span class="p">).</span><span class="nx">children</span><span class="p">(</span><span class="dl">'</span><span class="s1">.alert:first-child</span><span class="dl">'</span><span class="p">).</span><span class="nx">alert</span><span class="p">().</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">close</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">},</span> <span class="nx">wait</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">addMessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">bootstrapType</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">outer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div/&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">class</span><span class="p">:</span> <span class="dl">'</span><span class="s1">alert alert-dismissable </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">bootstrapType</span>
+      <span class="p">});</span>
+      <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;button/&gt;</span><span class="dl">'</span><span class="p">,{</span>
+        <span class="na">type</span><span class="p">:</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">class</span><span class="p">:</span><span class="dl">'</span><span class="s1">close</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">data-dismiss</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">alert</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">aria-hidden</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">});</span>
+      <span class="nx">button</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">&amp;times;</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">outer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+      <span class="nx">outer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#messageHolder</span><span class="dl">'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">outer</span><span class="p">);</span>
+      <span class="nx">alertTimeout</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+    <span class="p">};</span> 
+</code></pre></div></div>
+
+<h1 id="visual-affordance">Visual Affordance</h1>
+<p>I found this a pretty hard design decision. I'm not sure I'm happy it really calls out what is happening to a user and I think I'll grab a designer the next time I'm next to one and ask their opinion but…</p>
+
+<p><img src="/images/affordance-loggedout.png" alt="editable sections for anonymous users" /></p>
+
+<p><img src="/images/affordance-loggedin.png" alt="editable sections for anonymous users" /></p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="nf">editorPencil</span><span class="p">(</span><span class="nv">$size</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nl">content</span><span class="p">:</span> <span class="s2">"\270f  "</span><span class="p">;</span>
+	<span class="nl">font-family</span><span class="p">:</span> <span class="s1">'Glyphicons Halflings'</span><span class="p">;</span>
+	<span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+	<span class="nl">font-size</span><span class="p">:</span> <span class="nv">$size</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">div</span><span class="o">[</span><span class="nt">contenteditable</span><span class="o">]</span><span class="nd">:before</span> <span class="p">{</span>
+	<span class="k">@include</span> <span class="nd">editorPencil</span><span class="p">(</span><span class="m">1em</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span><span class="o">[</span><span class="nt">contenteditable</span><span class="o">]</span><span class="nd">:before</span> <span class="p">{</span>
+	<span class="k">@include</span> <span class="nd">editorPencil</span><span class="p">(</span><span class="m">0</span><span class="mi">.5em</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Since the site is already using bootstrap CSS was added that uses <code class="language-plaintext highlighter-rouge">:before</code> to add a pencil icon to any contenteditable div or H1.</p>
+
+<h1 id="ckeditor">CKEditor</h1>
+<p>Another little bonus is that CKEditor is aware of contenteditable elements so including that in the page gives you WYSIWYG power directly on any contenteditable.
+<!--alex ignore hook --->
+All that was necessary to hook it up was to include it in the page and to switch from using the valid <code class="language-plaintext highlighter-rouge">&lt;div content contenteditable/&gt;</code> to using <code class="language-plaintext highlighter-rouge">&lt;div content contenteditable=true/&gt;</code> a change I can live with to get the power of WYSIWYG directly on page elements</p>
+
+<h1 id="how-does-it-work">(How) does it work?</h1>
+<p>If you watch the GIF below it's clear this is a working prototype and not a finished product. But it does work!</p>
+
+<p>The page content is jumping about as alert messages are added and that's not OK so a better mechanism is necessary for highlighting that changes have been persisted.</p>
+
+<p>But this was really fun to add and it needed very little code to do so.</p>
+
+<p><img src="/images/editing.gif" alt="editing the page" /></p>
+:ET

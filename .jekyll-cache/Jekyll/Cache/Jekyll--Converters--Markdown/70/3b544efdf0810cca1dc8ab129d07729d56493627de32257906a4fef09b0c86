@@ -1,0 +1,294 @@
+I"T<p>After describing event-driven and serverless systems in <a href="/2018/02/serverless-1.html">part one</a> it is time to write some code. Well, almost. The first task is a <a href="http://alistair.cockburn.us/Walking+skeleton">walking skeleton</a>: some code that runs on production infrastructure to prove we could have a CI pipeline.</p>
+
+<p>I think I'll roll my AWS credentials pretty frequently now - since I can't imagine I'll get through this series without leaking my keys somehow</p>
+
+<p><code class="language-plaintext highlighter-rouge">¯\_(ツ)_/¯</code></p>
+
+<p>Putting authentication and authorisation to one side, because the chunk is too big otherwise, this task is to write a command channel to allow editors to propose destinations on the <code class="language-plaintext highlighter-rouge">visitplannr</code> system.</p>
+
+<p>This requires the set up of API Gateway, AWS Lambda, and DynamoDB infrastructure and showing some code running. But doesn't require DynamoDB table streams or more than one lambda.</p>
+
+<p>That feels like a meaningful slice.</p>
+
+<!--more-->
+
+<h1 id="the-moving-pieces">The moving pieces</h1>
+
+<p><img src="/images/events/c4/first-slice-2.jpg" alt="the second level of a c4 diagram" /></p>
+
+<h2 id="infrastructure-as-code">Infrastructure as Code</h2>
+
+<p>We use terraform at work so it would be quite productive to use that - but I wanted to try out <a href="https://github.com/awslabs/aws-sam-local">SAM local</a> to understand its local development story and deployment using CloudFormation.</p>
+
+<p>From <a href="https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md">the docs</a>: "SAM Local can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."</p>
+
+<p>The <a href="https://github.com/awslabs/serverless-application-model">Serverless Application Model or SAM</a> is based on CloudFormation. With the aim of defining "a standard application model for serverless applications".</p>
+
+<p><a href="https://aws.amazon.com/cloudformation/">CloudFormation</a> is an AWS specific infrastructure as code resource letting you author entire application stacks as JSON or YAML. That let's you launch "application stacks", in this case: API Gateway, Lambda, and DynamoDB.</p>
+
+<h2 id="code-as-code">Code as Code</h2>
+
+<p>AWS lambda now runs many awesome languages (NodeJS, Python, C#, Java, and Go). I 💖 JavaScript and have already experimented a few times over the last few years with NodeJS in Lambda. So will write the application in Node.</p>
+
+<p>There are a number of frameworks that sit on top of AWS Lambda and API Gateway. Such as <a href="https://claudiajs.com/">Claudia.js</a> or <a href="https://serverless.com/">Serverless</a>. But I didn't want any of the details hidden away from me so haven't investigated them at all (which may be cutting off my arm to spite my face).</p>
+
+<h2 id="the-eventstream">The eventstream</h2>
+
+<p>It is common to use <a href="https://aws.amazon.com/dynamodb/">dynamodb</a> as the storage mechanism for Lambda. "Amazon DynamoDB is highly available, with automatic and synchronous data replication across three facilities in an AWS Region."</p>
+
+<p>Which highlights one of the benefits of the serverless model - geographically distributed HA database by default.</p>
+
+<p>It can read and write JSON, and allows you to subscribe to the stream of changes for a table. So most likely fits the needs of this application.</p>
+
+<h1 id="the-sam-template">The SAM template</h1>
+
+<p><a href="https://github.com/pauldambra/visit-plannr/blob/9bb8c9d392a1352d5d1e51f34e1a04700b9a20e9/template.yaml">The SAM template</a> is (once you're used to the syntax) pretty straightforward.</p>
+
+<p>A header describing this template and the versions of the language used:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">AWSTemplateFormatVersion </span><span class="pi">:</span> <span class="s1">'</span><span class="s">2010-09-09'</span>
+<span class="na">Transform</span><span class="pi">:</span> <span class="s">AWS::Serverless-2016-10-31</span>
+
+<span class="na">Description</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">A location and weather aware day-trip planner for parents</span>
+
+</code></pre></div></div>
+
+<p>a list of the resources to be created:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Resources</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h2 id="a-dynamodb-table-definition">A dynamodb table definition:</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">EventsTable</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AWS::DynamoDB::Table"</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">AttributeDefinitions</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">StreamName</span>
+          <span class="na">AttributeType</span><span class="pi">:</span> <span class="s">S</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">EventId</span>
+          <span class="na">AttributeType</span><span class="pi">:</span> <span class="s">S</span>
+      <span class="na">KeySchema</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">StreamName</span>
+          <span class="na">KeyType</span><span class="pi">:</span> <span class="s">HASH</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">EventId</span>
+          <span class="na">KeyType</span><span class="pi">:</span> <span class="s">RANGE</span>
+      <span class="na">ProvisionedThroughput</span><span class="pi">:</span>
+        <span class="na">ReadCapacityUnits</span><span class="pi">:</span> <span class="m">5</span>
+        <span class="na">WriteCapacityUnits</span><span class="pi">:</span> <span class="m">5</span>
+</code></pre></div></div>
+
+<p>"<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html">In DynamoDB, tables, items, and attributes are the core components that you work with. A table is a collection of items, and each item is a collection of attributes. DynamoDB uses primary keys to uniquely identify each item in a table and secondary indexes to provide more querying flexibility.</a>"</p>
+
+<p>There are two types of primary key in dynamodb. And this is the first design decision which will need validation in future. In fact in a "real" project this would need a <a href="http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions">lightweight architecture decision record</a>. So let's add one <a href="https://github.com/pauldambra/visit-plannr/blob/0d563ec26c7fd7920c1da5f1e67d1f70693016d5/doc/ladr/0002-dynamodb-composite-primary-key-design.md">here</a>.</p>
+
+<p>The first kind of primary key in DynamoDB is having only a partition key. The partition key is hashed and determines where on physical storage the item is placed. The partition key must be unique.</p>
+
+<p>The second kind is a composite primary key. It consists of a partition key and a sort key. The partition key no longer needs to be unique in isolation. Rather the sort key/partition key pair must be unique.</p>
+
+<p>In a real system this would probably push towards StreamName as the partition key: so that events that logically live together physically live together. And EventNumber in the stream as the sort key. So that the order of items as they are stored on physical media matches the order they are likely to be read.</p>
+
+<p>This would introduce a bunch of complexity in code for tracking event numbers so for now instead of an EventNumber as the sort key the decision is to introduce a UUID EventId. This will need performance testing to check that there is no significant impact of the items being sorted by UUID.</p>
+
+<p>The "ProvisionedThroughput" setting show where the abstraction starts to leak and the fact that these services run on infrastructure bleeds through. Under the hood AWS is reserving capacity for dynamodb - after all <em>they</em> definitely do have to capacity plan their infrastructure so that we don't have to.</p>
+
+<p><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">From the docs</a>:</p>
+
+<p>"One read capacity unit = one strongly consistent read per second, or two eventually consistent reads per second, for items up to 4 KB in size.</p>
+
+<p>One write capacity unit = one write per second, for items up to 1 KB in size."</p>
+
+<p>So the system needs to be sized against the expected read and write throughput.</p>
+
+<p>The AWS SDK has retries built in for <em>if</em> the AWS service throttles your reads or writes when you are over capacity. This would be an area that would need testing and monitoring in a real system.</p>
+
+<p>It's important to note that the "cost" of managing that capacity setting is probably lower than the cost of creating, managing, and maintaining your own distributed, highly-available, (potentially) multi-master database cluster.</p>
+
+<p>And worth saying that on Prime Day 2017 <a href="https://twitter.com/pauldambra/status/968504223158734849">Amazon's own use of DynamoDB peaked at nearly 13 million reads per second</a>. So the need for throughput limits in config isn't because the service can't cope with <em>your</em> load.</p>
+
+<h2 id="the-lambda-and-api-gateway-definition">The lambda <em>and</em> API gateway definition:</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">ProposeDestinationFunction</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::Serverless::Function</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">Runtime</span><span class="pi">:</span> <span class="s">nodejs6.10</span>
+      <span class="na">Handler</span><span class="pi">:</span> <span class="s">proposeDestination.handler</span>
+      <span class="na">Timeout</span><span class="pi">:</span> <span class="m">10</span>
+      <span class="na">Policies</span><span class="pi">:</span> <span class="s">AmazonDynamoDBFullAccess</span>
+      <span class="na">Environment</span><span class="pi">:</span>
+        <span class="na">Variables</span><span class="pi">:</span>
+          <span class="na">EVENTS_TABLE</span><span class="pi">:</span> <span class="kt">!Ref</span> <span class="s">EventsTable</span>
+      <span class="na">Events</span><span class="pi">:</span>
+        <span class="na">ProposeDestination</span><span class="pi">:</span>
+          <span class="na">Type</span><span class="pi">:</span> <span class="s">Api</span>
+          <span class="na">Properties</span><span class="pi">:</span>
+            <span class="na">Path</span><span class="pi">:</span> <span class="s">/destination</span>
+            <span class="na">Method</span><span class="pi">:</span> <span class="s">POST</span>
+
+</code></pre></div></div>
+
+<p>This sets a lambda function with a given handler, and runtime. The handler is the code that will run when the event is received. And sets an environment variable to reference the created dynamodb table.</p>
+
+<p>Finally sets that this lambda function will be triggered by an API POST to /destination. Which is all SAM needs in order to create an API gateway to trigger the lambda.</p>
+
+<p>With 39 lines of YAML SAM will provision an API gateway, a lambda function, and a dynamodb function. All highly available, elastic, and distributed geographically - that's pretty funky!</p>
+
+<h1 id="the-handler-code">The handler code</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`received event: </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">event</span><span class="p">)}</span><span class="s2">`</span><span class="p">)</span>
+  <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">statusCode</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="na">body</span><span class="p">:</span> <span class="dl">'</span><span class="s1">OK</span><span class="dl">'</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>First things first:</p>
+
+<ul>
+  <li>No semi-colons. Live with it. It's great.</li>
+  <li><a href="https://standardjs.com/">standardjs</a> - I don't agree with all of standardjs' decisions but I do recognise that since they're largely arbitrary I shouldn't care.</li>
+</ul>
+
+<p>This is a <a href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html">lambda function</a>. It's about as small a function as you can write to respond to an event from API gateway. First it logs the received event. Then it tells API gateway to return a http status 200 with the body 'OK' to the client.</p>
+
+<h1 id="anchors-away">Anchors away!</h1>
+
+<p>After incurring the incredible cost of $0.02 because I kept forgetting to strip chai and mocha from the bundle I wrote a deployment script.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c">#! /bin/bash</span>
+
+<span class="nb">set</span> <span class="nt">-eux</span>
+
+<span class="nb">rm</span> <span class="nt">-rf</span> node_modules/
+
+npm <span class="nb">install</span> <span class="nt">--only</span><span class="o">=</span>production
+
+<span class="k">if </span>aws s3 <span class="nb">ls</span> <span class="s2">"s3://visitplannr"</span> 2&gt;&amp;1 | <span class="nb">grep</span> <span class="nt">-q</span> <span class="s1">'NoSuchBucket'</span>
+<span class="k">then
+  </span>aws s3 mb s3://visitplannr
+<span class="k">fi
+
+</span>sam package <span class="nt">--template-file</span> template.yaml <span class="se">\</span>
+  <span class="nt">--s3-bucket</span> visitplannr <span class="se">\</span>
+  <span class="nt">--output-template-file</span> packaged.yaml
+
+sam deploy <span class="nt">--template-file</span> ./packaged.yaml <span class="se">\</span>
+  <span class="nt">--stack-name</span> visitplannr <span class="se">\</span>
+  <span class="nt">--capabilities</span> CAPABILITY_IAM
+
+</code></pre></div></div>
+
+<ul>
+  <li>remove node_modules directory</li>
+  <li>npm install all of the non-dev dependencies (there aren't actually any yet!)</li>
+  <li>make sure there's an s3 bucket to upload the code into</li>
+  <li>run <code class="language-plaintext highlighter-rouge">sam package</code> which translates to CloudFormation and uploads the code to s3</li>
+  <li>run <code class="language-plaintext highlighter-rouge">sam deploy</code> which launches the application stack</li>
+</ul>
+
+<p>Running that creates everything necessary in AWS. Looking at the created stack there are more pieces created than needed to be specified.</p>
+
+<p><img src="/images/events/stack.png" alt="the created resources" /></p>
+
+<p>This includes the IAM roles to allow these resources to talk to each other. These at least in part result from the config line: <code class="language-plaintext highlighter-rouge">Policies: AmazonDynamoDBFullAccess</code> applied to the lambda function.</p>
+
+<p>This is <em>much more</em> access than we need. But in the interest of not getting diverted the necessity for finer grained access goes on the to-do list - it's possible but not necessary right now.</p>
+
+<p>The wider than necessary access can be seen in the lambda console which lists out the resources the function can access and the policy that makes that access possible.</p>
+
+<p><img src="/images/events/lambda-console.png" alt="the lambda console and its permissions" /></p>
+
+<p>The API Gateway console shows the new endpoint</p>
+
+<p><img src="/images/events/api-gateway.png" alt="the api gateway console" /></p>
+
+<p>The endpoint can be tested right in the console:</p>
+
+<p><img src="/images/events/testing-api-1.png" alt="testing the api" /></p>
+
+<p>and the results are logged in the page</p>
+
+<p><img src="/images/events/testing-api-result-2.png" alt="the api test results" /></p>
+
+<p>And finally, the cloudwatch logs show the output from running the lambda.</p>
+
+<p>That</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`received event: </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">event</span><span class="p">)}</span><span class="s2">`</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>results in logging:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+2018-03-04T22:45:26.854Z  bb57cb6c-1ffd-11e8-b4a3-d7ae7c406190  received event:
+{
+    "resource": "/destination",
+    "path": "/destination",
+    "httpMethod": "POST",
+    "headers": null,
+    "queryStringParameters": null,
+    "pathParameters": null,
+    "stageVariables": null,
+    "requestContext": {
+        "path": "/destination",
+        "accountId": "123456",
+        "resourceId": "0yfso6",
+        "stage": "test-invoke-stage",
+        "requestId": "test-invoke-request",
+        "identity": {
+            "apiKeyId": "test-invoke-api-key-id",
+            "userAgent": "Apache-HttpClient/4.5.x (Java/1.8.0_144)",
+            "snip": "much more info"
+        },
+        "resourcePath": "/destination",
+        "httpMethod": "POST",
+        "apiId": "lvcba3r3ia"
+    },
+    "body": "{\n    \"test\": \"this endpoint\"\n}",
+    "isBase64Encoded": false
+}
+
+</code></pre></div></div>
+
+<p>and each invocation also logs a line like:</p>
+
+<p><code class="language-plaintext highlighter-rouge">REPORT RequestId: bb57cb6c-1ffd-11e8-b4a3-d7ae7c406190  Duration: 15.92 ms  Billed Duration: 100 ms Memory Size: 128 MB Max Memory Used: 20 MB</code></p>
+
+<p>Showing you the actual and billed durations and the used memory compared to the provisioned memory.</p>
+
+<h1 id="more-leaky-abstractions">More leaky abstractions</h1>
+
+<p>So, it isn't that you don't have to care <em>at all</em> that there are servers. AWS Lambda charges per 100ms of function invocation. <a href="https://aws.amazon.com/lambda/pricing/">The amount of time you get for free and the cost per 100ms varies depending on how much RAM you allocate to the function</a>.</p>
+
+<p>In fact, increasing the RAM actually increases the underlying compute, network, threads, and more. In some experiments at Co-op Digital we saw that scaling for a network and compute bound workload was pretty important.</p>
+
+<h1 id="dynamodb">DynamoDB</h1>
+
+<p><img src="/images/events/dynamo-console.png" alt="The table viewed in the AWS console" /></p>
+
+<p>The table has been created and is ready to be used. The config we've used doesn't actually setup the table for autoscaling. But we'll loop back around and tidy that up later. It's another detail that doesn't need nailing right now.</p>
+
+<h1 id="lets-review">Let's review</h1>
+
+<p>With 39 lines of YAML we've created a walking skeleton to prove we can write code locally and deploy it to AWS.</p>
+
+<p>We've had to learn a little about the details of dynamodb and AWS lambda where they leak their underlying infrastructure into our worlds - although presumably there's a setting equivalent to "I care less about how much I spend than how much resource you use - charge me what you like and don't bother me again". I don't want to turn that on (yet).</p>
+
+<p>All the code for this stage can be found <a href="https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-two">on github</a></p>
+
+<p>And we're <strong>finally</strong> ready to write some tests. In the next post we'll look at some tests, talk about the final state of the handler, and look at how to set up locally to run integration tests.</p>
+
+<h1 id="and-delete">And delete</h1>
+
+<p><code class="language-plaintext highlighter-rouge">aws cloudformation delete-stack --stack-name visitplannr &amp;&amp; aws s3 rb s3://visitplannr --force</code></p>
+
+<p>This tells AWS to delete everything since I don't want to pay money for an application stack that nobody is using and only exists for my (unashamedly very low readership) blog.</p>
+:ET

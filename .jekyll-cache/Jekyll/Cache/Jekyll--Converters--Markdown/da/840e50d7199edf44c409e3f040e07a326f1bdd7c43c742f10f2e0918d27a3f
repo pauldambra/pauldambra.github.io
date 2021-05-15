@@ -1,0 +1,230 @@
+I"¸W<p>Today I had super-fun spotting the opportunity for a refactoring and figuring out how to apply it. I wanted to think it through while it was fresh in my mind to try to cement any learning opportunity</p>
+
+<p>The refactoring in question is <a href="https://www.industriallogic.com/xp/refactoring/conditionDispatcherWithCommand.html">"Replace Conditional Dispatcher with Command"</a>.</p>
+
+<p>Quoting that source the opportunity for this refactoring is when:
+<!--alex ignore execute ---></p>
+<blockquote>
+  <p>Conditional logic is used to dispatch requests and execute actions.</p>
+</blockquote>
+
+<p>And the solution is: 
+<!--alex ignore execute ---></p>
+<blockquote>
+  <p>Create a Command for each action. Store the Commands in a collection and
+replace the conditional logic with code to fetch and execute Commands.</p>
+</blockquote>
+
+<p>It's one of those subtle changes that has real power to tidy up and add to the expressiveness of your code.</p>
+
+<p>If (pun intended) you aren't familiar with it I'd definitely recommend trying it on for size by looking for an opportunity to apply it in your systems.</p>
+
+<!--more-->
+
+<h1 id="some-context">Some Context</h1>
+
+<p>In this instance we have a seam in our system that will over time become an anti-corruption (or defuckulation) layer. However, we're not building the full ACL as we'd have to solve lots of the other problems in the system first to know what should go into it.</p>
+
+<p>When one system "publishes" some data this class will be responsible for applying any translation and saving it in a second.</p>
+
+<p>The initial implementation looked like this</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">public</span> <span class="k">class</span> <span class="nc">ThingsPublisher</span> <span class="p">:</span> <span class="n">MagicSystemHook</span>
+  <span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IThingRepository</span> <span class="n">_thingRepository</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">ThingsPublisher</span><span class="p">(</span><span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">_thingRepository</span> <span class="p">=</span> <span class="n">thingRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPublish</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">publishedThings</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">thing</span> <span class="k">in</span> <span class="n">publishedThings</span>
+                            <span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">pt</span> <span class="p">=&gt;</span> <span class="n">pt</span><span class="p">.</span><span class="n">Type</span> <span class="p">==</span> <span class="s">"WhatWeDidFirst"</span><span class="p">))</span>
+      <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">convertedThing</span> <span class="p">=</span> <span class="n">thing</span><span class="p">.</span><span class="nf">Convert</span><span class="p">();</span>
+        <span class="n">_thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then over a few weeks we added a few more types that we needed to handle and uncovered some more detail in the requirements and ended up with something more like this</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">public</span> <span class="k">class</span> <span class="nc">ThingsPublisher</span> <span class="p">:</span> <span class="n">MagicSystemHook</span>
+  <span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IThingRepository</span> <span class="n">_thingRepository</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">_typesWeCareAbout</span> <span class="p">=</span>
+    <span class="p">{</span>
+      <span class="s">"WhatWeDidFirst"</span><span class="p">,</span>
+      <span class="s">"WhatWeDidSecond"</span><span class="p">,</span>
+      <span class="s">"ATypeThatComesAlongWithWhatWeDidSecond"</span><span class="p">,</span>
+      <span class="s">"AModificationToWhatWeDidSecond"</span><span class="p">,</span>
+      <span class="s">"WhatWeDidThird"</span>
+    <span class="p">};</span>
+
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;[]</span> <span class="n">_replacements</span> <span class="p">=</span>
+    <span class="p">{</span>
+      <span class="k">new</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;(</span><span class="s">@"/some-pattern/"</span><span class="p">,</span> <span class="s">"/its-pair/"</span><span class="p">),</span>
+      <span class="k">new</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;(</span><span class="s">@"/another-pattern/"</span><span class="p">,</span> <span class="s">"/and-its-pair/"</span><span class="p">),</span>
+      <span class="k">new</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;(</span><span class="s">@"/fiddly-detailed-pattern/"</span><span class="p">,</span> <span class="s">"/with-its-pair/"</span><span class="p">),</span>
+    <span class="p">};</span>
+
+    <span class="k">public</span> <span class="nf">ThingsPublisher</span><span class="p">(</span><span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">_thingRepository</span> <span class="p">=</span> <span class="n">thingRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPublish</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">publishedThings</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">thing</span> <span class="k">in</span> <span class="n">publishedThings</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">WeCareAboutIt</span><span class="p">))</span>
+      <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">convertedThing</span> <span class="p">=</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">thing</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">thing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">.</span><span class="nf">StartsWith</span><span class="p">(</span><span class="s">"one-expectation"</span><span class="p">)</span> <span class="p">||</span> <span class="n">thing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">.</span><span class="nf">StartsWith</span><span class="p">(</span><span class="s">"another-expectation"</span><span class="p">))</span>
+        <span class="p">{</span>
+          <span class="n">_thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="n">ConvertedThing</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">Thing</span> <span class="n">thing</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// omitted for brevity</span>
+      <span class="c1">// uses _replacements</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">ConvertedThing</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">WeCareAboutIt</span><span class="p">(</span><span class="n">Thing</span> <span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">_typesWeCareAbout</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Type</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="at-this-point">At this point</h1>
+
+<p>It's worth being clear (and not only because I was partially responsible for it) that I'm not saying that this code is <em>wrong</em>.</p>
+
+<p>We were learning about and from the system as we went so trying to write the "right" code would have definitely been wasteful previously.</p>
+
+<p>When we hit this class to modify it today, however, there were a few signals that set off my spidey-senses:
+<!--alex ignore clearly ---></p>
+<ul>
+  <li>we were making the fourth change</li>
+  <li>it didn't pass the squint test</li>
+  <li>say what you see
+    <ul>
+      <li>when we were talking about it neither my colleague nor I could clearly express what we thought it did</li>
+      <li>when we were expressing what it did we were talking about things implicit in the code not things explicit</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="fourth-change">Fourth Change</h2>
+
+<p>I like to have several examples within a system before I start to look for an abstraction. Or put another way "A little duplication is better than the wrong abstraction".</p>
+
+<h2 id="the-squint-test">The Squint Test</h2>
+
+<p>Sandi Metz proposed the squint test (<a href="https://www.youtube.com/watch?v=8bZh5LMaSmE">see this talk</a>) as a quick way to see if the shape of your code or the grouping of colours in your editor suggests any problems with your code. Amusingly there's a <a href="https://atom.io/packages/squint-test">package for Atom</a> to save you having to actually squint.</p>
+
+<h2 id="say-what-you-see">Say what you see</h2>
+<!--alex ignore easy --->
+<p>If you are talking about the code and you aren't using the words on the screen. Or if you can't succinctly explain what the conditionals are. Then you should be looking at whether there's information in your brain or elsewhere in the system that would help clarify what is happening. It's really easy to not be aware of what you have to know to understand some code - it's why i &lt;3 code reviews.</p>
+
+<h1 id="the-refactored-code">The Refactored Code</h1>
+
+<p>As we talked about it we both realised that what we had was difficult to express because we'd accidentally discovered a new concept. Something that was unconsciously in our brains when we wrote it and hadn't made its way into the computer.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">public</span> <span class="k">class</span> <span class="nc">ThingsPublisher</span> <span class="p">:</span> <span class="n">MagicSystemHook</span>
+  <span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IThingRepository</span> <span class="n">_thingRepository</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">interface</span> <span class="nc">IMightSaveThings</span>
+    <span class="p">{</span>
+      <span class="k">void</span> <span class="nf">MaybeSave</span><span class="p">(</span><span class="n">ConvertedThing</span> <span class="n">convertedThing</span><span class="p">,</span> <span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">class</span> <span class="nc">SaveUnchangedThing</span> <span class="p">:</span> <span class="n">IMightSaveThings</span>
+    <span class="p">{</span>
+      <span class="k">public</span> <span class="k">void</span> <span class="nf">MaybeSave</span><span class="p">(</span><span class="n">ConvertedThing</span> <span class="n">convertedThing</span><span class="p">,</span> <span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="n">thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">class</span> <span class="nc">FilterAmendAndSaveThings</span> <span class="p">:</span> <span class="n">IMightSaveThings</span>
+    <span class="p">{</span>
+      <span class="k">private</span> <span class="k">readonly</span> <span class="n">Regex</span> <span class="n">_thirdPartyPattern</span><span class="p">;</span>
+      <span class="k">private</span> <span class="k">readonly</span> <span class="kt">string</span> <span class="n">_replacementPattern</span><span class="p">;</span>
+
+      <span class="k">public</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="kt">string</span> <span class="n">thirdPartyPattern</span><span class="p">,</span> <span class="kt">string</span> <span class="n">replacementPattern</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="n">_thirdPartyPattern</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Regex</span><span class="p">(</span><span class="n">thirdPartyPattern</span><span class="p">);</span>
+        <span class="n">_replacementPattern</span> <span class="p">=</span> <span class="n">replacementPattern</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">public</span> <span class="k">void</span> <span class="nf">MaybeSave</span><span class="p">(</span><span class="n">ConvertedThing</span> <span class="n">convertedThing</span><span class="p">,</span> <span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">_thirdPartyPattern</span><span class="p">.</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+
+        <span class="n">convertedThing</span><span class="p">.</span><span class="n">Replaceable</span> <span class="p">=</span> <span class="n">_thirdPartyPattern</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">,</span> <span class="n">_replacementPattern</span><span class="p">);</span>
+        <span class="n">thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">IMightSaveThings</span><span class="p">&gt;</span> <span class="n">_typeRules</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">IMightSaveThings</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+      <span class="p">{</span><span class="s">"WhatWeDidFirst"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">SaveUnchangedThing</span><span class="p">()},</span>
+      <span class="p">{</span><span class="s">"WhatWeDidSecond"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="s">@"/some-pattern/"</span><span class="p">,</span> <span class="s">"/its-pair/"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s">"ATypeThatComesAlongWithWhatWeDidSecond"</span><span class="p">,</span><span class="k">new</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="s">@"/another-pattern/"</span><span class="p">,</span> <span class="s">"/and-its-pair/"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s">"AModificationToWhatWeDidSecond"</span><span class="p">,</span><span class="k">new</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="s">@"/fiddly-detailed-pattern/"</span><span class="p">,</span> <span class="s">"/with-its-pair/"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s">"WhatWeDidThird"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">SaveUnchangedThing</span><span class="p">()}</span>
+    <span class="p">};</span>
+
+    <span class="k">public</span> <span class="nf">ThingsPublisher</span><span class="p">(</span><span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">_thingRepository</span> <span class="p">=</span> <span class="n">thingRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPublish</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">publishedThings</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">thing</span> <span class="k">in</span> <span class="n">publishedThings</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">_typeRules</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">thing</span><span class="p">.</span><span class="n">Type</span><span class="p">))</span>
+          <span class="k">continue</span><span class="p">;</span>
+
+        <span class="kt">var</span> <span class="n">typeRule</span> <span class="p">=</span> <span class="n">_typeRules</span><span class="p">[</span><span class="n">thing</span><span class="p">.</span><span class="n">Type</span><span class="p">];</span>
+        <span class="kt">var</span> <span class="n">convertedThing</span> <span class="p">=</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">thing</span><span class="p">);</span>
+        <span class="n">typeRule</span><span class="p">.</span><span class="nf">MaybeSave</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">,</span> <span class="n">_thingRepository</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="n">ConvertedThing</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">Thing</span> <span class="n">thing</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// omitted for brevity</span>
+      <span class="c1">//much simpler factory method</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">ConvertedThing</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="so-now">So now</h1>
+
+<p>there are concepts explicitly in the code that were hidden or accidental beforehand</p>
+
+<ul>
+  <li>we only have rules for some types <em>and</em> now those rules are listed alongside the types in the <code class="language-plaintext highlighter-rouge">_typeRules</code> dictionary</li>
+  <li>generally speaking the rule is that a thing might be saved. I.e. the rule is of type <code class="language-plaintext highlighter-rouge">IMightSaveThings</code></li>
+  <li>for some types we save it without changing it
+    <ul>
+      <li>these we always save so maybe the name could be even better</li>
+    </ul>
+  </li>
+  <li>other types we don't always save, and when we do save them we change them first</li>
+</ul>
+
+<p>The beauty in this code is that not only should it be easier to grok for somebody new to it (or us in a few weeks) now if we need to add additional rules that don't break the <code class="language-plaintext highlighter-rouge">MaybeSave</code> contract we can do that in one place. And changes that break the contract do so visibly and prompt us to think about what the change means for the code.</p>
+
+<p>And we didn't only improve the codeâ€¦ we had a lot of fun (within context) realising it and fixing it.</p>
+:ET

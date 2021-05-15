@@ -1,0 +1,15 @@
+I"�<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/Websites-CMS-Platform-Storing-Data2.html">Previous Post</a></p>
+
+<p>A.K.A. No More CMS-y Admin Section?</p>
+
+<p>A traditional CMS framework or website has an admin section for logged in users. That section has a menu showing them which sections the user can edit and each section has a list of the pages they can edit and then the user can edit the text or upload images using a WYSIWYG editor.</p>
+
+<p>Don't fix it if it aint broken but… but… HTML5 includes <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_Editable">the <code class="language-plaintext highlighter-rouge">contenteditable</code> attribute</a> which makes (the text of) almost any element editable.</p>
+
+<p>If the admin section exists (in large part) to allow editing of content and editing of content can be completed in the page itself could this replace the admin section?</p>
+
+:ET

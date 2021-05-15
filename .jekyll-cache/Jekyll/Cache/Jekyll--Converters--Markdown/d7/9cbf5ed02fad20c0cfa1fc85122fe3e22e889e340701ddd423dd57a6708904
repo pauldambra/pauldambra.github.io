@@ -1,0 +1,5 @@
+I"N<p>I've really been enjoying using Albacore Rake instead of MSBuild at work. It's enabled us to get everyone involved (because ugh, msbuild xml) and to improve our CI/CD pipeline.</p>
+
+<p>Today we were talking about reducing the number of build configurations we have… which we only have in order to support config transforms.</p>
+
+:ET

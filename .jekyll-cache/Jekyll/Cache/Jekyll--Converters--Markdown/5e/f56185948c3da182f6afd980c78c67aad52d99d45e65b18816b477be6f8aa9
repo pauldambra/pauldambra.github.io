@@ -1,0 +1,76 @@
+I"�"<p>I've been using <a href="http://www.jetbrains.com/resharper/">JetBrains Resharper</a> for a while after a recommendation along the lines of "I can't stand to write code without it now" and…</p>
+
+<p>I can't stand to write code without it now!</p>
+
+<!--more-->
+
+<p>I've got a program that (in a moderately clunky way) gets all of the emails in a couple of mailboxes and checks to see if they are non-delivery reports, reports of address changes (which our customers consistently send in reply to newsletters), unsubscribe requests (despite a link in the mail) and so on…
+<!--alex ignore demon-->  <br />
+The class that handled the matching of text against rules had grown to be a real behemoth if not actually a spaghetti monster it was at the minimum a noodle demon. I won't post the code here the internet isn't big enough!</p>
+
+<p>But it consisted of an enum, five <code class="language-plaintext highlighter-rouge">List&lt;string&gt;</code> and then a set of methods that took an email object compared the body and subject to the 5 phrase lists and returned an appropriate result from the enum.</p>
+
+<p>I realised that I didn't want a list per result…</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_badAddresses</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="s">"no user by that name"</span><span class="p">);</span>
+<span class="n">_outOfOffice</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="s">"on my hols"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>it was getting difficult to manage, there was no checking for duplication of the strings, there was no apparent way to keep the enum return and phrase list linked and all the looping was getting confusing.</p>
+
+<p>So I went through two stages and Resharper helped by being awesome at supporting my laziness.</p>
+
+<p>First I combined the many lists into one D<code class="language-plaintext highlighter-rouge">ictionary&lt;string, phrasecheckresult&gt;</code> to link my candidate strings with my enum result types.</p>
+
+<p>I used a little of Notepad++'s Find and replace magic to wholesale convert my list initialisation into a Dictionary initialisation and ended up with</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_phraseMap</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">phrasecheckresult</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="p">{</span><span class="s">"554 qq sorry, no valid recipients}"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>                             
+    <span class="p">{</span><span class="s">"user doesn't have a yahoo.co.uk account"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"account has been disabled or discontinued"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"550 recipient"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"is invalid"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"user invalid"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<!--alex ignore failed-->
+<p>cut short for brevity as there are nearly 300 phrases now… Using an object initialiser meant I had nowhere to go when the program failed at runtime adding duplicate keys to the dictionary. Catching the exception didn't help since I couldn't see what key was duplicated to tidy up my code.</p>
+
+<p>So I highlighted all the rows of initialisation and what did I see?</p>
+
+<p><img src="http://1.bp.blogspot.com/_u8J81ttOSD8/TL8LrjgRXsI/AAAAAAAAAL4/U86PBLyzzZM/s400/ResharperToAddCall.jpg" alt="what did i see?" /></p>
+
+<p>Resharper's context menu lets me switch the object initialiser out to a series of .Add() calls. I could quickly find the duplicates and then switch back to an object initialiser. Yay!</p>
+
+<p>I <em>should</em> be writing unit tests but then that's always being put off to the next project and could I check if I've added a key already during an object initialisers run? I guess not but…</p>
+
+<p>Second I wrote a couple of if braces that checked the subject and body and returned the appropriate results… up pops Resharper and suggests I can convert that to a Linq expression and I get the end result of…</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">enum</span> <span class="n">PhraseCheckResult</span>
+<span class="p">{</span>
+    <span class="n">None</span><span class="p">,</span> <span class="n">BadAddress</span><span class="p">,</span> <span class="n">ChangeAddress</span><span class="p">,</span> <span class="n">OutOfOffice</span><span class="p">,</span> <span class="n">Unsubscribe</span><span class="p">,</span> <span class="n">Delete</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">static</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">&gt;</span> <span class="n">_phraseMap</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="n">PhraseCheckResult</span> <span class="nf">CheckItemAgainstLists</span><span class="p">(</span><span class="n">OutlookItem</span> <span class="n">itemIn</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_phraseMap</span><span class="p">.</span><span class="nf">SingleOrDefault</span><span class="p">(</span>
+        <span class="n">i</span> <span class="p">=&gt;</span>
+        <span class="n">itemIn</span><span class="p">.</span><span class="n">Subject</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">().</span><span class="nf">Contains</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">Key</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">())</span> <span class="p">||</span> <span class="n">itemIn</span><span class="p">.</span><span class="n">Body</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">().</span><span class="nf">Contains</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">Key</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">())).</span>
+        <span class="n">Value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="nf">ProcessPhraseList</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">_phraseMap</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+         <span class="p">{</span><span class="s">"554 qq sorry, no valid recipients}"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+         <span class="p">{</span><span class="s">"user doesn't have a yahoo.co.uk account"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could shift Delete to be first in the enum and your program's behaviour would change. Bonza!</p>
+:ET

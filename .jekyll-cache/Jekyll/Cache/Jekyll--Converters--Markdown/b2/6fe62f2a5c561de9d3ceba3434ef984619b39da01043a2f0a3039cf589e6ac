@@ -1,0 +1,25 @@
+I"Õ<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p>OK, four months since part four. I got a puppy and have written the code for this part of the series in 2 minute blocks after sleepless nights. Not a productive way to do things!</p>
+
+<p><img src="/images/puppy.gif" alt="the puppy attacking a shoe" /></p>
+
+<h1 id="getting-ready-to-make-some-html">Getting ready to make some HTML</h1>
+
+<p>Now that the API lets clients propose destinations to the visit plannr the home page for the service can be built. It's going to show the most recently updated destinations.</p>
+
+<p>In a CRUD SQL system the application would have been maintaining the most up-to-date state of each destination in SQL and you'd read them when the HTML is requested. But this application isn't storing the state of the destinations but the facts that it has been told about the destinations.</p>
+
+<blockquote>
+  <p>As an aside a lot of people don't realise that CRUD SQL stands for <strong><em>C</em></strong> an we <strong><em>R</em></strong> eally not <strong><em>U</em></strong> se SQL <strong><em>D</em></strong> atabases they may <strong><em>S</em></strong> eem familiar but all the ORM stuff is well over our <strong><em>Q</em></strong> uota for comp <strong><em>L</em></strong> icated dependencies.</p>
+</blockquote>
+
+<p>In an event driven system applications subscribe to be notified when new events occur. They can create read models as the events arrive. Those read models are what the application uses to, erm, read data. So they're used in places many applications make SQL queries. Now this visit plannr application needs a read model for recently updated destinations.</p>
+
+:ET

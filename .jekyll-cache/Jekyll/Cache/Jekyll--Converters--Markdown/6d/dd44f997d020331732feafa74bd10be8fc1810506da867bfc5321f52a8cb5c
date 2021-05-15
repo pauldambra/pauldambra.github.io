@@ -1,0 +1,29 @@
+I"�<!--alex ignore whitespace-->
+<p>Twice recently I've hit the same problem with two different mobile phone vendor's websites. Vodafone (displayed here) and 3. When I type a phone number I split it into three sections using white-space. "nnnn nnn nnnn" that's how I remember numbers. That's not uncommon I don't think…</p>
+
+<!--more-->
+
+<p><img src="http://1.bp.blogspot.com/-5j1jDK3JAss/TfIK0Q-_reI/AAAAAAAAAO0/LyikHIbRnj0/s1600/idiots.png" alt="using a dash in an input" /></p>
+
+<p>nor is it odd to use a dash.</p>
+
+<p>So why do I need to learn how your website wants phone numbers formatted.</p>
+
+<p>Whack some javascript on your page… you <em>must</em> be using it for something!</p>
+
+<p><code class="language-plaintext highlighter-rouge">var correctedNumber = numberTypedOnForm.replace(" ","").replace("-","");</code></p>
+
+<p>and with that massive development cost you aren't going to make someone type a number twice only to satisfy your database server. Yes, not everyone will have javascript turned on and it won't catch everyone's weird way of typing phone numbers</p>
+
+<blockquote>
+  <p>"(nnnn)-nn-nn-nn-n"</p>
+</blockquote>
+
+<p>but it's about not introducing a pain point for customers when you don't have to</p>
+
+<p>If you want to be really fancy you could</p>
+
+<p><code class="language-plaintext highlighter-rouge">var correctedNumber = numberTypedOnForm.replace("/\D/g","");</code></p>
+
+<p>Computers are supposed to make our lives easier but it's up to <em>you</em> website developers to help them help us.</p>
+:ET

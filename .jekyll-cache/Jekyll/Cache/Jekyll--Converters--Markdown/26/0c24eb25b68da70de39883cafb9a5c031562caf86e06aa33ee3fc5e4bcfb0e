@@ -1,0 +1,171 @@
+I")+<aside class="series">
+	<h1>This post is part of a series on improving this blog #recursion</h1>
+	<div class="links">
+		<div class="previous"></div>
+		<div class="next">
+			<a href="/structured-data-with-jekyll.html">Next Post</a>
+		</div>
+	</div>
+</aside>
+
+<p>I recently had a conversation where I said that I couldn't build an AMP version of my blog because I use Github Pages to build and serve it. Github don't allow any Jekyll plugins to run.</p>
+
+<p>Later that day my subconscious prompted me to realise that, since Github pages will serve static HTML quite happily, I could use Travis CI to build a Github repository that held the source for the blog and push the static output to a second repository that Github would publish as is.</p>
+
+<!--more-->
+
+<h1 id="travis-ci">Travis CI</h1>
+<!--alex ignore hooks --->
+<p><a href="https://travis-ci.org/">Travis</a> is an online continuous integration system that hooks very neatly into Github. It's free for open source projects and adds build status to commits. It can be set to automatically build pull requests and adds output to those PRs so that people can see if it is safe to merge a request without building it locally themselves</p>
+
+<p><img src="/images/integrates-with-github.png" alt="Travis integrates with Github" /></p>
+
+<p>Travis is configured by placing a YAML file in the root of the project. You can place commands directly into the config file but I prefer to put those commands in a script file - that way you can run them locally to confirm the steps <em>should</em> work before pushing the YAML file to Github for Travis to detect.</p>
+
+<p>Continuous integration is the process of automating build and verification of your software. It's they way you avoid having to say "Works on my machine. ¯_(ツ)_/¯". I &lt;3 CI so being able to fold it into my hobby workflow like this is super satisfying.</p>
+
+<h1 id="desired-outcome">Desired outcome</h1>
+<!--alex ignore host-hostess --->
+<p>I decided to have one repository called <code class="language-plaintext highlighter-rouge">blog_source</code> which would build the static site into a folder. And a second repository (the original one <code class="language-plaintext highlighter-rouge">pauldambra.github.io</code>) that would host the actual site. Previously I pushed the jekyll source to that repository for Github to build now I'll be pushing HTML for Github to host.</p>
+
+<p>The process will be:</p>
+
+<ul>
+  <li>git init the output repository in a known folder,</li>
+  <li>pull the current state,</li>
+  <li>write the new output over the top,</li>
+  <li>commit those changes and push to the remote.</li>
+</ul>
+
+<p>That push makes any changes visible in short order online.</p>
+
+<p>I was introduced to this "release repository" mechanism for deploying code in a previous job. It is particularly effective for projects that build some static output that can be run as-is like this static HTML site or a NodeJS project after transpilation.</p>
+
+<p>You can extend it nicely by pushing a version that can be hosted in a CI environment and have acceptance tests run against it. Which, if they pass, cause that version to be tagged in the git repository allowing it to be used further down your deployment pipeline.</p>
+
+<h1 id="initial-steps">Initial steps</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/bash</span>
+
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nv">DEPLOY_REPO</span><span class="o">=</span><span class="s2">"https://</span><span class="k">${</span><span class="nv">DEPLOY_BLOG_TOKEN</span><span class="k">}</span><span class="s2">@github.com/pauldambra/pauldambra.github.io.git"</span>
+
+<span class="k">function </span>main <span class="o">{</span>
+	clean
+	get_current_site
+	build_site
+<span class="o">}</span>
+
+<span class="k">function </span>clean <span class="o">{</span> 
+	<span class="nb">echo</span> <span class="s2">"cleaning _site folder"</span>
+	<span class="k">if</span> <span class="o">[</span> <span class="nt">-d</span> <span class="s2">"_site"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then </span><span class="nb">rm</span> <span class="nt">-Rf</span> _site<span class="p">;</span> <span class="k">fi</span> 
+<span class="o">}</span>
+
+<span class="k">function </span>get_current_site <span class="o">{</span> 
+	<span class="nb">echo</span> <span class="s2">"getting latest site"</span>
+	git clone <span class="nt">--depth</span> 1 <span class="nv">$DEPLOY_REPO</span> _site 
+<span class="o">}</span>
+
+<span class="k">function </span>build_site <span class="o">{</span> 
+	<span class="nb">echo</span> <span class="s2">"building site"</span>
+	bundle <span class="nb">exec </span>jekyll build 
+<span class="o">}</span>
+
+main
+</code></pre></div></div>
+
+<p>These first steps are relatively straightforward.</p>
+
+<ul>
+  <li>if the output folder exists delete it</li>
+  <li>then clone the latest revision of the output repository into it</li>
+  <li>finally run the jekyll build
+    <ul>
+      <li>I'm accepting the default output location of _site to simplify things</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The only 'complicated' bit here is the DEPLOY_BLOG_TOKEN environment variable that is being used to authenticate against Github.</p>
+
+<h1 id="github-personal-access-tokens">Github Personal Access Tokens</h1>
+
+<p>Personal access tokens act in-place of passwords for github resources. You can limit what permissions those tokens have. Generating different tokens for different uses so you can delete them if you suspect they have been compromised.</p>
+
+<p><img src="/images/personal-access-tokens.png" alt="personal access token setup screen" /></p>
+
+<p>Since they act like passwords you should be very careful with them… 
+Travis allows you to encrypt variables before adding them to the .travis.yml file so that secure information doesn't need to be committed into the repository or stored in plain text by the CI system.</p>
+
+<p>The <a href="https://github.com/travis-ci/travis.rb">Travis CLI</a> encrypts the key in the context of the repository in which Travis is going to run so that it can only be decrypted in that context.</p>
+
+<p>This secure variable will be used in the blog_source build so that's the encryption context.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>travis encrypt <span class="nv">DEPLOY_BLOG_TOKEN</span><span class="o">=</span>SOME_SECRET_VALUE <span class="nt">-r</span> pauldambra/blog_source  <span class="nt">--add</span>
+</code></pre></div></div>
+
+<p>Here we provide the name that should be available in Travis and its value. With <code class="language-plaintext highlighter-rouge">-r</code> specify the repository context to operate in and with <code class="language-plaintext highlighter-rouge">--add</code> instruct the CLI to add the token to the .travis.yml file.</p>
+
+<h1 id="the-travisyml-file">The .travis.yml file</h1>
+
+<p>The definition for <a href="https://docs.travis-ci.com/user/customizing-the-build">the Travis YAML is online</a>. It lets you define the build environment and what commands will be run at each stage of the lifecycle of your travis jobs.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s">ruby</span>
+<span class="na">cache</span><span class="pi">:</span> <span class="s">bundler</span>
+<span class="na">install</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">bundle install</span>
+<span class="na">script</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">./build.sh"</span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">global</span><span class="pi">:</span>
+    <span class="na">secure</span><span class="pi">:</span> <span class="s">aGrEaTbIgLoNgEnCrYpTeDvAlUe</span>
+</code></pre></div></div>
+
+<p>Here we tell Travis that</p>
+
+<ul>
+  <li>this is a Ruby project</li>
+  <li>to cache the bundler output (most of the run turns out to be building nokogiri)</li>
+  <li>that the install setup is to run <code class="language-plaintext highlighter-rouge">bundle install</code></li>
+  <li>that the build step is to run <code class="language-plaintext highlighter-rouge">./build.sh</code></li>
+  <li>and finally to add the secure variable to the environment.</li>
+</ul>
+
+<h1 id="deploying-the-built-output">Deploying the built output</h1>
+<!--alex ignore master --->
+<p>The final step in the script is to push the changed code to the output repository, when we're on master and not in a pull request.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>deploy <span class="o">{</span>
+	<span class="nb">echo</span> <span class="s2">"deploying changes"</span>
+
+	<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$TRAVIS_PULL_REQUEST</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+	    </span><span class="nb">echo</span> <span class="s2">"except don't publish site for pull requests"</span>
+	    <span class="nb">exit </span>0
+	<span class="k">fi  
+
+	if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$TRAVIS_BRANCH</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"master"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+	    </span><span class="nb">echo</span> <span class="s2">"except we should only publish the master branch. stopping here"</span>
+	    <span class="nb">exit </span>0
+	<span class="k">fi
+
+	</span><span class="nb">cd </span>_site
+	git config <span class="nt">--global</span> user.name <span class="s2">"Travis CI"</span>
+    git config <span class="nt">--global</span> user.email paul.dambra+travis@gmail.com
+	git add <span class="nt">-A</span>
+	git status
+	git commit <span class="nt">-m</span> <span class="s2">"Lastest site built on successful travis build </span><span class="nv">$TRAVIS_BUILD_NUMBER</span><span class="s2"> auto-pushed to github"</span>
+	git push <span class="nv">$DEPLOY_REPO</span> master:master
+<span class="o">}</span>
+</code></pre></div></div>
+<!--alex ignore master --->
+<p>Travis adds several convenience environment variables two of which which can be checked here to confirm that we don't want to deploy pull requests or branches other than master.</p>
+
+<p>Then the script ensures that the commit is identified and has a message that can be tracked back to this Travis build. Before pushing to Github.</p>
+
+<h1 id="finally">Finally</h1>
+
+<p><img src="/images/travis.png" alt="travis build history" /></p>
+
+<p>This process turned out to be straightforward and Travis is a joy to work with. Next up it's time to add some plugins to the site so that an AMP version can be published</p>
+:ET

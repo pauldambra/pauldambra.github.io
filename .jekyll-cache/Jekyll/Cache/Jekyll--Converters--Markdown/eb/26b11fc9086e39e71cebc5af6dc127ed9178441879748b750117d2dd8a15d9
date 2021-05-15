@@ -1,0 +1,13 @@
+I"3<p>After describing event-driven and serverless systems in <a href="/2018/02/serverless-1.html">part one</a> it is time to write some code. Well, almost. The first task is a <a href="http://alistair.cockburn.us/Walking+skeleton">walking skeleton</a>: some code that runs on production infrastructure to prove we could have a CI pipeline.</p>
+
+<p>I think I'll roll my AWS credentials pretty frequently now - since I can't imagine I'll get through this series without leaking my keys somehow</p>
+
+<p><code class="language-plaintext highlighter-rouge">¯\_(ツ)_/¯</code></p>
+
+<p>Putting authentication and authorisation to one side, because the chunk is too big otherwise, this task is to write a command channel to allow editors to propose destinations on the <code class="language-plaintext highlighter-rouge">visitplannr</code> system.</p>
+
+<p>This requires the set up of API Gateway, AWS Lambda, and DynamoDB infrastructure and showing some code running. But doesn't require DynamoDB table streams or more than one lambda.</p>
+
+<p>That feels like a meaningful slice.</p>
+
+:ET

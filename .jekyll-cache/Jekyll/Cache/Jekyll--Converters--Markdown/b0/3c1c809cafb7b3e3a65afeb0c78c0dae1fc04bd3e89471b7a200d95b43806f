@@ -1,0 +1,18 @@
+I"�<!--alex ignore banging --->
+<p>I posted about my <a href="/reactotype/part-one.html">impressions of working with React</a> slowly building an HTML table and banging on about it. I ended that post with one of the more memorable cliff-hangers in recent time.</p>
+
+<blockquote>
+  <h1 id="sorting-and-filtering-the-table">Sorting and Filtering the Table</h1>
+
+  <p>That we will leave till part two… because I introduced a relatively artifical constraint that I didn't want the filtering control to be a part of the table.</p>
+
+  <p>Imagine that there will be many tables with the same filter. I don't want to bind the filter to any one table or insist that every table has it.</p>
+
+  <p>At first I expected that it would force me to understand React's components and how to compose them… instead I stumbled on something really cool #cliffhanger</p>
+</blockquote>
+
+<p>Exciting! Right?</p>
+
+<p>I want to add a filter control and I don't want it to be bound to a particular table so that it can be re-used.</p>
+
+:ET

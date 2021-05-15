@@ -1,0 +1,315 @@
+I"n�<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p>In this post we start to see how we can build a stream of events that lets us create state. We'll do this by adding an event subscrber that waits until a user proposes a destination to visit and validates the location they've provided.</p>
+
+<p><img src="/images/events/c4/second-slice-4.jpg" alt="the slice being built in this article" /></p>
+
+<!--more-->
+
+<h1 id="overview">Overview</h1>
+
+<p>This slice will prove that the system can subscribe to events occurring, react to them, and write new events back to the stream. That would only leave authentication, and a read model website to build to provide all the parts needed.</p>
+
+<p>Subscribing and reacting to events demonstrates one of the benefits mentioned in <a href="/2018/02/serverless-1.html">part one</a>. That these systems are composable. The additional code added here won't need any changes to the existing deployed applications. But can still add new behaviour to the system as a whole.
+<!--alex ignore kids --->
+In part three we added a command handler that could write <code class="language-plaintext highlighter-rouge">ProposedDestination</code> events. Here a user is saying they think there is a place that parents would like to take their kids. The application accepts this to smooth their experience (and capture any proposal) and then responds to that event by checking the provided details before listing the new destination.</p>
+
+<p><img src="/images/events/part-four-flow.jpg" alt="the event flow" /></p>
+
+<p>So:
+<!--alex ignore failure ---></p>
+<ul>
+  <li>one or more ProposedDestination events occur</li>
+  <li>The Location Validator is subscribed to those events</li>
+  <li>It reads each one and validates the provided location</li>
+  <li>Writing the success or failure event to the stream
+<!--alex ignore failure --->
+Notice here that the validator doesn't need to know what happens in case of success or failure. It doesn't even need to know whether there are applications that do something - there's no coupling of config or orchestration.</li>
+</ul>
+
+<h1 id="twee-example">Twee Example</h1>
+
+<p>The first iteration will be a validator that confirms that an event has a <code class="language-plaintext highlighter-rouge">geolocation</code> key which has a numeric latitude and longitude.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"geolocation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.34</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This is a bit silly but the point here isn't to see what useful location validation looks like. Think of it as a walking skeleton into which more realistic geolocation like checking the coordinate is in the UK could be placed.</p>
+
+<h1 id="infrastructure-changes">Infrastructure Changes</h1>
+
+<p>As discussed in <a href="/2018/02/serverless-2.html">part two</a> DynamoDb already has the concept of streams of changes to tables as triggers for lambdas. Updating the SAM template to add the stream changes the definition to:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">EventsTable</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AWS::DynamoDB::Table"</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">AttributeDefinitions</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">StreamName</span>
+          <span class="na">AttributeType</span><span class="pi">:</span> <span class="s">S</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">EventId</span>
+          <span class="na">AttributeType</span><span class="pi">:</span> <span class="s">S</span>
+      <span class="na">KeySchema</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">StreamName</span>
+          <span class="na">KeyType</span><span class="pi">:</span> <span class="s">HASH</span>
+        <span class="pi">-</span> <span class="na">AttributeName</span><span class="pi">:</span> <span class="s">EventId</span>
+          <span class="na">KeyType</span><span class="pi">:</span> <span class="s">RANGE</span>
+      <span class="na">ProvisionedThroughput</span><span class="pi">:</span>
+        <span class="na">ReadCapacityUnits</span><span class="pi">:</span> <span class="m">5</span>
+        <span class="na">WriteCapacityUnits</span><span class="pi">:</span> <span class="m">5</span>
+      <span class="na">StreamSpecification</span><span class="pi">:</span>
+        <span class="na">StreamViewType</span><span class="pi">:</span> <span class="s">NEW_IMAGE</span>
+</code></pre></div></div>
+
+<p>This change to add the <a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_StreamSpecification.html"><code class="language-plaintext highlighter-rouge">StreamSpecification</code></a> YAML key sets the stream of changes to only include the new version of the item. The valid options for <code class="language-plaintext highlighter-rouge">StreamViewType</code> are:</p>
+
+<ul>
+  <li>KEYS_ONLY - Only the key attributes of the modified item are written to the stream.</li>
+  <li>NEW_IMAGE - The entire item, as it appears after it was modified, is written to the stream.</li>
+  <li>OLD_IMAGE - The entire item, as it appeared before it was modified, is written to the stream.</li>
+  <li>NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are written to the stream.</li>
+</ul>
+
+<p>Referring back to Fowler's four types of event driven systems from <a href="/2018/02/serverless-1.html">part One</a>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">KEYS_ONLY</code> works for "Event Notification": the receiver knows a property changed and whether it wants to act (<em>but not what changed</em>).</li>
+  <li><code class="language-plaintext highlighter-rouge">NEW_IMAGE</code> could map to "Event Assisted State Transfer" (EAST) unless the receiver needs access to the old version of the data. For example to write to your old and new address when your postal address changes. And could map to CQRS where the new_image could be either the command or the result of accepting the command</li>
+  <li><code class="language-plaintext highlighter-rouge">OLD_IMAGE</code> doesn't map to any type but would be great for an audit log or system where data mustn't be lost.</li>
+  <li><code class="language-plaintext highlighter-rouge">NEW_AND_OLD_IMAGES</code> maps well to EAST and CQRS.</li>
+</ul>
+
+<p>25 characters to add the change. Over 1200 to disect it.</p>
+
+<h1 id="the-lambda">The Lambda…</h1>
+
+<p>… is again a composition root to allow unit testing without the external dependencies.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mapDomainEvent</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/location-validation/dynamoDbMap</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">guid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./GUID</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">streamRepo</span>
+<span class="kd">const</span> <span class="nx">dynamoDbClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/dynamoDbClient</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">makeStreamRepository</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/make-stream-repository</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">geolocationValidator</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/location-validation/geolocation-validator</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">geolocationEventWriter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/location-validation/geolocation-validation-event-writer</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">eventWriter</span>
+
+<span class="kd">const</span> <span class="nx">makeEventSubscriber</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/location-validation/event-subscriber</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">receivedEvents</span> <span class="o">=</span> <span class="nx">mapDomainEvent</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
+
+  <span class="nx">streamRepo</span> <span class="o">=</span> <span class="nx">streamRepo</span> <span class="o">||</span> <span class="nx">makeStreamRepository</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">dynamoDbClient</span><span class="p">.</span><span class="nx">connect</span><span class="p">(),</span> <span class="nx">guid</span><span class="p">)</span>
+  <span class="nx">eventWriter</span> <span class="o">=</span> <span class="nx">eventWriter</span> <span class="o">||</span> <span class="nx">geolocationEventWriter</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">streamRepo</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">eventSubscriber</span> <span class="o">=</span> <span class="nx">makeEventSubscriber</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">geolocationValidator</span><span class="p">,</span> <span class="nx">eventWriter</span><span class="p">)</span>
+
+  <span class="nx">eventSubscriber</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">receivedEvents</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Again some dependencies are initialised in the handler but memoised outside of it to reduce start-up time when a lambda is re-used.</p>
+
+<p>It maps from the list of DynamoDB events received to a list of domain events and then passes those off to an <code class="language-plaintext highlighter-rouge">eventSubscriber</code>. The event subscriber has the validator and the resulting events writer injected.</p>
+
+<p>The event subscriber is only interesting because it does some Promise fangling:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">for</span><span class="p">:</span> <span class="p">(</span><span class="nx">geolocationValidator</span><span class="p">,</span> <span class="nx">eventWriter</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">apply</span><span class="p">:</span> <span class="p">(</span><span class="nx">events</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`received events: </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">events</span><span class="p">)}</span><span class="s2">`</span><span class="p">)</span>
+
+      <span class="kd">const</span> <span class="nx">writePromises</span> <span class="o">=</span> <span class="nx">events</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">geolocationValidator</span>
+          <span class="p">.</span><span class="nx">tryValidate</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">eventWriter</span><span class="p">.</span><span class="nx">writeSuccess</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+          <span class="p">})</span>
+          <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">eventWriter</span><span class="p">.</span><span class="nx">writeFailure</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
+          <span class="p">})</span>
+      <span class="p">})</span>
+
+      <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">writePromises</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">`wrote </span><span class="p">${</span><span class="nx">writePromises</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> events to dynamodb`</span><span class="p">))</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Both the validator and the event writer return promises. The validator only to provide a nicer API. The writer because it is IO. Because of JavaScript's single-threaded "helpfulness" this could mean that your code finishes before the promises finish handing back to the Lambda's callback and terminating your code before it can complete.</p>
+
+<p>This naive version does that:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">for</span><span class="p">:</span> <span class="p">(</span><span class="nx">geolocationValidator</span><span class="p">,</span> <span class="nx">eventWriter</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">apply</span><span class="p">:</span> <span class="p">(</span><span class="nx">events</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`received events: </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">events</span><span class="p">)}</span><span class="s2">`</span><span class="p">)</span>
+
+      <span class="nx">events</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">geolocationValidator</span>
+          <span class="p">.</span><span class="nx">tryValidate</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">eventWriter</span><span class="p">.</span><span class="nx">writeSuccess</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+          <span class="p">})</span>
+          <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">eventWriter</span><span class="p">.</span><span class="nx">writeFailure</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
+          <span class="p">})</span>
+      <span class="p">})</span>
+
+      <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">`wrote </span><span class="p">${</span><span class="nx">events</span><span class="p">}</span><span class="s2"> events to dynamodb`</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Instead each Promise is captured and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"><code class="language-plaintext highlighter-rouge">Promise.all</code></a> is used to convert that list of promises into a single promise that only completes when they have all completed.</p>
+
+<p>Testing that takes a bit of juggling but is relatively straight-forward:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">chai</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">dirtyChai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dirty-chai</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">chai</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">dirtyChai</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">expect</span>
+
+<span class="kd">const</span> <span class="nx">geolocationValidator</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../../destinations/location-validation/geolocation-validator</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">geolocationEventWriter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../../destinations/location-validation/geolocation-validation-event-writer</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">makeEventSubscriber</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../../destinations/location-validation/event-subscriber</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">severalFakeEvents</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">fakeEvent</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">event</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">geolocation</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">latitude</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">longitude</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">[</span>
+    <span class="nx">fakeEvent</span><span class="p">,</span>
+    <span class="nx">fakeEvent</span><span class="p">,</span>
+    <span class="nx">fakeEvent</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">simulateSlowWriteToDynamo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span>
+  <span class="k">while</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nx">now</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* do nothing */</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">assertAllOfTheEventsHaveWritten</span> <span class="o">=</span> <span class="p">(</span><span class="nx">actual</span><span class="p">,</span> <span class="nx">expected</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">actual</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">the event subscriber can handle multiple events</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">without calling back it is finished before they write to dynamo</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">writesCompleted</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="kd">const</span> <span class="nx">fakeSlowStreamRepo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">writeToStream</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">simulateSlowWriteToDynamo</span><span class="p">()</span>
+          <span class="nx">writesCompleted</span><span class="o">++</span>
+          <span class="nx">resolve</span><span class="p">()</span>
+        <span class="p">})</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">const</span> <span class="nx">eventWriter</span> <span class="o">=</span> <span class="nx">geolocationEventWriter</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">fakeSlowStreamRepo</span><span class="p">)</span>
+
+    <span class="kd">const</span> <span class="nx">eventSubscriber</span> <span class="o">=</span> <span class="nx">makeEventSubscriber</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">geolocationValidator</span><span class="p">,</span> <span class="nx">eventWriter</span><span class="p">)</span>
+
+    <span class="kd">const</span> <span class="nx">events</span> <span class="o">=</span> <span class="nx">severalFakeEvents</span><span class="p">()</span>
+
+    <span class="nx">eventSubscriber</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span>
+      <span class="nx">events</span><span class="p">,</span>
+      <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">complete</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">err</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="kc">null</span><span class="p">()</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">complete</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="kc">null</span><span class="p">()</span>
+
+        <span class="nx">assertAllOfTheEventsHaveWritten</span><span class="p">(</span><span class="nx">writesCompleted</span><span class="p">,</span> <span class="nx">events</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+
+        <span class="nx">done</span><span class="p">()</span>
+      <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Here a fake, slow write is introduced and captures a count of completed writes.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">writesCompleted</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="kd">const</span> <span class="nx">fakeSlowStreamRepo</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">writeToStream</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">simulateSlowWriteToDynamo</span><span class="p">()</span>
+      <span class="nx">writesCompleted</span><span class="o">++</span>
+      <span class="nx">resolve</span><span class="p">()</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This let the change above be test-driven. Running the test showed it failing before any delays occurring until the <code class="language-plaintext highlighter-rouge">Promise.all</code> change was introduced.</p>
+
+<h1 id="woo-hoo-event-driven">Woo-Hoo! Event-Driven!</h1>
+
+<p>Running <code class="language-plaintext highlighter-rouge">deploy.sh</code> and pushing a test API event in results in a DynamoDB table with the expected two events.</p>
+
+<p><img src="/images/events/2-events-written.png" alt="two events in a dynamodb table" /></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"correlationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2237661b-851b-4e78-3dfd-efe2436717d4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"geolocation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.14</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.13</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destinationProposed"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"EventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a49fc63b-889f-4311-3b7f-efb6251d39c3"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"StreamName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination-2237661b-851b-4e78-3dfd-efe2436717d4"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"correlationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2237661b-851b-4e78-3dfd-efe2436717d4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggeringEvent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a49fc63b-889f-4311-3b7f-efb6251d39c3"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geolocationValidationSucceeded"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"EventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d8b75eb2-347f-4275-3ea4-7d1c934e6589"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"StreamName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination-2237661b-851b-4e78-3dfd-efe2436717d4"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This is fantastic. All of the pieces for the event-driven back-end now exist.</p>
+
+<p>It's not all golden. There's still quite a bit of manual testing necessary to check that the lambda's dependencies are declared correctly and wired together as expected. And to check that the system hangs together as expected.</p>
+
+<p>At the moment that's not enough pain to stop moving forwards with the broad-brushstrokes implementation but it is getting close.</p>
+
+<p>Next time we will add a read model and (depending on the length of the blog post that generates) view it via HTML.</p>
+
+<p>All the code for this stage can be found <a href="https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-four">on github</a></p>
+
+<h1 id="an-aside-on-cost">An aside on cost</h1>
+
+<p>So far this blog series has cost $0.09 in AWS charges relating to vistplannr. Almost all of which has been avoidable S3 charges.</p>
+:ET

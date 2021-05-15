@@ -1,0 +1,4 @@
+I"}<p>I've been meaning to get around to writing a good tutorial on c# background workers. Mainly because I use them to separate the GUI from all the heavy lifting and I always forget how to update things.</p>
+
+<p>In case I never get around to it. <a href="http://dotnetperls.com/backgroundworker">This is about the clearest introduction I've ever found.</a> Well worth a read…</p>
+:ET

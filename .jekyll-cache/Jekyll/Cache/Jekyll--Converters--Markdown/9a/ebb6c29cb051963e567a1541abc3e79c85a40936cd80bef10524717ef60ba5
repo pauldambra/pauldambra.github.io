@@ -1,0 +1,291 @@
+I"E�<p>I love C# but while we're trying to beat our deployment process into submission at work I'm only really writing Ruby and Powershell. So when a <a href="http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/">few</a>, <a href="http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/">different</a> <a href="http://www.ryanwgough.com/blog/happy_numbers.html">articles</a> about the Happy Numbers kata turned up on my twitter feed and I found myself with a large whisky and a sleeping family I thought I'd have a go.</p>
+
+<p>The Happy Numbers kata is defined as</p>
+
+<blockquote>
+  <p>Choose a two-digit number (eg. 23), square each digit and add them together. 
+Keep repeating this until you reach 1
+or the cycle carries on in a continuous loop.</p>
+
+  <p>If you reach 1 then the number you started with is a “happy number”.</p>
+
+  <p>Can you find all the happy numbers between 1 and 100?</p>
+</blockquote>
+
+<!--more-->
+
+<p>There is more info on <a href="http://en.wikipedia.org/wiki/Happy_number">what a Happy Number is on wikipedia</a>.</p>
+
+<p>The second link <a href="http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/">above</a> has some spoilers in. Particularly that the order of the numbers doesn't matter, and that zeroes don't matter. I did previously rediscover that the order that you add numbers doesn't matter when working on some insurance software a few years back (although it took me a while :annoyedwithselfemoticon:) so let's be kind to me and assume I'd have got there on my own if I hadn't read the article first (although it was a <em>large</em> whisky).</p>
+
+<p>After writing a couple of tests:</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Test</span><span class="p">]</span>
+<span class="p">[</span><span class="nf">TestCase</span><span class="p">(</span><span class="m">31</span><span class="p">,</span> <span class="k">true</span><span class="p">)]</span>
+<span class="p">[</span><span class="nf">TestCase</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="k">false</span><span class="p">)]</span>
+<span class="p">[</span><span class="nf">TestCase</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="k">false</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">CanIdentifyHappyNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">expected</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Assert</span><span class="p">.</span><span class="nf">AreEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="nf">IsAHappyNumber</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I realised that I really like Ruby's having a question mark on methods that return a boolean and miss that feature in C#.</p>
+
+<p>And that the sensible public API was a call to <code class="language-plaintext highlighter-rouge">IsAHappyNumber</code> directly on the integer so I could crank out a large test.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Taken from http://oeis.org/A007770</span>
+<span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="kt">int</span><span class="p">[]</span> <span class="n">HappyNumbersUpTo1000</span> <span class="p">=</span>
+<span class="p">{</span>
+    <span class="m">1</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">19</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">32</span><span class="p">,</span> <span class="m">44</span><span class="p">,</span> <span class="m">49</span><span class="p">,</span> <span class="m">68</span><span class="p">,</span> <span class="m">70</span><span class="p">,</span> <span class="m">79</span><span class="p">,</span> <span class="m">82</span><span class="p">,</span> <span class="m">86</span><span class="p">,</span> <span class="m">91</span><span class="p">,</span> <span class="m">94</span><span class="p">,</span> <span class="m">97</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="m">103</span><span class="p">,</span> <span class="m">109</span><span class="p">,</span> <span class="m">129</span><span class="p">,</span> <span class="m">130</span><span class="p">,</span> <span class="m">133</span><span class="p">,</span> <span class="m">139</span><span class="p">,</span>
+    <span class="m">167</span><span class="p">,</span> <span class="m">176</span><span class="p">,</span> <span class="m">188</span><span class="p">,</span> <span class="m">190</span><span class="p">,</span> <span class="m">192</span><span class="p">,</span> <span class="m">193</span><span class="p">,</span> <span class="m">203</span><span class="p">,</span> <span class="m">208</span><span class="p">,</span> <span class="m">219</span><span class="p">,</span> <span class="m">226</span><span class="p">,</span> <span class="m">230</span><span class="p">,</span> <span class="m">236</span><span class="p">,</span> <span class="m">239</span><span class="p">,</span> <span class="m">262</span><span class="p">,</span> <span class="m">263</span><span class="p">,</span> <span class="m">280</span><span class="p">,</span> <span class="m">291</span><span class="p">,</span> <span class="m">293</span><span class="p">,</span> <span class="m">301</span><span class="p">,</span> <span class="m">302</span><span class="p">,</span> <span class="m">310</span><span class="p">,</span> <span class="m">313</span><span class="p">,</span>
+    <span class="m">319</span><span class="p">,</span> <span class="m">320</span><span class="p">,</span> <span class="m">326</span><span class="p">,</span> <span class="m">329</span><span class="p">,</span> <span class="m">331</span><span class="p">,</span> <span class="m">338</span><span class="p">,</span> <span class="m">356</span><span class="p">,</span> <span class="m">362</span><span class="p">,</span> <span class="m">365</span><span class="p">,</span> <span class="m">367</span><span class="p">,</span> <span class="m">368</span><span class="p">,</span> <span class="m">376</span><span class="p">,</span> <span class="m">379</span><span class="p">,</span> <span class="m">383</span><span class="p">,</span> <span class="m">386</span><span class="p">,</span> <span class="m">391</span><span class="p">,</span> <span class="m">392</span><span class="p">,</span> <span class="m">397</span><span class="p">,</span> <span class="m">404</span><span class="p">,</span> <span class="m">409</span><span class="p">,</span> <span class="m">440</span><span class="p">,</span> <span class="m">446</span><span class="p">,</span>
+    <span class="m">464</span><span class="p">,</span> <span class="m">469</span><span class="p">,</span> <span class="m">478</span><span class="p">,</span> <span class="m">487</span><span class="p">,</span> <span class="m">490</span><span class="p">,</span> <span class="m">496</span><span class="p">,</span> <span class="m">536</span><span class="p">,</span> <span class="m">556</span><span class="p">,</span> <span class="m">563</span><span class="p">,</span> <span class="m">565</span><span class="p">,</span> <span class="m">566</span><span class="p">,</span> <span class="m">608</span><span class="p">,</span> <span class="m">617</span><span class="p">,</span> <span class="m">622</span><span class="p">,</span> <span class="m">623</span><span class="p">,</span> <span class="m">632</span><span class="p">,</span> <span class="m">635</span><span class="p">,</span> <span class="m">637</span><span class="p">,</span> <span class="m">638</span><span class="p">,</span> <span class="m">644</span><span class="p">,</span> <span class="m">649</span><span class="p">,</span> <span class="m">653</span><span class="p">,</span>
+    <span class="m">655</span><span class="p">,</span> <span class="m">656</span><span class="p">,</span> <span class="m">665</span><span class="p">,</span> <span class="m">671</span><span class="p">,</span> <span class="m">673</span><span class="p">,</span> <span class="m">680</span><span class="p">,</span> <span class="m">683</span><span class="p">,</span> <span class="m">694</span><span class="p">,</span> <span class="m">700</span><span class="p">,</span> <span class="m">709</span><span class="p">,</span> <span class="m">716</span><span class="p">,</span> <span class="m">736</span><span class="p">,</span> <span class="m">739</span><span class="p">,</span> <span class="m">748</span><span class="p">,</span> <span class="m">761</span><span class="p">,</span> <span class="m">763</span><span class="p">,</span> <span class="m">784</span><span class="p">,</span> <span class="m">790</span><span class="p">,</span> <span class="m">793</span><span class="p">,</span> <span class="m">802</span><span class="p">,</span> <span class="m">806</span><span class="p">,</span> <span class="m">818</span><span class="p">,</span>
+    <span class="m">820</span><span class="p">,</span> <span class="m">833</span><span class="p">,</span> <span class="m">836</span><span class="p">,</span> <span class="m">847</span><span class="p">,</span> <span class="m">860</span><span class="p">,</span> <span class="m">863</span><span class="p">,</span> <span class="m">874</span><span class="p">,</span> <span class="m">881</span><span class="p">,</span> <span class="m">888</span><span class="p">,</span> <span class="m">899</span><span class="p">,</span> <span class="m">901</span><span class="p">,</span> <span class="m">904</span><span class="p">,</span> <span class="m">907</span><span class="p">,</span> <span class="m">910</span><span class="p">,</span> <span class="m">912</span><span class="p">,</span> <span class="m">913</span><span class="p">,</span> <span class="m">921</span><span class="p">,</span> <span class="m">923</span><span class="p">,</span> <span class="m">931</span><span class="p">,</span> <span class="m">932</span><span class="p">,</span> <span class="m">937</span><span class="p">,</span> <span class="m">940</span><span class="p">,</span>
+    <span class="m">946</span><span class="p">,</span> <span class="m">964</span><span class="p">,</span> <span class="m">970</span><span class="p">,</span> <span class="m">973</span><span class="p">,</span> <span class="m">989</span><span class="p">,</span> <span class="m">998</span><span class="p">,</span> <span class="m">1000</span>
+<span class="p">};</span>
+
+<span class="p">[</span><span class="n">Test</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">CanTestAThousandNumbers</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="m">1000</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span>
+        <span class="n">Assert</span><span class="p">.</span><span class="nf">AreEqual</span><span class="p">(</span><span class="n">HappyNumbersUpTo1000</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="p">.</span><span class="nf">IsAHappyNumber</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>So, with a 1000 failing tests I could run through a few naive implementations to get to a reasonable one.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Globalization</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">HappyNumbers</span>
+<span class="p">{</span>
+    <span class="c1">// Choose a two-digit number (eg. 23), square each digit and add them together. </span>
+    <span class="c1">// Keep repeating this until you reach 1 or the cycle carries on in a continuous loop. </span>
+    <span class="c1">// If you reach 1 then the number you started with is a “happy number”.</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">HappyNumbers</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;</span> <span class="n">NumberChain</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;();</span> 
+        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">HappyNumberResults</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;();</span>
+
+        <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">IsAHappyNumber</span><span class="p">(</span><span class="k">this</span> <span class="kt">int</span> <span class="n">startingNumber</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">digitsToTest</span> <span class="p">=</span> <span class="n">startingNumber</span><span class="p">.</span><span class="nf">GetDigits</span><span class="p">()</span>
+                                             <span class="p">.</span><span class="nf">StripZeroes</span><span class="p">()</span>
+                                             <span class="p">.</span><span class="nf">OrderedByDigit</span><span class="p">();</span>
+
+            <span class="kt">var</span> <span class="n">happyNumberKey</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="s">","</span><span class="p">,</span> <span class="n">digitsToTest</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nf">AlreadyKnowThatThisNumberIsHappy</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="n">HappyNumberResults</span><span class="p">[</span><span class="n">happyNumberKey</span><span class="p">];</span>
+            <span class="p">}</span>
+
+            <span class="nf">GuardAgainstStrangeness</span><span class="p">(</span><span class="n">startingNumber</span><span class="p">);</span>
+            <span class="n">NumberChain</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">startingNumber</span><span class="p">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="n">startingNumber</span><span class="p">});</span>
+            <span class="nf">TestForHappiness</span><span class="p">(</span><span class="n">startingNumber</span><span class="p">,</span> <span class="n">happyNumberKey</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">HappyNumberResults</span><span class="p">[</span><span class="n">happyNumberKey</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">GuardAgainstStrangeness</span><span class="p">(</span><span class="kt">int</span> <span class="n">startingNumber</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">NumberChain</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">startingNumber</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="p">(</span>
+                    <span class="kt">string</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span>
+                        <span class="s">"I didn't think we could have a number ({0}) without a result that was in the number chain at this point"</span><span class="p">,</span>
+                        <span class="n">startingNumber</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">AlreadyKnowThatThisNumberIsHappy</span><span class="p">(</span><span class="kt">string</span> <span class="n">happyNumberKey</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">HappyNumberResults</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">TestForHappiness</span><span class="p">(</span><span class="kt">int</span> <span class="n">startingNumber</span><span class="p">,</span> <span class="kt">string</span> <span class="n">happyNumberKey</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">nextInChain</span> <span class="p">=</span> <span class="n">startingNumber</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(!</span><span class="nf">HappyNumberCalculationIsCompleteFor</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">nextInChain</span> <span class="p">=</span> <span class="n">nextInChain</span><span class="p">.</span><span class="nf">GetSumOfSquaredDigits</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">nextInChain</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">HappyNumberResults</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nf">TheCalculationChainHasLoopedAround</span><span class="p">(</span><span class="n">startingNumber</span><span class="p">,</span> <span class="n">nextInChain</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="n">HappyNumberResults</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// If the last calculated sum of the squares of the digits is already in the set of calculated numbers</span>
+        <span class="c1">/// then this number chain has looped around</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">TheCalculationChainHasLoopedAround</span><span class="p">(</span><span class="kt">int</span> <span class="n">startingNumber</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sumOfSquaredDigits</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">canAddToTheNumbersInThisChain</span> <span class="p">=</span> <span class="n">NumberChain</span><span class="p">[</span><span class="n">startingNumber</span><span class="p">].</span><span class="nf">Add</span><span class="p">(</span><span class="n">sumOfSquaredDigits</span><span class="p">);</span>
+            <span class="k">return</span> <span class="p">!</span><span class="n">canAddToTheNumbersInThisChain</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">HappyNumberCalculationIsCompleteFor</span><span class="p">(</span><span class="kt">string</span> <span class="n">happyNumberKey</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">HappyNumberResults</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">GetSumOfSquaredDigits</span><span class="p">(</span><span class="k">this</span> <span class="kt">int</span> <span class="n">number</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">number</span><span class="p">.</span><span class="nf">GetDigits</span><span class="p">()</span>
+                         <span class="p">.</span><span class="nf">Sum</span><span class="p">(</span><span class="n">digit</span> <span class="p">=&gt;</span> <span class="n">digit</span><span class="p">*</span><span class="n">digit</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="nf">GetDigits</span><span class="p">(</span><span class="k">this</span> <span class="kt">int</span> <span class="n">number</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">number</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">)</span>
+                         <span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">digit</span> <span class="p">=&gt;</span> <span class="kt">int</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="n">digit</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">)));</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="nf">StripZeroes</span><span class="p">(</span><span class="k">this</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">numbers</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">numbers</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">digit</span> <span class="p">=&gt;</span> <span class="n">digit</span> <span class="p">!=</span> <span class="m">0</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="nf">OrderedByDigit</span><span class="p">(</span><span class="k">this</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">numbers</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">numbers</span><span class="p">.</span><span class="nf">OrderBy</span><span class="p">(</span><span class="n">i</span><span class="p">=&gt;</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>OK, there's a lot going on there. First there are two dictionaries: one which keeps track of the numbers generated while processing each number processed; the other which keeps track of the results for a key describing each number (not the number be being processed).</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;</span> <span class="n">NumberChain</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">HashSet</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;();</span> 
+<span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">HappyNumberResults</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;();</span>
+</code></pre></div></div>
+
+<p>The first dictionary is used for deciding when a number is sad - if a number is seen for a second time then either it was the start number or the process has started looping. The second dictionary is for shortcut results. That is since 123, 213, 321, 1203, 2130, 3021, etc all have the same result once we've seen 123 we can immediately return a result for all other numbers that have a single 1, 2, and 3 and any number of zeroes.</p>
+
+<p>Then <code class="language-plaintext highlighter-rouge">var happyNumberKey = string.Join(",", digitsToTest);</code> because two instances of <code class="language-plaintext highlighter-rouge">int[]</code> aren't equal based on their contents it is necessary to generate a key that from the arrays so that they can be compared when adding to the HappyNumberResults dictionary.</p>
+
+<p>There are a bunch of methods to help reveal intent - mainly for this method that does the meat of the work:</p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">TestForHappiness</span><span class="p">(</span><span class="kt">int</span> <span class="n">startingNumber</span><span class="p">,</span> <span class="kt">string</span> <span class="n">happyNumberKey</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">nextInChain</span> <span class="p">=</span> <span class="n">startingNumber</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(!</span><span class="nf">HappyNumberCalculationIsCompleteFor</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">nextInChain</span> <span class="p">=</span> <span class="n">nextInChain</span><span class="p">.</span><span class="nf">GetSumOfSquaredDigits</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nextInChain</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">HappyNumberResults</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nf">TheCalculationChainHasLoopedAround</span><span class="p">(</span><span class="n">startingNumber</span><span class="p">,</span> <span class="n">nextInChain</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">HappyNumberResults</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">happyNumberKey</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This expresses the algorithm: take a number, get the sum of the square of its digits, test for a result, stop if you have one or do the same to that sum. I don't like the triple check of <code class="language-plaintext highlighter-rouge">HappyNumberIsCompleteFor</code>, <code class="language-plaintext highlighter-rouge">nextInChain==1</code>, and <code class="language-plaintext highlighter-rouge">TheCalculationChainHasLoopedAround</code> but I can't immediately see how to split that up without it being too meh.</p>
+
+<h1 id="results">Results</h1>
+<p>My first naive implementation didn't order digits or strip zeroes and reached around 320,000 in five seconds. I added ordering of digits but (since I was drinking) I used an integer array as the key on the HappyNumbersResults dictionary - doh! At least when performance didn't improve I realised what I'd done.</p>
+
+<p>Switching to a string key for the short-cut dictionary had, as could be expected, no impact for unordered digits but pushes the maximum reached up to around 2,000,000 for ordered digits.</p>
+
+<p>Removing zeroes from the digits array didn't have much impact - presumably because calculating the square of zero isn't very expensive.</p>
+
+<h1 id="can-this-be-improved">Can this be improved?</h1>
+<p>Processing two million numbers in five seconds is pretty good but I wondered if this could be improved on with some of the fangling available in the <a href="http://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx">TPL library</a>.</p>
+
+<p>First lesson here was that I don't get the TPL at all… <em>at all</em></p>
+
+<p>My first attempt at parallel processing of the list meant adding the cost of starting a thread for every number (as the Happy Numbers are processed one at a time) so I added an extension method to call <code class="language-plaintext highlighter-rouge">AreHappyNumbers</code> on a list of integers.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="nf">AreHappyNumbers</span><span class="p">(</span>
+    <span class="k">this</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">numbersToProcess</span><span class="p">,</span> 
+    <span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="n">numbersToProcess</span> <span class="k">as</span> <span class="kt">int</span><span class="p">[]</span> <span class="p">??</span> <span class="n">numbersToProcess</span><span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;(</span><span class="n">numbers</span><span class="p">.</span><span class="nf">Count</span><span class="p">());</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">number</span> <span class="k">in</span> <span class="n">numbers</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cancellationToken</span><span class="p">.</span><span class="n">IsCancellationRequested</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Debug</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"returning before processing {0} on cancel"</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">results</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">results</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">number</span><span class="p">.</span><span class="nf">IsAHappyNumber</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">results</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>This method takes a range of numbers and a cancellation token. It then loops over the numbers calculating if they are happy and testing for cancellation before each number.</p>
+
+<p>After quite a few false starts and confusions with the TPL I ended up with the following:</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Test</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">ParallelRunForFiveSeconds</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">watch</span> <span class="p">=</span> <span class="n">Stopwatch</span><span class="p">.</span><span class="nf">StartNew</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">cancellationTokenSource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">CancellationTokenSource</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">tasks</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Task</span><span class="p">&lt;</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;&gt;&gt;();</span>
+    <span class="kt">var</span> <span class="n">count</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="c1">//without this line the whole thing runs to completion</span>
+    <span class="n">cancellationTokenSource</span><span class="p">.</span><span class="nf">CancelAfter</span><span class="p">(</span><span class="m">5000</span><span class="p">);</span>
+
+    <span class="k">try</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">index</span> <span class="k">in</span> <span class="n">Enumerable</span><span class="p">.</span><span class="nf">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">cancellationToken</span> <span class="p">=</span> <span class="n">cancellationTokenSource</span><span class="p">.</span><span class="n">Token</span><span class="p">;</span>
+            <span class="n">tasks</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">Task</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">StartNew</span><span class="p">(</span>
+                <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Enumerable</span><span class="p">.</span><span class="nf">Range</span><span class="p">(</span><span class="n">index</span> <span class="p">*</span> <span class="m">1000000</span><span class="p">,</span> <span class="m">1000000</span><span class="p">)</span>
+                                <span class="p">.</span><span class="nf">AreHappyNumbers</span><span class="p">(</span><span class="n">cancellationToken</span><span class="p">)));</span>
+        <span class="p">}</span>
+
+        <span class="c1">//without timeout the stopwatch measures around 6.5 seconds</span>
+       <span class="n">Task</span><span class="p">.</span><span class="nf">WaitAll</span><span class="p">(</span><span class="n">tasks</span><span class="p">.</span><span class="n">Cast</span><span class="p">&lt;</span><span class="n">Task</span><span class="p">&gt;().</span><span class="nf">ToArray</span><span class="p">(),</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">5</span><span class="p">));</span>
+       <span class="n">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">t</span> <span class="p">=&gt;</span> <span class="n">t</span><span class="p">.</span><span class="n">Result</span><span class="p">).</span><span class="nf">Sum</span><span class="p">(</span><span class="n">result</span> <span class="p">=&gt;</span> <span class="n">result</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">TaskCanceledException</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"task was cancelled and that's ok"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"watch has been running for {0} seconds"</span><span class="p">,</span> <span class="n">watch</span><span class="p">.</span><span class="n">Elapsed</span><span class="p">.</span><span class="n">TotalSeconds</span><span class="p">);</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"In five seconds the number of numbers was {0}"</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<!--alex ignore damn --->
+<p>So, yes that's not a test and it is probably awful TPL code but I'm pretty damn sure it doesn't run for more than 5 seconds and it calculates…</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;drumroll/&gt;</code></p>
+
+<p>around <em>SEVEN AND A HALF MILLION NUMBERS</em> in those five seconds. Yes, they're not consecutive - but that's a pretty good improvement from two million. Such a good improvement that I'm doubting myself (although I can't see the error if there was one!)</p>
+
+<h1 id="so">So…</h1>
+
+<p>I thought the Happy Numbers kata would be a little diversion for an evening but the addition of a five second limit suggested <a href="http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/">in Kevin Rutherford's post</a> made for a really interesting challenge.
+<!--alex ignore ball --->
+I don't tend to work on problems that lead me to need to optimise as heavily as I have done here. That meant I had to think very differently about what I was doing and that's always a good thing (I think). Although it has lead to some pretty ugly code. Maybe after a little rest I'll see if I can keep the performance and make it smell less - it's definitely ended up as a ball of mud!</p>
+
+<p>If anyone does grok the TPL and can point out what I've done badly or could be improved <a href="https://github.com/pauldambra/HappyNumbersKata">the code is on GitHub</a> and I'd appreciate any pointers.</p>
+
+:ET

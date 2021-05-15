@@ -1,0 +1,17 @@
+I"^<aside class="series">
+  <h1>
+    This post is part of a series on improving this blog #recursion
+  </h1>
+  <div class="links">
+    <div class="previous">
+      <a href="/structured-data-with-jekyll.html">Previous Post</a>
+    </div>
+    <div class="next">
+      <a href="/2017/generating-static-amp.html">Next Post</a>
+    </div>
+  </div>
+</aside>
+
+<p>One of the benefits of generating a site as a static artefact (here using <a href="https://jekyllrb.com/">Jekyll</a> but there are a gazillion tools) is that the finished product is a known quantity. Anything that's a known quantity can be tested!</p>
+
+:ET

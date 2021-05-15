@@ -1,0 +1,15 @@
+I"�<p>I love C# but while we're trying to beat our deployment process into submission at work I'm only really writing Ruby and Powershell. So when a <a href="http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/">few</a>, <a href="http://silkandspinach.net/2014/11/13/happy-numbers-again-spoilers/">different</a> <a href="http://www.ryanwgough.com/blog/happy_numbers.html">articles</a> about the Happy Numbers kata turned up on my twitter feed and I found myself with a large whisky and a sleeping family I thought I'd have a go.</p>
+
+<p>The Happy Numbers kata is defined as</p>
+
+<blockquote>
+  <p>Choose a two-digit number (eg. 23), square each digit and add them together. 
+Keep repeating this until you reach 1
+or the cycle carries on in a continuous loop.</p>
+
+  <p>If you reach 1 then the number you started with is a “happy number”.</p>
+
+  <p>Can you find all the happy numbers between 1 and 100?</p>
+</blockquote>
+
+:ET

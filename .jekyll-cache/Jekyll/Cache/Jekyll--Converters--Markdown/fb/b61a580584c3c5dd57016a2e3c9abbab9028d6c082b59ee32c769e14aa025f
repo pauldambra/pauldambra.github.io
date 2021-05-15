@@ -1,0 +1,190 @@
+I"�X<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/better-affordance.html">Previous Post</a>
+<!--alex ignore failure --->
+In the last post a better visual affordance that a page element is editable was added. But didn't solve the problem that notifications of success or failure were obtrusive and disconnected from the edited element.</p>
+
+<p><img src="/images/pulse.gif" alt="pulsing affordance" /></p>
+
+<!--more-->
+<!--alex ignore failure --->
+<p>The desired behaviour is that when a change is made the entire current page is persisted to the server and the user is made aware of success or failure without interrupting their workflow unnecessarily.</p>
+
+<p><img src="/images/affordance-with-state.gif" alt="Editable indicator changing state" /></p>
+
+<p>So here as the text is changed the indicator changes to the save icon. On success to a tick and after a short delay back to the editable icon.</p>
+
+<p>But how?!</p>
+
+<h1 id="changing-the-icon">Changing the icon</h1>
+
+<p>The actual switch is</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">)</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span> <span class="o">=</span> <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span> <span class="o">||</span> <span class="p">{};</span>
+
+  <span class="kd">var</span> <span class="nx">switchIcons</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">oldClass</span><span class="p">,</span> <span class="nx">newClass</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">oldClass</span><span class="p">);</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">newClass</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentStarted</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-pencil</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-save</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentCompleted</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-save</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-check</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-check</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-pencil</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentFailed</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-save</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-times</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{}));</span>
+</code></pre></div></div>
+
+<p>Since the site is using the well-named <a href="http://fortawesome.github.io/Font-Awesome/">Font-awesome icon library</a> all that is needed to change the icon is to alter the fa classes on the element.</p>
+
+<p>As an exercise in hipsterism this is done with <a href="http://vanilla-js.com/">vanilla javascript</a> but it would be trivial to pass JQuery into this IIFE and use the class addition and removal functions it provides instead.</p>
+
+<p>So,</p>
+
+<ul>
+  <li>when saving content has started the pencil icon is switched out for a save icon</li>
+  <li>when saving completes the save icon is switched for a check and timeout is set to switch that check back to the original pencil</li>
+  <li>when saving fails the save icon is switched for an X.</li>
+</ul>
+
+<p>Right now this behaviour on fail is pretty rubbish as the user doesn't get an error message and there's no way to retry. Really hovering over or clicking on the X should display the error message. The icon should change to a retry symbol or clicking on it should prompt for retry and the page should use localstorage so that your edits aren't lost. But that's for another day!</p>
+
+<h1 id="wiring-it-up">Wiring it up</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="kd">var</span> <span class="nx">getEditableElementsForUpload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.panel</span><span class="dl">'</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">.panel-body</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">title</span><span class="p">:</span> <span class="nx">title</span> <span class="p">?</span> <span class="nx">title</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+          <span class="na">body</span><span class="p">:</span> <span class="nx">body</span><span class="p">?</span> <span class="nx">body</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span>
+        <span class="p">};</span>
+      <span class="p">}).</span><span class="kd">get</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">i</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+      
+      <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentStarted</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">panels</span> <span class="o">=</span> <span class="nx">getEditableElementsForUpload</span><span class="p">();</span>
+
+      <span class="kd">var</span> <span class="nx">putData</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">panels</span><span class="dl">'</span><span class="p">:</span> <span class="nx">panels</span><span class="p">};</span>
+      <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span><span class="dl">'</span><span class="s1">/pages/home</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">dataType</span><span class="p">:</span><span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">putData</span><span class="p">),</span>
+        <span class="na">type</span><span class="p">:</span><span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span>
+      <span class="p">}).</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span><span class="nx">status</span><span class="p">){</span>
+        <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentFailed</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+      <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentCompleted</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">$</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>When the onContentEdited event is fired for an element</p>
+
+<ul>
+  <li>the child i element which holds the editable indicator is found</li>
+  <li>the parts of the page that need to be persisted are gathered</li>
+  <li>saveContentStarted is called</li>
+  <li>the jquery.ajax method is used to persist the page (yes, with a hardcoded URL this is a work-in-progress after all)</li>
+  <li>the ajax methods fail and done promises are associated with the saveContentFailed and saveContentCompleted methods respectively</li>
+</ul>
+
+<p>This did need a slight change to the JS that watches for changes to the page that was introduced <a href="/On-Page-Editing.html#edit-event-js">in a previous article</a></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">,</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">ckedit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="c1">//shamelessly borrowed from http://stackoverflow.com/a/14027188/222163</span>
+    <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">bindEvents</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">before</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">*[contenteditable]</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">before</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">html</span><span class="p">();</span>
+        <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">keyup paste</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+          <span class="k">if</span> <span class="p">(</span><span class="nx">before</span> <span class="o">!=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">html</span><span class="p">())</span> <span class="p">{</span> 
+            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+              <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+            <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="c1">//ckeditor replaces content when it inits against an element - yay</span>
+        <span class="nx">ckedit</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">instanceReady</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">editor</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">$</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;i class="fa fa-pencil editable-affordance"&gt;&lt;/i&gt;</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">});</span>
+
+    <span class="p">};</span>    
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">CKEDITOR</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>This now adds the i child element which indicates that a particular element is editable which is necessary because of how ckeditor alters the DOM when it picks up on a contenteditable element.</p>
+
+<p>And, rather than calling <code class="language-plaintext highlighter-rouge">omniclopse.onContentEdited</code> it now passes in the page element that triggered the event so its editable indicator can be updated.</p>
+
+<h1 id="the-result">The result</h1>
+<p>is a pretty, funky, pulsing indicator that shows an element is editable and changes state with the element to keep the user informed of what is happening in the background.</p>
+
+<p><img src="/images/affordance-with-delay.gif" alt="editable indicator changing state after typing finishes" /></p>
+
+<h1 id="doh-stscript">Doh-stscript</h1>
+
+<h2 id="a-postscript-but-also-doh">a postscript but also doh</h2>
+
+<p>The eagle-eyed will notice a difference between the first example gif of the end result and this one. Which is the result of a bug I introduced.
+<!--alex ignore fires --->
+The code above which actually fires the onContentEdited event uses a timeout so that the event doesn't fire until after content has finished changing.</p>
+
+<p>In the original version it looked like <code class="language-plaintext highlighter-rouge">timer = setTimeout(omniclopse.onContentEdited, 500);</code> which says call the <code class="language-plaintext highlighter-rouge">omniclopse.onContentEdited</code> event after 500 milliseconds.</p>
+
+<p>When I had to pass in the element so its state could be updated I made the simplest (and stupidest) change possible so that the line of code now read <code class="language-plaintext highlighter-rouge">timer = setTimeout(omniclopse.onContentEdited($(this)[0]), 500);</code></p>
+
+<p>Even without viewing these side-by-side JS ninjas might see what I did…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">500</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Because the second version has brackets against the function name JS evaluates the function as soon as it parses it which isn't what we want to happen.</p>
+
+<p>This is definitely what qualifies as an <a href="http://en.wikipedia.org/wiki/User_error">ID-10T</a> problem.</p>
+
+<p>What this meant was as soon as the HTML changed and even while the user is still typing the system starts to update. That wasn't the desired behaviour!</p>
+
+<p>This code should read (as it does above)…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This now captures the element that is being edited in the <code class="language-plaintext highlighter-rouge">el</code> variable and then passes a function to setTimeout which <em>when SetTimeout actually runs</em> calls onContentEdited.</p>
+
+<p>The even more eagle-eyed will notice I've stopped bothering to write tests for these little bits of JS and now I'm introducing bugs by changing old bits of code. Who could have guessed?!</p>
+:ET

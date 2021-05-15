@@ -1,0 +1,19 @@
+I"<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/websites-CMS-platform-logging-in.html">Previous Post</a></p>
+
+<blockquote>
+  <p>A promise represents the eventual result of an asynchronous operation.</p>
+</blockquote>
+
+<p>The basic idea is that you can swap in a promise where you would normally pass in a callback.</p>
+
+<p>The primary interaction is that you call a method which returns a promise which will eventually return a result (it <em>can</em> immediately return the result if it's available) and you chain a call to <code class="language-plaintext highlighter-rouge">.then()</code> onto that method call.</p>
+
+<p>The call to then is equivalent to passing in the callback function.</p>
+
+<p>Clear as mud?</p>
+
+:ET

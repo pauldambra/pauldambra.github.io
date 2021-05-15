@@ -1,0 +1,128 @@
+I"�+<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/On-Page-Editing.html">Previous Post</a></p>
+
+<p>In the last post I wasn't happy with the visual affordance that a page element is editable.</p>
+
+<p><img src="/images/affordance-loggedout.png" alt="editable sections for anonymous users" /></p>
+
+<p><img src="/images/affordance-loggedin.png" alt="editable sections for anonymous users" /></p>
+
+<!--more-->
+
+<p>I also wasn't happy that the page elements shifted around as alerts were added to the screen.</p>
+
+<p><img src="/images/editing.gif" alt="editing the page" /></p>
+
+<h1 id="so">So…</h1>
+
+<h3 id="thats-what-a-proof-of-concept-is-for-right">That's what a proof of concept is for, right?</h3>
+
+<p>I still don't have a better idea of how to indicate that an element is editable but we can make it nicer!</p>
+
+<h3 id="and">And…</h3>
+
+<p>There are two steps</p>
+
+<ul>
+  <li>Make the affordance more betterer</li>
+  <li>Make the affordance give more info</li>
+</ul>
+
+<h1 id="a-more-affordable-affordance">A more affordable affordance</h1>
+
+<p><sub> ouch! what a pun</sub></p>
+
+<p>The indicator that an element is editable has to be on the element itself otherwise how is a user to know what they can edit - but what we had didn't draw the eye.</p>
+
+<p>By using CSS3 keyframes we can cock-a-snoot at older browsers (without breaking them) and get the desired behaviour.</p>
+
+<p><img src="/images/pulse.gif" alt="Pulsing editor indicator" /></p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="nf">editorAffordance</span><span class="p">(</span><span class="nv">$size</span><span class="o">,</span> <span class="nv">$pos</span><span class="o">,</span> <span class="nv">$glow</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+	<span class="nl">left</span><span class="p">:</span> <span class="nv">$pos</span><span class="p">;</span>
+	<span class="nl">top</span><span class="p">:</span> <span class="nv">$pos</span><span class="p">;</span>
+	<span class="nl">z-index</span><span class="p">:</span> <span class="m">900</span><span class="p">;</span>
+	<span class="nl">color</span><span class="p">:</span> <span class="nv">$glow</span><span class="p">;</span>
+	<span class="nl">font-size</span><span class="p">:</span> <span class="nv">$size</span><span class="p">;</span>
+	<span class="nl">border-radius</span><span class="p">:</span> <span class="m">15px</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">contenteditable</span><span class="o">]</span> <span class="p">{</span>
+	<span class="na">-moz-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+	<span class="na">-khtml-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+	<span class="na">-webkit-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+	<span class="na">-ms-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+	<span class="na">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+	<span class="nl">outline</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+	<span class="nt">position</span><span class="nd">:relative</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">div</span><span class="o">[</span><span class="nt">contenteditable</span><span class="o">]</span> <span class="p">{</span>
+	<span class="nc">.editable-affordance</span><span class="p">{</span>
+    	<span class="k">@include</span> <span class="nd">editorAffordance</span><span class="p">(</span><span class="m">1em</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="nv">$complementaryDarkTwo</span><span class="p">);</span>
+    	<span class="k">@include</span> <span class="nd">animation</span><span class="p">(</span><span class="s1">'darkpulse 2.5s infinite ease-in'</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span><span class="o">[</span><span class="nt">contenteditable</span><span class="o">]</span> <span class="p">{</span>
+	<span class="nc">.editable-affordance</span><span class="p">{</span>
+    	<span class="k">@include</span> <span class="nd">editorAffordance</span><span class="p">(</span><span class="m">0</span><span class="mi">.5em</span><span class="o">,</span> <span class="m">-0</span><span class="mi">.5em</span><span class="o">,</span> <span class="no">gold</span><span class="p">);</span>
+    	<span class="k">@include</span> <span class="nd">animation</span><span class="p">(</span><span class="s1">'goldpulse 2.5s infinite ease-in'</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The important bits here are:</p>
+
+<h2 id="the-positioning">The positioning</h2>
+
+<p>Using the <code class="language-plaintext highlighter-rouge">[contenteditable]</code> rule to set <code class="language-plaintext highlighter-rouge">position:relative</code> on the editable elements means we can add an element as a child with <code class="language-plaintext highlighter-rouge">.editable-afforance</code> as one of its classes. That class has a rule that sets <code class="language-plaintext highlighter-rouge">position:absolute</code> and some positioning to put the element top left (but those positions are passed in so don't need to be top left).</p>
+
+<p>Positioning something absolutely inside something that is positioned relatively positions the child in relation to the parent (<a href="http://www.amazon.co.uk/gp/product/B00EZ3Y5RW/ref=as_li_ss_tl?ie=UTF8&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B00EZ3Y5RW&amp;linkCode=as2&amp;tag=mindlramblnon-21">see - CSS is straight-forward</a>
+).</p>
+
+<p>Giving an element that indicates something is editable but doesn't push that editable content out of its way.</p>
+
+<h1 id="no-blue-outline">No blue outline</h1>
+
+<p>Adding <code class="language-plaintext highlighter-rouge">user-select:none</code> means that when the editable element is selected the browser doesn't (shouldn't?) add its default outline that indicates the item is selected.</p>
+
+<h1 id="the-magic">The magic</h1>
+
+<p>The <code class="language-plaintext highlighter-rouge">@include animation('dark pulse...</code> is where the magic happens.</p>
+
+<p><a href="https://github.com/pauldambra/omniclopse/blob/1c99d8bd370132cad5c50ee6b0c97e5f4c9c4cdc/scss/animation.scss">The animation.scss file</a> has some scss goodness that pumps out browser specific versions of the rules required for the pulse effect. That complexity also hides what's going on somewhat.</p>
+
+<p>As always the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">Mozilla Developer Network</a> documentation is awesome. In (very) short the animation rule is passed the name of a keyframes rule. The keyframes rule tells the browser what CSS to apply at known points in the animation. Those known points are calculated using the animation duration.</p>
+
+<p>So, if 2s is set as the animation-duration then a keyframe rule for 50% applies after 1 second.</p>
+
+<p>Here there are three rules that set a cycling box shadow inside and outside of the element</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@include</span> <span class="nd">keyframes</span><span class="p">(</span><span class="n">darkpulse</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nt">0</span><span class="nv">%</span> <span class="p">{</span> 
+	<span class="nl">box-shadow</span><span class="p">:</span> <span class="nb">inset</span> <span class="m">0px</span> <span class="m">0px</span> <span class="m">5px</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">61</span><span class="o">,</span><span class="m">28</span><span class="o">,</span><span class="m">79</span><span class="p">)</span><span class="o">,</span>
+		<span class="m">0px</span> <span class="m">0px</span> <span class="m">15px</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">61</span><span class="o">,</span><span class="m">28</span><span class="o">,</span><span class="m">79</span><span class="p">);</span> 
+	<span class="p">}</span>
+  <span class="nt">50</span><span class="nv">%</span> <span class="p">{</span> 
+  	<span class="nl">box-shadow</span><span class="p">:</span> <span class="nb">inset</span> <span class="m">0px</span> <span class="m">0px</span> <span class="m">15px</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">61</span><span class="o">,</span><span class="m">28</span><span class="o">,</span><span class="m">79</span><span class="p">)</span><span class="o">,</span> 
+  		<span class="m">0px</span> <span class="m">0px</span> <span class="m">35px</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">61</span><span class="o">,</span><span class="m">28</span><span class="o">,</span><span class="m">79</span><span class="p">);</span> 
+  <span class="p">}</span>
+  <span class="nt">100</span><span class="nv">%</span> <span class="p">{</span>  
+  	<span class="nl">box-shadow</span><span class="p">:</span> <span class="nb">inset</span> <span class="m">0px</span> <span class="m">0px</span> <span class="m">5px</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">61</span><span class="o">,</span><span class="m">28</span><span class="o">,</span><span class="m">79</span><span class="p">)</span><span class="o">,</span> 
+  		<span class="m">0px</span> <span class="m">0px</span> <span class="m">15px</span> <span class="nf">rgb</span><span class="p">(</span><span class="m">61</span><span class="o">,</span><span class="m">28</span><span class="o">,</span><span class="m">79</span><span class="p">);</span> 
+  	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And here is a codepen so you can play with the CSS that generates the effect</p>
+<p data-height="129" data-theme-id="7380" data-slug-hash="gIseG" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/pauldambra/pen/gIseG/">gIseG</a> by Paul D'Ambra (<a href="http://codepen.io/pauldambra">@pauldambra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async="" src="//codepen.io/assets/embed/ei.js"></script>
+
+<p>The next post will cover the second objective of making the editable affordance give information about whether saving edits was successful.</p>
+:ET

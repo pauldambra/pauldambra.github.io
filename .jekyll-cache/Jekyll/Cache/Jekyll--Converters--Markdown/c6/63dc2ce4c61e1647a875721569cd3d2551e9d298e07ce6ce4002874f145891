@@ -1,0 +1,65 @@
+I"=<p>It is relatively common to find (or write) a line of code like this</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">var</span> <span class="n">thingy</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Thingy</span><span class="p">(</span><span class="n">_someDependency</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Reading this line a person can know this is initialising a <code class="language-plaintext highlighter-rouge">Thingy</code> which takes a dependency on something… and something else is false.
+<!--alex ignore easy --->
+I'm really lazy and easily distracted so I don't like to have to think about anything except the one task I'm trying to not get distracted from. Having to think about what it means that something is false provides an opportunity for me to get distracted.</p>
+
+<!--more-->
+
+<p>Also, this means there is some information or some decision that has been taken by a previous developer that they have kept in their brain - all the person reading this line sees is the result of that. Each time somebody comes to this class they may have to invest time reminding themselves what the boolean parameter means.</p>
+
+<h1 id="can-it-be-better">Can it be better?</h1>
+
+<p>Well, C# (as well as other languages) allows <a href="http://msdn.microsoft.com/en-gb/library/dd264739.aspx">named parameters</a> so this <code class="language-plaintext highlighter-rouge">Thingy</code> could be instantiated by using</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">var</span> <span class="n">thingy</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Thingy</span><span class="p">(</span><span class="n">_someDependency</span><span class="p">,</span> <span class="n">disableUnexpectedBehaviour</span><span class="p">:</span> <span class="k">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Now when a person reads this line of code they know more about what is happening and that should support them in introducing correct code. Here they learn that there is a mode where this class can do something in an unexpected way. Since the named parameter makes the intent clearer a developer can make a decision about how to instantiate the class with a reasonable idea of what will happen.</p>
+
+<p>However, the next time someone writes code that uses a <code class="language-plaintext highlighter-rouge">Thingy</code> they don't have to use a named parameter so it is still possible to use the form which obscures intent.</p>
+
+<h1 id="static-factory-method">Static Factory Method</h1>
+
+<p>It is possible to hide the constructor and provide <a href="http://refactoring.com/catalog/replaceConstructorWithFactoryMethod.html">static factory methods</a> to create and return instances. Where there is more than one way to construct the object more than one factory method can be provided to clarify this difference.</p>
+
+<p>These are my latest obsession - so I recommend taking the time to jump to the declaration of <code class="language-plaintext highlighter-rouge">Thingy</code> and do something like this:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">class</span> <span class="nc">Thingy</span> 
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">SomeDependency</span> <span class="n">_someDependency</span><span class="p">;</span>
+	<span class="k">private</span> <span class="k">readonly</span> <span class="kt">bool</span> <span class="n">_disableUnexpectedBehaviour</span>
+
+    <span class="c1">// make the constructor private - this isn't necessary </span>
+    <span class="c1">// but enforces the use of the static factory methods</span>
+	<span class="k">private</span> <span class="nf">Thingy</span><span class="p">(</span><span class="n">SomeDependency</span> <span class="n">someDependency</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">disableUnexpectedBehaviour</span><span class="p">)</span> 
+	<span class="p">{</span>
+		<span class="n">_someDependency</span> <span class="p">=</span> <span class="n">someDependency</span><span class="p">;</span>
+		<span class="n">_disableUnexpectedBehaviour</span> <span class="p">=</span> <span class="n">disableUnexpectedBehaviour</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="c1">//add static factory methods</span>
+	<span class="k">public</span> <span class="k">static</span> <span class="n">Thingy</span> <span class="nf">WithExpectedBehaviour</span><span class="p">(</span><span class="n">SomeDependency</span> <span class="n">someDependency</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Thingy</span><span class="p">(</span><span class="n">someDependency</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">public</span> <span class="k">static</span> <span class="n">Thingy</span> <span class="nf">WithUnexpectedBehaviour</span><span class="p">(</span><span class="n">SomeDependency</span> <span class="n">someDependency</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Thingy</span><span class="p">(</span><span class="n">someDependency</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="c1">//&lt;snip/&gt;</span>
+<span class="p">}</span>
+
+	<span class="kt">var</span> <span class="n">thingy</span> <span class="p">=</span>  <span class="n">Thingy</span><span class="p">.</span><span class="nf">WithExpectedBehaviour</span><span class="p">(</span><span class="n">_someDependency</span><span class="p">);</span>
+	<span class="kt">var</span> <span class="n">crazyThingy</span> <span class="p">=</span>  <span class="n">Thingy</span><span class="p">.</span><span class="nf">WithUnexpectedBehaviour</span><span class="p">(</span><span class="n">_someDependency</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>Now you can't construct a <code class="language-plaintext highlighter-rouge">Thingy</code> without using one of these methods. This means that your decision to use a <code class="language-plaintext highlighter-rouge">Thingy</code> includes an explicit decision about what it means for it to be included in your code. Yay for clarity!</p>
+:ET

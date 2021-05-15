@@ -1,0 +1,11 @@
+I"P<p>MS have open-sourced <a href="https://github.com/PowerShell/PowerShell">powershell</a> and made it work on many platforms. Kudos to them - I'm loving the "new MS".</p>
+
+<p>I've never really <em>got</em> powershell. Although it's definitely an improvement on vbscript so I have used it when I've needed to automate windows.</p>
+
+<p>But as a task approaches some ill-defined level of complexity I switch to C#, Ruby, or Node rather than writing a script. Not that those are the only options but I don't know Perl, or Python, or $yourFavouriteTool.</p>
+
+<p>As a result I have barely written any Powershell on Windows and, as I've done more work on Linux over the last few years, I've also barely written any bash.</p>
+
+<p>So, while I think it's a good thing that MS are opening up and releasing cross platform tools I was underwhelmed. But…</p>
+
+:ET

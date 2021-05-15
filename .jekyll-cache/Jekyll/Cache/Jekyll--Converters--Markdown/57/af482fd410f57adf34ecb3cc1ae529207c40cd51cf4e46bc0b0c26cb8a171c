@@ -1,0 +1,13 @@
+I"W<p>At the end of the last post I realised I'd sacrificed some good practice in the rush to make it work (i.e. worked normally like all those other guilty software engineers everywhere everyday.)
+<!--alex ignore kids --->
+So earlier today I played with the kids to tire them out enough that I could distract them with television and write some #holidaycode because I am a good(-ish) parent.</p>
+
+<p>I managed to</p>
+
+<ul>
+  <li>switch from using magic strings in the messagebus channel and topic identifiers</li>
+  <li>remove some duplication</li>
+  <li>and get some tests around ReactJS</li>
+</ul>
+
+:ET

@@ -1,0 +1,47 @@
+I"Ñ<p>Yarn is a new JS package manager that promises to be fast, secure, and reliable. My initial experience is that it <em>is</em> fast. I'm excited about making time to use it for real at work. Kudos to the developers!</p>
+
+<!--more-->
+
+<p><img src="/images/yarn-desc.png" alt="Yarn description" /></p>
+
+<p>It was <a href="https://code.facebook.com/posts/1840075619545360">announced by Facebook</a> and has been <a href="http://yehudakatz.com/2016/10/11/im-excited-to-work-on-yarn-the-new-js-package-manager-2/">worked on by real luminaries</a>. There's real weight behind it!</p>
+
+<h2 id="repeatable-builds">Repeatable builds</h2>
+
+<p>Anyone that uses NPM has probably been hit by their build suddenly failing because a dependency of a dependency of a dependency has introduced a breaking change in a patch version update. To be fair to the JS community these issues tend to be fixed quickly but that's no use while it is broken. So the fact that Yarn includes npm shrinkwrap without me having to figure out how shrinkwrap works is a boon.</p>
+
+<h2 id="fast-builds">Fast builds</h2>
+
+<p>But the biggest reason I'm excited is that yarn has a cache of downloaded packages. Because people don't check node modules into source control and npm doesn't cache them we all download lodash and its friends over and over and over again. The build for the main project I work on at the moment spends 5 minutes downloading npm packages. I resent each of those 5 minutes. each. and. every. one.</p>
+
+<h2 id="how-to-convert-an-existing-project">How to convert an existing project</h2>
+
+<p>you type:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn
+</code></pre></div></div>
+
+<p>seriously that's it!</p>
+
+<p>and you'll see something like this</p>
+
+<p><img src="/images/yarn-run.png" alt="Yarn run" /></p>
+
+<p>There you can see that the first run for this project with few dependencies was 2.25s but subsequent runs are more like 0.75s</p>
+
+<p>NPM is consistently around 4 seconds for the same project.</p>
+
+<p><img src="/images/npm-run.png" alt="NPM run for the same project" /></p>
+
+<p>If the difference was really only between 4 and 0.75 seconds I wouldn't be too excited (although not relying on other people's infrastructure to build and deploy is a big dealâ„¢)</p>
+
+<p>But setting up a project with fifteen dependencies had a much more striking improvement. NPM took over a minute, yarn a little under 5 seconds.</p>
+
+<p><img src="/images/fifteen-dependencies.png" alt="yarn being awesome" /></p>
+
+<p>I'm excited to get our build agents set up to see what yarn turns the five minute plus npm run at work into.</p>
+
+<h1 id="evolution">evolution</h1>
+
+<p>So yarn made a sensible decision. It doesn't reinvent the wheel, doesn't ask us to abandon things that work. But it promises to reduce impact of changing dependencies, reduce necessity of an external network when building software, and reduce the time spent building software. Those are really great things to improve.</p>
+:ET
