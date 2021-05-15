@@ -37,13 +37,10 @@
     <meta property="fb:pages" content="1029758320473951" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
-    {% if page.path contains '_posts' %}
-      <link rel="amphtml" href="{{site.url}}/{{site.ampdir}}{{page.id}}">
-    {% endif %}
 
     <link rel="prefetch" href="/images/cardboard.jpg">
 
-    <style amp-custom>
+    <style>
       {% include syntax.css %}
       {% capture include_to_scssify %}
         {% include main.scss %}

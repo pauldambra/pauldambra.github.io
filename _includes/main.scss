@@ -121,8 +121,7 @@ article {
           margin-right: 5px;
         }
 
-        img,
-        amp-image {
+        img {
           width: 32px;
           height: 32px;
         }
@@ -311,8 +310,7 @@ ul {
 }
 .post-category {
   float: right;
-  img,
-  amp-img {
+  img {
     fill: $dark;
     width: 24px;
     height: 24px;
@@ -341,8 +339,7 @@ ul {
   }
 }
 
-img,
-amp-img {
+img {
   display: block;
   max-width: 1000px;
   vertical-align: middle;
@@ -403,8 +400,7 @@ footer {
     line-height: 25px;
     vertical-align: bottom;
     text-decoration: none;
-    img,
-    amp-img {
+    img {
       width: 25px;
       height: 25px;
       line-height: 25px;

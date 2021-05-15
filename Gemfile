@@ -3,7 +3,6 @@ gem 'github-pages'
 
 gem 'webdrivers'
 
-#for amp generation
 gem 'nokogiri'
 gem 'fastimage'
 gem 'html-proofer'

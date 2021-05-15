@@ -7,9 +7,7 @@ encoding: UTF-8
 url: https://pauldambra.dev
 author: paul.dambra+fb-instant@gmail.com
 excerpt_separator: <!--more-->
-ampdir: amp
 facebook_id: 1029758320473951
-amp_googleanalytics_id: UA-49969634-1
 future: true
 plugins:
   - octopress-paginate

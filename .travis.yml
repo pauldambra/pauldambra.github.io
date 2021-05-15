@@ -15,7 +15,6 @@ install:
 script:
   - ./imageOptimisation.sh
   - ./build.sh
-  # - ./amp-validate.sh
 after_success:
   - ./deploy.sh
   - bundle exec ruby ./htmltest.rb

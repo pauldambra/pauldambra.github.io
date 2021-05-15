@@ -4,7 +4,7 @@ require 'html-proofer'
 
 # bundle exec htmlproofer \
 #   _site \
-#   --file-ignore /amp/,/.git/ \
+#   --file-ignore /.git/ \
 #   --check-favicon \
 #   --check-html \
 #   --check-opengraph
@@ -16,7 +16,7 @@ options = {
   check_favicon: true,
   check_opengraph: true,
   check_html: true,
-  file_ignore: ['/amp/', '/.git/'],
+  file_ignore: ['/.git/'],
   parallel: { in_processes: 6 }
 }
 HTMLProofer.check_directory("./_site", options).run
