@@ -15,9 +15,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 2
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '2.6'
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
@@ -28,7 +28,7 @@ jobs:
     - name: setup dependencies
       run: sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
     - name: pre build
-      run: bundle install && npm ci
+      run: npm ci
     - name: image optimisation
       if: steps.changed-images.outputs.changed == 'true'
       run: ./imageOptimisation.sh
