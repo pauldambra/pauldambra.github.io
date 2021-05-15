@@ -11,6 +11,7 @@ facebook_id: 1029758320473951
 future: true
 plugins:
   - octopress-paginate
+keep_files: [images]
 exclude:
   - node_modules
   - sw-config.js
@@ -25,6 +26,18 @@ exclude:
   - make_collection.py
   - weeknote.rb
   - .vscode
+  - .github
+  - .idea
+  - .alexrc
+  - .gitignore
+  - .nvmrc
+  - .remark*
+  - .ruby-version
+  - .spelling
+  - CNAME
+  - htmltest.rb
+  - keybase.txt
+  - package-lock.json
 collections:
   dear_diary_year_one:
     output: false

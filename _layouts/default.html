@@ -31,7 +31,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{ page.title }}</title>
     <link rel="canonical" href="{{ page.canonical_url | prepend: site.url }}" />
-    {% include openGraph.html %}
+    <meta property="og:url"          content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="{{ page.title }}" />
+    <meta property="og:description"  content="{{ page.description | default: 'a blog about software engineering' }}" />
+    <meta property="og:image"        content="{{ site.url }}/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="{{ site.facebook_id }}" />
+
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{page.description | default: 'a blog about software engineering' }}">
     <meta property="fb:pages" content="1029758320473951" />
