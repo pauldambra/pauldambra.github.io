@@ -34,9 +34,7 @@ exclude:
   - .remark*
   - .ruby-version
   - .spelling
-  - CNAME
   - htmltest.rb
-  - keybase.txt
   - package-lock.json
   - .jekyll-cache
 collections:
