@@ -20,6 +20,7 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        working-directory: 'src'
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
