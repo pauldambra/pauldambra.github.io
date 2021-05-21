@@ -9,7 +9,6 @@ author: paul.dambra+fb-instant@gmail.com
 excerpt_separator: <!--more-->
 facebook_id: 1029758320473951
 future: true
-incremental: true
 plugins:
   - octopress-paginate
 keep_files: [images]
