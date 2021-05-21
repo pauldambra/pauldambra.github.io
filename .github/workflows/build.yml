@@ -59,11 +59,12 @@ jobs:
       run: bundle exec jekyll build
     - name: deploy
       run: |
-        cd _site && \
-        git add -A && \
-        git config --global user.name "Github Actions CI" && \
-        git config --global user.email paul.dambra+github@actions.com && \
-        git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github" && \
+        cd _site
+        git diff
+        git add -A
+        git config --global user.name "Github Actions CI"
+        git config --global user.email paul.dambra+github@actions.com
+        git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github"
         git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master --force
     - name: test html # has to come after deploy so new links are valid
       run: bundle exec ruby ./htmltest.rb
