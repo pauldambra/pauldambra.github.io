@@ -56,7 +56,7 @@ jobs:
     - name: lint with alex
       run: cd src && npx alex _posts --diff --why
     - name: build site
-      run: cd src && bundle exec jekyll build --trace --destination ../_site
+      run: cd src && bundle exec jekyll build --trace
     - name: deploy
       run: |
         cd _site
