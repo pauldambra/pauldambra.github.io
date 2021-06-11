@@ -16,25 +16,23 @@ jobs:
       with:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
         fetch-depth: 0
-        path: 'src'
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-        working-directory: 'src'
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
     - uses: marceloprado/has-changed-path@v1
       id: changed-images
       with:
-        paths: src/images/**/*.*
+        paths: images/**/*.*
     - name: setup dependencies
       run: sudo apt-get install libjpeg-progs optipng fonts-noto-color-emoji
     - name: pre build
       run: cd src && npm ci
     - name: image optimisation
       if: steps.changed-images.outputs.changed == 'true'
-      run: cd src && ./imageOptimisation.sh
+      run: ./imageOptimisation.sh
     - name: get the current state of the site
       uses: actions/checkout@v2
       with:
@@ -44,19 +42,19 @@ jobs:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
         fetch-depth: 0
     - name: update service worker
-      run: cd src && npx sw-precache --config service-worker-config.js
+      run: npx sw-precache --config service-worker-config.js
     - name: lint markdown
-      run: cd src && npx remark . --use lint --frail
+      run: npx remark . --use lint --frail
     - name: lint spelling
-      run: cd src && npx mdspell _posts/**.md \
+      run: npx mdspell _posts/**.md \
         --en-gb \
         --ignore-numbers \
         --ignore-acronyms \
         --report
     - name: lint with alex
-      run: cd src && npx alex _posts --diff --why
+      run: npx alex _posts --diff --why
     - name: build site
-      run: cd src && bundle exec jekyll build --trace
+      run: bundle exec jekyll build --trace
     - name: deploy
       run: |
         cd _site
@@ -67,5 +65,5 @@ jobs:
         git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github"
         git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master
     - name: test html # has to come after deploy so new links are valid
-      run: cd src && bundle exec ruby ./htmltest.rb
+      run: bundle exec ruby ./htmltest.rb
 
