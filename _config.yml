@@ -13,6 +13,7 @@ plugins:
   - octopress-paginate
 keep_files: [images]
 exclude:
+  - vendor
   - node_modules
   - sw-config.js
   - "*.sh"
