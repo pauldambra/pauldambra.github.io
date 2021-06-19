@@ -63,7 +63,7 @@ jobs:
         git config --global user.name "Github Actions CI"
         git config --global user.email paul.dambra+github@actions.com
         git commit -m "${GITHUB_RUN_NUMBER} auto-pushed to github"
-        git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master --force-with-lease
+        git push https://${{ secrets.blog_repo_access }}@github.com/pauldambra/pauldambra.github.io.git master:master --force
     - name: test html # has to come after deploy so new links are valid
       run: bundle exec ruby ./htmltest.rb
 
