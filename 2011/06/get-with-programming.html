@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Get with the program(ming)!</title>
+    <link rel="canonical" href="https://pauldambra.dev/2011/06/get-with-programming.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2011/06/get-with-programming.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Get with the program(ming)!" />
+    <meta property="og:description"  content="a blog about software engineering" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="a blog about software engineering">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Get with the program(ming)!",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"197",
+   "url":"https://pauldambra.dev/2011/06/get-with-programming.html",
+   "datePublished":"2011-06-10",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2011/06/get-with-programming.html"
+   },
+   "articleBody":"\nTwice  recently  I've  hit  the  same  problem  with  two  different  mobile  phone  vendor's  websites.  Vodafone  (displayed  here)  and  3.  When  I  type  a  phone  number  I  split  it  into  three  sections  using  white-space.  \"nnnn  nnn  nnnn\"  that's  how  I  remember  numbers.  That's  not  uncommon  I  don't  think…\n\n\n\n\n\nnor  is  it  odd  to  use  a  dash.\n\nSo  why  do  I  need  to  learn  how  your  website  wants  phone  numbers  formatted.\n\nWhack  some  javascript  on  your  page…  you  must  be  using  it  for  something!\n\nvar  correctedNumber  =  numberTypedOnForm.replace(\"  \",\"\").replace(\"-\",\"\");\n\nand  with  that  massive  development  cost  you  aren't  going  to  make  someone  type  a  number  twice  only  to  satisfy  your  database  server.  Yes,  not  everyone  will  have  javascript  turned  on  and  it  won't  catch  everyone's  weird  way  of  typing  phone  numbers\n\n\n    \"(nnnn)-nn-nn-nn-n\"\n\n\nbut  it's  about  not  introducing  a  pain  point  for  customers  when  you  don't  have  to\n\nIf  you  want  to  be  really  fancy  you  could\n\nvar  correctedNumber  =  numberTypedOnForm.replace(\"/\\D/g\",\"\");\n\nComputers  are  supposed  to  make  our  lives  easier  but  it's  up  to  you  website  developers  to  help  them  help  us.\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Fri Jun 10 2011
+		</div>
+		<h1 class="title">Get with the program(ming)!</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2011/06/get-with-programming.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Get+with+the+program%28ming%29%21&via=pauldambra&url=https://pauldambra.dev/2011/06/get-with-programming.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#rant">
+				in: rant
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#design">
+			design
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#ux">
+			ux
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<!--alex ignore whitespace-->
+<p>Twice recently I've hit the same problem with two different mobile phone vendor's websites. Vodafone (displayed here) and 3. When I type a phone number I split it into three sections using white-space. "nnnn nnn nnnn" that's how I remember numbers. That's not uncommon I don't think…</p>
+
+<!--more-->
+
+<p><img src="http://1.bp.blogspot.com/-5j1jDK3JAss/TfIK0Q-_reI/AAAAAAAAAO0/LyikHIbRnj0/s1600/idiots.png" alt="using a dash in an input" loading="lazy" /></p>
+
+<p>nor is it odd to use a dash.</p>
+
+<p>So why do I need to learn how your website wants phone numbers formatted.</p>
+
+<p>Whack some javascript on your page… you <em>must</em> be using it for something!</p>
+
+<p><code class="language-plaintext highlighter-rouge">var correctedNumber = numberTypedOnForm.replace(" ","").replace("-","");</code></p>
+
+<p>and with that massive development cost you aren't going to make someone type a number twice only to satisfy your database server. Yes, not everyone will have javascript turned on and it won't catch everyone's weird way of typing phone numbers</p>
+
+<blockquote>
+  <p>"(nnnn)-nn-nn-nn-n"</p>
+</blockquote>
+
+<p>but it's about not introducing a pain point for customers when you don't have to</p>
+
+<p>If you want to be really fancy you could</p>
+
+<p><code class="language-plaintext highlighter-rouge">var correctedNumber = numberTypedOnForm.replace("/\D/g","");</code></p>
+
+<p>Computers are supposed to make our lives easier but it's up to <em>you</em> website developers to help them help us.</p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>More like this...</h1>
+      
+          <a href="/2018/01/direction.html">
+  <div class="article-tile">
+      <h3>
+        Is where we're going where we're going
+      </h3>
+      <small>
+        29 Jan 2018
+      </small>
+  </div>
+</a>
+      
+          <a href="/2013/11/astronomical-database-identfier.html">
+  <div class="article-tile">
+      <h3>
+        Astronomical Database Identfier
+      </h3>
+      <small>
+        22 Nov 2013
+      </small>
+  </div>
+</a>
+      
+          <a href="/2009/10/bing-is-not-search-engine.html">
+  <div class="article-tile">
+      <h3>
+        Bing is not a search engine
+      </h3>
+      <small>
+        30 Oct 2009
+      </small>
+  </div>
+</a>
+      
+   
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2011/06/get-with-programming.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2011/06/get-with-programming.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

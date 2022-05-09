@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Websites != CMS Platform - Better Editable Affordance with JS for great good</title>
+    <link rel="canonical" href="https://pauldambra.dev/better-affordance-js.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/better-affordance-js.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Websites != CMS Platform - Better Editable Affordance with JS for great good" />
+    <meta property="og:description"  content="using funky js magic to make a better visual affordance" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="using funky js magic to make a better visual affordance">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Websites != CMS Platform - Better Editable Affordance with JS for great good",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"1651",
+   "url":"https://pauldambra.dev/better-affordance-js.html",
+   "datePublished":"2014-07-30",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/better-affordance-js.html"
+   },
+   "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nThe  code  can  be  found  on  GitHub\n\nPrevious  Post\n\nIn  the  last  post  a  better  visual  affordance  that  a  page  element  is  editable  was  added.  But  didn't  solve  the  problem  that  notifications  of  success  or  failure  were  obtrusive  and  disconnected  from  the  edited  element.\n\n\n\n\n\nThe  desired  behaviour  is  that  when  a  change  is  made  the  entire  current  page  is  persisted  to  the  server  and  the  user  is  made  aware  of  success  or  failure  without  interrupting  their  workflow  unnecessarily.\n\n\n\nSo  here  as  the  text  is  changed  the  indicator  changes  to  the  save  icon.  On  success  to  a  tick  and  after  a  short  delay  back  to  the  editable  icon.\n\nBut  how?!\n\nChanging  the  icon\n\nThe  actual  switch  is\n\n(function(omniclopse)  {\n    'use  strict';\n\n    omniclopse.ux  =  omniclopse.ux  ||  {};\n\n    var  switchIcons  =  function(element,  oldClass,  newClass)  {\n        element.classList.remove(oldClass);\n        element.classList.add(newClass);\n    };\n\n    omniclopse.ux.saveContentStarted  =  function(element)  {\n        switchIcons(element,  'fa-pencil',  'fa-save');\n    };\n\n    omniclopse.ux.saveContentCompleted  =  function(element)  {\n        switchIcons(element,  'fa-save',  'fa-check');\n        setTimeout(function()  {\n            switchIcons(element,  'fa-check',  'fa-pencil');\n        },  3000);\n    };\n\n    omniclopse.ux.saveContentFailed  =  function(element)  {\n        switchIcons(element,  'fa-save',  'fa-times');\n    };\n}(window.omniclopse  =  window.omniclopse  ||  {}));\n\n\nSince  the  site  is  using  the  well-named  Font-awesome  icon  library  all  that  is  needed  to  change  the  icon  is  to  alter  the  fa  classes  on  the  element.\n\nAs  an  exercise  in  hipsterism  this  is  done  with  vanilla  javascript  but  it  would  be  trivial  to  pass  JQuery  into  this  IIFE  and  use  the  class  addition  and  removal  functions  it  provides  instead.\n\nSo,\n\n\n    when  saving  content  has  started  the  pencil  icon  is  switched  out  for  a  save  icon\n    when  saving  completes  the  save  icon  is  switched  for  a  check  and  timeout  is  set  to  switch  that  check  back  to  the  original  pencil\n    when  saving  fails  the  save  icon  is  switched  for  an  X.\n\n\nRight  now  this  behaviour  on  fail  is  pretty  rubbish  as  the  user  doesn't  get  an  error  message  and  there's  no  way  to  retry.  Really  hovering  over  or  clicking  on  the  X  should  display  the  error  message.  The  icon  should  change  to  a  retry  symbol  or  clicking  on  it  should  prompt  for  retry  and  the  page  should  use  localstorage  so  that  your  edits  aren't  lost.  But  that's  for  another  day!\n\nWiring  it  up\n\n(function(omniclopse,  $)  {\n        'use  strict';\n        \n        var  getEditableElementsForUpload  =  function()  {\n            return  $('.panel').map(function(index,  el)  {\n                var  title  =  $(el).find('h1');\n                var  body  =  $(el).find('.panel-body');\n                return  {\n                    title:  title  ?  title.text()  :  '',\n                    body:  body?  body.html()  :  ''\n                };\n            }).get();\n        };\n\n        omniclopse.onContentEdited  =  function(element)  {\n            var  icon  =  $(element).find('i')[0];\n            \n            omniclopse.ux.saveContentStarted(icon);\n            var  panels  =  getEditableElementsForUpload();\n\n            var  putData  =  {'panels':  panels};\n            $.ajax({\n                url:'/pages/home',\n                dataType:'json',\n                contentType:'application/json',\n                data:JSON.stringify(putData),\n                type:'PUT'\n            }).fail(function(xhr,status){\n                omniclopse.ux.saveContentFailed(icon);\n            }).done(function(){\n                omniclopse.ux.saveContentCompleted(icon);\n            });\n        };\n\n}(window.omniclopse  =  window.omniclopse  ||  {},  $));\n\n\nWhen  the  onContentEdited  event  is  fired  for  an  element\n\n\n    the  child  i  element  which  holds  the  editable  indicator  is  found\n    the  parts  of  the  page  that  need  to  be  persisted  are  gathered\n    saveContentStarted  is  called\n    the  jquery.ajax  method  is  used  to  persist  the  page  (yes,  with  a  hardcoded  URL  this  is  a  work-in-progress  after  all)\n    the  ajax  methods  fail  and  done  promises  are  associated  with  the  saveContentFailed  and  saveContentCompleted  methods  respectively\n\n\nThis  did  need  a  slight  change  to  the  JS  that  watches  for  changes  to  the  page  that  was  introduced  in  a  previous  article\n\n(function(omniclopse,  $,  ckedit)  {\n        'use  strict';\n\n        //shamelessly  borrowed  from  http://stackoverflow.com/a/14027188/222163\n        omniclopse.bindEvents  =  function()  {\n\n                var  before;\n                var  timer;\n                $('*[contenteditable]').on('focus',  function()  {\n                    before  =  $(this).html();\n                }).on('keyup  paste',  function()  {  \n                    if  (before  !=  $(this).html())  {  \n                        clearTimeout(timer);\n                        var  el  =  $(this)[0];\n                        timer  =  setTimeout(function()  {\n                            omniclopse.onContentEdited(el);\n                        },  500);\n                    }\n                });\n\n                //ckeditor  replaces  content  when  it  inits  against  an  element  -  yay\n                ckedit.on('instanceReady',  function(e)  {\n                    $(e.editor.element.$).append('&lt;i  class=\"fa  fa-pencil  editable-affordance\"&gt;&lt;/i&gt;');\n                });\n\n        };        \n}(window.omniclopse  =  window.omniclopse  ||  {},  $,  CKEDITOR));\n\n\nThis  now  adds  the  i  child  element  which  indicates  that  a  particular  element  is  editable  which  is  necessary  because  of  how  ckeditor  alters  the  DOM  when  it  picks  up  on  a  contenteditable  element.\n\nAnd,  rather  than  calling  omniclopse.onContentEdited  it  now  passes  in  the  page  element  that  triggered  the  event  so  its  editable  indicator  can  be  updated.\n\nThe  result\nis  a  pretty,  funky,  pulsing  indicator  that  shows  an  element  is  editable  and  changes  state  with  the  element  to  keep  the  user  informed  of  what  is  happening  in  the  background.\n\n\n\nDoh-stscript\n\na  postscript  but  also  doh\n\nThe  eagle-eyed  will  notice  a  difference  between  the  first  example  gif  of  the  end  result  and  this  one.  Which  is  the  result  of  a  bug  I  introduced.\n\nThe  code  above  which  actually  fires  the  onContentEdited  event  uses  a  timeout  so  that  the  event  doesn't  fire  until  after  content  has  finished  changing.\n\nIn  the  original  version  it  looked  like  timer  =  setTimeout(omniclopse.onContentEdited,  500);  which  says  call  the  omniclopse.onContentEdited  event  after  500  milliseconds.\n\nWhen  I  had  to  pass  in  the  element  so  its  state  could  be  updated  I  made  the  simplest  (and  stupidest)  change  possible  so  that  the  line  of  code  now  read  timer  =  setTimeout(omniclopse.onContentEdited($(this)[0]),  500);\n\nEven  without  viewing  these  side-by-side  JS  ninjas  might  see  what  I  did…\n\ntimer  =  setTimeout(omniclopse.onContentEdited,  500);\ntimer  =  setTimeout(omniclopse.onContentEdited($(this)[0]),  500);\n\n\nBecause  the  second  version  has  brackets  against  the  function  name  JS  evaluates  the  function  as  soon  as  it  parses  it  which  isn't  what  we  want  to  happen.\n\nThis  is  definitely  what  qualifies  as  an  ID-10T  problem.\n\nWhat  this  meant  was  as  soon  as  the  HTML  changed  and  even  while  the  user  is  still  typing  the  system  starts  to  update.  That  wasn't  the  desired  behaviour!\n\nThis  code  should  read  (as  it  does  above)…\n\n        var  el  =  $(this)[0];\n        timer  =  setTimeout(function()  {\n            omniclopse.onContentEdited(el);\n        },  500);\n\n\nThis  now  captures  the  element  that  is  being  edited  in  the  el  variable  and  then  passes  a  function  to  setTimeout  which  when  SetTimeout  actually  runs  calls  onContentEdited.\n\nThe  even  more  eagle-eyed  will  notice  I've  stopped  bothering  to  write  tests  for  these  little  bits  of  JS  and  now  I'm  introducing  bugs  by  changing  old  bits  of  code.  Who  could  have  guessed?!\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Wed Jul 30 2014
+		</div>
+		<h1 class="title">Websites != CMS Platform - Better Editable Affordance with JS for great good</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/better-affordance-js.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Better+Editable+Affordance+with+JS+for+great+good&via=pauldambra&url=https://pauldambra.dev/better-affordance-js.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#cms">
+				in: cms
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#learning">
+			learning
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#cms">
+			cms
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#design">
+			design
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#web">
+			web
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#series">
+			series
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/better-affordance.html">Previous Post</a>
+<!--alex ignore failure --->
+In the last post a better visual affordance that a page element is editable was added. But didn't solve the problem that notifications of success or failure were obtrusive and disconnected from the edited element.</p>
+
+<p><img src="/images/pulse.gif" alt="pulsing affordance" loading="lazy" /></p>
+
+<!--more-->
+<!--alex ignore failure --->
+<p>The desired behaviour is that when a change is made the entire current page is persisted to the server and the user is made aware of success or failure without interrupting their workflow unnecessarily.</p>
+
+<p><img src="/images/affordance-with-state.gif" alt="Editable indicator changing state" loading="lazy" /></p>
+
+<p>So here as the text is changed the indicator changes to the save icon. On success to a tick and after a short delay back to the editable icon.</p>
+
+<p>But how?!</p>
+
+<h1 id="changing-the-icon">Changing the icon</h1>
+
+<p>The actual switch is</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">)</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span> <span class="o">=</span> <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span> <span class="o">||</span> <span class="p">{};</span>
+
+  <span class="kd">var</span> <span class="nx">switchIcons</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">oldClass</span><span class="p">,</span> <span class="nx">newClass</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">oldClass</span><span class="p">);</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">newClass</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentStarted</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-pencil</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-save</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentCompleted</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-save</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-check</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-check</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-pencil</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentFailed</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">switchIcons</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-save</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fa-times</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{}));</span>
+</code></pre></div></div>
+
+<p>Since the site is using the well-named <a href="http://fortawesome.github.io/Font-Awesome/">Font-awesome icon library</a> all that is needed to change the icon is to alter the fa classes on the element.</p>
+
+<p>As an exercise in hipsterism this is done with <a href="http://vanilla-js.com/">vanilla javascript</a> but it would be trivial to pass JQuery into this IIFE and use the class addition and removal functions it provides instead.</p>
+
+<p>So,</p>
+
+<ul>
+  <li>when saving content has started the pencil icon is switched out for a save icon</li>
+  <li>when saving completes the save icon is switched for a check and timeout is set to switch that check back to the original pencil</li>
+  <li>when saving fails the save icon is switched for an X.</li>
+</ul>
+
+<p>Right now this behaviour on fail is pretty rubbish as the user doesn't get an error message and there's no way to retry. Really hovering over or clicking on the X should display the error message. The icon should change to a retry symbol or clicking on it should prompt for retry and the page should use localstorage so that your edits aren't lost. But that's for another day!</p>
+
+<h1 id="wiring-it-up">Wiring it up</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="kd">var</span> <span class="nx">getEditableElementsForUpload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.panel</span><span class="dl">'</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">.panel-body</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">title</span><span class="p">:</span> <span class="nx">title</span> <span class="p">?</span> <span class="nx">title</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+          <span class="na">body</span><span class="p">:</span> <span class="nx">body</span><span class="p">?</span> <span class="nx">body</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span>
+        <span class="p">};</span>
+      <span class="p">}).</span><span class="kd">get</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">i</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+      
+      <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentStarted</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">panels</span> <span class="o">=</span> <span class="nx">getEditableElementsForUpload</span><span class="p">();</span>
+
+      <span class="kd">var</span> <span class="nx">putData</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">panels</span><span class="dl">'</span><span class="p">:</span> <span class="nx">panels</span><span class="p">};</span>
+      <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span><span class="dl">'</span><span class="s1">/pages/home</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">dataType</span><span class="p">:</span><span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">putData</span><span class="p">),</span>
+        <span class="na">type</span><span class="p">:</span><span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span>
+      <span class="p">}).</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span><span class="nx">status</span><span class="p">){</span>
+        <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentFailed</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+      <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">ux</span><span class="p">.</span><span class="nx">saveContentCompleted</span><span class="p">(</span><span class="nx">icon</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">$</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>When the onContentEdited event is fired for an element</p>
+
+<ul>
+  <li>the child i element which holds the editable indicator is found</li>
+  <li>the parts of the page that need to be persisted are gathered</li>
+  <li>saveContentStarted is called</li>
+  <li>the jquery.ajax method is used to persist the page (yes, with a hardcoded URL this is a work-in-progress after all)</li>
+  <li>the ajax methods fail and done promises are associated with the saveContentFailed and saveContentCompleted methods respectively</li>
+</ul>
+
+<p>This did need a slight change to the JS that watches for changes to the page that was introduced <a href="/On-Page-Editing.html#edit-event-js">in a previous article</a></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">,</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">ckedit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="c1">//shamelessly borrowed from http://stackoverflow.com/a/14027188/222163</span>
+    <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">bindEvents</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">before</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">*[contenteditable]</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">before</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">html</span><span class="p">();</span>
+        <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">keyup paste</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+          <span class="k">if</span> <span class="p">(</span><span class="nx">before</span> <span class="o">!=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">html</span><span class="p">())</span> <span class="p">{</span> 
+            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+              <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+            <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="c1">//ckeditor replaces content when it inits against an element - yay</span>
+        <span class="nx">ckedit</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">instanceReady</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">editor</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">$</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;i class="fa fa-pencil editable-affordance"&gt;&lt;/i&gt;</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">});</span>
+
+    <span class="p">};</span>    
+<span class="p">}(</span><span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">omniclopse</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">CKEDITOR</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>This now adds the i child element which indicates that a particular element is editable which is necessary because of how ckeditor alters the DOM when it picks up on a contenteditable element.</p>
+
+<p>And, rather than calling <code class="language-plaintext highlighter-rouge">omniclopse.onContentEdited</code> it now passes in the page element that triggered the event so its editable indicator can be updated.</p>
+
+<h1 id="the-result">The result</h1>
+<p>is a pretty, funky, pulsing indicator that shows an element is editable and changes state with the element to keep the user informed of what is happening in the background.</p>
+
+<p><img src="/images/affordance-with-delay.gif" alt="editable indicator changing state after typing finishes" loading="lazy" /></p>
+
+<h1 id="doh-stscript">Doh-stscript</h1>
+
+<h2 id="a-postscript-but-also-doh">a postscript but also doh</h2>
+
+<p>The eagle-eyed will notice a difference between the first example gif of the end result and this one. Which is the result of a bug I introduced.
+<!--alex ignore fires --->
+The code above which actually fires the onContentEdited event uses a timeout so that the event doesn't fire until after content has finished changing.</p>
+
+<p>In the original version it looked like <code class="language-plaintext highlighter-rouge">timer = setTimeout(omniclopse.onContentEdited, 500);</code> which says call the <code class="language-plaintext highlighter-rouge">omniclopse.onContentEdited</code> event after 500 milliseconds.</p>
+
+<p>When I had to pass in the element so its state could be updated I made the simplest (and stupidest) change possible so that the line of code now read <code class="language-plaintext highlighter-rouge">timer = setTimeout(omniclopse.onContentEdited($(this)[0]), 500);</code></p>
+
+<p>Even without viewing these side-by-side JS ninjas might see what I did…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">500</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Because the second version has brackets against the function name JS evaluates the function as soon as it parses it which isn't what we want to happen.</p>
+
+<p>This is definitely what qualifies as an <a href="http://en.wikipedia.org/wiki/User_error">ID-10T</a> problem.</p>
+
+<p>What this meant was as soon as the HTML changed and even while the user is still typing the system starts to update. That wasn't the desired behaviour!</p>
+
+<p>This code should read (as it does above)…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">omniclopse</span><span class="p">.</span><span class="nx">onContentEdited</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This now captures the element that is being edited in the <code class="language-plaintext highlighter-rouge">el</code> variable and then passes a function to setTimeout which <em>when SetTimeout actually runs</em> calls onContentEdited.</p>
+
+<p>The even more eagle-eyed will notice I've stopped bothering to write tests for these little bits of JS and now I'm introducing bugs by changing old bits of code. Who could have guessed?!</p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>More like this...</h1>
+      
+          <a href="/wrapping_up.html">
+  <div class="article-tile">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>
+      
+          <a href="/better-affordance.html">
+  <div class="article-tile">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a>
+      
+          <a href="/On-Page-Editing.html">
+  <div class="article-tile">
+      <h3>
+        Websites != CMS Platform - On Page Editing
+      </h3>
+      <small>
+        11 Jun 2014
+      </small>
+  </div>
+</a>
+      
+   
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/better-affordance-js.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/better-affordance-js.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Adding Structured Data to a Jekyll site</title>
+    <link rel="canonical" href="https://pauldambra.dev/structured-data-with-jekyll.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/structured-data-with-jekyll.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Adding Structured Data to a Jekyll site" />
+    <meta property="og:description"  content="how to add structured data to a jekyll site" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="how to add structured data to a jekyll site">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Adding Structured Data to a Jekyll site",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"1104",
+   "url":"https://pauldambra.dev/structured-data-with-jekyll.html",
+   "datePublished":"2016-09-20",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/structured-data-with-jekyll.html"
+   },
+   "articleBody":"\n\t\n\t\tThis  post  is  part  of  a  series  on  improving  this  blog  #recursion\n\t\n\t\n\t\t\n\t\t\tPrevious  Post\n\t\t\n\t\t\n            Next  Post\n\t\t\n\t\n\n\nStructured  Data  is  a  way  of  adding  context  to  files  served  on  the  web  so  that  computers  (primarily  but  not  only  search  engines)  can  respond  to  what  your  content  means.\n\nGoogle,  for  example,  will  alter  and  improve  how  your  site  appears  in  search  results  based  on  the  context  you  give  your  data.  And  if  your  site  is  considered  authoritative  can  use  the  data  to  build  the  knowledge  cards  it  sits  alongside  other  search  results.\n\nThis  blog  is  only  authoritative  for  being  unread  but  I've  not  worked  with  structured  data  and  thought  I'd  investigate.\n\n\n\nThere  are  several  formats  with  which  you  can  add  structured  data  which  typically  use  the  schema.org  vocabulary.  Google  prefers  JSON-LD  which  is  added  to  the  page  in  a  script  tag  as  opposed  to,  for  example,  Microdata  which  decorates  the  HTML.\n\nHere  is  an  (example  taken  from  schema.org):\n\n&lt;div  itemscope  itemtype=\"http://schema.org/ScreeningEvent\"&gt;\n    &lt;h1  itemprop=\"name\"&gt;Jaws  3-D\"&lt;/h1&gt;\n    &lt;div  itemprop=\"description\"&gt;Jaws  3-D  shown  in  3D.&lt;/div&gt;\n    &lt;p&gt;Location:  &lt;div  itemprop=\"location\"  itemscope  itemtype=\"http://schema.org/MovieTheater\"&gt;\n        &lt;span  itemprop=\"name\"&gt;ACME  Cinemas  10&lt;/span&gt;\n        &lt;span  itemprop=\"screenCount\"&gt;10&lt;/span&gt;\n        &lt;/div&gt;\n    &lt;/p&gt;\n    &lt;div  itemprop=\"workPresented\"  itemscope  itemtype=\"http://schema.org/Movie\"&gt;\n        &lt;span  itemprop=\"name\"&gt;Jaws  3-D&lt;/span&gt;\n        &lt;link  itemprop=\"sameAs\"  href=\"www.imdb.com/title/tt0085750/\"/&gt;\n    &lt;/div&gt;\n    &lt;p&gt;Language:  &lt;span  itemprop=\"inLanguage\"  content=\"en\"&gt;English&lt;/span&gt;&lt;/p&gt;\n    &lt;p&gt;Film  format:  &lt;span  itemprop=\"videoFormat\"&gt;3D&lt;/span&gt;&lt;/p&gt;\n&lt;/div&gt;\n\n\nThe  same  markup  in  JSON-LD:\n\n&lt;script  type=\"application/ld+json\"&gt;\n{\n    \"@context:\":  \"http://schema.org\",\n    \"@type\":  \"ScreeningEvent\",\n    \"name\":  \"Jaws  3-D\",\n    \"description\":  \"Jaws  3-D  shown  in  3D.\"\n    \"location\":  {\n        \"@type\":  \"MovieTheater\",\n        \"name\":  \"ACME  Cinemas  10\",\n        \"screenCount\":  10\n    },\n    \"workPresented\":  {\n        \"@type\":  \"Movie\",\n        \"name\":  \"Jaws  3-D\",\n        \"sameAs\":  \"www.imdb.com/title/tt0085750/\"\n    },\n    \"inLanguage\":  \"en\",\n    \"videoFormat\":  \"3D\"\n}\n&lt;/script&gt;\n\n\n\nSince  the  aim  is  to  add  this  data  to  a  Jekyll  site  where  the  HTML  is  generated  from  markdown  adding  Microdata  would  most  likely  be  a  massive  faff.  But  adding  a  script  tag  should  be  trivial.\n\nFirst,  the  home  page.\n\n&lt;script  type=\"application/ld+json\"&gt;\n{  \"@context\":  \"http://schema.org\",  \n  \"@type\":  \"Blog\",\n  \"keywords\":  \"software  engineering  agile  refactoring  c#  ruby  javascript\",  \n  \"url\":  \"https://pauldambra.github.io\",\n  \"mainEntityOfPage\":  {\n        \"@type\":  \"WebPage\",\n        \"@id\":  \"https://pauldambra.github.io\"\n    },\n  \"author\":  {\n        \"@type\":  \"Person\",\n        \"name\":  \"Paul  D'Ambra\",\n        \"sameAs\":  [\n                \"https://twitter.com/pauldambra\",\n                \"https://github.com/pauldambra\",\n                \"https://plus.google.com/u/0/+PaulDAmbraPlus\"\n        ]\n    }\n  }\n&lt;/script&gt;\n\n\nThe  above  can  be  dropped  straight  into  the  index.html  that  the  home  page  is  generated  from.\n\nIt  says  that  it  use  schema.org,  is  describing  a  blog,  which  has  a  bunch  of  keywords  and  is  at  a  particular  URL.  It  advertises  that  the  main  thing  about  this  webpage  is  the  page  itself.  And  lists  that  I'm  the  author  and  that  I  can  be  identified  at  a  set  of  other  locations  (twitter,  github,  and  google+)\n\nPretty  straightforward  since  it  is  totally  static  information.\n\nNext,  each  blog  post\n\nThere's  more  to  grok  here…\n\n\n{%  assign  wordcount  =  include.content  |  number_of_words  %}\n\n&lt;script  type=\"application/ld+json\"&gt;\n{    \n      \"@context\":\"http://schema.org\",\n      \"@type\":\"BlogPosting\",\n      \"headline\":\"{{  include.headline  }}\",\n      \"genre\":\"{{  include.category  }}\",\n      \"keywords\":\"{{  include.keywords  }}\",\n      \"wordCount\":\"{{  wordcount  }}\",\n      \"url\":\"https://pauldambra.github.io{{  include.link  }}\",\n      \"datePublished\":\"{{  include.date  |  |  date:  '%Y-%m-%d'  }}\",\n      \"author\":{    \n            \"@type\":\"Person\",\n            \"name\":\"Paul  D'Ambra\",\n            \"sameAs\":[    \n                \"https://twitter.com/pauldambra\",\n                \"https://github.com/pauldambra\",\n                \"https://plus.google.com/u/0/+PaulDAmbraPlus\"\n            ]\n      },\n      \"publisher\":{    \n            \"@type\":\"Person\",\n            \"name\":\"Paul  D'Ambra\",\n            \"sameAs\":[    \n                \"https://twitter.com/pauldambra\",\n                \"https://github.com/pauldambra\",\n                \"https://plus.google.com/u/0/+PaulDAmbraPlus\"\n            ],\n            \"logo\":  {\n    \t\t\"@type\":  \"ImageObject\",\n    \t\t\"contentUrl\":  \"https://pauldambra.github.io/images/logo.png\",\n    \t\t    \"url\":  \"https://pauldambra.github.io\"\n        }\n      },\n      \"image\":{    \n            \"@type\":\"ImageObject\",\n            \"contentUrl\":\"https://pauldambra.github.io/images/cardboard.jpg\",\n            \"url\":\"https://pauldambra.github.io\",\n            \"height\":\"450\",\n            \"width\":\"1000\"\n      },\n      \"mainEntityOfPage\":{    \n            \"@type\":\"WebPage\",\n            \"@id\":\"https://pauldambra.github.io{{  include.link  }}\"\n      },\n      \"articleBody\":\"{{  include.content  |  strip_html  |  xml_escape  |  normalize_whitepace  |  strip_newlines  |  strip  }}\"\n}\n&lt;/script&gt;\n\n\n\nAs  with  the  index  page  the  context  and  type  is  set.  That  determines  which  properties  are  relevant.  Also  best  to  run  the  markup  through  the  Google  testing  tool  to  make  sure  that  you  have  included  the  properties  Google  requires.\n\nThe  above  is  pasted  into  an  html  file  in  the  _includes  folder.  And  added  to  the  layout  used  to  render  BlogPosts\n\n\n{%  \n    include  structuredData.html  \n    headline=page.title\n    genre=page.category\n    keywords=page.keywords\n    content=page.content\n    link=page.permalink\n    date=page.date\n%}\n\n\n\n\nBlogPosts  (i.e.  those  items  in  the  _posts  folder)  have  a  bunch  of  variables  either  automatically  available  or  added  in  the  post's  YAML  frontmatter.  These  are  passed  on  into  the  structuredData  include  and  referenced  inside  it  as  include.provided_name\n\nThat's  not  quite  everything\n\nThe  home  page  now  has  some  data  about  the  site  itself  but  there's  nothing  in  the  markup  to  indicate  that  it  is  made  up  of  a  list  of  the  site's  published  blog  posts.\n\nMy  solution  to  this  highlights  nicely  how  powerful  the  liquid  templating  language  can  be  with  a  very  limited  set  of  operators  and  filters.\n\n\n&lt;script  type=\"application/ld+json\"&gt;\n{\n    \"@context\":  \"http://schema.org\",\n    \"@type\":  \"ItemList\",\n    \"itemListElement\":  [\n    {{  items  }}  &lt;!--  see  below  --&gt;\n    ]\n}\n&lt;/script&gt;\n\n\n\nThis  adds  a  second  script  tag  to  hold  the  item  list  of  blog  postings.  It  is  then  necessary  to  loop  over  each  post  in  site.posts  and  add  an  entry  for  that  item.\n\nBut  an  array  with  a  trailing  comma  is  not  valid  JSON+LD  and  including  a  template  here  ends  up  with  a  trailing  comma.\n\nThe  solution  is  led  by  two  things:\n\n\n    Liquid  provides  the  join  filter  which  correctly  joins  an  array  without  adding  a  trailing  separator\n    You  can  only  initialise  an  array  by  splitting  a  string\n\n\nso…\n\n\n    {%  assign  items  =  \"\"  %}\n    {%  for  post  in  site.posts  %}\n        {%  capture  list_item  %}\n                {%  \n                        include  blogListItem.html  \n                        index=forloop.index\n                        url=post.url\n                        title=post.title\n                        date=post.date\n                %}\n        {%  endcapture  %}\n        {%  assign  items  =  items  |  append:  list_item  |  append:  \"|||\"  %}\n    {%  endfor  %}\n        \n    {%  assign  items  =  items  |  split:  \"|||\"  |  join:  ','  %}\n\n\n\n\n    create  an  empty  string\n    loop  over  site.posts\n    for  each  post  capture  the  result  of  populating  a  blogListItem  include  into  a  string\n    append  that  to  the  original  string  with  a  known  separator\n    then  split  that  string\n    then  join  that  array  with  commas\n    that  can  then  be  output  into  the  script  tag  above\n\n\nThere  may  well  be  a  different  way  of  doing  that.  It  seems  a  bit  bonkers  but  it  works…\n\nDo  the  search  engines  use  it?\n\nI've  submitted  the  site  for  crawling  since  adding  structured  data  and  Google  has  so  far  picked  up  the  home  page  and  four  of  the  articles.\n\n\n\nSeveral  days  on  and  there's  no  obvious  change  in  how  my  site  places  in  search  rankings  or  how  Google  displays  it  but…\n\n\n    their  documentation  says  it  can  take  some  time  and  I've  seen  other  people  talking  about  it  taking  more  than  10  days\n    as  above  this  site  isn't  authoritative  for  anything  so  I  may  not  be  crossing  a  threshold  of  importance  for  processing  or  be  at  the  back  of  a  very  long  queue.\n\n\nAnyway,  I  think  Structured  Data,  as  well  as  being  interesting,  is  a  prerequisite  for  getting  AMP  set  up  and  that's  next  up…\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Tue Sep 20 2016
+		</div>
+		<h1 class="title">Adding Structured Data to a Jekyll site</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/structured-data-with-jekyll.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Adding+Structured+Data+to+a+Jekyll+site&via=pauldambra&url=https://pauldambra.dev/structured-data-with-jekyll.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#structured-data">
+				in: Structured Data
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#jekyll">
+			jekyll
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#recursion">
+			recursion
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#seo">
+			seo
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#json-ld">
+			json+ld
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<aside class="series">
+	<h1>
+		This post is part of a series on improving this blog #recursion
+	</h1>
+	<div class="links">
+		<div class="previous">
+			<a href="/using-travis-to-build-jekyll.html">Previous Post</a>
+		</div>
+		<div class="next">
+      <a href="/2017/testing-static-sites.html">Next Post</a>
+		</div>
+	</div>
+</aside>
+
+<p>Structured Data is a way of adding context to files served on the web so that computers (primarily but not only search engines) can respond to what your content means.</p>
+
+<p>Google, for example, will alter and improve how your site appears in search results based on the context you give your data. And if your site is considered authoritative can use the data to build the knowledge cards it sits alongside other search results.</p>
+
+<p>This blog is only authoritative for being unread but I've not worked with structured data and thought I'd investigate.</p>
+
+<!--more-->
+
+<p>There are several formats with which you can add structured data which typically use the <a href="http://schema.org/docs/schemas.html">schema.org</a> vocabulary. Google prefers <a href="http://json-ld.org/">JSON-LD</a> which is added to the page in a script tag as opposed to, for example, Microdata which decorates the HTML.</p>
+
+<p>Here is an (<a href="https://schema.org/Movie">example taken from schema.org</a>):</p>
+
+<pre><code class="language-HTML">&lt;div itemscope itemtype="http://schema.org/ScreeningEvent"&gt;
+  &lt;h1 itemprop="name"&gt;Jaws 3-D"&lt;/h1&gt;
+  &lt;div itemprop="description"&gt;Jaws 3-D shown in 3D.&lt;/div&gt;
+  &lt;p&gt;Location: &lt;div itemprop="location" itemscope itemtype="http://schema.org/MovieTheater"&gt;
+    &lt;span itemprop="name"&gt;ACME Cinemas 10&lt;/span&gt;
+    &lt;span itemprop="screenCount"&gt;10&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/p&gt;
+  &lt;div itemprop="workPresented" itemscope itemtype="http://schema.org/Movie"&gt;
+    &lt;span itemprop="name"&gt;Jaws 3-D&lt;/span&gt;
+    &lt;link itemprop="sameAs" href="www.imdb.com/title/tt0085750/"/&gt;
+  &lt;/div&gt;
+  &lt;p&gt;Language: &lt;span itemprop="inLanguage" content="en"&gt;English&lt;/span&gt;&lt;/p&gt;
+  &lt;p&gt;Film format: &lt;span itemprop="videoFormat"&gt;3D&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>The same markup in JSON-LD:</p>
+
+<pre><code class="language-HTML">&lt;script type="application/ld+json"&gt;
+{
+  "@context:": "http://schema.org",
+  "@type": "ScreeningEvent",
+  "name": "Jaws 3-D",
+  "description": "Jaws 3-D shown in 3D."
+  "location": {
+    "@type": "MovieTheater",
+    "name": "ACME Cinemas 10",
+    "screenCount": 10
+  },
+  "workPresented": {
+    "@type": "Movie",
+    "name": "Jaws 3-D",
+    "sameAs": "www.imdb.com/title/tt0085750/"
+  },
+  "inLanguage": "en",
+  "videoFormat": "3D"
+}
+&lt;/script&gt;
+
+</code></pre>
+
+<p>Since the aim is to add this data to a Jekyll site where the HTML is generated from markdown adding Microdata would most likely be a massive faff. But adding a script tag should be trivial.</p>
+
+<h1 id="first-the-home-page">First, the home page.</h1>
+
+<pre><code class="language-HTML">&lt;script type="application/ld+json"&gt;
+{ "@context": "http://schema.org", 
+ "@type": "Blog",
+ "keywords": "software engineering agile refactoring c# ruby javascript", 
+ "url": "https://pauldambra.github.io",
+ "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pauldambra.github.io"
+  },
+ "author": {
+    "@type": "Person",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ]
+  }
+ }
+&lt;/script&gt;
+</code></pre>
+
+<p>The above can be dropped straight into the index.html that the home page is generated from.</p>
+
+<p>It says that it use schema.org, is describing a blog, which has a bunch of keywords and is at a particular URL. It advertises that the main thing about this webpage is the page itself. And lists that I'm the author and that I can be identified at a set of other locations (twitter, github, and google+)</p>
+
+<p>Pretty straightforward since it is totally static information.</p>
+
+<h1 id="next-each-blog-post">Next, each blog post</h1>
+
+<p>There's more to grok here…</p>
+
+<pre><code class="language-HTML">
+{% assign wordcount = include.content | number_of_words %}
+
+&lt;script type="application/ld+json"&gt;
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"{{ include.headline }}",
+   "genre":"{{ include.category }}",
+   "keywords":"{{ include.keywords }}",
+   "wordCount":"{{ wordcount }}",
+   "url":"https://pauldambra.github.io{{ include.link }}",
+   "datePublished":"{{ include.date | | date: '%Y-%m-%d' }}",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+  		"@type": "ImageObject",
+  		"contentUrl": "https://pauldambra.github.io/images/logo.png",
+  		  "url": "https://pauldambra.github.io"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.github.io/images/cardboard.jpg",
+      "url":"https://pauldambra.github.io",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.github.io{{ include.link }}"
+   },
+   "articleBody":"{{ include.content | strip_html | xml_escape | normalize_whitepace | strip_newlines | strip }}"
+}
+&lt;/script&gt;
+
+</code></pre>
+
+<p>As with the index page the context and type is set. That determines which properties are relevant. Also best to run the markup through the <a href="https://search.google.com/structured-data/testing-tool">Google testing tool</a> to make sure that you have included the properties Google requires.</p>
+
+<p>The above is pasted into an html file in the _includes folder. And added to the layout used to render BlogPosts</p>
+
+<pre><code class="language-HTML">
+{% 
+  include structuredData.html 
+  headline=page.title
+  genre=page.category
+  keywords=page.keywords
+  content=page.content
+  link=page.permalink
+  date=page.date
+%}
+
+
+</code></pre>
+
+<p>BlogPosts (i.e. those items in the _posts folder) have a bunch of variables either automatically available or added in the post's YAML frontmatter. These are passed on into the structuredData include and referenced inside it as <code class="language-plaintext highlighter-rouge">include.provided_name</code></p>
+
+<h1 id="thats-not-quite-everything">That's not quite everything</h1>
+
+<p>The home page now has some data about the site itself but there's nothing in the markup to indicate that it is made up of a list of the site's published blog posts.</p>
+
+<p>My solution to this highlights nicely how powerful the <a href="https://shopify.github.io/liquid/">liquid templating language</a> can be with a very limited set of operators and filters.</p>
+
+<pre><code class="language-HTML">
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "http://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+  {{ items }} &lt;!-- see below --&gt;
+  ]
+}
+&lt;/script&gt;
+
+</code></pre>
+
+<p>This adds a second script tag to hold the item list of blog postings. It is then necessary to loop over each post in <code class="language-plaintext highlighter-rouge">site.posts</code> and add an entry for that item.</p>
+
+<p>But an array with a trailing comma is not valid JSON+LD and including a template here ends up with a trailing comma.</p>
+
+<p>The solution is led by two things:</p>
+
+<ul>
+  <li>Liquid provides the join filter which correctly joins an array without adding a trailing separator</li>
+  <li>You can only initialise an array by splitting a string</li>
+</ul>
+
+<p>so…</p>
+
+<pre><code class="language-HTML">
+  {% assign items = "" %}
+  {% for post in site.posts %}
+    {% capture list_item %}
+        {% 
+            include blogListItem.html 
+            index=forloop.index
+            url=post.url
+            title=post.title
+            date=post.date
+        %}
+    {% endcapture %}
+    {% assign items = items | append: list_item | append: "|||" %}
+  {% endfor %}
+    
+  {% assign items = items | split: "|||" | join: ',' %}
+
+</code></pre>
+
+<ul>
+  <li>create an empty string</li>
+  <li>loop over <code class="language-plaintext highlighter-rouge">site.posts</code></li>
+  <li>for each post capture the result of populating a <code class="language-plaintext highlighter-rouge">blogListItem</code> include into a string</li>
+  <li>append that to the original string with a known separator</li>
+  <li>then split that string</li>
+  <li>then join that array with commas</li>
+  <li>that can then be output into the script tag above</li>
+</ul>
+
+<p>There may well be a different way of doing that. It seems a bit bonkers but it works…</p>
+
+<h1 id="do-the-search-engines-use-it">Do the search engines use it?</h1>
+
+<p>I've submitted the site for crawling since adding structured data and Google has so far picked up the home page and four of the articles.</p>
+
+<p><img src="/images/structured-data-crawled.png" alt="structured data crawled by Google" loading="lazy" />
+<!--alex ignore obvious --->
+Several days on and there's no obvious change in how my site places in search rankings or how Google displays it but…</p>
+
+<ul>
+  <li>their documentation says it can take some time and I've seen other people talking about it taking more than 10 days</li>
+  <li>as above this site isn't authoritative for anything so I may not be crossing a threshold of importance for processing or be at the back of a very long queue.</li>
+</ul>
+
+<p>Anyway, I think Structured Data, as well as being interesting, is a prerequisite for getting AMP set up and that's next up…</p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>Some other articles...</h1>
+      
+
+      
+        <a href="/2021/01/year-notes.html">
+  <div class="article-tile">
+      <h3>
+        2020 Year Notes
+      </h3>
+      <small>
+        03 Jan 2021
+      </small>
+  </div>
+</a>
+      
+        <a href="/2018/02/serverless-4.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Part Four
+      </h3>
+      <small>
+        15 Mar 2018
+      </small>
+  </div>
+</a>
+      
+        <a href="/2021/09/emotional-advice.html">
+  <div class="article-tile">
+      <h3>
+        Advice given on ending four years at Co-op
+      </h3>
+      <small>
+        17 Sep 2021
+      </small>
+  </div>
+</a>
+      
+  
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/structured-data-with-jekyll.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/structured-data-with-jekyll.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

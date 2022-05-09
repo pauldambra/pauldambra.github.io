@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>DRY - considered harmful</title>
+    <link rel="canonical" href="https://pauldambra.dev/2018/03/harmful-dry.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2018/03/harmful-dry.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="DRY - considered harmful" />
+    <meta property="og:description"  content="DRY is about ideas not about code" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="DRY is about ideas not about code">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"DRY - considered harmful",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"5253",
+   "url":"https://pauldambra.dev/2018/03/harmful-dry.html",
+   "datePublished":"2018-03-30",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2018/03/harmful-dry.html"
+   },
+   "articleBody":"DRY  or  WET?\n\nDRY,  in  software  development,  stands  for  Don't  Repeat  Yourself.  This  is  often  taken  to  mean  remove  any  duplication  of  lines  of  code.  See  the  anti-example  in  the  wiki  page  comparing  to  WET  code  -  which  stands  for  Write  Everything  Twice.  This  reinforces  the  idea  that  this  is  about  the  amount  you  type.\n\nBelow  we're  going  to  look  at  what  the  impact  of  removing  duplication  of  lines  of  code  does  to  some  software,  hopefully  demonstrate  that  it  isn't  desirable  as  an  absolute  rule,  and  show  what  the  better  way  might  be.\n\n\n\nWe're  making  an  internet  cafe  and  so  we  need  software  to  make  internet  drinks\n\n\nclass  Coffee(val  milk:  Int,  val  sugar:  Int)  {\n        override  fun  toString()  =  \"pour  a  Coffee(milk=$milk,  sugar=$sugar)\"\n}\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(1,  0)\n        println(whiteCoffeeNoSugar)\n}\n\n\n\nThis  instructs  the  barista\n\npour  a  Coffee(milk=1,  sugar=0)\n\n\nGreat,  customers  like  it.  Let's  add  tea!\n\n\nclass  Coffee(val  milk:  Int,  val  sugar:  Int)  {\n        override  fun  toString()  =  \"Coffee(milk=$milk,  sugar=$sugar)\"\n}\n\nclass  Tea(val  milk:  Int,  val  sugar:  Int)  {\n        override  fun  toString()  =  \"Tea(milk=$milk,  sugar=$sugar)\"\n}\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(1,  0)\n        println(whiteCoffeeNoSugar)\n\n        val  buildersTea  =  Tea(1,  3)\n        println(buildersTea)\n}\n\n\n\nWoah!  Wait!  That  violates  DRY!  There's  loads  of  duplication.  Let's  remove  it.\n\n\nabstract  class  Drink(\n    val  name:  String,\n    val  milk:  Int,\n    val  sugar:  Int\n)  {\n        override  fun  toString()  =  \"pour  a  $name(milk=$milk,  sugar=$sugar)\"\n}\n\nclass  Coffee(milk:  Int,  sugar:  Int)  :  Drink(\"Coffee\",  milk,  sugar)\n\nclass  Tea(milk:  Int,  sugar:  Int)  :  Drink(\"Tea\",  milk,  sugar)\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(1,  0)\n        println(whiteCoffeeNoSugar)\n\n        val  buildersTea  =  Tea(1,  3)\n        println(buildersTea)\n}\n\n\n\nPhew,  now  we  won't  get  thrown  out  of  the  Agiles  and  can  carry  on  building  our  internet  cafe  global  super-company.\n\nBrilliant,  that's  DRY?\n\nYep,  no  repetition.  Everything  is  hunky-dory.\n\nThe  next  feature  request  comes  in.\n\nAs  a  User\nI  want  to  add  warm  milk\nSo  that  I  can  buy  a  warmer  drink\n\n\n(yep,  I  know  that's  an  awful  user  story  but  this  imaginary  dev  team  think  they  are  nailing  it)\n\nTaking  advantage  of  named  and  default  parameters  we  can  add  a  warm  milk  property  to  drinks.\n\n\nabstract  class  Drink(\n    val  name:  String  =  \"Drink\",\n    val  milk:  Int  =  0,\n    val  warmMilk:  Int  =  0,\n    val  sugar:  Int  =  0\n)  {\n        override  fun  toString()\n            =  \"pour  a  $name(milk=$milk,  warmMilk=$warmMilk,  sugar=$sugar)\"\n}\n\nclass  Coffee(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0)\n    :  Drink(\"Coffee\",  milk,  warmMilk,  sugar)\n\nclass  Tea(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0)\n    :  Drink(\"Tea\",  milk,  warmMilk,  sugar)\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(milk  =  1,  sugar  =  0)\n        println(whiteCoffeeNoSugar)\n\n        val  buildersTea  =  Tea(milk  =  1,  sugar  =  3)\n        println(buildersTea)\n\n        val  warmerCoffee  =  Coffee(warmMilk  =    2,  sugar  =  2)\n        println(warmerCoffee)\n}\n\n\n\nAnd  the  next  request:\n\n\nAs  a  User\nI  want  to  order  chocolate  sprinkles\nSo  that  I  can  spend  more  money\n\n\n\n\nabstract  class  Drink(\n    val  name:  String  =  \"Drink\",\n    val  milk:  Int  =  0,\n    val  warmMilk:  Int  =  0,\n    val  sugar:  Int  =  0,\n    val  chocolateSprinkles:  Int  =  0\n)  {\n        override  fun  toString()\n            =  \"pour  a  $name(milk=$milk,  warmMilk=$warmMilk,  sugar=$sugar,  chocolateSprinkles=$chocolateSprinkles)\"\n}\n\nclass  Coffee(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0,  chocolateSprinkles:  Int  =  0)\n        :  Drink(\"Coffee\",  milk,  warmMilk,  sugar,  chocolateSprinkles)\n\nclass  Tea(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0)\n        :  Drink(\"Tea\",  milk,  warmMilk,  sugar)\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(milk  =  1,  sugar  =  0)\n        println(whiteCoffeeNoSugar)\n\n        val  buildersTea  =  Tea(milk  =  1,  sugar  =  3)\n        println(buildersTea)\n\n        val  warmerCoffee  =  Coffee(warmMilk  =    2,  sugar  =  2)\n        println(warmerCoffee)\n\n        val  mocha  =  Coffee(warmMilk  =    2,  sugar  =  2,  chocolateSprinkles  =  4)\n        println(mocha)\n}\n\n\n\nThe  money  is  pouring  in.  And  our  code  is  as  DRY  as  possible.  We  added  chocolate  sprinkles  without  breaking  a  sweat.\n\nNext  we  can  add  lemon  in  tea  and  hazelnut  syrup  in  coffee  in  a  single  code  change.  We're  on  fire!\n\n\nabstract  class  Drink(\n    val  name:  String  =  \"Drink\",\n    val  milk:  Int  =  0,\n    val  warmMilk:  Int  =  0,\n    val  sugar:  Int  =  0,\n    val  chocolateSprinkles:  Int  =  0,\n    val  lemon:  Int  =  0,\n    val  hazelnutSyrup:  Int  =  0\n)  {\n\n        override  fun  toString()  =\n            \"pour  a  $name(milk=$milk,  \"  +\n                \"warmMilk=$warmMilk,  \"  +\n                \"sugar=$sugar,  \"  +\n                \"chocolateSprinkles=$chocolateSprinkles,  \"  +\n                \"lemon=$lemon,  \"  +\n                \"hazelnutSyrup=$hazelnutSyrup)\"\n}\n\nclass  Coffee(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0,  chocolateSprinkles:  Int  =  0,  hazelnutSyrup:  Int  =  0)\n        :  Drink(\"Coffee\",  milk,  warmMilk,  sugar,  chocolateSprinkles,  hazelnutSyrup)\n\nclass  Tea(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0,  lemon:  Int  =  0)\n        :  Drink(\"Tea\",  milk,  warmMilk,  sugar,  lemon)\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(milk  =  1,  sugar  =  0)\n        println(whiteCoffeeNoSugar)\n\n        val  buildersTea  =  Tea(milk  =  1,  sugar  =  3)\n        println(buildersTea)\n\n        val  warmerCoffee  =  Coffee(warmMilk  =    2,  sugar  =  2)\n        println(warmerCoffee)\n\n        val  mocha  =  Coffee(warmMilk  =    2,  sugar  =  2,  chocolateSprinkles  =  4)\n        println(mocha)\n}\n\n\n\nPretty  soon  after  deployment  disaster  strikes!  Barista  Mike  Acawfe  reports\n\n\n    this  latest  software  version  is  a  disaster.  It's  adding  lemon  to  hazelnut  coffee  and  chocolate  sprinkes  to  tea  ordered  with  lemon.\n\n\nugh,  I  knew  we  should  have  tried  that  new  fangled  unit  testing.  All  the  code  compiles  but  the  position  of  the  parameters  matters  in  how  they  get  from  the  Coffee  and  Tea  classes  to  the  base  Drink  class.\n\nYou  can  fix  this  with  more  named  parameters!\n\n\nabstract  class  Drink(\n    val  name:  String  =  \"Drink\",\n    val  milk:  Int  =  0,\n    val  warmMilk:  Int  =  0,\n    val  sugar:  Int  =  0,\n    val  chocolateSprinkles:  Int  =  0,\n    val  lemon:  Int  =  0,\n    val  hazelnutSyrup:  Int  =  0\n)  {\n\n        override  fun  toString()  =\n            \"pour  a  $name(milk=$milk,  \"  +\n                \"warmMilk=$warmMilk,  \"  +\n                \"sugar=$sugar,  \"  +\n                \"chocolateSprinkles=$chocolateSprinkles,  \"  +\n                \"lemon=$lemon,  \"  +\n                \"hazelnutSyrup=$hazelnutSyrup)\"\n}\n\nclass  Coffee(milk:  Int  =  0,  warmMilk:  Int  =  0,\n    sugar:  Int  =  0,  chocolateSprinkles:  Int  =  0,  hazelnutSyrup:  Int  =  0)\n    :  Drink(\"Coffee\",  milk  =  milk,  warmMilk  =  warmMilk,\n    sugar  =  sugar,  chocolateSprinkles  =  chocolateSprinkles,  hazelnutSyrup  =  hazelnutSyrup)\n\nclass  Tea(milk:  Int  =  0,  warmMilk:  Int  =  0,  sugar:  Int  =  0,  lemon:  Int  =  0)\n    :  Drink(\"Tea\",  milk  =  milk,  warmMilk  =  warmMilk,  sugar  =  sugar,  lemon  =  lemon)\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee(milk  =  1,  sugar  =  0)\n        println(whiteCoffeeNoSugar)\n\n        val  buildersTea  =  Tea(milk  =  1,  sugar  =  3)\n        println(buildersTea)\n\n        val  warmerCoffee  =  Coffee(warmMilk  =    2,  sugar  =  2)\n        println(warmerCoffee)\n\n        val  mocha  =  Coffee(warmMilk  =    2,  sugar  =  2,  chocolateSprinkles  =  4)\n        println(mocha)\n\n        val  lemonTea  =  Tea(lemon  =  1)\n        println(lemonTea)\n}\n\n\n\nBut,  something  is  bothering  you.  It  was  hard  to  spot  this  bug  because  even  though  there's  no  duplication  of  code  there's  actually  lots  of  duplication  of  names.  This  lovely  DRY  code  uses  the  word  milk  nine  times.  In  fact  each  of  the  ingredients  is  mentioned  nine  times.  So  any  new  ingredient  means  edits  in  nine  places.\n\nAnd  the  call  through  to  the  base  class  constructor  duplicates  the  constructor  on  the  line  above.  Any  changes  to  the  ingredients  and  you'll  need  to  change  both  constructors.\n\nYou  meet  a  friend  for  coffee  and,  since  it's  on  your  mind,  ask  how  they  would  remove  this  last  duplication?!\n\nEach  idea  once  and  only  once\n\nYour  friend  explains  that  DRY  isn't  about  code.  It's  about  ideas!  The  reason  you're  struggling  is  that  the  idea  that  some  drinks  have  milk  and  others  lemon  is  hidden  because  you've  treated  removing  lines  of  code  as  an  absolute  rule.\n\nThey  offer  to  help  you  rewrite  your  code  with  that  in  mind.\n\nThe  first  idea  that's  missing  is  that  there  are  types  of  ingredients.\n\nThe  second  idea  is  that  each  drink  is  a  collection  of  ingredients  that  should  be  printed  out  for  the  baristas.\n\nSo  you  start  with  a  marker  interface  and  a  set  of  data  classes.  Each  drink  then  allows  you  to  add  a  subset  of  the  possible  interfaces  and  prints  out  the  barista's  instructions.\n\nAt  the  same  time  you  add  the  concept  of  temperature  to  milk  so  you  don't  have  to  have  implicitly  cold  milk  separately  from  warm  milk.\n\n\ninterface  Ingredient\n\nenum  class  Temperature  {\n        WARM,  COLD\n}\n\ndata  class  Sugar(val  spoons:  Int)  :  Ingredient\ndata  class  Milk(val  glugs:  Int,  val  temperature:  Temperature  =  Temperature.COLD)  :  Ingredient\ndata  class  ChocolateSprinkles(val  pinches:  Int)  :  Ingredient\ndata  class  HazelnutSyrup(val  shots:  Int)  :  Ingredient\ndata  class  Lemon(val  squeezes:  Int)  :  Ingredient\n\nclass  Coffee  {\n        private  val  ingredients:  MutableList&lt;Ingredient&gt;  =  mutableListOf()\n\n        fun  withIngredient(ingredient:  Sugar):  Coffee  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        fun  withIngredient(ingredient:  Milk):  Coffee  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        fun  withIngredient(ingredient:  ChocolateSprinkles):  Coffee  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        fun  withIngredient(ingredient:  HazelnutSyrup):  Coffee  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        override  fun  toString()\n            =  \"pour  a  Coffee(${ingredients.joinToString(\",\")})\"\n}\n\nclass  Tea  {\n        private  val  ingredients:  MutableList&lt;Ingredient&gt;  =  mutableListOf()\n\n        fun  withIngredient(ingredient:  Sugar):  Tea  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        fun  withIngredient(ingredient:  Milk):  Tea  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        fun  withIngredient(ingredient:  Lemon):  Tea  {\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        override  fun  toString()\n            =  \"pour  a  Tea(${ingredients.joinToString(\",\")})\"\n}\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee().withIngredient(Milk(1))\n        println(whiteCoffeeNoSugar)\n\n        val  sugaryCoffee  =  Coffee().withIngredient(Sugar(3))\n        println(sugaryCoffee)\n\n        val  warmerCoffee  =  Coffee().withIngredient(Milk(2,  Temperature.WARM)).withIngredient(Sugar(3))\n        println(warmerCoffee)\n\n        val  mocha  =  Coffee()\n            .withIngredient(Milk(2,  Temperature.WARM))\n            .withIngredient(Sugar(2))\n            .withIngredient(ChocolateSprinkles(4))\n        println(mocha)\n\n        val  theFancyCoffee  =  Coffee()\n            .withIngredient(Milk(2,  Temperature.WARM))\n            .withIngredient(Sugar(2))\n            .withIngredient(ChocolateSprinkles(4))\n            .withIngredient(HazelnutSyrup(2))\n\n        println(theFancyCoffee)\n\n        val  buildersTea  =  Tea().withIngredient(Milk(1)).withIngredient(Sugar(3))\n        println(buildersTea)\n\n        val  lemonTea  =  Tea().withIngredient(Lemon(1))\n        println(lemonTea)\n}\n\n\n\nThis  prints  out\n\n\npour  a  Coffee(Milk(glugs=1))\npour  a  Coffee(Sugar(spoons=3))\npour  a  Coffee(WarmMilk(glugs=2),Sugar(spoons=3))\npour  a  Coffee(WarmMilk(glugs=2),Sugar(spoons=2),ChocolateSprinkles(pinches=4))\npour  a  Coffee(WarmMilk(glugs=2),Sugar(spoons=2),ChocolateSprinkles(pinches=4),HazelnutSyrup(shots=2))\npour  a  Tea(Milk(glugs=1),Sugar(spoons=3))\npour  a  Tea(Lemon(squeezes=1))\n\n\n\nNotice  the  awesome  toString  output  that  Kotlin's  data  classes  give  you  for  the  Ingredients.\n\nNow  the  word  milk  is  only  in  the  code  three  times.  Once  when  it  is  declared  and  once  in  each  drink.\n\nBut  there  is  still  duplication  of  the  idea  that  a  drink  can  have  ingredients  added.  In  fact  each  drink  has  almost  the  same  method  repeated  for  each  ingredient.  All  to  avoid  being  able  to  put  chocolate  sprinkles  in  tea.\n\nSo  the  idea  that  chocolate  sprinkles  aren't  a  tea  ingredient  is  implicit  in  the  fact  that  there's  no  method  for  it.  It  isn't  represented  once  and  only  once.\n\nOne  option  is  to  accept  any  ingredient  to  the  method  but  explicitly  refuse  ones  that  shouldn't  be  added\n\n\nclass  Coffee  {\n        class  ItIsNotOKToPutLemonInCoffee  :  Throwable()\n\n        private  val  ingredients:  MutableList&lt;Ingredient&gt;  =  mutableListOf()\n\n        fun  withIngredient(ingredient:  Ingredient):  Coffee  {\n                if  (ingredient  is  Lemon)  {\n                        throw  ItIsNotOKToPutLemonInCoffee()\n                }\n\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        override  fun  toString()\n            =  \"pour  a  Coffee(${ingredients.joinToString(\",\")})\"\n}\n\nclass  Tea  {\n        class  ItIsNotOKToPutThisIngredientInTea(ingredient:  Ingredient)\n            :  Throwable(\"It  is  not  OK  to  put  $ingredient  in  tea\")\n\n        private  val  ingredients:  MutableList&lt;Ingredient&gt;  =  mutableListOf()\n\n        fun  withIngredient(ingredient:  Ingredient):  Tea  {\n                if  (ingredient  is  HazelnutSyrup\n                        ||  ingredient  is  ChocolateSprinkles)  {\n                        throw  ItIsNotOKToPutThisIngredientInTea(ingredient)\n                }\n\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        override  fun  toString()\n            =  \"pour  a  Tea(${ingredients.joinToString(\",\")})\"\n}\n\n\n\nBut  there's  still  duplication  of  the  idea.  You'll  have  to  change  Tea  or  Coffee  any  time  you  add  a  new  ingredient.  And  even  though  the  withIngredient  method  only  knows  about  the  marker  interface  in  its  signature  it  has  to  know  about  concrete  implementations  of  the  interface  to  work.  Yuk!\n\n\nenum  class  Temperature  {\n        WARM,  COLD\n}\n\ninterface  Ingredient  {\n        fun  canBeAddedTo(drink:  Drink)  =  true\n}\n\ndata  class  Sugar(val  spoons:  Int)  :  Ingredient\ndata  class  Milk(val  glugs:  Int,  val  temperature:  Temperature  =  Temperature.COLD)  :  Ingredient\n\ndata  class  ChocolateSprinkles(val  pinches:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Coffee\n}\n\ndata  class  HazelnutSyrup(val  shots:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Coffee\n}\n\ndata  class  Lemon(val  squeezes:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Tea\n}\n\nabstract  class  Drink  {\n        class  IsNotFitForConsumptionWithThisIngredient(ingredient:  Ingredient,  drink:  Drink)\n            :  Throwable(\"It  is  not  OK  to  put  $ingredient  in  ${drink.javaClass.simpleName}\")\n\n        private  val  ingredients:  MutableList&lt;Ingredient&gt;  =  mutableListOf()\n\n        fun  withIngredient(ingredient:  Ingredient):  Drink  {\n                if  (!ingredient.canBeAddedTo(this))  {\n                        throw  Drink.IsNotFitForConsumptionWithThisIngredient(ingredient,  this)\n                }\n\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        override  fun  toString()\n            =  \"pour  a  ${this.javaClass.simpleName}(${ingredients.joinToString(\",\")})\"\n}\n\nclass  Coffee  :  Drink()\n\nclass  Tea  :  Drink()\n\n\n\nSo  now  ingredients  know  whether  they  can  be  added  to  a  drink.  They  default  to  it  being  ok  that  they  are  added  to  any  drink\n\n\ninterface  Ingredient  {\n        fun  canBeAddedTo(drink:  Drink)=  true\n}\n\n\n\nbut  can  be  specified  as  allowed  only  for  certain  drinks\n\n\ndata  class  ChocolateSprinkles(val  pinches:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Coffee\n}\n\n\n\nThis  means  that  new  ingredients  that  are  added  shouldn't  need  any  modifications  to  the  drinks.\n\nNow  Drink  as  an  abstract  class  reappears.  The  individual  drinks  now  only  need  to  have  a  type  for  the  canBeAddedTo(drink:Drink)  check.  It's  ok  to  allow  code  to  get  more  complex  while  you're  working  on  it  as  happened  here  when  the  withIngredient  methods  were  exploded  into  Coffee  and  Tea.\n\n\nabstract  class  Drink  {\n        class  IsNotFitForConsumptionWithThisIngredient(ingredient:  Ingredient,  drink:  Drink)  :  Throwable(\"It  is  not  OK  to  put  $ingredient  in  ${drink.javaClass.simpleName}\")\n\n        private  val  ingredients:  MutableList&lt;Ingredient&gt;  =  mutableListOf()\n\n        fun  withIngredient(ingredient:  Ingredient):  Drink  {\n                if  (!ingredient.canBeAddedTo(this))  {\n                        throw  Drink.IsNotFitForConsumptionWithThisIngredient(ingredient,  this)\n                }\n\n                ingredients.add(ingredient)\n                return  this\n        }\n\n        override  fun  toString()\n            =  \"pour  a  ${this.javaClass.simpleName}(${ingredients.joinToString(\",\")})\"\n}\n\n\n\nI'm  still  confused  by  Java  allowing  methods  in  interfaces.  Ingredient  can  be  an  interface  but  because  Drink  wants  to  override  ToString  it  has  to  be  an  abstract  class.  Without  that  it  could  be  an  interface  too  ¯\\_(ツ)_/¯\n\nOne  idea  that  is  still  implicit  is  that  the  ingredients  are  printed  out  for  the  barista.  So  let's  add  an  OrderPrinter  and  take  the  need  to  descibe  itself  out  of  the  Drink\n\nWe  can  also  take  the  opportunity,  since  we're  exposing  the  drink's  ingredients,  to  make  them  an  immutable  list.\n\n\nenum  class  Temperature  {\n        WARM,  COLD\n}\n\ninterface  Ingredient  {\n        fun  canBeAddedTo(drink:  Drink)  =  true\n}\n\ndata  class  Sugar(val  spoons:  Int)  :  Ingredient\ndata  class  Milk(val  glugs:  Int,  val  temperature:  Temperature  =  Temperature.COLD)  :  Ingredient\n\ndata  class  ChocolateSprinkles(val  pinches:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Coffee\n}\n\ndata  class  HazelnutSyrup(val  shots:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Coffee\n}\n\ndata  class  Lemon(val  squeezes:  Int)  :  Ingredient  {\n        override  fun  canBeAddedTo(drink:  Drink)  =  drink  is  Tea\n}\n\nabstract  class  Drink  {\n        class  IsNotFitForConsumptionWithThisIngredient(ingredient:  Ingredient,  drink:  Drink)\n                :  Throwable(\"It  is  not  OK  to  put  $ingredient  in  ${drink.javaClass.simpleName}\")\n\n        var  ingredients:  List&lt;Ingredient&gt;  =  emptyList()\n                private  set\n\n        fun  withIngredient(ingredient:  Ingredient):  Drink  {\n                if  (!ingredient.canBeAddedTo(this))  {\n                        throw  Drink.IsNotFitForConsumptionWithThisIngredient(ingredient,  this)\n                }\n\n                ingredients  +=  ingredient\n                return  this\n        }\n}\n\nclass  OrderPrinter  {\n        companion  object  {\n                fun  instructBarista(drink:Drink)\n                    =  \"pour  a  ${drink.javaClass.simpleName}(${drink.ingredients.joinToString(\",\")})\"\n        }\n}\n\nclass  Coffee  :  Drink()\n\nclass  Tea  :  Drink()\n\nfun  main(args:  Array&lt;String&gt;)  {\n        val  whiteCoffeeNoSugar  =  Coffee()\n            .withIngredient(Milk(1))\n\n        println(OrderPrinter.instructBarista(whiteCoffeeNoSugar))\n\n        val  sugaryCoffee  =  Coffee()\n            .withIngredient(Sugar(3))\n\n        println(OrderPrinter.instructBarista(sugaryCoffee))\n\n        val  warmerCoffee  =  Coffee()\n            .withIngredient(Milk(2,  Temperature.WARM))\n            .withIngredient(Sugar(3))\n\n        println(OrderPrinter.instructBarista(warmerCoffee))\n\n        val  mocha  =  Coffee()\n            .withIngredient(Milk(2,  Temperature.WARM))\n            .withIngredient(Sugar(2))\n            .withIngredient(ChocolateSprinkles(4))\n\n        println(OrderPrinter.instructBarista(mocha))\n\n        val  theFancyCoffee  =  Coffee()\n            .withIngredient(Milk(2,  Temperature.WARM))\n            .withIngredient(Sugar(2))\n            .withIngredient(ChocolateSprinkles(4))\n            .withIngredient(HazelnutSyrup(2))\n\n        println(OrderPrinter.instructBarista(theFancyCoffee))\n\n        val  buildersTea  =  Tea()\n            .withIngredient(Milk(1))\n            .withIngredient(Sugar(3))\n\n        println(OrderPrinter.instructBarista(buildersTea))\n\n        val  lemonTea  =  Tea().withIngredient(Lemon(1))\n\n        println(OrderPrinter.instructBarista(lemonTea))\n\n        try  {\n                Tea().withIngredient(ChocolateSprinkles(2))\n        }  catch  (e:  Drink.IsNotFitForConsumptionWithThisIngredient)  {\n                println(\"excellently  did  not  allow  chocolate  in  tea:  $e\")\n        }\n}\n\n\n\nThis  is  about  twice  as  much  code  as  the  original  DRY  version.  But  is  much  more  flexible  for  adding  new  ingredients  without  changing  existing  code.  What  DRY  misses  is  the  much  more  expressive  four  rules  of  simple  design.\n\n\n    Runs  all  the  tests\n    Has  no  duplicated  logic.  Be  wary  of  hidden  duplication  like  parallel  class  hierarchies\n    States  every  intention  important  to  the  programmer\n    Has  the  fewest  possible  classes  and  methods\n\n\nThese  are  in  order  of  importance.  The  code  in  this  article  is  manually  tested  but  doesn't  pass  this  as  the  rule  is  runs  all  the  tests.  Before  fixing  anything  else  my  fictional  friend  should  have  made  me  write  tests.\n\nRules  2,  3  and  4  are  in  tension  with  each  other.  If  I  want  to  state  every  intention  to  the  future  reader  I  can't  only  remove  as  many  classes  and  methods  as  possible.  The  wonderful  design  pressure  as  I  tried  to  show  here  is  that  you  want  the  smallest  amount  of  code  to  communicate  the  largest  amount  of  the  ideas  it  represents.\n\nSo,  stop  looking  for  duplicated  lines  of  code.  Stop  automatically  making  every  string  a  constant.  And  start  having  empathy  for  the  future  reader  of  your  code.  Leave  as  little  of  the  information  needed  to  change  the  code  in  your  brain  as  possible  by  putting  it  in  the  code.\n\nAll  of  the  code  can  be  found  on  Github\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Fri Mar 30 2018
+		</div>
+		<h1 class="title">DRY - considered harmful</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2018/03/harmful-dry.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=DRY+-+considered+harmful&via=pauldambra&url=https://pauldambra.dev/2018/03/harmful-dry.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#programming">
+				in: programming
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#dry">
+			dry
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#solid">
+			solid
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#refactoring">
+			refactoring
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#kotlin">
+			kotlin
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<h1 id="dry-or-wet">DRY or WET?</h1>
+
+<p>DRY, in software development, stands for Don't Repeat Yourself. This is often taken to mean remove any duplication of lines of code. See the anti-example <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">in the wiki page</a> comparing to WET code - which stands for Write Everything Twice. This reinforces the idea that this is about the amount you type.</p>
+
+<p>Below we're going to look at what the impact of removing duplication of lines of code does to some software, hopefully demonstrate that it isn't desirable as an absolute rule, and show what the better way might be.</p>
+
+<!--more-->
+
+<p>We're making an internet cafe and so we need software to make internet drinks</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"pour a Coffee(milk=$milk, sugar=$sugar)"</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>This instructs the barista</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pour a Coffee(milk=1, sugar=0)
+</code></pre></div></div>
+
+<p>Great, customers like it. Let's add tea!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Coffee(milk=$milk, sugar=$sugar)"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span><span class="p">(</span><span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Tea(milk=$milk, sugar=$sugar)"</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Woah! Wait! That violates DRY! There's loads of duplication. Let's remove it.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span><span class="p">(</span>
+  <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"pour a $name(milk=$milk, sugar=$sugar)"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Coffee"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Tea"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Phew, now we won't get thrown out of the Agiles and can carry on building our internet cafe global super-company.</p>
+
+<h1 id="brilliant-thats-dry">Brilliant, that's DRY?</h1>
+
+<p>Yep, no repetition. Everything is hunky-dory.</p>
+
+<p>The next feature request comes in.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>As a User
+I want to add warm milk
+So that I can buy a warmer drink
+</code></pre></div></div>
+
+<p>(yep, <em>I</em> know that's an awful user story but this imaginary dev team think they are nailing it)</p>
+
+<p>Taking advantage of named and default parameters we can add a warm milk property to drinks.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span><span class="p">(</span>
+  <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Drink"</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a $name(milk=$milk, warmMilk=$warmMilk, sugar=$sugar)"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Coffee"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Tea"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">warmerCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">warmerCoffee</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>And the next request:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+As a User
+I want to order chocolate sprinkles
+So that I can spend more money
+
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span><span class="p">(</span>
+  <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Drink"</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">chocolateSprinkles</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a $name(milk=$milk, warmMilk=$warmMilk, sugar=$sugar, chocolateSprinkles=$chocolateSprinkles)"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">chocolateSprinkles</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Coffee"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">chocolateSprinkles</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Tea"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">warmerCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">warmerCoffee</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">mocha</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">chocolateSprinkles</span> <span class="p">=</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">mocha</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>The money is pouring in. And our code is as DRY as possible. We added chocolate sprinkles without breaking a sweat.</p>
+
+<p>Next we can add lemon in tea and hazelnut syrup in coffee in a single code change. We're on fire!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span><span class="p">(</span>
+  <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Drink"</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">chocolateSprinkles</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">lemon</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">hazelnutSyrup</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span>
+      <span class="s">"pour a $name(milk=$milk, "</span> <span class="p">+</span>
+        <span class="s">"warmMilk=$warmMilk, "</span> <span class="p">+</span>
+        <span class="s">"sugar=$sugar, "</span> <span class="p">+</span>
+        <span class="s">"chocolateSprinkles=$chocolateSprinkles, "</span> <span class="p">+</span>
+        <span class="s">"lemon=$lemon, "</span> <span class="p">+</span>
+        <span class="s">"hazelnutSyrup=$hazelnutSyrup)"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">chocolateSprinkles</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hazelnutSyrup</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Coffee"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">chocolateSprinkles</span><span class="p">,</span> <span class="n">hazelnutSyrup</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lemon</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Tea"</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">lemon</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">warmerCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">warmerCoffee</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">mocha</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">chocolateSprinkles</span> <span class="p">=</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">mocha</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Pretty soon after deployment disaster strikes! Barista Mike Acawfe reports</p>
+
+<blockquote>
+  <p>this latest software version is a disaster. It's adding lemon to hazelnut coffee and chocolate sprinkes to tea ordered with lemon.</p>
+</blockquote>
+
+<p>ugh, I knew we should have tried that new fangled unit testing. All the code compiles but the <a href="http://connascence.io/position.html">position of the parameters matters</a> in how they get from the <code class="language-plaintext highlighter-rouge">Coffee</code> and <code class="language-plaintext highlighter-rouge">Tea</code> classes to the base <code class="language-plaintext highlighter-rouge">Drink</code> class.</p>
+
+<p>You can fix this with more named parameters!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span><span class="p">(</span>
+  <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Drink"</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">chocolateSprinkles</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">lemon</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="kd">val</span> <span class="py">hazelnutSyrup</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span>
+      <span class="s">"pour a $name(milk=$milk, "</span> <span class="p">+</span>
+        <span class="s">"warmMilk=$warmMilk, "</span> <span class="p">+</span>
+        <span class="s">"sugar=$sugar, "</span> <span class="p">+</span>
+        <span class="s">"chocolateSprinkles=$chocolateSprinkles, "</span> <span class="p">+</span>
+        <span class="s">"lemon=$lemon, "</span> <span class="p">+</span>
+        <span class="s">"hazelnutSyrup=$hazelnutSyrup)"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">chocolateSprinkles</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hazelnutSyrup</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Coffee"</span><span class="p">,</span> <span class="n">milk</span> <span class="p">=</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span> <span class="p">=</span> <span class="n">warmMilk</span><span class="p">,</span>
+  <span class="n">sugar</span> <span class="p">=</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">chocolateSprinkles</span> <span class="p">=</span> <span class="n">chocolateSprinkles</span><span class="p">,</span> <span class="n">hazelnutSyrup</span> <span class="p">=</span> <span class="n">hazelnutSyrup</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">warmMilk</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sugar</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lemon</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">:</span> <span class="nc">Drink</span><span class="p">(</span><span class="s">"Tea"</span><span class="p">,</span> <span class="n">milk</span> <span class="p">=</span> <span class="n">milk</span><span class="p">,</span> <span class="n">warmMilk</span> <span class="p">=</span> <span class="n">warmMilk</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">lemon</span> <span class="p">=</span> <span class="n">lemon</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">milk</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">warmerCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">warmerCoffee</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">mocha</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">(</span><span class="n">warmMilk</span> <span class="p">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">sugar</span> <span class="p">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">chocolateSprinkles</span> <span class="p">=</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">mocha</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">lemonTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">(</span><span class="n">lemon</span> <span class="p">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">lemonTea</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>But, something is bothering you. It was hard to spot this bug because even though there's no duplication of code there's actually lots of duplication of names. This lovely DRY code uses the word milk nine times. In fact each of the ingredients is mentioned nine times. So any new ingredient means edits in nine places.</p>
+
+<p>And the call through to the base class constructor duplicates the constructor on the line above. Any changes to the ingredients and you'll need to change both constructors.</p>
+
+<p>You meet a friend for coffee and, since it's on your mind, ask how they would remove this last duplication?!</p>
+
+<h2 id="each-idea-once-and-only-once">Each idea once and only once</h2>
+
+<p>Your friend explains that <a href="http://wiki.c2.com/?DontRepeatYourself">DRY isn't about code. It's about ideas!</a> The reason you're struggling is that the idea that some drinks have milk and others lemon is hidden because you've treated removing lines of code as an absolute rule.</p>
+
+<p>They offer to help you rewrite your code with that in mind.</p>
+
+<p>The first idea that's missing is that there are types of ingredients.</p>
+
+<p>The second idea is that each drink is a collection of ingredients that should be printed out for the baristas.</p>
+
+<p>So you start with a marker interface and a set of data classes. Each drink then allows you to add a subset of the possible interfaces and prints out the barista's instructions.</p>
+
+<p>At the same time you add the concept of temperature to milk so you don't have to have implicitly cold milk separately from warm milk.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">interface</span> <span class="nc">Ingredient</span>
+
+<span class="k">enum</span> <span class="kd">class</span> <span class="nc">Temperature</span> <span class="p">{</span>
+    <span class="nc">WARM</span><span class="p">,</span> <span class="nc">COLD</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">Sugar</span><span class="p">(</span><span class="kd">val</span> <span class="py">spoons</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+<span class="kd">data class</span> <span class="nc">Milk</span><span class="p">(</span><span class="kd">val</span> <span class="py">glugs</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">temperature</span><span class="p">:</span> <span class="nc">Temperature</span> <span class="p">=</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">COLD</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+<span class="kd">data class</span> <span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="kd">val</span> <span class="py">pinches</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+<span class="kd">data class</span> <span class="nc">HazelnutSyrup</span><span class="p">(</span><span class="kd">val</span> <span class="py">shots</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+<span class="kd">data class</span> <span class="nc">Lemon</span><span class="p">(</span><span class="kd">val</span> <span class="py">squeezes</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Sugar</span><span class="p">):</span> <span class="nc">Coffee</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Milk</span><span class="p">):</span> <span class="nc">Coffee</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">ChocolateSprinkles</span><span class="p">):</span> <span class="nc">Coffee</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">HazelnutSyrup</span><span class="p">):</span> <span class="nc">Coffee</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a Coffee(${ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Sugar</span><span class="p">):</span> <span class="nc">Tea</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Milk</span><span class="p">):</span> <span class="nc">Tea</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Lemon</span><span class="p">):</span> <span class="nc">Tea</span> <span class="p">{</span>
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a Tea(${ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">sugaryCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">sugaryCoffee</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">warmerCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">WARM</span><span class="p">)).</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">warmerCoffee</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">mocha</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">WARM</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">mocha</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">theFancyCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">WARM</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">HazelnutSyrup</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="n">theFancyCoffee</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">)</span>
+
+    <span class="kd">val</span> <span class="py">lemonTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Lemon</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">lemonTea</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>This prints out</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+pour a Coffee(Milk(glugs=1))
+pour a Coffee(Sugar(spoons=3))
+pour a Coffee(WarmMilk(glugs=2),Sugar(spoons=3))
+pour a Coffee(WarmMilk(glugs=2),Sugar(spoons=2),ChocolateSprinkles(pinches=4))
+pour a Coffee(WarmMilk(glugs=2),Sugar(spoons=2),ChocolateSprinkles(pinches=4),HazelnutSyrup(shots=2))
+pour a Tea(Milk(glugs=1),Sugar(spoons=3))
+pour a Tea(Lemon(squeezes=1))
+
+</code></pre></div></div>
+
+<p>Notice the awesome <code class="language-plaintext highlighter-rouge">toString</code> output that Kotlin's data classes give you for the <code class="language-plaintext highlighter-rouge">Ingredient</code>s.</p>
+
+<p>Now the word milk is only in the code three times. Once when it is declared and once in each drink.</p>
+
+<p>But there is still duplication of the idea that a drink can have ingredients added. In fact each drink has almost the same method repeated for each ingredient. All to avoid being able to put chocolate sprinkles in tea.</p>
+
+<p>So the <em>idea</em> that chocolate sprinkles aren't a tea ingredient is implicit in the fact that there's no method for it. It isn't represented <a href="http://wiki.c2.com/?OnceAndOnlyOnce">once and only once</a>.</p>
+
+<p>One option is to accept any ingredient to the method but explicitly refuse ones that shouldn't be added</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nc">Coffee</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="nc">ItIsNotOKToPutLemonInCoffee</span> <span class="p">:</span> <span class="nc">Throwable</span><span class="p">()</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">):</span> <span class="nc">Coffee</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ingredient</span> <span class="k">is</span> <span class="nc">Lemon</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="nc">ItIsNotOKToPutLemonInCoffee</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a Coffee(${ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="nc">ItIsNotOKToPutThisIngredientInTea</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">)</span>
+      <span class="p">:</span> <span class="nc">Throwable</span><span class="p">(</span><span class="s">"It is not OK to put $ingredient in tea"</span><span class="p">)</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">):</span> <span class="nc">Tea</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ingredient</span> <span class="k">is</span> <span class="nc">HazelnutSyrup</span>
+            <span class="p">||</span> <span class="n">ingredient</span> <span class="k">is</span> <span class="nc">ChocolateSprinkles</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="nc">ItIsNotOKToPutThisIngredientInTea</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a Tea(${ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>But there's still duplication of the idea. You'll have to change <code class="language-plaintext highlighter-rouge">Tea</code> or <code class="language-plaintext highlighter-rouge">Coffee</code> any time you add a new ingredient. And even though the <code class="language-plaintext highlighter-rouge">withIngredient</code> method only knows about the marker interface in its signature it has to know about concrete implementations of the interface to work. Yuk!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">enum</span> <span class="kd">class</span> <span class="nc">Temperature</span> <span class="p">{</span>
+    <span class="nc">WARM</span><span class="p">,</span> <span class="nc">COLD</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="k">true</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">Sugar</span><span class="p">(</span><span class="kd">val</span> <span class="py">spoons</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+<span class="kd">data class</span> <span class="nc">Milk</span><span class="p">(</span><span class="kd">val</span> <span class="py">glugs</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">temperature</span><span class="p">:</span> <span class="nc">Temperature</span> <span class="p">=</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">COLD</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+
+<span class="kd">data class</span> <span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="kd">val</span> <span class="py">pinches</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Coffee</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">HazelnutSyrup</span><span class="p">(</span><span class="kd">val</span> <span class="py">shots</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Coffee</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">Lemon</span><span class="p">(</span><span class="kd">val</span> <span class="py">squeezes</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Tea</span>
+<span class="p">}</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">,</span> <span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span>
+      <span class="p">:</span> <span class="nc">Throwable</span><span class="p">(</span><span class="s">"It is not OK to put $ingredient in ${drink.javaClass.simpleName}"</span><span class="p">)</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">):</span> <span class="nc">Drink</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">ingredient</span><span class="p">.</span><span class="nf">canBeAddedTo</span><span class="p">(</span><span class="k">this</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="nc">Drink</span><span class="p">.</span><span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a ${this.javaClass.simpleName}(${ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span> <span class="p">:</span> <span class="nc">Drink</span><span class="p">()</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span> <span class="p">:</span> <span class="nc">Drink</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p>So now ingredients know whether they can be added to a drink. They default to it being ok that they are added to any drink</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">interface</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)=</span> <span class="k">true</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>but can be specified as allowed only for certain drinks</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">data class</span> <span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="kd">val</span> <span class="py">pinches</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Coffee</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>This means that new ingredients that are added shouldn't need any modifications to the drinks.</p>
+
+<p>Now <code class="language-plaintext highlighter-rouge">Drink</code> as an abstract class reappears. The individual drinks now only need to have a type for the <code class="language-plaintext highlighter-rouge">canBeAddedTo(drink:Drink)</code> check. It's ok to <a href="/2017/05/big-pile-of-soil.html">allow code to get more complex while you're working on it</a> as happened here when the <code class="language-plaintext highlighter-rouge">withIngredient</code> methods were exploded into <code class="language-plaintext highlighter-rouge">Coffee</code> and <code class="language-plaintext highlighter-rouge">Tea</code>.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">,</span> <span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Throwable</span><span class="p">(</span><span class="s">"It is not OK to put $ingredient in ${drink.javaClass.simpleName}"</span><span class="p">)</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">):</span> <span class="nc">Drink</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">ingredient</span><span class="p">.</span><span class="nf">canBeAddedTo</span><span class="p">(</span><span class="k">this</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="nc">Drink</span><span class="p">.</span><span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">ingredients</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span>
+      <span class="p">=</span> <span class="s">"pour a ${this.javaClass.simpleName}(${ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>I'm still confused by Java allowing methods in interfaces. <code class="language-plaintext highlighter-rouge">Ingredient</code> can be an interface but because <code class="language-plaintext highlighter-rouge">Drink</code> wants to override <code class="language-plaintext highlighter-rouge">ToString</code> it has to be an abstract class. Without that it could be an interface too ¯\_(ツ)_/¯</p>
+
+<p>One idea that is still implicit is that the ingredients are printed out for the barista. So let's add an <code class="language-plaintext highlighter-rouge">OrderPrinter</code> and take the need to descibe itself out of the <code class="language-plaintext highlighter-rouge">Drink</code></p>
+
+<p>We can also take the opportunity, since we're exposing the drink's ingredients, to make them an immutable list.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">enum</span> <span class="kd">class</span> <span class="nc">Temperature</span> <span class="p">{</span>
+    <span class="nc">WARM</span><span class="p">,</span> <span class="nc">COLD</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="k">true</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">Sugar</span><span class="p">(</span><span class="kd">val</span> <span class="py">spoons</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+<span class="kd">data class</span> <span class="nc">Milk</span><span class="p">(</span><span class="kd">val</span> <span class="py">glugs</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">temperature</span><span class="p">:</span> <span class="nc">Temperature</span> <span class="p">=</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">COLD</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span>
+
+<span class="kd">data class</span> <span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="kd">val</span> <span class="py">pinches</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Coffee</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">HazelnutSyrup</span><span class="p">(</span><span class="kd">val</span> <span class="py">shots</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Coffee</span>
+<span class="p">}</span>
+
+<span class="kd">data class</span> <span class="nc">Lemon</span><span class="p">(</span><span class="kd">val</span> <span class="py">squeezes</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Ingredient</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">canBeAddedTo</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span> <span class="p">=</span> <span class="n">drink</span> <span class="k">is</span> <span class="nc">Tea</span>
+<span class="p">}</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">,</span> <span class="n">drink</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">)</span>
+        <span class="p">:</span> <span class="nc">Throwable</span><span class="p">(</span><span class="s">"It is not OK to put $ingredient in ${drink.javaClass.simpleName}"</span><span class="p">)</span>
+
+    <span class="kd">var</span> <span class="py">ingredients</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Ingredient</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">emptyList</span><span class="p">()</span>
+        <span class="k">private</span> <span class="k">set</span>
+
+    <span class="k">fun</span> <span class="nf">withIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">:</span> <span class="nc">Ingredient</span><span class="p">):</span> <span class="nc">Drink</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">ingredient</span><span class="p">.</span><span class="nf">canBeAddedTo</span><span class="p">(</span><span class="k">this</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="nc">Drink</span><span class="p">.</span><span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">(</span><span class="n">ingredient</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">ingredients</span> <span class="p">+=</span> <span class="n">ingredient</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">OrderPrinter</span> <span class="p">{</span>
+    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+        <span class="k">fun</span> <span class="nf">instructBarista</span><span class="p">(</span><span class="n">drink</span><span class="p">:</span><span class="nc">Drink</span><span class="p">)</span>
+          <span class="p">=</span> <span class="s">"pour a ${drink.javaClass.simpleName}(${drink.ingredients.joinToString("</span><span class="p">,</span><span class="s">")})"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Coffee</span> <span class="p">:</span> <span class="nc">Drink</span><span class="p">()</span>
+
+<span class="kd">class</span> <span class="nc">Tea</span> <span class="p">:</span> <span class="nc">Drink</span><span class="p">()</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">whiteCoffeeNoSugar</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">whiteCoffeeNoSugar</span><span class="p">))</span>
+
+    <span class="kd">val</span> <span class="py">sugaryCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">sugaryCoffee</span><span class="p">))</span>
+
+    <span class="kd">val</span> <span class="py">warmerCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">WARM</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">warmerCoffee</span><span class="p">))</span>
+
+    <span class="kd">val</span> <span class="py">mocha</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">WARM</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">mocha</span><span class="p">))</span>
+
+    <span class="kd">val</span> <span class="py">theFancyCoffee</span> <span class="p">=</span> <span class="nc">Coffee</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nc">Temperature</span><span class="p">.</span><span class="nc">WARM</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">HazelnutSyrup</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">theFancyCoffee</span><span class="p">))</span>
+
+    <span class="kd">val</span> <span class="py">buildersTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Milk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+      <span class="p">.</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Sugar</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">buildersTea</span><span class="p">))</span>
+
+    <span class="kd">val</span> <span class="py">lemonTea</span> <span class="p">=</span> <span class="nc">Tea</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">Lemon</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="nc">OrderPrinter</span><span class="p">.</span><span class="nf">instructBarista</span><span class="p">(</span><span class="n">lemonTea</span><span class="p">))</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nc">Tea</span><span class="p">().</span><span class="nf">withIngredient</span><span class="p">(</span><span class="nc">ChocolateSprinkles</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Drink</span><span class="p">.</span><span class="nc">IsNotFitForConsumptionWithThisIngredient</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"excellently did not allow chocolate in tea: $e"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<!--alex ignore simple --->
+<p>This is about twice as much code as the original DRY version. But is much more flexible for adding new ingredients without changing existing code. What DRY misses is the much more expressive <a href="https://martinfowler.com/bliki/BeckDesignRules.html">four rules of simple design</a>.</p>
+
+<ol>
+  <li>Runs all the tests</li>
+  <li>Has no duplicated logic. Be wary of hidden duplication like parallel class hierarchies</li>
+  <li>States every intention important to the programmer</li>
+  <li>Has the fewest possible classes and methods</li>
+</ol>
+
+<p>These are in order of importance. The code in this article is manually tested but doesn't pass this as the rule is <em>runs</em> all the tests. Before fixing anything else my fictional friend should have made me write tests.</p>
+
+<p>Rules 2, 3 and 4 are in tension with each other. If I want to state every intention to the future reader I can't only remove as many classes and methods as possible. The wonderful design pressure as I tried to show here is that you want the smallest amount of code to communicate the largest amount of the ideas it represents.</p>
+
+<p>So, stop looking for duplicated lines of code. Stop automatically making every string a constant. And start having empathy for the future reader of your code. Leave as little of the information needed to change the code in your brain as possible by putting it in the code.</p>
+
+<p><a href="https://github.com/pauldambra/dry-coffee">All of the code can be found on Github</a></p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>Some other articles...</h1>
+      
+
+      
+        <a href="/2021/07/tech-debts.html">
+  <div class="article-tile">
+      <h3>
+        Tech Debts
+      </h3>
+      <small>
+        21 Jul 2021
+      </small>
+  </div>
+</a>
+      
+        <a href="/2021/01/year-notes.html">
+  <div class="article-tile">
+      <h3>
+        2020 Year Notes
+      </h3>
+      <small>
+        03 Jan 2021
+      </small>
+  </div>
+</a>
+      
+        <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>
+      
+  
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2018/03/harmful-dry.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2018/03/harmful-dry.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

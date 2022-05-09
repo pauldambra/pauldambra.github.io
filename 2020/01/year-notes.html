@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>2019 Year Notes</title>
+    <link rel="canonical" href="https://pauldambra.dev/2020/01/year-notes.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2020/01/year-notes.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="2019 Year Notes" />
+    <meta property="og:description"  content="My year notes for 2019" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="My year notes for 2019">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"2019 Year Notes",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"1905",
+   "url":"https://pauldambra.dev/2020/01/year-notes.html",
+   "datePublished":"2020-01-07",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2020/01/year-notes.html"
+   },
+   "articleBody":"Since  October  2017  I've  been  keeping  week  notes.  I've  found  them  a  fantastic  tool  to  track  my  focus  and  to  remember  to  reflect  on  success  (or  lack  of  it).\n\nSome  colleagues  and  some  tooters  have  written  year  notes  as  2019  ends.  And  here  are  mine…  It  feels  egotistical…  but  hopefully  it's  useful  to  me  in  the  future  even  if  it  isn't  to  anyone  else.\n\n\n\nBeing  a  Principal  Engineer\n\nI  spent  2018  seconded  into  this  role  and  2019  officially  in  it.  The  teams  I  work  with  are  achieving  great  things:  reduced  complexity,  reduced  cost,  increased  stability  and  throughput,  and  regularly  deliver  same  day  fixes  (down  from  10  days  for  simple  fixes).  Check  the  Customer  and  Member  section  in  this  Co-op  blog.  But  even  two  years  in  I  find  it  hard  to  see  the  value  I'm  providing  and  to  unlearn  a  lot  of  the  not-principal-engineer  habits  I'd  worked  hard  to  learn.\n\nThe  biggest  being…\n\nFeedback  loops\n\nMy  feedback  loop  is  really  long  -  months  sometimes.  Maybe  that  was  always  the  case  and  I  didn't  see  but  it  makes  tracking  impact  hard.  It  feels  like  this  got  better  over  the  year  but  large  organisations  tend  towards  silos  and  I've  found  that  tends  to  increase  the  length  of  and  decrease  the  quality  of  feedback  loops.\n\nThis  is  important  to  me  and  I  can't  think  of  a  goal…  that's  worrying.\n\nStaying  out  of  the  way  vs  getting  in  the  way\n\nMaking  a  balance  between  letting  the  team  get  on  with  things  and  stepping  in  to  influence,  coach,  and  set  guide  rails  is  really  hard.  A  lot  of  my  experience  was  working  solo  as  the  only  tech  person  at  a  not-for-profit  or  in  roles  where  I  was  embedded  as  a  member  of  a  team.  Acting  alongside  several  teams  is  very  different…\n\nAs  an  example  from  recent  months:  remembering  to  care  that  we  lint  our  JS  and  not  which  linter  we  use  was  hard  (although  no  semicolons  4  life  obvs).  Then  noticing  that  folk  kept  replacing  the  linter  and  that  I  need  to  step  in  and  make  the  arbitrary  choice  and  let  them  get  on  with  smashing  it  is  important.  (maybe  growth  would  be  knowing  that  somebody  needed  to  step  in  and  helping  someone  else  do  it)\n\nKnowing  which  gear  to  change  into  so  I'm  letting  the  teams  be  creative  but  keeping  them  on  track  is  something  I  have  no  idea  how  to  measure  if  I'm  doing  well…  So  I  suppose  my  goal  is  to  start  2021  with  a  better  relationship  with  being  a  \"leader\"  (I  still  put  that  in  air  quotes  every  time  I  say  it).\n\nMaking  time  to  write  code\n\nMaking  time  to  write  code  with  the  teams  has  been  critical  for  my  sanity  (and  I  think  my  effectiveness).  Recently  I  spent  time  with  the  folk  building  offers.\n\nPartly  because  a  tight  opportunity/deadline  needed  support,  partly  because  it  was  fun,  partly  because  my  instinct  was  that  was  the  next  important  thing  for  me  to  do.  \n\nBut  it  gave  me  space  to  talk  to  them  about  the  four  rules  of  simple  design,  get  confidence  in  their  abilities,  help  them  get  used  to  a  new  (to  them)  codebase,  and  expand  some  of  our  design  decisions  while  in  context.  Plus  I  💖  cutting  some  code.\n\nI  have  to  figure  out  a  way  to  make  this  a  regular  part  of  my  role  without  using  it  as  a  mechanism  for  procrastination.  And  I  should  ask  that  group  for  feedback  on  how  it  felt  for  them!\n\nWeekNotes\n\nI've  really  valued  the  focus  on  reflection.  Particularly  around  trying  to  find  a  new  feedback  loop  I  can  lean  on.  I  started  them  without  any  plan  and  now  realise  it's  a  shame  they're  images  on  twitter.  I  can't  even  find  the  first  one  :(\n\nAt  the  moment  they're  really  in  google  docs.  Cos  I  can  make  them  on  the  train  home.  I  need  to  find  a  train-friendly  way  to  be  able  to  write  and  publish  them  easily  without  relying  on  a  walled  garden.\n\n\n\nBeing  part  of  a  big  organisation\n\nSometimes  you  can  get  a  glimpse  of  how  a  tiny  improvement  in  a  big  organisation  can  have  a  huge  impact  and  that  keeps  me  going.  Things  like  visiting  one  of  our  food  distribution  centres  and  realising  the  massive  technological  and  human  effort  that  we're  a  tiny  supporting  player  to.  Or  being  part  of  the  systems  that  have  helped  Co-op  members  give  £17m  to  local  causes.\n\nWe  started  a  monthly  conference  instead  of  our  weekly  community  of  practice.  I  was  worried  that  the  extra  time  commitment  would  mean  people  didn't  attend  and  I  was  so  wrong.  There  are  enough  of  us  that  the  monthly  unconference  is  one  of  the  best  things  about  working  at  Co-op.  Kudos  to  Gemma  Cameron  for  having  the  vision  and  making  it  happen.\n\nBut,  despite  the  openness  and  willingness  to  improve  we  see  in  colleagues  across  this  massive  beast  of  a  company,  large  organisations  are  inherently  pathological.  Some  groups  work  in  such  a  way  that  shows  they  see  the  plan  as  the  goal.  A  thing  being  on-time  and  on-budget  becomes  more  important  than  it  being  valuable.  And  that  thing  being  valuable  is  a  side  note.  Things  are  made  that  are  either  not  measurable  or  not  measured.\n\nI'm  not  sure  how  best  to  contribute  to  improving  that.  It's  easy  to  fall  into  an  agile  echo  chamber  -  thinking  if  you  turn  up  with  some  post-its,  a  whiteboard,  and  a  jenkins  server  everything  is  solved.  It'll  be  hard,  but  important,  to  hold  true  to  our  principles  while  showing  the  same  willingness  to  listen  and  change  that  we're  asking  of  folks  in  the  \"Enterprise\"  (disappointingly  not  a  spaceship).\n\nFor  now  I'll  concentrate  on  moving  to  a  place  where  we  deliver  frequently  and  show  commitment  to  measuring  value.  Tidying  our  own  house  before  we  complain  about  someone  else's.\n\nTalking\n\n2019's  Week  1  weeknotes  mentioned  a  colleague  Graham  Thompson  saying:  \"we're  aligned  because  we  talk\".  That  turned  out  to  be  the  theme  for  the  year.  Over  and  over  we  discovered  our  problems  by  talking  and  solved  them  by  talking.\n\nBut  multiple  times  we  also  saw  that  the  team  spent  less  time  fixing  or  building  something  than  we'd  spent  talking  about  whether  we  should.\n\nThis  year  I  want  to  try  to  swim  against  the  current  of  our  meeting  driven  organisation  and  focus  on  face-to-face  communication  as  part  of  what  we're  working  on.\n\nI  also  have  a  140+  day  streak  on  duolingo  learning  Italian.  Non  c'è  un  serpente  nei  miei  stivali.  I'll  aim  to  practice  every  day  this  year.\n\nGo-live  is  marketing\n\nIn  2016  I  went  to  watch  James  Jeffries  talk  at  the  leanmanc  usergroup  and  the  other  speaker,  Andy  Mayer,  said  something  along  the  lines  of  \"because  you're  releasing  to  production  and  learning  constantly  go  live  should  be  driven  by  marketing\".\n\nWe've  seen  the  value  in  that  approach  over  and  over  in  2019.\n\nWeek  4:  \"🍾  “Legacy”  DB  System  we've  been  replacing  has  now  been  strangled  away  and  nothing  uses  it  anymore\"\n\nWeek  40:  \"🦄  team's  third  significant  \"go  live\"  that  was  so  smooth  it  was  almost  an  anti-climax\"\n\nWeek  45:  \"💪  Deployed  a  new  system  to  replace  part  of  another  system  while  that  system  was  under  sustained  load.  Bold  and  seamless\"\n\nThat  week  4  release  was  the  end  of  9  months  and  more  of  at  least  two  people  working  full  time.  It  was  a  significant  change  and  affected  multiple  business  units.\n\nGo-live  was  announced  at  standup  with:  \"oh  yeah,  MODS  is  primary  for  reads  and  writes  now\".  Running  in  production  as  soon  as  and  as  meaningfully  as  possible  is  a  forking  super  power.\n\nMaster,  Black  list,  Guys,  and  more\n\nI've  consistently  spent  time  trying  to  refocus  my  use  of  language  this  year.  Things  like  using  primary  or  trunk  instead  of  master,  exclusion  list  instead  of  blacklist,  folk  or  skipping  the  word  instead  of  guys.\n\nThis  seems  like  the  least  I  can  do  to  promote  inclusion.  It's  not  enough  but  it's  something.\n\nFor  a  while  we  had  a  non-binary  colleague  who  used  they/them  as  pronouns.  I  definitely  wasn't  good  enough  at  managing  that.  It  was  such  a  clear  example  of  how  unconsciously  I  use  gendered  language.  I  tend  to  speak  in  a  stream  of  consciousness  style  and  I  need  to  practice  speaking  purposefully.\n\nEven  if  I  only  make  one  person  feel  included  or  avoid  excluding  them  then  the  effort  has  been  worth  it.\n\nRunning\n\nI  used  to  cycle  1000km  a  year  plus.  I  don't  now.  Largely  because  cycling  in  Central  Manchester  is  a  horrible  experience.  But  I  still  snack  as  if  I'm  cycling  twice  a  week  all  year  :(\n\nSo  I  decided  I  needed  to  step  up  my  game.  I  ran  35  weeks  of  the  year.  And  averaged  6.5km  in  those  weeks.  Better  than  I  expected.  And  a  good  start.  But  I  want  to  double  that  this  year.\n\nWhich  suggests  my  maths  need  to  improve  since  there  aren't  70  weeks  in  the  year.  Let's  say:  10km  average  over  40  weeks  of  the  year.\n\nI'll  also  give  up  shaming  myself  for  not  cycling  27km  to  work  and  aim  to  go  for  some  rides  for  fun  when  the  weather  picks  up.\n\nWalking\n\nThis  is  the  first  full  year  I've  had  a  dog  since  I  was  a  teenager.  Best  decision  in  a  long  time.  As  much  work  as  having  a  baby  but  it  adds  joy  to  life.\n\ndog  on  new  years  day  2019\n\n\ndog  on  new  years  day  2020\n\n\nKids\n\n\n\nAll  three  kids  have  said  they  don't  want  to  be  on  social  media  so  I  won't  mention  much  here.  Watching  them  growing  into  sensible,  curious,  wonderful,  talented  nerds  despite  my  terrible  parenting  is  the  most  incredible  thing.\n\nThey  also  have  learned  to  amuse  themselves  by  saying:  \"blink  and  I'll  be  in  college\"  when  I'm  distracted  by  my  phone  and  they  want  my  attention.\n\nThey  deserve  my  attention.  We  used  to  have  \"family  screen-free  day\"  once  a  week.  That's  coming  back!\n\nWhat  writing  this  taught  me  I  want  to  do  in  2020\n\n\n    decide  what  feedback  loops  I  want  to  shorten\n    find  others  that  want  to  do  that  and  work  with  them\n    expect  to  find  better  ways  of  doing  it  by  including  others\n    read  about  leadership  and  get  over  myself\n    make  time  to  write  code  and  find  out  from  the  teams  how  they'd  like  me  to  do  that\n    figure  out  how  I  can  write  weeknotes  as  easily  without  images  in  twitter  being  the  main  record\n    move  to  a  place  where  we  regularly  measure  and  report  on  our  work\n    speak  face-to-face  with  individuals  instead  of  in  big  meetings\n    practice  Italian  every  day\n    use  the  unfair  super  power  of  being  a  white,  middle-class,  middle-aged,  straight  man  to  lift  others  up\n    10km  running  on  average  over  40  weeks  of  the  year\n    4  leisurely  cycle  rides\n    put  my  phone  down  and  talk  to  my  kids\n\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Tue Jan 07 2020
+		</div>
+		<h1 class="title">2019 Year Notes</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2020/01/year-notes.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=2019+Year+Notes&via=pauldambra&url=https://pauldambra.dev/2020/01/year-notes.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#year-notes">
+				in: year-notes
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#dear-diary">
+			dear-diary
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#working-out-loud">
+			working-out-loud
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<p>Since <a href="https://twitter.com/pauldambra/status/916336773566992384">October 2017</a> I've been keeping week notes. I've found them a fantastic tool to track my focus and to remember to reflect on success (or lack of it).</p>
+
+<p>Some <a href="https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe">colleagues</a> and <a href="https://twitter.com/tekin/status/1213878853560651776">some</a> <a href="https://alicebartlett.co.uk/blog/yearnotes-2019">tooters</a> have written year notes as 2019 ends. And here are mine… It feels egotistical… but hopefully it's useful to me in the future even if it isn't to anyone else.</p>
+
+<!--more-->
+
+<h1 id="being-a-principal-engineer">Being a Principal Engineer</h1>
+<!--alex ignore simple --->
+<p>I spent 2018 seconded into this role and 2019 officially in it. The teams I work with are achieving great things: reduced complexity, reduced cost, increased stability and throughput, and regularly deliver same day fixes (down from 10 days for simple fixes). <a href="https://digitalblog.coop.co.uk/2019/12/17/2019-highlights-theres-a-lot-to-be-proud-of/">Check the Customer and Member section in this Co-op blog</a>. But even two years in I find it hard to see the value I'm providing and to unlearn a lot of the not-principal-engineer habits I'd worked hard to learn.</p>
+
+<p>The biggest being…</p>
+
+<h2 id="feedback-loops">Feedback loops</h2>
+
+<p>My feedback loop is really long - months sometimes. Maybe that was always the case and I didn't see but it makes tracking impact hard. It feels like this got better over the year but large organisations tend towards silos and I've found that tends to increase the length of and decrease the quality of feedback loops.</p>
+
+<p>This is important to me and I can't think of a goal… that's worrying.</p>
+
+<h2 id="staying-out-of-the-way-vs-getting-in-the-way">Staying out of the way vs getting in the way</h2>
+
+<p>Making a balance between letting the team get on with things and stepping in to influence, coach, and set guide rails is <em>really</em> hard. A lot of my experience was working solo as the only tech person at a not-for-profit or in roles where I was embedded as a member of a team. Acting alongside several teams is very different…</p>
+
+<p>As an example from recent months: remembering to care that we lint our JS and not which linter we use was hard (although no semicolons 4 life obvs). Then noticing that folk kept replacing the linter and that I need to step in and make the arbitrary choice and let them get on with smashing it is important. (maybe growth would be knowing that <em>somebody</em> needed to step in and helping someone else do it)</p>
+
+<p>Knowing which gear to change into so I'm letting the teams be creative but keeping them on track is something I have no idea how to measure if I'm doing well… So I suppose my goal is to start 2021 with a better relationship with being a "leader" (I still put that in air quotes every time I say it).</p>
+
+<h2 id="making-time-to-write-code">Making time to write code</h2>
+
+<p>Making time to write code with the teams has been critical for my sanity (and I think my effectiveness). Recently I spent time with the folk building <a href="https://coop.co.uk/offers">offers</a>.</p>
+
+<p>Partly because a tight opportunity/deadline needed support, partly because it was fun, partly because my instinct was that was the next important thing for me to do. 
+<!--alex ignore simple --->
+But it gave me space to talk to them about the four rules of simple design, get confidence in their abilities, help them get used to a new (to them) codebase, and expand some of our design decisions while in context. Plus I 💖 cutting some code.</p>
+
+<p>I have to figure out a way to make this a regular part of my role without using it as a mechanism for procrastination. And I should ask that group for feedback on how it felt for them!</p>
+
+<h1 id="weeknotes">WeekNotes</h1>
+
+<p>I've really valued the focus on reflection. Particularly around trying to find a new feedback loop I can lean on. I started them without any plan and now realise it's a shame they're images on twitter. I can't even find the first one :(
+<!--alex ignore easy --->
+At the moment they're really in google docs. Cos I can make them on the train home. I need to find a train-friendly way to be able to write and publish them easily without relying on a walled garden.</p>
+
+<p><img src="/images/weeknotes.png" alt="weeknotes image" loading="lazy" /></p>
+
+<h1 id="being-part-of-a-big-organisation">Being part of a big organisation</h1>
+
+<p>Sometimes you can get a glimpse of how a tiny improvement in a big organisation can have a huge impact and that keeps me going. Things like visiting one of our food distribution centres and realising the massive technological and human effort that we're a tiny supporting player to. Or being part of the systems that have helped <a href="https://www.coop.co.uk/local-causes">Co-op members give £17m</a> to local causes.</p>
+
+<p>We started a monthly conference instead of our weekly community of practice. I was worried that the extra time commitment would mean people didn't attend and I was so wrong. There are enough of us that the monthly unconference is one of the best things about working at Co-op. Kudos to <a href="https://twitter.com/ruby_gem/">Gemma Cameron</a> for having the vision and making it happen.
+<!--alex ignore beast --->
+But, despite the openness and willingness to improve we see in colleagues across this massive beast of a company, large organisations are inherently pathological. Some groups work in such a way that shows they see the plan as the goal. A thing being on-time and on-budget becomes more important than it being valuable. And that thing being valuable is a side note. Things are made that are either not measurable or not measured.
+<!--alex ignore easy --->
+I'm not sure how best to contribute to improving that. It's easy to fall into an agile echo chamber - thinking if you turn up with some post-its, a whiteboard, and a jenkins server everything is solved. It'll be hard, but important, to hold true to our principles while showing the same willingness to listen and change that we're asking of folks in the "Enterprise" (disappointingly not a spaceship).</p>
+
+<p>For now I'll concentrate on moving to a place where we deliver frequently and show commitment to measuring value. Tidying our own house before we complain about someone else's.</p>
+
+<h1 id="talking">Talking</h1>
+
+<p>2019's Week 1 weeknotes mentioned a colleague Graham Thompson saying: "we're aligned because we talk". That turned out to be the theme for the year. Over and over we discovered our problems by talking and solved them by talking.</p>
+
+<p>But multiple times we also saw that the team spent less time fixing or building something than we'd spent talking about whether we should.</p>
+
+<p>This year I want to try to swim against the current of our meeting driven organisation and focus on face-to-face communication as part of what we're working on.</p>
+
+<p>I also have a 140+ day streak on duolingo learning Italian. Non c'è un serpente nei miei stivali. I'll aim to practice every day this year.</p>
+
+<h1 id="go-live-is-marketing">Go-live is marketing</h1>
+
+<p>In 2016 I went to watch <a href="https://web.archive.org/web/20160919013216/https://www.meetup.com/leanmanc/events/234035422/">James Jeffries talk at the leanmanc usergroup</a> and the other speaker, <a href="https://twitter.com/andymayer">Andy Mayer</a>, said something along the lines of "because you're releasing to production and learning constantly go live should be driven by marketing".</p>
+
+<p>We've seen the value in that approach over and over in 2019.</p>
+
+<p>Week 4: "🍾 “Legacy” DB System we've been replacing has now been strangled away and nothing uses it anymore"</p>
+
+<p>Week 40: "🦄 team's third significant "go live" that was so smooth it was almost an anti-climax"</p>
+
+<p>Week 45: "💪 Deployed a new system to replace part of another system while that system was under sustained load. Bold and seamless"</p>
+
+<p>That week 4 release was the end of 9 months and more of at least two people working full time. It was a significant change and affected multiple business units.</p>
+
+<p>Go-live was announced at standup with: "oh yeah, MODS is primary for reads and writes now". Running in production as soon as and as meaningfully as possible is a forking super power.
+<!--alex ignore master black blacklist ---></p>
+<h1 id="master-black-list-guys-and-more">Master, Black list, Guys, and more</h1>
+<!--alex ignore master black blacklist gals-men --->
+<p>I've consistently spent time trying to refocus my use of language this year. Things like using primary or trunk instead of master, exclusion list instead of blacklist, folk or skipping the word instead of guys.</p>
+
+<p>This seems like the least I can do to promote inclusion. It's not enough but it's something.</p>
+
+<p>For a while we had a non-binary colleague who used they/them as pronouns. I definitely wasn't good enough at managing that. It was such a clear example of how unconsciously I use gendered language. I tend to speak in a stream of consciousness style and I need to practice speaking purposefully.</p>
+
+<p>Even if I only make one person feel included or avoid excluding them then the effort has been worth it.</p>
+
+<h1 id="running">Running</h1>
+
+<p>I used to cycle 1000km a year plus. I don't now. Largely because cycling in Central Manchester is a horrible experience. But I still snack as if I'm cycling twice a week all year :(</p>
+
+<p>So I decided I needed to step up my game. I ran 35 weeks of the year. And averaged 6.5km in those weeks. Better than I expected. And a good start. But I want to double that this year.</p>
+
+<p>Which suggests my maths need to improve since there aren't 70 weeks in the year. Let's say: 10km average over 40 weeks of the year.</p>
+
+<p>I'll also give up shaming myself for not cycling 27km to work and aim to go for some rides for fun when the weather picks up.</p>
+
+<h1 id="walking">Walking</h1>
+<!--alex ignore baby --->
+<p>This is the first full year I've had a dog since I was a teenager. Best decision in a long time. As much work as having a baby but it adds joy to life.</p>
+
+<h3 id="dog-on-new-years-day-2019">dog on new years day 2019</h3>
+<p><img src="/images/dog-2019-01-01.jpg" alt="dog on new years day 2019" loading="lazy" /></p>
+
+<h3 id="dog-on-new-years-day-2020">dog on new years day 2020</h3>
+<p><img src="/images/dog-2020-01-01.jpg" alt="dog on new years day 2020" loading="lazy" />
+<!--alex ignore kids ---></p>
+<h1 id="kids">Kids</h1>
+<!--alex ignore death --->
+<p><img src="/images/god-of-death.png" alt="god of death" loading="lazy" />
+<!--alex ignore kids --->
+All three kids have said they don't want to be on social media so I won't mention much here. Watching them growing into sensible, curious, wonderful, talented nerds despite my terrible parenting is the most incredible thing.</p>
+
+<p>They also have learned to amuse themselves by saying: "blink and I'll be in college" when I'm distracted by my phone and they want my attention.</p>
+
+<p>They deserve my attention. We used to have "family screen-free day" once a week. That's coming back!</p>
+
+<h1 id="what-writing-this-taught-me-i-want-to-do-in-2020">What writing this taught me I want to do in 2020</h1>
+<!--alex ignore kids white easy --->
+<ul>
+  <li>decide what feedback loops I want to shorten</li>
+  <li>find others that want to do that and work with them</li>
+  <li>expect to find better ways of doing it by including others</li>
+  <li>read about leadership and get over myself</li>
+  <li>make time to write code and find out from the teams how they'd like me to do that</li>
+  <li>figure out how I can write weeknotes as easily without images in twitter being the main record</li>
+  <li>move to a place where we regularly measure and report on our work</li>
+  <li>speak face-to-face with individuals instead of in big meetings</li>
+  <li>practice Italian every day</li>
+  <li>use the unfair super power of being a white, middle-class, middle-aged, straight man to lift others up</li>
+  <li>10km running on average over 40 weeks of the year</li>
+  <li>4 leisurely cycle rides</li>
+  <li>put my phone down and <a href="https://twitter.com/JohnnoNolan/status/1208046191906185216">talk to my kids</a></li>
+</ul>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>Some other articles...</h1>
+      
+
+      
+        <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>
+      
+        <a href="/2018/03/harmful-dry.html">
+  <div class="article-tile">
+      <h3>
+        DRY - considered harmful
+      </h3>
+      <small>
+        30 Mar 2018
+      </small>
+  </div>
+</a>
+      
+        <a href="/2018/02/serverless-2.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Part Two
+      </h3>
+      <small>
+        04 Feb 2018
+      </small>
+  </div>
+</a>
+      
+  
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2020/01/year-notes.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2020/01/year-notes.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Testing Static HTML!</title>
+    <link rel="canonical" href="https://pauldambra.dev/2017/testing-static-sites.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2017/testing-static-sites.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Testing Static HTML!" />
+    <meta property="og:description"  content="Testing the generated site is one of the benefits of static HTML generators" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Testing the generated site is one of the benefits of static HTML generators">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Testing Static HTML!",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"926",
+   "url":"https://pauldambra.dev/2017/testing-static-sites.html",
+   "datePublished":"2017-03-19",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2017/testing-static-sites.html"
+   },
+   "articleBody":"\n    \n        This  post  is  part  of  a  series  on  improving  this  blog  #recursion\n    \n    \n        \n            Previous  Post\n        \n        \n            Next  Post\n        \n    \n\n\nOne  of  the  benefits  of  generating  a  site  as  a  static  artefact  (here  using  Jekyll  but  there  are  a  gazillion  tools)  is  that  the  finished  product  is  a  known  quantity.  Anything  that's  a  known  quantity  can  be  tested!\n\n\n\nTest  the  generated  HTML\n\nI  chose  a  wonderful  tool  called  htmlproofer  which,  since  it  has  a  CLI,  can  be  invoked  as  part  of  the  build.\n\n#!  /bin/bash\n\nset  -eu\n\nbundle  exec  htmlproofer  \\\n    _site  \\\n    --file-ignore  /amp/,/.git/  \\\n    --check-favicon  \\\n    --check-html  \\\n    --check-opengraph\n\n\nThis  checks  the  generated  site  directory.  Ignoring  the  AMP  folder.  The  list  of  checks  this  carries  out  (reproduced  here  from  the  project  readme):\n\n\n\nImages\n\nimg  elements:\n\n\n    Whether  all  your  images  have  alt  tags\n    Whether  your  internal  image  references  are  not  broken\n    Whether  external  images  are  showing\n    Whether  your  images  are  HTTP\n\n\nLinks\n\na,  link  elements:\n\n\n    Whether  your  internal  links  are  working\n    Whether  your  internal  hash  references  (#linkToMe)  are  working\n    Whether  external  links  are  working\n    Whether  your  links  are  HTTPS\n    Whether  CORS/SRI  is  enabled\n\n\nScripts\n\nscript  elements:\n\n\n    Whether  your  internal  script  references  are  working\n    Whether  external  scripts  are  loading\n    Whether  CORS/SRI  is  enabled\n\n\nFavicon\n\n\n    Whether  your  favicons  are  valid.\n\n\nOpenGraph\n\nWhether  the  images  and  URLs  in  the  OpenGraph  metadata  are  valid.\nHTML\n\nWhether  your  HTML  markup  is  valid.  This  is  done  via  Nokogiri,  to  ensure  well-formed  markup.\n\n\n\nIf  the  following  invalid  elements  are  added  to  the  page  and  the  htmlproofer  script  run…\n\n&lt;img  src=\"foo.png\"/&gt;\n\n&lt;a  href=\"/does-not-exist\"&gt;invalid  link&lt;/a&gt;\n\n\n…then  the  output  highlights  five  errors.\n\nRunning  [\"HtmlCheck\",  \"FaviconCheck\",  \"ImageCheck\",  \"LinkCheck\",  \"ScriptCheck\",  \"OpenGraphCheck\"]  on  [\"_site\"]  on  *.html...  \nChecking  310  external  links...\nRan  on  55  files!\n-  _site/2017/testing-static-sites.html\n    *    External  link  http://pauldambra.github.io/2017/testing-static-sites.html  failed:  404  No  error\n    *    External  link  http://pauldambra.github.io/amp/2017/testing-static-html  failed:  404  No  error\n    *    image  foo.png  does  not  have  an  alt  attribute  (line  678)\n    *    internal  image  foo.png  does  not  exist  (line  678)\n    *    internally  linking  to  /does-not-exist,  which  does  not  exist  (line  680)\n          &lt;a  href=\"/does-not-exist\"&gt;invalid  link&lt;/a&gt;\nhtmlproofer  3.5.0  |  Error:    HTML-Proofer  found  5  failures!\nThe  command  \"./htmltest.sh\"  exited  with  1.\n\n\nThree  of  these  were  expected:\n\n\n    that  the  image  element  doesn't  have  an  alt  attribute\n    that  foo.png  does  not  exist\n    and  that  the  internal  link  to  /does-not-exist  does  not,  erm,  exist\n\n\nruh  roh\n\nInterestingly  this  also  reveals  a  bug  in  the  setup.\n\n    *    External  link  http://pauldambra.github.io/2017/testing-static-sites.html  failed:  404  No  error\n    *    External  link  http://pauldambra.github.io/amp/2017/testing-static-html  failed:  404  No  errors\n\n\nGrepping  the  generated  html  for  those  two  external  links  finds  them  in  the  HEAD  of  the  document.\n\nI'd  only  run  this  process  on  existing,  published  blog  posts  since  adding  it.  This  is  the  first  time  that  it  has  run  against  a  repo  with  a  new,  unpublished  blog  post  and  it's  correctly  highlighting  that  the  open  graph  URL  for  this  article  and  the  amphtml  link  rel  for  this  article  don't  exist.  Because  they  don't  -  this  article  hasn't  been  published  yet.\n\nThe  site's  .travis.yml  file  currently  has:\n\nscript:\n    -  \"./build.sh\"\n    -  \"./htmltest.sh\"\n    -  \"./amp-validate.sh\"\nafter_success:\n    -  \"./deploy.sh\"\n\n\nthis  will  have  to  become\n\nscript:\n    -  \"./build.sh\"\n    -  \"./amp-validate.sh\"\nafter_success:\n    -  \"./deploy.sh\"\n    -  \"./htmltest.sh\"\n\n\nso  that  the  HTML  test  only  runs  after  the  deploy  has  occurred.  Ideally  any  published  documents  would  be  tested  before  deploy  and  could  fail  the  build  and  newly  published  documents  only  after  their  first  deploy  as  a  smoke  test.  But  this  will  do  for  now.\n\nTest  the  generated  AMP\n\nAn  AMP  version  of  the  site  is  generated  at  build  time  too.  HTML-Proofer  can't  test  the  AMP  site  so  these  pages  could  be  broken  and  that  test  doesn't  protect  us.\n\nAMP  is  a  dream  to  work  with  because  the  AMP  debugger  is  well  built  and  provides  clear,  actionable  errors.  Brilliantly  that  online  debugger  is  available  as  an  NPM  package  so  as  can  be  seen  above  there  is  an  amp-validate.sh  as  part  of  the  build.\n\n#!  /bin/bash\n\nset  -eu\n\nnpm  install  -g  amphtml-validator\n\nfor  f  in  `find  _site/amp  -type  f  -name  '*.html'`;  do\n    amphtml-validator  $f\ndone\n\n\nBecause  the  AMP  debugger  was  so  helpful  when  adding  AMP  generation  the  only  warning  this  generated  when  it  was  added  to  build  was  many  instances  of\n\n\n    _site/amp/2009/05/anonymous-methods-when-invoking-in-vb/index.html:633:6  The  extension  'amp-twitter  extension  .js  script'  was  &gt;  found  on  this  page,  but  is  unused  (no  'amp-twitter'  tag  seen).  This  may  become  an  error  in  the  future.  (see  https://www.ampproject.org/docs/reference/extended/amp-twitter.html)\n\n\nEach  AMP  page  had  the  amp-twitter  extension  included  whether  or  not  there  was  a  tweet  embedded  in  the  page.  This  was  fixed.\n\nAnd  a  single,  old  page  which  the  AMP  generator  couldn't  handle  and  so\n\n\n    _site/amp/2011/04/ssh-without-password/index.html:636:3  The  attribute  'style'  may  not  appear  in  tag  'span'.\n_site/amp/2011/04/ssh-without-password/index.html:667:15  The  tag  'paste'  is  disallowed.\n\n\nAgain  fixed  by  updating  the  HTML  of  the  non-AMP  post.\n\nAnd  so?\n\nWhen  these  two  types  of  test  were  added  there  were  237  HTML  errors  and  9  AMP  warnings  and  2  AMP  errors.  From  as  little  as  missing  a  favicon  through  to  genuinely  malformed  pages.  Adding  these  tests  was  straight-forward,  added  value  to  the  CI  for  this  blog,  and  is  another  good  indication  of  the  benefits  of  statically  generated  sites.\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Sun Mar 19 2017
+		</div>
+		<h1 class="title">Testing Static HTML!</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2017/testing-static-sites.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Testing+Static+HTML%21&via=pauldambra&url=https://pauldambra.dev/2017/testing-static-sites.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#continuous-delivery">
+				in: continuous delivery
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#series">
+			series
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#blog">
+			blog
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#recursion">
+			recursion
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#testing">
+			testing
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#jekyll">
+			jekyll
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#travisci">
+			travisci
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<aside class="series">
+  <h1>
+    This post is part of a series on improving this blog #recursion
+  </h1>
+  <div class="links">
+    <div class="previous">
+      <a href="/structured-data-with-jekyll.html">Previous Post</a>
+    </div>
+    <div class="next">
+      <a href="/2017/generating-static-amp.html">Next Post</a>
+    </div>
+  </div>
+</aside>
+
+<p>One of the benefits of generating a site as a static artefact (here using <a href="https://jekyllrb.com/">Jekyll</a> but there are a gazillion tools) is that the finished product is a known quantity. Anything that's a known quantity can be tested!</p>
+
+<!--more-->
+
+<h1 id="test-the-generated-html">Test the generated HTML</h1>
+
+<p>I chose a wonderful tool called <a href="https://github.com/gjtorikian/html-proofer">htmlproofer</a> which, since it has a CLI, can be invoked as part of the build.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#! /bin/bash
+
+set -eu
+
+bundle exec htmlproofer \
+  _site \
+  --file-ignore /amp/,/.git/ \
+  --check-favicon \
+  --check-html \
+  --check-opengraph
+</code></pre></div></div>
+
+<p>This checks the generated site directory. Ignoring the AMP folder. The list of checks this carries out (reproduced here from <a href="https://github.com/gjtorikian/html-proofer/blob/c95d21dd5221243c7a7cfb1218fd6fd853381765/README.md">the project readme</a>):</p>
+
+<hr />
+
+<h3 id="images">Images</h3>
+
+<p>img elements:</p>
+
+<ul>
+  <li>Whether all your images have alt tags</li>
+  <li>Whether your internal image references are not broken</li>
+  <li>Whether external images are showing</li>
+  <li>Whether your images are HTTP</li>
+</ul>
+
+<h3 id="links">Links</h3>
+
+<p>a, link elements:</p>
+
+<ul>
+  <li>Whether your internal links are working</li>
+  <li>Whether your internal hash references (#linkToMe) are working</li>
+  <li>Whether external links are working</li>
+  <li>Whether your links are HTTPS</li>
+  <li>Whether CORS/SRI is enabled</li>
+</ul>
+
+<h3 id="scripts">Scripts</h3>
+
+<p>script elements:</p>
+
+<ul>
+  <li>Whether your internal script references are working</li>
+  <li>Whether external scripts are loading</li>
+  <li>Whether CORS/SRI is enabled</li>
+</ul>
+
+<h3 id="favicon">Favicon</h3>
+
+<ul>
+  <li>Whether your favicons are valid.</li>
+</ul>
+
+<h3 id="opengraph">OpenGraph</h3>
+
+<p>Whether the images and URLs in the OpenGraph metadata are valid.
+HTML</p>
+
+<p>Whether your HTML markup is valid. This is done via Nokogiri, to ensure well-formed markup.</p>
+
+<hr />
+<!--alex ignore invalid --->
+<p>If the following invalid elements are added to the page and the htmlproofer script run…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;img src="foo.png"/&gt;
+
+&lt;a href="/does-not-exist"&gt;invalid link&lt;/a&gt;
+</code></pre></div></div>
+
+<p>…then the output highlights five errors.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running ["HtmlCheck", "FaviconCheck", "ImageCheck", "LinkCheck", "ScriptCheck", "OpenGraphCheck"] on ["_site"] on *.html... 
+Checking 310 external links...
+Ran on 55 files!
+- _site/2017/testing-static-sites.html
+  *  External link http://pauldambra.github.io/2017/testing-static-sites.html failed: 404 No error
+  *  External link http://pauldambra.github.io/amp/2017/testing-static-html failed: 404 No error
+  *  image foo.png does not have an alt attribute (line 678)
+  *  internal image foo.png does not exist (line 678)
+  *  internally linking to /does-not-exist, which does not exist (line 680)
+     &lt;a href="/does-not-exist"&gt;invalid link&lt;/a&gt;
+htmlproofer 3.5.0 | Error:  HTML-Proofer found 5 failures!
+The command "./htmltest.sh" exited with 1.
+</code></pre></div></div>
+
+<p>Three of these were expected:</p>
+
+<ul>
+  <li>that the image element doesn't have an alt attribute</li>
+  <li>that foo.png does not exist</li>
+  <li>and that the internal link to <code class="language-plaintext highlighter-rouge">/does-not-exist</code> does not, erm, exist</li>
+</ul>
+
+<h2 id="ruh-roh">ruh roh</h2>
+
+<p>Interestingly this also reveals a bug in the setup.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  *  External link http://pauldambra.github.io/2017/testing-static-sites.html failed: 404 No error
+  *  External link http://pauldambra.github.io/amp/2017/testing-static-html failed: 404 No errors
+</code></pre></div></div>
+
+<p>Grepping the generated html for those two external links finds them in the HEAD of the document.</p>
+
+<p>I'd only run this process on existing, <em>published</em> blog posts since adding it. This is the first time that it has run against a repo with a new, <em>unpublished</em> blog post and it's correctly highlighting that the open graph URL for this article and the amphtml link rel for this article don't exist. Because they don't - this article hasn't been published yet.</p>
+
+<p>The site's .travis.yml file currently has:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>script:
+  - "./build.sh"
+  - "./htmltest.sh"
+  - "./amp-validate.sh"
+after_success:
+  - "./deploy.sh"
+</code></pre></div></div>
+
+<p>this will have to become</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>script:
+  - "./build.sh"
+  - "./amp-validate.sh"
+after_success:
+  - "./deploy.sh"
+  - "./htmltest.sh"
+</code></pre></div></div>
+
+<p>so that the HTML test only runs after the deploy has occurred. Ideally any published documents would be tested before deploy and could fail the build and newly published documents only after their first deploy as a smoke test. But this will do for now.</p>
+
+<h1 id="test-the-generated-amp">Test the generated AMP</h1>
+
+<p>An AMP version of the site is generated at build time too. HTML-Proofer can't test the AMP site so these pages could be broken and that test doesn't protect us.</p>
+
+<p>AMP is a dream to work with because the AMP debugger is well built and provides clear, actionable errors. Brilliantly that online debugger is available as an NPM package so as can be seen above there is an <code class="language-plaintext highlighter-rouge">amp-validate.sh</code> as part of the build.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#! /bin/bash
+
+set -eu
+
+npm install -g amphtml-validator
+
+for f in `find _site/amp -type f -name '*.html'`; do
+  amphtml-validator $f
+done
+</code></pre></div></div>
+
+<p>Because the AMP debugger was so helpful when adding AMP generation the only warning this generated when it was added to build was many instances of</p>
+
+<blockquote>
+  <p>_site/amp/2009/05/anonymous-methods-when-invoking-in-vb/index.html:633:6 The extension 'amp-twitter extension .js script' was &gt; found on this page, but is unused (no 'amp-twitter' tag seen). This may become an error in the future. (see https://www.ampproject.org/docs/reference/extended/amp-twitter.html)</p>
+</blockquote>
+
+<p>Each AMP page had the amp-twitter extension included whether or not there was a tweet embedded in the page. <a href="https://github.com/pauldambra/blog_source/commit/4329b333aa15c3e71827ba0a5c42e608616d881a">This was fixed.</a></p>
+
+<p>And a single, old page which the AMP generator couldn't handle and so</p>
+
+<blockquote>
+  <p>_site/amp/2011/04/ssh-without-password/index.html:636:3 The attribute 'style' may not appear in tag 'span'.
+_site/amp/2011/04/ssh-without-password/index.html:667:15 The tag 'paste' is disallowed.</p>
+</blockquote>
+
+<p><a href="https://github.com/pauldambra/blog_source/commit/c82542fec278d97c2749f6c09961efae15df175c#diff-b584697099c805190a2a5cfaae07bfc1">Again fixed by updating the HTML of the non-AMP post.</a></p>
+
+<h1 id="and-so">And so?</h1>
+
+<p>When these two types of test were added there were 237 HTML errors and 9 AMP warnings and 2 AMP errors. From as little as missing a favicon through to genuinely malformed pages. Adding these tests was straight-forward, added value to the CI for this blog, and is another good indication of the benefits of statically generated sites.</p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>Some other articles...</h1>
+      
+
+      
+        <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>
+      
+        <a href="/2021/09/emotional-advice.html">
+  <div class="article-tile">
+      <h3>
+        Advice given on ending four years at Co-op
+      </h3>
+      <small>
+        17 Sep 2021
+      </small>
+  </div>
+</a>
+      
+        <a href="/2018/03/harmful-dry.html">
+  <div class="article-tile">
+      <h3>
+        DRY - considered harmful
+      </h3>
+      <small>
+        30 Mar 2018
+      </small>
+  </div>
+</a>
+      
+  
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2017/testing-static-sites.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2017/testing-static-sites.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

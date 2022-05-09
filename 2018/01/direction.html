@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Is where we're going where we're going</title>
+    <link rel="canonical" href="https://pauldambra.dev/2018/01/direction.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2018/01/direction.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Is where we're going where we're going" />
+    <meta property="og:description"  content="Direction is more important than speed" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Direction is more important than speed">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Is where we're going where we're going",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"1140",
+   "url":"https://pauldambra.dev/2018/01/direction.html",
+   "datePublished":"2018-01-29",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2018/01/direction.html"
+   },
+   "articleBody":"Velocity  is…\n\nA  way  of  measuring  the  progress  being  made  by  a  software  team.  Not  all  teams  use  velocity.  I've  been  on  quite  a  few  that  do.  So  at  least  some  teams  still  use  it  as  a  measure.\n\n\n\n\n    Velocity  is  the  number  of  story  points  completed  by  a  team  in  an  iteration.\nscrum  alliance  2014\n\ndefine  velocity  as  simply  a  measure  of  how  fast  a  team  is  going\nmountain  goat  software  2014\n\n\nIn  fact  both  of  those  articles  go  on  to  expand  on  the  physical  metaphor…\n\n\n    How  do  you  measure  your  velocity  while  driving?  (Imagine  the  speedometer  is  broken.)  You've  been  driving  for  the  last  two  hours,  you've  gone  160  kilometers,  so  you  know  your  average  velocity  is  80  km  per  hour.  scrum  alliance  2014\n\n\nA  little  physics\n\nNotice  that  in  the  quote  above  there  is  a  switch  between  \"velocity\"  and  \"speedometer\".\n\nIf  you  were  driving  too  fast  you  don't  get  a  velociting  ticket  for  exceeding  the  velocity  limit.\n\nIn  physics  (and  policing)  there  is  a  distinction  between  speed  and  velocity.\n\nSpeed  only  has  magnitude  but  velocity  is  speed  and  direction.\n\nWait,  what?\n\nIf  you  are  told  someone  is  moving  30mph  can  you  tell  me  how  long  it  will  take  them  to  get  to  your  house?\n\nNo!  You  don't  know  where  they  are  and  you  don't  know  which  way  they're  travelling.  You  need  to  know  they  are,  for  example,  due  south  from  your  house  and  travelling  north.\n\nYou  can't  say  anything  about  when  and  where  they  will  arrive  only  from  their  speed.\n\nSo,  what  do  we  need?\n\nSimplistically  (let's  not  stretch  the  metaphor  to  routing  on  a  map)  you  need:\n\n\n    a  destination\n    a  starting  point\n    a  direction  of  travel\n    a  speed\n\n\nLet's,  for  now,  assume  we're  talking  about  a  fixed  destination  and  starting  point  (spoiler:  we're  not).\n\n(Most?)  Teams  that  measure  velocity  do  so  as  if  direction  doesn't  exist.  It's  a  count  of  the  work  completed…  it  assumes  you  know  where  you  are,  where  you're  going,  and  that  you're  heading  in  the  right  direction.\n\nIt  assumes  that  every  (task|story|ticket|feature)  you  are  asked  to  complete  is  the  correct  thing  to  do.\n\nDo  we  care?  Should  we  care?\n\nHigh  speed  with  no  progress\n\n\n\nSo  logically  you  can  have  a  high  speed  system  with  low  progress.  And  you  can  have  a  low  speed  system  with  high  progress.\n\nLet's  labour  the  point…\n\nTake  two  cyclists  and  start  them  at  the  same  place  with  some  desired  destination  for  them  to  travel  to.  Point  one  of  them  in  the  right  direction  and  the  other  randomly.  No  matter  how  fast  the  randomly  pointed  cyclist  travels  they  are  far  less  likely  to  reach  the  destination  at  all.\n\nMix  in  a  closer  to  reality  metaphor.  Make  it  a  journey  of  many  legs  and  the  likelihood  that  the  randomly  directed  cyclist  will  ever  reach  the  destination  approaches  zero  pretty  quickly.  The  other  cyclist  could  be  travelling  at  any  speed  but  is  guaranteed  to  get  to  the  destination.\n\n\n\nSo,  what\n\nI  assume  a  few  things:\n\n\n    you  want  to  achieve  something  to  solve  a  problem\n    you  want  to  get  better  at  doing  that\n    you  don't  want  to  waste  your  own  or  somebody  else's  time  or  money\n\n\nIn  which  case  you  have  to  regularly  measure\n\n\n    where  you  are\n    where  you're  going\n    the  direction  you're  travelling\n    that  your  speed  isn't  zero\n\n\nOtherwise,  like  the  cyclist  that  chooses  random  directions  you  can't  expect  to  ever  reach  your  destination.\n\nIn  reality  you  aren't  given  random  tickets  to  work  on  (or  at  least  for  your  sake  I  hope  not).  Instead,  with  what  we  all  know  right  now  some  group  of  us  choose  what  to  work  on  next.\n\nYou're  not  being  pointed  randomly  but  instead  in  roughly  the  right  direction.\n\nTaking  the  cyclist  example  again  -  If  you  can  stop  and  re-assess  your  roughly  correct  destination  you'll  get  there  eventually  but  you'll  still  take  longer  than  a  cyclist  that  has  better  directions  provided  than  you.\n\nSo,  ok,  direction  is  important.\n\nBut  why  regularly  measure\n\nBecause  the  landscape  you're  building  software  in  probably  doesn't  look  like  this:\n\n\n\nSince  we're  generally  operating  under  imperfect  conditions.  Trying  to  figure  out  where  we  are  is  more  like  being  in  the  fog:\n\n\n\nA  friend  was  for  a  while  a  member  of  mountain  rescue  (who  are  incidentally  incredible  -  you  should  give  them  money).  They  once  described  to  me  how  they  navigate  when  they  have  very  low  visibility.\n\n\n\nIn  pairs:\n\n\n    use  the  map  to  figure  out  where  you  are\n    use  that  information  to  figure  out  what  direction  to  go\n    using  a  compass  one  of  you  slowly  walks  in  that  direction\n    the  other  stays  still  and  calls  out  when  the  walker  is  about  to  disappear  into  the  fog\n    then  that  person  catches  up  with  the  walker\n    repeat\n\n\nLooking  at  the  context  of  where  they  are  against  what  they  know  about  the  world.  Working  together  to  understand  what  that  means,  right  then.  Watching  each  other  and  relying  on  communication.  Chopping  the  journey  into  many  safer  parts.\n\nCan  this  apply  to  software  teams?  (spoiler,  yes,  I  think  so.)\n\nI've  tried  a  number  of  times  to  work  this  out  during  sessions  at  Co-op  Digital  and  XP  Manchester.  Many  thanks  to  the  people  who  shared  their  time  and  brains  with  my  confused  grasping  at  an  idea.\n\nMaybe  I've  not  worked  it  out  completely  yet…  toot  me  and  tell  me  what  you  think!\n\n\n    \n        We  can  use  tools  like  the  Cyenfin  framework,  Wardley  mapping,  and  user  research  to  understand  where  we  are  and  how  we  want  to  get  to  our  destination.\n    \n    \n        We  can  remember  that  we  have  low  visibility  and  work  closely  together  to  make  sure  we  aren't  trying  to  move  too  far  in  one  go.  Slicing  work  as  thinly  as  our  context  tells  us  makes  sense.\n    \n    \n        We  can  use  data  from  people  using  our  software  and  more  user  research  as  our  compass  to  check  whether  we  strayed  from  our  desired  path.\n    \n\n\nTL;DR\n\nWe  can  and  should  care  if  we're  being  asked  to  do  something  meaningful.  And  we  mustn't  treat  it  as  somebody  else's  work  to  check  where  we  should  go  or  whether  we  got  there.\n\nThe  number  of  tickets  you  complete  is  not  a  measure  of  progress  by  itself.  Start  by  measuring  value  and  only  then,  if  ever,  start  counting  tickets  or  points\n\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Mon Jan 29 2018
+		</div>
+		<h1 class="title">Is where we're going where we're going</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2018/01/direction.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Is+where+we%27re+going+where+we%27re+going&via=pauldambra&url=https://pauldambra.dev/2018/01/direction.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#agile">
+				in: agile
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#physics">
+			physics
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#software">
+			software
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#agile">
+			agile
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#cargo-cult">
+			cargo-cult
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#rant">
+			rant
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<h1 id="velocity-is">Velocity is…</h1>
+
+<p>A way of measuring the progress being made by a software team. Not all teams use velocity. I've been on quite a few that do. So at least some teams still use it as a measure.</p>
+
+<!--more-->
+
+<blockquote>
+  <p>Velocity is the number of story points completed by a team in an iteration.
+<a href="https://web.archive.org/web/20170926190909/https://www.scrumalliance.org/community/articles/2014/february/velocity">scrum alliance 2014</a>
+<!--alex ignore simple --->
+define velocity as simply a measure of how fast a team is going
+<a href="https://www.mountaingoatsoftware.com/blog/know-exactly-what-velocity-means-to-your-scrum-team">mountain goat software 2014</a></p>
+</blockquote>
+
+<p>In fact both of those articles go on to expand on the physical metaphor…</p>
+
+<blockquote>
+  <p>How do you measure your velocity while driving? (Imagine the speedometer is broken.) You've been driving for the last two hours, you've gone 160 kilometers, so you know your average velocity is 80 km per hour. <a href="https://web.archive.org/web/20170926190909/https://www.scrumalliance.org/community/articles/2014/february/velocity">scrum alliance 2014</a></p>
+</blockquote>
+
+<h1 id="a-little-physics">A little physics</h1>
+
+<p>Notice that in the quote above there is a switch between "velocity" and "speedometer".</p>
+
+<p>If you were driving too fast you don't get a velociting ticket for exceeding the velocity limit.</p>
+
+<p>In physics (and policing) there is a <a href="https://www.khanacademy.org/science/physics/one-dimensional-motion/displacement-velocity-time/a/what-is-velocity">distinction between speed and velocity.</a></p>
+
+<p>Speed only has magnitude but <a href="https://youtu.be/DRb5PSxJerM?t=55s">velocity is speed <em>and</em> direction</a>.</p>
+
+<h3 id="wait-what">Wait, what?</h3>
+
+<p>If you are told someone is moving 30mph can you tell me how long it will take them to get to your house?</p>
+
+<p>No! You don't know where they are and you don't know which way they're travelling. You need to know they are, for example, due south from your house and travelling north.</p>
+
+<p>You can't say <em>anything</em> about when and where they will arrive only from their speed.</p>
+
+<h3 id="so-what-do-we-need">So, what do we need?</h3>
+
+<p>Simplistically (let's not stretch the metaphor to routing on a map) you need:</p>
+
+<ul>
+  <li>a destination</li>
+  <li>a starting point</li>
+  <li>a direction of travel</li>
+  <li>a speed</li>
+</ul>
+
+<p>Let's, for now, assume we're talking about a fixed destination and starting point (spoiler: we're not).</p>
+
+<p>(Most?) Teams that measure velocity do so as if direction doesn't exist. It's a count of the work completed… it assumes you know where you are, where you're going, and that you're heading in the right direction.</p>
+
+<p>It assumes that every <code class="language-plaintext highlighter-rouge">(task|story|ticket|feature)</code> you are asked to complete is the correct thing to do.</p>
+
+<p>Do we care? Should we care?</p>
+
+<h1 id="high-speed-with-no-progress">High speed with no progress</h1>
+
+<p><img src="/images/kids.gif" alt="some toddlers demonstrating you can have speed without progress" loading="lazy" /></p>
+
+<p>So logically you can have a high speed system with low progress. And you can have a low speed system with high progress.</p>
+
+<p>Let's labour the point…</p>
+
+<p>Take two cyclists and start them at the same place with some desired destination for them to travel to. Point one of them in the right direction and the other randomly. No matter how fast the randomly pointed cyclist travels they are far less likely to reach the destination <em>at all</em>.</p>
+
+<p>Mix in a closer to reality metaphor. Make it a journey of many legs and the likelihood that the randomly directed cyclist will ever reach the destination approaches zero pretty quickly. The other cyclist could be travelling at any speed but is guaranteed to get to the destination.</p>
+
+<p><img src="/images/zero-velocity.png" alt="1 step forward and 1 step back means 0 progress" loading="lazy" /></p>
+
+<h1 id="so-what">So, what</h1>
+
+<p>I assume a few things:</p>
+
+<ul>
+  <li>you want to achieve something to solve a problem</li>
+  <li>you want to get better at doing that</li>
+  <li>you don't want to waste your own or somebody else's time or money</li>
+</ul>
+
+<p>In which case you have to regularly measure</p>
+
+<ul>
+  <li>where you are</li>
+  <li>where you're going</li>
+  <li>the direction you're travelling</li>
+  <li>that your speed isn't zero</li>
+</ul>
+
+<p>Otherwise, like the cyclist that chooses random directions you can't expect to ever reach your destination.</p>
+
+<p>In reality you aren't given random tickets to work on (or at least for your sake I hope not). Instead, with what we all know right now some group of us choose what to work on next.</p>
+
+<p>You're not being pointed randomly but instead in roughly the right direction.</p>
+
+<p>Taking the cyclist example again - If you can stop and re-assess your roughly correct destination you'll get there eventually but you'll still take longer than a cyclist that has better directions provided than you.</p>
+
+<p>So, ok, direction is important.</p>
+
+<h1 id="but-why-regularly-measure">But why regularly measure</h1>
+
+<p>Because the landscape you're building software in probably doesn't look like this:</p>
+
+<p><img src="/images/sunny-day.jpg" alt="a picture of the peak district with great visibility" loading="lazy" /></p>
+
+<p>Since we're generally operating under imperfect conditions. Trying to figure out where we are is more like being in the fog:</p>
+
+<p><img src="/images/foggy-day.jpg" alt="a picture of the peak in foggy conditions" loading="lazy" /></p>
+
+<p>A friend was for a while a member of mountain rescue (who are incidentally incredible - <a href="https://donate.justgiving.com/donation-amount?uri=aHR0cHM6Ly9kb25hdGUtYXBpLmp1c3RnaXZpbmcuY29tL2FwaS9kb25hdGlvbnMvNzk5ZTk3YzlhMDFiNGRkMGJhNzEwNTdjMWIxODgyZjg=">you should give them money</a>). They once described to me how they navigate when they have very low visibility.</p>
+
+<p><img src="/images/lost.jpg" alt="a lost Lego hiker" loading="lazy" /></p>
+
+<p>In pairs:</p>
+
+<ul>
+  <li>use the map to figure out where you are</li>
+  <li>use that information to figure out what direction to go</li>
+  <li>using a compass one of you slowly walks in that direction</li>
+  <li>the other stays still and calls out when the walker is about to disappear into the fog</li>
+  <li>then that person catches up with the walker</li>
+  <li>repeat</li>
+</ul>
+
+<p>Looking at the context of where they are against what they know about the world. Working together to understand what that means, right then. Watching each other and relying on communication. Chopping the journey into many safer parts.</p>
+
+<h1 id="can-this-apply-to-software-teams-spoiler-yes-i-think-so">Can this apply to software teams? (spoiler, yes, I think so.)</h1>
+
+<p>I've tried a number of times to work this out during sessions at <a href="https://digitalblog.coop.co.uk/work-with-us/">Co-op Digital</a> and <a href="https://xpmanchester.wordpress.com/">XP Manchester</a>. Many thanks to the people who shared their time and brains with my confused grasping at an idea.</p>
+
+<p>Maybe I've not worked it out completely yet… <a href="https://twitter.com/pauldambra">toot me and tell me what you think</a>!</p>
+
+<ul>
+  <li>
+    <p>We can use tools like <a href="https://lizkeogh.com/2012/03/11/cynefin-for-devs/">the Cyenfin framework</a>, <a href="https://medium.com/wardleymaps">Wardley mapping</a>, and user research to understand where we are and how we want to get to our destination.</p>
+  </li>
+  <li>
+    <p>We can remember that we have low visibility and work closely together to make sure we aren't trying to move too far in one go. Slicing work as thinly as our context tells us makes sense.</p>
+  </li>
+  <li>
+    <p>We can use data from people using our software and more user research as our compass to check whether we strayed from our desired path.</p>
+  </li>
+</ul>
+
+<h1 id="tldr">TL;DR</h1>
+
+<p>We can and should care if we're being asked to do something meaningful. And we mustn't treat it as somebody else's work to check where we should go or whether we got there.</p>
+
+<p>The number of tickets you complete is not a measure of progress by itself. Start by measuring value and only then, if ever, start counting tickets or points</p>
+
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>More like this...</h1>
+      
+          <a href="/2017/07/retrosperiment.html">
+  <div class="article-tile">
+      <h3>
+        Retrosperiment
+      </h3>
+      <small>
+        06 Jul 2017
+      </small>
+  </div>
+</a>
+      
+          <a href="/2017/06/radarban.html">
+  <div class="article-tile">
+      <h3>
+        Where we're going we don't need columns
+      </h3>
+      <small>
+        24 Jun 2017
+      </small>
+  </div>
+</a>
+      
+          <a href="/real-vs-soft.html">
+  <div class="article-tile">
+      <h3>
+        Real vs. Software Engineering
+      </h3>
+      <small>
+        29 Nov 2015
+      </small>
+  </div>
+</a>
+      
+   
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2018/01/direction.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2018/01/direction.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

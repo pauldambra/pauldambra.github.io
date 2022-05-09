@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Astronomical Database Identfier</title>
+    <link rel="canonical" href="https://pauldambra.dev/2013/11/astronomical-database-identfier.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2013/11/astronomical-database-identfier.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Astronomical Database Identfier" />
+    <meta property="og:description"  content="a blog about software engineering" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="a blog about software engineering">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Astronomical Database Identfier",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"817",
+   "url":"https://pauldambra.dev/2013/11/astronomical-database-identfier.html",
+   "datePublished":"2013-11-22",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2013/11/astronomical-database-identfier.html"
+   },
+   "articleBody":"I  dealt  with  an  unusual  requirement  over  the  last  few  days.  And  wish  I'd  understood  some  of  the  more  unusual  ways  that  big  numbers  are  handled  in  C#,  Entity  Framework,  MS  SQL  and  Oracle\n\n\n\nThat  requirement  came  about  in  the  development  of  an  App  that  will  act  as  an  API  for  a  bunch  of  sales  data.  The  data  is  provided  by  another  3rd  party  exported  from  their  Oracle  database.\n\nThat  data  ultimately  ends  up  in  pretty  graphs  on  an  iPad.\n\nWhen  I  received  the  first  set  of  demo  data  I  noticed  both  negative  IDs  and  9  digit  ids.\n\nThis  immediately  made  me  worry  about  whether  we  had  the  right  data  formats  (everyone  worries  about  data  formats,  right?)  and  I  asked  the  question.\n\nIt  turns  out  that  the  DB  schema  that  the  data  is  ultimately  sourced  from  has  the  ID  column  defined  as  NUMBER(38).\n\nI've  never  really  used  Oracle  so  I  had  to  dig  around  to  discover  that  a  NUMBER(38)  field  can  hold  99999999999999999999999999999999999999x10125  as  its  maximum  value\n\nOK,  that's  a  big  number.  Let's  put  it  into  context  -  the  ESA  estimates  there  are  something  like  1022 to  1024  stars  in  the  known  universe\n\nThese  IDs  are  used  in  the  MS  SQL  DB  Schema  that  we're  importing  into  so  I  can't  ignore  the  possibility  of  an  ID  coming  in  with  this  massive  value.  So  there're  three  distinct  problems  here…\n\n\n    How  do  I  represent  these  numbers  in  .Net  (C#  4.5  to  be  precise)\n    How  do  I  have  Entity  Framework  6  map  these  potentially  massive  IDs\n    How  do  I  represent  these  numbers  in  the  schema\n\n\nRepresenting  a  Vigintillion  in  Dot  Net\n\nA  quick  journey  to  MSDN  and  we  can  see  that  if  we  restrict  ourselves  to  integral  types  then  we  have  int  and  long…  In  short  one  of  those  will  hold  a  lot,  lot  less  than  NUMBER(38)  and  the  other  a  lot  less.\n\nAll  is  not  lost.  Since  .Net  4  we  have  had  access  to  BigInteger  which  allows  for  arbitrarily  large  numbers.\n\nOK,  so  we  can  actually  import  the  number  into  memory…  that's  a  start\n\nUsing  BigDecimal  as  an  ID  in  EF6\n\nLet's  fire  up  an  EF  project,  create  an  entity  model  with  a  BigInteger  ID,  and  add  a  DbSet  for  that  model  to  a  DbContext:\n\n\n\nHaving  an  integral  type  ID  at  this  point  and  running  Enable-Migrations  from  the  console  would  work  without  complaint  but  with  BigInteger  as  the  Id  an  exception  is  thrown…\n\nSystem.Data.Entity.ModelConfiguration.ModelValidationException:  One  or  more  validation  errors  were  detected  during  model  generation:\n\nHugeNumbers.Proton:  :  EntityType  'Proton'  has  no  key  defined.\n\nDefine  the  key  for  this  EntityType.\n\nProtons:  EntityType:  EntitySet  'Protons'  is  based  on  type  'Proton'  that  has  no  keys  defined.\n\n\nAdding  the  [Key]  data  attribute  doesn't  help.\n\nHow  about  fangling  the  ModelBuilder  directly?\n\n\n\nProgress!  Kind  of  :\n\nThe  property  'Id'  cannot  be  used  as  a  key  property  on  the  entity  'HugeNumbers.Proton'  because  the  property  type  is  not  a  valid  key  type.  Only  scalar  types,  string  and  byte[]  are  supported  key  types.\n\n\nA  negative  result  is  still  a  result.  So  this  is  definitely  progress!  The  scalar  types  in  SQL  include  numeric  which  can  hold  38  digits.  Huzzah!  And  answers  the  question  of  how  to  represent  the  ID  in  the  database.\n\nSo  can  we  have  a  numeric  ID  in  EF?!\n\nSo  long  as  we  can  define  a  value  type  key  we  can  have  numeric  in  the  DB.  Ta  da!\n\n\n\nWe  can  enable  migrations  and  then  generate  one:\n\n\n\nWrong  :\n\nDecimal  has  the  largest  precision  of  the  .Net  value  types  and  \"only\"  offers  28-29  significant  digits\n\nIs  this  peculiar  to  Entity  Framework?\n\nThe  NHibernate  docs  say\n\n\n    Any  integral  property  type  is  thus  supported.\n\n\nso  unless  there  is  some  funkiness  possible  with  NHibernate  (which  I've  never  used  in  anger)  then  I'm  guessing  they've  made  a  similar  design  decision  to  the  EF  team.  And  it  wouldn't  be  possible  there  either…\n\nIn  conclusion\n\nEntity  Framework  is  not  yet  ready  for  storing  an  identifier  for  every  proton  in  the  universe  and  if  you  might  want  to  be  storing  38  digit  identifiers  (a  phrase  which  I'm  assured  by  my  five-year  old  daughter  actually  kills  int32.MaxValue  fairies  every  time  it  is  uttered)  then  you  aren't  going  to  be  using  Entity  Framework  and  I'd  guess  you  aren't  going  to  be  having  a  good  time.\n\nAnd  straight  from  the  Magic  Unicorns  mouth\n\n\n\t@pauldambra  As  you  concluded,  it's  not  possible  to  map  BigInt  with  EF.  Easiest  solution  is  probably  to  bypass  EF  for  that  data.\n\n\t—  Entity  Framework  (@efmagicunicorns)  November  22,  2013\n\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Fri Nov 22 2013
+		</div>
+		<h1 class="title">Astronomical Database Identfier</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2013/11/astronomical-database-identfier.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Astronomical+Database+Identfier&via=pauldambra&url=https://pauldambra.dev/2013/11/astronomical-database-identfier.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#databases">
+				in: databases
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#entity-framework">
+			entity-framework
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#oracle">
+			oracle
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#wat">
+			wat
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#rant">
+			rant
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<p>I dealt with an unusual requirement over the last few days. And wish I'd understood some of the more unusual ways that big numbers are handled in C#, Entity Framework, MS SQL and Oracle</p>
+
+<!--more-->
+
+<p>That requirement came about in the development of an App that will act as an API for a bunch of sales data. The data is provided by another 3rd party exported from their Oracle database.</p>
+
+<p>That data ultimately ends up in pretty graphs on an iPad.</p>
+
+<p>When I received the first set of demo data I noticed both negative IDs and 9 digit ids.</p>
+
+<p>This immediately made me worry about whether we had the right data formats (everyone worries about data formats, right?) and I asked the question.</p>
+
+<p>It turns out that the DB schema that the data is ultimately sourced from has the ID column defined as NUMBER(38).</p>
+
+<p>I've never really used Oracle so I had to dig around to discover that <a href="http://docs.oracle.com/cd/B19306_01/server.102/b14237/limits001.htm">a NUMBER(38) field can hold 99999999999999999999999999999999999999x10<sup>125</sup> as its maximum value</a></p>
+
+<p>OK, that's a big number. Let's put it into context - <a href="https://www.esa.int/Our_Activities/Space_Science/Herschel/How_many_stars_are_there_in_the_Universe">the ESA estimates there are something like 10<sup>22</sup> to 10<sup>24 </sup> stars in the known universe</a></p>
+
+<p>These IDs are used in the MS SQL DB Schema that we're importing into so I can't ignore the possibility of an ID coming in with this massive value. So there're three distinct problems here…</p>
+
+<ol>
+  <li>How do I represent these numbers in .Net (C# 4.5 to be precise)</li>
+  <li>How do I have Entity Framework 6 map these potentially massive IDs</li>
+  <li>How do I represent these numbers in the schema</li>
+</ol>
+
+<h2 id="representing-a-vigintillion-in-dot-net">Representing a Vigintillion in Dot Net</h2>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/exx3b86w(v=vs.110).aspx">A quick journey to MSDN</a> and we can see that if we restrict ourselves to integral types then we have int and long… In short one of those will hold a lot, lot less than NUMBER(38) and the other a lot less.</p>
+
+<p>All is not lost. Since .Net 4 we have had access to <a href="http://msdn.microsoft.com/en-us/library/system.numerics.biginteger(v=vs.110).aspx">BigInteger</a> which allows for arbitrarily large numbers.</p>
+
+<p>OK, so we can actually import the number into memory… that's a start</p>
+
+<h3 id="using-bigdecimal-as-an-id-in-ef6">Using BigDecimal as an ID in EF6</h3>
+
+<p>Let's fire up an EF project, create an entity model with a BigInteger ID, and add a DbSet for that model to a DbContext:</p>
+
+<p><img src="http://4.bp.blogspot.com/-PgeRsO_R89w/Uo-zpg99w-I/AAAAAAAAJTk/8CyZmhvxdCw/s640/HugeNumbers.PNG" alt="huge numbers code" loading="lazy" /></p>
+
+<p>Having an integral type ID at this point and running Enable-Migrations from the console would work without complaint but with BigInteger as the Id an exception is thrown…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>System.Data.Entity.ModelConfiguration.ModelValidationException: One or more validation errors were detected during model generation:
+
+HugeNumbers.Proton: : EntityType 'Proton' has no key defined.
+
+Define the key for this EntityType.
+
+Protons: EntityType: EntitySet 'Protons' is based on type 'Proton' that has no keys defined.
+</code></pre></div></div>
+
+<p>Adding the [Key] data attribute doesn't help.</p>
+
+<p>How about fangling the ModelBuilder directly?</p>
+
+<p><img src="http://1.bp.blogspot.com/-Sy-WWyCcbWg/Uo-1qZFYLQI/AAAAAAAAJTw/kaI76AZC15s/s1600/proton2.PNG" alt="huge numbers more code" loading="lazy" /></p>
+
+<p>Progress! Kind of :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The property 'Id' cannot be used as a key property on the entity 'HugeNumbers.Proton' because the property type is not a valid key type. Only scalar types, string and byte[] are supported key types.
+</code></pre></div></div>
+
+<p>A negative result is still a result. So this is definitely progress! The <a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/decimal-and-numeric-transact-sql?view=sql-server-ver15">scalar types in SQL</a> include <a href="http://msdn.microsoft.com/en-us/library/ms187746.aspx">numeric</a> which can hold 38 digits. Huzzah! And answers the question of how to represent the ID in the database.</p>
+
+<h4 id="so-can-we-have-a-numeric-id-in-ef">So can we have a numeric ID in EF?!</h4>
+
+<p>So long as we can define a value type key we can have numeric in the DB. Ta da!</p>
+
+<p><img src="http://2.bp.blogspot.com/-5kh5vIIvp0w/Uo-7LImoKqI/AAAAAAAAJUA/i4OdUD5Coxo/s1600/Capture3.PNG" alt="huge numbers even more code" loading="lazy" /></p>
+
+<p>We can enable migrations and then generate one:</p>
+
+<p><img src="http://1.bp.blogspot.com/-KelcMu1mi6w/Uo-7cv3auqI/AAAAAAAAJUI/lVSpjAvszNU/s1600/Capture4.PNG" alt="huge numbers even more code" loading="lazy" /></p>
+
+<p>Wrong :</p>
+
+<p>Decimal has the largest precision of the .Net value types and <a href="http://msdn.microsoft.com/en-us/library/364x0z75(v=vs.110).aspx">"only" offers 28-29 significant digits</a></p>
+
+<h3 id="is-this-peculiar-to-entity-framework">Is this peculiar to Entity Framework?</h3>
+
+<p><a href="https://nhibernate.info/doc/nhibernate-reference/mapping.html">The NHibernate docs</a> say</p>
+
+<blockquote>
+  <p>Any integral property type is thus supported.</p>
+</blockquote>
+
+<p>so unless there is some funkiness possible with NHibernate (which I've never used in anger) then I'm guessing they've made a similar design decision to the EF team. And it wouldn't be possible there either…</p>
+
+<h3 id="in-conclusion">In conclusion</h3>
+<!--alex ignore daughter-son fairies --->
+<p>Entity Framework is not yet ready for storing an identifier for every proton in the universe and if you might want to be storing 38 digit identifiers (a phrase which I'm assured by my five-year old daughter actually kills <code class="language-plaintext highlighter-rouge">int32.MaxValue</code> fairies every time it is uttered) then you aren't going to be using Entity Framework and I'd guess you aren't going to be having a good time.</p>
+
+<h3 id="and-straight-from-the-magic-unicorns-mouth">And straight from the Magic Unicorns mouth</h3>
+
+<div class="tweet-wrapper">
+	<blockquote class="twitter-tweet" lang="en"><a href="https://twitter.com/pauldambra">@pauldambra</a> As you concluded, it's not possible to map BigInt with EF. Easiest solution is probably to bypass EF for that data.
+
+	— Entity Framework (@efmagicunicorns) <a href="https://twitter.com/efmagicunicorns/statuses/403996143677235200">November 22, 2013</a></blockquote><script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>
+</div>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>Some other articles...</h1>
+      
+
+      
+        <a href="/2018/06/serverless-5.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Part Five - Read Models
+      </h3>
+      <small>
+        10 Jun 2018
+      </small>
+  </div>
+</a>
+      
+        <a href="/2020/01/year-notes.html">
+  <div class="article-tile">
+      <h3>
+        2019 Year Notes
+      </h3>
+      <small>
+        07 Jan 2020
+      </small>
+  </div>
+</a>
+      
+        <a href="/2021/09/emotional-advice.html">
+  <div class="article-tile">
+      <h3>
+        Advice given on ending four years at Co-op
+      </h3>
+      <small>
+        17 Sep 2021
+      </small>
+  </div>
+</a>
+      
+  
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2013/11/astronomical-database-identfier.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2013/11/astronomical-database-identfier.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

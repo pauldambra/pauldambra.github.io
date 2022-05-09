@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Serverless - Part Three</title>
+    <link rel="canonical" href="https://pauldambra.dev/2018/02/serverless-3.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2018/02/serverless-3.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Serverless - Part Three" />
+    <meta property="og:description"  content="Examining event driven serverless systems" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Examining event driven serverless systems">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Serverless - Part Three",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"1928",
+   "url":"https://pauldambra.dev/2018/02/serverless-3.html",
+   "datePublished":"2018-02-05",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2018/02/serverless-3.html"
+   },
+   "articleBody":"Part  One  -  describing  event-driven  and  serverless  systems\n\nPart  Two  -  Infrastructure  as  code  walking  skeleton\n\nIn  this  post  we  will  look  at  how  SAM  local  let's  you  develop  locally  and  write  the  first  lambda  function.  To  take  a  ProposeDestination  command  and  write  a  DestinationProposed  event  to  the  eventstream.\n\n\"SAM  Local  can  be  used  to  test  functions  locally,  start  a  local  API  Gateway  from  a  SAM  template,  validate  a  SAM  template,  and  generate  sample  payloads  for  various  event  sources.\"\n\n\n\nSAM  Local\n\nYou  have  to  have  Docker  running  locally  and  then  you  can  npm  install  -g  aws-sam-local.\n\nTo  start  the  API  Gateway  and  Lambda  example  from  part  two  navigate  to  the  directory  containing  the  template.yaml  file  and  run  sam  local  start-api\n\nThis  starts  lambda  in  Docker  and  shows  what  endpoints  are  mounted:\n\n\n\nYou  can  then  POST  to  the  endpoint  curl  -H  \"Content-Type:  application/json\"  -X  POST  -d  '{\"geolocation\":\"xyz\",  \"name\":\"test\"}'  http://127.0.0.1:3000/destination\n\nWhich  outputs  the  same  information  as  you  would  see  in  cloudwatch  logs:\n\n\n\nDynamoDB\n\nThis  took  several  attempts  to  get  running  -  mostly  because  of  unfamiliarity  with  Docker  -  AWS  were  super  helpful  on  twitter  despite  my  silliness.  Without  that  confusion  this  would  have  been  very  straightforward.\n\nThere  are  three  steps  to  this:\n\n1)  Start  dynamodb\n\nDynamoDB  needs  to  be  run  as  a  named  container  and  on  the  same  Docker  network  as  SAM  local\n\ndocker  network  create  lambda-local\nsam  local  start-api  --docker-network  lambda-local\ndocker  run  -d  -v  \"$PWD\":/dynamodb_local_db  -p  8000:8000  --network  lambda-local  --name  dynamodb  cnadiminti/dynamodb-local\n\n\n2)  Create  the  DynamoDB  table\n\nSAM  local  can't  create  DynamoDB  tables  from  the  template.yaml  in  the  way  that  CloudFormation  will  when  the  SAM  application  is  deployed  so  the  table  needs  manually  creating.\n\nThe  following  AWS  CLI  command  will  create  the  table  as  defined  in  the  template.yaml:\n\naws  dynamodb  create-table  \\\n    --table-name  visitplannr-events  \\\n    --attribute-definitions  \\\n                AttributeName=EventId,AttributeType=S  AttributeName=StreamName,AttributeType=S  \\\n    --key-schema  AttributeName=StreamName,KeyType=HASH  AttributeName=EventId,KeyType=RANGE  \\\n    --provisioned-throughput  \\\n    ReadCapacityUnits=5,WriteCapacityUnits=5  \\\n    --endpoint-url  http://0.0.0.0:8000\n\n\n3)  Write  some  code  to  have  the  one  talk  to  the  other\n\nThe  client  connection  code  is:\n\n\nconst  AWS  =  require('aws-sdk')\nconst  awsRegion  =  process.env.AWS_REGION  ||  'eu-west-2'\n\nlet  dynamoDbClient\nconst  makeClient  =  ()  =&gt;  {\n    const  options  =  {\n        region:  awsRegion\n    }\n    if  (process.env.AWS_SAM_LOCAL)  {\n        options.endpoint  =  'http://dynamodb:8000'\n    }\n    dynamoDbClient  =  new  AWS.DynamoDB.DocumentClient(options)\n    return  dynamoDbClient\n}\n\nmodule.exports  =  {\n    connect:  ()  =&gt;  dynamoDbClient  ||  makeClient()\n}\n\n\n\nThis  module  exposes  a  connect  method  that  lazily  initializes  the  db  client.\n\nSAM  local  sets  an  AWS_SAM_LOCAL  environment  variable  so  the  code  checks  for  that  and  if  it  is  present  sets  the  endpoint  URL  to  http://dynamodb:8000.  This  is  the  container  name  and  the  port  it  exposes.\n\nFor  the  production  code  you  don't  need  to  set  any  endpoint  and  can  let  lambda  figure  out  what  to  connect  to.\n\nThe  propose  destination  handler\n\nThe  handler  should  act  as  a  composition  root.  It  creates  the  application's  object  graph  and  lets  the  parts  do  the  work.  This  allows  unit  tests  to  inject  fakes.  If  those  tests  were  to  exercise  the  handler  directly  the  code  would  run  the  dynamoDbClient  and  timeout  waiting  for  dynamodb.\n\nThe  handler  ends  up  looking  like  this:\n\n\nconst  httpResponse  =  require('./destinations/httpResponse')\nconst  mapCommand  =  require('./destinations/mapCommand')\n\nconst  guid  =  require('./GUID')\n\nlet  streamRepo\nconst  dynamoDbClient  =  require('./destinations/dynamoDbClient')\nconst  makeStreamRepository  =  require('./destinations/make-stream-repository')\n\nconst  commandHandler  =  require('./destinations/commandHandler')\n\nexports.handler  =  (event,  context,  callback)  =&gt;  {\n    const  proposeDestination  =  mapCommand.fromAPI(event,  'proposeDestination')\n\n    streamRepo  =  streamRepo  ||  makeStreamRepository.for(dynamoDbClient.connect(),  guid)\n\n    commandHandler\n        .apply({\n            command:  proposeDestination,\n            type:  'destinationProposed',\n            streamName:  'destination',\n            streamRepository:  streamRepo\n        })\n        .then(()  =&gt;  httpResponse.success(proposeDestination,  callback))\n        .catch((err)  =&gt;  httpResponse.invalid(err,  proposeDestination,  callback))\n}\n\n\n\nHere  the  handler  converts  the  API  gateway  event  to  a  ProposeDestination  command.  It  then  either  uses  the  existing  stream  repository  or  creates  one  currying  the  dynamodb  client  and  guid  generator.\n\nThe  command  handler  is  then  called.  It  either  converts  the  command  to  a  destinationProposed  event  and  returns  an  HTTP  200  success.  Or  fails  and  returns  an  HTTP  400  invalid  request.\n\nTesting  this  with  SAM  local\n\nI  haven't  wrapped  this  up  into  something  useful  that  could  be  run  in  a  CI  pipeline  but  as  a  sense  check  before  deployment  this  is  a  good  starting  point.\n\nFirst  ensure  SAM  local  is  running:\n\nAWS_REGION=eu-west-2  sam  local  start-api  --docker-network  lambda-local\n\nThen  also  that  dynamodb  is  running:\n\ndocker  run  -d  -v  \"$PWD\":/dynamodb_local_db  -p  8000:8000  --network  lambda-local  --name  dynamodb  cnadiminti/dynamodb-local\n\nThen  write  a  test  to  exercise  the  system:\n\n\nconst  request  =  require('supertest')\nvar  exec  =  require('child_process').exec\nconst  expect  =  require('chai').expect\n\nconst  rootUrl  =  process.env.rootUrl  ||  'http://127.0.0.1:3000'\nconst  dynamoDbUrl  =  process.env.dynamoDbUrl  ||  'http://0.0.0.0:8000'\n\nconst  countItemsInTable  =  ()  =&gt;  {\n    return  new  Promise((resolve,  reject)  =&gt;  {\n        exec(\n            `aws  dynamodb  scan  --table-name  visitplannr-events  --endpoint-url  ${dynamoDbUrl}`,\n            (error,  stdOut,  stdErr)  =&gt;  {\n                if  (error)  {\n                    reject(new  Error(error))\n                    return\n                }\n                const  scanResult  =  JSON.parse(stdOut)\n                resolve(scanResult.Items.length)\n            }\n        )\n    })\n}\n\ndescribe('propose  destination',  function  ()  {\n    it('can  write  an  event  to  dynamodb',  function  (done)  {\n        this.timeout(5000)\n\n        countItemsInTable()\n            .then(startCount  =&gt;  {\n                request(rootUrl)\n                    .post('/destination')\n                    .send('{\"name\":\"test  destination\",\"geolocation\":{\"x\":  0,  \"y\":  0}}')\n                    .end((err,  res)  =&gt;  {\n                        if  (err)  {\n                            done(err)\n                            return\n                        }\n                        countItemsInTable()\n                            .then(finalCount  =&gt;  {\n                                expect(finalCount).to.equal(startCount  +  1)\n                                done()\n                            })\n                            .catch(done)\n                    })\n            })\n            .catch(done)\n    })\n})\n\n\n\n\nThis  is  not  a  great  example  of  a  test  for  a  number  of  reasons  but  it  does  demonstrate  that  the  running  system  can  receive  an  HTTP  post  after  which  there  is  one  more  item  in  the  dynamodb  table.\n\nThe  devil  is  always  in  the  detail  so  this  test  wouldn't  be  good  enough  for  a  real  system.  But  it  does  show  that  the  lambda  functions  can  be  integration  tested  locally  with  real  HTTP  calls,  writing  to  a  local  dynamodb.\n\nUnit  testing\n\nThe  composition  root  approach  means  that  the  handler  can  be  unit  tested  without  relying  on  the  dynamodb  client.  As  an  example  testing  the  behaviour  in  the  repository  against  a  fake  dynamodb,  here  the  test  locks  in  that  the  repository  adds  a  correlation  id  to  the  item  written  to  the  stream:\n\n\nconst  streamRepoFactory  =  require('../destinations/make-stream-repository')\nconst  expect  =  require('chai').expect\n\ndescribe('the  stream  repository',  function  ()  {\n    const  fakeGuidGenerator  =  {\n        generate:  ()  =&gt;  'a-generated-guid'\n    }\n\n    const  fakeDynamoDbClient  =  {\n        put:  (params,  callback)  =&gt;  {  callback()  }\n    }\n\n    const  streamRepo  =  streamRepoFactory.for(fakeDynamoDbClient,  fakeGuidGenerator)\n\n    let  writeToTheStream\n\n    beforeEach(function  ()  {\n        writeToTheStream  =  streamRepo.writeToStream(\n            {\n                streamName:  'arbitrary-string',\n                event:  {winnie:  'pooh'}\n            }\n        )\n    })\n\n    it('decorates  the  event  with  a  correlation  id',  function  (done)  {\n        writeToTheStream\n            .then(writtenItem  =&gt;  {\n                expect(writtenItem.Item.event).to.deep.equal({\n                    winnie:  'pooh',\n                    correlationId:  'a-generated-guid'\n                })\n                done()\n            })\n            .catch(done)\n    })\n})\n\n\n\nWriting  to  the  event  stream  can  be  tested  with  a  guid  generator  that  always  generates  the  same  guid,  and  a  dynamodb  client  that  doesn't  connect  to  dynamodb.  This  lets  other  behaviour  be  tested  without  those  dependencies  complicating  or  slowing  down  the  tests.\n\nTesting  in  AWS\n\nThe  integration  test  above  is  bound  to  querying  dynamodb  using  the  AWS  CLI.  It  would  not  take  a  lot  of  fixing  to  have  that  test  run  against  an  actual  API  Gateway  endpoint  and  dynamodb  instance.\n\nAt  this  point  the  code  is  still  coming  together  but  demonstrates  that  there  is  a  local  dev  story,  the  system  could  be  tested  in  CI,  and  can  run  in  AWS.\n\nExtending  the  system\n\nSo  now  POSTing  to  Lambda  can  write  events  to  dynamodb.  In  the  next  post  we  will  look  at  subscribing  to  and  responding  to  that  event  stream.\n\nAll  the  code  for  this  stage  can  be  found  on  github\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Mon Feb 05 2018
+		</div>
+		<h1 class="title">Serverless - Part Three</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2018/02/serverless-3.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Serverless+-+Part+Three&via=pauldambra&url=https://pauldambra.dev/2018/02/serverless-3.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#serverless">
+				in: serverless
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#serverless">
+			serverless
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#series">
+			series
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#events">
+			events
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#eventdriven">
+			eventdriven
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p>In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command and write a <code class="language-plaintext highlighter-rouge">DestinationProposed</code> event to the eventstream.</p>
+
+<p>"<a href="https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md">SAM Local</a> can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."</p>
+
+<!--more-->
+
+<h1 id="sam-local">SAM Local</h1>
+
+<p>You have to have Docker running locally and then you can <code class="language-plaintext highlighter-rouge">npm install -g aws-sam-local</code>.</p>
+
+<p>To start the API Gateway and Lambda example from <a href="/2018/02/serverless-2.html">part two</a> navigate to the directory containing the template.yaml file and run <code class="language-plaintext highlighter-rouge">sam local start-api</code></p>
+
+<p>This starts lambda in Docker and shows what endpoints are mounted:</p>
+
+<p><img src="/images/start-api.png" alt="the start-api command console output" loading="lazy" /></p>
+
+<p>You can then POST to the endpoint <code class="language-plaintext highlighter-rouge">curl -H "Content-Type: application/json" -X POST -d '{"geolocation":"xyz", "name":"test"}' http://127.0.0.1:3000/destination</code></p>
+
+<p>Which outputs the same information as you would see in cloudwatch logs:</p>
+
+<p><img src="/images/api-console-output.png" alt="the api console output" loading="lazy" /></p>
+
+<h1 id="dynamodb">DynamoDB</h1>
+
+<p>This took several attempts to get running - mostly because of unfamiliarity with Docker - <a href="https://twitter.com/heitor_lessa/status/968574144681037826">AWS were super helpful on twitter</a> despite my silliness. Without that confusion this would have been very straightforward.</p>
+
+<p>There are three steps to this:</p>
+
+<h2 id="1-start-dynamodb">1) Start dynamodb</h2>
+
+<p>DynamoDB needs to be run as a named container and on the same Docker network as SAM local</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker network create lambda-local
+sam <span class="nb">local </span>start-api <span class="nt">--docker-network</span> lambda-local
+docker run <span class="nt">-d</span> <span class="nt">-v</span> <span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/dynamodb_local_db <span class="nt">-p</span> 8000:8000 <span class="nt">--network</span> lambda-local <span class="nt">--name</span> dynamodb cnadiminti/dynamodb-local
+</code></pre></div></div>
+
+<h2 id="2-create-the-dynamodb-table">2) Create the DynamoDB table</h2>
+
+<p>SAM local can't create DynamoDB tables from the template.yaml in the way that CloudFormation will when the SAM application is deployed so the table needs manually creating.</p>
+
+<p>The following AWS CLI command will create the table as defined in the template.yaml:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws dynamodb create-table <span class="se">\</span>
+  <span class="nt">--table-name</span> visitplannr-events <span class="se">\</span>
+  <span class="nt">--attribute-definitions</span> <span class="se">\</span>
+        <span class="nv">AttributeName</span><span class="o">=</span>EventId,AttributeType<span class="o">=</span>S <span class="nv">AttributeName</span><span class="o">=</span>StreamName,AttributeType<span class="o">=</span>S <span class="se">\</span>
+  <span class="nt">--key-schema</span> <span class="nv">AttributeName</span><span class="o">=</span>StreamName,KeyType<span class="o">=</span>HASH <span class="nv">AttributeName</span><span class="o">=</span>EventId,KeyType<span class="o">=</span>RANGE <span class="se">\</span>
+  <span class="nt">--provisioned-throughput</span> <span class="se">\</span>
+  <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span>5 <span class="se">\</span>
+  <span class="nt">--endpoint-url</span> http://0.0.0.0:8000
+</code></pre></div></div>
+
+<h2 id="3-write-some-code-to-have-the-one-talk-to-the-other">3) Write some code to have the one talk to the other</h2>
+
+<p>The client connection code is:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">AWS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">aws-sdk</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">awsRegion</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AWS_REGION</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">eu-west-2</span><span class="dl">'</span>
+
+<span class="kd">let</span> <span class="nx">dynamoDbClient</span>
+<span class="kd">const</span> <span class="nx">makeClient</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">region</span><span class="p">:</span> <span class="nx">awsRegion</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AWS_SAM_LOCAL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">http://dynamodb:8000</span><span class="dl">'</span>
+  <span class="p">}</span>
+  <span class="nx">dynamoDbClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nx">DynamoDB</span><span class="p">.</span><span class="nx">DocumentClient</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">dynamoDbClient</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">connect</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dynamoDbClient</span> <span class="o">||</span> <span class="nx">makeClient</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>This module exposes a connect method that lazily initializes the db client.</p>
+
+<p>SAM local sets an AWS_SAM_LOCAL environment variable so the code checks for that and if it is present sets the endpoint URL to <code class="language-plaintext highlighter-rouge">http://dynamodb:8000</code>. This is the container name and the port it exposes.</p>
+
+<p>For the production code you don't need to set any endpoint and can let lambda figure out what to connect to.</p>
+
+<h1 id="the-propose-destination-handler">The propose destination handler</h1>
+
+<p>The handler should act as a <a href="http://blog.ploeh.dk/2011/07/28/CompositionRoot/">composition root</a>. It creates the application's object graph and lets the parts do the work. This allows unit tests to inject fakes. If those tests were to exercise the handler directly the code would run the <code class="language-plaintext highlighter-rouge">dynamoDbClient</code> and timeout waiting for dynamodb.</p>
+
+<p>The handler ends up looking like this:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">httpResponse</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/httpResponse</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">mapCommand</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/mapCommand</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">guid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./GUID</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">streamRepo</span>
+<span class="kd">const</span> <span class="nx">dynamoDbClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/dynamoDbClient</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">makeStreamRepository</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/make-stream-repository</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">commandHandler</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./destinations/commandHandler</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">proposeDestination</span> <span class="o">=</span> <span class="nx">mapCommand</span><span class="p">.</span><span class="nx">fromAPI</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="dl">'</span><span class="s1">proposeDestination</span><span class="dl">'</span><span class="p">)</span>
+
+  <span class="nx">streamRepo</span> <span class="o">=</span> <span class="nx">streamRepo</span> <span class="o">||</span> <span class="nx">makeStreamRepository</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">dynamoDbClient</span><span class="p">.</span><span class="nx">connect</span><span class="p">(),</span> <span class="nx">guid</span><span class="p">)</span>
+
+  <span class="nx">commandHandler</span>
+    <span class="p">.</span><span class="nx">apply</span><span class="p">({</span>
+      <span class="na">command</span><span class="p">:</span> <span class="nx">proposeDestination</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">destinationProposed</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">streamName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">destination</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">streamRepository</span><span class="p">:</span> <span class="nx">streamRepo</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">httpResponse</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">proposeDestination</span><span class="p">,</span> <span class="nx">callback</span><span class="p">))</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">httpResponse</span><span class="p">.</span><span class="nx">invalid</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">proposeDestination</span><span class="p">,</span> <span class="nx">callback</span><span class="p">))</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Here the handler converts the API gateway event to a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command. It then either uses the existing stream repository or creates one currying the dynamodb client and guid generator.
+<!--alex ignore invalid --->
+The command handler is then called. It either converts the command to a <code class="language-plaintext highlighter-rouge">destinationProposed</code> event and returns an HTTP 200 success. Or fails and returns an HTTP 400 invalid request.</p>
+
+<h1 id="testing-this-with-sam-local">Testing this with SAM local</h1>
+
+<p>I haven't wrapped this up into something useful that could be run in a CI pipeline but as a sense check before deployment this is a good starting point.</p>
+
+<p>First ensure SAM local is running:</p>
+
+<p><code class="language-plaintext highlighter-rouge">AWS_REGION=eu-west-2 sam local start-api --docker-network lambda-local</code></p>
+
+<p>Then also that dynamodb is running:</p>
+
+<p><code class="language-plaintext highlighter-rouge">docker run -d -v "$PWD":/dynamodb_local_db -p 8000:8000 --network lambda-local --name dynamodb cnadiminti/dynamodb-local</code></p>
+
+<p>Then write a test to exercise the system:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">supertest</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">exec</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">).</span><span class="nx">exec</span>
+<span class="kd">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">chai</span><span class="dl">'</span><span class="p">).</span><span class="nx">expect</span>
+
+<span class="kd">const</span> <span class="nx">rootUrl</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">rootUrl</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">http://127.0.0.1:3000</span><span class="dl">'</span>
+<span class="kd">const</span> <span class="nx">dynamoDbUrl</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">dynamoDbUrl</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">http://0.0.0.0:8000</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">countItemsInTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">exec</span><span class="p">(</span>
+      <span class="s2">`aws dynamodb scan --table-name visitplannr-events --endpoint-url </span><span class="p">${</span><span class="nx">dynamoDbUrl</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stdOut</span><span class="p">,</span> <span class="nx">stdErr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+          <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="kd">const</span> <span class="nx">scanResult</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">stdOut</span><span class="p">)</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="nx">scanResult</span><span class="p">.</span><span class="nx">Items</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">propose destination</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">can write an event to dynamodb</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timeout</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+
+    <span class="nx">countItemsInTable</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">startCount</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">request</span><span class="p">(</span><span class="nx">rootUrl</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">/destination</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"name":"test destination","geolocation":{"x": 0, "y": 0}}</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">end</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+              <span class="k">return</span>
+            <span class="p">}</span>
+            <span class="nx">countItemsInTable</span><span class="p">()</span>
+              <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">finalCount</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">expect</span><span class="p">(</span><span class="nx">finalCount</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">startCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="nx">done</span><span class="p">()</span>
+              <span class="p">})</span>
+              <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span>
+          <span class="p">})</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+
+</code></pre></div></div>
+
+<p>This is not a great example of a test for a number of reasons but it does demonstrate that the running system can receive an HTTP post after which there is one more item in the dynamodb table.
+<!--alex ignore devil --->
+The devil is always in the detail so this test wouldn't be good enough for a real system. But it does show that the lambda functions can be integration tested locally with real HTTP calls, writing to a local dynamodb.</p>
+
+<h1 id="unit-testing">Unit testing</h1>
+
+<p>The composition root approach means that the handler can be unit tested without relying on the dynamodb client. As an example testing the behaviour in the repository against a fake dynamodb, here the test locks in that the repository adds a correlation id to the item written to the stream:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">streamRepoFactory</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../destinations/make-stream-repository</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">chai</span><span class="dl">'</span><span class="p">).</span><span class="nx">expect</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">the stream repository</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">fakeGuidGenerator</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">generate</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="dl">'</span><span class="s1">a-generated-guid</span><span class="dl">'</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">fakeDynamoDbClient</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">put</span><span class="p">:</span> <span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">callback</span><span class="p">()</span> <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">streamRepo</span> <span class="o">=</span> <span class="nx">streamRepoFactory</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">fakeDynamoDbClient</span><span class="p">,</span> <span class="nx">fakeGuidGenerator</span><span class="p">)</span>
+
+  <span class="kd">let</span> <span class="nx">writeToTheStream</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">writeToTheStream</span> <span class="o">=</span> <span class="nx">streamRepo</span><span class="p">.</span><span class="nx">writeToStream</span><span class="p">(</span>
+      <span class="p">{</span>
+        <span class="na">streamName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">arbitrary-string</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">event</span><span class="p">:</span> <span class="p">{</span><span class="na">winnie</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pooh</span><span class="dl">'</span><span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="p">})</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">decorates the event with a correlation id</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">writeToTheStream</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">writtenItem</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">writtenItem</span><span class="p">.</span><span class="nx">Item</span><span class="p">.</span><span class="nx">event</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">({</span>
+          <span class="na">winnie</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pooh</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">correlationId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a-generated-guid</span><span class="dl">'</span>
+        <span class="p">})</span>
+        <span class="nx">done</span><span class="p">()</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+</code></pre></div></div>
+
+<p>Writing to the event stream can be tested with a guid generator that always generates the same guid, and a dynamodb client that doesn't connect to dynamodb. This lets other behaviour be tested without those dependencies complicating or slowing down the tests.</p>
+
+<h1 id="testing-in-aws">Testing in AWS</h1>
+
+<p>The integration test above is bound to querying dynamodb using the AWS CLI. It would not take a lot of fixing to have that test run against an actual API Gateway endpoint and dynamodb instance.</p>
+
+<p>At this point the code is still coming together but demonstrates that there is a local dev story, the system could be tested in CI, and can run in AWS.</p>
+
+<h1 id="extending-the-system">Extending the system</h1>
+
+<p>So now POSTing to Lambda can write events to dynamodb. In the next post we will look at subscribing to and responding to that event stream.</p>
+
+<p>All the code for this stage can be found <a href="https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-three">on github</a></p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>More like this...</h1>
+      
+          <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>
+      
+          <a href="/2018/07/serverless-6.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Part Six - Making a view
+      </h3>
+      <small>
+        01 Jul 2018
+      </small>
+  </div>
+</a>
+      
+          <a href="/2018/06/serverless-5.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Part Five - Read Models
+      </h3>
+      <small>
+        10 Jun 2018
+      </small>
+  </div>
+</a>
+      
+   
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2018/02/serverless-3.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2018/02/serverless-3.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>

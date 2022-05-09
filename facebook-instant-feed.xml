@@ -1,0 +1,753 @@
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+  	<title>Mindless Rambling Nonsense</title>
+    <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+    <link>https://pauldambra.dev/</link>
+    <lastBuildDate>2022-05-09T13:24:46+00:00</lastBuildDate>
+    <language>en-gb</language>
+    
+    <item>
+      <title>Advice given on ending four years at Co-op</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2021/09/emotional-advice.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2021/09/emotional-advice.html</guid>
+
+      <pubDate>2021-09-17T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2021/09/emotional-advice.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Advice given on ending four years at Co-op" />
+			<meta property="og:description"  content="advice I wrote while feeling emotional on leaving the co-op" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I've finished at the Co-op after four years. I was feeling emotional and wrote some "wise words". I thought I'd record them here. In the future, when I'm reminiscing, they can transport me back to this feeling.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2021-09-17T08:00:00+00:00">September 17, 2021</time>
+			      <time class="op-modified" dateTime="2021-09-17T08:00:00+00:00">September 17, 2021</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Tech Debts</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2021/07/tech-debts.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2021/07/tech-debts.html</guid>
+
+      <pubDate>2021-07-21T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2021/07/tech-debts.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Tech Debts" />
+			<meta property="og:description"  content="There are four things we call tech debt" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>Here is something I had to write down at work. Something I've tried to say (with varying success) more than once. That I'm publishing here so I can refer back to it in future and in case it is useful for someone else</p>
+
+<p>When I am thinking about this, I am thinking about three things</p>
+
+<p><a href="https://agilemanifesto.org/principles.html">Two of the agile principles</a></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>Continuous attention to technical excellence and good design enhances agility.</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Simplicity–the art of maximising the amount of work not done–is essential.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>And the XP Rule</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p><a href="http://www.extremeprogramming.org/rules/refactor.html">Refactor Mercilessly</a></p>
+    </blockquote>
+  </li>
+</ul>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2021-07-21T08:00:00+00:00">July 21, 2021</time>
+			      <time class="op-modified" dateTime="2021-07-21T08:00:00+00:00">July 21, 2021</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>2020 Year Notes</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2021/01/year-notes.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2021/01/year-notes.html</guid>
+
+      <pubDate>2021-01-03T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2021/01/year-notes.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="2020 Year Notes" />
+			<meta property="og:description"  content="My year notes for 2020" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>Since <a href="https://twitter.com/pauldambra/status/916336773566992384">October 2017</a> I've been keeping week notes. I've found them a fantastic tool to track my focus and to remember to reflect on success (or lack of it). I didn't write them for most of 2020. When pandemic hit it seemed too self-centered. I wish I'd kept them up now.</p>
+
+<p>I wrote <a href="/2020/01/year-notes.html">year notes last year</a>. Surprisingly that was the only blog post I wrote last year 😱</p>
+
+<p>Here are mine for 2020… It feels egotistical… but it's intended to remind me to reflect. Hopefully it's useful to me in the future even if it isn't to anyone else.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2021-01-03T08:00:00+00:00">January 03, 2021</time>
+			      <time class="op-modified" dateTime="2021-01-03T08:00:00+00:00">January 03, 2021</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>2019 Year Notes</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2020/01/year-notes.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2020/01/year-notes.html</guid>
+
+      <pubDate>2020-01-07T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2020/01/year-notes.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="2019 Year Notes" />
+			<meta property="og:description"  content="My year notes for 2019" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>Since <a href="https://twitter.com/pauldambra/status/916336773566992384">October 2017</a> I've been keeping week notes. I've found them a fantastic tool to track my focus and to remember to reflect on success (or lack of it).</p>
+
+<p>Some <a href="https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe">colleagues</a> and <a href="https://twitter.com/tekin/status/1213878853560651776">some</a> <a href="https://alicebartlett.co.uk/blog/yearnotes-2019">tooters</a> have written year notes as 2019 ends. And here are mine… It feels egotistical… but hopefully it's useful to me in the future even if it isn't to anyone else.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2020-01-07T08:00:00+00:00">January 07, 2020</time>
+			      <time class="op-modified" dateTime="2020-01-07T08:00:00+00:00">January 07, 2020</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Serverless - Lessons learned</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2019/11/serverless-lessons-learned.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2019/11/serverless-lessons-learned.html</guid>
+
+      <pubDate>2019-11-30T10:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2019/11/serverless-lessons-learned.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Serverless - Lessons learned" />
+			<meta property="og:description"  content="reflecting on time spent building serverless systems" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>At the 2019 Manchester Java Unconference I attended a discussion on "Cloud Native Functions". It turned out nobody in the group had used "cloud native" but I've been working with teams using serviceful systems.</p>
+
+<p>I have a bad habit of talking more than I should but, despite my best efforts, the group expressed interest in hearing what teams at Co-op Digital had learned in the last ten months or so of working with serviceful systems in AWS.</p>
+
+<p>We defined some terms, covered some pitfalls and gotchas, some successes, and most of all our key learning: that once you can deploy one serviceful system into production you can move faster than you ever have before.</p>
+
+<p>Let's spend a little while defining our terms…</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2019-11-30T10:00:00+00:00">November 30, 2019</time>
+			      <time class="op-modified" dateTime="2019-11-30T10:00:00+00:00">November 30, 2019</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Serverless - Part Six - Making a view</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2018/07/serverless-6.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2018/07/serverless-6.html</guid>
+
+      <pubDate>2018-07-01T10:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2018/07/serverless-6.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Serverless - Part Six - Making a view" />
+			<meta property="og:description"  content="Examining event driven serverless systems - creating a view from the read model" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p><a href="/2018/06/serverless-5.html">Part Five</a> - Making a read model</p>
+
+<p>In part 5 the code was written to make sure that whenever a destination changes the recent destinations read model will update. Now that read model can be used to realise a view that a human can use. We'll add code to create a HTML view behind AWS cloudfront. This will demonstrate how event driven systems can be created by adding new code instead of changing existing code.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2018-07-01T10:00:00+00:00">July 01, 2018</time>
+			      <time class="op-modified" dateTime="2018-07-01T10:00:00+00:00">July 01, 2018</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Serverless - Part Five - Read Models</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2018/06/serverless-5.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2018/06/serverless-5.html</guid>
+
+      <pubDate>2018-06-10T10:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2018/06/serverless-5.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Serverless - Part Five - Read Models" />
+			<meta property="og:description"  content="Examining event driven serverless systems - creating a read model" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p>OK, four months since part four. I got a puppy and have written the code for this part of the series in 2 minute blocks after sleepless nights. Not a productive way to do things!</p>
+
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/images/puppy.webm" type="video/webm" />
+  <source src="/images/puppy.mp4" type="video/mp4" />
+</video>
+
+<h1 id="getting-ready-to-make-some-html">Getting ready to make some HTML</h1>
+
+<p>Now that the API lets clients propose destinations to the visit plannr the home page for the service can be built. It's going to show the most recently updated destinations.</p>
+
+<p>In a CRUD SQL system the application would have been maintaining the most up-to-date state of each destination in SQL and you'd read them when the HTML is requested. But this application isn't storing the state of the destinations but the facts that it has been told about the destinations.</p>
+
+<blockquote>
+  <p>As an aside a lot of people don't realise that CRUD SQL stands for <strong><em>C</em></strong> an we <strong><em>R</em></strong> eally not <strong><em>U</em></strong> se SQL <strong><em>D</em></strong> atabases they may <strong><em>S</em></strong> eem familiar but all the ORM stuff is well over our <strong><em>Q</em></strong> uota for comp <strong><em>L</em></strong> icated dependencies.</p>
+</blockquote>
+
+<p>In an event driven system applications subscribe to be notified when new events occur. They can create read models as the events arrive. Those read models are what the application uses to, erm, read data. So they're used in places many applications make SQL queries. Now this visit plannr application needs a read model for recently updated destinations.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2018-06-10T10:00:00+00:00">June 10, 2018</time>
+			      <time class="op-modified" dateTime="2018-06-10T10:00:00+00:00">June 10, 2018</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>DRY - considered harmful</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2018/03/harmful-dry.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2018/03/harmful-dry.html</guid>
+
+      <pubDate>2018-03-30T10:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2018/03/harmful-dry.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="DRY - considered harmful" />
+			<meta property="og:description"  content="DRY is about ideas not about code" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <h1 id="dry-or-wet">DRY or WET?</h1>
+
+<p>DRY, in software development, stands for Don't Repeat Yourself. This is often taken to mean remove any duplication of lines of code. See the anti-example <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">in the wiki page</a> comparing to WET code - which stands for Write Everything Twice. This reinforces the idea that this is about the amount you type.</p>
+
+<p>Below we're going to look at what the impact of removing duplication of lines of code does to some software, hopefully demonstrate that it isn't desirable as an absolute rule, and show what the better way might be.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2018-03-30T10:00:00+00:00">March 30, 2018</time>
+			      <time class="op-modified" dateTime="2018-03-30T10:00:00+00:00">March 30, 2018</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Serverless - Part Four</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2018/02/serverless-4.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2018/02/serverless-4.html</guid>
+
+      <pubDate>2018-03-15T10:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2018/02/serverless-4.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Serverless - Part Four" />
+			<meta property="og:description"  content="Examining event driven serverless systems" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p>In this post we start to see how we can build a stream of events that lets us create state. We'll do this by adding an event subscrber that waits until a user proposes a destination to visit and validates the location they've provided.</p>
+
+<p><img src="/images/second-slice-4.jpg" alt="the slice being built in this article" loading="lazy" /></p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2018-03-15T10:00:00+00:00">March 15, 2018</time>
+			      <time class="op-modified" dateTime="2018-03-15T10:00:00+00:00">March 15, 2018</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Serverless - Part Three</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2018/02/serverless-3.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2018/02/serverless-3.html</guid>
+
+      <pubDate>2018-02-05T10:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2018/02/serverless-3.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Serverless - Part Three" />
+			<meta property="og:description"  content="Examining event driven serverless systems" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p>In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command and write a <code class="language-plaintext highlighter-rouge">DestinationProposed</code> event to the eventstream.</p>
+
+<p>"<a href="https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md">SAM Local</a> can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2018-02-05T10:00:00+00:00">February 05, 2018</time>
+			      <time class="op-modified" dateTime="2018-02-05T10:00:00+00:00">February 05, 2018</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+  </channel>
+</rss>

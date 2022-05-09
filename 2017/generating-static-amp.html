@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';" />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MiRaNo"/>
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png"/>
+
+    <!-- Add to home screen for Windows-->
+    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png"/>
+    <meta name="msapplication-TileColor" content="#575757"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Generating static AMP pages</title>
+    <link rel="canonical" href="https://pauldambra.dev/2017/generating-static-amp.html" />
+    <meta property="og:url"          content="https://pauldambra.dev/2017/generating-static-amp.html" />
+    <meta property="og:type"         content="article" />
+    <meta property="og:title"        content="Generating static AMP pages" />
+    <meta property="og:description"  content="Using Jekyll plugins to generate AMP version of pages" />
+    <meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id"       content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Using Jekyll plugins to generate AMP version of pages">
+    <meta property="fb:pages" content="1029758320473951" />
+    <link rel="alternate" type="application/rss+xml" title="Mindless Rambling Nonsense" href="https://pauldambra.dev/feed.xml">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg">
+
+    <style>
+      .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f3f3; }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #FF6600 } /* Literal.Number.Bin */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sa { color: #CC3300 } /* Literal.String.Affix */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .dl { color: #CC3300 } /* Literal.String.Delimiter */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #CC00FF } /* Name.Function.Magic */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .vm { color: #003333 } /* Name.Variable.Magic */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+
+      
+      html { height: 100%; font-size: 20px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+html * { box-sizing: border-box; }
+
+body { font-family: "Khula", sans-serif; font-size: 1em; min-height: 100%; display: flex; flex-direction: column; margin: 0; line-height: 1.42857143; }
+
+main { background-color: #fff; padding: 10px 5px; /* flex: 1; would be enough but it looks bad in IE */ flex: 1 1 auto; width: 94%; margin: auto; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 .post-metadata { font-size: 1.2em; }
+
+h3.tag-list { font-size: 1.2em; }
+
+hr { clear: both; }
+
+p { word-wrap: break-word; }
+
+a { color: #000; text-decoration: underline; }
+
+a:visited { color: #000; }
+
+a:hover { color: #000; text-decoration: underline; }
+
+li { margin-left: 0.5em; }
+
+.pagination { text-align: center; word-spacing: 0.75em; }
+
+.pagination a { text-decoration: none; }
+
+.pagination a:hover { text-decoration: underline; }
+
+article header { display: flex; flex-direction: column; border-bottom: #000 solid 2px; background-color: #fff; color: #000; }
+
+article header .heading { flex: 3 0 auto; }
+
+article header .meta { flex: 1 0 auto; display: flex; flex-direction: row; }
+
+@media (max-width: 450px) { article header .meta { flex-direction: column; } }
+
+article header .meta .more-like-this { text-align: right; align-content: flex-end; flex: 3 0 auto; }
+
+article header .meta .post-category { float: none; }
+
+article header .meta .share-this { display: flex; align-self: flex-end; }
+
+article header .meta .share-this a { margin-right: 5px; }
+
+article header .meta .share-this img { width: 32px; height: 32px; }
+
+article #title { line-height: 75px; padding-top: 10px; }
+
+article h1 { -webkit-margin-after: 0; -webkit-margin-before: 5px; margin-bottom: 0; margin-top: 5px; }
+
+blockquote { padding: 5px 10px; margin: 0 0 20px; border-left: 5px solid #eee; }
+
+header { display: flex; flex-direction: column; background-color: #222; color: #fff; padding: 5px 15px 10px 15px; }
+
+header nav, header .top { background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.3); padding: 0.5em 1em; }
+
+header nav a + a { margin-left: 1em; }
+
+header .top { display: flex; flex-direction: row; }
+
+@media (max-width: 550px) { header .top { flex-direction: column; } header .top .name { margin-top: 1em; } }
+
+header .separator { flex-grow: 1; }
+
+header.hero { background-image: url("/images/cardboard.jpg"); }
+
+@media (max-width: 600px) { header.hero { background-position: -400px -23px; } }
+
+@media (max-width: 778px) { header.hero { height: 370px; } }
+
+@media (min-width: 778px) { header.hero { height: 437px; } }
+
+@media (min-width: 984px) { header.hero { background-size: 100%; } }
+
+@media (min-width: 1440px) { header.hero { height: 600px; } }
+
+@media (max-height: 320px) { header.hero { height: 250px; } }
+
+header.hero a { color: #fff; text-decoration: underline; }
+
+header.hero a:visited { color: #fff; }
+
+header.hero a:hover { color: #fff; text-decoration: underline; }
+
+header a { color: #aaa; text-decoration: underline; }
+
+header a:visited { color: #aaa; }
+
+header a:hover { color: #aaa; text-decoration: underline; }
+
+header .title a { text-decoration: none; }
+
+@media (min-width: 550px) { header .title { font-size: 150%; font-weight: bold; } }
+
+header .name { display: flex; align-items: flex-end; justify-content: flex-start; flex-direction: column; }
+
+@media (max-width: 750px) { header .name p { justify-content: flex-end; } }
+
+header .name .row { display: flex; align-items: center; }
+
+header .name .row div { margin-right: 15px; }
+
+header .name .row a { height: 32px; }
+
+header p { margin: 0; word-wrap: break-word; }
+
+@media screen and (max-width: 500px) { ul { padding: 0; } }
+
+.excerpt h1 { overflow: hidden; text-overflow: ellipsis; }
+
+.excerpt .series { display: none; }
+
+.categories-list li { list-style: none; margin: 0.2em; }
+
+.short { height: 100px !important; }
+
+.tag-list { font-weight: normal; }
+
+.tag-list li { list-style: none; margin: 0.2em; }
+
+.tag-list .post-category { float: none; }
+
+.tag-list h3 a { color: #000; text-decoration: none; }
+
+.tag-list h3 a:visited { color: #000; }
+
+.tag-list h3 a:hover { color: #000; text-decoration: underline; }
+
+.tag-list a { color: #aaa; text-decoration: none; }
+
+.tag-list a:visited { color: #aaa; }
+
+.tag-list a:hover { color: #aaa; text-decoration: underline; }
+
+.link-list .post-category { float: left; padding: 5px; }
+
+.category-link { font-weight: normal; }
+
+.category-link a { color: #000; text-decoration: none; }
+
+.category-link a:visited { color: #000; }
+
+.category-link a:hover { color: #000; text-decoration: underline; }
+
+.post-metadata { color: #575757; display: inline-block; padding: 1px 3px; }
+
+.post-metadata a { color: #575757; text-decoration: none; }
+
+.post-metadata a:visited { color: #575757; }
+
+.post-metadata a:hover { color: #575757; text-decoration: underline; }
+
+.post-category { float: right; }
+
+.post-category img { fill: #575757; width: 24px; height: 24px; display: inline-block; }
+
+.post-item { -moz-transition: 0.25s; -ms-transition: 0.25s; -o-transition: 0.25s; -webkit-transition: 0.25s; margin-bottom: 20px; transition: 0.25s; display: flex; flex-direction: column; flex: 4 0 auto; }
+
+.post-item:hover { background-color: rgba(245, 245, 245, 0.7); border-radius: 5px; }
+
+.post-item .metadata .post-category { text-align: right; }
+
+img { display: block; max-width: 1000px; vertical-align: middle; width: 100%; margin: auto; }
+
+aside { border-left: 1px solid darkslateblue; color: darkslateblue; margin-bottom: 1em; margin-left: 2em; padding-left: 0.5em; }
+
+aside.series { border-left: none; margin: 0 0 1.5em 0; }
+
+aside.series h1 { font-size: 1em; }
+
+aside.series .links { display: flex; }
+
+aside.series .links .previous { text-align: left; flex: 1 0 auto; }
+
+aside.series .links .next { text-align: right; flex: 1 0 auto; }
+
+.posts { list-style-type: none; margin-bottom: 2em; padding: 0; }
+
+.posts li { line-height: 1.75em; }
+
+footer { padding: 5px 15px; margin: 0 auto; width: 100%; background-color: #000; color: #fff; min-height: 2em; overflow: hidden; height: 30px; }
+
+footer a, footer a:visited, footer a:hover { color: #fff; line-height: 25px; vertical-align: bottom; text-decoration: none; }
+
+footer a img, footer a:visited img, footer a:hover img { width: 25px; height: 25px; line-height: 25px; vertical-align: sub; text-decoration: none; display: inline; }
+
+.paged-weeknotes a { text-decoration: none; }
+
+.further-reading { margin-top: 60px; }
+
+.further-reading a { text-decoration: none; }
+
+.further-reading .article-tile { display: inline-block; width: 30%; margin-right: 1%; border: 1px solid #aaa; padding: 5px; min-height: 10em; text-overflow: ellipsis; vertical-align: top; position: relative; }
+
+@media screen and (max-width: 425px) { .further-reading .article-tile { width: 100%; margin-bottom: 1%; } }
+
+.further-reading .article-tile small { bottom: 5px; position: absolute; right: 5px; }
+
+.highlight { overflow-x: scroll; }
+
+    </style>
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta name="google-site-verification" content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c" />
+    <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_DumQNjXoXRQpyaus5OM861c3BEYtwwKyzVTNmPs1XIt',{api_host:'https://app.posthog.com', _capture_performance: true, debug: true, autocapture: true, capture_pageview: true, disable_session_recording: false })
+</script> 
+  </head>
+  <body>
+    <header class="hero" role="banner">
+	<div class="top">
+		<div class="title">
+			<a href="/">Mindless Rambling Nonsense</a>
+		</div>
+		<div class="separator"></div>
+		<div class="name">
+			<div class="row">
+				<div>Paul D'Ambra</div>
+					<a href="https://github.com/pauldambra" rel="noopener">
+						<img src="/images/GitHub-Mark-Light-32px.png" alt="pauldambra on github" width="32" height="32">
+					</a>
+			</div>
+			<div class="row">
+				<div>Fangler</div>
+					<a href="https://twitter.com/pauldambra" rel="noopener">
+						<img src="/images/twitter-32.png" alt="pauldambra on twitter" width="32" height="32">
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="bottom">
+		<nav role="navigation">
+			<a href="/">Blog Posts</a>
+			<a href="/weeknotes.html">Week Notes</a>
+		</nav>
+	</div>
+</header>
+
+    <main role="main">
+      
+
+<script type="application/ld+json">
+{  
+   "@context":"http://schema.org",
+   "@type":"BlogPosting",
+   "headline":"Generating static AMP pages",
+   "genre":"",
+   "keywords":"",
+   "wordCount":"1901",
+   "url":"https://pauldambra.dev/2017/generating-static-amp.html",
+   "datePublished":"2017-03-22",
+   "author":{  
+      "@type":"Person",
+      "name":"Paul D'Ambra",
+      "sameAs":[  
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+   },
+   "publisher":{  
+"@type": "Organization",
+    "name": "Paul D'Ambra",
+    "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "contentUrl": "https://pauldambra.dev/images/logo.png",
+        "url": "https://pauldambra.dev"
+    }
+   },
+   "image":{  
+      "@type":"ImageObject",
+      "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+      "url":"https://pauldambra.dev",
+      "height":"450",
+      "width":"1000"
+   },
+   "mainEntityOfPage":{  
+      "@type":"WebPage",
+      "@id":"https://pauldambra.dev/2017/generating-static-amp.html"
+   },
+   "articleBody":"\n    \n        This  post  is  part  of  a  series  on  improving  this  blog  #recursion\n    \n    \n        \n            Previous  Post\n        \n        \n            Next  Post\n        \n    \n\n\nAMP  or  Accelerated  Mobile  Pages  is  a  Google-backed  project  that  allows  you  to  use  restricted  HTML  to  delivery  static  content  quickly.  Since  AMP  HTML  is  restricted  it  isn't  a  fit  for  every  site.\n\nSince  this  blog  is  published  as  static  HTML  articles  it  is  a  good  candidate  for  publishing  an  AMP  version.  An  open  source  AMP  jekyll  plugin  was  amended  to  add  AMP  versions  of  pages.\n\nThe  major  discovery  was  that  the  validation  tooling  around  AMP  is  awesome.  Compare  that  to  Facebook  Instant  Articles  where  there  is  almost  no  validation  tooling  (that  I  could  discover  at  least)…\n\nThis  didn't  feel  like  a  topic  that  justified  several  posts  so  to  avoid  taking  too  long  this  is  a  bit  of  a  whistle-stop  tour  of  adding  AMP  pages  to  this  blog.\n\n\n\nJekyll  Plugin\n\nThe  basic  idea  is  adapted  from  a  Jekyll  plugin  on  github.\n\nThere  are  several  parts  here:\n\n\n    Adding  an  AMP  layout  to  the  site\n    Adding  a  'generator'  to  the  Jekyll  module\n    Adding  an  'amp_images'  filter\n    Adding  an  'amp_tweets'  filter\n\n\nThis  was  a  very  manual  process  but  not  particularly  onerous.  Jekyll  proved  to  be  well-made  for  extension.\n\nAdding  an  AMP  layout\n\nAMP  has  some  required  markup.  So  an  amp-post.html  was  added  to  the  _layouts  folder.\n\n\n&lt;!doctype  html&gt;\n&lt;html  amp  lang=\"en\"&gt;\n    &lt;head&gt;\n        &lt;meta  charset=\"utf-8\"&gt;\n        &lt;title&gt;{{  page.title  }}&lt;/title&gt;\n        &lt;link  rel=\"canonical\"  href=\"{{  site.url  }}{{  page.url  }}\"  /&gt;\n        &lt;meta  name=\"viewport\"  content=\"width=device-width,minimum-scale=1,initial-scale=1\"&gt;\n        &lt;link  href=\"https://fonts.googleapis.com/css?family=Khula\"  rel=\"stylesheet\"&gt;\n        &lt;style  amp-custom&gt;\n            {%  include  syntax.css  %}\n            {%  capture  include_to_scssify  %}\n                {%  include  main.scss  %}\n            {%  endcapture  %}\n            {{  include_to_scssify  |  scssify  }}\n        &lt;/style&gt;\n        &lt;style  amp-boilerplate&gt;body{-webkit-animation:-amp-start  8s  steps(1,end)  0s  1  normal  both;-moz-animation:-amp-start  8s  steps(1,end)  0s  1  normal  both;-ms-animation:-amp-start  8s  steps(1,end)  0s  1  normal  both;animation:-amp-start  8s  steps(1,end)  0s  1  normal  both}@-webkit-keyframes  -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes  -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes  -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes  -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes  -amp-start{from{visibility:hidden}to{visibility:visible}}&lt;/style&gt;&lt;noscript&gt;&lt;style  amp-boilerplate&gt;body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}&lt;/style&gt;&lt;/noscript&gt;\n\n{%  if  page.body  contains  \"florp-wrapper\"  %}\n            &lt;script  async  custom-element=\"amp-twitter\"  src=\"https://cdn.ampproject.org/v0/amp-twitter-0.1.js\"&gt;&lt;/script&gt;\n{%  endif  %}\n\n        &lt;script  async  custom-element=\"amp-analytics\"\n        src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"&gt;&lt;/script&gt;\n        &lt;script  async  src=\"https://cdn.ampproject.org/v0.js\"&gt;&lt;/script&gt;\n\n&lt;link  rel=\"shortcut  icon\"  href=\"/favicon.ico\"  /&gt;\n\n        {%  include  openGraph.html  %}\n    &lt;/head&gt;\n    \n\n\nSo,  there's  an  &lt;style  amp-boilerplate/&gt;  element  which  has  to  be  included  and  the  &lt;html  amp  lang=\"en\"&gt;  declaration.\n\nscript  elements  are  declared  async.  Not  just  any  javascript  can  be  included.  Here  the  amp-analytics  script  is  loaded  to  allow  adding  google  analytics  to  the  page.\n\nCurrently  the  AMP  validator  considers  including  an  unnecessary  script  a  warning  and  not  an  error  but  that  could  change  in  future.  So  the  amp-twitter  script  is  loaded  but  only  if  there  is  an  embedded  tweet  in  the  page.\n\nStyles\n\nAll  styles  are  included  in  the  head  in  the  &lt;style  amp-custom/&gt;  element.  It  was  found  to  be  easier  to  load  all  styles  that  way  even  on  non-AMP  pages.  There  was  no  measurable  difference  in  page  rendering  with  styles  in  a  linked  stylesheet  versus  in  a  style  tag  in  the  head.\n\nPreviously  the  site  used  bootstrap  v3  for  styling  (which  is  burned  into  my  muscle  memory).  But  assessing  how  much  of  bootstrap  was  being  used  (hardly  any)  vs.  how  much  was  being  copied  into  the  head  of  the  page  (oodles)  for  AMP  made  bootstrap  a  difficult  choice  to  keep.\n\nBootstrap  is  MIT  licensed  so  only  the  used  styles  were  copied  into  the  site's  scss  file.  Mixed  in  with  the  custom  styles  there  are  only  c400  lines  of  styles.\n\nPresumably  it  is  not  true  for  all  sites  that  there  is  no  performance  difference  between  an  in-page  style  element  and  a  linked  sheet  but  there's  only  12Kb  of  SCSS  to  be  compiled  for  this  site…  and  a  third  of  that  is  for  syntax  highlighting  of  code  blocks.\n\nThe  Body\n\n\n    {%  capture  header  %}{%  include  header.html  %}{%  endcapture  %}\n    {{  header  |  amp_images:  false,  32,  32  }}\n    &lt;div  class=\"main\"&gt;\n\n    {%  \n        include  structuredData.html  \n        headline=page.title\n        genre=page.category\n        keywords=page.keywords\n        content=page.body\n        link=page.permalink\n        date=page.date\n    %}\n      \n    &lt;article&gt;\n    {%  capture  post_header  %}{%  include  post_header.html  %}{%  endcapture  %}\n    {{  post_header  |  amp_images  }}\n            &lt;div  class=\"post\"&gt;\n            {{  page.body  |  markdownify  |  amp_images  |  amp_tweets  }}  \n        &lt;/div&gt;\n    &lt;/article&gt;  \n\n    &lt;/div&gt;\n\n    {%  capture  footer  %}{%  include  footer.html  %}{%  endcapture  %}\n    {{  footer  |  amp_images:  false,  25,  25  }}\n\n\n\nAll  images  have  to  be  fed  to  the  amp_images  filter  (see  below).\n\nStructured  data  is  apparently  not  required  for  AMP  but  Google's  webmaster  tools  were  unhappy  if  it  was  not  present  so  the  structured  data  include  is  added.\n\nThe  main  content  is  also  passed  through  the  amp_tweets  filter  as  well  as  the  amp_images  filter.\n\n\n    \n        \n            `  {{  page.body\n            markdownify\n            amp_images\n            amp_tweets  }}  `\n        \n    \n\n\nSo  far  so  straightforward\n\nAdding  a  generator\n\nJekyll  generators  run  as  part  of  Jekyll's  build  and  \"create  additional  content  based  on  your  own  rules\".\n\nThis  generator  is  almost  exactly  the  same  as  found  on  Github.\n\nrequire  'thread'\nrequire  'thwait'\n\n    #  Generates  a  new  AMP  post  for  each  existing  post\n    class  AmpGenerator  &lt;  Generator\n        priority  :low\n        def  generate(site)\n            dir  =  site.config['ampdir']  ||  'amp'\n            threads  =  site.posts.docs.map  do  |post|\n                Thread.new  do\n                    index  =  AmpPost.new(site,  site.source,  File.join(dir,  post.id),  post)\n                    index.render(site.layouts,  site.site_payload)\n                    index.write(site.dest)\n                    site.pages  &lt;&lt;  index\n                end\n            end\n            ThreadsWait.all_waits(*threads)\n        end\n    end\nend\n\n\nFor  each  of  the  posts  in  the  site  this  initializes  an  AmpPost  as  a  copy  of  that  non  AMP  post  and  adds  that  new  post  into  an  amp  folder  in  the  output.\n\nSite  build  was  taking  around  18  seconds  after  adding  this  generator  (and  the  image  and  twitter  filters).  Amending  the  generator  so  that  it  creates  a  new  thread  for  each  AmpPost  and  then  waits  for  all  of  those  threads  to  finish  reduce  build  time  to  around  7  seconds!\n\nAdding  an  'amp_images'  filter\n\nAMP  images  must  be  given  an  explicit  size.  And  this  filter,  which  is  unchanged  from  that  found  on  github,  uses  nokogiri  to  find  each  img  element  and  convert  it  to  an  amp-image  element.\n\nSo  markup  like\n\n&lt;p&gt;\n    &lt;img  src=\"/images/yarn-desc.png\"  alt=\"Yarn  description\"  /&gt;\n&lt;/p&gt;\n\n\nbecomes\n\n&lt;p&gt;\n    &lt;amp-img  src=\"/images/yarn-desc.png\"  \n                      alt=\"Yarn  description\"  \n                      width=\"900\"  \n                      height=\"304\"  \n                      layout=\"responsive\"&gt;\n    &lt;/amp-img&gt;\n&lt;/p&gt;\n\n\nAdding  an  'amp_tweets'  filter\n\nIf  you  want  to  embed  a  tweet  in  a  blog  post  (and  I,  for  my  sins,  often  do)  then  twitter  provide  HTML  something  like\n\n\n&lt;blockquote  class=\"twitter-tweet\"  data-lang=\"en\"&gt;&lt;p  lang=\"en\"  dir=\"ltr\"&gt;\n    &lt;a  href=\"https://twitter.com/some_user\"&gt;@some_user&lt;/a&gt;  the  content  content  @sender  (@sender)  &lt;a  href=\"https://twitter.com/sender/status/IDFORTHETWEET\"&gt;August  20,  2016&lt;/a&gt;&lt;/blockquote&gt;\n&lt;script  async=\"\"  defer=\"\"  src=\"//platform.twitter.com/widgets.js\"  charset=\"utf-8\"&gt;&lt;/script&gt;\n\n\n\nAMP  insists  this  element  has  a  known  height  and  width  so  that  has  to  be  manually  edited  to\n\n\n&lt;div  class=\"florp-wrapper\"  data-width=\"292\"  data-height=\"350\"&gt;\n    &lt;blockquote  class=\"twitter-tweet\"  data-lang=\"en\"&gt;&lt;p  lang=\"en\"  dir=\"ltr\"&gt;\n        &lt;a  href=\"https://twitter.com/some_user\"&gt;@some_user&lt;/a&gt;  the  content  content  @sender  (@sender)  &lt;a  href=\"https://twitter.com/sender/status/IDFORTHETWEET\"&gt;August  20,  2016&lt;/a&gt;&lt;/blockquote&gt;\n    &lt;script  async=\"\"  defer=\"\"  src=\"//platform.twitter.com/widgets.js\"  charset=\"utf-8\"&gt;&lt;/script&gt;\n&lt;/div&gt;\n\n\n\nThe  amp_tweet  filter  then  uses  that  .florp-wrapper  class  to  find  each  tweet  and  convert  it  to  an  amp-twitter  element.\n\n&lt;div  class=\"florp-wrapper\"  data-width=\"292\"  data-height=\"350\"&gt;\n    &lt;div&gt;\n        &lt;amp-twitter  layout=\"responsive\"  data-tweetid=\"IDFORTHETWEET\"  width=\"292\"  height=\"350\"&gt;&lt;/amp-twitter&gt;\n    &lt;/div&gt;\n&lt;/div&gt;\n\n\nThe  necessity  to  manually  remember  to  wrap  the  embedded  tweets  in  a  div  with  the  correct  class  is  the  least  nice  part  of  this  whole  process  (but  it's  not  the  worst  thing  in  the  world).\n\n(the  tweets  aren't  really  wrapped  with  florp-wrapper  but  using  the  real  class  meant  the  script  was  included  and  so  failed  AMP  validation  :/)\n\nAMP  Validation\n\nThe  AMP  validator  is  fudging  awesome!  It  was  invaluable  in  figuring  out  if  I'd  set  this  all  up  correctly  and  then  identifying  old  posts  which  were  only  imported  HTML  and  not  Markdown  that  Jekyll  was  building.  Those  old  posts  held  the  majority  of  the  AMP  issues  identified.\n\nYou  can\n\n\n    paste  the  generated  AMP  html  directly  to  the  validator.\n    load  via  URL\n    have  it  as  a  browser  extension\n    and  run  it  as  part  of  a  script\n\n\nGoogle  Webmaster  tools\n\n\n\nGoogle  webmaster  tools  are  also,  slowly,  picking  up  that  the  AMP  pages  are  present.  Highlighting  warnings  and  errors  and  linking  out  to  the  validator.\n\nAnd  so…\n\nIf  you're  already  generating  articles  using  Jekyll  it's  well  worth  investigating  a  little  time  to  get  this  setup.  Either  because  it'll  be  interesting  to  do  or  because  you  believe  you  enough  traffic  from  mobile  devices  to  justify  not  making  those  readers  wait  before  they  can  consume  your  awesome  content.\n"
+}
+</script>
+<article>
+<header>
+	<div class="heading">
+		<div class="date">
+			Wed Mar 22 2017
+		</div>
+		<h1 class="title">Generating static AMP pages</h1>
+	</div>
+	<div class="meta">
+		<div class="share-this">
+			<a id="facebook-share-link" 
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2017/generating-static-amp.html">
+				<img src="/images/facebook-black-32.png" alt="share on facebook" width="32" height="32">
+			</a>
+			<a id="twitter-share-link"
+			   class="social-share" 
+			   target="_blank"
+			   rel="noopener"
+			   href="https://twitter.com/intent/tweet?text=Generating+static+AMP+pages&via=pauldambra&url=https://pauldambra.dev/2017/generating-static-amp.html">
+				<img src="/images/twitter-black-32.png" alt="share on twitter" width="32" height="32">
+			</a>
+		</div>
+		<div class="more-like-this">
+			<a class="post-metadata post-category"
+				href="/categories.html#amp">
+				in: AMP
+			</a>
+			<div>
+				
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#series">
+			series
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#blog">
+			blog
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#recursion">
+			recursion
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#amp">
+			AMP
+		</a>
+	</span>
+
+	<span class="post-category">
+		<img src="/images/tag.svg" alt="tag-icon"/>
+		<a class="post-metadata"
+			href="/tags.html#jekyll">
+			jekyll
+		</a>
+	</span>
+
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="post">
+		<aside class="series">
+  <h1>
+    This post is part of a series on improving this blog #recursion
+  </h1>
+  <div class="links">
+    <div class="previous">
+      <a href="/2017/testing-static-sites.html">Previous Post</a>
+    </div>
+    <div class="next">
+      <a href="/2017/testing-meaning.html">Next Post</a>
+    </div>
+  </div>
+</aside>
+
+<p><a href="https://www.ampproject.org/learn/overview/">AMP or Accelerated Mobile Pages</a> is a Google-backed project that allows you to use restricted HTML to delivery static content quickly. Since AMP HTML is restricted it isn't a fit for every site.</p>
+
+<p>Since this blog is published as static HTML articles it is a good candidate for publishing an AMP version. An open source AMP jekyll plugin was amended to add AMP versions of pages.</p>
+
+<p>The major discovery was that the validation tooling around AMP is awesome. Compare that to Facebook Instant Articles where there is almost no validation tooling (that I could discover at least)…</p>
+
+<p>This didn't feel like a topic that justified several posts so to avoid taking too long this is a bit of a whistle-stop tour of adding AMP pages to this blog.</p>
+
+<!--more-->
+
+<h1 id="jekyll-plugin">Jekyll Plugin</h1>
+
+<p>The basic idea is adapted from a <a href="https://github.com/juusaw/amp-jekyll/">Jekyll plugin on github</a>.</p>
+
+<p>There are several parts here:</p>
+
+<ul>
+  <li>Adding an AMP layout to the site</li>
+  <li>Adding a 'generator' to the Jekyll module</li>
+  <li>Adding an 'amp_images' filter</li>
+  <li>Adding an 'amp_tweets' filter</li>
+</ul>
+
+<p>This was a very manual process but not particularly onerous. Jekyll proved to be well-made for extension.</p>
+
+<h2 id="adding-an-amp-layout">Adding an AMP layout</h2>
+
+<p>AMP has some <a href="https://www.ampproject.org/docs/get_started/create/basic_markup">required markup</a>. So an <a href="https://github.com/pauldambra/blog_source/blob/7a39e7851dfb2cdf93ae28464d5f97ed7c1ad4c1/_layouts/amp-post.html">amp-post.html</a> was added to the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">amp</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>{{ page.title }}<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"canonical"</span> <span class="na">href=</span><span class="s">"{{ site.url }}{{ page.url }}"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width,minimum-scale=1,initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://fonts.googleapis.com/css?family=Khula"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">amp-custom</span><span class="nt">&gt;</span>
+      <span class="p">{</span><span class="err">%</span> <span class="err">include</span> <span class="err">syntax.css</span> <span class="err">%</span><span class="p">}</span>
+      <span class="p">{</span><span class="err">%</span> <span class="err">capture</span> <span class="err">include_to_scssify</span> <span class="err">%</span><span class="p">}</span>
+        <span class="p">{</span><span class="err">%</span> <span class="err">include</span> <span class="err">main.scss</span> <span class="err">%</span><span class="p">}</span>
+      <span class="p">{</span><span class="err">%</span> <span class="err">endcapture</span> <span class="err">%</span><span class="p">}</span>
+      <span class="p">{</span><span class="err">{</span> <span class="err">include_to_scssify</span> <span class="err">|</span> <span class="err">scssify</span> <span class="p">}</span><span class="err">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">amp-boilerplate</span><span class="nt">&gt;body</span><span class="p">{</span><span class="nl">-webkit-animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">;</span><span class="nl">-moz-animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">;</span><span class="nl">-ms-animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">;</span><span class="nl">animation</span><span class="p">:</span><span class="n">-amp-start</span> <span class="m">8s</span> <span class="n">steps</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">end</span><span class="p">)</span> <span class="m">0s</span> <span class="m">1</span> <span class="nb">normal</span> <span class="nb">both</span><span class="p">}</span><span class="k">@-webkit-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@-moz-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@-ms-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@-o-keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="k">@keyframes</span> <span class="n">-amp-start</span><span class="p">{</span><span class="nt">from</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">hidden</span><span class="p">}</span><span class="nt">to</span><span class="p">{</span><span class="nl">visibility</span><span class="p">:</span><span class="nb">visible</span><span class="p">}}</span><span class="nt">&lt;/style&gt;&lt;noscript&gt;&lt;style </span><span class="na">amp-boilerplate</span><span class="nt">&gt;body</span><span class="p">{</span><span class="nl">-webkit-animation</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span><span class="nl">-moz-animation</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span><span class="nl">-ms-animation</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span><span class="nl">animation</span><span class="p">:</span><span class="nb">none</span><span class="p">}</span><span class="nt">&lt;/style&gt;&lt;/noscript&gt;</span>
+
+{% if page.body contains "florp-wrapper" %}
+      <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">custom-element=</span><span class="s">"amp-twitter"</span> <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0/amp-twitter-0.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+{% endif %}
+
+    <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">custom-element=</span><span class="s">"amp-analytics"</span>
+    <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0/amp-analytics-0.1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">src=</span><span class="s">"https://cdn.ampproject.org/v0.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"shortcut icon"</span> <span class="na">href=</span><span class="s">"/favicon.ico"</span> <span class="nt">/&gt;</span>
+
+    {% include openGraph.html %}
+  <span class="nt">&lt;/head&gt;</span>
+  
+</code></pre></div></div>
+
+<p>So, there's an <code class="language-plaintext highlighter-rouge">&lt;style amp-boilerplate/&gt;</code> element which has to be included and the <code class="language-plaintext highlighter-rouge">&lt;html amp lang="en"&gt;</code> declaration.
+<!--alex ignore just --->
+<code class="language-plaintext highlighter-rouge">script</code> elements are declared async. Not just any javascript can be included. Here the amp-analytics script is loaded to allow adding google analytics to the page.</p>
+
+<p>Currently the AMP validator considers including an unnecessary script a warning and not an error but that could change in future. So the amp-twitter script is loaded but only if there is an embedded tweet in the page.</p>
+
+<h3 id="styles">Styles</h3>
+
+<p>All styles are included in the head in the <code class="language-plaintext highlighter-rouge">&lt;style amp-custom/&gt;</code> element. It was found to be easier to load all styles that way <em>even on non-AMP pages</em>. There was no measurable difference in page rendering with styles in a linked stylesheet versus in a style tag in the head.</p>
+
+<p>Previously the site used <a href="http://getbootstrap.com/">bootstrap v3</a> for styling (which is burned into my muscle memory). But assessing how much of bootstrap was being used (hardly any) vs. how much was being copied into the head of the page (oodles) for AMP made bootstrap a difficult choice to keep.</p>
+
+<p><a href="https://github.com/twbs/bootstrap/blob/9c469cd0e8abaac19c163622ed68b6783dfa366c/LICENSE">Bootstrap is MIT licensed</a> so only the used styles were copied into the site's scss file. Mixed in with the custom styles there are only c400 lines of styles.</p>
+
+<p>Presumably it is not true for all sites that there is no performance difference between an in-page style element and a linked sheet but there's only 12Kb of SCSS to be compiled for this site… and a third of that is for syntax highlighting of code blocks.</p>
+
+<h2 id="the-body">The Body</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  {% capture header %}{% include header.html %}{% endcapture %}
+  {{ header | amp_images: false, 32, 32 }}
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+
+  {% 
+    include structuredData.html 
+    headline=page.title
+    genre=page.category
+    keywords=page.keywords
+    content=page.body
+    link=page.permalink
+    date=page.date
+  %}
+   
+  <span class="nt">&lt;article&gt;</span>
+  {% capture post_header %}{% include post_header.html %}{% endcapture %}
+  {{ post_header | amp_images }}
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+      {{ page.body | markdownify | amp_images | amp_tweets }} 
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/article&gt;</span> 
+
+  <span class="nt">&lt;/div&gt;</span>
+
+  {% capture footer %}{% include footer.html %}{% endcapture %}
+  {{ footer | amp_images: false, 25, 25 }}
+
+</code></pre></div></div>
+
+<p>All images have to be fed to the <code class="language-plaintext highlighter-rouge">amp_images</code> filter (see below).</p>
+
+<p>Structured data is apparently not required for AMP but Google's webmaster tools were unhappy if it was not present so the structured data include is added.</p>
+
+<p>The main content is also passed through the <code class="language-plaintext highlighter-rouge">amp_tweets</code> filter as well as the <code class="language-plaintext highlighter-rouge">amp_images</code> filter.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>` {{ page.body</td>
+      <td>markdownify</td>
+      <td>amp_images</td>
+      <td>amp_tweets }} `</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So far so straightforward</p>
+
+<h1 id="adding-a-generator">Adding a generator</h1>
+
+<p>Jekyll <a href="https://jekyllrb.com/docs/plugins/#generators">generators</a> run as part of Jekyll's build and "create additional content based on your own rules".</p>
+
+<p>This generator is almost exactly the same as found on Github.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'thread'</span>
+<span class="nb">require</span> <span class="s1">'thwait'</span>
+
+  <span class="c1"># Generates a new AMP post for each existing post</span>
+  <span class="k">class</span> <span class="nc">AmpGenerator</span> <span class="o">&lt;</span> <span class="no">Generator</span>
+    <span class="n">priority</span> <span class="ss">:low</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+      <span class="n">dir</span> <span class="o">=</span> <span class="n">site</span><span class="p">.</span><span class="nf">config</span><span class="p">[</span><span class="s1">'ampdir'</span><span class="p">]</span> <span class="o">||</span> <span class="s1">'amp'</span>
+      <span class="n">threads</span> <span class="o">=</span> <span class="n">site</span><span class="p">.</span><span class="nf">posts</span><span class="p">.</span><span class="nf">docs</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+        <span class="no">Thread</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span>
+          <span class="n">index</span> <span class="o">=</span> <span class="no">AmpPost</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">site</span><span class="p">.</span><span class="nf">source</span><span class="p">,</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">post</span><span class="p">.</span><span class="nf">id</span><span class="p">),</span> <span class="n">post</span><span class="p">)</span>
+          <span class="n">index</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="n">site</span><span class="p">.</span><span class="nf">layouts</span><span class="p">,</span> <span class="n">site</span><span class="p">.</span><span class="nf">site_payload</span><span class="p">)</span>
+          <span class="n">index</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">site</span><span class="p">.</span><span class="nf">dest</span><span class="p">)</span>
+          <span class="n">site</span><span class="p">.</span><span class="nf">pages</span> <span class="o">&lt;&lt;</span> <span class="n">index</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+      <span class="no">ThreadsWait</span><span class="p">.</span><span class="nf">all_waits</span><span class="p">(</span><span class="o">*</span><span class="n">threads</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>For each of the posts in the site this initializes an <code class="language-plaintext highlighter-rouge">AmpPost</code> as a copy of that non AMP post and adds that new post into an amp folder in the output.</p>
+
+<p>Site build was taking around 18 seconds after adding this generator (and the image and twitter filters). Amending the generator so that it creates a new thread for each AmpPost and then waits for all of those threads to finish reduce build time to around 7 seconds!</p>
+
+<h1 id="adding-an-amp_images-filter">Adding an 'amp_images' filter</h1>
+
+<p><a href="https://www.ampproject.org/docs/reference/components/media/amp-img">AMP images must be given an explicit size</a>. And this filter, which is unchanged from that found on github, uses nokogiri to find each img element and convert it to an amp-image element.</p>
+
+<p>So markup like</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/images/yarn-desc.png"</span> <span class="na">alt=</span><span class="s">"Yarn description"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<p>becomes</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;amp-img</span> <span class="na">src=</span><span class="s">"/images/yarn-desc.png"</span> 
+           <span class="na">alt=</span><span class="s">"Yarn description"</span> 
+           <span class="na">width=</span><span class="s">"900"</span> 
+           <span class="na">height=</span><span class="s">"304"</span> 
+           <span class="na">layout=</span><span class="s">"responsive"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/amp-img&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<h1 id="adding-an-amp_tweets-filter">Adding an 'amp_tweets' filter</h1>
+
+<p>If you want to embed a tweet in a blog post (and I, for my sins, often do) then twitter provide HTML something like</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;blockquote</span> <span class="na">class=</span><span class="s">"twitter-tweet"</span> <span class="na">data-lang=</span><span class="s">"en"</span><span class="nt">&gt;&lt;p</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">dir=</span><span class="s">"ltr"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/some_user"</span><span class="nt">&gt;</span>@some_user<span class="nt">&lt;/a&gt;</span> the content content @sender (@sender) <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/sender/status/IDFORTHETWEET"</span><span class="nt">&gt;</span>August 20, 2016<span class="nt">&lt;/a&gt;&lt;/blockquote&gt;</span>
+<span class="nt">&lt;script </span><span class="na">async=</span><span class="s">""</span> <span class="na">defer=</span><span class="s">""</span> <span class="na">src=</span><span class="s">"//platform.twitter.com/widgets.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+</code></pre></div></div>
+
+<p>AMP insists this element has a known height and width so that has to be manually edited to</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"florp-wrapper"</span> <span class="na">data-width=</span><span class="s">"292"</span> <span class="na">data-height=</span><span class="s">"350"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;blockquote</span> <span class="na">class=</span><span class="s">"twitter-tweet"</span> <span class="na">data-lang=</span><span class="s">"en"</span><span class="nt">&gt;&lt;p</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">dir=</span><span class="s">"ltr"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/some_user"</span><span class="nt">&gt;</span>@some_user<span class="nt">&lt;/a&gt;</span> the content content @sender (@sender) <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/sender/status/IDFORTHETWEET"</span><span class="nt">&gt;</span>August 20, 2016<span class="nt">&lt;/a&gt;&lt;/blockquote&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">async=</span><span class="s">""</span> <span class="na">defer=</span><span class="s">""</span> <span class="na">src=</span><span class="s">"//platform.twitter.com/widgets.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+</code></pre></div></div>
+
+<p>The amp_tweet filter then uses that <code class="language-plaintext highlighter-rouge">.florp-wrapper</code> class to find each tweet and convert it to an amp-twitter element.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"florp-wrapper"</span> <span class="na">data-width=</span><span class="s">"292"</span> <span class="na">data-height=</span><span class="s">"350"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;amp-twitter</span> <span class="na">layout=</span><span class="s">"responsive"</span> <span class="na">data-tweetid=</span><span class="s">"IDFORTHETWEET"</span> <span class="na">width=</span><span class="s">"292"</span> <span class="na">height=</span><span class="s">"350"</span><span class="nt">&gt;&lt;/amp-twitter&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>The necessity to manually remember to wrap the embedded tweets in a div with the correct class is the least nice part of this whole process (but it's not the worst thing in the world).
+<!--alex ignore failed --->
+(the tweets aren't really wrapped with <a href="https://twitter.com/actioncookbook/status/684515262712967170?lang=en"><code class="language-plaintext highlighter-rouge">florp-wrapper</code></a> but using the real class meant the script was included and so failed AMP validation :/)</p>
+
+<h1 id="amp-validation">AMP Validation</h1>
+
+<p>The <a href="https://validator.ampproject.org/">AMP validator</a> is fudging awesome! It was invaluable in figuring out if I'd set this all up correctly and then identifying old posts which were only imported HTML and not Markdown that Jekyll was building. Those old posts held the majority of the AMP issues identified.</p>
+
+<p>You can</p>
+
+<ul>
+  <li>paste the generated AMP html <a href="https://validator.ampproject.org/">directly to the validator</a>.</li>
+  <li><a href="https://validator.ampproject.org/#url=http%3A%2F%2Fpauldambra.github.io%2Famp%2F2011%2F04%2Fssh-without-password%2Findex.html">load via URL</a></li>
+  <li>have it as a <a href="https://chrome.google.com/webstore/detail/amp-validator/nmoffdblmcmgeicmolmhobpoocbbmknc?hl=en">browser extension</a></li>
+  <li>and <a href="/2017/testing-static-sites.html">run it as part of a script</a></li>
+</ul>
+
+<h1 id="google-webmaster-tools">Google Webmaster tools</h1>
+
+<p><img src="/images/AMP-webmaster.png" alt="Webmaster tools AMP pages" loading="lazy" /></p>
+
+<p>Google webmaster tools are also, slowly, picking up that the AMP pages are present. Highlighting warnings and errors and linking out to the validator.</p>
+
+<h1 id="and-so">And so…</h1>
+
+<p>If you're already generating articles using Jekyll it's well worth investigating a little time to get this setup. Either because it'll be interesting to do or because you believe you enough traffic from mobile devices to justify not making those readers wait before they can consume your awesome content.</p>
+
+	</div>
+	<div class="further-reading">
+
+  
+
+  
+    <h1>Some other articles...</h1>
+      
+
+      
+        <a href="/2021/01/year-notes.html">
+  <div class="article-tile">
+      <h3>
+        2020 Year Notes
+      </h3>
+      <small>
+        03 Jan 2021
+      </small>
+  </div>
+</a>
+      
+        <a href="/2018/07/serverless-6.html">
+  <div class="article-tile">
+      <h3>
+        Serverless - Part Six - Making a view
+      </h3>
+      <small>
+        01 Jul 2018
+      </small>
+  </div>
+</a>
+      
+        <a href="/2021/07/tech-debts.html">
+  <div class="article-tile">
+      <h3>
+        Tech Debts
+      </h3>
+      <small>
+        21 Jul 2021
+      </small>
+  </div>
+</a>
+      
+  
+</div>
+
+</article>
+    </div>
+    <footer>
+	<div>
+		<a href="https://pauldambra.dev/feed.xml">
+			<img src="/images/rss.svg" alt="the rss feed">
+			Subscribe to RSS feed
+		</a>
+	</div>
+</footer>
+
+    
+    <script>
+      var tsl = document.getElementById('twitter-share-link')
+      tsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'twitter',
+          socialAction: 'tweet',
+          socialTarget: "https://pauldambra.dev/2017/generating-static-amp.html"
+        });
+      });
+
+      var fsl = document.getElementById('facebook-share-link')
+      fsl.addEventListener('click', function() {
+        ga('send', {
+          hitType: 'social',
+          socialNetwork: 'facebook',
+          socialAction: 'share',
+          socialTarget: "https://pauldambra.dev/2017/generating-static-amp.html"
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+
+  </body>
+</html>
