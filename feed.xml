@@ -1,0 +1,2086 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Mindless Rambling Nonsense</title>
+		<description>My thoughts are mindless and rambling so the best place for them is the internet</description>		
+		<link>https://pauldambra.dev</link>
+		<atom:link href="https://pauldambra.dev/feed.xml" rel="self" type="application/rss+xml" />
+		<updated>2025-08-06T14:37:01+00:00</updated>
+		
+			<item>
+				<title>How I use LLMs?</title>
+				<description>&lt;p&gt;I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don&apos;t think they&apos;re finished improving.&lt;/p&gt;
+
+&lt;p&gt;Let&apos;s &lt;del&gt;growth hack blog visitor numbers&lt;/del&gt; record how I use them today as a little reflection on where I think they work and where they don&apos;t. Something I can revisit as the tech (and my skill with it) improves&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally&quot;&gt;First, a necessary but brief diversion into how I use tools generally&lt;/h1&gt;
+
+&lt;p&gt;I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don&apos;t begruge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things&lt;/p&gt;
+
+&lt;p&gt;Because of that entry to the industry I&apos;m also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I&apos;m too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)&lt;/p&gt;
+
+&lt;p&gt;So, I &lt;em&gt;like&lt;/em&gt; having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: &quot;hey, why not like this?&quot;&lt;/p&gt;
+
+&lt;h1 id=&quot;do-i-think-llms-do-good-work&quot;&gt;Do I think LLMs do good work?&lt;/h1&gt;
+
+&lt;p&gt;It&apos;s like having a startlingly talented, but very overconfident, inexperienced colleague&lt;/p&gt;
+
+&lt;p&gt;They will swing from correcting you on the intricacies of some detail of technology to doing blindingly stupid things like naming variables with one of your competitors company names in them&lt;/p&gt;
+
+&lt;p&gt;And just like the work of any colleague where you bear more responsibility. It is on you to own making sure the work is good. If you&apos;re helping someone with less experience than you the mistakes are yours, don&apos;t blame the colleague / LLM&lt;/p&gt;
+
+&lt;p&gt;And just like working with any colleague… you can do more together than you could before - &lt;strong&gt;once you know how to work together&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As an example, while I&apos;m writing this Claude Code is writing some tests for me. I just did a &quot;mean colleague&quot; trick. I went in and commented out the implementation - and the tests carried on passing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/07/over-confident-1.png&quot; alt=&quot;the over confident colleague&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The LLM fixed that and we shipped the PR.&lt;/p&gt;
+
+&lt;p&gt;I find faking timers in Jest super confusing and couldn&apos;t figure it out… the LLM could 🤝&lt;/p&gt;
+
+&lt;h1 id=&quot;things-im-totally-sold-on&quot;&gt;Things I&apos;m totally sold on&lt;/h1&gt;
+
+&lt;h2 id=&quot;research-for-me&quot;&gt;Research for me&lt;/h2&gt;
+
+&lt;p&gt;I tend to use ChatGPT for this but only out of habit. I not-very-fondly remember days of sweating over documentation and blog posts while trying to figure out something.&lt;/p&gt;
+
+&lt;p&gt;Or, even worse, searching for your problem and finding a single hit…&lt;/p&gt;
+
+&lt;p&gt;a stack overflow question…&lt;/p&gt;
+
+&lt;p&gt;with no answers…&lt;/p&gt;
+
+&lt;p&gt;from years ago…&lt;/p&gt;
+
+&lt;p&gt;that you asked and have no memory of&lt;/p&gt;
+
+&lt;p&gt;🫠&lt;/p&gt;
+
+&lt;p&gt;Now, I can delegate that to the LLM. It does that groundwork, responds to follow-ups. &lt;del&gt;Can&apos;t&lt;/del&gt; Doesn&apos;t care when I ask silly questions.&lt;/p&gt;
+
+&lt;p&gt;I can do something else with my time while the legwork is being done.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;You have to remember that confabulation exists. I ask it for sources and go check for myself. Because I&apos;m confirming and critiquing (instead of doing the groundwork) it&apos;s quicker and easier work.&lt;/p&gt;
+
+&lt;p&gt;Also…. OMG if it does maths for you, make sure to double check the numbers. It can quickly go off the rails.&lt;/p&gt;
+
+&lt;h1 id=&quot;simple-tasks&quot;&gt;Simple tasks&lt;/h1&gt;
+
+&lt;p&gt;As mentioned above… this morning I&apos;ve got a couple of tricky things to figure out… and I wanted to write some tests on a bit of code that had let me down in one of our SDKs.&lt;/p&gt;
+
+&lt;p&gt;So, in the background Claude can figure out why the tests weren&apos;t working and get them working. Then I check that work, together we correct it.&lt;/p&gt;
+
+&lt;p&gt;In reality that probably saved me an hour of work (maybe less but definitely not more).&lt;/p&gt;
+
+&lt;p&gt;Could I do that every day? That&apos;s heading for most of a working week each month.That&apos;s quality memes on Slack time, practically for free!&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-1&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;I&apos;m pretty good at context switching, my life forces me to be. If you&apos;re not, you should figure out a different way of doing this.&lt;/p&gt;
+
+&lt;p&gt;And you&apos;re responsible for this work… even though you didn&apos;t write it. You still need to engage your brain. The machine isn&apos;t thinking. And the more nuance in the task, the more opportunity for it to confidently do something very silly&lt;/p&gt;
+
+&lt;h1 id=&quot;things-im-partly-sold-on&quot;&gt;Things I&apos;m partly sold on&lt;/h1&gt;
+
+&lt;h2 id=&quot;explaining-complex-things&quot;&gt;Explaining complex things&lt;/h2&gt;
+
+&lt;p&gt;The LLM is your over-confident colleague with arcane knowledge. You can ask: &quot;Hey, I&apos;m trying to figure out why my kafka consumer is timing out sometimes. Explain how a nodejs consumer behaves during cooperative rebalance and why it might time out.&quot;&lt;/p&gt;
+
+&lt;p&gt;And it will confidently share exactly why that is happening. Digesting the docs and the 1000s of blog posts. It will draw diagrams and propose solutions. Amazing learning tool.&lt;/p&gt;
+
+&lt;p&gt;I often work with open source tools that do complicated things I don&apos;t fully understand. Being able to ask &quot;what does this arcane few lines of code do&quot;. To get a quick start on figuring something out is super useful.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-2&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;It will also sometimes confidently explain &lt;em&gt;absolute nonsense&lt;/em&gt;. And when you say &quot;but the nodejs consumer doesn&apos;t have that method&quot;. It will reply &quot;Thanks! You&apos;re absolutely right.&quot; And then explain something else just as confidently.&lt;/p&gt;
+
+&lt;h2 id=&quot;being-your-army-of-interns&quot;&gt;Being your army of interns&lt;/h2&gt;
+
+&lt;p&gt;You can run more than one instance of a tool. And give each of them a different task. In theory that&apos;s a multiplier since you can have more than one &quot;intern&quot; doing work for you at the same time.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve now got two copies of our main repo on disk so that I can happily have two totally separate streams of work.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-3&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;Starting lots of things is not as powerful as finishing lots of things!&lt;/p&gt;
+
+&lt;p&gt;Also, personally, I purposefully don&apos;t have a job as a tech lead at a company that employs inexperienced folk and then expects the tech lead to make sure things stay on track. I&apos;ve had that job, it&apos;s a valid company strategy, it&apos;s not my jam.&lt;/p&gt;
+
+&lt;p&gt;I enjoy when I&apos;m making software and I&apos;m not a massive fan of rounds of reviewing PRs with a colleague that I can&apos;t simply trust. And you can&apos;t simply trust these machines. So, there&apos;s a worfklow here that is a multiplier which I haven&apos;t quite figured out… but the risk is that I end up squashing the fun bits of my job, and accidentally shipping a bunch of rubbish (as opposed to my current approach of enjoying the process of shipping artisanal, hand-crafted rubbish)&lt;/p&gt;
+
+&lt;h4 id=&quot;warning-2&quot;&gt;Warning 2?&lt;/h4&gt;
+
+&lt;p&gt;They&apos;re not actually very good software engineers… particularly since most of the data they&apos;ve ingested about software engineering is &quot;blogs on how to start something from scratch&quot;. So, if that&apos;s not the task. Then I find it often harder to prompt an LLM to do than to do it myself&lt;/p&gt;
+
+&lt;p&gt;Case in point…&lt;/p&gt;
+
+&lt;p&gt;While I was typing this post Claude was doing the work to duplicate a data management section of the application. I wouldn&apos;t have to think to do this, so giving it to a machine that isn&apos;t thinking &lt;em&gt;should&lt;/em&gt; be OK.&lt;/p&gt;
+
+&lt;p&gt;But in the end I did the job myself…&lt;/p&gt;
+
+&lt;p&gt;There was just enough nuance that Claude was making a mess of it.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&apos;m not good enough at prompting.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&apos;m giving it a job it&apos;s not ready for.&lt;/p&gt;
+
+&lt;p&gt;But there&apos;a a lot of snake oil to be sold in the gaps there…&lt;/p&gt;
+
+&lt;p&gt;For example…&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/07/mistake.png&quot; alt=&quot;the over confident colleague 2&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I pasted in the error message after the first set of changes it made. It decided that the problem was TypeScript was out of synch. So, it did some stuff with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touch&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo&lt;/code&gt; insisting all along that typescript was confused.&lt;/p&gt;
+
+&lt;p&gt;So I checked and, actually, it was using packages without installing them. This over-confident thing is amazing and horrifying at the same time.&lt;/p&gt;
+
+&lt;h2 id=&quot;reviewing-your-prs&quot;&gt;Reviewing your PRs&lt;/h2&gt;
+
+&lt;p&gt;Machines don&apos;t get bored or distracted (yet). So having a PR reviewer that can look at 78 changes in a rename or move refactor that won&apos;t get blind to the one difference where there&apos;s a mistake or a typo is pretty powerful. I&apos;ve tried three reviewer tools. They&apos;re all about as good and bad as each other.&lt;/p&gt;
+
+&lt;p&gt;Personally, I really hate the summary of the PR they all do. But then I&apos;ve got colleagues that hate writing PR descriptions I bet the summary is useful for them.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-4&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;It is not thinking, just pretending to. So when you get &quot;nit pick: the blah should be wired to the clink expander&quot; it is fine to just hit &quot;resolve conversation&quot; in GitHub. I think these are a nice pre-filter for human reviewers but they&apos;re nowhere near as useful as being able to tag a person you trust and respect.&lt;/p&gt;
+
+&lt;h1 id=&quot;things-im-not-sold-on&quot;&gt;Things I&apos;m not sold on&lt;/h1&gt;
+
+&lt;h2 id=&quot;writing-tests-with-an-llm&quot;&gt;Writing tests with an LLM&lt;/h2&gt;
+
+&lt;p&gt;I don&apos;t do TDD any more. Often I write tests after the implementation… shhh don&apos;t tell anyone. But for some types of tasks I do like to write a test or two first. Particularly &quot;someone says this is broken and needs fixing, is it?&quot;&lt;/p&gt;
+
+&lt;p&gt;Even pointing the LLM at existing tests I find they tend to churn out rubbish tests. I think that&apos;s probably because they&apos;ve ingested the internet and there are so many bad examples of writing tests on the internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;whatever-the-opposite-of-a-warning-is&quot;&gt;Whatever the opposite of a warning is?&lt;/h3&gt;
+
+&lt;p&gt;They don&apos;t get bored and have ingested the whole internet. So I find they&apos;re really good at &quot;i&apos;ve started writing parameterised tests, please add more examples to test edgecases in blah processing&quot; or &quot;look at the implementation file X and suggest missing tests or tests that can be removed in this test file&quot;.&lt;/p&gt;
+</description>
+				<pubDate>Thu, 24 Jul 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/07/how-i-use-llms.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/07/how-i-use-llms.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>How do I like to be managed?</title>
+				<description>&lt;p&gt;An amazing engineer colleague has taken on (booming, god-on-the-mountain voice) extra responsibilities. Unfortunately for them, one of those responsibilities is managing me.&lt;/p&gt;
+
+&lt;p&gt;They asked me how I like to be managed. I thought it was a good question, so I pushed it into my background processing queue, got distracted, and never answered them.&lt;/p&gt;
+
+&lt;p&gt;Periodically I feel guilty about that, so I thought I&apos;d write it down here. Maybe it will help me decide what my answer is…&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;I guess I should consider a few different things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;when I&apos;ve not been managed well&lt;/li&gt;
+  &lt;li&gt;when I&apos;ve been managed well&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;when-ive-not-been-managed-well&quot;&gt;When I&apos;ve not been managed well&lt;/h1&gt;
+
+&lt;h2 id=&quot;the-fool&quot;&gt;The fool&lt;/h2&gt;
+
+&lt;p&gt;Many years ago, I was working for a large Enterprise omni-clopse style technology services company. I was young and didn&apos;t know what I wanted from life.&lt;/p&gt;
+
+&lt;p&gt;Well, that&apos;s not quite true. I wanted to change the world of long, loud rock music. But I was kidding myself.&lt;/p&gt;
+
+&lt;p&gt;I had fallen into a job as an infrastructure engineer because I&apos;m pretty good at solving problems and I like computers.&lt;/p&gt;
+
+&lt;p&gt;The person managing me was… well… they were the worst manager I&apos;ve ever had. I didn&apos;t know that at the time. I&apos;d not had many managers before, so I didn&apos;t know what to expect.&lt;/p&gt;
+
+&lt;p&gt;There came a point where I wanted to be a software engineer. In a 1-2-1 they asked me about my goals, and I shared that. They gave me a long rambling speech about how I wouldn&apos;t enjoy that.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve been a software engineer for a long time now, and I love it.&lt;/p&gt;
+
+&lt;p&gt;I take responsibility for my mistakes… listening to them was a mistake, and that&apos;s on me. But I am pretty certain I would have been a software engineer years earlier if I hadn&apos;t listened to them.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-absent-manager&quot;&gt;The absent manager&lt;/h2&gt;
+
+&lt;p&gt;For a short while I was at a consulting company. My manager was on the same team as me. I think… it was never clear.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t remember a single 1-2-1 in the time I was there. Particularly, I don&apos;t once remember feeling pushed or supported. I didn&apos;t think I was doing super well&lt;/p&gt;
+
+&lt;p&gt;Again, I could have done something about this… I&apos;m not looking for someone at fault. But on reflection one of the reasons I left that job was a lack of feedback and a feeling I wasn&apos;t valued&lt;/p&gt;
+
+&lt;h1 id=&quot;when-ive-been-managed-well&quot;&gt;When I&apos;ve been managed well&lt;/h1&gt;
+
+&lt;h2 id=&quot;timely-feedback&quot;&gt;timely feedback&lt;/h2&gt;
+
+&lt;p&gt;In a 1-2-1 a long time ago, my manager said: &quot;I&apos;m too busy. And I value that when I see an email chain, and I see you&apos;ve replied, I can ignore it. Because I know it&apos;ll be sorted out.&quot;&lt;/p&gt;
+
+&lt;p&gt;I didn&apos;t think of myself that way. It was super clear about what was happening. And how I could continue or level it up.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m not in touch with them anymore, but that short feedback changed my approach more than any other moment I&apos;m aware of&lt;/p&gt;
+
+&lt;p&gt;And the reverse, a different manager said (paraphrasing) &quot;I need you to decide when to stop working on something.&quot; Really clear, timely example of what I was getting wrong, and how I could fix things.&lt;/p&gt;
+
+&lt;p&gt;I am… very easily distracted. One person described it as a &quot;curiosity-driven approach to work.&quot;&lt;/p&gt;
+
+&lt;p&gt;I used to apologise about this and try hard to avoid it. Until a colleague said: (paraphrasing) &quot;the thing is, you&apos;re good at it - why don&apos;t you just try and get better, instead of fighting yourself.&quot;&lt;/p&gt;
+
+&lt;p&gt;This has been transformative. I&apos;m more productive, more present as a parent, and less stressed about my behaviour (not the same as thinking I always get it right 🙈)&lt;/p&gt;
+
+&lt;h2 id=&quot;context-context-context&quot;&gt;context, context, context&lt;/h2&gt;
+
+&lt;p&gt;Another thing I value — the larger or faster the organization the more I miss it.&lt;/p&gt;
+
+&lt;p&gt;A more senior colleague often has context that you don&apos;t. Your manager is often that person. And sharing that with you is super valuable.&lt;/p&gt;
+
+&lt;p&gt;That might be how you&apos;re seen (&quot;your long to-do lists don&apos;t help people understand what you&apos;re working on&quot;).&lt;/p&gt;
+
+&lt;p&gt;It might be organizational context, for example, once I was worrying about the specifics of a deadline, a senior colleague said: &quot;We have to spend 90% of the marketing budget printing posters by the second week of the financial year. Nobody will care if your deadline moves, but some will really care if you know you&apos;ll miss it completely. Because they can&apos;t afford to reprint.&quot;&lt;/p&gt;
+
+&lt;p&gt;Suddenly, I didn&apos;t have to plan what week I would hit something. Just how confident I was for a &quot;yes/no&quot; decision. Way easier, and more helpful!&lt;/p&gt;
+
+&lt;p&gt;Or, when an exec at omniclopse was a shouty-man, throwing salesforce at every problem. Learning that they&apos;d been hired specifically to implement salesforce completely changed my understanding of their needs. They were trapped doing something they didn&apos;t want to do until they could point at implemented salesforce. And I was trapped with them until then…&lt;/p&gt;
+
+&lt;p&gt;That made my job so much easier.&lt;/p&gt;
+
+&lt;h2 id=&quot;experience--the-coach&quot;&gt;experience / the coach&lt;/h2&gt;
+
+&lt;p&gt;The person managing you has different experience to you.&lt;/p&gt;
+
+&lt;p&gt;A previous manager was a purposeful politician. Helping me understand that I had to give a Director level colleague &quot;something to say yes to&quot; instead of showing them why they were wrong (spoiler they were definitely wrong. I know I sometimes am… but not that time). By giving them something to say yes to, we could get past the loggerhead we were stuck at.&lt;/p&gt;
+
+&lt;p&gt;Another manager was great at coaching questions. Pushing you to see where you were missing something and to figure out how to address it. Long walks, with tough questions, that sometimes ended with ice-cream 🧑‍🍳👌&lt;/p&gt;
+
+&lt;h1 id=&quot;does-this-help-me-answer-their-question&quot;&gt;Does this help me answer their question?&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;timely feedback.
+    &lt;ul&gt;
+      &lt;li&gt;we&apos;re all works-in-progress and don&apos;t always see what we&apos;re getting right or wrong&lt;/li&gt;
+      &lt;li&gt;in-person feedback is the gold standard, but I prefer feedback sooner. so async is better than missed&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;similarly &quot;the coach&quot;
+    &lt;ul&gt;
+      &lt;li&gt;I worry that I&apos;m not great at reflecting on my work&lt;/li&gt;
+      &lt;li&gt;I also find impostor syndrome a real problem,&lt;/li&gt;
+      &lt;li&gt;and I&apos;m &quot;senior&quot; enough that people assume I know what I&apos;m doing&lt;/li&gt;
+      &lt;li&gt;So, I worry that I get less feedback than I otherwise would&lt;/li&gt;
+      &lt;li&gt;So, I love to hear critical feedback as much as positive&lt;/li&gt;
+      &lt;li&gt;I&apos;d rather be asked the uncomfortable question than miss the opportunity to improve&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;context, context, context
+    &lt;ul&gt;
+      &lt;li&gt;one colleague would refer to the &quot;Chief Reminding Officer&quot;&lt;/li&gt;
+      &lt;li&gt;it&apos;s easy to get lost in the forest even with a map in hand&lt;/li&gt;
+      &lt;li&gt;your manager often has a very different viewpoint (and worries they&apos;re too far from the forest)&lt;/li&gt;
+      &lt;li&gt;I&apos;d rather be reminded of the context more often than I need&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Tue, 03 Jun 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>2024 Year Notes</title>
+				<description>&lt;p&gt;I remain super un-inspired to write over the last few years. Which is a shame - because it&apos;s a a great way to learn. And very uninspired to write about 2024 in particular. So, here are some very short year notes for 2024.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;why-dont-i-want-to-write-about-2024&quot;&gt;Why don&apos;t I want to write about 2024…&lt;/h1&gt;
+
+&lt;p&gt;2024 was in some ways great, genuinely so, life is good…&lt;/p&gt;
+
+&lt;p&gt;But it was over-shadowed by grief and the preparation for grief. You can find out about that in this post &lt;a href=&quot;https://pauldambra.dev/2024/09/wwmd.html&quot;&gt;https://pauldambra.dev/2024/09/wwmd.html&lt;/a&gt; (unless you&apos;d like to avoid grief)&lt;/p&gt;
+
+&lt;h1 id=&quot;goals-i-chose-for-2024&quot;&gt;Goals I chose for 2024&lt;/h1&gt;
+
+&lt;h3 id=&quot;work&quot;&gt;work&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate&lt;/li&gt;
+  &lt;li&gt;take more time to lift my head up and look at the horizon&lt;/li&gt;
+  &lt;li&gt;get better at digging into tricky problems&lt;/li&gt;
+  &lt;li&gt;get better at not being distracted by tricky problems if there is some higher value work I should be doing&lt;/li&gt;
+  &lt;li&gt;speak to customers for at least 5 hours over the year&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;home&quot;&gt;home&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;more time with my family (screens off, not watching telly)&lt;/li&gt;
+  &lt;li&gt;solidify my transactional Italian, figure out how to head towards conversational Italian&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week (and lose weight)&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;travel&quot;&gt;Travel&lt;/h2&gt;
+
+&lt;p&gt;Google doesn&apos;t support timeline in the web view anymore… 🤷
+So, no image of my travel&lt;/p&gt;
+
+&lt;p&gt;I visited&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sicily
+    &lt;ul&gt;
+      &lt;li&gt;to hack on a heatmaps product&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Valencia
+    &lt;ul&gt;
+      &lt;li&gt;for a team offsite&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Vienna
+    &lt;ul&gt;
+      &lt;li&gt;for a team onboarding&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mykonos
+    &lt;ul&gt;
+      &lt;li&gt;for the whole company offsite&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;it is wild to me to consider that much travel in a year that felt so small&lt;/p&gt;
+
+&lt;h2 id=&quot;work-1&quot;&gt;Work&lt;/h2&gt;
+
+&lt;p&gt;At one point I was outside The Christie in Manchester (a specialist cancer treatment hospital we are so lucky to have). I overheard a man on the phone, anxious, agitated, almost shouting: &quot;they&apos;ve said they can&apos;t see me! i can&apos;t come back another day. if i have to take more time off work i&apos;ll lose my job&quot;.&lt;/p&gt;
+
+&lt;p&gt;I am uncountably grateful to have a job where I was told to take whatever time I needed. Where colleagues picked up the slack. And that I enjoy so much.&lt;/p&gt;
+
+&lt;h1 id=&quot;me&quot;&gt;Me&lt;/h1&gt;
+
+&lt;p&gt;I lost 12kg in 2024. The unrelenting drudgery of not eating is so dull.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve continued enjoying cooking. Food has always been an expression of love in my life.&lt;/p&gt;
+
+&lt;h2 id=&quot;first-pasta-of-2024&quot;&gt;first pasta of 2024&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/05/first-pasta-2024.jpg&quot; alt=&quot;the first pasta I cooked in 2024&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;last-pasta-of-2024&quot;&gt;last pasta of 2024&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/05/last-pasta-2024.jpg&quot; alt=&quot;the last pasta I cooked in 2024&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;my-favourite-moment-of-2024&quot;&gt;My favourite moment of 2024?&lt;/h2&gt;
+
+&lt;p&gt;Cheesy, but it was when my dad said &quot;i&apos;d be happy to be served that pasta in Italy&quot;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/05/dad-pasta-2024.jpg&quot; alt=&quot;the pasta my dad thought was good enough for italy&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;what-writing-this-taught-me-i-want-to-do-in-2025&quot;&gt;What writing this taught me I want to do in 2025&lt;/h1&gt;
+
+&lt;p&gt;OMG I have no idea… we&apos;re nearly 6 months through. I think I just need a year without life-grinding disruption.&lt;/p&gt;
+
+&lt;p&gt;Let&apos;s just carry everything forwards…&lt;/p&gt;
+
+&lt;h3 id=&quot;work-2&quot;&gt;work&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate&lt;/li&gt;
+  &lt;li&gt;take more time to lift my head up and look at the horizon&lt;/li&gt;
+  &lt;li&gt;get better at digging into tricky problems&lt;/li&gt;
+  &lt;li&gt;get better at not being distracted by tricky problems if there is some higher value work I should be doing&lt;/li&gt;
+  &lt;li&gt;speak to customers for at least 5 hours over the year&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;home-1&quot;&gt;home&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;more time with my family (screens off, not watching telly)&lt;/li&gt;
+  &lt;li&gt;solidify my transactional Italian, figure out how to head towards conversational Italian&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week (and lose weight)&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Mon, 05 May 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/05/year-notes.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/05/year-notes.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>What would mum do?</title>
+				<description>&lt;p&gt;Recently my mum died. And I don&apos;t know how to process what felt like a very quick and very slow experience all at the same time.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve been writing here for a long time, maybe writing here will help me… At least it helps shamelessly ask for &lt;a href=&quot;https://www.justgiving.com/page/in-memory-of-denise-dambra&quot;&gt;donations to Cancer Research&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Talking with my brother one thing that stood out was that we both want to remember to focus on the good things. There&apos;s a risk that otherwise we only remember the last few relatively horrible months. So, I wanted to spend some time to reflect about what things I want to be sure to remember.&lt;/p&gt;
+
+&lt;p&gt;(I normally try to vary the starting words of my sentences… but no apologies for overusing sentences starting with mum in this one)&lt;/p&gt;
+
+&lt;p&gt;#FuckCancer&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;what-would-mum-do&quot;&gt;What would mum do?&lt;/h1&gt;
+
+&lt;p&gt;I couldn&apos;t give the eulogy at the funeral - I barely got through a poetry reading. My brother did an &lt;strong&gt;amazing&lt;/strong&gt; job. In his eulogy he explained that in trying to think of how to approach it and what to say he had asked himself: &quot;what would mum do?&quot;. Funnily enough… I&apos;d asked myself the same question.&lt;/p&gt;
+
+&lt;p&gt;I didn&apos;t know how to get through the reading. And I remembered her saying that when she read a poem at her dad&apos;s funeral she had prepared by reading it over and over. So, that in the moment, if it was too hard, then maybe she would get through it just from practice. So simple, but just right. So, that&apos;s what I did.&lt;/p&gt;
+
+&lt;p&gt;When it came to it… I looked up and realised the crematorium was full. I saw faces I&apos;d not seen for decades. My heart was hammering, and I don&apos;t remember a moment of it. But I&apos;m told it was read well. Thanks mum.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m going to remember to ask myself that question.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-fearless-feminist-and-self-improver&quot;&gt;A fearless feminist and self-improver&lt;/h1&gt;
+
+&lt;p&gt;Mum chose the poem I read at the funeral. Honestly, I didn&apos;t like it… And I couldn&apos;t ask her why. So, what would mum do?&lt;/p&gt;
+
+&lt;p&gt;She had no option of what to study at school. Working-class girls from Manchester in the 60s were prepared to be housewives and nothing else. But, she went back to education later in life, getting a degree in her 50s. Ultimately having at least three careers however you cut it.&lt;/p&gt;
+
+&lt;p&gt;She would have learned about the poem and the poet. So, I learned about the poem and the poet. And discovered so many parallels for her life.&lt;/p&gt;
+
+&lt;p&gt;That Elizabeth Barrett Browning was a feminist and an abolitionist despite losing her family as a result. That her love with her husband was so deep as to be famous. That she spent a part of her life in Italy. That the poem communicates a profound love.&lt;/p&gt;
+
+&lt;p&gt;And, the poem made sense. I could completely understand why she&apos;d chosen it… to give us all one last, one &lt;em&gt;more&lt;/em&gt;, message of love. I knew how to read it.&lt;/p&gt;
+
+&lt;p&gt;Particularly, I want to remember the parallel that mum had always been a feminist.&lt;/p&gt;
+
+&lt;p&gt;Once when she worked at British Telecom (would have been the early 90s), the CEO was unexpectedly passing through the office and saying hello to people.&lt;/p&gt;
+
+&lt;p&gt;Mum: &quot;Can I ask you a question while you&apos;re here?&quot;&lt;br /&gt;
+CEO (surprised): &quot;of course&quot;&lt;br /&gt;
+Mum: &quot;Why are there no women on the board?&quot;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;From a house with no electric lights in Ancoats to fearlessly asking challenging questions of the powerful 💪&lt;/p&gt;
+
+&lt;p&gt;One lesson I know I have learned from her is to be a champion for what is right (however well I might be doing at that) and that there&apos;s always a return on investment from trying to be a better version of yourself.&lt;/p&gt;
+
+&lt;h1 id=&quot;show-a-genuine-interest-in-people&quot;&gt;Show a genuine interest in people&lt;/h1&gt;
+
+&lt;p&gt;Mum had a boundless optimism, and huge capacity for love and interest in people. In the last few months I lost count of the number of people from across decades of her life who have told us things like &quot;she saved me&quot;, or &quot;she was my honourary sister, gran, or mother&quot;. And she could talk for England… for those of you that know me - she made me look shy and retiring.&lt;/p&gt;
+
+&lt;p&gt;But (unlike me) she always asked questions.&lt;/p&gt;
+
+&lt;p&gt;An example…&lt;/p&gt;
+
+&lt;p&gt;In her final weeks while in hospital. There was a woman in the next bed who was silent and withdrawn. She wasn&apos;t interacting with other patients or hospital staff. To be kind… she looked like she&apos;d had a hard life. And, to be honest, I was a little afraid of her and tried not to make eye contact.&lt;/p&gt;
+
+&lt;p&gt;At some point I noticed mum had started asking her questions about herself. Little things at first, but with genuine interest in the replies. Genuine interest in the person. Within a few minutes there was a different person there. Engaged and talking - teaching the patients in the ward all about raising pigeons.&lt;/p&gt;
+
+&lt;p&gt;Sorry to all the friends who have put up with my info-dumping approach to conversations. I&apos;ll try and ask more questions - I promise.&lt;/p&gt;
+
+&lt;h1 id=&quot;theres-so-much-more&quot;&gt;There&apos;s so much more…&lt;/h1&gt;
+
+&lt;p&gt;There is so much more I could remember, and so many more lessons I could take - her optimism and positivity is already stamped on my approach to life. But these things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;what would mum do?&lt;/li&gt;
+  &lt;li&gt;be a champion for what you think is right&lt;/li&gt;
+  &lt;li&gt;be a better version of yourself&lt;/li&gt;
+  &lt;li&gt;show a genuine interest in people&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Those are things I want to carry with me.&lt;/p&gt;
+
+&lt;p&gt;I know that I am lucky to have had parents who loved and protected me, who never once gave me a moment to doubt there was always somewhere safe for me.&lt;/p&gt;
+
+&lt;p&gt;Shamelessly again I will take the opportunity to ask for &lt;a href=&quot;https://www.justgiving.com/page/in-memory-of-denise-dambra&quot;&gt;donations to Cancer Research at https://www.justgiving.com/page/in-memory-of-denise-dambra&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And then leave the final words to Elizabeth Barrett Browning&lt;/p&gt;
+
+&lt;p&gt;How do I love thee? Let me count the ways.&lt;br /&gt;
+I love thee to the depth and breadth and height&lt;br /&gt;
+My soul can reach, when feeling out of sight&lt;br /&gt;
+For the ends of being and ideal grace.&lt;br /&gt;
+I love thee to the level of every day’s&lt;br /&gt;
+Most quiet need, by sun and candle-light.&lt;br /&gt;
+I love thee freely, as men strive for right.&lt;br /&gt;
+I love thee purely, as they turn from praise.&lt;br /&gt;
+I love thee with the passion put to use&lt;br /&gt;
+In my old griefs, and with my childhood’s faith.&lt;br /&gt;
+I love thee with a love I seemed to lose&lt;br /&gt;
+With my lost saints. I love thee with the breath,&lt;br /&gt;
+Smiles, tears, of all my life; and, if God choose,&lt;br /&gt;
+I shall but love thee better after death.&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mum.jpg&quot; alt=&quot;mum meeting my #2 child&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Thu, 12 Sep 2024 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2024/09/wwmd.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2024/09/wwmd.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>2023 Year Notes</title>
+				<description>&lt;p&gt;I wrote &lt;a href=&quot;/2020/01/year-notes.html&quot;&gt;year notes for 2019&lt;/a&gt;, &lt;a href=&quot;/2021/01/year-notes.html&quot;&gt;and 2020&lt;/a&gt;, &lt;a href=&quot;/2023/01/year-notes.html&quot;&gt;and 2022&lt;/a&gt;. I remain super un-inspired to write over the last few years. Which is a shame - because it&apos;s a a great way to learn. Although 7 posts in 2023 isn&apos;t as few as I expected.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;goals-i-chose-for-2023&quot;&gt;Goals I chose for 2023&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;and whether I achieved them or not&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate 🧐&lt;/li&gt;
+  &lt;li&gt;practice Italian every day 🥑&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week 🌓&lt;/li&gt;
+  &lt;li&gt;8 leisurely cycle rides ❌&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice ✅&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;visit-italy-at-least-twice-&quot;&gt;visit Italy at least twice ✅&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2024/01/anzio-terrace.jpg&quot; alt=&quot;on the terrace in Anzio&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I spent an amazing week in Anzio (near Rome) in spring for a family holiday. And a differently amazing week in Bologna in the winter for work.&lt;/p&gt;
+
+&lt;p&gt;Anzio was particularly great because the folk that live there didn&apos;t speak English. So, I had to speak Italian. Proving I have graduated from &quot;Hangry three year old&quot; to &quot;Precocious three year old&quot;. A highlight was the owner of a pizza place complimenting my Italian.&lt;/p&gt;
+
+&lt;h3 id=&quot;8-leisurely-cycle-rides-&quot;&gt;8 leisurely cycle rides ❌&lt;/h3&gt;
+
+&lt;p&gt;I took 0 rides. I&apos;m not super sure how I&apos;d fit this into my life right now. Maybe this shouldn&apos;t be a goal. I love cycling, I don&apos;t love cycling around British drivers.&lt;/p&gt;
+
+&lt;h3 id=&quot;train-at-the-gym-at-least-twice-a-week-every-week-&quot;&gt;train at the gym at least twice a week every week 🌓&lt;/h3&gt;
+
+&lt;p&gt;Overall, I averaged a day a week at the gym. From January to July I averaged twice a week. But the rest of the year was tricky.&lt;/p&gt;
+
+&lt;p&gt;This has been great… I didn&apos;t think I&apos;d enjoy it. But, having time to listen to podcasts &amp;amp; audio books, and to watch Italian TV has been amazing. I&apos;m stronger than I&apos;ve ever been (I&apos;m not confused about how strong other people are relative to me (much stronger), but I&apos;m not in competition with other people. I&apos;m in competition with myself).&lt;/p&gt;
+
+&lt;p&gt;Why concentrate on being stronger..? Maybe, because I&apos;m not any lighter :/&lt;/p&gt;
+
+&lt;h3 id=&quot;practice-italian-every-day-&quot;&gt;practice Italian every day 🥑&lt;/h3&gt;
+
+&lt;p&gt;Another half achieved. I&apos;ve done a lot of practice, I&apos;m better at Italian than I was… but I&apos;m not being purposeful or consistent about it.&lt;/p&gt;
+
+&lt;p&gt;I think this (like cycling) is about finding a way to fit it into my life. To some extent I need to be gentle with myself - we have a 2 year old and that is a ridonculous amount of work. Some of these things will be way easier in 2 years time.&lt;/p&gt;
+
+&lt;p&gt;But I don&apos;t want to wait 2 years :/&lt;/p&gt;
+
+&lt;h3 id=&quot;continue-becoming-a-better-engineer-and-team-mate-&quot;&gt;continue becoming a better engineer and team-mate 🧐&lt;/h3&gt;
+
+&lt;p&gt;2023 was an awesome year of work. I&apos;ve worked on some of the hardest things I&apos;ve ever worked on with some genuinely amazing people. I&apos;ve done good work, and I&apos;ve achieved things. I&apos;m going to be stepping up as team lead in 2024 and I&apos;m super excited about that. We work on a wicked product with a great team. We&apos;re on the verge of releasing some awesome things. I&apos;m super lucky.&lt;/p&gt;
+
+&lt;p&gt;But the imposter syndrome has been going hard this year. It&apos;s frustrating to still have my inner voice undercutting me.&lt;/p&gt;
+
+&lt;p&gt;I like pairing things up so they are in tension with each other…&lt;/p&gt;
+
+&lt;p&gt;Seneca said &quot;Difficulty comes from our lack of confidence.&quot;&lt;/p&gt;
+
+&lt;p&gt;And Bertrand Russel said &quot;One of the painful things about our time is that those who feel certainty are stupid, and those with any imagination and understanding are filled with doubt and indecision.&quot;&lt;/p&gt;
+
+&lt;p&gt;It&apos;s a good tension… I want to bring confidence in my work, but I want to temper that with humility and doubt. I need to do what I&apos;d advise someone else to do and track what I&apos;m really achieving and respond to that. Otherwise there&apos;s no way to know what&apos;s imposter syndrome and what&apos;s my subconscious prompting me to take a second look at something.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-was-2023-like&quot;&gt;What was 2023 like?&lt;/h1&gt;
+
+&lt;p&gt;It would be weirdly coy to write this and not say that 2023 was defined by grief. The realisation that grief would be coming, the lost months waiting, and then the grief itself. I&apos;ve lost people before but nobody so close. Some combination of circumstances has meant it has cut so much deeper this time.&lt;/p&gt;
+
+&lt;p&gt;2023 very much felt like two years. The year before we knew grief was coming, and the year after. Despite that I really enjoyed the journey this year. I feel happier in myself.&lt;/p&gt;
+
+&lt;p&gt;#4 daughter still says &quot;stankyou&quot; instead of &quot;thank you&quot; and I&apos;m going to be horribly sad when she stops.&lt;/p&gt;
+
+&lt;p&gt;It is cliche but this year has made me wonder what I hope to be able to say on my death bed when asked &quot;what was your life like?&quot;.&lt;/p&gt;
+
+&lt;h2 id=&quot;travel&quot;&gt;Travel&lt;/h2&gt;
+
+&lt;p&gt;In 2023 I visited 2 countries (I&apos;m not counting the UK, and I&apos;m not counting the few hours I spent in Schipol airport as a trip to Holland 😊).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2024/01/travel.png&quot; alt=&quot;2023 travel map from Google Maps showing the countries and places I visited&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Aruba
+    &lt;ul&gt;
+      &lt;li&gt;for the whole company off-site&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Anzio, Italy
+    &lt;ul&gt;
+      &lt;li&gt;for a family holiday&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Bologna, Italy
+    &lt;ul&gt;
+      &lt;li&gt;for a team off-site&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Aruba was amazing, astounding, and awesome (all the As). For weeks beforehand I couldn&apos;t help crow-barring that we were going into every conversation. It was beautiful.&lt;/p&gt;
+
+&lt;p&gt;At our whole company off-site we have a hackathon. And so, we were all working in the bar at an all-inclusive resort. A woman from a recently arrived cruise ship came over: &quot;I have to ask… what kind of job do you all have that you&apos;re working in a bar in Aruba?&quot;.&lt;/p&gt;
+
+&lt;h2 id=&quot;work&quot;&gt;Work&lt;/h2&gt;
+
+&lt;p&gt;A couple of times I&apos;d said &quot;We need to understand Kafka and ClickHouse better&quot;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2024/01/monkeys-paw.gif&quot; alt=&quot;a monkey&apos;s paw&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A monkey&apos;s paw somewhere kicked in, and I spent a lot of time this year working with the sharper edges of Kafka and ClickHouse. We saved money, made things faster, and made things more reliable. Which let us improve the product.&lt;/p&gt;
+
+&lt;p&gt;I now understand Kafka and ClickHouse well enough to be truly afraid of how little I know about them 🤣&lt;/p&gt;
+
+&lt;p&gt;In Rome in 2022 I got the feedback (roughly) &quot;you spend a lot of time spinning plates, and worrying about it, but you&apos;re pretty good at it, maybe you should stop worrying about it, and get better at it&quot;… That really resonated with me, and I&apos;ve been trying to do that.&lt;/p&gt;
+
+&lt;p&gt;In Bologna in 2023 I got the feedback &quot;you&apos;re the king of distractions&quot;. There is still always the risk of having too much work-in-progress and not finishing things but letting myself admit that my mind works better with a higher personal WIP limit has been great.&lt;/p&gt;
+
+&lt;p&gt;I also got the feedback that I&apos;d done some things because we &lt;em&gt;could&lt;/em&gt; without stopping to think enough about whether we &lt;em&gt;should&lt;/em&gt;. Particularly since I&apos;m stepping into the team lead role I need to think deeply about this feedback.&lt;/p&gt;
+
+&lt;p&gt;Again this year I&apos;ve spent time talking to customers. And, as always, it&apos;s been absolutely essential to how I&apos;ve been able to do my job. I&apos;ve not purposefully focussed on this - other than knowing I want to be doing it. I&apos;m going to be more purposeful here…&lt;/p&gt;
+
+&lt;h1 id=&quot;me&quot;&gt;Me&lt;/h1&gt;
+
+&lt;p&gt;I&apos;ve been enjoying cooking. Food has always been an expression of love in my life. I&apos;ve got pretty good at pizza and pasta this year. Although I&apos;m still pretty terrible at focaccia.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2024/01/cooking.gif&quot; alt=&quot;a gif of meals I&apos;ve cooked in 2023&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;my-favourite-moment-of-2023&quot;&gt;My favourite moment of 2023?&lt;/h2&gt;
+
+&lt;p&gt;It has to be flushing this toilet in the modern art museum in Bologna to try and figure out if I was about to relieve myself in a piece of art or a toilet.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2024/01/toilet.jpg&quot; alt=&quot;a toilet in a modern art museum&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;what-writing-this-taught-me-i-want-to-do-in-2024&quot;&gt;What writing this taught me I want to do in 2024&lt;/h1&gt;
+
+&lt;p&gt;Looking back through photos and thinking over the year made me realise that every year is longer than I think it is going to be… we can fit a lot into a year. And we can miss a lot of opportunities…&lt;/p&gt;
+
+&lt;h3 id=&quot;work-1&quot;&gt;work&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate&lt;/li&gt;
+  &lt;li&gt;take more time to lift my head up and look at the horizon&lt;/li&gt;
+  &lt;li&gt;get better at digging into tricky problems&lt;/li&gt;
+  &lt;li&gt;get better at not being distracted by tricky problems if there is some higher value work I should be doing&lt;/li&gt;
+  &lt;li&gt;speak to customers for at least 5 hours over the year&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;home&quot;&gt;home&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;more time with my family (screens off, not watching telly)&lt;/li&gt;
+  &lt;li&gt;solidify my transactional Italian, figure out how to head towards conversational Italian&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week (and lose weight)&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Mon, 01 Jan 2024 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2024/01/year-notes.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2024/01/year-notes.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>Zucchini focaccia</title>
+				<description>&lt;p&gt;This year we&apos;ve grown way too many zucchinis.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2023/07/the plants.jpg&quot; alt=&quot;the plants&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One way I&apos;ve been trying to use them up is putting them in dough.&lt;/p&gt;
+
+&lt;p&gt;The kids love it!&lt;/p&gt;
+
+&lt;!--alex disable he-her dad-mom--&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2023/07/chopped.jpg&quot; alt=&quot;chopped garlic and zucchini&quot; loading=&quot;lazy&quot; /&gt;
+&lt;img src=&quot;/images/2023/07/blitzed.jpg&quot; alt=&quot;blitzed cooked zucchini&quot; loading=&quot;lazy&quot; /&gt;
+&lt;img src=&quot;/images/2023/07/dough.jpg&quot; alt=&quot;dough&quot; loading=&quot;lazy&quot; /&gt;
+&lt;img src=&quot;/images/2023/07/ready for the oven.jpg&quot; alt=&quot;ready for the oven&quot; loading=&quot;lazy&quot; /&gt;
+&lt;img src=&quot;/images/2023/07/ready for the oven two.jpg&quot; alt=&quot;ready for the oven two&quot; loading=&quot;lazy&quot; /&gt;
+&lt;img src=&quot;/images/2023/07/cooked-one.jpg&quot; alt=&quot;cooked-one&quot; loading=&quot;lazy&quot; /&gt;
+&lt;img src=&quot;/images/2023/07/cooked-two.jpg&quot; alt=&quot;cooked-two&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Mon, 24 Jul 2023 07:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/recipes/2023/07/zucchini-focaccia.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/recipes/2023/07/zucchini-focaccia.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>Paul&apos;s Law</title>
+				<description>&lt;p&gt;Everyone should have their own law… This is mine:&lt;/p&gt;
+
+&lt;h1 id=&quot;all-new-build-tools-are-better-than-what-came-before-until-they-are-able-to-solve-all-of-the-problems-of-the-thing-they-replaced-and-then-theyre-at-least-as-bad-a-new-tool-will-then-replace-them&quot;&gt;All new build tools are better than what came before. Until they are able to solve all of the problems of the thing they replaced and then they&apos;re at least as bad. A new tool will then replace them&lt;/h1&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Anyone who remembers the mad rush to replace every build tool in your JavaScript projects with Grunt, to have to replace that with Gulp only days later, will know what I mean.&lt;/p&gt;
+</description>
+				<pubDate>Thu, 08 Jun 2023 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2023/06/pauls-law.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2023/06/pauls-law.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>March 2023 Month Notes</title>
+				<description>&lt;p&gt;Year Goals for 2023&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate&lt;/li&gt;
+  &lt;li&gt;practice Italian every day&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week&lt;/li&gt;
+  &lt;li&gt;8 leisurely cycle rides&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;How did March go?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;In reverse order&lt;/p&gt;
+
+&lt;h2 id=&quot;visit-italy-at-least-twice&quot;&gt;Visit Italy at least twice&lt;/h2&gt;
+
+&lt;p&gt;Excitement building this month because &quot;Italy Trip Number One&quot; is in April…&lt;/p&gt;
+
+&lt;h2 id=&quot;8-leisurely-cycle-rides&quot;&gt;8 leisurely cycle rides&lt;/h2&gt;
+
+&lt;p&gt;0 cycle rides in Mar.&lt;/p&gt;
+
+&lt;h2 id=&quot;train-at-the-gym-at-least-twice-a-week&quot;&gt;train at the gym at least twice a week&lt;/h2&gt;
+
+&lt;p&gt;✅ Three times a week even while in the Caribbean with work. Still enjoying it.&lt;/p&gt;
+
+&lt;h2 id=&quot;practice-italian-every-day&quot;&gt;Practice Italian every day&lt;/h2&gt;
+
+&lt;p&gt;✅ only a few minutes at a time, but I did it every day.&lt;/p&gt;
+
+&lt;h2 id=&quot;continue-becoming-a-better-engineer-and-team-mate&quot;&gt;Continue becoming a better engineer and team-mate&lt;/h2&gt;
+
+&lt;p&gt;This was my last month on &lt;a href=&quot;https://posthog.com/handbook/small-teams/product-analytics&quot;&gt;team product analytics&lt;/a&gt;. I&apos;m moving to &lt;a href=&quot;https://posthog.com/handbook/small-teams/session-recording&quot;&gt;team session replay&lt;/a&gt;. Ben and I built network performance monitoring in December and had a great work vibe - exciting to be building more monitoring tools.&lt;/p&gt;
+
+&lt;p&gt;It makes sense to move teams now because there&apos;s a natural gap… 1 week in Aruba with work, and then 2 weeks in Italy. So, I can start fresh when I get back.&lt;/p&gt;
+
+&lt;h3 id=&quot;yep-thats-right---aruba&quot;&gt;Yep, that&apos;s right - Aruba&lt;/h3&gt;
+
+&lt;p&gt;We had our annual offsite in Aruba this month. It was a ridiculously beautiful place.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2023/04/02/pool.jpg&quot; alt=&quot;a pina colada by the pool&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The highlight is always &lt;a href=&quot;https://posthog.com/handbook/company/offsites#all-company-offsite-hackathon&quot;&gt;the hackathon&lt;/a&gt;. This year I worked on a team building issue tracking into PostHog.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2023/04/02/issue-tracking.gif&quot; alt=&quot;a gif of the issue tracking page we built&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hackathon always reminds me of how powerful it is to start work together and excited.&lt;/p&gt;
+
+&lt;p&gt;My new favourite planning method is &quot;post-it notes on a table with food and drink&quot;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2023/04/02/planning.jpg&quot; alt=&quot;a table with post-it notes on the surface&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Sun, 02 Apr 2023 18:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2023/03/mar-month-notes.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2023/03/mar-month-notes.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>I saved 183 million dollars by not moving to the Cloud</title>
+				<description>&lt;p&gt;The average human brain has 2.5 petabytes of memory (source: random google result). 2.5 Petabytes is equal to 2,500,000 Gigabytes. Or 2,500 terabytes. The u-12tb1.112xlarge instance on AWS has 13TB of memory.&lt;/p&gt;
+
+&lt;p&gt;So, conclusively, 193 u-12tb1.112xlarge instances are equivalent to one brain. Or your brain could run in AWS for 15,305,472.00 USD per month. Therefore, I&apos;ve saved 183 million dollars by not moving my brain to the cloud in the last year alone.&lt;/p&gt;
+
+&lt;p&gt;There seem to be a fashion for writing &lt;a href=&quot;https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0&quot;&gt;articles&lt;/a&gt; &lt;a href=&quot;https://tech.ahrefs.com/how-ahrefs-saved-us-400m-in-3-years-by-not-going-to-the-cloud-8939dd930af8&quot;&gt;claiming&lt;/a&gt; that some company has saved hundreds of millions of dollars by not moving to the cloud.&lt;/p&gt;
+
+&lt;p&gt;I managed phyisical servers for more than a decade. For the UK Magistrates Courts and for the British Mountaineering Council. I was pretty good at it. But, I absolutely jumped at the chance to move to the cloud. Why?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;i-really-dont-miss-running-my-own-kit-colocated-or-directly-owned&quot;&gt;I &lt;em&gt;really&lt;/em&gt; don&apos;t miss running my own kit (colocated or directly owned).&lt;/h2&gt;
+
+&lt;p&gt;I don&apos;t miss cycling around Manchester on a Bank Holiday weekend because I&apos;d miscalculated how much network cabling I&apos;d need for an upgrade.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t miss keeping a spreadsheet of storage so I knew when to order disks, negotiating with suppliers for cost of new disks, because I was buying a slightly smaller bulk than AWS.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t miss having to explain to folk in datacenter support that they could take the disks out of my failed server and put them in a new server if they had one available.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t miss the day the single point of failure in the rack failed and everything was offline while I waited for a new doohickey to be shipped to me because it didn&apos;t make sense to keep spares of everything on hand.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t miss trying to figure out if some new generation of server hardware would work for or would fit in my rack as manufacturers stopped making the kit we did use.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t miss hacking at a multi-thousand pound HP Proliant server with a breadknife because it was the only way to make the thing fit together due to a manufacturing error. And I couldn&apos;t wait for a replacement.&lt;/p&gt;
+
+&lt;h2 id=&quot;however&quot;&gt;However,&lt;/h2&gt;
+
+&lt;p&gt;The problem with all those articles isn&apos;t that they say you should or shouldn&apos;t run in the cloud. But that they make bold claims about what &lt;em&gt;everyone&lt;/em&gt; should do.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m not going to say every workload should run in the cloud (cliche nod to StackOverflow) but it certainly isn&apos;t free to get all of the benefits.&lt;/p&gt;
+</description>
+				<pubDate>Sun, 19 Mar 2023 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2023/03/the-cloud.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2023/03/the-cloud.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>Office 365 mega-thread</title>
+				<description>&lt;p&gt;Between the end of 2019 and when I left the Co-op on Sep 18th 2021 I used Office 365 and never found a single redeeming feature.&lt;/p&gt;
+
+&lt;p&gt;Well, maybe one, a small set of Co-op employees had access to slack and g-suite in Co-op Digital. But in the rest of Co-op they were using installed (i.e. local only) old versions of Office (&lt;strong&gt;without video-conferencing and chat&lt;/strong&gt;). For them, maybe Office 365 was an improvement - and certainly it made remote work during the pandemic possible.&lt;/p&gt;
+
+&lt;p&gt;But for me, it was a constant source of frustration.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m sure that there are great people working on Office with care and attention but I didn&apos;t &lt;em&gt;experience&lt;/em&gt; that. It was like being haunted and losing your mind all in one go. I had a habit of &lt;a href=&quot;https://twitter.com/pauldambra/status/1185848202249023488&quot;&gt;tooting my frustrations&lt;/a&gt;. I&apos;m aware of them having been submitted as evidence in one procurement process. I don&apos;t think they swung the decision.&lt;/p&gt;
+
+&lt;p&gt;If the tooter-web dissappeared they&apos;d be the one thing I missed and so I&apos;ve copied them here.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;I didn&apos;t start the thread until after I had already made several of the toots. So the initial few dates might appear out of order. I&apos;ve kept the order that I added them to the thread instead of listing them in date order.&lt;/p&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:20AM Oct 20, 2019&lt;/div&gt;
+    My life with office 365 is not richer
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;3:52 PM Oct 8, 2019&lt;/div&gt;
+    Me (a person at work): I&apos;d like to import* a calendar&lt;br /&gt;
+Office 365: &quot;YOU MUST WANT SPORTS!&quot;&lt;br /&gt;
+&lt;br /&gt;
+This should not be the default behaviour of anything&lt;br /&gt;
+&lt;br /&gt;
+* I want to view a calendar
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/1.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;7:46PM Sep 26, 2019&lt;/div&gt;
+    Interesting to learn that all one time password apps should behave the same because it&apos;s described in an RFC...&lt;br /&gt;
+&lt;br /&gt;
+And yet Office 365 can only use Microsoft authenticator&lt;br /&gt;
+&lt;br /&gt;
+#NewMicrosoft&lt;br /&gt;
+&lt;br /&gt;
+#VeryStaringFace
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:01PM Oct 18, 2019&lt;/div&gt;
+    Hey @office365 can you opensource? It would be quicker for me to contribute code to fix Word than to figure out how to amend a numbered list in this garbage fire
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/2.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:33PM Oct 9, 2019&lt;/div&gt;
+    In word you click &quot;Give feedback to Microsoft&quot;.&lt;br /&gt;
+&lt;br /&gt;
+ 3 apps, 3 different feedback mechanisms.&lt;br /&gt;
+&lt;br /&gt;
+that gives me a sad
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;7:41PM Oct 9, 2019&lt;/div&gt;
+    Where&apos;s the approprate place to report that the visual affordance for giving feedback is different in Outlook, Word, and Powerpoint (in the browser)?
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;4:48PM Oct 8, 2019&lt;/div&gt;
+    Hey @office365 what is going on with pasting into lists in Word in Chrome?!&lt;br /&gt;
+&lt;br /&gt;
+(gif: MS Word in the browser being very odd about lists)
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/3.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;4:29PM Oct 4, 2019&lt;/div&gt;
+    Me: &quot;a new Word document just look many times already in the last couple of days&quot;&lt;br /&gt;
+O365: &quot;Please just this time but not the others could you mindlessly click this box accepting a certificate&quot;&lt;br /&gt;
+Me: *just wanting to write some text *clicks OutlookO365: &quot;H! Psyche! Nothing happened . Lol&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;6:03PM Oct 9, 2019&lt;/div&gt;
+    I just selected a time for an invite in outlook calendar in a browser on my phone. &lt;br /&gt;
+&lt;br /&gt;
+Great example of why you should use native inputs instead of building your own&lt;br /&gt;
+&lt;br /&gt;
+(Spoler that was not a native input and it was too hard)
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:20AM Oct 20, 2019&lt;/div&gt;
+    And today, I found a uservoice entry for snoozing email (blimey do I miss @inboxbygmail)&lt;br /&gt;
+&lt;br /&gt;
+I can sign in using google or facebook but not office 365&lt;br /&gt;
+&lt;br /&gt;
+I have twice given consent for storage of PII but my vote hasn&apos;t registered
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/4.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:24AM Oct 20, 2019&lt;/div&gt;
+    I&apos;ve just realised that I can &quot;like&quot; an email in Outlook&lt;br /&gt;
+&lt;br /&gt;
+What am I supposed to imagine happens when I do that?!&lt;br /&gt;
+&lt;br /&gt;
+Does the other person get an email saying that I&apos;ve liked a different email? What is it for?
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:39AM Oct 20, 2019&lt;/div&gt;
+    Outlook: &quot;try the new focussed inbox. we&apos;ll stop moving messages to the &apos;Clutter&apos; folder&quot;&lt;br /&gt;
+Me: &quot;What&apos;s the clutter folder?&quot; Where is that?! Ugh I guess I&apos;ll learn more&quot;&lt;br /&gt;
+Outlook: &quot;lol video is unavailable. psyche!&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/5.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+        &lt;img src=&quot;/images/office365/6.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:41AM Oct 20, 2019&lt;/div&gt;
+    Nope, no clutter folder :/
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/7.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;1:39PM Oct 21, 2019&lt;/div&gt;
+    Listening to someone use Outlook for the first time&lt;br /&gt;
+&lt;br /&gt;
+&quot;this isn&apos;t nice&quot;&lt;br /&gt;
+&quot;that&apos;s unexpected&quot;&lt;br /&gt;
+&lt;br /&gt;
+#UX
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:00PM Oct 21, 2019&lt;/div&gt;
+    Insert a picture with the cursor in a cell in excel. Adds image at full size.&lt;br /&gt;
+&lt;br /&gt;
+Insert a picture in a powerpoint slide. Adds image as small as it feels it can get away with.&lt;br /&gt;
+&lt;br /&gt;
+As a user&lt;br /&gt;
+I want adding images to be as frustrating as possible&lt;br /&gt;
+So that I close my laptop and go outside
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:10AM Oct 24, 2019&lt;/div&gt;
+    Me: *I wonder if I can book a meeting with someone&lt;br /&gt;
+Calendar: I WILL SHOW YOU MYSELF HORZONTL SO ALL TEXT IS HIDDEN. I HALP YOU MAKE A DECIDE
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/8.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:35PM Oct 29, 2019&lt;/div&gt;
+    Calendar: &quot;Don&apos;t worry some of what you need to click on is off th ebottom of the screen but despite it being lierally the default behaviour of a web page you can&apos;t scroll to it&quot;&lt;br /&gt;
+Calendar: *holds up hand for high five
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/9.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;1:00PM Nov 6, 2019&lt;/div&gt;
+    Presented without comment #calendar #search
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/10.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:58AM Nov 25, 2019&lt;/div&gt;
+    The two states of opening an email in Outlook on poor signal&lt;br /&gt;
+&lt;br /&gt;
+(NB I have gmail open in another window in the same browser. Guess whether it can open my mail)
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/11.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+        &lt;img src=&quot;/images/office365/12.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:42AM Dec 3, 2019&lt;/div&gt;
+    Me: find this document&lt;br /&gt;
+OneDrive: here are some results... including the folder they are in...&lt;br /&gt;
+Me: oh, useful can I open that folder from here&lt;br /&gt;
+OneDrive: No!
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/13.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:44AM Dec 3, 2019&lt;/div&gt;
+    And just randomly someone else&apos;s name is the title of the left hand column of the OneDrive page.&lt;br /&gt;
+&lt;br /&gt;
+Really is the least discoverable UI I&apos;ve worked with for quite some time.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/14.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:56PM Dec 3, 2019&lt;/div&gt;
+    When the browser tab has this red thing it&apos;s Outlook making it look like you&apos;ve new mail when actually you haven&apos;t
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/15.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:28AM Dec 12, 2019&lt;/div&gt;
+    Me: navigates to a week in the calendar&lt;br /&gt;
+Me: &quot;yep, that&apos;s the one&quot; *clicks new event&lt;br /&gt;
+Office 364.5: Ah, you must want to default to today not the week you&apos;re looking actually
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/16.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;6:58PM Dec 19, 2019&lt;/div&gt;
+    My office 420 session just expired *while* I was typing into a Word document.&lt;br /&gt;
+&lt;br /&gt;
+It told me to refresh the page.&lt;br /&gt;
+&lt;br /&gt;
+I did.&lt;br /&gt;
+&lt;br /&gt;
+3 paragraphs of text gone.&lt;br /&gt;
+&lt;br /&gt;
+I have literally never lost a character of text in over a decade of using Google.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:23PM Jan 28, 2020&lt;/div&gt;
+    Today in my-life-editing-word-documents-in-chrome the cursor moves around while I&apos;m typing and so every sentence is a battle
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/17.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:17AM Feb 11, 2020&lt;/div&gt;
+    Me: fuck it, ok, I&apos;ll open Outlook as a native app&lt;br /&gt;
+Outlook: you have to quit word first, Lol&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/18.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:21AM Feb 11, 2020&lt;/div&gt;
+    Outlook (native app): log in twice now please.&lt;br /&gt;
+Outlook (native app): click allow or deny on this meaningless tech message.&lt;br /&gt;
+Outlook (native app): and now here are two appointments in the past that nobody has asked about&lt;br /&gt;
+&lt;br /&gt;
+#FuckingHell
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:55AM Feb 11, 2020&lt;/div&gt;
+    Outlook (native app): here&apos;re 1664 reminders for the past, human I am halp
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:05AM Feb 12, 2020&lt;/div&gt;
+    Even though the cursor is in it I can&apos;t type in the box to thell them what I don&apos;t like...&lt;br /&gt;
+&lt;br /&gt;
+I don&apos;t feel like my feedback is valued.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/19.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;6:36pM Mar 2, 2020&lt;/div&gt;
+    Me: &quot;please save this spreadsheet with this password to open it&quot;&lt;br /&gt;
+Me: *pastes password into box&lt;br /&gt;
+Excel: &quot;please confirm the password into this new box&quot;&lt;br /&gt;
+Me: *pastes password into box&lt;br /&gt;
+Excel: &quot;they are not the same&quot;&lt;br /&gt;
+Me: &quot;I feel like you have secret password format restrictions&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/20.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;2:27PM Mar 24, 2020&lt;/div&gt;
+    Searching in GMail: &quot;did you mean this email that doesn&apos;t actually have the words you typed into search but we had a feeling you might actually want?&quot;&lt;br /&gt;
+&lt;br /&gt;
+Searching in Outlook:
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/21.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:21AM Jun 7, 2020&lt;/div&gt;
+    The mail icon on the left has no little notification. That means I don&apos;t have mail. If it had a little notification it would mean I had mail&lt;br /&gt;
+&lt;br /&gt;
+The mail icon on the right has a little notification. That rarely means I have mail. How is even that little detail so badly implemented?!
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/22.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:30AM Jun 7, 2020&lt;/div&gt;
+    I checked. There was no mail. Now, there&apos;s a notification on twitter. I checked. There was something new.&lt;br /&gt;
+&lt;br /&gt;
+Twitter can get it right and they&apos;ve made showing a list of snippets of text complicated.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/23.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;7:50PM Jun 15, 2020&lt;/div&gt;
+    Me: *signs in to Word desktop app&lt;br /&gt;
+Word: you have to sign in&lt;br /&gt;
+Me: *clicks sign in&lt;br /&gt;
+Word: *with no feedback &quot;you have to sign in&quot;&lt;br /&gt;
+Me: *clicks sign in&lt;br /&gt;
+Word: *with no feedback &quot;you have to sign in&quot;&lt;br /&gt;
+...&lt;br /&gt;
+Me: *clicks sign in&lt;br /&gt;
+Word: &quot;seventh times the charm&quot; *saves changes
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;7:54PM Jun 15, 2020&lt;/div&gt;
+    Me: *highlights line of text&lt;br /&gt;
+Me: *paste&lt;br /&gt;
+Word: &quot;Don&apos;t worry, I&apos;ve stuck this pasted text as the start of the next nearest heading in the document.&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/24.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:18PM Jun 16, 2020&lt;/div&gt;
+    Me: *clicks a calendar appointment in O365 web calendar&lt;br /&gt;
+O342: &quot;here&apos;s your little white diamond&quot;&lt;br /&gt;
+Me: &quot;no, that&apos;s not what should happen&quot; *clicks again&lt;br /&gt;
+O213: &quot;yep, little white diamond, as requested&quot;&lt;br /&gt;
+Me: *waits a minute and clicks again&lt;br /&gt;
+O420: &quot;your diamond, good sir&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/25.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:18AM Jun 19, 2020&lt;/div&gt;
+    wait, so teams works in the app or in chrome?&lt;br /&gt;
+&lt;br /&gt;
+sorry, I was late for the meeting. I foolishly thought having two browsers on my computer would be enough
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:02PM Jun 26, 2020&lt;/div&gt;
+    me: scroll down please&lt;br /&gt;
+word in the browser: I DoNT sCroLl An1m0r&lt;br /&gt;
+me: it&apos;s just a browser window&lt;br /&gt;
+word: I DoNT sCroLl An1m0r&lt;br /&gt;
+me: refreshes window&lt;br /&gt;
+word:  NO SCROLL ONLY RENDER
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/26.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:08PM Jun 26, 2020&lt;/div&gt;
+    Ha, forking hall MS, One instance of firefox, all tabs scroll except for MS Word tabs. even newly opened ones. &lt;br /&gt;
+&lt;br /&gt;
+This has happened to multiple open tabs (and now any new tabs) at the same time.&lt;br /&gt;
+&lt;br /&gt;
+Office 365 must be a burning nightmare of a code base.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:10PM Jun 26, 2020&lt;/div&gt;
+    Oh, my bad, it was Chrome not firefox. Teams can&apos;t do video in Firefox so I have to run two different browsers.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/27.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;1:04PM Jun 26, 2020&lt;/div&gt;
+    I have the outlook calendar integration in Slack now. It&apos;s great except...&lt;br /&gt;
+&lt;br /&gt;
+slack: you have a meeting!&lt;br /&gt;
+me: * clicks link&lt;br /&gt;
+link: * opens in my default browser&lt;br /&gt;
+teams: I can&apos;t a video in this browser&lt;br /&gt;
+me: * copies link from browser URL bar&lt;br /&gt;
+me: * pastes into Chrome&lt;br /&gt;
+&lt;br /&gt;
+1/2
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;1:04PM Jun 26, 2020&lt;/div&gt;
+    teams: You want to open in app or browser?&lt;br /&gt;
+me: IN THE BROWSER&lt;br /&gt;
+teams: would you like to join this call&lt;br /&gt;
+me: * clicks join now&lt;br /&gt;
+&lt;br /&gt;
+in another timeline&lt;br /&gt;
+&lt;br /&gt;
+me: * clicks link&lt;br /&gt;
+zoom: * want to join call?&lt;br /&gt;
+me: * clicks join now&lt;br /&gt;
+&lt;br /&gt;
+2/2
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:52AM Jul 15, 2020&lt;/div&gt;
+    Me: highlights text at the beginning of a bullet point and presses delete&lt;br /&gt;
+Outlook: I R DELETE THE BULLET POINT AND NOT THE WORDIES AS PER YOUR RECENT REQUEST
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:37AM Jul 16, 2020&lt;/div&gt;
+    ORGANISE WHAT MESSAGES, OUTLOOK?! YOU ARE LITERALLY TELLING ME THERE ARE NO MESSAGES AND THAT I SHOULD ORGANISE THEM
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/28.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:16PM Jul 16, 2020&lt;/div&gt;
+    How I make a line chart in excel (web version) where the first column should be the Y axis values.&lt;br /&gt;
+&lt;br /&gt;
+1) copy data to google sheets
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:57AM Jul 29, 2020&lt;/div&gt;
+    me: open the next email, please&lt;br /&gt;
+outlook: here you go&lt;br /&gt;
+me: close email&lt;br /&gt;
+me: oh, actually, open email again&lt;br /&gt;
+outlook: I can&apos;t display that email&lt;br /&gt;
+me: but... but...
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:31AM Aug 6, 2020&lt;/div&gt;
+    powerpoint: &quot;Here&apos;s how text selection works&quot;&lt;br /&gt;
+me: &quot;Yes, that is what I expected&quot;&lt;br /&gt;
+narrator: &quot;It was not what he expected&quot;&lt;br /&gt;
+&lt;br /&gt;
+(look at the difference in the same key commands when the cursor is on &quot;predictable&quot; vs. when it is on &quot;Not&quot;)
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/29.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:36AM Aug 6, 2020&lt;/div&gt;
+    After I stopped recording the screen I deleted the text by holding down backspace. Sometimes the cursor moved left without actually removing the character to its left.&lt;br /&gt;
+&lt;br /&gt;
+This is fine becuase text editing is new&lt;br /&gt;
+&lt;br /&gt;
+NB it is not new and not fine
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/30.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:48AM Aug 21, 2020&lt;/div&gt;
+    me: *typing in box&lt;br /&gt;
+teams: wHy NoT rEfErsH teH paJ
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/31.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:50AM Aug 21, 2020&lt;/div&gt;
+    Let&apos;s not worry about the fact that while Teams wants me to refresh the page cos I&apos;m not connected to the internet. I can toot from the same computer.&lt;br /&gt;
+&lt;br /&gt;
+TIL: https://Twitter.com runs on my laptop&lt;br /&gt;
+&lt;br /&gt;
+Turns out it&apos;s called teams cos it&apos;s teeming with bugs
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/32.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;2:53PM Sep 2, 2020&lt;/div&gt;
+    Me: ...&lt;br /&gt;
+Me: ...&lt;br /&gt;
+TeAmS: I HAVE ANTICIPATED YOUR NEEDS AND MUTED THE LIVE STREAM AGAIN FOR YOU HUMAN. NO NEED TO THANK ME
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;5:16PM Sep 2, 2020&lt;/div&gt;
+    This isn&apos;t just an Office 365 complaint. But look at all that unused space... What are all of those buttons?! &lt;br /&gt;
+&lt;br /&gt;
+Can we just all agree that icons need to have text alongside them?
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/33.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:37AM Sep 9, 2020&lt;/div&gt;
+    I don&apos;t have the energy for snark today&lt;br /&gt;
+&lt;br /&gt;
+fucking teams!
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:18AM Sep 15, 2020&lt;/div&gt;
+    I&apos;ve edited text in probably 10 applications already today. In all bar one of them the only thing that has caused mistakes is my fat fingers&lt;br /&gt;
+&lt;br /&gt;
+I&apos;m on my fourth attempt trying to edit a line of text in powerpoint and whole blocks of the text keep disappearing
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/34.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:00PM Sep 15, 2020&lt;/div&gt;
+    Award for the most value-less interruption ever goes to...&lt;br /&gt;
+&lt;br /&gt;
+*opens golden envelope&lt;br /&gt;
+&lt;br /&gt;
+message to say that you clicked on a link for content you have access to and would you like to go to that content?
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/35.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;3:54PM Nov 9, 2020&lt;/div&gt;
+    Kid in the same room playing an online game, I&apos;m watching a video, and using Slack. My house couldn&apos;t currently have more internet.&lt;br /&gt;
+&lt;br /&gt;
+Me: * clicks a link in Teams&lt;br /&gt;
+Teams: &quot;I don&apos;t feel too well&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/36.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;7:42AM Nov 9, 2020&lt;/div&gt;
+    me: &quot;I&apos;d like to edit this bulleted list&quot;&lt;br /&gt;
+outlook: &quot;gotcha&quot;&lt;br /&gt;
+me: &quot;new line please&quot;&lt;br /&gt;
+O: &quot;starts with a bullet&quot;&lt;br /&gt;
+me: *tab&lt;br /&gt;
+O: *move the bullet in&lt;br /&gt;
+me: *repeats 3 times&lt;br /&gt;
+me: &quot;new line please&quot;&lt;br /&gt;
+O: &quot;starts with a bullet&quot;&lt;br /&gt;
+me: *tab&lt;br /&gt;
+O: &quot;move the cursor leave the bullet, gotcha&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/37.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:16AM Nov 24, 2020&lt;/div&gt;
+    Teams: works on chrome desktop but it turns out not on chrome mobile. Works in Firefox including video for live events but not video for meetings&lt;br /&gt;
+&lt;br /&gt;
+#NewMicrosoft my arse
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/38.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:12AM Dec 4, 2020&lt;/div&gt;
+    So, you can close the Teams app window on Mac by pressing CMD + W when you think another window has focus and not be able to get it back without restarting&lt;br /&gt;
+&lt;br /&gt;
+What I like in a tool is when there are multiple sharp edges to cut myself with when I use it
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/39.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:13AM Dec 4, 2020&lt;/div&gt;
+    And, yes, it&apos;s possible in other applications.... but they also don&apos;t dump you in a dead end.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/40.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:42AM Dec 11, 2020&lt;/div&gt;
+    1. open email&lt;br /&gt;
+2. save to onedrive&lt;br /&gt;
+3. view in onedrive&lt;br /&gt;
+4. download&lt;br /&gt;
+&lt;br /&gt;
+Thanks O3.65 I&apos;m glad there&apos;s not a download attachment button
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:42AM Dec 11, 2020&lt;/div&gt;
+    I googled yammer, got to a website, clicked start using yammer, I am logged in to O3.65 and have access to Yammer
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/41.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:05AM Dec 14, 2020&lt;/div&gt;
+    Oh, forking hell. Joining a teams call UI is like the space shuttle&lt;br /&gt;
+&lt;br /&gt;
+join teams call without audio&lt;br /&gt;
+&lt;br /&gt;
+means literally without audio, it doesn&apos;t mean &quot;join muted&quot; which is a useful setting but instead &quot;join without being able to hear&quot; which doesn&apos;t seem useful to me
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;14:23PM Jan 15, 2021&lt;/div&gt;
+    me: *cmd + tab&lt;br /&gt;
+teams: &quot;your invisible notification window, as requested&quot;&lt;br /&gt;
+me: &quot;that&apos;s not right&quot;&lt;br /&gt;
+me: *clicks &quot;calendar&quot; in the window menu&lt;br /&gt;
+teams: &quot;your calendar, you should have said first time, here you go&quot;&lt;br /&gt;
+&lt;br /&gt;
+(nb if I move my mouse around I get the calendar items&apos; hover text)
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/42.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;6:08PM Jan 29, 2021&lt;/div&gt;
+    Me: presses space&lt;br /&gt;
+Almost every program playing video: *toggles play/pause&lt;br /&gt;
+MS stream not full screen: *toggles play/pause&lt;br /&gt;
+MS stream in full screen: I AM EXITING FULL SCREEN AS ANYONE WOULD EXPECT
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/43.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;2:57PM Feb 8, 2021&lt;/div&gt;
+    Me: *I wonder if @HollyDonohue01 is on this call?&lt;br /&gt;
+Teams: *offscreen &quot;Calling her in to this meeting for you&quot;&lt;br /&gt;
+Teams: &quot;Hey Holly, Paul is inviting you to join these 85 people on a call&quot;&lt;br /&gt;
+Me: &quot;Argh, that&apos;s not what I meant! How do I cancel this?&quot;&lt;br /&gt;
+Teams: &quot;What is a cancel?&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/44.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;5:37PM Feb 22, 2021&lt;/div&gt;
+    Me: *signed into teams and using it&lt;br /&gt;
+Me: *clicks a button&lt;br /&gt;
+Teams: YOU HAVE TO SIGN IN INSIDE THE WINDOW EVEN THOUGH YOU HAVE TO SIGN IN TO SEE THE WINDOW. I AM A SECURE
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/45.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:42PM Mar 23, 2021&lt;/div&gt;
+    For three weeks I&apos;ve been off work and I didn&apos;t notice the feeling cos it was an absence of a thing&lt;br /&gt;
+&lt;br /&gt;
+The absence of being amazed at how bad something is... I&apos;ve not noticeably waited for a computer to do something&lt;br /&gt;
+&lt;br /&gt;
+And now? &quot;Crashing&quot; back into using O3.65
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/46.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:43PM Mar 23, 2021&lt;/div&gt;
+    Me: please open this spreadsheet&lt;br /&gt;
+Teams: allow me to present an onboarding journey you don&apos;t need and can&apos;t interact with that freezes your browser
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/47.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:53PM Mar 23, 2021&lt;/div&gt;
+    Oh nice, no option to mark all as read in Teams. Thank fork there are only 26&lt;br /&gt;
+&lt;br /&gt;
+As a business owner&lt;br /&gt;
+I want to pay my staff to have to click on every conversation &lt;br /&gt;
+So that I know they are engaging&lt;br /&gt;
+&lt;br /&gt;
+pro tip if you click through them quickly they don&apos;t actually get marked as read
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/48.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;8:40AM Apr 6, 2021&lt;/div&gt;
+    I have six applications that are using the internet successfully. But not Outlook 🤬&lt;br /&gt;
+&lt;br /&gt;
+I&apos;m lucky my calendar and mail aren&apos;t trapped in that burning building of a system, eh?
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/49.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:59AM Apr 6, 2021&lt;/div&gt;
+    Thanks powerpoint
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/50.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;2:43PM Apr 6, 2021&lt;/div&gt;
+    Office 3.64 spell check now takes my northern accent into account
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/51.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:57AM Apr 12, 2021&lt;/div&gt;
+    Every Monday Outlook does a &quot;cute&quot; thing where it recreates a meeting series for me so that I can say I don&apos;t go to it anymore.&lt;br /&gt;
+&lt;br /&gt;
+It takes maybe 30 seconds. If it&apos;s doing that for 1% of employees that&apos;s 5 hours a week.&lt;br /&gt;
+&lt;br /&gt;
+That&apos;d be 8 weeks FTE over the year. #HiddenCosts
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/52.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;10:00AM Apr 14, 2021&lt;/div&gt;
+    For weeks now Teams has been &quot;opening&quot; a &quot;notification&quot; window on my Mac. It isn&apos;t viewable and only has the effect that I can no longer CMD+Tab to Teams cos that invisible window gets &quot;shown&quot;&lt;br /&gt;
+&lt;br /&gt;
+The &quot;fix&quot; is to restart Teams when I notice it&lt;br /&gt;
+&lt;br /&gt;
+(lifehack: just close it instead)
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/53.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:22PM Apr 26, 2021&lt;/div&gt;
+    Sharepoint: THIS IS NOT SAVED&lt;br /&gt;
+Also Sharepoint: YOU SHOULD REFRESH TEH PAGE&lt;br /&gt;
+Me: *please save the page&lt;br /&gt;
+Sharepoint: HAVE A FREE STACK TRACE. I AM A WEB
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/54.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+        &lt;img src=&quot;/images/office365/55.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+        &lt;img src=&quot;/images/office365/56.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;12:23PM Apr 26, 2021&lt;/div&gt;
+    And, yes, reader, when I refreshed the page all my edits had gone. Sharepoint has one purpose and cannot do it&lt;br /&gt;
+&lt;br /&gt;
+It&apos;s like Wordpress having a bad trip
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;4:47PM Mar 10, 2021&lt;/div&gt;
+    I &quot;like&quot; the new &quot;why not in a fortnight&quot; scheduling feature&lt;br /&gt;
+&lt;br /&gt;
+here&apos;s me suggesting a meeting that the invitee is free for and Office helpfully pointing out we&apos;re both also free two weeks later than that
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/57.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;3:35PM May 13, 2021&lt;/div&gt;
+    Teams: DONUT WORRY HUMAN, FOR THIS MEETING YOU ARNE&quot;T ALLOWED TO ATTACH FILES IN TEH CHAT
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/58.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:07AM May 14, 2021&lt;/div&gt;
+    Outlook: DO NOT WORRY HUMAN, IF I NEVER FINISH LOADING THESE SCRIPTS YOU CANNOT SEE YOUR MAIL AND GET SOME FOCUS TIME
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/59.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;1:56PM May 24, 2021&lt;/div&gt;
+    outlook *showing me an invite: &quot;no conflicts 👍&quot;&lt;br /&gt;
+me *looking at the calendar: &quot;do you know what a conflict is?&quot;&lt;br /&gt;
+outlook *starting to sweat: &quot;yes?&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/60.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+        &lt;img src=&quot;/images/office365/61.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:44AM Jul 7, 2021&lt;/div&gt;
+    PP: morning&lt;br /&gt;
+me: &quot;open a deck, please&quot;&lt;br /&gt;
+PP: here you go&lt;br /&gt;
+me: &quot;open this one from the browser&quot;&lt;br /&gt;
+PP: I AM FROZEN&lt;br /&gt;
+me: *ugh, force quit&lt;br /&gt;
+O3.7: DON&apos;T WORRY WE HAVE A CUSTOM WAY OF HANDLING ERRORS&lt;br /&gt;
+me: is it good&lt;br /&gt;
+O3.7: I don&apos;t know, I&apos;ve never seen it work
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/62.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+        &lt;img src=&quot;/images/office365/63.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:45AM Jul 7, 2021&lt;/div&gt;
+    me: maybe if I sign out&lt;br /&gt;
+&quot;Power&quot;point: &quot;worth a shot, guv&quot;&lt;br /&gt;
+me: *sign out, please&lt;br /&gt;
+PP: done it&lt;br /&gt;
+me: *and sign back in, please&lt;br /&gt;
+PP: NOT A THING I CAN DO, PYSKE!
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/64.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;11:58AM Jul 12, 2021&lt;/div&gt;
+    me: *has a 30-minute meeting with one other person&lt;br /&gt;
+Teams: HERE IS AN ATTENDANCE REPORT. THIS IS A HELP IF YOU DON&apos;T KNOW IF YOU ATTENDED OR IF YOU NEED TO CHECK IF YOU JUST SPENT THRITY MINUTES ALONE OR NOT&quot;
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/65.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;4:57PM Sep 7, 2021&lt;/div&gt;
+    CISO: &quot;Hello, I&apos;d like to implement security&quot;&lt;br /&gt;
+O365: &quot;It&apos;s already done. The steps for downloading an attachment are: 1) click save to one drive 2) click view in one drive 3) download. Security!&lt;br /&gt;
+&lt;br /&gt;
+WHY CAN I NOT DOWNLOAD AN ATTACHMENT FROM AN EMAIL
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+    &lt;/div&gt;
+    
+        &lt;video autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot; class=&quot;rounded drop-shadow-md&quot;&gt;
+            &lt;source src=&quot;/images/office365/66.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;/video&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;1:42PM Sep 17, 2021&lt;/div&gt;
+    One final disappointment from O3.6&lt;br /&gt;
+&lt;br /&gt;
+Because I insist on the unexpected browser choice of Chrome on an Android. I can&apos;t join a meeting when I find myself caught away from home.&lt;br /&gt;
+&lt;br /&gt;
+Obvs Teams isn&apos;t supported on desktop Chrome
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/67.jpeg&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;div class=&quot;border rounded p-4 my-2 drop-shadow-sm&quot;&gt;
+    &lt;div class=&quot;ml-2 float-right text-gray-500&quot;&gt;9:06AM Sep 18, 2021&lt;/div&gt;
+    And in a perfect bit of poetry, I can end this thread, let down by technology, and frozen in Teams.
+    &lt;div class=&quot;flex flex-row flex-wrap justify-start gap-4&quot;&gt; 
+    
+        &lt;img src=&quot;/images/office365/68.png&quot; class=&quot;max-w-sm w-1/2 h-auto m-0 rounded drop-shadow-md&quot; loading=&quot;lazy&quot; /&gt;
+    
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+</description>
+				<pubDate>Sun, 05 Mar 2023 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2023/03/office-365-mega-thread.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2023/03/office-365-mega-thread.html
+				</guid>
+			</item>
+		
+	</channel>
+</rss>
