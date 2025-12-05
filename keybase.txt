@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/pauldambra
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://pauldambra.dev
+  * I am pauldambra (https://keybase.io/pauldambra) on keybase.
+  * I have a public key with fingerprint 0D4B 9EA7 24DA 468E C242  A843 56C8 5550 9D09 8C8A
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01201847a7911fb7a5af1e26e7f33c633cc9050e1617964b7a2b32176b41c73f113e0a",
+      "fingerprint": "0d4b9ea724da468ec242a84356c855509d098c8a",
+      "host": "keybase.io",
+      "key_id": "56c855509d098c8a",
+      "kid": "0101a862800bcf0a9be0a37e0067fab5e2fc02dc92c30751580c87b0c4f1dcb204f00a",
+      "uid": "1d159232b9d2ed2f1b0722d6831da619",
+      "username": "pauldambra"
+    },
+    "service": {
+      "hostname": "pauldambra.dev",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1568281978,
+  "expire_in": 157680000,
+  "prev": "5193adb477fcc0f8e2dcba8604815345ebccdd83f4e222a481264b0fcdda1917",
+  "seqno": 9,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.3
+Comment: https://keybase.io/crypto
+
+yMNuAnicbVJrUFVVGAUCSgIFAoc7ochhIJRHe5/3uZoiRCBOZYWAgl7PYx84gPde
+7j0XeQyGaOEgw1jmNLwcAsosNGhCKqoRhhGIdFDAHkoCM6GMwJAwMpBm5zD5q37s
+2bO/vdb61rf27vF6ysnDOaVv9676VZUVzgNdtQ6nfUX+RcWYYJEKMWMxloNWNpQr
+IbtqylEkzIgBiAPIkgzPcBDKAsNTvAwRTiNGJgiR1pbIAQogSEOGo0kNgAsEDhla
+IKHIEDKEBAI8FonJijkT2aw2xazqshIpcIhncFLiSZpFIk7iPEsSFC2yFEUBTgIc
+K7I6Mcti1xmaOYG3o2jFotW0g2nF3v/gn/gGkGdpnAVAEGXAc4Jmg2AQADQj8wKF
+cFkEuCRyuEgAhoIUC0SWEYBIylASBRyQMljx7ViRgxKkOJzABU7CkYTLUAAMjks0
+S0CJpyGnA+3IZuYPIg1t5R25En9QsPFYSSSm1fMVEenR6rP8BxMtoXyNb7VZVIto
+ydXuslTVajfqXLXQqoMPIcH0r4xJUMySlqXGyEc2u2IxY0aoIUVV0XUhRbM4CzmG
+jcRQgVWxIZOiIyiG1qIAQO+jtdOSgxzBSwLJMLIoAplFWhiClhggWUgRJIUEUZQk
+lpBJhOM4r1Vx7XmBrBV5yEEG0wfLM1swI6fZ5DM1SbuSaeZVhw1hJd1dGa5Ozh5O
+7m4u+h9z8ljl/eTnPapd81gN8btaERWTJgTd7XEUDyV1YJTh1966yeZg4pPFl1KS
+XxFaQ6zj96SRs0EzBcZ7G12o9oKXdx29gF23Hvtw7524pua1GQafiZ3fbvtxb9T+
+9afPLKy/6L6nN7j60RvetuKE6vsNMeGhL0bURF0yv7up8Zf4op314xGxJek3e0DQ
+kZjP25u7GWXDRIPrluSha2k7DvsYspzzk2u7Xn+mZOZ+eukB3x4lsP/o4zSvhCtf
+52VP1K+73HQhNbHb9wO/iZqbSYOGFGNrxgNPQ8aDqdTnA78sVqeXRTmLKJM+q4w1
+3l5qOLFmW5zzqYEfcjqcv+v8qT3w3MngxpKw38vCVk/fiAiInm4Maa+Y6/q+NOJP
+9viJ2fnFjcfHyzf95tfWsa8zcPKju7HP9Rs6Ww3g/YdDVdRCv2fdW4vnZ1vedtma
+UG7JktbGe8WHzfyV3cxUnS29tjCfnPkxXVU9YWnafP6rGz5T22caRg487XWLaUod
+r+PG6JYxfnj/ybmg9i3hZ8KvXFw4Xd/GXt0auiG+kpmiva8X/fHqe5fJxS/KFH9i
+sJHuu52YCFb7xr2ZVxngGH1tMvSF0cJn3fo/bVoKDnnn8I655Rr/v2vK5i5ljyy1
+insCkjarkXduDbq6DceOeqjnTL0JLbOZkvcpt3kwkPjwyKFl9zFqXWKbienzTIv+
+pnxmd/rPjvHtOcPMP9ZvvGY=
+=dHZ0
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/pauldambra
+
+==================================================================
