@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I use LLMs?</title>
+    <link rel="canonical" href="https://pauldambra.dev/2025/07/how-i-use-llms.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2025/07/how-i-use-llms.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I use LLMs?" />
+    <meta
+      property="og:description"
+      content="How I use LLMs"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I use LLMs"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I use LLMs?",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1660",
+     "url":"https://pauldambra.dev/2025/07/how-i-use-llms.html",
+     "datePublished":"2025-07-24",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2025/07/how-i-use-llms.html"
+     },
+     "articleBody":"I  remain  very  cynical  about  the  current  high-water  mark  for  LLMs  and  augmented  coding…  but  at  the  same  time  I  use  them  every  day  and  I  don't  think  they're  finished  improving.\n\nLet's  growth  hack  blog  visitor  numbers  record  how  I  use  them  today  as  a  little  reflection  on  where  I  think  they  work  and  where  they  don't.  Something  I  can  revisit  as  the  tech  (and  my  skill  with  it)  improves\n\n\n\nFirst,  a  necessary  but  brief  diversion  into  how  I  use  tools  generally\n\nI  was  largely  self-taught  as  a  developer  and  (after  vbscript  😱)  I  started  with  DotNet.  I  found  JetBrains  Resharper  early  on  and  never  looked  back.  The  assistance  in  the  IDE  to  write,  refactor,  and  improve  code  was  game-changing.  I  don't  begruge  anybody  any  tool  they  want  to  use  to  level-up.  Wanna  use  a  graphical  git  client,  or  emacs,  or  anything  else…  go  for  it,  go  make  cool  things\n\nBecause  of  that  entry  to  the  industry  I'm  also  not  super  keen  on  VSCode  (you  love  it?  great,  see  above,  you  do  you,  go  make  cool  things).  I'm  too  used  to  clever  interventions  helping  me  and  VSCode  is  too  barebones  (and  so  much  slower  than  SublimeText)\n\nSo,  I  like  having  tools  directly  involved  in  my  workflow.  I  learned  LINQ  more  quickly  and  more  thoroughly  because  I  had  resharper  prompting  me  inline,  at  write-time:  \"hey,  why  not  like  this?\"\n\nDo  I  think  LLMs  do  good  work?\n\nIt's  like  having  a  startlingly  talented,  but  very  overconfident,  inexperienced  colleague\n\nThey  will  swing  from  correcting  you  on  the  intricacies  of  some  detail  of  technology  to  doing  blindingly  stupid  things  like  naming  variables  with  one  of  your  competitors  company  names  in  them\n\nAnd  just  like  the  work  of  any  colleague  where  you  bear  more  responsibility.  It  is  on  you  to  own  making  sure  the  work  is  good.  If  you're  helping  someone  with  less  experience  than  you  the  mistakes  are  yours,  don't  blame  the  colleague  /  LLM\n\nAnd  just  like  working  with  any  colleague…  you  can  do  more  together  than  you  could  before  -  once  you  know  how  to  work  together\n\nAs  an  example,  while  I'm  writing  this  Claude  Code  is  writing  some  tests  for  me.  I  just  did  a  \"mean  colleague\"  trick.  I  went  in  and  commented  out  the  implementation  -  and  the  tests  carried  on  passing.\n\n\n\nThe  LLM  fixed  that  and  we  shipped  the  PR.\n\nI  find  faking  timers  in  Jest  super  confusing  and  couldn't  figure  it  out…  the  LLM  could  🤝\n\nThings  I'm  totally  sold  on\n\nResearch  for  me\n\nI  tend  to  use  ChatGPT  for  this  but  only  out  of  habit.  I  not-very-fondly  remember  days  of  sweating  over  documentation  and  blog  posts  while  trying  to  figure  out  something.\n\nOr,  even  worse,  searching  for  your  problem  and  finding  a  single  hit…\n\na  stack  overflow  question…\n\nwith  no  answers…\n\nfrom  years  ago…\n\nthat  you  asked  and  have  no  memory  of\n\n🫠\n\nNow,  I  can  delegate  that  to  the  LLM.  It  does  that  groundwork,  responds  to  follow-ups.  Can't  Doesn't  care  when  I  ask  silly  questions.\n\nI  can  do  something  else  with  my  time  while  the  legwork  is  being  done.\n\nWarning?\n\nYou  have  to  remember  that  confabulation  exists.  I  ask  it  for  sources  and  go  check  for  myself.  Because  I'm  confirming  and  critiquing  (instead  of  doing  the  groundwork)  it's  quicker  and  easier  work.\n\nAlso….  OMG  if  it  does  maths  for  you,  make  sure  to  double  check  the  numbers.  It  can  quickly  go  off  the  rails.\n\nSimple  tasks\n\nAs  mentioned  above…  this  morning  I've  got  a  couple  of  tricky  things  to  figure  out…  and  I  wanted  to  write  some  tests  on  a  bit  of  code  that  had  let  me  down  in  one  of  our  SDKs.\n\nSo,  in  the  background  Claude  can  figure  out  why  the  tests  weren't  working  and  get  them  working.  Then  I  check  that  work,  together  we  correct  it.\n\nIn  reality  that  probably  saved  me  an  hour  of  work  (maybe  less  but  definitely  not  more).\n\nCould  I  do  that  every  day?  That's  heading  for  most  of  a  working  week  each  month.That's  quality  memes  on  Slack  time,  practically  for  free!\n\nWarning?\n\nI'm  pretty  good  at  context  switching,  my  life  forces  me  to  be.  If  you're  not,  you  should  figure  out  a  different  way  of  doing  this.\n\nAnd  you're  responsible  for  this  work…  even  though  you  didn't  write  it.  You  still  need  to  engage  your  brain.  The  machine  isn't  thinking.  And  the  more  nuance  in  the  task,  the  more  opportunity  for  it  to  confidently  do  something  very  silly\n\nThings  I'm  partly  sold  on\n\nExplaining  complex  things\n\nThe  LLM  is  your  over-confident  colleague  with  arcane  knowledge.  You  can  ask:  \"Hey,  I'm  trying  to  figure  out  why  my  kafka  consumer  is  timing  out  sometimes.  Explain  how  a  nodejs  consumer  behaves  during  cooperative  rebalance  and  why  it  might  time  out.\"\n\nAnd  it  will  confidently  share  exactly  why  that  is  happening.  Digesting  the  docs  and  the  1000s  of  blog  posts.  It  will  draw  diagrams  and  propose  solutions.  Amazing  learning  tool.\n\nI  often  work  with  open  source  tools  that  do  complicated  things  I  don't  fully  understand.  Being  able  to  ask  \"what  does  this  arcane  few  lines  of  code  do\".  To  get  a  quick  start  on  figuring  something  out  is  super  useful.\n\nWarning?\n\nIt  will  also  sometimes  confidently  explain  absolute  nonsense.  And  when  you  say  \"but  the  nodejs  consumer  doesn't  have  that  method\".  It  will  reply  \"Thanks!  You're  absolutely  right.\"  And  then  explain  something  else  just  as  confidently.\n\nBeing  your  army  of  interns\n\nYou  can  run  more  than  one  instance  of  a  tool.  And  give  each  of  them  a  different  task.  In  theory  that's  a  multiplier  since  you  can  have  more  than  one  \"intern\"  doing  work  for  you  at  the  same  time.\n\nI've  now  got  two  copies  of  our  main  repo  on  disk  so  that  I  can  happily  have  two  totally  separate  streams  of  work.\n\nWarning?\n\nStarting  lots  of  things  is  not  as  powerful  as  finishing  lots  of  things!\n\nAlso,  personally,  I  purposefully  don't  have  a  job  as  a  tech  lead  at  a  company  that  employs  inexperienced  folk  and  then  expects  the  tech  lead  to  make  sure  things  stay  on  track.  I've  had  that  job,  it's  a  valid  company  strategy,  it's  not  my  jam.\n\nI  enjoy  when  I'm  making  software  and  I'm  not  a  massive  fan  of  rounds  of  reviewing  PRs  with  a  colleague  that  I  can't  simply  trust.  And  you  can't  simply  trust  these  machines.  So,  there's  a  worfklow  here  that  is  a  multiplier  which  I  haven't  quite  figured  out…  but  the  risk  is  that  I  end  up  squashing  the  fun  bits  of  my  job,  and  accidentally  shipping  a  bunch  of  rubbish  (as  opposed  to  my  current  approach  of  enjoying  the  process  of  shipping  artisanal,  hand-crafted  rubbish)\n\nWarning  2?\n\nThey're  not  actually  very  good  software  engineers…  particularly  since  most  of  the  data  they've  ingested  about  software  engineering  is  \"blogs  on  how  to  start  something  from  scratch\".  So,  if  that's  not  the  task.  Then  I  find  it  often  harder  to  prompt  an  LLM  to  do  than  to  do  it  myself\n\nCase  in  point…\n\nWhile  I  was  typing  this  post  Claude  was  doing  the  work  to  duplicate  a  data  management  section  of  the  application.  I  wouldn't  have  to  think  to  do  this,  so  giving  it  to  a  machine  that  isn't  thinking  should  be  OK.\n\nBut  in  the  end  I  did  the  job  myself…\n\nThere  was  just  enough  nuance  that  Claude  was  making  a  mess  of  it.\n\nMaybe  I'm  not  good  enough  at  prompting.\n\nMaybe  I'm  giving  it  a  job  it's  not  ready  for.\n\nBut  there'a  a  lot  of  snake  oil  to  be  sold  in  the  gaps  there…\n\nFor  example…\n\n\n\nI  pasted  in  the  error  message  after  the  first  set  of  changes  it  made.  It  decided  that  the  problem  was  TypeScript  was  out  of  synch.  So,  it  did  some  stuff  with  touch  and  echo  insisting  all  along  that  typescript  was  confused.\n\nSo  I  checked  and,  actually,  it  was  using  packages  without  installing  them.  This  over-confident  thing  is  amazing  and  horrifying  at  the  same  time.\n\nReviewing  your  PRs\n\nMachines  don't  get  bored  or  distracted  (yet).  So  having  a  PR  reviewer  that  can  look  at  78  changes  in  a  rename  or  move  refactor  that  won't  get  blind  to  the  one  difference  where  there's  a  mistake  or  a  typo  is  pretty  powerful.  I've  tried  three  reviewer  tools.  They're  all  about  as  good  and  bad  as  each  other.\n\nPersonally,  I  really  hate  the  summary  of  the  PR  they  all  do.  But  then  I've  got  colleagues  that  hate  writing  PR  descriptions  I  bet  the  summary  is  useful  for  them.\n\nWarning?\n\nIt  is  not  thinking,  just  pretending  to.  So  when  you  get  \"nit  pick:  the  blah  should  be  wired  to  the  clink  expander\"  it  is  fine  to  just  hit  \"resolve  conversation\"  in  GitHub.  I  think  these  are  a  nice  pre-filter  for  human  reviewers  but  they're  nowhere  near  as  useful  as  being  able  to  tag  a  person  you  trust  and  respect.\n\nThings  I'm  not  sold  on\n\nWriting  tests  with  an  LLM\n\nI  don't  do  TDD  any  more.  Often  I  write  tests  after  the  implementation…  shhh  don't  tell  anyone.  But  for  some  types  of  tasks  I  do  like  to  write  a  test  or  two  first.  Particularly  \"someone  says  this  is  broken  and  needs  fixing,  is  it?\"\n\nEven  pointing  the  LLM  at  existing  tests  I  find  they  tend  to  churn  out  rubbish  tests.  I  think  that's  probably  because  they've  ingested  the  internet  and  there  are  so  many  bad  examples  of  writing  tests  on  the  internet.\n\nWhatever  the  opposite  of  a  warning  is?\n\nThey  don't  get  bored  and  have  ingested  the  whole  internet.  So  I  find  they're  really  good  at  \"i've  started  writing  parameterised  tests,  please  add  more  examples  to  test  edgecases  in  blah  processing\"  or  \"look  at  the  implementation  file  X  and  suggest  missing  tests  or  tests  that  can  be  removed  in  this  test  file\".\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Jul 24 2025</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I use LLMs?</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2025/07/how-i-use-llms.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+use+LLMs%3F&via=pauldambra&url=https://pauldambra.dev/2025/07/how-i-use-llms.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<!--more-->
+
+<h1 id="first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally">First, a necessary but brief diversion into how I use tools generally</h1>
+
+<p>I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don't begruge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things</p>
+
+<p>Because of that entry to the industry I'm also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I'm too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)</p>
+
+<p>So, I <em>like</em> having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: "hey, why not like this?"</p>
+
+<h1 id="do-i-think-llms-do-good-work">Do I think LLMs do good work?</h1>
+
+<p>It's like having a startlingly talented, but very overconfident, inexperienced colleague</p>
+
+<p>They will swing from correcting you on the intricacies of some detail of technology to doing blindingly stupid things like naming variables with one of your competitors company names in them</p>
+
+<p>And just like the work of any colleague where you bear more responsibility. It is on you to own making sure the work is good. If you're helping someone with less experience than you the mistakes are yours, don't blame the colleague / LLM</p>
+
+<p>And just like working with any colleague… you can do more together than you could before - <strong>once you know how to work together</strong></p>
+
+<p>As an example, while I'm writing this Claude Code is writing some tests for me. I just did a "mean colleague" trick. I went in and commented out the implementation - and the tests carried on passing.</p>
+
+<p><img src="/images/2025/07/over-confident-1.png" alt="the over confident colleague" loading="lazy" /></p>
+
+<p>The LLM fixed that and we shipped the PR.</p>
+
+<p>I find faking timers in Jest super confusing and couldn't figure it out… the LLM could 🤝</p>
+
+<h1 id="things-im-totally-sold-on">Things I'm totally sold on</h1>
+
+<h2 id="research-for-me">Research for me</h2>
+
+<p>I tend to use ChatGPT for this but only out of habit. I not-very-fondly remember days of sweating over documentation and blog posts while trying to figure out something.</p>
+
+<p>Or, even worse, searching for your problem and finding a single hit…</p>
+
+<p>a stack overflow question…</p>
+
+<p>with no answers…</p>
+
+<p>from years ago…</p>
+
+<p>that you asked and have no memory of</p>
+
+<p>🫠</p>
+
+<p>Now, I can delegate that to the LLM. It does that groundwork, responds to follow-ups. <del>Can't</del> Doesn't care when I ask silly questions.</p>
+
+<p>I can do something else with my time while the legwork is being done.</p>
+
+<h3 id="warning">Warning?</h3>
+
+<p>You have to remember that confabulation exists. I ask it for sources and go check for myself. Because I'm confirming and critiquing (instead of doing the groundwork) it's quicker and easier work.</p>
+
+<p>Also…. OMG if it does maths for you, make sure to double check the numbers. It can quickly go off the rails.</p>
+
+<h1 id="simple-tasks">Simple tasks</h1>
+
+<p>As mentioned above… this morning I've got a couple of tricky things to figure out… and I wanted to write some tests on a bit of code that had let me down in one of our SDKs.</p>
+
+<p>So, in the background Claude can figure out why the tests weren't working and get them working. Then I check that work, together we correct it.</p>
+
+<p>In reality that probably saved me an hour of work (maybe less but definitely not more).</p>
+
+<p>Could I do that every day? That's heading for most of a working week each month.That's quality memes on Slack time, practically for free!</p>
+
+<h3 id="warning-1">Warning?</h3>
+
+<p>I'm pretty good at context switching, my life forces me to be. If you're not, you should figure out a different way of doing this.</p>
+
+<p>And you're responsible for this work… even though you didn't write it. You still need to engage your brain. The machine isn't thinking. And the more nuance in the task, the more opportunity for it to confidently do something very silly</p>
+
+<h1 id="things-im-partly-sold-on">Things I'm partly sold on</h1>
+
+<h2 id="explaining-complex-things">Explaining complex things</h2>
+
+<p>The LLM is your over-confident colleague with arcane knowledge. You can ask: "Hey, I'm trying to figure out why my kafka consumer is timing out sometimes. Explain how a nodejs consumer behaves during cooperative rebalance and why it might time out."</p>
+
+<p>And it will confidently share exactly why that is happening. Digesting the docs and the 1000s of blog posts. It will draw diagrams and propose solutions. Amazing learning tool.</p>
+
+<p>I often work with open source tools that do complicated things I don't fully understand. Being able to ask "what does this arcane few lines of code do". To get a quick start on figuring something out is super useful.</p>
+
+<h3 id="warning-2">Warning?</h3>
+
+<p>It will also sometimes confidently explain <em>absolute nonsense</em>. And when you say "but the nodejs consumer doesn't have that method". It will reply "Thanks! You're absolutely right." And then explain something else just as confidently.</p>
+
+<h2 id="being-your-army-of-interns">Being your army of interns</h2>
+
+<p>You can run more than one instance of a tool. And give each of them a different task. In theory that's a multiplier since you can have more than one "intern" doing work for you at the same time.</p>
+
+<p>I've now got two copies of our main repo on disk so that I can happily have two totally separate streams of work.</p>
+
+<h3 id="warning-3">Warning?</h3>
+
+<p>Starting lots of things is not as powerful as finishing lots of things!</p>
+
+<p>Also, personally, I purposefully don't have a job as a tech lead at a company that employs inexperienced folk and then expects the tech lead to make sure things stay on track. I've had that job, it's a valid company strategy, it's not my jam.</p>
+
+<p>I enjoy when I'm making software and I'm not a massive fan of rounds of reviewing PRs with a colleague that I can't simply trust. And you can't simply trust these machines. So, there's a worfklow here that is a multiplier which I haven't quite figured out… but the risk is that I end up squashing the fun bits of my job, and accidentally shipping a bunch of rubbish (as opposed to my current approach of enjoying the process of shipping artisanal, hand-crafted rubbish)</p>
+
+<h4 id="warning-2">Warning 2?</h4>
+
+<p>They're not actually very good software engineers… particularly since most of the data they've ingested about software engineering is "blogs on how to start something from scratch". So, if that's not the task. Then I find it often harder to prompt an LLM to do than to do it myself</p>
+
+<p>Case in point…</p>
+
+<p>While I was typing this post Claude was doing the work to duplicate a data management section of the application. I wouldn't have to think to do this, so giving it to a machine that isn't thinking <em>should</em> be OK.</p>
+
+<p>But in the end I did the job myself…</p>
+
+<p>There was just enough nuance that Claude was making a mess of it.</p>
+
+<p>Maybe I'm not good enough at prompting.</p>
+
+<p>Maybe I'm giving it a job it's not ready for.</p>
+
+<p>But there'a a lot of snake oil to be sold in the gaps there…</p>
+
+<p>For example…</p>
+
+<p><img src="/images/2025/07/mistake.png" alt="the over confident colleague 2" loading="lazy" /></p>
+
+<p>I pasted in the error message after the first set of changes it made. It decided that the problem was TypeScript was out of synch. So, it did some stuff with <code class="language-plaintext highlighter-rouge">touch</code> and <code class="language-plaintext highlighter-rouge">echo</code> insisting all along that typescript was confused.</p>
+
+<p>So I checked and, actually, it was using packages without installing them. This over-confident thing is amazing and horrifying at the same time.</p>
+
+<h2 id="reviewing-your-prs">Reviewing your PRs</h2>
+
+<p>Machines don't get bored or distracted (yet). So having a PR reviewer that can look at 78 changes in a rename or move refactor that won't get blind to the one difference where there's a mistake or a typo is pretty powerful. I've tried three reviewer tools. They're all about as good and bad as each other.</p>
+
+<p>Personally, I really hate the summary of the PR they all do. But then I've got colleagues that hate writing PR descriptions I bet the summary is useful for them.</p>
+
+<h3 id="warning-4">Warning?</h3>
+
+<p>It is not thinking, just pretending to. So when you get "nit pick: the blah should be wired to the clink expander" it is fine to just hit "resolve conversation" in GitHub. I think these are a nice pre-filter for human reviewers but they're nowhere near as useful as being able to tag a person you trust and respect.</p>
+
+<h1 id="things-im-not-sold-on">Things I'm not sold on</h1>
+
+<h2 id="writing-tests-with-an-llm">Writing tests with an LLM</h2>
+
+<p>I don't do TDD any more. Often I write tests after the implementation… shhh don't tell anyone. But for some types of tasks I do like to write a test or two first. Particularly "someone says this is broken and needs fixing, is it?"</p>
+
+<p>Even pointing the LLM at existing tests I find they tend to churn out rubbish tests. I think that's probably because they've ingested the internet and there are so many bad examples of writing tests on the internet.</p>
+
+<h3 id="whatever-the-opposite-of-a-warning-is">Whatever the opposite of a warning is?</h3>
+
+<p>They don't get bored and have ingested the whole internet. So I find they're really good at "i've started writing parameterised tests, please add more examples to test edgecases in blah processing" or "look at the implementation file X and suggest missing tests or tests that can be removed in this test file".</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2026/01/how-i-use-llms-3.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - three
+      </h3>
+      <small>
+        30 Jan 2026
+      </small>
+  </div>
+</a>  <a href="/2025/12/avoiding-madness.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Things that a different me would have been tipped into psychosis by
+      </h3>
+      <small>
+        03 Dec 2025
+      </small>
+  </div>
+</a>  <a href="/2025/10/how-i-use-llms-2.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs - two?
+      </h3>
+      <small>
+        24 Oct 2025
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2025/07/how-i-use-llms.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2025/07/how-i-use-llms.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

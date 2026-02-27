@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Mindless Rambling Nonsense - page 4</title>
+    <link rel="canonical" href="https://pauldambra.dev/weeknotes/page4/" />
+    <meta property="og:url" content="https://pauldambra.dev/weeknotes/page4/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mindless Rambling Nonsense - page 4" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Blog",
+    "keywords": "software engineering agile refactoring c# ruby javascript",
+    "url": "https://pauldambra.github.io",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://pauldambra.github.io"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+    }
+  }
+</script>
+
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2021/3.html"> <h2 id="2021-week-3">2021 Week 3</h2>
+
+<p>❌ didn't manage to keep three days free for engineering <br />
+🗣 but did get to meet even more people 1-2-1 <br />
+⌨️ did some CI fangling <br />
+💣 joined an investigation of some networking confusion <br />
+❓still fun not knowing so much! <br />
+💖 had a great session to understand our systems <br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 15 Jan 2021
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2021/2.html"> <h2 id="2021-week-2">2021 Week 2</h2>
+
+<p>💖 first week with funeralcare <br />
+🗺 wardley mapping session - learned so much! <br />
+⌨️ wrote some code and took part in a production deploy <br />
+❓I don't know so much! <br />
+🤔 which is exciting <br />
+🤫 did my best to shut up more <br />
+🤯 had a <em>wonderful</em> intro to how we talk about funerals and how important the service we provide is <br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 08 Jan 2021
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/13.html"> <h2 id="2020-week-13">2020 Week 13</h2>
+
+<p>🎥 a week of being frustrated and learning how (not?) to do video calls <br />
+💖 still incredible to see everyone supporting each other <br />
+🔭 it's lovely to be surrounded by family all the time but… <br />
+❓ what am I supposed to do - turns out my job was looking for serendipitous conversations… <br />
+🧭 and helping nudge things in the right direction or help give people courage to try something <br />
+🏚 that's not going to work now so I need to find a better way to contribute <br />
+🚀 fascinating to see this normally slow company try to act at furious pace <br />
+👩‍⚕️ important to figure out how to keep some of this new bold pace once we're past the pandemic <br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 28 Mar 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/12.html"> <h2 id="2020-week-12">2020 Week 12</h2>
+
+<p>🎢 this week has been wild <br />
+ 💝 what a simply wonderful time to work with people that care at a company that wants to do good<br />
+ 🤳 seems ridulously self-interested to waffle about how hard or not I've found this week when folk are losing their income<br /></p>
+
+<p>Schools are closing. We used to homeschool. I wondered if it would be useful to share what we learned.</p>
+
+<p>I wrote hundreds of words on homeschooling. My wife laughed at me. Told me to stop waffling and said “write this down”</p>
+
+<p>Obvs this was our experience, with our kids, in our context but…</p>
+
+<ul>
+  <li>Let them play. Play is learning.</li>
+  <li>You’re not a teacher. That’s ok. Teaching is hard (kudos teachers 👑).</li>
+  <li>You’re not teaching 30 kids so don’t act like you are. A couple of hours of "teaching" a day will likely be plenty (and plenty exhausting).</li>
+  <li>Put stuff out they’ve not played with recently e.g. things to count with, puzzles, a book they hardly ever look at. Just leave it out for them to notice.</li>
+  <li>Use their interests. Talk to them about the topic you want to teach while they’re playing. Baking, shopping, accounting, planning an imaginary business.</li>
+  <li>Don’t get sucked in to the overwhelming amount of resources. twinkl is free right now. TES has resources for older kids. There’s so much online you can get sucked in to just comparing them. We had the most success when we just spent some time with them doing something at whatever level they’re at.</li>
+  <li>There are amazing homeschoolers that look like they’ve got it sorted. Social media will make it look like you’re not doing a good job cos others share at their best. But their house is messy and full of fighting kids too. They just don’t take photos while that’s happening</li>
+  <li>What worked for us was making sure we went outside every day. Even if it was wet</li>
+</ul>
+
+<h1 id="i-made-these">I made these:</h1>
+
+<ul>
+  <li><a href="https://pauldambra.dev/readerer/">https://pauldambra.dev/readerer/</a></li>
+  <li><a href="https://pauldambra.dev/round-it/">https://pauldambra.dev/round-it/</a></li>
+  <li><a href="https://pauldambra.dev/get-to-1000/">https://pauldambra.dev/get-to-1000/</a></li>
+</ul>
+
+<p>Or rather they are the ones I kept. I’d see how quickly I could make something that helped them or held their attention. #3 loved being allowed to hold my phone and shouting at readerer The other two loved getting cat gifs as rewards</p>
+
+<p>🎨I’d love to see what the digital community all make as learning resources. <br />
+👩‍❤️‍👩It's such a strange time in the world. Remember to be kind to others and to yourself.<br /></p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 20 Mar 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/11.html"> <h2 id="2020-week-11">2020 Week 11</h2>
+
+<p>🌪 felt like I was running around spinning plates this week <br />
+💖 love that someone noticed and reminded me to talk and let people help <br />
+🔭 worked remote two days. It was ok but strange to start something new on a background of anxiety <br />
+🧭 feeling disconnected from the why of some things <br />
+😍 new colleague joined us and has got stuck in right away <br />
+👩‍👩‍👧‍👦 had our Friday show and tell remotely. Which worked well but was a bit weird <br />
+🦄 discovered that two things I've been worrying about have been started and practically finished <br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 14 Mar 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/10.html"> <h2 id="2020-week-10">2020 Week 10</h2>
+
+<p>💖 multiple instances of being supported or seeing people be supported this week <br />
+🌪 basically 50% of my time this week was meetings <br />
+🏚 and most of the rest of the time trying to catch up ad-hoc on actual work <br />
+⌨️ paired once, demoed TDD once and… <br />
+🙈 spent an hour confused before I caught up and realised people had given me the answer and needed help implementing it <br />
+🎛 remote pairing/mobbing is hard. I wasn't good at it <br />
+😕 we had an API design session. I felt really confused and unprepared <br />
+🎯 realised afterwards I've had a really clear direction for 18 months and the teams have overtaken me <br />
+🤔 I'll have to do more thinking <em>and</em> get everyone else to own the design more <br />
+🔨 went back this morning and refactored something we found yesterday because I couldn't live with myself if I'd left it <br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 07 Mar 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/9.html"> <h2 id="2020-week-9">2020 Week 9</h2>
+
+<p>🍾 some incredible secret news this week <br />
+💪 people are overloaded but knuckling down and trying to figure a way through <br />
+🚀 this week <em>flew</em> by <br />
+🔍 really interesting retro helping a colleague prepare for a talk <br />
+⌨️ I wrote some code this week <br />
+🏚 I'd forgotten how much harder writing code is than drawing on a whiteboard and then waiting while others do <br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 28 Feb 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/7.html"> <h2 id="2020-week-7">2020 Week 7</h2>
+
+<p>🌪this week was wild <br />
+🏃‍♂️ it was non-stop <br />
+💰every meeting feels different now we've been told how much money we have to make for each pound we spend <br />
+🗣lots of honesty this week and remembering that talking has been our super power <br />
+⛈including talking about EventStorming at xpmanchester<br />
+💤so draining but was fun too<br />
+💖we challenged each other to give feedback more. I gave feedback every day. It's hard<br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 14 Feb 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/6.html"> <h2 id="2020-week-6">2020 Week 6</h2>
+
+<p>☯️ saw the best and worst sides of being at a big company this week<br />
+🗺 saw people hear the word "plan" and assume it means a loss of autonomy<br />
+Ⓡ agile still has requirements<br />
+💡 it just doesn't pretend it can get them all right on day one<br />
+| agile still has deadlines<br />
+🔭 but it plays with scope to meet them<br />
+🚀 lots of same day fixes again this week<br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 08 Feb 2020
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/weeknotes/2020/5.html"> <h2 id="2020-week-5">2020 Week 5</h2>
+
+<p>💖 2 big incredible things this week<br />
+💪 we're trialling locking your account when you log in if you have a known compromised (pwned) password<br />
+🔐 we turned on the AWS WAF in front of a subset of our systems<br />
+🚀 both things have been a labour of love<br />
+🗣 lots of meetings but still feel like I've spent time with the team<br />
+❓ wish I knew how so I could do that more<br />
+✅ had fun</p>
+ </a>
+  </div>
+  <div class="mt-2 border-t-2 border-t-slate-400">
+    <div class="flex items-end">
+      posted on: 31 Jan 2020
+    </div>
+  </div>
+</div>
+ 
+<div class="flex justify-center gap-x-2">
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/weeknotes/page3/"
+      >&laquo; Prev</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/weeknotes"
+      >1</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/weeknotes/page2"
+      >2</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/weeknotes/page3"
+      >3</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <strong>4</strong>
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/weeknotes/page5"
+      >5</a
+    >
+    
+  </span>
+  
+
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/weeknotes/page5/"
+      >Next &raquo;</a
+    >
+    
+  </span>
+</div>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

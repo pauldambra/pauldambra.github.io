@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Serverless - Part Six - Making a view</title>
+    <link rel="canonical" href="https://pauldambra.dev/2018/07/serverless-6.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2018/07/serverless-6.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Serverless - Part Six - Making a view" />
+    <meta
+      property="og:description"
+      content="Examining event driven serverless systems - creating a view from the read model"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Examining event driven serverless systems - creating a view from the read model"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Serverless - Part Six - Making a view",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2510",
+     "url":"https://pauldambra.dev/2018/07/serverless-6.html",
+     "datePublished":"2018-07-01",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2018/07/serverless-6.html"
+     },
+     "articleBody":"Part  One  -  describing  event-driven  and  serverless  systems\n\nPart  Two  -  Infrastructure  as  code  walking  skeleton\n\nPart  Three  -  SAM  Local  and  the  first  event  producer\n\nPart  Four  -  Making  streams  of  events\n\nPart  Five  -  Making  a  read  model\n\nIn  part  5  the  code  was  written  to  make  sure  that  whenever  a  destination  changes  the  recent  destinations  read  model  will  update.  Now  that  read  model  can  be  used  to  realise  a  view  that  a  human  can  use.  We'll  add  code  to  create  a  HTML  view  behind  AWS  cloudfront.  This  will  demonstrate  how  event  driven  systems  can  be  created  by  adding  new  code  instead  of  changing  existing  code.\n\n\n\nWhere  were  we?\n\n\n\nThe  system  so  far  allows  an  API  call  to  propose  a  destination  someone  might  want  to  visit.  When  that  ProposeDestination  command  is  received  after  a  little  validation  a  DestinationProposed  event  might  be  saved  to  DynamoDB.  A  lambda  is  subscribed  and  when  that  event  is  raised  validates  the  location  of  the  destination  -  you  can't  visit  somewhere  that  isn't  anywhere  after  all.  That  lambda  saves  either  a  geolocationValidationSucceeded  or  geolocationValidationFailed  event  to  DynamoDB.\n\nRight  now  there  are  no  consumers  of  the  geolocationValidationFailed  event.  When  one  is  necessary,  for  example  to  let  the  destination  proposer  know  we  need  their  help  to  correct  the  record,  nothing  already  written  has  to  change.  A  new  subscriber  would  be  added  alongside.\n\nThe  last  change  was  to  add  a  subscriber  to  any  event  in  the  stream.  An  event  being  received  is  a  strong  indication  that  a  destination  changed  so  its  job  was  to  make  sure  that  destination  is  stored  or  updated  in  DynamoDB.\n\nMost  systems  only  save  that  final  data  and  throw  away  all  the  other  lovely  information.  Maybe  they  come  pretty  close  to  saving  the  same  information  because  they  write  it  as  log  messages.  A  form  of  event  stream  that  is  very  difficult  to  consume.\n\nReadModels  are  Projections  are  ReadModels\n\nIf  you're  familiar  with  SQL  then  you've  typed  something  like  Select  name,  thing,  clink,  andStuff  from  myTable  before  now.  That  list  of  properties  is  the  projection.  The  structural  representation  of  the  data  in  the  store  that  will  be  the  query  result.\n\nSince  a  read  model  is  a  representation  of  the  data  that  is  provided  for  one  or  more  reads  or  queries  then  a  read  model  is  a  projection.\n\nGenerally  speaking  you  can  say  either  ReadModel  or  Projection.  Some  people  distinguish  between  ReadModel  as  a  set  of  data  and  Projection  as  a  stream  of  that  data  which  might  be  a  useful  distinction.\n\nWhere  does  this  change  take  us?\n\nThis  set  of  changes  puts  the  system  in  a  position  to  be  able  to  serve  a  HTML  home  page  that  shows  the  most  recently  changed  destinations.  Get  the  champagne  on  ice  this  start-up  is  heading  to  exit.\n\n\n\nThis  change  adds  two  new  lambdas  (or  subscribers,  or  consumers).\n\nCreating  HTML\n\nThe  destination  stored  to  DynamoDB  is  our  read  model  but  in  the  beauty  of  an  event  driven  system  can  also  be  subscribed  to.  This  means  we  don't  have  to  read  from  DynamoDB  when  somebody  wants  to  put  that  data  into  HTML  to  display  to  a  user.\n\n\n\nBecause  the  system  is  event  driven  we  know  whether  the  data  has  changed  so  we  have  an  hook  for  cache  invalidation.  That  means  the  system  can  generate  HTML  whenever  the  set  of  destinations  changes.\n\nThe  handler  should  look  familar  now:\n\nconst  AWS  =  require(\"aws-sdk\");\nconst  region  =  process.env.AWS_REGION  ||  \"eu-west-2\";\nconst  s3  =  new  AWS.S3({  region  });\n\nlet  documentClient;\nconst  dynamoDbClient  =  require(\"./destinations/dynamoDbClient\");\nconst  lambdaHandler  =  require(\"./destinations/homepage/handler\");\nconst  readModelsTableName  =\n    process.env.READMODEL_TABLE  ||  \"vistplannr-readmodels\";\n\nexports.handler  =  async  (event)  =&gt;  {\n    documentClient  =  documentClient  ||  dynamoDbClient.documentClient();\n\n    const  handler  =  lambdaHandler\n        .withTableName(readModelsTableName)\n        .withDocumentClient(documentClient)\n        .withStorage(s3,  \"visitplannr-site-home\");\n\n    const  promise  =  handler(event);\n\n    promise.catch((err)  =&gt;  console.log(err,  \"error  generating  homepage\"));\n    return  promise;\n};\n\n\nIt  acts  as  the  composition  root,  gathers  dependencies,  injects  the  dependencies  into  the  system,  and  handles  the  event.  So  the  code  can  be  tested  completely  decoupled  from  the  dependencies.\n\nThe  actual  code  is  straight  forward.  Read  something  from  one  place,  transform  it,  and  write  it  to  another\n\nconst  guid  =  require(\"../../GUID.js\");\nconst  makeReadModelRepository  =  require(\"../destinations-read-model/make-readmodel-repository.js\");\nconst  generate  =  require(\"./htmlGenerator\");\n\nconst  writeToS3  =  (html,  s3,  bucketName)  =&gt;  {\n    const  params  =  {\n        ACL:  \"public-read\",\n        Body:  html,\n        Key:  \"index.html\",\n        ContentType:  \"text/html\",\n        Bucket:  bucketName,\n    };\n\n    return  s3.upload(params).promise();\n};\n\nmodule.exports  =  {\n    withTableName:  (tableName)  =&gt;  ({\n        withDocumentClient:  (dynamoDbClient)  =&gt;  ({\n            withStorage:  (s3,  bucketName)  =&gt;  {\n                const  readModelRepo  =  makeReadModelRepository.for(\n                    tableName,\n                    dynamoDbClient,\n                    guid\n                );\n\n                return  async  (event)  =&gt;  {\n                    console.log(event,  \"triggering  event\");\n\n                    //  we  don't  care  about  the  event  o_O\n                    const  destinations  =  await  readModelRepo.read(5);\n                    console.log(\n                        destinations,\n                        \"loaded  destinations  for  home  page  generation\"\n                    );\n\n                    const  html  =  generate.homepage(destinations.Items);\n                    return  writeToS3(html,  s3,  bucketName);\n                };\n            },\n        }),\n    }),\n};\n\n\nSo  now  whenever  there's  an  event  the  HTML  is  templated  and  written  to  S3.\n\nInvalidating  the  Content  Delivery  Network's  Cache\n\nThe  bucket  that  the  templated  HTML  is  written  to  is  being  served  as  a  static  site  behind  the  CloudFront  CDN.  A  CDN  is  a  bunch  of  computers  that  cache  a  copy  of  your  content  close  to  the  edge  of  the  network  so  that  it  can  be  delivered  to  users  as  quickly  as  possible.\n\nBecause  the  HTML  is  behind  a  CDN  writing  to  the  bucket  isn't  enough.  The  CDN  carries  on  serving  the  old  cached  content.  So  writing  to  S3  will  also  need  to  invalidate  the  CDN's  cache.\n\nThat  could  be  done  in  the  same  lambda  as  writes  the  event  to  S3  but  writing  to  S3  is  itself  a  lambda  trigger.  So  we  can  encode  the  behaviour  \"when  the  static  content  changes  invalidate  the  cache\"  instead  of  \"when  this  particular  reason  for  the  content  to  change  happens  invalidate  the  cache\".\n\nHaving  a  separate  lambda  continues  to  demonstrate  you  can  take  advantage  of  the  additive  nature  of  an  event  driven  system.\n\nconst  AWS  =  require(\"aws-sdk\");\nconst  cloudfront  =  new  AWS.CloudFront();\nconst  ssm  =  new  AWS.SSM();\nconst  fileChanged  =  require(\"./destinations/cloudfront/handler.js\");\nconst  timestamps  =  require(\"./destinations/timestamps.js\");\n\nlet  cloudfrontDistributionIdParam;\n\nexports.handler  =  async  (event)  =&gt;  {\n    cloudfrontDistributionIdParam  =\n        cloudfrontDistributionIdParam  ||\n        (await  ssm.getParameter({  Name:  process.env.PARAM_NAME  }).promise());\n\n    const  invalidations  =  await  fileChanged\n        .withCDN(cloudfront)\n        .withDistribution(cloudfrontDistributionIdParam.Parameter.Value)\n        .withTimestampSource(timestamps)\n        .invalidate(event);\n\n    return  Promise.all(invalidations);\n};\n\n\n\n\nIn  what  should  be  a  familiar  pattern  now  the  dependencies  are  gathered,  curried  into  the  actual  application  code,  invoked,  and  the  results  passed  back  out  to  the  lambda  environment  to  signal  success  or  failure.\n\n\n\nThe  notable  difference  here  is  the  introduction  of  a  new  AWS  dependency:  AWS  SSM.  Simple  Systems  Manager  (SSM)  is  a  wide  set  of  services  to  let  you  manage  and  configure  Amazon  AWS  systems.  The  piece  being  used  is  Parameter  Store.\n\nThis  is  a  service  that  allows  you  to  store  plain  text  or  encrypted  config.  Used  here  to  store  and  provide  the  cloudfront  distribution  id.  Why  Parameter  Store  is  being  used  is  covered  below.\n\nThe  handler  then  uses  the  timestamp  and  the  event  to  make  a  unique(ish)  id  for  the  invalidation  and  shapes  the  correct  call  to  CloudFront  to  invalidate  the  cache.\n\n\n\nWhat  made  this  a  fast  change?\n\nAlmost  everything  necessary  already  existed\n\n\n    test  mechanism\n    event  streams\n    CloudFormation  templates\n\nContinuing  to  bang  the  drum  for  why  event  driven  systems  are  so  productive…  Almost  the  entire  change  was  the  functional  code  to  read,  transform,  and  then  write.  Because  the  system  complexity  has  been  pushed  up  to  the  architecture  the  individual  blocks  can  be  simple.\n\n\nBoth  lambdas  were  written  in  an  evening.\n\nWhat  blew  up  and  stopped  it  being  a  fast  change?\n\nCloudFormation  was  not  happy  with  what  I  was  trying  to  do…  In  setting  out  the  template  to  add  the  CloudFront  distribution,  static  site  bucket,  policies  allowing  public  read  from  the  bucket,  and  the  two  lambdas  I  created  a  circular  dependency.\n\nAnd  had  no  idea  what  to  do  next  :(\n\n\n\nLuckily  I  know  how  to  toot!  And  the  lovely  Heitor  Lessa  from  AWS  gave  me  some  pointers.  I  particularly  love  that  he  laid  out  part  of  the  path  without  giving  me  the  solution  -  I  didn't  have  the  tools  to  investigate  myself  but  will  do  next  time  now.\n\nIn  the  CloudFormation  template  the  cloud  front  distribution  ID  was  being  set  as  an  environment  variable  on  the  lambda  that  would  need  it.  But  from  the  help  provided\n\n#  This  Environment  block  creates  the  circular  dependency\n##  CF  needs  S3  to  be  created  first\n####  Lambda  needs  CF  and  S3  to  be  created  first\n#####  S3  needs  S3-&gt;Lambda  permission  to  be  created  first\n######  [Fails]  S3-&gt;Lambda  permission  needs  Lambda  to  be  created  first\n######  --&gt;  This  circles  back  to  point  2\n\n\nThis  seems  to  be  an  unavoidable  effect  of  how  CloudFormation  works  partly  because  I  couldn't  use  an  S3  bucket  as  an  event  source  for  a  lambda  if  it  wasn't  defined  in  the  same  template.  So  I  couldn't  split  the  templates  and  pass  data  as  identifiers  from  one  to  the  other.\n\nMy  colleagues  were  particularly  helpful\n\n\n\nThe  best  solution  (we  could  think  of)  was  to  put  the  ID  into  parameter  store  from  the  cloudformation  template  to  break  the  circular  dependency.\n\n\n\nI've  been  avoiding  abstractions  like  terraform  or  the  confusingly  named  serverless  framework  while  writing  this  series  so  that  I  understood  the  nuts  and  bolts  and  this  was  the  first  time  I  came  close  to  regretting  this  decision.  Always  frustrating  to  have  things  broken  without  knowing  what  to  do  next  :'(\n\nTwo  standout  pieces  of  advice  I  received:\n\n\n    The  SAM  template  will  generate  additional  CloudFormation  resources  for  you  (to  save  you  typing  them).  You  can  reference  them  in  the  template.\n\n\nSo  in  this  resource  description\n\n    CloudfrontFunctionPermissions:\n            Type:  \"AWS::IAM::Policy\"\n            Properties:\n                    PolicyName:  \"CloudfrontCacheInvalidation\"\n                    PolicyDocument:\n                            Version:  \"2012-10-17\"\n                            Statement:\n                                    -\n                                            Effect:  \"Allow\"\n                                            Action:  \"cloudfront:CreateInvalidation\"\n                                            Resource:  \"*\"\n                    Roles:\n                            -  !Ref  CloudfrontInvalidatingFunctionRole\n\n\nThe  !Ref  CloudfrontInvalidatingFunctionRole  is  referencing  a  role  in  the  template  that  isn't  in  the  template  until  SAM  has  converted  it  to  a  full  CloudFormation  template  o_O.\n\nI  think  this  is  confusing  but  it's  good  to  know.\n\n\n    You  can  use  cfn-python-lint  to  lint  CloudFormation  templates.  It  gives  much  better  output  than  you  get  elsewhere!\n\n\nCost\n\nThere  was  a  lot  of  CloudFormation  stack  creation  and  deletion  as  a  result  of  all  of  this.  So  I  was  very  disappointed  to  see  that  it  had  pushed  my  monthly  bill  up  gigantically.\n\n\n\nThis  might  seem  like  a  silly  point  but  creating  a  similarly  resilient  application  with  a  serverful  architecture  would  probably  be\n\n\n    1  load  balancer  and  2  virtual  machines  for  the  application\n    3  virtual  machines  for  the  eventstore\n    1  load  balancer  and  2  virtual  machines  for  an  API  gateway\n\n\n(yep,  and  networks  and  security  groups  and  and  and)\n\nThat  gives  a  monthly  cost  of  at  least  $100  standing  idle.  I'm  much  happier  to  be  stung  for  6  cents.\n\nWhat's  the  TODO  list  now?\n\nWe  have  most  of  the  basic  building  blocks  but  only  someone  comfortable  calling  an  API  directly  can  propose  a  destination.  The  next  steps  from  a  system  behaviour  perspective  will  be  to  start  to  add  a  UI  to  propose  destinations.  This  will  start  to  call  out  the  need  for  authentication  and  authorisation  if  it  doesn't  demand  it  outright.\n\nFrom  a  developer's  health  perspective  we've  got  quite  a  lot  of  code  now.  There's  no  bundling  so  the  upload  to  S3  contains  more  than  it  needs  to  and  it's  JS  -  I  love  JS  -  but  there're  no  types  which  can  start  to  get  confusing.\n\nAlso  any  system  level  testing  is  all  manual  at  the  moment  which  isn't  good  enough.  There  needs  to  be  a  way  to  visualise  what  is  there,  what  it  is  doing,  and  that  it  works.\n\n\n    visualise  deployed  system\n    observe  deployed  system\n    test  deployed  system\n    bundle  JS\n    add  Typescript\n    add  a  propose  destination  form\n    add  auth  to  the  system\n\n\nThe  code  for  this  part  can  be  found  on  github\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Jul 01 2018</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Serverless - Part Six - Making a view</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2018/07/serverless-6.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Serverless+-+Part+Six+-+Making+a+view&via=pauldambra&url=https://pauldambra.dev/2018/07/serverless-6.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#serverless"
+      >
+        in: serverless
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#read-model">
+    read model
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#views">
+    views
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p><a href="/2018/06/serverless-5.html">Part Five</a> - Making a read model</p>
+
+<p>In part 5 the code was written to make sure that whenever a destination changes the recent destinations read model will update. Now that read model can be used to realise a view that a human can use. We'll add code to create a HTML view behind AWS cloudfront. This will demonstrate how event driven systems can be created by adding new code instead of changing existing code.</p>
+
+<!--more-->
+
+<h1 id="where-were-we">Where were we?</h1>
+
+<p><img src="/images/current-sequence.jpg" alt="a sequence diagram of the system so far" loading="lazy" /></p>
+
+<p>The system so far allows an API call to propose a destination someone might want to visit. When that <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command is received after a little validation a <code class="language-plaintext highlighter-rouge">DestinationProposed</code> event might be saved to DynamoDB. A lambda is subscribed and when that event is raised validates the location of the destination - you can't visit somewhere that isn't anywhere after all. That lambda saves either a <code class="language-plaintext highlighter-rouge">geolocationValidationSucceeded</code> or <code class="language-plaintext highlighter-rouge">geolocationValidationFailed</code> event to DynamoDB.</p>
+
+<p>Right now there are no consumers of the <code class="language-plaintext highlighter-rouge">geolocationValidationFailed</code> event. When one is necessary, for example to let the destination proposer know we need their help to correct the record, nothing already written has to change. A new subscriber would be added alongside.</p>
+
+<p>The last change was to add a subscriber to any event in the stream. An event being received is a strong indication that a <code class="language-plaintext highlighter-rouge">destination</code> changed so its job was to make sure that <code class="language-plaintext highlighter-rouge">destination</code> is stored or updated in DynamoDB.</p>
+
+<p>Most systems only save that final data and throw away all the other lovely information. Maybe they come pretty close to saving the same information because they write it as log messages. A form of event stream that is very difficult to consume.</p>
+
+<h4 id="readmodels-are-projections-are-readmodels">ReadModels are Projections are ReadModels</h4>
+
+<p>If you're familiar with SQL then you've typed something like <code class="language-plaintext highlighter-rouge">Select name, thing, clink, andStuff from myTable</code> before now. That list of properties is the <a href="http://cqrs.wikidot.com/doc:projection">projection</a>. The structural representation of the data in the store that will be the query result.</p>
+
+<p>Since a read model is a representation of the data that is provided for one or more reads or queries then a read model is a projection.</p>
+
+<p>Generally speaking you can say either ReadModel or Projection. Some people distinguish between ReadModel as a set of data and Projection as a stream of that data which might be a useful distinction.</p>
+
+<h1 id="where-does-this-change-take-us">Where does this change take us?</h1>
+
+<p>This set of changes puts the system in a position to be able to serve a HTML home page that shows the most recently changed destinations. Get the champagne on ice this start-up is heading to exit.</p>
+
+<p><img src="/images/new-sequence.jpg" alt="the new sequence diagram" loading="lazy" /></p>
+
+<p>This change adds two new lambdas (or subscribers, or consumers).</p>
+
+<h2 id="creating-html">Creating HTML</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">destination</code> stored to DynamoDB is our read model but in the beauty of an event driven system can also be subscribed to. This means we don't have to read from DynamoDB when somebody wants to put that data into HTML to display to a user.</p>
+
+<!--alex ignore hook --->
+
+<p>Because the system is event driven we know whether the data has changed so we have an hook for cache invalidation. That means the system can generate HTML whenever the set of destinations changes.</p>
+
+<p>The handler should look familar now:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">AWS</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">aws-sdk</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">region</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AWS_REGION</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">eu-west-2</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">s3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nc">S3</span><span class="p">({</span> <span class="nx">region</span> <span class="p">});</span>
+
+<span class="kd">let</span> <span class="nx">documentClient</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">dynamoDbClient</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/dynamoDbClient</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">lambdaHandler</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/homepage/handler</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">readModelsTableName</span> <span class="o">=</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">READMODEL_TABLE</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">vistplannr-readmodels</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="k">async </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">documentClient</span> <span class="o">=</span> <span class="nx">documentClient</span> <span class="o">||</span> <span class="nx">dynamoDbClient</span><span class="p">.</span><span class="nf">documentClient</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">handler</span> <span class="o">=</span> <span class="nx">lambdaHandler</span>
+    <span class="p">.</span><span class="nf">withTableName</span><span class="p">(</span><span class="nx">readModelsTableName</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">withDocumentClient</span><span class="p">(</span><span class="nx">documentClient</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">withStorage</span><span class="p">(</span><span class="nx">s3</span><span class="p">,</span> <span class="dl">"</span><span class="s2">visitplannr-site-home</span><span class="dl">"</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+
+  <span class="nx">promise</span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="dl">"</span><span class="s2">error generating homepage</span><span class="dl">"</span><span class="p">));</span>
+  <span class="k">return</span> <span class="nx">promise</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>It acts as the composition root, gathers dependencies, injects the dependencies into the system, and handles the event. So the code can be tested completely decoupled from the dependencies.</p>
+
+<p>The actual code is straight forward. Read something from one place, transform it, and write it to another</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">guid</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">../../GUID.js</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">makeReadModelRepository</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">../destinations-read-model/make-readmodel-repository.js</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">generate</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./htmlGenerator</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">writeToS3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">html</span><span class="p">,</span> <span class="nx">s3</span><span class="p">,</span> <span class="nx">bucketName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">ACL</span><span class="p">:</span> <span class="dl">"</span><span class="s2">public-read</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Body</span><span class="p">:</span> <span class="nx">html</span><span class="p">,</span>
+    <span class="na">Key</span><span class="p">:</span> <span class="dl">"</span><span class="s2">index.html</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">ContentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/html</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Bucket</span><span class="p">:</span> <span class="nx">bucketName</span><span class="p">,</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="nx">s3</span><span class="p">.</span><span class="nf">upload</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nf">promise</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">withTableName</span><span class="p">:</span> <span class="p">(</span><span class="nx">tableName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">withDocumentClient</span><span class="p">:</span> <span class="p">(</span><span class="nx">dynamoDbClient</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+      <span class="na">withStorage</span><span class="p">:</span> <span class="p">(</span><span class="nx">s3</span><span class="p">,</span> <span class="nx">bucketName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">readModelRepo</span> <span class="o">=</span> <span class="nx">makeReadModelRepository</span><span class="p">.</span><span class="k">for</span><span class="p">(</span>
+          <span class="nx">tableName</span><span class="p">,</span>
+          <span class="nx">dynamoDbClient</span><span class="p">,</span>
+          <span class="nx">guid</span>
+        <span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">async </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="dl">"</span><span class="s2">triggering event</span><span class="dl">"</span><span class="p">);</span>
+
+          <span class="c1">// we don't care about the event o_O</span>
+          <span class="kd">const</span> <span class="nx">destinations</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">readModelRepo</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span>
+            <span class="nx">destinations</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">loaded destinations for home page generation</span><span class="dl">"</span>
+          <span class="p">);</span>
+
+          <span class="kd">const</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">generate</span><span class="p">.</span><span class="nf">homepage</span><span class="p">(</span><span class="nx">destinations</span><span class="p">.</span><span class="nx">Items</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nf">writeToS3</span><span class="p">(</span><span class="nx">html</span><span class="p">,</span> <span class="nx">s3</span><span class="p">,</span> <span class="nx">bucketName</span><span class="p">);</span>
+        <span class="p">};</span>
+      <span class="p">},</span>
+    <span class="p">}),</span>
+  <span class="p">}),</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>So now whenever there's an event the HTML is templated and written to S3.</p>
+
+<h2 id="invalidating-the-content-delivery-networks-cache">Invalidating the Content Delivery Network's Cache</h2>
+
+<p>The bucket that the templated HTML is written to is being served as a static site behind the <a href="https://aws.amazon.com/cloudfront/">CloudFront CDN</a>. A CDN is a bunch of computers that cache a copy of your content close to the edge of the network so that it can be delivered to users as quickly as possible.</p>
+
+<p>Because the HTML is behind a CDN writing to the bucket isn't enough. The CDN carries on serving the old cached content. So writing to S3 will also need to invalidate the CDN's cache.</p>
+
+<p>That <em>could</em> be done in the same lambda as writes the event to S3 but writing to S3 is itself a lambda trigger. So we can encode the behaviour "when the static content changes invalidate the cache" instead of "when this particular reason for the content to change happens invalidate the cache".</p>
+
+<p>Having a separate lambda continues to demonstrate you can take advantage of the additive nature of an event driven system.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">AWS</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">aws-sdk</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">cloudfront</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nc">CloudFront</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">ssm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nc">SSM</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">fileChanged</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/cloudfront/handler.js</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">timestamps</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/timestamps.js</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">cloudfrontDistributionIdParam</span><span class="p">;</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="k">async </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">cloudfrontDistributionIdParam</span> <span class="o">=</span>
+    <span class="nx">cloudfrontDistributionIdParam</span> <span class="o">||</span>
+    <span class="p">(</span><span class="k">await</span> <span class="nx">ssm</span><span class="p">.</span><span class="nf">getParameter</span><span class="p">({</span> <span class="na">Name</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PARAM_NAME</span> <span class="p">}).</span><span class="nf">promise</span><span class="p">());</span>
+
+  <span class="kd">const</span> <span class="nx">invalidations</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fileChanged</span>
+    <span class="p">.</span><span class="nf">withCDN</span><span class="p">(</span><span class="nx">cloudfront</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">withDistribution</span><span class="p">(</span><span class="nx">cloudfrontDistributionIdParam</span><span class="p">.</span><span class="nx">Parameter</span><span class="p">.</span><span class="nx">Value</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">withTimestampSource</span><span class="p">(</span><span class="nx">timestamps</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">invalidate</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="nx">invalidations</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<!--alex ignore failure --->
+
+<p>In what should be a familiar pattern now the dependencies are gathered, curried into the actual application code, invoked, and the results passed back out to the lambda environment to signal success or failure.</p>
+
+<!--alex ignore simple --->
+
+<p>The notable difference here is the introduction of a new AWS dependency: AWS SSM. <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/Welcome.html">Simple Systems Manager (SSM)</a> is a wide set of services to let you manage and configure Amazon AWS systems. The piece being used is <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html">Parameter Store</a>.</p>
+
+<p>This is a service that allows you to store plain text or encrypted config. Used here to store and provide the cloudfront distribution id. Why Parameter Store is being used is covered below.</p>
+
+<p>The handler then uses the timestamp and the event to make a unique(ish) id for the invalidation and shapes the correct call to CloudFront to invalidate the cache.</p>
+
+<p><img src="/images/live-demo.gif" alt="a gif demoing API calls being translated to HTML" loading="lazy" /></p>
+
+<h1 id="what-made-this-a-fast-change">What made this a fast change?</h1>
+
+<p>Almost everything necessary already existed</p>
+
+<ul>
+  <li>test mechanism</li>
+  <li>event streams</li>
+  <li>CloudFormation templates
+<!--alex ignore simple --->
+Continuing to bang the drum for why event driven systems are so productive… Almost the entire change was the functional code to read, transform, and then write. Because the system complexity has been pushed up to the architecture the individual blocks can be simple.</li>
+</ul>
+
+<p>Both lambdas were written in an evening.</p>
+
+<h1 id="what-blew-up-and-stopped-it-being-a-fast-change">What blew up and stopped it being a fast change?</h1>
+
+<p>CloudFormation was not happy with what I was trying to do… In setting out the template to add the CloudFront distribution, static site bucket, policies allowing public read from the bucket, and the two lambdas I created a circular dependency.</p>
+
+<p>And had no idea what to do next :(</p>
+
+<!--alex ignore he-she laid --->
+
+<p>Luckily I <a href="https://twitter.com/pauldambra/status/1010216895155527686">know how to toot</a>! And the lovely Heitor Lessa from AWS gave me <a href="https://twitter.com/pauldambra/status/1009929768920371200">some pointers</a>. I particularly love that he laid out part of the path without giving me the solution - I didn't have the tools to investigate myself but will do next time now.</p>
+
+<p>In the CloudFormation template the cloud front distribution ID was being set as an environment variable on the lambda that would need it. But <a href="https://gist.github.com/heitorlessa/6cf10d8591ccdc8b9219b6fad8d16d5c#file-template-yaml-L62">from the help provided</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># This Environment block creates the circular dependency
+## CF needs S3 to be created first
+#### Lambda needs CF and S3 to be created first
+##### S3 needs S3-&gt;Lambda permission to be created first
+###### [Fails] S3-&gt;Lambda permission needs Lambda to be created first
+###### --&gt; This circles back to point 2
+</code></pre></div></div>
+
+<p>This seems to be an unavoidable effect of how CloudFormation works partly because I couldn't use an S3 bucket as an event source for a lambda if it wasn't defined in the same template. So I couldn't split the templates and pass data as identifiers from one to the other.</p>
+
+<p>My colleagues were particularly helpful</p>
+
+<p><img src="/images/helpful-advice.png" alt="advice on twitter to not use cloudformation" loading="lazy" /></p>
+
+<p>The best solution (we could think of) was to put the ID into parameter store from the cloudformation template to break the circular dependency.</p>
+
+<!--alex ignore nuts --->
+
+<p>I've been avoiding abstractions like <a href="https://www.terraform.io/">terraform</a> or <a href="https://serverless.com/">the confusingly named serverless framework</a> while writing this series so that I understood the nuts and bolts and this was the first time I came close to regretting this decision. Always frustrating to have things broken without knowing what to do next :'(</p>
+
+<p>Two standout pieces of advice I received:</p>
+
+<ol>
+  <li>The SAM template will generate additional CloudFormation resources for you (to save you typing them). You can reference them in the template.</li>
+</ol>
+
+<p>So in this resource description</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  CloudfrontFunctionPermissions:
+      Type: "AWS::IAM::Policy"
+      Properties:
+          PolicyName: "CloudfrontCacheInvalidation"
+          PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                  -
+                      Effect: "Allow"
+                      Action: "cloudfront:CreateInvalidation"
+                      Resource: "*"
+          Roles:
+              - !Ref CloudfrontInvalidatingFunctionRole
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">!Ref CloudfrontInvalidatingFunctionRole</code> is referencing a role in the template that isn't in the template until SAM has converted it to a full CloudFormation template o_O.</p>
+
+<p>I think this is confusing but it's good to know.</p>
+
+<ol>
+  <li>You can use <a href="https://github.com/awslabs/cfn-python-lint">cfn-python-lint</a> to lint CloudFormation templates. It gives much better output than you get elsewhere!</li>
+</ol>
+
+<h1 id="cost">Cost</h1>
+
+<p>There was a lot of CloudFormation stack creation and deletion as a result of all of this. So I was very disappointed to see that it had pushed my monthly bill up gigantically.</p>
+
+<p><img src="/images/bill.png" alt="the aws bill for 6 cents" loading="lazy" /></p>
+
+<p>This might seem like a silly point but creating a similarly resilient application with a serverful architecture would probably be</p>
+
+<ul>
+  <li>1 load balancer and 2 virtual machines for the application</li>
+  <li>3 virtual machines for the eventstore</li>
+  <li>1 load balancer and 2 virtual machines for an API gateway</li>
+</ul>
+
+<p>(yep, and networks and security groups and and and)</p>
+
+<p>That gives a monthly cost of at least $100 standing idle. I'm much happier to be stung for 6 cents.</p>
+
+<h1 id="whats-the-todo-list-now">What's the TODO list now?</h1>
+
+<p>We have most of the basic building blocks but only someone comfortable calling an API directly can propose a destination. The next steps from a system behaviour perspective will be to start to add a UI to propose destinations. This will start to call out the need for authentication and authorisation if it doesn't demand it outright.</p>
+
+<p>From a developer's health perspective we've got quite a lot of code now. There's no bundling so the upload to S3 contains more than it needs to and it's JS - I love JS - but <a href="https://staltz.com/all-js-libraries-should-be-authored-in-typescript.html">there're no types which can start to get confusing</a>.</p>
+
+<p>Also any system level testing is all manual at the moment which isn't good enough. There needs to be a way to visualise what is there, what it is doing, and that it works.</p>
+
+<ul>
+  <li>visualise deployed system</li>
+  <li>observe deployed system</li>
+  <li>test deployed system</li>
+  <li>bundle JS</li>
+  <li>add Typescript</li>
+  <li>add a propose destination form</li>
+  <li>add auth to the system</li>
+</ul>
+
+<p><a href="https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-six">The code for this part can be found on github</a></p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>  <a href="/2018/06/serverless-5.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Five - Read Models
+      </h3>
+      <small>
+        10 Jun 2018
+      </small>
+  </div>
+</a>  <a href="/2018/02/serverless-4.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Four
+      </h3>
+      <small>
+        15 Mar 2018
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2018/07/serverless-6.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2018/07/serverless-6.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

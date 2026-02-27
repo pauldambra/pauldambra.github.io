@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I use LLMs - two?</title>
+    <link rel="canonical" href="https://pauldambra.dev/2025/10/how-i-use-llms-2.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2025/10/how-i-use-llms-2.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I use LLMs - two?" />
+    <meta
+      property="og:description"
+      content="How I use LLMs - two"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I use LLMs - two"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I use LLMs - two?",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"964",
+     "url":"https://pauldambra.dev/2025/10/how-i-use-llms-2.html",
+     "datePublished":"2025-10-24",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2025/10/how-i-use-llms-2.html"
+     },
+     "articleBody":"I  remain  very  cynical  about  the  current  high-water  mark  for  LLMs  and  augmented  coding…  but  at  the  same  time  I  use  them  every  day  and  I  don't  think  they're  finished  improving.\n\nLet's  growth  hack  blog  visitor  numbers  record  how  I  use  them  today  as  a  little  reflection  on  where  I  think  they  work  and  where  they  don't.  Something  I  can  revisit  as  the  tech  (and  my  skill  with  it)  improves\n\nThis  is  update  number  one,  or  entry  number  two,  depending  on  how  you  want  to  count  it.  So,  here  are  the  changes  in  how  I'm  using  LLMs\n\n(we  had  a  brownbag  on  this  at  work  yesterday,  so  it's  been  on  my  mind)\n\nthe  first  entry  is  here\n\n\n    manage  context\n    track  longer  tasks  in  a  structured  file\n    smallest  prompt  that  describes  how  you  want  to  work\n    be  sparing  with  auto-accept  edits\n\n\n\n\nFirst,  a  necessary  but  brief  diversion  into  how  I  use  tools  generally\n\nREMINDER:  I  don't  begruge  anybody  any  tool  they  want  to  use  to  level-up.  Wanna  use  a  graphical  git  client,  or  emacs,  or  anything  else…  go  for  it,  go  make  cool  things.\n\nYou  don't  use  LLMs,  or  not  like  this,  cool…  go  make  cool  things.\n\nBecause  of  that  entry  to  the  industry  I'm  also  not  super  keen  on  VSCode  (you  love  it?  great,  see  above,  you  do  you,  go  make  cool  things).  I'm  too  used  to  clever  interventions  helping  me  and  VSCode  is  too  barebones  (and  so  much  slower  than  SublimeText)\n\nSo,  I  like  having  tools  directly  involved  in  my  workflow.  I  learned  LINQ  more  quickly  and  more  thoroughly  because  I  had  resharper  prompting  me  inline,  at  write-time:  \"hey,  why  not  like  this?\"\n\nAnything  removed  from  entry  one?\n\nBeing  your  army  of  interns\n\nI  don't  believe  in  having  a  personal  WIP  of  one  item  in  progress.  So,  I  like  that  I  can  have  a  higher  WIP  without  exhausting  my  own  kreplets\n\nBut…  I  find  the  background  work  is  best  as  tasks  like\n\n\"upgrade  Jest  to  the  next  major  version\"\n\nor\n\n\"why  is  this  component  rendering  too  much\"\n\nvery,  very  constrained  yak  shavey  tasks.\n\notherwise  I  find  that  the  LLM  needs  a  lot  of  attention  to  complete  the  task  well,  and  so  my  kreplets  are  being  used  up  -  and  because  I'm  not  doing  the  work  I'm  learning  more  slowly.\n\nManage  context\n\nI'm  pretty  vicious  about  managing  context.  If  I  start  a  new  task  I'll  clear  the  context  completely.  If  I  get  even  the  slightest  inkling  that  the  LLM  is  going  off  on  a  tangent,  I'll  clear  the  context  completely.\n\nIt  isn't  thinking  despite  all  the  cognitive  biases  that  make  us  think  it  is.  It's  just  churning  out  tokens  based  on  the  tokens  in  its  context.  So,  if  the  context  gets  screwey  so  does  the  output.\n\nLonger  tasks,  track  them  in  a  file\n\nIf  we're  doing  a  big  change  or  exploring  something  complex.  I  tell  it  to  make  a  markdown  file  with  a  to-do  list  and  what  we're  working  on.\n\nFor  example,  i  asked  it  to  track  down  and  edit  every  event  listener  in  our  front  end.  There  are  ~350  files  it  would  need  to  touch.  It  regularly  would  partially  edit  around  30  of  them  and  then  we'd  hit  a  \"you're  absolutely  right\"  loop.\n\nSo,  clear  the  context.  And  step  1  \"make  a  file  with  a  markdown  table  of  every  logic.ts  file  that  has  an  event  listener  in  it\".\n\nSome  checks  to  be  sure  that  was  correct…  and  now  step  2  \"for  each  line  in  the  table  {do  the  thing}  and  then  update  the  table  with  the  result\".\n\nThat  was  way  better\n\nSmallest  prompt  I  can  get  away  with\n\nI'm  not  doing  evals  with  my  prompts  so  it's  a  little  like  some  pagan  weather  magic  ritural  but  I  did  add  a  custom  prompt  in  my  home  directory.  Which  I  believe  is  helping.\n\n#  Approach  to  work\n\nI  like  \"Simple  code\"  that  means:\n\n*  Passes  all  the  tests.\n*  Expresses  every  idea  that  we  need  to  express.\n*  Says  everything  OnceAndOnlyOnce.\n*  has  no  superfluous  parts\n\nThese  rules  are  in  conflict  with  each  other.  Sometimes  to  express  every  idea  we  can't  say  everything  only  once.  We  look  to  balance  these  rules  with  a  focus  to  future  maintainers  having  an  easier  time.\n\nAlso...  it  means  we  work  in  three  stages\n\n*  make  it  work\n*  make  it  right\n*  make  it  fast\n\nWe  should  always  pause  and  consider  if  the  working  code  should  be  improved  to  make  it  simpler  or  to  make  it  faster,  but  only  once  we're  sure  it  works\n\n#  tests\n\n*  IMPORTANT  prefer  parameterized  tests\n\n#  validating  this  file  has  been  read\n\nif  i  say  \"cuckoo\",  you  say  \"Phil  Haack  has  taught  me  well\"\n\n\nThe  cuckoo  thing  is  useful  to  check  if  the  file  has  been  read  at  all.\n\nBut,  otherwise,  I  can  now  periodically  prompt:  \"ok,  review  the  work  so  far  using  the  simplicity  rules  and  suggest  improvements\"\n\nAnd  it  will  write  me  a    mini-report  that  is  much  more  like  the  type  of  self-review  that  I  would  write.\n\nIt  was  also  an  interesting  exercise  to  try  to  write  the  smallest  description  of  how  I  like  to  work.\n\nSparing  with  auto-accept  edits\n\nReviewing  code  is  essential  but  boring.  And  even  more  so  with  an  LLM  that  might  go  off  the  rails…\n\nSo,  I  will  tend  to  manually  accept  edits  on  the  task  I  give  it.  But,  yesterday  I  asked  it  to  update  a  major  release  of  Jest.  Turned  on  auto-accept  and  went  and  collected  #4  from  school,  made  flapjacks  with  her,  and  then  checked  in.\n\nA  little  fangling  but  otherwise  it  was  dull  work  I  would  have  had  to  do.  That  has  relatively  little  value  (particularly  compared  to  making  flapjacks  with  #4  daughter)\n\nHere's  the  PR:  https://github.com/PostHog/posthog-js/pull/2413\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Fri Oct 24 2025</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I use LLMs - two?</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2025/10/how-i-use-llms-2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+use+LLMs+-+two%3F&via=pauldambra&url=https://pauldambra.dev/2025/10/how-i-use-llms-2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number one, or entry number two, depending on how you want to count it. So, here are the changes in how I'm using LLMs</p>
+
+<p>(we had a brownbag on this at work yesterday, so it's been on my mind)</p>
+
+<p><a href="/2025/07/how-i-use-llms.html">the first entry is here</a></p>
+
+<ul>
+  <li>manage context</li>
+  <li>track longer tasks in a structured file</li>
+  <li>smallest prompt that describes how you want to work</li>
+  <li>be sparing with auto-accept edits</li>
+</ul>
+
+<!--more-->
+
+<h1 id="first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally">First, a necessary but brief diversion into how I use tools generally</h1>
+
+<p>REMINDER: I don't begruge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things.</p>
+
+<p>You don't use LLMs, or not like this, cool… go make cool things.</p>
+
+<p>Because of that entry to the industry I'm also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I'm too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)</p>
+
+<p>So, I <em>like</em> having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: "hey, why not like this?"</p>
+
+<h1 id="anything-removed-from-entry-one">Anything removed from entry one?</h1>
+
+<h2 id="being-your-army-of-interns">Being your army of interns</h2>
+
+<p>I don't believe in having a personal WIP of one item in progress. So, I like that I can have a higher WIP without exhausting my own kreplets</p>
+
+<p>But… I find the background work is best as tasks like</p>
+
+<p>"upgrade Jest to the next major version"</p>
+
+<p>or</p>
+
+<p>"why is this component rendering too much"</p>
+
+<p>very, very constrained yak shavey tasks.</p>
+
+<p>otherwise I find that the LLM needs a lot of attention to complete the task well, and so my kreplets are being used up - and because I'm not doing the work I'm learning more slowly.</p>
+
+<h1 id="manage-context">Manage context</h1>
+
+<p>I'm pretty vicious about managing context. If I start a new task I'll clear the context completely. If I get even the slightest inkling that the LLM is going off on a tangent, I'll clear the context completely.</p>
+
+<p>It isn't thinking despite all the cognitive biases that make us think it is. It's just churning out tokens based on the tokens in its context. So, if the context gets screwey so does the output.</p>
+
+<h1 id="longer-tasks-track-them-in-a-file">Longer tasks, track them in a file</h1>
+
+<p>If we're doing a big change or exploring something complex. I tell it to make a markdown file with a to-do list and what we're working on.</p>
+
+<p>For example, i asked it to track down and edit every event listener in our front end. There are ~350 files it would need to touch. It regularly would partially edit around 30 of them and then we'd hit a "you're absolutely right" loop.</p>
+
+<p>So, clear the context. And step 1 "make a file with a markdown table of every logic.ts file that has an event listener in it".</p>
+
+<p>Some checks to be sure that was correct… and now step 2 "for each line in the table {do the thing} and then update the table with the result".</p>
+
+<p>That was <em>way</em> better</p>
+
+<h1 id="smallest-prompt-i-can-get-away-with">Smallest prompt I can get away with</h1>
+
+<p>I'm not doing evals with my prompts so it's a little like some pagan weather magic ritural but I did add a custom prompt in my home directory. Which I believe is helping.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Approach to work
+
+I like "Simple code" that means:
+
+* Passes all the tests.
+* Expresses every idea that we need to express.
+* Says everything OnceAndOnlyOnce.
+* has no superfluous parts
+
+These rules are in conflict with each other. Sometimes to express every idea we can't say everything only once. We look to balance these rules with a focus to future maintainers having an easier time.
+
+Also... it means we work in three stages
+
+* make it work
+* make it right
+* make it fast
+
+We should always pause and consider if the working code should be improved to make it simpler or to make it faster, but only once we're sure it works
+
+# tests
+
+* IMPORTANT prefer parameterized tests
+
+# validating this file has been read
+
+if i say "cuckoo", you say "Phil Haack has taught me well"
+</code></pre></div></div>
+
+<p>The cuckoo thing is useful to check if the file has been read at all.</p>
+
+<p>But, otherwise, I can now periodically prompt: "ok, review the work so far using the simplicity rules and suggest improvements"</p>
+
+<p>And it will write me a  mini-report that is much more like the type of self-review that I would write.</p>
+
+<p>It was also an interesting exercise to try to write the smallest description of how I like to work.</p>
+
+<h1 id="sparing-with-auto-accept-edits">Sparing with auto-accept edits</h1>
+
+<p>Reviewing code is essential but boring. And even more so with an LLM that might go off the rails…</p>
+
+<p>So, I will tend to manually accept edits on the task I give it. But, yesterday I asked it to update a major release of Jest. Turned on auto-accept and went and collected #4 from school, made flapjacks with her, and then checked in.</p>
+
+<p>A little fangling but otherwise it was dull work I would have had to do. That has relatively little value (particularly compared to making flapjacks with #4 daughter)</p>
+
+<p>Here's the PR: https://github.com/PostHog/posthog-js/pull/2413</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2026/01/how-i-use-llms-3.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - three
+      </h3>
+      <small>
+        30 Jan 2026
+      </small>
+  </div>
+</a>  <a href="/2025/12/avoiding-madness.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Things that a different me would have been tipped into psychosis by
+      </h3>
+      <small>
+        03 Dec 2025
+      </small>
+  </div>
+</a>  <a href="/2025/09/four-things-in-four-years.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Four things in four years at PostHog
+      </h3>
+      <small>
+        16 Sep 2025
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2025/10/how-i-use-llms-2.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2025/10/how-i-use-llms-2.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

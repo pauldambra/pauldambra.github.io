@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Mindless Rambling Nonsense - page 8</title>
+    <link rel="canonical" href="https://pauldambra.dev/page8/" />
+    <meta property="og:url" content="https://pauldambra.dev/page8/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mindless Rambling Nonsense - page 8" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Blog",
+    "keywords": "software engineering agile refactoring c# ruby javascript",
+    "url": "https://pauldambra.github.io",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://pauldambra.github.io"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+    }
+  }
+</script>
+
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id1"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2014/03/websites-cms-displaying-pages.html">
+      <h1 class="overflow-hidden text-ellipsis">Websites != CMS Platform - Displaying pages</h1>
+    </a>
+    <p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/02/websites-cms.html">Previous Post</a>
+<a href="/2014/03/website-cms-display-pages-part-2.html">Next Post</a></p>
+
+<h1 id="setup">Setup</h1>
+
+<!--alex ignore easy --->
+
+<p>So, it's relatively easy to get an Hello World page displaying…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 17 Mar 2014</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#cms"
+        >in: cms</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id2"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2014/02/websites-cms.html">
+      <h1 class="overflow-hidden text-ellipsis">Websites != CMS Platform</h1>
+    </a>
+    <p>I was once complaining about having difficulty setting up a very slightly unusual feature in a Drupal site that was taking forever to achieve. The framework made so many assumptions about what I should do that it wouldn't let me do what I wanted to.</p>
+
+<!--alex ignore he-she --->
+
+<p>A freelancer commented that if he was quoting on a project that had a requirement that it use a given CMS he didn't quote any less than building from scratch. He had found it didn't make enough difference to the effort he'd spend…</p>
+
+<p>This stuck with me and matches my experience so far. (yeah, yeah, confirmation bias. I know)</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 22 Feb 2014</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#cms"
+        >in: cms</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id3"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2014/01/comparing-mongodb-and-tokumx.html">
+      <h1 class="overflow-hidden text-ellipsis">Comparing MongoDb and TokuMX</h1>
+    </a>
+    <p><a href="http://www.tokutek.com/tokumx-for-mongodb/">TokuMX</a> is an</p>
+
+<blockquote>
+  <p>"open source, high-performance distribution of MongoDB".</p>
+</blockquote>
+
+<p>On a current project we're using MongoDB and, as the system is likely to scale fairly heavily, worrying (primarily) about storage. So, I picked up a task to compare MongoDB and TokuMX.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 23 Jan 2014</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#nosql"
+        >in: nosql</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#mongodb">
+    mongodb
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#tokumx">
+    tokumx
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#comparison">
+    comparison
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#benchmark">
+    benchmark
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id4"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2013/11/astronomical-database-identfier.html">
+      <h1 class="overflow-hidden text-ellipsis">Astronomical Database Identfier</h1>
+    </a>
+    <p>I dealt with an unusual requirement over the last few days. And wish I'd understood some of the more unusual ways that big numbers are handled in C#, Entity Framework, MS SQL and Oracle</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 22 Nov 2013</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#databases"
+        >in: databases</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#entity-framework">
+    entity-framework
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#oracle">
+    oracle
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#wat">
+    wat
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#rant">
+    rant
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id5"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2013/03/automagical-search-ux.html">
+      <h1 class="overflow-hidden text-ellipsis">Automagical search UX</h1>
+    </a>
+    <p>So I'm building a page in a mobile app to find "things".</p>
+
+<p>Some assumptions:</p>
+
+<ul>
+  <li>If you're using the app you are already familiar with the "things"</li>
+  <li>You've clicked "Find Things" and so you're expecting, as a minimum, to type something into a box (to tell the app what things you want to find)</li>
+  <li>You're a busy person and <a href="http://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758">you don't want to have to think</a></li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 20 Mar 2013</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#ux"
+        >in: ux</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#analysis">
+    analysis
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#search">
+    search
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id6"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2012/09/obligatory-ios6-maps-post.html">
+      <h1 class="overflow-hidden text-ellipsis">Obligatory iOS6 maps post</h1>
+    </a>
+    <p>For years now I've not bothered buying a satnav because maps on my iPhone has been good enough… sometimes a bit dodgy (once taking a route more fitted for a mountain bike) but generally serviceable.</p>
+
+<p>Taking a trip from Manchester to Kettering this weekend with only my iPhone on iOS6 and the missus' on iOS5 was eye opening. Also, bleedin' awful… - 'drive around a roundabout twice in confusion' awful.</p>
+
+<p>I really did give it a good go but this image sums up the difficulty faced using iOS6 maps.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 23 Sep 2012</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#design"
+        >in: design</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#ios6">
+    iOS6
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id7"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2012/07/y-u-no-sell-downloads-hollywood.html">
+      <h1 class="overflow-hidden text-ellipsis">Y U NO SELL DOWNLOADS HOLLYWOOD</h1>
+    </a>
+    <!--alex ignore kids king-queen --->
+
+<p>So it occurred to me that my kids might enjoy The Lion King (they like roaring). Our TV is really a computer and is hooked up to the internets allowing all kinds of iPlayer and similar streaming goodness.</p>
+
+<p>I guess I'm not unusual in that when I want to find something I google it…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 25 Jul 2012</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#rant"
+        >in: rant</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#netflix">
+    netflix
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#streaming">
+    streaming
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#hollywood">
+    hollywood
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id8"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2012/02/is-there-really-just-ipad-market.html">
+      <h1 class="overflow-hidden text-ellipsis">Is there really just an iPad market?</h1>
+    </a>
+    <p>Disclaimer: I use and love an iPad (1). I've got an iPhone, mac mini, a MBP and an iMac. But I'm not an out and out fanboy - I'm a windows admin and nascent C# developer. I try to use Linux where it fits and find more places it fits all the time. And I've been developing an Android application.</p>
+
+<p>TL;DR The transformer prime is a beautiful computer but it might be true there's an iPad market and not a tablet market.</p>
+
+<h2 id="update">UPDATE</h2>
+
+<p>And then today Google release Chrome for Ice Cream Sandwich. BEST. TABLET. BROWSER. EVAR.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 07 Feb 2012</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#rant"
+        >in: rant</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#ios">
+    iOS
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#android">
+    android
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id9"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2012/01/setting-up-mvc3-website-using-built-in.html">
+      <h1 class="overflow-hidden text-ellipsis">Setting up an MVC3 website using built-in membership provider</h1>
+    </a>
+    <p>Oh wait… this is awful. AWRUCHKA. Right dry heaving done with.</p>
+
+<p>It's a good job so few websites want to authenticate users and collect data on them otherwise we'd constantly have to write the same code ove… what's that? Oh my! Everyone is going through this.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 12 Jan 2012</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#rant"
+        >in: rant</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#mvc">
+    mvc
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#visual-studio">
+    visual-studio
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#membership-provider">
+    membership-provider
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id10"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2011/09/unusbscribey-follow-up.html">
+      <h1 class="overflow-hidden text-ellipsis">An unusbscribey follow up</h1>
+    </a>
+    <p>So recently I <a href="http://mindlessramblingnonsense.blogspot.com/2011/08/how-to-design-unsubscribe-link.html">blogged a bloggy thing </a>here about unsubscribe links.</p>
+
+<p>I know a lot of people are of the opinion that an unsubscribe link should unsubscribe you and require no further action and that the whole idempotency thing is software design flim-flam and I was tempted to agree until I was introduced to the concept of pre-fetching…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 20 Sep 2011</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#http"
+        >in: HTTP</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#get">
+    GET
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#idempotence">
+    idempotence
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#detail">
+    detail
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#follow-up">
+    follow-up
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+ 
+<div class="flex justify-center gap-x-2">
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page7/"
+      >&laquo; Prev</a
+    >
+    
+  </span>
+
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/index.html"
+      >1</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2"
+      >2</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page3"
+      >3</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page4"
+      >4</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page5"
+      >5</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page6"
+      >6</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page7"
+      >7</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <strong>8</strong>
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page9"
+      >9</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page10"
+      >10</a
+    >
+    
+  </span>
+  
+
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page9/"
+      >Next &raquo;</a
+    >
+    
+  </span>
+</div>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

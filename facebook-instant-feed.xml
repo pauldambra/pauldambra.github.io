@@ -1,0 +1,751 @@
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+  	<title>Mindless Rambling Nonsense</title>
+    <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+    <link>https://pauldambra.dev/</link>
+    <lastBuildDate>2026-02-27T17:25:17+00:00</lastBuildDate>
+    <language>en-gb</language>
+    
+    <item>
+      <title>I shipped 1000 PRs in a year, AMA</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2026/02/deca-hundy.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2026/02/deca-hundy.html</guid>
+
+      <pubDate>2026-02-11T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2026/02/deca-hundy.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="I shipped 1000 PRs in a year, AMA" />
+			<meta property="og:description"  content="How I approach pace of work" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I shipped 1000 PRs in the last 12 months at <a href="https://posthog.com">PostHog</a>. And someone asked me how I do it… let's see if i know.</p>
+
+<h3 id="preamble">preamble</h3>
+
+<ul>
+  <li>yes, yes, I know you don't think I should count PRs</li>
+  <li>when a measure becomes a target it stops being a useful measure</li>
+  <li>embrace yourself</li>
+</ul>
+
+<h3 id="advice">advice</h3>
+
+<ul>
+  <li>it is running not cycling</li>
+  <li>small steps ftw</li>
+  <li>practice like a jazz musician</li>
+  <li>love making things</li>
+  <li>one more iteration</li>
+</ul>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2026-02-11T08:00:00+00:00">February 11, 2026</time>
+			      <time class="op-modified" dateTime="2026-02-11T08:00:00+00:00">February 11, 2026</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>How I do user interviews</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2026/02/how-i-do-user-interviews.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2026/02/how-i-do-user-interviews.html</guid>
+
+      <pubDate>2026-02-11T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2026/02/how-i-do-user-interviews.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="How I do user interviews" />
+			<meta property="og:description"  content="How I do user interviews" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I've been lucky to watch some excellent engineers, product managers, and user researchers carry out user interviews.</p>
+
+<p>And had the opportunity at PostHog to practice that skill. I've explained all this a couple of times to different people, so thought I'd write it down.</p>
+
+<ul>
+  <li>set expectations</li>
+  <li>write down quotes</li>
+  <li>show &gt; tell</li>
+  <li>compound interest</li>
+  <li>sometimes stop</li>
+  <li>be a Labrador</li>
+  <li>this is the redesign that will kill the the Facebook</li>
+</ul>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2026-02-11T08:00:00+00:00">February 11, 2026</time>
+			      <time class="op-modified" dateTime="2026-02-11T08:00:00+00:00">February 11, 2026</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>How I use LLMs? - three</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2026/01/how-i-use-llms-3.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2026/01/how-i-use-llms-3.html</guid>
+
+      <pubDate>2026-01-30T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2026/01/how-i-use-llms-3.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="How I use LLMs? - three" />
+			<meta property="og:description"  content="How I use LLMs - three" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number two, or entry number three, depending on how you want to count it.</p>
+
+<p><a href="/2025/07/how-i-use-llms.html">the first entry is here</a>
+<a href="/2026/01/how-i-use-llms-2.html">the second entry is here</a></p>
+
+<ul>
+  <li>XP pedant agent</li>
+  <li>primarily using LLMs</li>
+  <li>throw away way more work</li>
+  <li>be very strict with what i <em>do</em> type</li>
+  <li>i approach understanding code differently</li>
+</ul>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2026-01-30T08:00:00+00:00">January 30, 2026</time>
+			      <time class="op-modified" dateTime="2026-01-30T08:00:00+00:00">January 30, 2026</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Things that a different me would have been tipped into psychosis by</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2025/12/avoiding-madness.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2025/12/avoiding-madness.html</guid>
+
+      <pubDate>2025-12-03T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2025/12/avoiding-madness.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Things that a different me would have been tipped into psychosis by" />
+			<meta property="og:description"  content="Things that a different me would have been tipped into psychosis by" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p><img src="/images/prawn_face.png" alt="prawn face" loading="lazy" /></p>
+
+<p>There are a few memes (in the original sense) that have got stuck in my head. They feel like the beginning of madness. I'm going to track them, to see how many I accumulate</p>
+
+<ul>
+  <li>water isn't real</li>
+  <li>old people are time travellers</li>
+</ul>
+
+<p>Each of them feels like something that would tip a different me over the edge into madness.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2025-12-03T08:00:00+00:00">December 03, 2025</time>
+			      <time class="op-modified" dateTime="2025-12-03T08:00:00+00:00">December 03, 2025</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>How I use LLMs - two?</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2025/10/how-i-use-llms-2.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2025/10/how-i-use-llms-2.html</guid>
+
+      <pubDate>2025-10-24T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2025/10/how-i-use-llms-2.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="How I use LLMs - two?" />
+			<meta property="og:description"  content="How I use LLMs - two" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number one, or entry number two, depending on how you want to count it. So, here are the changes in how I'm using LLMs</p>
+
+<p>(we had a brownbag on this at work yesterday, so it's been on my mind)</p>
+
+<p><a href="/2025/07/how-i-use-llms.html">the first entry is here</a></p>
+
+<ul>
+  <li>manage context</li>
+  <li>track longer tasks in a structured file</li>
+  <li>smallest prompt that describes how you want to work</li>
+  <li>be sparing with auto-accept edits</li>
+</ul>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2025-10-24T08:00:00+00:00">October 24, 2025</time>
+			      <time class="op-modified" dateTime="2025-10-24T08:00:00+00:00">October 24, 2025</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>Four things in four years at PostHog</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2025/09/four-things-in-four-years.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2025/09/four-things-in-four-years.html</guid>
+
+      <pubDate>2025-09-16T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2025/09/four-things-in-four-years.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="Four things in four years at PostHog" />
+			<meta property="og:description"  content="Four things I've learned in four years at PostHog" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I've been at PostHog for four years. After having the best four years of my career at Co-op Digital, I'm privileged to have then also had the best four years of my career at PostHog. Surely, I've learned something that I can cram into a cliche format?!</p>
+
+<ul>
+  <li>Don't look for a family, look for a team</li>
+  <li>Talk to users <em>all the time</em></li>
+  <li>You can YOLO and strangle your figs at the same time</li>
+  <li>Trust is a super power</li>
+</ul>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2025-09-16T08:00:00+00:00">September 16, 2025</time>
+			      <time class="op-modified" dateTime="2025-09-16T08:00:00+00:00">September 16, 2025</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>How I use LLMs?</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2025/07/how-i-use-llms.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2025/07/how-i-use-llms.html</guid>
+
+      <pubDate>2025-07-24T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2025/07/how-i-use-llms.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="How I use LLMs?" />
+			<meta property="og:description"  content="How I use LLMs" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2025-07-24T08:00:00+00:00">July 24, 2025</time>
+			      <time class="op-modified" dateTime="2025-07-24T08:00:00+00:00">July 24, 2025</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>How do I like to be managed?</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html</guid>
+
+      <pubDate>2025-06-03T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="How do I like to be managed?" />
+			<meta property="og:description"  content="How do I like to be managed?" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>An amazing engineer colleague has taken on (booming, god-on-the-mountain voice) extra responsibilities. Unfortunately for them, one of those responsibilities is managing me.</p>
+
+<p>They asked me how I like to be managed. I thought it was a good question, so I pushed it into my background processing queue, got distracted, and never answered them.</p>
+
+<p>Periodically I feel guilty about that, so I thought I'd write it down here. Maybe it will help me decide what my answer is…</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2025-06-03T08:00:00+00:00">June 03, 2025</time>
+			      <time class="op-modified" dateTime="2025-06-03T08:00:00+00:00">June 03, 2025</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>2024 Year Notes</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2025/05/year-notes.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2025/05/year-notes.html</guid>
+
+      <pubDate>2025-05-05T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2025/05/year-notes.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="2024 Year Notes" />
+			<meta property="og:description"  content="My year notes for 2024" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>I remain super un-inspired to write over the last few years. Which is a shame - because it's a a great way to learn. And very uninspired to write about 2024 in particular. So, here are some very short year notes for 2024.</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2025-05-05T08:00:00+00:00">May 05, 2025</time>
+			      <time class="op-modified" dateTime="2025-05-05T08:00:00+00:00">May 05, 2025</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+    <item>
+      <title>What would mum do?</title>
+      <description>My thoughts are mindless and rambling so the best place for them is the internet</description>
+
+      
+      <link>https://pauldambra.dev/2024/09/wwmd.html</link>
+      <guid isPermaLink="true">https://pauldambra.dev/2024/09/wwmd.html</guid>
+
+      <pubDate>2024-09-12T08:00:00+00:00</pubDate>
+      <author>paul.dambra+fb-instant@gmail.com</author>
+      <content:encoded>
+        <![CDATA[
+        <!doctype html>
+	        <head>
+			  <meta charset="utf-8">
+			  <meta property="op:markup_version" content="v1.0">
+
+			  <!-- The URL of the web version of your article --> 
+			  <link rel="canonical" href="https://pauldambra.dev/facebook-instant-feed.xml" />
+			  
+			  <!-- The style to be used for this article --> 
+			  <meta property="fb:article_style" content="myarticlestyle">
+
+		  	<meta property="og:url"          content="https://pauldambra.dev/2024/09/wwmd.html" />
+			<meta property="og:type"         content="article" />
+			<meta property="og:title"        content="What would mum do?" />
+			<meta property="og:description"  content="A tribute to my mum" />
+			<meta property="og:image"        content="https://pauldambra.dev/images/cardboard.jpg" />
+			<meta property="fb:app_id"       content="1029758320473951" />
+			</head>
+			<body>
+			  <article>
+			    <header>
+			      <!-- The cover image shown inside your article --> 
+			      <figure>
+			        <img src="https://pauldambra.dev/images/cardboard.jpg" />
+			        <figcaption>A kanban board</figcaption>
+			      </figure>
+			      
+			      <!-- The title and subtitle shown in your article -->
+			      <h1> post.title </h1>
+
+			      <!-- A kicker for your article -->
+			      <h3 class="op-kicker">
+			        <p>Recently my mum died. And I don't know how to process what felt like a very quick and very slow experience all at the same time.</p>
+
+<p>I've been writing here for a long time, maybe writing here will help me… At least it helps shamelessly ask for <a href="https://www.justgiving.com/page/in-memory-of-denise-dambra">donations to Cancer Research</a></p>
+
+<p>Talking with my brother one thing that stood out was that we both want to remember to focus on the good things. There's a risk that otherwise we only remember the last few relatively horrible months. So, I wanted to spend some time to reflect about what things I want to be sure to remember.</p>
+
+<p>(I normally try to vary the starting words of my sentences… but no apologies for overusing sentences starting with mum in this one)</p>
+
+<p>#FuckCancer</p>
+
+
+			      </h3>
+
+			      <!-- The author of your article -->
+			      <address>
+			        <a rel="facebook" href="http://facebook.com/pauldambra">Paul D'Ambra</a>
+			      </address>
+
+			      <!-- The published and last modified time stamps -->
+			      <time class="op-published" dateTime="2024-09-12T08:00:00+00:00">September 12, 2024</time>
+			      <time class="op-modified" dateTime="2024-09-12T08:00:00+00:00">September 12, 2024</time>
+			    </header>
+			  </article>
+            </body>
+        </html
+        ]]>
+      </content:encoded>
+    </item>
+     
+  </channel>
+</rss>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Mindless Rambling Nonsense - page 3</title>
+    <link rel="canonical" href="https://pauldambra.dev/page3/" />
+    <meta property="og:url" content="https://pauldambra.dev/page3/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mindless Rambling Nonsense - page 3" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Blog",
+    "keywords": "software engineering agile refactoring c# ruby javascript",
+    "url": "https://pauldambra.github.io",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://pauldambra.github.io"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+    }
+  }
+</script>
+
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id1"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/recipes/2022/09/pizza-dough.html">
+      <h1 class="overflow-hidden text-ellipsis">Pizza dough</h1>
+    </a>
+    <p>It turns out that Neapolitan pizza dough is a strictly described thing. The <a href="https://www.legislation.gov.uk/eur/2010/97/annexes">UK version of the EU rules are here</a>. Those instructions use 1.8 kilograms of flour and 1 litre of water. But (if you're not going to a wholesaler) flour comes in 1 kilogram bags. Ingredients have been adjusted to 1kg for this recipe.</p>
+
+<p>I sometimes use a biga starter. <a href="https://pauldambra.dev/biga-calculator/">Instructions for that are here</a>. But it takes more work, time, and nuance.</p>
+
+<p>This recipe can be completed in a single day and makes a very consistently tasty dough</p>
+
+<p>(Yes! <em>That</em> much salt)</p>
+
+<p><img src="/images/dough-balls.jpg" alt="the dough balls resting on a wooden surface" loading="lazy" /></p>
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 04 Sep 2022</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#cooking"
+        >in: cooking</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#recipe">
+    recipe
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#salad">
+    salad
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id2"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/recipes/2022/09/pepper-salad.html">
+      <h1 class="overflow-hidden text-ellipsis">Roast Pepper Salad</h1>
+    </a>
+    <p>Be careful to have lots of good bread available to soak up the tasty oil when you're finished! 👩‍🍳👌</p>
+
+<p><img src="/images/pepper-1.jpg" alt="the pepper salad in a bowl" loading="lazy" />
+<img src="/images/pepper-2.jpg" alt="the pepper salad on friselle" loading="lazy" /></p>
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 04 Sep 2022</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#cooking"
+        >in: cooking</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#recipe">
+    recipe
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#salad">
+    salad
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id3"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2022/08/solar-panels.html">
+      <h1 class="overflow-hidden text-ellipsis">Five years of Solar Panels</h1>
+    </a>
+    <p>We've had photovoltaic (PV) solar panels generating electricity on our roof for exactly 5 years. I've explained the impact a few times privately or <a href="https://twitter.com/search?q=from%3Apauldambra%20AND%20solar&amp;src=typed_query">on the tooter website</a>. I'm writing it down here so that I don't have to re-remember all the details each time. And since electricity prices are in the news at the moment and it might be useful to some folks.</p>
+
+<p>We had 14 panels installed on 25th August 2017. It cost £4,793.25 which included 5% VAT. Our house is south facing at the rear. They've generated 17.06MWh of electricity in the last five years.</p>
+
+<p>That's 17,060Kwh or a little over 17,000 "units".</p>
+
+<p>And that represents around 4 tonnes of CO<sub>2</sub> "saved".</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 22 Aug 2022</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#energy"
+        >in: energy</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#solar">
+    solar
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#energy">
+    energy
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id4"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2022/07/weather-vane-or-sign-post.html">
+      <h1 class="overflow-hidden text-ellipsis">Are you a weather vane or a sign post</h1>
+    </a>
+    <p>Tony Benn once said: "I have divided politicians into two categories: the Signposts and the Weathercocks. The Signpost says: 'This is the way we should go.' And you don't have to follow them but if you come back in ten years time the Signpost is still there. The Weathercock hasn’t got an opinion until they've looked at the polls, talked to the focus groups, discussed it with the
+spin doctors."</p>
+
+<p>I heard this quote recently and it has really struck me…</p>
+
+<p>Having changed problem domain, work environment, stack, and programming language this last year I'm wondering what signpost I want to be.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 17 Sep 2021</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#discussion"
+        >in: discussion</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#software-engineering">
+    software engineering
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id5"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2021/09/emotional-advice.html">
+      <h1 class="overflow-hidden text-ellipsis">Advice given on ending four years at Co-op</h1>
+    </a>
+    <p>I've finished at the Co-op after four years. I was feeling emotional and wrote some "wise words". I thought I'd record them here. In the future, when I'm reminiscing, they can transport me back to this feeling.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 17 Sep 2021</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#life-events"
+        >in: life events</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#changing-jobs">
+    changing jobs
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#co-op">
+    co-op
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id6"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2021/07/tech-debts.html">
+      <h1 class="overflow-hidden text-ellipsis">Tech Debts</h1>
+    </a>
+    <p>Here is something I had to write down at work. Something I've tried to say (with varying success) more than once. That I'm publishing here so I can refer back to it in future and in case it is useful for someone else</p>
+
+<p>When I am thinking about this, I am thinking about three things</p>
+
+<p><a href="https://agilemanifesto.org/principles.html">Two of the agile principles</a></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>Continuous attention to technical excellence and good design enhances agility.</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Simplicity–the art of maximising the amount of work not done–is essential.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>And the XP Rule</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p><a href="http://www.extremeprogramming.org/rules/refactor.html">Refactor Mercilessly</a></p>
+    </blockquote>
+  </li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 21 Jul 2021</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#semantics"
+        >in: semantics</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#meaning">
+    meaning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#pedantry">
+    pedantry
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id7"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2021/01/year-notes.html">
+      <h1 class="overflow-hidden text-ellipsis">2020 Year Notes</h1>
+    </a>
+    <p>Since <a href="https://twitter.com/pauldambra/status/916336773566992384">October 2017</a> I've been keeping week notes. I've found them a fantastic tool to track my focus and to remember to reflect on success (or lack of it). I didn't write them for most of 2020. When pandemic hit it seemed too self-centered. I wish I'd kept them up now.</p>
+
+<p>I wrote <a href="/2020/01/year-notes.html">year notes last year</a>. Surprisingly that was the only blog post I wrote last year 😱</p>
+
+<p>Here are mine for 2020… It feels egotistical… but it's intended to remind me to reflect. Hopefully it's useful to me in the future even if it isn't to anyone else.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 03 Jan 2021</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#year-notes"
+        >in: year-notes</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dear-diary">
+    dear-diary
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id8"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2020/01/year-notes.html">
+      <h1 class="overflow-hidden text-ellipsis">2019 Year Notes</h1>
+    </a>
+    <p>Since <a href="https://twitter.com/pauldambra/status/916336773566992384">October 2017</a> I've been keeping week notes. I've found them a fantastic tool to track my focus and to remember to reflect on success (or lack of it).</p>
+
+<p>Some <a href="https://medium.com/@nathan_nowinhd/year-note-b389d092b8fe">colleagues</a> and <a href="https://twitter.com/tekin/status/1213878853560651776">some</a> <a href="https://alicebartlett.co.uk/blog/yearnotes-2019">tooters</a> have written year notes as 2019 ends. And here are mine… It feels egotistical… but hopefully it's useful to me in the future even if it isn't to anyone else.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 07 Jan 2020</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#year-notes"
+        >in: year-notes</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dear-diary">
+    dear-diary
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id9"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2019/11/serverless-lessons-learned.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Lessons learned</h1>
+    </a>
+    <p>At the 2019 Manchester Java Unconference I attended a discussion on "Cloud Native Functions". It turned out nobody in the group had used "cloud native" but I've been working with teams using serviceful systems.</p>
+
+<p>I have a bad habit of talking more than I should but, despite my best efforts, the group expressed interest in hearing what teams at Co-op Digital had learned in the last ten months or so of working with serviceful systems in AWS.</p>
+
+<p>We defined some terms, covered some pitfalls and gotchas, some successes, and most of all our key learning: that once you can deploy one serviceful system into production you can move faster than you ever have before.</p>
+
+<p>Let's spend a little while defining our terms…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 30 Nov 2019</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#experience-report">
+    experience-report
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id10"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/07/serverless-6.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Part Six - Making a view</h1>
+    </a>
+    <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p><a href="/2018/06/serverless-5.html">Part Five</a> - Making a read model</p>
+
+<p>In part 5 the code was written to make sure that whenever a destination changes the recent destinations read model will update. Now that read model can be used to realise a view that a human can use. We'll add code to create a HTML view behind AWS cloudfront. This will demonstrate how event driven systems can be created by adding new code instead of changing existing code.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 01 Jul 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#read-model">
+    read model
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#views">
+    views
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+ 
+<div class="flex justify-center gap-x-2">
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2/"
+      >&laquo; Prev</a
+    >
+    
+  </span>
+
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/index.html"
+      >1</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2"
+      >2</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <strong>3</strong>
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page4"
+      >4</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page5"
+      >5</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page6"
+      >6</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page7"
+      >7</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page8"
+      >8</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page9"
+      >9</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page10"
+      >10</a
+    >
+    
+  </span>
+  
+
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page4/"
+      >Next &raquo;</a
+    >
+    
+  </span>
+</div>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

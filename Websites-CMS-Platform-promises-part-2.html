@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform - Promises - part 2</title>
+    <link rel="canonical" href="https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html" />
+    <meta property="og:url" content="https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform - Promises - part 2" />
+    <meta
+      property="og:description"
+      content="bluebird and stack exchange communities are awesome"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="bluebird and stack exchange communities are awesome"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform - Promises - part 2",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2052",
+     "url":"https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html",
+     "datePublished":"2014-06-01",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nThe  code  can  be  found  on  GitHub\n\nPrevious  Post\n\nSo,  in  the  last  post  I  worked  on  switching  some  callback  code  to  using  promises  with  Bluebird  library  but  as  I've  not  seen  much  promisified  (definitely  a  word!)  code  I  wasn't  sure  whether  it  was  any  good.\n\nSo  I  posted  a  question  on  the  code  review  stackexchange  asking  for  feedback.\n\n\n\nHere's  the  code  I  had  written:\n\n//I'm  using  bluebird.js  for  promises\nvar  users  =  Promise.promisifyAll(db.users);\nvar  compare  =  Promise.promisify(bcrypt.compare);\n\n//this  strategy  is  used  by  passport  to  handle  logins\nmodule.exports.localStrategy  =  new  LocalStrategy(function(username,  password,  done)  {\n    var  matchedUser;\n\n    var  comparePassword  =  function(user){\n        if(!user)  {\n            throw  new  NoMatchedUserError();\n        }\n\n        //memoise  the  loaded  user  so  it  can  be  returned  below\n        matchedUser  =  user;\n        return  compare(password,  matchedUser.password);\n    };\n\n    users.findOneAsync({  username:  username  })\n        .then(comparePassword)\n        .then(function(isMatch)  {\n            return  isMatch\n                ?  done(null,  matchedUser)\n                :  done(null,  false,  {  message:  'Incorrect  password.'  });\n        })\n        .catch(NoMatchedUserError,  function()  {\n            return  done(null,  false,  {  message:  'Incorrect  username.'  });\n        })  \n        .error(function(err)  {\n            return  done(err);\n        });\n});\n\n\nand  here's  the  code  that  was  suggested\n\n//I'm  using  bluebird.js  for  promises\nvar  users  =  Promise.promisifyAll(db.users);\nvar  compare  =  Promise.promisify(bcrypt.compare);\n\n\n//  This  strategy  is  used  by  passport  to  handle  logins\nmodule.exports.localStrategy  =  new  LocalStrategy(function(username,  password,  done)  {\n    users.findOneAsync({username:  username}).bind({})\n        .then(function(user)  {\n                if  (!user)  {\n                    throw  new  NoMatchedUserError('Incorrect  username.');\n                }\n                this.user  =  user;\n                return  compare(password,  user.password);\n        })\n        .then(function(isMatch)  {\n            if  (isMatch)  {\n                return  this.user;\n            }\n            else  {\n                throw  {  message:  'Incorrect  password.'  };\n            }\n        })\n        .nodeify(done);\n});\n\n\nthere  are  a  couple  of  differences  here  that  led  to  some  great  learning  for  me!\n\nBind\n\nThe  first  is  the  bind  function.\n\nIn  JS  there  is  a  method  on  the  function  prototype  called  bind.  Bind  returns  a  new  function  identical  to  the  original  except  that  the  first  argument  to  bind  sets  the  this  context  for  the  function  and  any  subsequent  arguments  are  'stored'  and  precede  any  arguments  given  when  the  new  function  is  eventually  called.\n\nvar  original  =  function()  {\n        console.log(this);\n        console.log(arguments);\n}  //  in  a  browser  for  example  the  original  function  logs  the  window  object  and  an  empty  array\n\nvar  withNoParameters  =  original.bind({ada:'lovelace'});\nwithNoParameters();  //logs  Object  {ada:  \"lovelace\"}  and  an  empty  array\n\nvar  withParameters  =  withNoParameters.bind({ada:'lovelace'},34)\nwithParameters();  //logs  Object  {ada:  \"lovelace\"}  and  then  [34]\nwithParameters('Hedy  Lamarr');  //logs  Object  {ada:  \"lovelace\"}  and  then  [34,  \"Hedy  Lamarr\"]  \n\n\nThe  bluebird  bind  function  doesn't  allow  you  to  add  arguments  but  does  provide  the  ability  to  bind  the  context.  Or  rather  of  returning  a  promise  bound  to  the  given  context.  That  context  follows  the  promise  down  the  chain  (unless  a  new  Promise  is  created)\n\nSo  here  we  can  use  it  to  simplify  the  code:\nvar  users  =  Promise.promisifyAll(db.users);\nvar  compare  =  Promise.promisify(bcrypt.compare);\n\nmodule.exports.localStrategy  =  new  LocalStrategy(function(username,  password,  done)  {\n    users.findOneAsync({username:  username})\n        .bind({})  //replace  the  findOneAsync  promise  with  one  bound  to  an  empty  object\n        .then(function(user)  {\n                this.user  =  user;  //  add  or  update  a  user  property  on  the  bound  object  \n                return  compare(password,  user.password);\n        })\n        .then(function(isMatch)  {\n            if  (isMatch)  {\n                return  this.user;  //still  able  to  refer  to  the  same  context\n            }\n        });\n});\n\n\nNodeify\n\nThe  other  fantabulous  feature  is  nodeify.  In  the  original  code  above  the  promisify  functions  convert  code  that  expects  to  receive  a  callback  into  code  that  returns  a  promise.  Nodeify  does  the  reverse  and  returns  a  promise  that  when  it  is  resolved  will  call  the  provided  callback.  Or  as  the  bluebird  docs  explain  it:\n\n\n    Register  a  node-style  callback  on  this  promise.  When  this  promise  is  is  either  fulfilled  or  rejected,  the  node  callback  will  be  called  back  with  the  node.js  convention  where  error  reason  is  the  first  argument  and  success  value  is  the  second  argument.  The  error  argument  will  be  null  in  case  of  success.\n\n\nvar  users  =  Promise.promisifyAll(db.users);\nvar  compare  =  Promise.promisify(bcrypt.compare);\n\nmodule.exports.localStrategy  =  new  LocalStrategy(function(username,  password,  done)  {\n    users.findOneAsync({username:  username}).bind({})\n        .then(function(user)  {\n                this.user  =  user;\n                return  compare(password,  user.password);\n        })\n        .then(function(isMatch)  {\n            if  (isMatch)  {\n                return  this.user;\n            }\n        }).nodefiy(done);  //on  success  calls  done(null,  this.user)\n});\n\n\nSo\nThese  were  both  transformative  for  me.  I  now  have  a  way  to  plug  promises  into  my  code  bit  by  bit  and  to  carry  on  using  libraries  that  know  nothing  about  promises.\n\nBut\nPassport  uses  an  optional  third  argument  to  populate  the  flash  message  so  you  can  put  a  meaningful  message  in  front  of  a  user  when  they  try  to  login  and  aren't  successful.\n\nI  poked  at  nodeify  with  a  stick  and  a  glass  of  wine  and  couldn't  make  that  work…  because  nodeify  only  passes  on  the  error  object  or  the  success  value.\n\nWonderful  Community\nAfter  reading  the  code  for  nodeify  and  realising  I  had  far  less  idea  how  JS  works  than  than  I  thought  I  did  and  much,  much  less  than  the  library  authors  I  posted  on  StackOverflow  with  an  example  of  what  I  wanted  to  achieve\n\nmodule.exports.localStrategy  =  new  LocalStrategy(function(username,  password,  done)  {\n    users.findOneAsync({username:  username}).bind({})\n        .then(function(user)  {\n                if  (!user)  {\n                    throw  new  NoMatchedUserError('Incorrect  username.');\n                    //should  be  equivalent  to:\n                    //  return  done(null,  false,  {message:'something'});\n                }\n                this.user  =  user;\n                return  compare(password,  user.password);\n        })\n        .then(function(isMatch)  {\n            if  (isMatch)  {\n                return  this.user;\n                //is  equivalent  to:\n                //  return  done(null,  this.user);\n            }\n            else  {\n                throw  {  message:  'Incorrect  password.'  };\n                //should  be  equivalent  to:\n                //  return  done(null,  false,  {message:'something  else'};\n            }\n        })\n        .nodeify(done);\n});\n\n\nApart  from  a  message  confirming  that  it  wasn't  currently  possible  to  use  nodeify  that  way  I  also  got  comments  from  one  of  the  Bluebird  project  committers  that  they  thought  this  was  a  decent  use-case  and  could  I  log  an  issue…\n\nI  did…\n\nAnd  they've  added  the  feature  for  version  2.0\n\nI  really  love  it  when  a  project  is  responsive!  Gives  me  confidence  that  they  care  about  what  they're  building  and  I'm  safe  to  be  using  it.\n\n(yes,  I'm  a  massive  hippy  :-))\n\nAnd\nSo  I  forked  Bluebird,  cloned  it,  switched  to  the  2.0  branch  and  ran  npm  build.  I  (relatively  lazily)  copied  the  built  js  files  over  the  v1.2.4  files  that  npm  had  installed  in  the  project  and  changed  the  code  to  use  the  new  feature  (with  some  comments  added  for  this  post)…\n\nmodule.exports.localStrategy  =  new  LocalStrategy(function(username,  password,  done)  {\n    users.findOneAsync({  username:  username  })\n        .bind([])  //now  the  context  needs  to  be  an  array\n        .then(function(user){\n            if(!user)  {\n                throw  new  NoMatchedUserError();\n            }\n            this[0]  =  user;  //the  first  item  in  the  context  should  be  the  user\n            return  compare(password,  this[0].password);\n        })\n        .then(function(passwordsMatch)  {\n            if  (!passwordsMatch)  {\n                this[0]  =  false;  //don't  return  a  user  (as  they  cannot  login)\n                this[1]  =  'Incorrect  password.';  //add  a  message  that  passport  can  use  for  a  flash  message\n            }\n            return  this;\n        })\n        .catch(NoMatchedUserError,  function()  {\n            this[0]  =  false;  //  couldn't  find  a  user  so  don't  return  one\n            this[1]  =  'Incorrect  username.';  //add  a  message  that  passport  can  use  for  a  flash  message\n            return  this;\n        })  \n        .error(function(err)  {\n            return  err;\n        })\n        .nodeify(done,  {spread:true});  //  Yay!  \n});\n\n\nMy  code  looks  how  I  wanted,  does  what  I  wanted,  I  grok  promises  much  more,  and  I've  learned  that  the  bluebird  developers  are  lovely.  Awesomeness!\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Jun 01 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform - Promises - part 2</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Promises+-+part+2&via=pauldambra&url=https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#js">
+    js
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#promises">
+    promises
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/Websites-CMS-Platform-promises.html">Previous Post</a></p>
+
+<p>So, in the last post I worked on switching some callback code to using promises with <a href="https://www.npmjs.org/package/bluebird">Bluebird</a> library but as I've not seen much promisified (definitely a word!) code I wasn't sure whether it was any good.</p>
+
+<p>So I posted <a href="http://codereview.stackexchange.com/questions/51712/is-this-a-reasonable-way-to-implement-promises-in-node-js">a question on the code review stackexchange</a> asking for feedback.</p>
+
+<!--more-->
+
+<p>Here's the code I had written:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//I'm using bluebird.js for promises</span>
+<span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">compare</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">);</span>
+
+<span class="c1">//this strategy is used by passport to handle logins</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">localStrategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalStrategy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">matchedUser</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">comparePassword</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoMatchedUserError</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">//memoise the loaded user so it can be returned below</span>
+    <span class="nx">matchedUser</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nf">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">matchedUser</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">users</span><span class="p">.</span><span class="nf">findOneAsync</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="nx">username</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">comparePassword</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">isMatch</span>
+        <span class="p">?</span> <span class="nf">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">matchedUser</span><span class="p">)</span>
+        <span class="p">:</span> <span class="nf">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect password.</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">NoMatchedUserError</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nf">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect username.</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">})</span> 
+    <span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nf">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>and here's the code that was suggested</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//I'm using bluebird.js for promises</span>
+<span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">compare</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">);</span>
+
+
+<span class="c1">// This strategy is used by passport to handle logins</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">localStrategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalStrategy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">users</span><span class="p">.</span><span class="nf">findOneAsync</span><span class="p">({</span><span class="na">username</span><span class="p">:</span> <span class="nx">username</span><span class="p">}).</span><span class="nf">bind</span><span class="p">({})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoMatchedUserError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Incorrect username.</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect password.</span><span class="dl">'</span> <span class="p">};</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">nodeify</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>there are a couple of differences here that led to some great learning for me!</p>
+
+<h1 id="bind">Bind</h1>
+
+<p>The first is <a href="https://github.com/petkaantonov/bluebird/blob/master/API.md#binddynamic-thisarg---promise">the bind function</a>.</p>
+
+<p>In JS there is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">a method on the function prototype called bind</a>. Bind returns a new function identical to the original except that the first argument to bind sets the <code class="language-plaintext highlighter-rouge">this</code> context for the function and any subsequent arguments are 'stored' and precede any arguments given when the new function is eventually called.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">original</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// in a browser for example the original function logs the window object and an empty array</span>
+
+<span class="kd">var</span> <span class="nx">withNoParameters</span> <span class="o">=</span> <span class="nx">original</span><span class="p">.</span><span class="nf">bind</span><span class="p">({</span><span class="na">ada</span><span class="p">:</span><span class="dl">'</span><span class="s1">lovelace</span><span class="dl">'</span><span class="p">});</span>
+<span class="nf">withNoParameters</span><span class="p">();</span> <span class="c1">//logs Object {ada: "lovelace"} and an empty array</span>
+
+<span class="kd">var</span> <span class="nx">withParameters</span> <span class="o">=</span> <span class="nx">withNoParameters</span><span class="p">.</span><span class="nf">bind</span><span class="p">({</span><span class="na">ada</span><span class="p">:</span><span class="dl">'</span><span class="s1">lovelace</span><span class="dl">'</span><span class="p">},</span><span class="mi">34</span><span class="p">)</span>
+<span class="nf">withParameters</span><span class="p">();</span> <span class="c1">//logs Object {ada: "lovelace"} and then [34]</span>
+<span class="nf">withParameters</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hedy Lamarr</span><span class="dl">'</span><span class="p">);</span> <span class="c1">//logs Object {ada: "lovelace"} and then [34, "Hedy Lamarr"] </span>
+</code></pre></div></div>
+
+<p>The bluebird bind function doesn't allow you to add arguments but does provide the ability to bind the context. Or rather of returning a promise bound to the given context. That context follows the promise down the chain (unless a new <code class="language-plaintext highlighter-rouge">Promise</code> is created)</p>
+
+<p>So here we can use it to simplify the code:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">compare</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">localStrategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalStrategy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">users</span><span class="p">.</span><span class="nf">findOneAsync</span><span class="p">({</span><span class="na">username</span><span class="p">:</span> <span class="nx">username</span><span class="p">})</span>
+    <span class="p">.</span><span class="nf">bind</span><span class="p">({})</span> <span class="c1">//replace the findOneAsync promise with one bound to an empty object</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span> <span class="c1">// add or update a user property on the bound object </span>
+        <span class="k">return</span> <span class="nf">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span> <span class="c1">//still able to refer to the same context</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h1 id="nodeify">Nodeify</h1>
+
+<p>The other fantabulous feature is <a href="https://github.com/petkaantonov/bluebird/blob/master/API.md#nodeifyfunction-callback---promise">nodeify</a>. In the original code above the promisify functions convert code that expects to receive a callback into code that returns a promise. Nodeify does the reverse and returns a promise that when it is resolved will call the provided callback. Or as the bluebird docs explain it:</p>
+
+<blockquote>
+  <p>Register a node-style callback on this promise. When this promise is is either fulfilled or rejected, the node callback will be called back with the node.js convention where error reason is the first argument and success value is the second argument. The error argument will be <code class="language-plaintext highlighter-rouge">null</code> in case of success.</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">compare</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">localStrategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalStrategy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">users</span><span class="p">.</span><span class="nf">findOneAsync</span><span class="p">({</span><span class="na">username</span><span class="p">:</span> <span class="nx">username</span><span class="p">}).</span><span class="nf">bind</span><span class="p">({})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}).</span><span class="nf">nodefiy</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span> <span class="c1">//on success calls done(null, this.user)</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h1 id="so">So</h1>
+<p>These were both transformative for me. I now have a way to plug promises into my code bit by bit and to carry on using libraries that know nothing about promises.</p>
+
+<h1 id="but">But</h1>
+<p>Passport uses an optional third argument to populate the flash message so you can put a meaningful message in front of a user when they try to login and aren't successful.</p>
+
+<p>I poked at nodeify with a stick and a glass of wine and couldn't make that work… because nodeify only passes on the error object or the success value.</p>
+
+<h1 id="wonderful-community">Wonderful Community</h1>
+<p>After reading the code for nodeify and realising I had far less idea how JS works than than I thought I did and much, much less than the library authors I <a href="http://stackoverflow.com/questions/23920589/how-to-pass-a-third-argument-to-a-callback-using-bluebird-js-nodeify">posted on StackOverflow</a> with an example of what I wanted to achieve</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">localStrategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalStrategy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">users</span><span class="p">.</span><span class="nf">findOneAsync</span><span class="p">({</span><span class="na">username</span><span class="p">:</span> <span class="nx">username</span><span class="p">}).</span><span class="nf">bind</span><span class="p">({})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoMatchedUserError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Incorrect username.</span><span class="dl">'</span><span class="p">);</span>
+          <span class="c1">//should be equivalent to:</span>
+          <span class="c1">// return done(null, false, {message:'something'});</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+        <span class="c1">//is equivalent to:</span>
+        <span class="c1">// return done(null, this.user);</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect password.</span><span class="dl">'</span> <span class="p">};</span>
+        <span class="c1">//should be equivalent to:</span>
+        <span class="c1">// return done(null, false, {message:'something else'};</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">nodeify</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Apart from a message confirming that it wasn't currently possible to use nodeify that way I also got comments from one of the Bluebird project committers that they thought this was a decent use-case and could I log an issue…</p>
+
+<p><a href="https://github.com/petkaantonov/bluebird/issues/219">I did</a>…</p>
+
+<p><a href="https://github.com/petkaantonov/bluebird/commit/5ca7743c8f8260d43c2f25951e65177d71450d1c#diff-218b9ea0594b584c56937aadfc377657">And they've added the feature for version 2.0</a></p>
+
+<p>I really love it when a project is responsive! Gives me confidence that they care about what they're building and I'm safe to be using it.</p>
+
+<p>(yes, I'm a massive hippy :-))</p>
+
+<h1 id="and">And</h1>
+<p>So I forked Bluebird, cloned it, switched to the 2.0 branch and ran npm build. I (relatively lazily) copied the built js files over the v1.2.4 files that npm had installed in the project and changed the code to use the new feature (with some comments added for this post)…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">localStrategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalStrategy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">users</span><span class="p">.</span><span class="nf">findOneAsync</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="nx">username</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nf">bind</span><span class="p">([])</span> <span class="c1">//now the context needs to be an array</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoMatchedUserError</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span> <span class="c1">//the first item in the context should be the user</span>
+      <span class="k">return</span> <span class="nf">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">password</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">passwordsMatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">passwordsMatch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">//don't return a user (as they cannot login)</span>
+        <span class="k">this</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Incorrect password.</span><span class="dl">'</span><span class="p">;</span> <span class="c1">//add a message that passport can use for a flash message</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">NoMatchedUserError</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// couldn't find a user so don't return one</span>
+      <span class="k">this</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Incorrect username.</span><span class="dl">'</span><span class="p">;</span> <span class="c1">//add a message that passport can use for a flash message</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">})</span> 
+    <span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">nodeify</span><span class="p">(</span><span class="nx">done</span><span class="p">,</span> <span class="p">{</span><span class="na">spread</span><span class="p">:</span><span class="kc">true</span><span class="p">});</span> <span class="c1">// Yay! </span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>My code looks how I wanted, does what I wanted, I grok promises much more, and I've learned that the bluebird developers are lovely. Awesomeness!</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/Websites-CMS-Platform-promises-part-2.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

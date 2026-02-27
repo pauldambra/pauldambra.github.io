@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Dear Diary Year One</title>
+    <link rel="canonical" href="https://pauldambra.dev/dear-diary-year-one.html" />
+    <meta property="og:url" content="https://pauldambra.dev/dear-diary-year-one.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Dear Diary Year One" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <h1> Dear Diary </h1>
+
+<p>
+I've fallen into a habit of ending each working week by tweeting a diary entry of my week. And have realised I've kept it up for a year now.
+</p>
+<p>
+It's not very accessible because the entries are images so that I can fit them into a tweet. But it's been really useful for keping track of the positives I (and mostly the people I work with) achieve.
+</p>
+<p>
+  But mostly it's helpful for reflecting on whether I'm doing valuable things and whether they are the things I meant to do each week.
+</p>
+<p>
+  You can <a href="https://twitter.com/search?f=tweets&vertical=default&q=from%3Apauldambra%20AND%20%23deardiary&src=typd" target="_blank">follow the entries on twitter</a> but that doesn't feel permanent enough so I've gathered them here.
+  </p>
+
+
+  
+
+      <h2>2017week1</h2>
+      <img src="/images/dear_diary_year_one/1.2017week1.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week2</h2>
+      <img src="/images/dear_diary_year_one/2.2017week2.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week3</h2>
+      <img src="/images/dear_diary_year_one/3.2017week3.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week4</h2>
+      <img src="/images/dear_diary_year_one/4.2017week4.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week5and6</h2>
+      <img src="/images/dear_diary_year_one/5.2017week5and6.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week7</h2>
+      <img src="/images/dear_diary_year_one/6.2017week7.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week8</h2>
+      <img src="/images/dear_diary_year_one/7.2017week8.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week9</h2>
+      <img src="/images/dear_diary_year_one/8.2017week9.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week10</h2>
+      <img src="/images/dear_diary_year_one/9.2017week10.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week11</h2>
+      <img src="/images/dear_diary_year_one/10.2017week11.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week12</h2>
+      <img src="/images/dear_diary_year_one/11.2017week12.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2017week13</h2>
+      <img src="/images/dear_diary_year_one/12.2017week13.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week1</h2>
+      <img src="/images/dear_diary_year_one/13.2018week1.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week2</h2>
+      <img src="/images/dear_diary_year_one/14.2018week2.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week3</h2>
+      <img src="/images/dear_diary_year_one/15.2018week3.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week4</h2>
+      <img src="/images/dear_diary_year_one/16.2018week4.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week5</h2>
+      <img src="/images/dear_diary_year_one/17.2018week5.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week6</h2>
+      <img src="/images/dear_diary_year_one/18.2018week6.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week7</h2>
+      <img src="/images/dear_diary_year_one/19.2018week7.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week8</h2>
+      <img src="/images/dear_diary_year_one/20.2018week8.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week9</h2>
+      <img src="/images/dear_diary_year_one/21.2018week9.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week10</h2>
+      <img src="/images/dear_diary_year_one/22.2018week10.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week11</h2>
+      <img src="/images/dear_diary_year_one/23.2018week11.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week12</h2>
+      <img src="/images/dear_diary_year_one/24.2018week12.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week13</h2>
+      <img src="/images/dear_diary_year_one/25.2018week13.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week14</h2>
+      <img src="/images/dear_diary_year_one/26.2018week14.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week15</h2>
+      <img src="/images/dear_diary_year_one/27.2018week15.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week16</h2>
+      <img src="/images/dear_diary_year_one/28.2018week16.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week17</h2>
+      <img src="/images/dear_diary_year_one/29.2018week17.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week18</h2>
+      <img src="/images/dear_diary_year_one/30.2018week18.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week19</h2>
+      <img src="/images/dear_diary_year_one/31.2018week19.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week20and21</h2>
+      <img src="/images/dear_diary_year_one/32.2018week20and21.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week22</h2>
+      <img src="/images/dear_diary_year_one/33.2018week22.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week23</h2>
+      <img src="/images/dear_diary_year_one/34.2018week23.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week24</h2>
+      <img src="/images/dear_diary_year_one/35.2018week24.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week25</h2>
+      <img src="/images/dear_diary_year_one/36.2018week25.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week26</h2>
+      <img src="/images/dear_diary_year_one/37.2018week26.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week27</h2>
+      <img src="/images/dear_diary_year_one/38.2018week27.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week28</h2>
+      <img src="/images/dear_diary_year_one/39.2018week28.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week29</h2>
+      <img src="/images/dear_diary_year_one/40.2018week29.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week30</h2>
+      <img src="/images/dear_diary_year_one/41.2018week30.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week31</h2>
+      <img src="/images/dear_diary_year_one/42.2018week31.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week32</h2>
+      <img src="/images/dear_diary_year_one/43.2018week32.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week33</h2>
+      <img src="/images/dear_diary_year_one/44.2018week33.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week34</h2>
+      <img src="/images/dear_diary_year_one/45.2018week34.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week35</h2>
+      <img src="/images/dear_diary_year_one/46.2018week35.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week36</h2>
+      <img src="/images/dear_diary_year_one/47.2018week36.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week37</h2>
+      <img src="/images/dear_diary_year_one/48.2018week37.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+      <h2>2018week38</h2>
+      <img src="/images/dear_diary_year_one/49.2018week38.png" alt="an image from my diary from before I switched to text based entries served as images">
+
+  
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

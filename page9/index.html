@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Mindless Rambling Nonsense - page 9</title>
+    <link rel="canonical" href="https://pauldambra.dev/page9/" />
+    <meta property="og:url" content="https://pauldambra.dev/page9/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mindless Rambling Nonsense - page 9" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Blog",
+    "keywords": "software engineering agile refactoring c# ruby javascript",
+    "url": "https://pauldambra.github.io",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://pauldambra.github.io"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+    }
+  }
+</script>
+
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id1"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2011/08/how-to-design-unsubscribe-link.html">
+      <h1 class="overflow-hidden text-ellipsis">How to design an unsubscribe link?!?</h1>
+    </a>
+    <p>We send out mail to 70,000+ members of our organisation. In theory they know they're getting it cos they're advised when they join the organisation that we'll send the email… yes, I know that implicit opt-ins aren't best practice… I want to polish up our email unsubscribe flow since the amount of mail we send out is steadily climbing as we move from paper to email for more things.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 05 Aug 2011</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#http"
+        >in: HTTP</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#get">
+    GET
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#idempotence">
+    idempotence
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#detail">
+    detail
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id2"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2011/06/get-with-programming.html">
+      <h1 class="overflow-hidden text-ellipsis">Get with the program(ming)!</h1>
+    </a>
+    <!--alex ignore whitespace-->
+
+<p>Twice recently I've hit the same problem with two different mobile phone vendor's websites. Vodafone (displayed here) and 3. When I type a phone number I split it into three sections using white-space. "nnnn nnn nnnn" that's how I remember numbers. That's not uncommon I don't think…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 10 Jun 2011</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#rant"
+        >in: rant</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#ux">
+    ux
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id3"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2011/04/ssh-without-password.html">
+      <h1 class="overflow-hidden text-ellipsis">SSH without password</h1>
+    </a>
+    <!--alex ignore easy-->
+
+<p>I've resolved to learn more about linux and have been slowly boggling at how easy I find some tasks are in comparison to the MS world…</p>
+
+<p>Recently I've been working on what was intended to be a small and straight-forward website that has rapidly grown to be a large behemoth that will take credit card payments.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 11 Apr 2011</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#ssh"
+        >in: ssh</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#linux">
+    linux
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#windows">
+    windows
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#git">
+    git
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#ssh">
+    ssh
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id4"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2010/10/refactor-fun.html">
+      <h1 class="overflow-hidden text-ellipsis">Refactor ==fun</h1>
+    </a>
+    <p>I've been using <a href="http://www.jetbrains.com/resharper/">JetBrains Resharper</a> for a while after a recommendation along the lines of "I can't stand to write code without it now" and…</p>
+
+<p>I can't stand to write code without it now!</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 20 Oct 2010</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#refactoring"
+        >in: refactoring</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#refactoring">
+    refactoring
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dictionary">
+    dictionary
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id5"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2010/08/odd-odd-odd-login-behaviour.html">
+      <h1 class="overflow-hidden text-ellipsis">Odd, odd, odd login behaviour</h1>
+    </a>
+    <p>I've got <a href="https://support.hp.com/gb-en/document/c01846437">a mini 5101</a>. A little HP netbook that I lurve. It runs Windows 7 and Ubuntu 10.04 with aplomb.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 07 Aug 2010</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#hardware"
+        >in: hardware</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#review">
+    review
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#problem-solving">
+    problem-solving
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id6"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2010/05/theres-more-in-them-that-hills.html">
+      <h1 class="overflow-hidden text-ellipsis">There's more in them thar hills...</h1>
+    </a>
+    <p>…than the <a href="http://en.wikipedia.org/wiki/Factory_method_pattern">Factory pattern</a>.</p>
+
+<p>So anyway I learn about design patterns and begin to use the factory pattern. And much like many other people I settle into a world where there are no other patterns. All is comfortable and fluffy and instantiated from calling code much as it was in days gone by.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 08 May 2010</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#software-engineering"
+        >in: software-engineering</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design-patterns">
+    design-patterns
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#java">
+    java
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id7"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2010/03/quack-quack-says-duck-now-with-added.html">
+      <h1 class="overflow-hidden text-ellipsis">Quack Quack Says The Duck now with added threading</h1>
+    </a>
+    <p>In a <a href="http://mindlessramblingnonsense.blogspot.com/2009/10/quack-quack-says-duck.html">previous post</a> I advertised an application I'd made for WinMo to entertain my toddler.</p>
+
+<!--alex ignore her-him-->
+<p>Having watched her play with it and having been <a href="http://stackoverflow.com/questions/2498609/handle-windows-mobile-click-event-so-that-it-doesnt-queue-while-my-program-is">reminded to K.I.S.S</a>. I've fixed a bug that highlighted the difference in expectations between myself and a toddler.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 29 Mar 2010</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#windows-mobile"
+        >in: windows-mobile</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#parenting">
+    parenting
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#microsoft">
+    microsoft
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#vb-net">
+    vb.net
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#ux">
+    ux
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id8"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2009/12/c-background-worker.html">
+      <h1 class="overflow-hidden text-ellipsis">c# Background Worker</h1>
+    </a>
+    <p>I've been meaning to get around to writing a good tutorial on c# background workers. Mainly because I use them to separate the GUI from all the heavy lifting and I always forget how to update things.</p>
+
+<p>In case I never get around to it. <a href="http://dotnetperls.com/backgroundworker">This is about the clearest introduction I've ever found.</a> Well worth a read…</p>
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 01 Dec 2009</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#c"
+        >in: c#</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dotnet">
+    dotnet
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#microsoft">
+    microsoft
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#background-workers">
+    background-workers
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id9"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2009/10/bing-is-not-search-engine.html">
+      <h1 class="overflow-hidden text-ellipsis">Bing is not a search engine</h1>
+    </a>
+    <p>Over the last two days I've been researching using Windows Deployment Services with BDD. I've got 4 workstations to build so I may as well investigate it right?</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 30 Oct 2009</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#rant"
+        >in: rant</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#bing">
+    bing
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#rant">
+    rant
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#search">
+    search
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#microsoft">
+    microsoft
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id10"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2009/10/quack-quack-says-duck.html">
+      <h1 class="overflow-hidden text-ellipsis">Quack Quack says the Duck</h1>
+    </a>
+    <!--alex ignore daughter-son-->
+<p>I've released a piece of software that I made for my 18 month old daughter on Codeplex <a href="https://web.archive.org/web/20130301150839/http://qqstd.codeplex.com/">http://qqstd.codeplex.com/</a>.</p>
+
+<p>It's a small dotNet app for Windows Mobile that creates sound-image pairs by scanning a resource folder and then randomly displays one of the images. When the image is touched the sound associated with the image is played.
+<!--alex ignore daughter-son her-him-->
+I developed it to occupy my daughter and teach her animal noises but the app doesn't care what if finds so you could use pictures of family and friends and their names said out-loud; Vehicles and their engine noises or anything that enters your transom.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 04 Oct 2009</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#windows-mobile"
+        >in: windows-mobile</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#vb-net">
+    vb.net
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#code">
+    code
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#parenting">
+    parenting
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+ 
+<div class="flex justify-center gap-x-2">
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page8/"
+      >&laquo; Prev</a
+    >
+    
+  </span>
+
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/index.html"
+      >1</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2"
+      >2</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page3"
+      >3</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page4"
+      >4</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page5"
+      >5</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page6"
+      >6</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page7"
+      >7</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page8"
+      >8</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <strong>9</strong>
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page10"
+      >10</a
+    >
+    
+  </span>
+  
+
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page10/"
+      >Next &raquo;</a
+    >
+    
+  </span>
+</div>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

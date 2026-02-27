@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Powershell on Linux</title>
+    <link rel="canonical" href="https://pauldambra.dev/powershell-on-linux.html" />
+    <meta property="og:url" content="https://pauldambra.dev/powershell-on-linux.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Powershell on Linux" />
+    <meta
+      property="og:description"
+      content="initial investigation of powershell on linux"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="initial investigation of powershell on linux"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Powershell on Linux",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2220",
+     "url":"https://pauldambra.dev/powershell-on-linux.html",
+     "datePublished":"2016-08-28",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/powershell-on-linux.html"
+     },
+     "articleBody":"MS  have  open-sourced  powershell  and  made  it  work  on  many  platforms.  Kudos  to  them  -  I'm  loving  the  \"new  MS\".\n\nI've  never  really  got  powershell.  Although  it's  definitely  an  improvement  on  vbscript  so  I  have  used  it  when  I've  needed  to  automate  windows.\n\nBut  as  a  task  approaches  some  ill-defined  level  of  complexity  I  switch  to  C#,  Ruby,  or  Node  rather  than  writing  a  script.  Not  that  those  are  the  only  options  but  I  don't  know  Perl,  or  Python,  or  $yourFavouriteTool.\n\nAs  a  result  I  have  barely  written  any  Powershell  on  Windows  and,  as  I've  done  more  work  on  Linux  over  the  last  few  years,  I've  also  barely  written  any  bash.\n\nSo,  while  I  think  it's  a  good  thing  that  MS  are  opening  up  and  releasing  cross  platform  tools  I  was  underwhelmed.  But…\n\n\n\n…some  colleagues  were  excited  and  people  I  think  of  as  being  *nix  people  too\n\n\n    @dhobsd  It&#39;s  hard  to  fit  in  140  chars,  but  powershell  is  an  incredible  improvement  over  unix  shells  and  is  generally  amazingsauce.&mdash;  @jordansissel  (@jordansissel)  August  20,  2016\n\n\n\nI  thought  I'd  spend  some  time  to  compare  the  two.\n\nThe  Test\n\nI've  been  watching  Gary  Bernhardt's  Destroy  All  Software  screencasts  (which  I  heartily  recommend).  I  enjoyed  his  use  of  looping  over  git  revisions  to  carry  out  tasks  to  show  either  some  git  tool  or  bash  itself.\n\nI  came  up  with  a  fake  scenario  of  having  a  Big-Data  problem.  The  amount  of  data  was  suddenly,  and  unexpectedly  increased  as  a  result  of  human  error.  And  that’s  caused  all  our  systems  to  explode  (something  I’ve  seen  happen  too  so  not  that  fake).  My  task  was  to  investigate  and  find  out  when  the  error  occurred.\n\n\n\nIf  you  read  that  commit  log  you  might  be  able  to  guess  where  the  error  occurred.  Let’s  pretend  that  the  log  is  more  complex  and  not  so  useful.\n\nAside\n\nIf  you  like  that  Git  log  output  run:\n\ngit  config  --global  alias.lg  \"log  --color  --graph  --pretty=format:'%Cred%h%Creset  -%C(yellow)%d%Creset  %s  %Cgreen(%cr)  %C(bold  blue)&lt;%an&gt;%Creset'  --abbrev-commit\"\n\n\nNB  scroll  to  the  right  to  copy  that  text  it's  really  long.\n\nAnd  then  use  git  lg  to  run  it\n\nCarrying  on\n\nThis  particular  big  data  company  use  a  venerable,  and  well-trusted  database  technology  -  a  file.  I  decided  on  this  approach\n\n\n    get  a  list  of  commits\n    loop  over  them  checking  each  one  out\n    while  checkout  out  count  the  lines  in  each  file\n    compare  each  linecount  to  the  last\n    break  when  the  change  in  linecount  breaches  some  arbitrary  threshold\n    clean  up\n\n\nThis  turns  out  to  be  pretty  trivial  in  both  bash:\n\n#!  /bin/bash\n\nset  -e\n\nLASTCOMMIT=0\n\nfor  commit  in  `git  rev-list  master  --reverse`\ndo\n\t`git  checkout  $commit  &amp;&gt;  /dev/null`\n        lines=$(wc  -l  &lt;  big-data.txt)\n        linediff=`expr  $lines  -  $LASTCOMMIT`\n        if  [[  $linediff  -gt  10  ]];  then\n        \techo  \"this  is  the  bad  commit  $commit\"\n        \tbreak\n        fi\n\n        LASTCOMMIT=$lines\ndone\n\n`git  checkout  master  &amp;&gt;  /dev/null`\n\n\nand  PowerShell:\n\n$lastcommit  =  0\n\nforeach  ($commit  in  iex  \"git  rev-list  master  --reverse\")\n{  \n        iex  \"git  checkout  $commit\"  *&gt;  $null\n\n        $lines=(iex  \"wc  -l  big-data.txt\").Split(\"  \",  [System.StringSplitOptions]::RemoveEmptyEntries)\n        $linediff  =  $lines[0]  -  $lastcommit\n        \n        if  ($linediff  -gt  10)  \n        {\n                write-host  \"this  is  the  bad  commit  $($commit)\"\n                break\n        }\n\n        $lastcommit  =  $lines[0]\n}\n\niex  \"git  checkout  master\"  *&gt;  $null\n\n\nThere  were  a  couple  of  differences  because  PowerShell  insisted  on  evaluating  the  command  strings.  And  it  turns  out  ‘&amp;’  and  ‘&lt;’  are  \"reserved  for  future  use\".\n\n\nBoth  were  relatively  easy  to  write,  relatively  easy  to  read,  run  correctly,  and  give  the  correct  output.\n\nMore  Complex  Example\n\nI  downloaded  the  stack  overflow  vote  archive.  At  time  of  writing  this  is  a  10  Gigabyte  xml  file.  I  want  to  know  how  many  of  the  votes  are  from  2010  and  a  breakdown  of  the  types  of  votes  in  that  year.\n\n\n\nBash\n\n#!  /bin/bash\n\nset  -e\n\nnon_data_lines_count=3\nlines=$((  $(wc  -l  &lt;  $1)  -  $non_data_lines_count  ))\n\ntwenty_ten_regex=\"CreationDate=\\\"2010\"\nvote_type_regex=\"VoteTypeId=\\\"([0-9]+)\\\"\"\n\ndeclare  -a  vote_types\n\nwhile  read  line  ;  do\n        if  [[  $line  =~  $vote_type_regex  ]];  then  \n                vote_type_id=\"${BASH_REMATCH[1]}\"\n                ((vote_types[vote_type_id]++))\n        fi\ndone  &lt;  &lt;(grep  $twenty_ten_regex  $1)\n\ntwenty_ten_count=0\nfor  k  in  \"${!vote_types[@]}\"\ndo\n    twenty_ten_count=$(($twenty_ten_count  +  vote_types[$k]))\n    echo  \"VoteTypeId:  $k  had  ${vote_types[$k]}  votes\"\ndone\n\necho  \"there  were  $lines  total  votes  in  the  file\"\necho  \"there  were  $twenty_ten_count  total  votes  in  2010\"\n\n\nThis  script:\n\n\n    counts  the  lines  in  the  file\n        \n            subtracting  three  because  there  are  three  lines  that  aren't  vote  data  in  the  file\n        \n    \n    it  also  reads  the  lines  in  the  file  from  2010  one  by  one\n    then  increments  a  count  in  an  associative  array  if  it  can  capture  a  VoteTypeId  from  the  line\n    when  finished  it  sums  those  VoteTypeIds  to  count  the  2010  v0tes\n    finally  it  prints  out  some  output\n\n\nrunning  time  ./process-votes.sh  ~/Downloads/Votes.xml  gives  the  following:\n\n  VoteTypeId:  1  had  467439  votes\n  VoteTypeId:  2  had  4198861  votes\n  VoteTypeId:  3  had  256759  votes\n  VoteTypeId:  4  had  200  votes\n  VoteTypeId:  5  had  380887  votes\n  VoteTypeId:  8  had  8632  votes\n  VoteTypeId:  9  had  8578  votes\n  VoteTypeId:  10  had  199344  votes\n  VoteTypeId:  11  had  13231  votes\n  VoteTypeId:  12  had  535  votes\n  VoteTypeId:  15  had  965  votes\n  there  were  105301744  total  votes  in  the  file\n  there  were  5535431  total  votes  in  2010\n  ./process-votes.sh  ~/Downloads/Votes.xml    581.57s  user  408.41s  system  105%  cpu  15:36.35  total\n\n\nPowerShell\n\nParam  ([string]  $filePath  =  $null)\n\n$reader  =  [System.IO.File]::OpenText($filePath)\n\n$voteTypes  =  @{}\n$lines=-3\n$twentyTenLines=0\n\nwhile($null  -ne  ($line  =  $reader.ReadLine()))  \n{\n        $lines++\n        if  ($line  -match  \"CreationDate=\"\"2010\")\n        {\n                $xml  =  [xml]\"$line\"\n                $twentyTenLines++\n                $voteTypes[$xml.row.VoteTypeId]++\n        }\n}\n\nforeach  ($voteTypeCount  in  $voteTypes.GetEnumerator())  {\n        Write-Host  \"VoteTypeId:  $($voteTypeCount.Name)  had  $($voteTypeCount.Value)  votes\"\n}\n\nwrite-host  \"there  were  $($lines)  total  votes  in  the  file\"\nwrite-host  \"there  were  $($twentyTenLines)  total  votes  in  2010\"\n\n\nThe  process  followed  here  is  almost  the  same.  The  script:\n\n\n    reads  each  line  of  the  file  one  at  a  time\n        \n            as  it  does  so  it  counts  them\n            starting  from  minus  three  because  there  are  three  lines  that  aren't  vote  data  in  the  file\n        \n    \n    it  checks  each  line  to  see  if  it  is  from  2010\n        \n            if  it  is  it  parses  that  line  as  XML\n            increments  a  count  of  lines  in  2010\n            and  increments  a  count  of  the  VoteTypeId\n        \n    \n    finally  it  prints  out  some  output\n\n\nrunning  time  powershell  ./process-votes.ps1  ~/Downloads/Votes.xml  gives  the  output:\n\nVoteTypeId:  8  had  8632  votes\nVoteTypeId:  4  had  200  votes\nVoteTypeId:  12  had  535  votes\nVoteTypeId:  1  had  467439  votes\nVoteTypeId:  10  had  199344  votes\nVoteTypeId:  3  had  256759  votes\nVoteTypeId:  9  had  8578  votes\nVoteTypeId:  11  had  13231  votes\nVoteTypeId:  2  had  4198861  votes\nVoteTypeId:  5  had  380887  votes\nVoteTypeId:  15  had  965  votes\nthere  were  105301745  total  votes  in  the  file\nthere  were  5535431  total  votes  in  2010\npowershell  ./process-votes.ps1  ~/Downloads/Votes.xml    279.78s  user  7.00s  system  99%  cpu  4:49.45  total\n\n\nAt  first  I  parsed  every  line  as  xml  so  I  could  access  the  CreationDate  but  that  took  nearly  ten  times  as  long.\n\nI  also  tried  out  the  same  approach  of  reading  and  counting  every  line  instead  of  grepping  only  2010  lines  in  bash.  That  slowed  the  bash  implementation  down  even  further.\n\nConfirmation  Bias!\n\nIs  my  tendency  to  move  away  from  scripts  justified  by  these  results?  I  know  little  Python  so  it  seemed  a  fair  comparison  to  try  a  Python  version.\n\nimport  sys\nimport  re\n\nclass  Counter(dict):\n        def  __missing__(self,  key):\n                return  0\n\nline_counter  =  0\nvote_types  =  Counter()\n\ncreation_date_regex  =  re.compile('CreationDate=\"2010')\nvote_type_regex  =  re.compile('VoteTypeId=\\\"(\\d+)\\\"')\n\nwith  open(sys.argv[1],  \"r\")  as  file:\n        for  line  in  file:\n                line_counter  +=  1\n                if  creation_date_regex.findall(line):\n                        vote_type_id  =  vote_type_regex.findall(line)[0]\n                        vote_types[vote_type_id]  +=  1\n\nfor  key,  value  in  vote_types.iteritems():\n        print  \"VoteTypeId:  %s  had  %s  votes\"  %  (key,  value)\n\nprint  \"there  were  %s  total  votes  in  the  file\"  %  line_counter\nprint  \"there  were  %s  total  votes  in  2010\"  %  sum(vote_types.values())\n\n\nRunning  this  was  much  faster\n\nVoteTypeId:  11  had  13231  votes\nVoteTypeId:  10  had  199344  votes\nVoteTypeId:  12  had  535  votes\nVoteTypeId:  15  had  965  votes\nVoteTypeId:  1  had  467439  votes\nVoteTypeId:  3  had  256759  votes\nVoteTypeId:  2  had  4198861  votes\nVoteTypeId:  5  had  380887  votes\nVoteTypeId:  4  had  200  votes\nVoteTypeId:  9  had  8578  votes\nVoteTypeId:  8  had  8632  votes\nthere  were  105301745  total  votes  in  the  file\nthere  were  5535431  total  votes  in  2010\npython  ./stack/process-votes.py  ~/Downloads/Votes.xml    59.06s  user  4.65s  system  98%  cpu  1:04.41  total\n\n\n\nThis  supports  switching  away  from  scripting  languages  for  complex  tasks.\n\nAside\n\nIf  you're  observant  you'll  have  noticed  that  the  bash  implementation  reports  one  fewer  line  than  the  others.  It  turns  out  this  is  because  the  Votes.xml  file  doesn't  have  a  newline  character  at  the  end.\n\n\n\nThe  percent  symbol  at  the  end  of  this  output  demonstrates  that.\n\nThe  POSIX  definition  states  that  a  file  ends  with  an  empty  line  (see  this  awesome  StackOverflow  answer  for  a  breakdown)  and  since  the  Votes.xml  file  is  non-compliant  wc  counts  it  incorrectly.\n\nSo  What?\n\nYou  can  see  the  code  I  ran  on  github.  Both  powershell  and  bash  are  pretty  new  for  me  (for  anything  beyond  trivial  tasks).  Also,  I  can  count  on  the  fingers  of  one  hand  the  number  of  times  I've  had  to  directly  process  a  large  file  like  this  so  I  might  be  doing  something  naive.  As  a  result  I'd  really  welcome  feedback!\n\n\n    \n        \n            Language\n            Run  Time  (s)\n            Lines  per  Second\n        \n    \n    \n        \n            bash\n            581.57\n            181\n        \n        \n            PowerShell\n            279.78\n            376,373\n        \n        \n            Python\n            59.06\n            1,784,775\n        \n    \n\n\nPowerShell  runs  stably  on  Mac  OS.  And  while  it  is  slower  than  Python  (for  the  given  task)  it  runs  significantly  faster  than  bash.\n\nThis  was  actually  pretty  good  fun.  Both  bash  and  powershell  are  more  complex  than  I  imagined  but  not  as  hard  to  write  as  I  thought.  That  said  I  really  missed  being  able  to  write  tests  -  especially  when  the  runs  to  prove  the  scripts  against  the  full  dataset  took  tens  of  minutes.\n\nIf  you're  at  a  windows  shop  and  already  have  PowerShell  chops  this  could  be  a  useful  way  to  begin  to  introduce  linux  into  the  environment  without  having  to  learn  a  whole  new  toolchain  all  at  once.\n\nAnd  being  able  to  dip  into  the  .Net  framework  from  PowerShell  and  pipe  structured  data  between  commands  is  an  intriguing  opportunity.  I  still  &lt;3  the  new  Microsoft.\n\nThat  said…  looking  at  the  Python  result  and  being  mindful  that  Python  has  run  on  Windows  and  *nix  for  years  maybe  we  should  all  learn  Python  instead  of  Bash  or  PowerShell\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Aug 28 2016</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Powershell on Linux</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/powershell-on-linux.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Powershell+on+Linux&via=pauldambra&url=https://pauldambra.dev/powershell-on-linux.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#software-engineering"
+      >
+        in: software-engineering
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#powershell">
+    powershell
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#bash">
+    bash
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#linux">
+    linux
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#python">
+    python
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>MS have open-sourced <a href="https://github.com/PowerShell/PowerShell">powershell</a> and made it work on many platforms. Kudos to them - I'm loving the "new MS".</p>
+
+<p>I've never really <em>got</em> powershell. Although it's definitely an improvement on vbscript so I have used it when I've needed to automate windows.</p>
+
+<p>But as a task approaches some ill-defined level of complexity I switch to C#, Ruby, or Node rather than writing a script. Not that those are the only options but I don't know Perl, or Python, or $yourFavouriteTool.</p>
+
+<p>As a result I have barely written any Powershell on Windows and, as I've done more work on Linux over the last few years, I've also barely written any bash.</p>
+
+<p>So, while I think it's a good thing that MS are opening up and releasing cross platform tools I was underwhelmed. But…</p>
+
+<!--more-->
+
+<p>…some colleagues were excited and people I think of as being *nix people too</p>
+
+<div class="tweet-wrapper" data-width="292" data-height="350">
+  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/dhobsd">@dhobsd</a> It&#39;s hard to fit in 140 chars, but powershell is an incredible improvement over unix shells and is generally amazingsauce.</p>&mdash; @jordansissel (@jordansissel) <a href="https://twitter.com/jordansissel/status/766879364289957892">August 20, 2016</a></blockquote>
+<script async="" defer="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<p>I thought I'd spend some time to compare the two.</p>
+
+<h1 id="the-test">The Test</h1>
+<!--alex ignore destroy her-him --->
+<p>I've been watching <a href="https://www.destroyallsoftware.com/screencasts">Gary Bernhardt's Destroy All Software screencasts</a> (which I heartily recommend). I enjoyed his use of looping over git revisions to carry out tasks to show either some git tool or bash itself.</p>
+
+<p>I came up with a fake scenario of having a Big-Data problem. The amount of data was suddenly, and unexpectedly increased as a result of human error. And that’s caused all our systems to explode (something I’ve seen happen too so not that fake). My task was to investigate and find out when the error occurred.</p>
+
+<p><img src="/images/initial-commit-log.png" alt="the initial commit log" class="img-responsive img-thumbnail" /></p>
+
+<p>If you read that commit log you might be able to guess where the error occurred. Let’s pretend that the log is more complex and not so useful.</p>
+
+<h4 id="aside">Aside</h4>
+
+<p>If you like that Git log output run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"
+</code></pre></div></div>
+
+<p><em>NB scroll to the right to copy that text it's really long.</em></p>
+
+<p>And then use <code class="language-plaintext highlighter-rouge">git lg</code> to run it</p>
+
+<h4 id="carrying-on">Carrying on</h4>
+
+<p>This particular big data company use a venerable, and well-trusted database technology - a file. I decided on this approach</p>
+
+<ul>
+  <li>get a list of commits</li>
+  <li>loop over them checking each one out</li>
+  <li>while checkout out count the lines in each file</li>
+  <li>compare each linecount to the last</li>
+  <li>break when the change in linecount breaches some arbitrary threshold</li>
+  <li>clean up</li>
+</ul>
+
+<p>This turns out to be pretty trivial in both bash:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/bash</span>
+
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nv">LASTCOMMIT</span><span class="o">=</span>0
+
+<span class="k">for </span>commit <span class="k">in</span> <span class="sb">`</span>git rev-list master <span class="nt">--reverse</span><span class="sb">`</span>
+<span class="k">do</span>
+	<span class="sb">`</span>git checkout <span class="nv">$commit</span> &amp;&gt; /dev/null<span class="sb">`</span>
+    <span class="nv">lines</span><span class="o">=</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-l</span> &lt; big-data.txt<span class="si">)</span>
+    <span class="nv">linediff</span><span class="o">=</span><span class="sb">`</span><span class="nb">expr</span> <span class="nv">$lines</span> - <span class="nv">$LASTCOMMIT</span><span class="sb">`</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$linediff</span> <span class="nt">-gt</span> 10 <span class="o">]]</span><span class="p">;</span> <span class="k">then
+    	</span><span class="nb">echo</span> <span class="s2">"this is the bad commit </span><span class="nv">$commit</span><span class="s2">"</span>
+    	<span class="nb">break
+    </span><span class="k">fi
+
+    </span><span class="nv">LASTCOMMIT</span><span class="o">=</span><span class="nv">$lines</span>
+<span class="k">done</span>
+
+<span class="sb">`</span>git checkout master &amp;&gt; /dev/null<span class="sb">`</span>
+</code></pre></div></div>
+
+<p>and PowerShell:</p>
+
+<pre><code class="language-PowerShell">$lastcommit = 0
+
+foreach ($commit in iex "git rev-list master --reverse")
+{ 
+    iex "git checkout $commit" *&gt; $null
+
+    $lines=(iex "wc -l big-data.txt").Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
+    $linediff = $lines[0] - $lastcommit
+    
+    if ($linediff -gt 10) 
+    {
+        write-host "this is the bad commit $($commit)"
+        break
+    }
+
+    $lastcommit = $lines[0]
+}
+
+iex "git checkout master" *&gt; $null
+</code></pre>
+
+<p>There were a couple of differences because PowerShell insisted on evaluating the command strings. And it turns out ‘&amp;’ and ‘&lt;’ are "reserved for future use".</p>
+
+<!--alex ignore easy --->
+<p>Both were relatively easy to write, relatively easy to read, run correctly, and give the correct output.</p>
+
+<h1 id="more-complex-example">More Complex Example</h1>
+
+<p>I downloaded <a href="https://archive.org/download/stackexchange/stackoverflow.com-Votes.7z">the stack overflow vote archive</a>. At time of writing this is a 10 Gigabyte xml file. I want to know how many of the votes are from 2010 and a breakdown of the types of votes in that year.</p>
+
+<p><img src="/images/votes.png" alt="the stackoverflow votes file" class="img-responsive img-thumbnail" /></p>
+
+<h2 id="bash">Bash</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/bash</span>
+
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nv">non_data_lines_count</span><span class="o">=</span>3
+<span class="nv">lines</span><span class="o">=</span><span class="k">$((</span> <span class="si">$(</span><span class="nb">wc</span> <span class="nt">-l</span> &lt; <span class="nv">$1</span><span class="si">)</span> <span class="o">-</span> <span class="nv">$non_data_lines_count</span> <span class="k">))</span>
+
+<span class="nv">twenty_ten_regex</span><span class="o">=</span><span class="s2">"CreationDate=</span><span class="se">\"</span><span class="s2">2010"</span>
+<span class="nv">vote_type_regex</span><span class="o">=</span><span class="s2">"VoteTypeId=</span><span class="se">\"</span><span class="s2">([0-9]+)</span><span class="se">\"</span><span class="s2">"</span>
+
+<span class="nb">declare</span> <span class="nt">-a</span> vote_types
+
+<span class="k">while </span><span class="nb">read </span>line <span class="p">;</span> <span class="k">do
+    if</span> <span class="o">[[</span> <span class="nv">$line</span> <span class="o">=</span>~ <span class="nv">$vote_type_regex</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then 
+        </span><span class="nv">vote_type_id</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">BASH_REMATCH</span><span class="p">[1]</span><span class="k">}</span><span class="s2">"</span>
+        <span class="o">((</span>vote_types[vote_type_id]++<span class="o">))</span>
+    <span class="k">fi
+done</span> &lt; &lt;<span class="o">(</span><span class="nb">grep</span> <span class="nv">$twenty_ten_regex</span> <span class="nv">$1</span><span class="o">)</span>
+
+<span class="nv">twenty_ten_count</span><span class="o">=</span>0
+<span class="k">for </span>k <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="p">!vote_types[@]</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">do
+  </span><span class="nv">twenty_ten_count</span><span class="o">=</span><span class="k">$((</span><span class="nv">$twenty_ten_count</span> <span class="o">+</span> vote_types[<span class="nv">$k</span><span class="o">]</span><span class="k">))</span>
+  <span class="nb">echo</span> <span class="s2">"VoteTypeId: </span><span class="nv">$k</span><span class="s2"> had </span><span class="k">${</span><span class="nv">vote_types</span><span class="p">[</span><span class="nv">$k</span><span class="p">]</span><span class="k">}</span><span class="s2"> votes"</span>
+<span class="k">done
+
+</span><span class="nb">echo</span> <span class="s2">"there were </span><span class="nv">$lines</span><span class="s2"> total votes in the file"</span>
+<span class="nb">echo</span> <span class="s2">"there were </span><span class="nv">$twenty_ten_count</span><span class="s2"> total votes in 2010"</span>
+</code></pre></div></div>
+
+<p>This script:</p>
+
+<ul>
+  <li>counts the lines in the file
+    <ul>
+      <li>subtracting three because there are three lines that aren't vote data in the file</li>
+    </ul>
+  </li>
+  <li>it also reads the lines in the file from 2010 one by one</li>
+  <li>then increments a count in an associative array if it can capture a VoteTypeId from the line</li>
+  <li>when finished it sums those VoteTypeIds to count the 2010 v0tes</li>
+  <li>finally it prints out some output</li>
+</ul>
+
+<p>running <code class="language-plaintext highlighter-rouge">time ./process-votes.sh ~/Downloads/Votes.xml</code> gives the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> VoteTypeId: 1 had 467439 votes
+ VoteTypeId: 2 had 4198861 votes
+ VoteTypeId: 3 had 256759 votes
+ VoteTypeId: 4 had 200 votes
+ VoteTypeId: 5 had 380887 votes
+ VoteTypeId: 8 had 8632 votes
+ VoteTypeId: 9 had 8578 votes
+ VoteTypeId: 10 had 199344 votes
+ VoteTypeId: 11 had 13231 votes
+ VoteTypeId: 12 had 535 votes
+ VoteTypeId: 15 had 965 votes
+ there were 105301744 total votes in the file
+ there were 5535431 total votes in 2010
+ ./process-votes.sh ~/Downloads/Votes.xml  581.57s user 408.41s system 105% cpu 15:36.35 total
+</code></pre></div></div>
+
+<h2 id="powershell">PowerShell</h2>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Param</span><span class="w"> </span><span class="p">([</span><span class="n">string</span><span class="p">]</span><span class="w"> </span><span class="nv">$filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">$null</span><span class="p">)</span><span class="w">
+
+</span><span class="nv">$reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">System.IO.File</span><span class="p">]::</span><span class="n">OpenText</span><span class="p">(</span><span class="nv">$filePath</span><span class="p">)</span><span class="w">
+
+</span><span class="nv">$voteTypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">@{}</span><span class="w">
+</span><span class="nv">$lines</span><span class="o">=</span><span class="nt">-3</span><span class="w">
+</span><span class="nv">$twentyTenLines</span><span class="o">=</span><span class="mi">0</span><span class="w">
+
+</span><span class="kr">while</span><span class="p">(</span><span class="bp">$null</span><span class="w"> </span><span class="o">-ne</span><span class="w"> </span><span class="p">(</span><span class="nv">$line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$reader</span><span class="o">.</span><span class="nf">ReadLine</span><span class="p">()))</span><span class="w"> 
+</span><span class="p">{</span><span class="w">
+    </span><span class="nv">$lines</span><span class="o">++</span><span class="w">
+    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nv">$line</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"CreationDate=""2010"</span><span class="p">)</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nv">$xml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">xml</span><span class="p">]</span><span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span><span class="w">
+        </span><span class="nv">$twentyTenLines</span><span class="o">++</span><span class="w">
+        </span><span class="nv">$voteTypes</span><span class="p">[</span><span class="nv">$xml</span><span class="o">.</span><span class="nf">row</span><span class="o">.</span><span class="nf">VoteTypeId</span><span class="p">]</span><span class="o">++</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="kr">foreach</span><span class="w"> </span><span class="p">(</span><span class="nv">$voteTypeCount</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$voteTypes</span><span class="o">.</span><span class="nf">GetEnumerator</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"VoteTypeId: </span><span class="si">$(</span><span class="nv">$voteTypeCount</span><span class="o">.</span><span class="nf">Name</span><span class="si">)</span><span class="s2"> had </span><span class="si">$(</span><span class="nv">$voteTypeCount</span><span class="o">.</span><span class="nf">Value</span><span class="si">)</span><span class="s2"> votes"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">write-host</span><span class="w"> </span><span class="s2">"there were </span><span class="si">$(</span><span class="nv">$lines</span><span class="si">)</span><span class="s2"> total votes in the file"</span><span class="w">
+</span><span class="n">write-host</span><span class="w"> </span><span class="s2">"there were </span><span class="si">$(</span><span class="nv">$twentyTenLines</span><span class="si">)</span><span class="s2"> total votes in 2010"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The process followed here is almost the same. The script:</p>
+
+<ul>
+  <li>reads each line of the file one at a time
+    <ul>
+      <li>as it does so it counts them</li>
+      <li>starting from minus three because there are three lines that aren't vote data in the file</li>
+    </ul>
+  </li>
+  <li>it checks each line to see if it is from 2010
+    <ul>
+      <li>if it is it parses that line as XML</li>
+      <li>increments a count of lines in 2010</li>
+      <li>and increments a count of the VoteTypeId</li>
+    </ul>
+  </li>
+  <li>finally it prints out some output</li>
+</ul>
+
+<p>running <code class="language-plaintext highlighter-rouge">time powershell ./process-votes.ps1 ~/Downloads/Votes.xml</code> gives the output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VoteTypeId: 8 had 8632 votes
+VoteTypeId: 4 had 200 votes
+VoteTypeId: 12 had 535 votes
+VoteTypeId: 1 had 467439 votes
+VoteTypeId: 10 had 199344 votes
+VoteTypeId: 3 had 256759 votes
+VoteTypeId: 9 had 8578 votes
+VoteTypeId: 11 had 13231 votes
+VoteTypeId: 2 had 4198861 votes
+VoteTypeId: 5 had 380887 votes
+VoteTypeId: 15 had 965 votes
+there were 105301745 total votes in the file
+there were 5535431 total votes in 2010
+powershell ./process-votes.ps1 ~/Downloads/Votes.xml  279.78s user 7.00s system 99% cpu 4:49.45 total
+</code></pre></div></div>
+
+<p>At first I parsed every line as xml so I could access the CreationDate but that took nearly ten times as long.</p>
+
+<p>I also tried out the same approach of reading and counting every line instead of grepping only 2010 lines in bash. That slowed the bash implementation down even further.</p>
+
+<h2 id="confirmation-bias">Confirmation Bias!</h2>
+
+<p>Is my tendency to move away from scripts justified by these results? I know little Python so it seemed a fair comparison to try a Python version.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+<span class="kn">import</span> <span class="n">re</span>
+
+<span class="k">class</span> <span class="nc">Counter</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__missing__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">line_counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">vote_types</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">()</span>
+
+<span class="n">creation_date_regex</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="sh">'</span><span class="s">CreationDate=</span><span class="sh">"</span><span class="s">2010</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">vote_type_regex</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="sh">'</span><span class="s">VoteTypeId=</span><span class="se">\"</span><span class="s">(\d+)</span><span class="se">\"</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sh">"</span><span class="s">r</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+        <span class="n">line_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">creation_date_regex</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">vote_type_id</span> <span class="o">=</span> <span class="n">vote_type_regex</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="n">line</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">vote_types</span><span class="p">[</span><span class="n">vote_type_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">vote_types</span><span class="p">.</span><span class="nf">iteritems</span><span class="p">():</span>
+    <span class="k">print</span> <span class="sh">"</span><span class="s">VoteTypeId: %s had %s votes</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="sh">"</span><span class="s">there were %s total votes in the file</span><span class="sh">"</span> <span class="o">%</span> <span class="n">line_counter</span>
+<span class="k">print</span> <span class="sh">"</span><span class="s">there were %s total votes in 2010</span><span class="sh">"</span> <span class="o">%</span> <span class="nf">sum</span><span class="p">(</span><span class="n">vote_types</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Running this was <em>much</em> faster</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VoteTypeId: 11 had 13231 votes
+VoteTypeId: 10 had 199344 votes
+VoteTypeId: 12 had 535 votes
+VoteTypeId: 15 had 965 votes
+VoteTypeId: 1 had 467439 votes
+VoteTypeId: 3 had 256759 votes
+VoteTypeId: 2 had 4198861 votes
+VoteTypeId: 5 had 380887 votes
+VoteTypeId: 4 had 200 votes
+VoteTypeId: 9 had 8578 votes
+VoteTypeId: 8 had 8632 votes
+there were 105301745 total votes in the file
+there were 5535431 total votes in 2010
+python ./stack/process-votes.py ~/Downloads/Votes.xml  59.06s user 4.65s system 98% cpu 1:04.41 total
+
+</code></pre></div></div>
+
+<p>This supports switching away from scripting languages for complex tasks.</p>
+
+<h2 id="aside-1">Aside</h2>
+
+<p>If you're observant you'll have noticed that the bash implementation reports one fewer line than the others. It turns out this is because the Votes.xml file doesn't have a newline character at the end.</p>
+
+<p><img src="/images/nonewline.png" alt="tailing the votes file" class="img-responsive img-thumbnail" /></p>
+
+<p>The percent symbol at the end of this output demonstrates that.</p>
+
+<p>The POSIX definition states that a file ends with an empty line (see <a href="http://stackoverflow.com/a/25322168/222163">this awesome StackOverflow answer</a> for a breakdown) and since the Votes.xml file is non-compliant <code class="language-plaintext highlighter-rouge">wc</code> counts it incorrectly.</p>
+
+<h2 id="so-what">So What?</h2>
+
+<p>You can see the code I ran <a href="https://github.com/pauldambra/bash_vs_powershell">on github</a>. Both powershell and bash are pretty new for me (for anything beyond trivial tasks). Also, I can count on the fingers of one hand the number of times I've had to directly process a large file like this so I might be doing something naive. As a result I'd really welcome feedback!</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Run Time (s)</th>
+      <th>Lines per Second</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bash</td>
+      <td>581.57</td>
+      <td>181</td>
+    </tr>
+    <tr>
+      <td>PowerShell</td>
+      <td>279.78</td>
+      <td>376,373</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>59.06</td>
+      <td>1,784,775</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>PowerShell runs stably on Mac OS. And while it is slower than Python (for the given task) it runs significantly faster than bash.</p>
+
+<p>This was actually pretty good fun. Both bash and powershell are more complex than I imagined but not as hard to write as I thought. That said I <em>really</em> missed being able to write tests - especially when the runs to prove the scripts against the full dataset took tens of minutes.</p>
+
+<p>If you're at a windows shop and already have PowerShell chops this could be a useful way to begin to introduce linux into the environment without having to learn a whole new toolchain all at once.</p>
+
+<p>And being able to dip into the .Net framework from PowerShell and pipe structured data between commands is an intriguing opportunity. I still &lt;3 the new Microsoft.</p>
+
+<p>That said… looking at the Python result and being mindful that Python has run on Windows and *nix for years maybe we should all learn Python instead of Bash or PowerShell</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/powershell-on-linux.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/powershell-on-linux.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

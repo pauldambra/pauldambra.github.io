@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I use LLMs? - three</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/01/how-i-use-llms-3.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/01/how-i-use-llms-3.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I use LLMs? - three" />
+    <meta
+      property="og:description"
+      content="How I use LLMs - three"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I use LLMs - three"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I use LLMs? - three",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1203",
+     "url":"https://pauldambra.dev/2026/01/how-i-use-llms-3.html",
+     "datePublished":"2026-01-30",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/01/how-i-use-llms-3.html"
+     },
+     "articleBody":"I  remain  very  cynical  about  the  current  high-water  mark  for  LLMs  and  augmented  coding…  but  at  the  same  time  I  use  them  every  day  and  I  don't  think  they're  finished  improving.\n\nLet's  growth  hack  blog  visitor  numbers  record  how  I  use  them  today  as  a  little  reflection  on  where  I  think  they  work  and  where  they  don't.  Something  I  can  revisit  as  the  tech  (and  my  skill  with  it)  improves\n\nThis  is  update  number  two,  or  entry  number  three,  depending  on  how  you  want  to  count  it.\n\nthe  first  entry  is  here\nthe  second  entry  is  here\n\n\n    XP  pedant  agent\n    primarily  using  LLMs\n    throw  away  way  more  work\n    be  very  strict  with  what  i  do  type\n    i  approach  understanding  code  differently\n\n\n\n\nFirst,  a  necessary  but  brief  diversion  into  how  I  use  tools  generally\n\nI  was  largely  self-taught  as  a  developer  and  (after  vbscript  😱)  I  started  with  DotNet.  I  found  JetBrains  Resharper  early  on  and  never  looked  back.  The  assistance  in  the  IDE  to  write,  refactor,  and  improve  code  was  game-changing.  I  don't  begrudge  anybody  any  tool  they  want  to  use  to  level-up.  Wanna  use  a  graphical  git  client,  or  emacs,  or  anything  else…  go  for  it,  go  make  cool  things\n\nBecause  of  that  entry  to  the  industry  I'm  also  not  super  keen  on  VSCode  (you  love  it?  great,  see  above,  you  do  you,  go  make  cool  things).  I'm  too  used  to  clever  interventions  helping  me  and  VSCode  is  too  barebones  (and  so  much  slower  than  SublimeText)\n\nSo,  I  like  having  tools  directly  involved  in  my  workflow.  I  learned  LINQ  more  quickly  and  more  thoroughly  because  I  had  resharper  prompting  me  inline,  at  write-time:  \"hey,  why  not  like  this?\"\n\nXP  pedant  agent\n\nI  love  the  XP  simplicity  rules  for  guiding  decision  making…\n\n\n    Passes  all  the  tests.\n    Expresses  every  idea  that  we  need  to  express.\n    Says  everything  OnceAndOnlyOnce.\n    Has  no  superfluous  parts.\n\n\nI  like  that  they're  in  tension  with  each  other.\n\nI've  added  them  to  my  AGENTS.md  and  if  it  forgets  I  can  prompt  it  \"hey,  apply  the  simplicity  rules\".\n\nOften  the  change  it  makes  is  the  one  I  would  have  manually  made.\n\nPrimarily  using  LLMs\n\nOver  the  last  three  months  particularly  the  capability  of  LLMs  has  transformed.  I  can  now  go  whole  days  mostly  prompting  an  LLM  and  writing  only  a  fraction  of  the  code  myself.  This  is…  fine.\n\nI've  been  working  on  super  complex,  tricky  to  find  memory  leak  problems.  I  would  not  have  had  the  patience  to  notice  some  of  the  things  that  the  robot  can  when  i  provide  it  with  context  from  my  investigations.\n\nAnd  while  it's  working  on  the  next  step  I  can  be  improving  my  investigation,  or  catching  up  on  Slack,  or  taking  my  kids  to  school.\n\nI  don't  feel  like  I've  lost  anything  by  not  (always)  typing  out  the  code  directly.  And  since  I  taught  the  robot  some  extreme  programming  techniques,  i  find  i  don't  need  to  re-work  much  at  all.\n\nI  genuinely  didn't  think  I'd  switch  this  much…  and  like  all  sticky  tools  I  didn't  have  to  think  about  it.  The  tool  hooked  me.\n\nThat  said…  i  don't  like  vibe  coding…  I'm  not  asleep  at  the  wheel  and  do  care  about  the  diff  that's  being  generated.  So  I  feel  slightly  vindicated  by  this  research  from  Anthropic  https://www.anthropic.com/research/AI-assistance-coding-skills\n\n\n    In  a  randomized  controlled  trial,  we  examined  1)  how  quickly  software  developers  picked  up  a  new  skill  (in  this  case,  a  Python  library)  with  and  without  AI  assistance;  and  2)  whether  using  AI  made  them  less  likely  to  understand  the  code  they’d  just  written.  \nWe  found  that  using  AI  assistance  led  to  a  statistically  significant  decrease  in  mastery.\n…\nImportantly,  using  AI  assistance  didn’t  guarantee  a  lower  score.  How  someone  used  AI  influenced  how  much  information  they  retained.\n\n\nthrow  away  way  more  work\n\nSince  I  didn't  type  it,  I  don't  feel  invested.  I  dump  a  prompt  in.  Come  back,  see  what  came  out.  And  sometimes  I  just  throw  it  away.  It  doesn't  help  as  much  as  I  expected,  or  a  UI  change  doesn't  look  as  good  as  I  hoped.\n\nWithout  feeling  invested  in  the  creation  I  am  a  little  more  rational  about  whether  to  throw  it  away.\n\nIt's  cheap  to  do  many  things  at  once  and  keep  the  useful  things.\n\nbe  very  strict  with  what  I  do  type\n\nThis  is  an  addition  to  \"manage  context\".\n\nSometimes  I  find  myself  writing  a  huge  prompt.  I  have  low  tolerance  for  this.  Or  I  find  the  task  is  spinning  and  churning  and  going  nowhere.  So,  instead,  when  I  recognise  that  I  stop,  I  clear  the  prompt,  and  I  spike  the  work.  Then  when  I  have  a  good  enough  sketch  I  point  the  robot  at  the  changes  and  say  \"hey,  like  this\".  I  believe  we  do  understand  some  problems  better  through  trying  to  solve  them.\n\nThe  robot  is  still  more  stupid  than  it  is  clever.  So,  giving  it  code  is  a  good  way  to  clever  it  up.\n\nIt  is  still  valuable  to  be  a  decent  software  engineer.  But  it  might  be  more  valuable  to  be  a  decent  software  engineer  who  dumps  a  sketch  into  an  LLM.  (if  it  isn't  now,  and  they  can  keep  improving,  then  it  will  be  soon)\n\nI  approach  understanding  code  differently\n\nThis  one  is  difficult  for  me  to  accept,  but  it's  snuck  up  on  me  and  over  the  last  few  months  changed  how  I  work.\n\nThe  cost  of  writing  code  is  falling  and  the  cost  of  understanding  code  is  falling.\n\nWhen  the  cost  of  a  thing  fundamentally  changes,  you  have  to  change  your  approach.\n\n\"Hey  robot,  write  a  script  to  validate  the  blah  does  thingy  (or  not)  when  the  wotsit  is  twanged\"\n\n\"Hey  robot,  why  does  the  clinkexpander  accept  a  boolean?\"\n\n\"Hey  robot,  how  does  the  clinkexpander  work?\"\n\n\"Hey  robot,  what  does  the  clinkexpander  actually  do?\"\n\nTasks  that  would  have  taken  me  hours  or  days  or  weeks  in  the  past  are  genuinely  done  in  minutes  now.\n\nI've  spent  a  big  chunk  of  time  recently  feeding  heap  snapshots  to  the  robot.  I  can  only  give  huge  thanks  I've  not  had  to  manually  grok  this  myself.\n\nIs  the  robot  perfect?  No.  not  even.\n\nIs  the  robot  a  good  software  engineer?  No.  not  even.\n\nIs  it  silly  to  ignore  the  fact  that  the  robot  does  not  need  to  be  perfect  or  good  for  it  to  be  a  fantastic  tool?\n\nyes,  veryeven.\n\nthe  game  has  changed.  pandora's  box  is  open.  the  robot  is  here  to  stay.\n\nIt  reminds  me  of  once…  I  used  to  work  with  someone  who  had  worked  mostly  with  signal  processing  baked  into  hardware.  Very  painful  to  discover  a  bug  after  release.  We  were  sat  together  and  I  changed  a  field  in  a  JSON  response.  He  asked  in  a  mid-panic:  \"but  how  many  bytes  will  that  add  to  the  payload?\".  Genuinely  confused,  I  said:  \"I've  barely  ever  had  to  care…  I  don't  think  it  matters\"\n\nWe're  on  the  verge  of  that  kind  of  change.  We're  not  there  ffs  but  some  point  down  the  road  someone  is  going  to  ask  \"but  isn't  that  AI  slop\"  and  their  colleague  will  answer,  genuinely  confused:  \"yes,  why?\"\n\nWill  some  of  that  software  be  bad?  yes\nalways-has-been-dot-meme\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Fri Jan 30 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I use LLMs? - three</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/01/how-i-use-llms-3.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+use+LLMs%3F+-+three&via=pauldambra&url=https://pauldambra.dev/2026/01/how-i-use-llms-3.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number two, or entry number three, depending on how you want to count it.</p>
+
+<p><a href="/2025/07/how-i-use-llms.html">the first entry is here</a>
+<a href="/2026/01/how-i-use-llms-2.html">the second entry is here</a></p>
+
+<ul>
+  <li>XP pedant agent</li>
+  <li>primarily using LLMs</li>
+  <li>throw away way more work</li>
+  <li>be very strict with what i <em>do</em> type</li>
+  <li>i approach understanding code differently</li>
+</ul>
+
+<!--more-->
+
+<h1 id="first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally">First, a necessary but brief diversion into how I use tools generally</h1>
+
+<p>I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don't begrudge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things</p>
+
+<p>Because of that entry to the industry I'm also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I'm too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)</p>
+
+<p>So, I <em>like</em> having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: "hey, why not like this?"</p>
+
+<h1 id="xp-pedant-agent">XP pedant agent</h1>
+
+<p>I love the <a href="https://wiki.c2.com/?XpSimplicityRules">XP simplicity rules</a> for guiding decision making…</p>
+
+<ul>
+  <li>Passes all the tests.</li>
+  <li>Expresses every idea that we need to express.</li>
+  <li>Says everything OnceAndOnlyOnce.</li>
+  <li>Has no superfluous parts.</li>
+</ul>
+
+<p>I like that they're in tension with each other.</p>
+
+<p>I've added them to my <a href="https://github.com/pauldambra/dotfiles/blob/main/ai/CLAUDE.md">AGENTS.md</a> and if it forgets I can prompt it "hey, apply the simplicity rules".</p>
+
+<p>Often the change it makes is the one I would have manually made.</p>
+
+<h1 id="primarily-using-llms">Primarily using LLMs</h1>
+
+<p>Over the last three months particularly the capability of LLMs has transformed. I can now go whole days mostly prompting an LLM and writing only a fraction of the code myself. This is… fine.</p>
+
+<p>I've been working on super complex, tricky to find memory leak problems. I would not have had the patience to notice some of the things that the robot can when i provide it with context from my investigations.</p>
+
+<p>And while it's working on the next step I can be improving my investigation, or catching up on Slack, or taking my kids to school.</p>
+
+<p>I don't feel like I've lost anything by not (always) typing out the code directly. And since <a href="https://github.com/pauldambra/dotfiles/blob/main/ai/CLAUDE.md">I taught the robot some extreme programming techniques</a>, i find i don't need to re-work much at all.</p>
+
+<p>I genuinely didn't think I'd switch this much… and like all sticky tools I didn't have to think about it. The tool hooked me.</p>
+
+<p>That said… i don't like vibe coding… I'm not asleep at the wheel and do care about the diff that's being generated. So I feel slightly vindicated by this research from Anthropic https://www.anthropic.com/research/AI-assistance-coding-skills</p>
+
+<blockquote>
+  <p>In a randomized controlled trial, we examined 1) how quickly software developers picked up a new skill (in this case, a Python library) with and without AI assistance; and 2) whether using AI made them less likely to understand the code they’d just written. 
+We found that using AI assistance led to a statistically significant decrease in mastery.
+…
+Importantly, using AI assistance didn’t guarantee a lower score. How someone used AI influenced how much information they retained.</p>
+</blockquote>
+
+<h1 id="throw-away-way-more-work">throw away way more work</h1>
+
+<p>Since I didn't type it, I don't feel invested. I dump a prompt in. Come back, see what came out. And sometimes I just throw it away. It doesn't help as much as I expected, or a UI change doesn't look as good as I hoped.</p>
+
+<p>Without feeling invested in the creation I am a little more rational about whether to throw it away.</p>
+
+<p>It's cheap to do many things at once and keep the useful things.</p>
+
+<h1 id="be-very-strict-with-what-i-do-type">be very strict with what I <em>do</em> type</h1>
+
+<p>This is an addition to "manage context".</p>
+
+<p>Sometimes I find myself writing a huge prompt. I have low tolerance for this. Or I find the task is spinning and churning and going nowhere. So, instead, when I recognise that I stop, I clear the prompt, and I spike the work. Then when I have a good enough sketch I point the robot at the changes and say "hey, like this". I believe we do understand some problems better through trying to solve them.</p>
+
+<p>The robot is still more stupid than it is clever. So, giving it code is a good way to clever it up.</p>
+
+<p>It is still valuable to be a decent software engineer. But it might be more valuable to be a decent software engineer who dumps a sketch into an LLM. (if it isn't now, and they can keep improving, then it will be soon)</p>
+
+<h1 id="i-approach-understanding-code-differently">I approach understanding code differently</h1>
+
+<p>This one is difficult for me to accept, but it's snuck up on me and over the last few months changed how I work.</p>
+
+<p>The cost of writing code is falling <em>and</em> the cost of understanding code is falling.</p>
+
+<p>When the cost of a thing fundamentally changes, you have to change your approach.</p>
+
+<p>"Hey robot, write a script to validate the blah does thingy (or not) when the wotsit is twanged"</p>
+
+<p>"Hey robot, why does the clinkexpander accept a boolean?"</p>
+
+<p>"Hey robot, how does the clinkexpander work?"</p>
+
+<p>"Hey robot, what does the clinkexpander actually do?"</p>
+
+<p>Tasks that would have taken me hours or days or weeks in the past are genuinely done in minutes now.</p>
+
+<p>I've spent a big chunk of time recently feeding heap snapshots to the robot. I can only give huge thanks I've not had to manually grok this myself.</p>
+
+<p>Is the robot perfect? No. not even.</p>
+
+<p>Is the robot a good software engineer? No. not even.</p>
+
+<p>Is it silly to ignore the fact that the robot does not need to be perfect or good for it to be a fantastic tool?</p>
+
+<p>yes, veryeven.</p>
+
+<p>the game has changed. pandora's box is open. the robot is here to stay.</p>
+
+<p>It reminds me of once… I used to work with someone who had worked mostly with signal processing baked into hardware. Very painful to discover a bug after release. We were sat together and I changed a field in a JSON response. He asked in a mid-panic: "but how many bytes will that add to the payload?". Genuinely confused, I said: "I've barely ever had to care… I don't think it matters"</p>
+
+<p>We're on the verge of that kind of change. We're not there ffs but some point down the road someone is going to ask "but isn't that AI slop" and their colleague will answer, genuinely confused: "yes, why?"</p>
+
+<p>Will some of that software be bad? yes
+always-has-been-dot-meme</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2025/12/avoiding-madness.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Things that a different me would have been tipped into psychosis by
+      </h3>
+      <small>
+        03 Dec 2025
+      </small>
+  </div>
+</a>  <a href="/2025/10/how-i-use-llms-2.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs - two?
+      </h3>
+      <small>
+        24 Oct 2025
+      </small>
+  </div>
+</a>  <a href="/2025/09/four-things-in-four-years.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Four things in four years at PostHog
+      </h3>
+      <small>
+        16 Sep 2025
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/01/how-i-use-llms-3.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/01/how-i-use-llms-3.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

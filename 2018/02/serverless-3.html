@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Serverless - Part Three</title>
+    <link rel="canonical" href="https://pauldambra.dev/2018/02/serverless-3.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2018/02/serverless-3.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Serverless - Part Three" />
+    <meta
+      property="og:description"
+      content="Examining event driven serverless systems"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Examining event driven serverless systems"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Serverless - Part Three",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1944",
+     "url":"https://pauldambra.dev/2018/02/serverless-3.html",
+     "datePublished":"2018-02-05",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2018/02/serverless-3.html"
+     },
+     "articleBody":"Part  One  -  describing  event-driven  and  serverless  systems\n\nPart  Two  -  Infrastructure  as  code  walking  skeleton\n\nIn  this  post  we  will  look  at  how  SAM  local  let's  you  develop  locally  and  write  the  first  lambda  function.  To  take  a  ProposeDestination  command  and  write  a  DestinationProposed  event  to  the  eventstream.\n\n\"SAM  Local  can  be  used  to  test  functions  locally,  start  a  local  API  Gateway  from  a  SAM  template,  validate  a  SAM  template,  and  generate  sample  payloads  for  various  event  sources.\"\n\n\n\nSAM  Local\n\nYou  have  to  have  Docker  running  locally  and  then  you  can  npm  install  -g  aws-sam-local.\n\nTo  start  the  API  Gateway  and  Lambda  example  from  part  two  navigate  to  the  directory  containing  the  template.yaml  file  and  run  sam  local  start-api\n\nThis  starts  lambda  in  Docker  and  shows  what  endpoints  are  mounted:\n\n\n\nYou  can  then  POST  to  the  endpoint  curl  -H  \"Content-Type:  application/json\"  -X  POST  -d  '{\"geolocation\":\"xyz\",  \"name\":\"test\"}'  http://127.0.0.1:3000/destination\n\nWhich  outputs  the  same  information  as  you  would  see  in  cloudwatch  logs:\n\n\n\nDynamoDB\n\nThis  took  several  attempts  to  get  running  -  mostly  because  of  unfamiliarity  with  Docker  -  AWS  were  super  helpful  on  twitter  despite  my  silliness.  Without  that  confusion  this  would  have  been  very  straightforward.\n\nThere  are  three  steps  to  this:\n\n1)  Start  dynamodb\n\nDynamoDB  needs  to  be  run  as  a  named  container  and  on  the  same  Docker  network  as  SAM  local\n\ndocker  network  create  lambda-local\nsam  local  start-api  --docker-network  lambda-local\ndocker  run  -d  -v  \"$PWD\":/dynamodb_local_db  -p  8000:8000  --network  lambda-local  --name  dynamodb  cnadiminti/dynamodb-local\n\n\n2)  Create  the  DynamoDB  table\n\nSAM  local  can't  create  DynamoDB  tables  from  the  template.yaml  in  the  way  that  CloudFormation  will  when  the  SAM  application  is  deployed  so  the  table  needs  manually  creating.\n\nThe  following  AWS  CLI  command  will  create  the  table  as  defined  in  the  template.yaml:\n\naws  dynamodb  create-table  \\\n    --table-name  visitplannr-events  \\\n    --attribute-definitions  \\\n                AttributeName=EventId,AttributeType=S  AttributeName=StreamName,AttributeType=S  \\\n    --key-schema  AttributeName=StreamName,KeyType=HASH  AttributeName=EventId,KeyType=RANGE  \\\n    --provisioned-throughput  \\\n    ReadCapacityUnits=5,WriteCapacityUnits=5  \\\n    --endpoint-url  http://0.0.0.0:8000\n\n\n3)  Write  some  code  to  have  the  one  talk  to  the  other\n\nThe  client  connection  code  is:\n\nconst  AWS  =  require(\"aws-sdk\");\nconst  awsRegion  =  process.env.AWS_REGION  ||  \"eu-west-2\";\n\nlet  dynamoDbClient;\nconst  makeClient  =  ()  =&gt;  {\n    const  options  =  {\n        region:  awsRegion,\n    };\n    if  (process.env.AWS_SAM_LOCAL)  {\n        options.endpoint  =  \"http://dynamodb:8000\";\n    }\n    dynamoDbClient  =  new  AWS.DynamoDB.DocumentClient(options);\n    return  dynamoDbClient;\n};\n\nmodule.exports  =  {\n    connect:  ()  =&gt;  dynamoDbClient  ||  makeClient(),\n};\n\n\nThis  module  exposes  a  connect  method  that  lazily  initializes  the  db  client.\n\nSAM  local  sets  an  AWS_SAM_LOCAL  environment  variable  so  the  code  checks  for  that  and  if  it  is  present  sets  the  endpoint  URL  to  http://dynamodb:8000.  This  is  the  container  name  and  the  port  it  exposes.\n\nFor  the  production  code  you  don't  need  to  set  any  endpoint  and  can  let  lambda  figure  out  what  to  connect  to.\n\nThe  propose  destination  handler\n\nThe  handler  should  act  as  a  composition  root.  It  creates  the  application's  object  graph  and  lets  the  parts  do  the  work.  This  allows  unit  tests  to  inject  fakes.  If  those  tests  were  to  exercise  the  handler  directly  the  code  would  run  the  dynamoDbClient  and  timeout  waiting  for  dynamodb.\n\nThe  handler  ends  up  looking  like  this:\n\nconst  httpResponse  =  require(\"./destinations/httpResponse\");\nconst  mapCommand  =  require(\"./destinations/mapCommand\");\n\nconst  guid  =  require(\"./GUID\");\n\nlet  streamRepo;\nconst  dynamoDbClient  =  require(\"./destinations/dynamoDbClient\");\nconst  makeStreamRepository  =  require(\"./destinations/make-stream-repository\");\n\nconst  commandHandler  =  require(\"./destinations/commandHandler\");\n\nexports.handler  =  (event,  context,  callback)  =&gt;  {\n    const  proposeDestination  =  mapCommand.fromAPI(event,  \"proposeDestination\");\n\n    streamRepo  =\n        streamRepo  ||  makeStreamRepository.for(dynamoDbClient.connect(),  guid);\n\n    commandHandler\n        .apply({\n            command:  proposeDestination,\n            type:  \"destinationProposed\",\n            streamName:  \"destination\",\n            streamRepository:  streamRepo,\n        })\n        .then(()  =&gt;  httpResponse.success(proposeDestination,  callback))\n        .catch((err)  =&gt;  httpResponse.invalid(err,  proposeDestination,  callback));\n};\n\n\nHere  the  handler  converts  the  API  gateway  event  to  a  ProposeDestination  command.  It  then  either  uses  the  existing  stream  repository  or  creates  one  currying  the  dynamodb  client  and  guid  generator.\n\n\n\nThe  command  handler  is  then  called.  It  either  converts  the  command  to  a  destinationProposed  event  and  returns  an  HTTP  200  success.  Or  fails  and  returns  an  HTTP  400  invalid  request.\n\nTesting  this  with  SAM  local\n\nI  haven't  wrapped  this  up  into  something  useful  that  could  be  run  in  a  CI  pipeline  but  as  a  sense  check  before  deployment  this  is  a  good  starting  point.\n\nFirst  ensure  SAM  local  is  running:\n\nAWS_REGION=eu-west-2  sam  local  start-api  --docker-network  lambda-local\n\nThen  also  that  dynamodb  is  running:\n\ndocker  run  -d  -v  \"$PWD\":/dynamodb_local_db  -p  8000:8000  --network  lambda-local  --name  dynamodb  cnadiminti/dynamodb-local\n\nThen  write  a  test  to  exercise  the  system:\n\nconst  request  =  require(\"supertest\");\nvar  exec  =  require(\"child_process\").exec;\nconst  expect  =  require(\"chai\").expect;\n\nconst  rootUrl  =  process.env.rootUrl  ||  \"http://127.0.0.1:3000\";\nconst  dynamoDbUrl  =  process.env.dynamoDbUrl  ||  \"http://0.0.0.0:8000\";\n\nconst  countItemsInTable  =  ()  =&gt;  {\n    return  new  Promise((resolve,  reject)  =&gt;  {\n        exec(\n            `aws  dynamodb  scan  --table-name  visitplannr-events  --endpoint-url  ${dynamoDbUrl}`,\n            (error,  stdOut,  stdErr)  =&gt;  {\n                if  (error)  {\n                    reject(new  Error(error));\n                    return;\n                }\n                const  scanResult  =  JSON.parse(stdOut);\n                resolve(scanResult.Items.length);\n            }\n        );\n    });\n};\n\ndescribe(\"propose  destination\",  function  ()  {\n    it(\"can  write  an  event  to  dynamodb\",  function  (done)  {\n        this.timeout(5000);\n\n        countItemsInTable()\n            .then((startCount)  =&gt;  {\n                request(rootUrl)\n                    .post(\"/destination\")\n                    .send('{\"name\":\"test  destination\",\"geolocation\":{\"x\":  0,  \"y\":  0}}')\n                    .end((err,  res)  =&gt;  {\n                        if  (err)  {\n                            done(err);\n                            return;\n                        }\n                        countItemsInTable()\n                            .then((finalCount)  =&gt;  {\n                                expect(finalCount).to.equal(startCount  +  1);\n                                done();\n                            })\n                            .catch(done);\n                    });\n            })\n            .catch(done);\n    });\n});\n\n\nThis  is  not  a  great  example  of  a  test  for  a  number  of  reasons  but  it  does  demonstrate  that  the  running  system  can  receive  an  HTTP  post  after  which  there  is  one  more  item  in  the  dynamodb  table.\n\n\n\nThe  devil  is  always  in  the  detail  so  this  test  wouldn't  be  good  enough  for  a  real  system.  But  it  does  show  that  the  lambda  functions  can  be  integration  tested  locally  with  real  HTTP  calls,  writing  to  a  local  dynamodb.\n\nUnit  testing\n\nThe  composition  root  approach  means  that  the  handler  can  be  unit  tested  without  relying  on  the  dynamodb  client.  As  an  example  testing  the  behaviour  in  the  repository  against  a  fake  dynamodb,  here  the  test  locks  in  that  the  repository  adds  a  correlation  id  to  the  item  written  to  the  stream:\n\nconst  streamRepoFactory  =  require(\"../destinations/make-stream-repository\");\nconst  expect  =  require(\"chai\").expect;\n\ndescribe(\"the  stream  repository\",  function  ()  {\n    const  fakeGuidGenerator  =  {\n        generate:  ()  =&gt;  \"a-generated-guid\",\n    };\n\n    const  fakeDynamoDbClient  =  {\n        put:  (params,  callback)  =&gt;  {\n            callback();\n        },\n    };\n\n    const  streamRepo  =  streamRepoFactory.for(\n        fakeDynamoDbClient,\n        fakeGuidGenerator\n    );\n\n    let  writeToTheStream;\n\n    beforeEach(function  ()  {\n        writeToTheStream  =  streamRepo.writeToStream({\n            streamName:  \"arbitrary-string\",\n            event:  {  winnie:  \"pooh\"  },\n        });\n    });\n\n    it(\"decorates  the  event  with  a  correlation  id\",  function  (done)  {\n        writeToTheStream\n            .then((writtenItem)  =&gt;  {\n                expect(writtenItem.Item.event).to.deep.equal({\n                    winnie:  \"pooh\",\n                    correlationId:  \"a-generated-guid\",\n                });\n                done();\n            })\n            .catch(done);\n    });\n});\n\n\nWriting  to  the  event  stream  can  be  tested  with  a  guid  generator  that  always  generates  the  same  guid,  and  a  dynamodb  client  that  doesn't  connect  to  dynamodb.  This  lets  other  behaviour  be  tested  without  those  dependencies  complicating  or  slowing  down  the  tests.\n\nTesting  in  AWS\n\nThe  integration  test  above  is  bound  to  querying  dynamodb  using  the  AWS  CLI.  It  would  not  take  a  lot  of  fixing  to  have  that  test  run  against  an  actual  API  Gateway  endpoint  and  dynamodb  instance.\n\nAt  this  point  the  code  is  still  coming  together  but  demonstrates  that  there  is  a  local  dev  story,  the  system  could  be  tested  in  CI,  and  can  run  in  AWS.\n\nExtending  the  system\n\nSo  now  POSTing  to  Lambda  can  write  events  to  dynamodb.  In  the  next  post  we  will  look  at  subscribing  to  and  responding  to  that  event  stream.\n\nAll  the  code  for  this  stage  can  be  found  on  github\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Mon Feb 05 2018</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Serverless - Part Three</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2018/02/serverless-3.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Serverless+-+Part+Three&via=pauldambra&url=https://pauldambra.dev/2018/02/serverless-3.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#serverless"
+      >
+        in: serverless
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p>In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command and write a <code class="language-plaintext highlighter-rouge">DestinationProposed</code> event to the eventstream.</p>
+
+<p>"<a href="https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md">SAM Local</a> can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."</p>
+
+<!--more-->
+
+<h1 id="sam-local">SAM Local</h1>
+
+<p>You have to have Docker running locally and then you can <code class="language-plaintext highlighter-rouge">npm install -g aws-sam-local</code>.</p>
+
+<p>To start the API Gateway and Lambda example from <a href="/2018/02/serverless-2.html">part two</a> navigate to the directory containing the template.yaml file and run <code class="language-plaintext highlighter-rouge">sam local start-api</code></p>
+
+<p>This starts lambda in Docker and shows what endpoints are mounted:</p>
+
+<p><img src="/images/start-api.png" alt="the start-api command console output" loading="lazy" /></p>
+
+<p>You can then POST to the endpoint <code class="language-plaintext highlighter-rouge">curl -H "Content-Type: application/json" -X POST -d '{"geolocation":"xyz", "name":"test"}' http://127.0.0.1:3000/destination</code></p>
+
+<p>Which outputs the same information as you would see in cloudwatch logs:</p>
+
+<p><img src="/images/api-console-output.png" alt="the api console output" loading="lazy" /></p>
+
+<h1 id="dynamodb">DynamoDB</h1>
+
+<p>This took several attempts to get running - mostly because of unfamiliarity with Docker - <a href="https://twitter.com/heitor_lessa/status/968574144681037826">AWS were super helpful on twitter</a> despite my silliness. Without that confusion this would have been very straightforward.</p>
+
+<p>There are three steps to this:</p>
+
+<h2 id="1-start-dynamodb">1) Start dynamodb</h2>
+
+<p>DynamoDB needs to be run as a named container and on the same Docker network as SAM local</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker network create lambda-local
+sam <span class="nb">local </span>start-api <span class="nt">--docker-network</span> lambda-local
+docker run <span class="nt">-d</span> <span class="nt">-v</span> <span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/dynamodb_local_db <span class="nt">-p</span> 8000:8000 <span class="nt">--network</span> lambda-local <span class="nt">--name</span> dynamodb cnadiminti/dynamodb-local
+</code></pre></div></div>
+
+<h2 id="2-create-the-dynamodb-table">2) Create the DynamoDB table</h2>
+
+<p>SAM local can't create DynamoDB tables from the template.yaml in the way that CloudFormation will when the SAM application is deployed so the table needs manually creating.</p>
+
+<p>The following AWS CLI command will create the table as defined in the template.yaml:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws dynamodb create-table <span class="se">\</span>
+  <span class="nt">--table-name</span> visitplannr-events <span class="se">\</span>
+  <span class="nt">--attribute-definitions</span> <span class="se">\</span>
+        <span class="nv">AttributeName</span><span class="o">=</span>EventId,AttributeType<span class="o">=</span>S <span class="nv">AttributeName</span><span class="o">=</span>StreamName,AttributeType<span class="o">=</span>S <span class="se">\</span>
+  <span class="nt">--key-schema</span> <span class="nv">AttributeName</span><span class="o">=</span>StreamName,KeyType<span class="o">=</span>HASH <span class="nv">AttributeName</span><span class="o">=</span>EventId,KeyType<span class="o">=</span>RANGE <span class="se">\</span>
+  <span class="nt">--provisioned-throughput</span> <span class="se">\</span>
+  <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span>5 <span class="se">\</span>
+  <span class="nt">--endpoint-url</span> http://0.0.0.0:8000
+</code></pre></div></div>
+
+<h2 id="3-write-some-code-to-have-the-one-talk-to-the-other">3) Write some code to have the one talk to the other</h2>
+
+<p>The client connection code is:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">AWS</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">aws-sdk</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">awsRegion</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AWS_REGION</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">eu-west-2</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">dynamoDbClient</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">makeClient</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">region</span><span class="p">:</span> <span class="nx">awsRegion</span><span class="p">,</span>
+  <span class="p">};</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AWS_SAM_LOCAL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">endpoint</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">http://dynamodb:8000</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">dynamoDbClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nx">DynamoDB</span><span class="p">.</span><span class="nc">DocumentClient</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">dynamoDbClient</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">connect</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dynamoDbClient</span> <span class="o">||</span> <span class="nf">makeClient</span><span class="p">(),</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This module exposes a connect method that lazily initializes the db client.</p>
+
+<p>SAM local sets an AWS_SAM_LOCAL environment variable so the code checks for that and if it is present sets the endpoint URL to <code class="language-plaintext highlighter-rouge">http://dynamodb:8000</code>. This is the container name and the port it exposes.</p>
+
+<p>For the production code you don't need to set any endpoint and can let lambda figure out what to connect to.</p>
+
+<h1 id="the-propose-destination-handler">The propose destination handler</h1>
+
+<p>The handler should act as a <a href="http://blog.ploeh.dk/2011/07/28/CompositionRoot/">composition root</a>. It creates the application's object graph and lets the parts do the work. This allows unit tests to inject fakes. If those tests were to exercise the handler directly the code would run the <code class="language-plaintext highlighter-rouge">dynamoDbClient</code> and timeout waiting for dynamodb.</p>
+
+<p>The handler ends up looking like this:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">httpResponse</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/httpResponse</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">mapCommand</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/mapCommand</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">guid</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./GUID</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">streamRepo</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">dynamoDbClient</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/dynamoDbClient</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">makeStreamRepository</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/make-stream-repository</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">commandHandler</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinations/commandHandler</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">proposeDestination</span> <span class="o">=</span> <span class="nx">mapCommand</span><span class="p">.</span><span class="nf">fromAPI</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="dl">"</span><span class="s2">proposeDestination</span><span class="dl">"</span><span class="p">);</span>
+
+  <span class="nx">streamRepo</span> <span class="o">=</span>
+    <span class="nx">streamRepo</span> <span class="o">||</span> <span class="nx">makeStreamRepository</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="nx">dynamoDbClient</span><span class="p">.</span><span class="nf">connect</span><span class="p">(),</span> <span class="nx">guid</span><span class="p">);</span>
+
+  <span class="nx">commandHandler</span>
+    <span class="p">.</span><span class="nf">apply</span><span class="p">({</span>
+      <span class="na">command</span><span class="p">:</span> <span class="nx">proposeDestination</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destinationProposed</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">streamName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">streamRepository</span><span class="p">:</span> <span class="nx">streamRepo</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">httpResponse</span><span class="p">.</span><span class="nf">success</span><span class="p">(</span><span class="nx">proposeDestination</span><span class="p">,</span> <span class="nx">callback</span><span class="p">))</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">httpResponse</span><span class="p">.</span><span class="nf">invalid</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">proposeDestination</span><span class="p">,</span> <span class="nx">callback</span><span class="p">));</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Here the handler converts the API gateway event to a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command. It then either uses the existing stream repository or creates one currying the dynamodb client and guid generator.</p>
+
+<!--alex ignore invalid --->
+
+<p>The command handler is then called. It either converts the command to a <code class="language-plaintext highlighter-rouge">destinationProposed</code> event and returns an HTTP 200 success. Or fails and returns an HTTP 400 invalid request.</p>
+
+<h1 id="testing-this-with-sam-local">Testing this with SAM local</h1>
+
+<p>I haven't wrapped this up into something useful that could be run in a CI pipeline but as a sense check before deployment this is a good starting point.</p>
+
+<p>First ensure SAM local is running:</p>
+
+<p><code class="language-plaintext highlighter-rouge">AWS_REGION=eu-west-2 sam local start-api --docker-network lambda-local</code></p>
+
+<p>Then also that dynamodb is running:</p>
+
+<p><code class="language-plaintext highlighter-rouge">docker run -d -v "$PWD":/dynamodb_local_db -p 8000:8000 --network lambda-local --name dynamodb cnadiminti/dynamodb-local</code></p>
+
+<p>Then write a test to exercise the system:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">supertest</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">exec</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">child_process</span><span class="dl">"</span><span class="p">).</span><span class="nx">exec</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">chai</span><span class="dl">"</span><span class="p">).</span><span class="nx">expect</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">rootUrl</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">rootUrl</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">http://127.0.0.1:3000</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">dynamoDbUrl</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">dynamoDbUrl</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">http://0.0.0.0:8000</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">countItemsInTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">exec</span><span class="p">(</span>
+      <span class="s2">`aws dynamodb scan --table-name visitplannr-events --endpoint-url </span><span class="p">${</span><span class="nx">dynamoDbUrl</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stdOut</span><span class="p">,</span> <span class="nx">stdErr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nf">reject</span><span class="p">(</span><span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kd">const</span> <span class="nx">scanResult</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">stdOut</span><span class="p">);</span>
+        <span class="nf">resolve</span><span class="p">(</span><span class="nx">scanResult</span><span class="p">.</span><span class="nx">Items</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">propose destination</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">can write an event to dynamodb</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">timeout</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+
+    <span class="nf">countItemsInTable</span><span class="p">()</span>
+      <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">startCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nf">request</span><span class="p">(</span><span class="nx">rootUrl</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/destination</span><span class="dl">"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"name":"test destination","geolocation":{"x": 0, "y": 0}}</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">end</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nf">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+              <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nf">countItemsInTable</span><span class="p">()</span>
+              <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">finalCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nf">expect</span><span class="p">(</span><span class="nx">finalCount</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nf">equal</span><span class="p">(</span><span class="nx">startCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="nf">done</span><span class="p">();</span>
+              <span class="p">})</span>
+              <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+          <span class="p">});</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>This is not a great example of a test for a number of reasons but it does demonstrate that the running system can receive an HTTP post after which there is one more item in the dynamodb table.</p>
+
+<!--alex ignore devil --->
+
+<p>The devil is always in the detail so this test wouldn't be good enough for a real system. But it does show that the lambda functions can be integration tested locally with real HTTP calls, writing to a local dynamodb.</p>
+
+<h1 id="unit-testing">Unit testing</h1>
+
+<p>The composition root approach means that the handler can be unit tested without relying on the dynamodb client. As an example testing the behaviour in the repository against a fake dynamodb, here the test locks in that the repository adds a correlation id to the item written to the stream:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">streamRepoFactory</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">../destinations/make-stream-repository</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">chai</span><span class="dl">"</span><span class="p">).</span><span class="nx">expect</span><span class="p">;</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">the stream repository</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">fakeGuidGenerator</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">generate</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">a-generated-guid</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">fakeDynamoDbClient</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">put</span><span class="p">:</span> <span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nf">callback</span><span class="p">();</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">streamRepo</span> <span class="o">=</span> <span class="nx">streamRepoFactory</span><span class="p">.</span><span class="k">for</span><span class="p">(</span>
+    <span class="nx">fakeDynamoDbClient</span><span class="p">,</span>
+    <span class="nx">fakeGuidGenerator</span>
+  <span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">writeToTheStream</span><span class="p">;</span>
+
+  <span class="nf">beforeEach</span><span class="p">(</span><span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">writeToTheStream</span> <span class="o">=</span> <span class="nx">streamRepo</span><span class="p">.</span><span class="nf">writeToStream</span><span class="p">({</span>
+      <span class="na">streamName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">arbitrary-string</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">event</span><span class="p">:</span> <span class="p">{</span> <span class="na">winnie</span><span class="p">:</span> <span class="dl">"</span><span class="s2">pooh</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="nf">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">decorates the event with a correlation id</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">writeToTheStream</span>
+      <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">writtenItem</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nf">expect</span><span class="p">(</span><span class="nx">writtenItem</span><span class="p">.</span><span class="nx">Item</span><span class="p">.</span><span class="nx">event</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nf">equal</span><span class="p">({</span>
+          <span class="na">winnie</span><span class="p">:</span> <span class="dl">"</span><span class="s2">pooh</span><span class="dl">"</span><span class="p">,</span>
+          <span class="na">correlationId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">a-generated-guid</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="nf">done</span><span class="p">();</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Writing to the event stream can be tested with a guid generator that always generates the same guid, and a dynamodb client that doesn't connect to dynamodb. This lets other behaviour be tested without those dependencies complicating or slowing down the tests.</p>
+
+<h1 id="testing-in-aws">Testing in AWS</h1>
+
+<p>The integration test above is bound to querying dynamodb using the AWS CLI. It would not take a lot of fixing to have that test run against an actual API Gateway endpoint and dynamodb instance.</p>
+
+<p>At this point the code is still coming together but demonstrates that there is a local dev story, the system could be tested in CI, and can run in AWS.</p>
+
+<h1 id="extending-the-system">Extending the system</h1>
+
+<p>So now POSTing to Lambda can write events to dynamodb. In the next post we will look at subscribing to and responding to that event stream.</p>
+
+<p>All the code for this stage can be found <a href="https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-three">on github</a></p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>  <a href="/2018/07/serverless-6.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Six - Making a view
+      </h3>
+      <small>
+        01 Jul 2018
+      </small>
+  </div>
+</a>  <a href="/2018/06/serverless-5.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Five - Read Models
+      </h3>
+      <small>
+        10 Jun 2018
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2018/02/serverless-3.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2018/02/serverless-3.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

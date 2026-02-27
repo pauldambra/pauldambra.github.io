@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Serverless - Part Five - Read Models</title>
+    <link rel="canonical" href="https://pauldambra.dev/2018/06/serverless-5.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2018/06/serverless-5.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Serverless - Part Five - Read Models" />
+    <meta
+      property="og:description"
+      content="Examining event driven serverless systems - creating a read model"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Examining event driven serverless systems - creating a read model"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Serverless - Part Five - Read Models",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2326",
+     "url":"https://pauldambra.dev/2018/06/serverless-5.html",
+     "datePublished":"2018-06-10",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2018/06/serverless-5.html"
+     },
+     "articleBody":"Part  One  -  describing  event-driven  and  serverless  systems\n\nPart  Two  -  Infrastructure  as  code  walking  skeleton\n\nPart  Three  -  SAM  Local  and  the  first  event  producer\n\nPart  Four  -  Making  streams  of  events\n\nOK,  four  months  since  part  four.  I  got  a  puppy  and  have  written  the  code  for  this  part  of  the  series  in  2  minute  blocks  after  sleepless  nights.  Not  a  productive  way  to  do  things!\n\n\n    \n    \n\n\nGetting  ready  to  make  some  HTML\n\nNow  that  the  API  lets  clients  propose  destinations  to  the  visit  plannr  the  home  page  for  the  service  can  be  built.  It's  going  to  show  the  most  recently  updated  destinations.\n\nIn  a  CRUD  SQL  system  the  application  would  have  been  maintaining  the  most  up-to-date  state  of  each  destination  in  SQL  and  you'd  read  them  when  the  HTML  is  requested.  But  this  application  isn't  storing  the  state  of  the  destinations  but  the  facts  that  it  has  been  told  about  the  destinations.\n\n\n    As  an  aside  a  lot  of  people  don't  realise  that  CRUD  SQL  stands  for  C  an  we  R  eally  not  U  se  SQL  D  atabases  they  may  S  eem  familiar  but  all  the  ORM  stuff  is  well  over  our  Q  uota  for  comp  L  icated  dependencies.\n\n\nIn  an  event  driven  system  applications  subscribe  to  be  notified  when  new  events  occur.  They  can  create  read  models  as  the  events  arrive.  Those  read  models  are  what  the  application  uses  to,  erm,  read  data.  So  they're  used  in  places  many  applications  make  SQL  queries.  Now  this  visit  plannr  application  needs  a  read  model  for  recently  updated  destinations.\n\n\n\nWhat  even  is  a  Read  Model?\n\n\n    The  query  (or  read)  model  is  a  denormalized  data  model.  It  is  not  meant  to  deliver  the  domain  behaviour,  only  data  for  display  (and  possibly  reporting).\n\n\n\n    CQRS-based  views  can  be  both  cheap  and  disposable  …  any  single  view  could  be  rewritten  from  scratch  in  isolation  or  the  entire  query  model  be  switched  to  completely  different  persistence  technology\n\n\n\n    both  from  Page  141  Implementing  Domain  Driven  Design  by  Vaughn  Vernon\n\n\nA  CQRS  system  (see  part  1)  separates  the  parts  of  the  application(s)  that  receives  commands  to  change  from  those  that  receive  queries  for  data.  Read  models  are  the  data  models  for  the  read  side  of  the  application.  This  lets  you  optimise  different  areas  for  their  specific  tasks.\n\nRead  models  are  a  representation  of  the  data  built  for  a  particular  query.  You  can  reuse  read  models.  However  in  a  CQRS  or  eventsourced  system  you  tend  to  make  many  read  models.\n\nIf  Sam  and  Jamie  both  come  to  my  house  to  help  me  garden  my  eventstream  would  be:\n\n[\n    {name:  \"Sam\",  type:  \"CameToGarden\"},\n    {name:  \"Jamie\",  type:  \"CameToGarden\"}\n]\n\n\nI  can  build  two  readmodels  from  this:\n\n{helperCount:  2}\n\n\n{peopleHelping:  [\"Sam\",  \"Jamie\"]}\n\n\nSo  each  read  model  in  a  system  is  a  different  way  of  representing  written  data  in  order  to  serve  a  particular  need.  Think  of  them  as  different  SQL  projections  or  views  over  tables.  They  aren't  the  data  they're  something  built  from  the  data  that  lets  you  show  it  to  someone.\n\nA  wonderful  thing  about  read  models  (in  an  eventsourced  system  at  least)  is  that  you  can  throw  them  away.  Imagine  a  SQL  database  that  you  can  delete  once  you  don't  like  its  shape.  In  a  system  with  read  models  you  can  change  your  code,  reset  the  system  that  builds  the  read  model  to  start  at  the  beginning  of  history,  and  let  it  create  the  new  read  model.\n\nWork  an  example\n\n\n\nLet's  imagine  an  eventsourced  ecommerce  application  with  no  events.  Sales  and  fulfilment  teams  need  to  know  how  much  money  we've  made,  how  many  orders  we've  taken,  and  what  products  have  been  sold.\n\nWe've  deployed  3  separate  applications  that  are  subscribed  to  the  empty  event  stream.\n\n\n\nBig  day  -  the  first  sale!  myshop.com  writes  an  event  to  the  stream  that  we've  sold  a  t-shirt.  The  sales,  order  count,  and  products  sold  read  models  update  and  any  UI  or  report  being  generated  using  them  can  update  accordingly.\n\n\n\nMany  days  and  events  have  passed  and  after  the  most  recent  cancelled  order  the  fulfilment  team  let  you  know  that  it's  really  hard  for  them  to  figure  out  what's  happening  when  an  order  is  cancelled.  They'd  like  a  view  to  help  them  manage  cancellations.\n\n\n\nSo  a  new  read  model  is  built  and  deployed  to  track  order  cancellations.  The  existing  read  models  are  all  up-to-date  on  event  300.  When  the  new  application  starts  its  read  model  isn't  showing  any  cancelled  orders  and  it  has  read  0  events.\n\n(important  to  note  that  no  other  applications  had  to  change  at  all  to  support  this!)\n\n\n\n\n\nThe  new  application  reads  through  the  event  stream  until  it  has  caught  up.  There's  a  period  of  time  where  it  is  reading  through  the  event  stream  and  performing  any  calculations  or  running  any  logic  where  it  isn't  caught  up  with  the  other  read  models  or  with  the  write  side  of  the  applications.\n\nThis  is  'eventual  consistency'.  An  event  sourced  system  embraces  the  benefits  of  not  trying  to  force  all  the  parts  of  the  application  to  stay  exactly  in  sync  with  each  other  all  the  time.\n\n\n\nAs  the  website  gets  more  popular  storing  the  products  sold  in  an  array  is  limiting  what  business  intelligence  the  sales  team  can  gather.  You  can  add  a  consumer  that  stores  products  sold  in  a  graph  database.\n\nAs  your  new  data  science  capability  learns  what  structure  they  want  in  this  new  data  store  it  is  possible  to  keep  deleting  the  graph  store  and  letting  it  recreate  from  the  event  stream.  Again  this  is  an  addition  that  doesn't  need  changes  to  the  existing  applications.\n\nWhy  a  Read  Model  now?\n\nThe  system  has  a  command  channel  to  propose  destinations,  and  an  event  subscriber  that  validates  the  proposed  destination.  Now  a  new  event  subscriber  can  respond  to  each  event  in  a  destination  stream  and  create  or  update  a  read  model  used  to  let  people  view  the  destinations  on  the  website.\n\nHow  to  make  a  read  model  in  this  system?\n\nIf  this  system  was  a  long  running  process  it  would  start,  read  all  the  events  from  the  beginning  of  time  (or  the  last  snapshot),  build  a  read  model  in-memory,  and  start  serving  requests  once  the  read  model  was  up-to-date  with  the  event  stream.\n\nIt  also  subscribes  to  the  event  stream  so  each  subsequent  event  written  to  the  stream  is  applied  to  the  read  model  store.  Even  with  millions  of  events  in  a  stream  once  the  system  has  caught  up  it  is  only  applying  one  event  at  a  time.  Only  applying  one  event  can  be  incredibly  fast!\n\nAnd  as  in  the  graph  database  example  above  read  models  don't  have  to  be  in-memory.  They  can  be  pretty  much  anywhere.  You  can  run  graph  databases,  document  databases,  sql  databases,  and  flat  files  side-by-side  as  read  models  for  different  uses.\n\nServerless  systems  only  run  for  the  lifetime  of  each  request  and  so  need  to  start  as  fast  as  possible.  Building  the  read  model  from  scratch  on-start  can  be  treated  as  too  slow  and  we'll  decide  to  store  the  read  model  in  dynamodb.\n\nThe  lambda\n\nThis  is  kept  as  a  port  into  the  system\n\nexports.handler  =  async  (event)  =&gt;  {\n    streamReader  =\n        streamReader  ||\n        makeStreamRepository.for(\n            eventsTableName,\n            dynamoDbClient.documentClient(),\n            guid\n        );\n\n    readModelWriter  =\n        readModelWriter  ||\n        makeReadModelRepository.for(\n            readModelsTableName,\n            dynamoDbClient.documentClient(),\n            guid\n        );\n\n    const  writes  =  await  readModelUpdateHandler\n        .withStreamReader(streamReader)\n        .withReadModelWriter(readModelWriter)\n        .allowingModelsWithStatus(terminalEventType)\n        .writeModelsFor(event);\n\n    return  Promise.all(writes);\n};\n\n\nIt  initialises  a  stream  reader  and  a  model  writer  then  curries  a  handler  function  which  receives  the  event  that  triggered  the  lambda.  Accepting  a  terminalEventType  so  destinations  that  shouldn't  be  shown  to  users  yet  can  be  filtered  out.  Finally  waiting  for  any  dynamodb  writes  to  be  gathered  and  passes  those  promises  back  to  the  executing  environment  so  it  can  wait  for  them  to  complete.\n\nThe  handler  is  small.\n\nconst  destinationReadModel  =  require(\"./destinationReadModel.js\");\nconst  streamNames  =  require(\"./streamNames\");\n\nmodule.exports  =  {\n    withStreamReader:  (streamReader)  =&gt;  ({\n        withReadModelWriter:  (modelWriter)  =&gt;  ({\n            allowingModelsWithStatus:  (status)  =&gt;  ({\n                writeModelsFor:  async  (event)  =&gt;  {\n                    console.log(`processing  trigger  event:  ${JSON.stringify(event)}`);\n\n                    const  readPromises  =  streamNames\n                        .from(event.Records)\n                        .map((cs)  =&gt;  streamReader.readStream({  streamName:  cs  }));\n\n                    const  streamsOfEvents  =  await  Promise.all(readPromises);\n\n                    const  writes  =  streamsOfEvents\n                        .map((streamOfWrappedEvents)  =&gt;\n                            streamOfWrappedEvents.map((x)  =&gt;  x.event)\n                        )\n                        .map(destinationReadModel.apply)\n                        .filter((m)  =&gt;  m.status  ===  status)\n                        .map(modelWriter.write);\n\n                    return  writes;\n                },\n            }),\n        }),\n    }),\n};\n\n\nThe  triggering  event  could  contain  more  than  one  dyanamodb  update  so:\n\nconst  readPromises  =  streamNames\n    .from(event.Records)\n    .map((cs)  =&gt;  streamReader.readStream({  streamName:  cs  }));\n\nconst  streamsOfEvents  =  await  Promise.all(readPromises);\n\n\nRemember  each  event  is  appended  onto  the  end  of  a  stream  of  events  that  represents  an  instance  of  a  particular  domain  concept.  So  each  destination  has  its  own  stream  of  events  that  make  up  the  history  of  that  destination.  This  code  reads  the  stream  name  from  each  of  the  events  that  triggered  the  lambda  and  reads  all  of  the  events  from  each  of  those  streams  from  dynamodb.\n\nconst  writes  =  streamsOfEvents\n    .map((streamOfWrappedEvents)  =&gt;  streamOfWrappedEvents.map((x)  =&gt;  x.event))\n    .map(destinationReadModel.apply)\n    .filter((m)  =&gt;  m.status  ===  status)\n    .map(modelWriter.write);\n\n\neach  stream  of  events  is  applied  to  a  destinationReadModel  which  are  filtered  to  keep  only  those  with  the  desired  status.  Those  models  are  then  written  to  dynamodb  so  other  applications  can  query  them.\n\nmodule.exports  =  {\n    apply:  (events)  =&gt;  {\n        const  readModel  =  events.reduce(\n            (model,  event)  =&gt;  {\n                switch  (event.type)  {\n                    case  \"destinationProposed\":\n                        model.name  =  event.name;\n                        model.geolocation  =  event.geolocation;\n                        model.timestamp  =  event.timestamp;\n                        break;\n                    case  \"geolocationValidationSucceeded\":\n                        model.status  =  \"locationValidated\";\n                        break;\n                    case  \"geolocationValidationFailed\":\n                        model.status  =  \"failed\";\n                        break;\n                }\n\n                return  model;\n            },\n            {  status:  \"pending\",  type:  \"destination\"  }\n        );\n\n        console.log(\n            `built  readmodel  ${JSON.stringify(\n                readModel\n            )}  from  events  ${JSON.stringify(events)}`\n        );\n        return  readModel;\n    },\n};\n\n\nBuilding  the  read  model  involves  taking  each  event  and  updating  a  model  based  on  the  event  type.  Here  you  can  see  how  this  code  is  tolerant  of  events  it  isn't  expecting  -  it  will  ignore  them.\n\nThere's  no  validation  that  the  data  being  read  from  the  events  is  present.  Whether  there  should  be  validation  at  this  stage  is  context  dependent.  Here  we  wrote  the  event  producers  and  know  that  for  there  to  be  a  geolocationValidationSucceeded  event  both  name  and  geolocation  have  to  be  present.  We  can  trust  that  the  read  model  will  be  good  enough  for  now.\n\nWhat's  next?\n\nNow  that  read  models  are  being  stored  in  dynamodb  the  next  step  is  to  generate  a  home  page.  Because  the  read  models  are  writing  to  a  dynamodb  table  they  can  be  treated  as  a  projection  (read  models  that  can  be  treated  as  an  eventstream  and  subscribed  to)  and  we  can  generate  static  HTML  when  the  read  models  change.\n\nAll  the  code  for  this  post  can  be  found  here  on  github.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Jun 10 2018</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Serverless - Part Five - Read Models</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2018/06/serverless-5.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Serverless+-+Part+Five+-+Read+Models&via=pauldambra&url=https://pauldambra.dev/2018/06/serverless-5.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#serverless"
+      >
+        in: serverless
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#read-model">
+    read model
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p>OK, four months since part four. I got a puppy and have written the code for this part of the series in 2 minute blocks after sleepless nights. Not a productive way to do things!</p>
+
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/images/puppy.webm" type="video/webm" />
+  <source src="/images/puppy.mp4" type="video/mp4" />
+</video>
+
+<h1 id="getting-ready-to-make-some-html">Getting ready to make some HTML</h1>
+
+<p>Now that the API lets clients propose destinations to the visit plannr the home page for the service can be built. It's going to show the most recently updated destinations.</p>
+
+<p>In a CRUD SQL system the application would have been maintaining the most up-to-date state of each destination in SQL and you'd read them when the HTML is requested. But this application isn't storing the state of the destinations but the facts that it has been told about the destinations.</p>
+
+<blockquote>
+  <p>As an aside a lot of people don't realise that CRUD SQL stands for <strong><em>C</em></strong> an we <strong><em>R</em></strong> eally not <strong><em>U</em></strong> se SQL <strong><em>D</em></strong> atabases they may <strong><em>S</em></strong> eem familiar but all the ORM stuff is well over our <strong><em>Q</em></strong> uota for comp <strong><em>L</em></strong> icated dependencies.</p>
+</blockquote>
+
+<p>In an event driven system applications subscribe to be notified when new events occur. They can create read models as the events arrive. Those read models are what the application uses to, erm, read data. So they're used in places many applications make SQL queries. Now this visit plannr application needs a read model for recently updated destinations.</p>
+
+<!--more-->
+
+<h1 id="what-even-is-a-read-model">What even is a Read Model?</h1>
+
+<blockquote>
+  <p>The query (or read) model is a denormalized data model. It is not meant to deliver the domain behaviour, only data for display (and possibly reporting).</p>
+</blockquote>
+
+<blockquote>
+  <p>CQRS-based views can be both cheap and disposable … any single view could be rewritten from scratch in isolation or the entire query model be switched to completely different persistence technology</p>
+</blockquote>
+
+<ul>
+  <li>both from Page 141 Implementing Domain Driven Design by Vaughn Vernon</li>
+</ul>
+
+<p>A CQRS system (<a href="/2018/02/serverless-1.html#cqrs">see part 1</a>) separates the parts of the application(s) that receives commands to change from those that receive queries for data. Read models are the data models for the read side of the application. This lets you optimise different areas for their specific tasks.</p>
+
+<p>Read models are a representation of the data built for a particular query. You <em>can</em> reuse read models. However in a CQRS or eventsourced system you tend to make many read models.</p>
+
+<p>If Sam and Jamie both come to my house to help me garden my eventstream would be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[
+  {name: "Sam", type: "CameToGarden"},
+  {name: "Jamie", type: "CameToGarden"}
+]
+</code></pre></div></div>
+
+<p>I can build two readmodels from this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{helperCount: 2}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{peopleHelping: ["Sam", "Jamie"]}
+</code></pre></div></div>
+
+<p>So each read model in a system is a different way of representing written data in order to serve a particular need. Think of them as different SQL projections or views over tables. They aren't the data they're something built from the data that lets you show it to someone.</p>
+
+<p>A wonderful thing about read models (in an eventsourced system at least) is that you can throw them away. Imagine a SQL database that you can delete once you don't like its shape. In a system with read models you can change your code, reset the system that builds the read model to start at the beginning of history, and let it create the new read model.</p>
+
+<h2 id="work-an-example">Work an example</h2>
+
+<p><img src="/images/1-no-event.jpg" alt="without any events" loading="lazy" /></p>
+
+<p>Let's imagine an eventsourced ecommerce application with no events. Sales and fulfilment teams need to know how much money we've made, how many orders we've taken, and what products have been sold.</p>
+
+<p>We've deployed 3 separate applications that are subscribed to the empty event stream.</p>
+
+<p><img src="/images/2-one-event.jpg" alt="after one event" loading="lazy" /></p>
+
+<p>Big day - the first sale! myshop.com writes an event to the stream that we've sold a t-shirt. The sales, order count, and products sold read models update and any UI or report being generated using them can update accordingly.</p>
+
+<p><img src="/images/3-many-events.jpg" alt="after many events" loading="lazy" /></p>
+
+<p>Many days and events have passed and after the most recent cancelled order the fulfilment team let you know that it's really hard for them to figure out what's happening when an order is cancelled. They'd like a view to help them manage cancellations.</p>
+
+<p><img src="/images/4-new-readmodel.jpg" alt="when the new read model is deployed" loading="lazy" /></p>
+
+<p>So a new read model is built and deployed to track order cancellations. The existing read models are all up-to-date on event 300. When the new application starts its read model isn't showing any cancelled orders and it has read 0 events.</p>
+
+<p>(important to note that no other applications had to change at all to support this!)</p>
+
+<p><img src="/images/5-caught-up.jpg" alt="when the new read model is caught up" loading="lazy" /></p>
+
+<!--alex ignore period --->
+
+<p>The new application reads through the event stream until it has caught up. There's a period of time where it is reading through the event stream and performing any calculations or running any logic where it isn't caught up with the other read models or with the write side of the applications.</p>
+
+<p>This is 'eventual consistency'. An event sourced system embraces the benefits of not trying to force all the parts of the application to stay exactly in sync with each other all the time.</p>
+
+<p><img src="/images/6-graph.jpg" alt="adding a graph database read model" loading="lazy" /></p>
+
+<p>As the website gets more popular storing the products sold in an array is limiting what business intelligence the sales team can gather. You can add a consumer that stores products sold in a graph database.</p>
+
+<p>As your new data science capability learns what structure they want in this new data store it is possible to keep deleting the graph store and letting it recreate from the event stream. Again this is an addition that doesn't need changes to the existing applications.</p>
+
+<h1 id="why-a-read-model-now">Why a Read Model now?</h1>
+
+<p>The system has a command channel to propose destinations, and an event subscriber that validates the proposed destination. Now a new event subscriber can respond to each event in a destination stream and create or update a read model used to let people view the destinations on the website.</p>
+
+<h1 id="how-to-make-a-read-model-in-this-system">How to make a read model in this system?</h1>
+
+<p>If this system was a long running process it would start, read all the events from the beginning of time (or the last snapshot), build a read model in-memory, and start serving requests once the read model was up-to-date with the event stream.</p>
+
+<p>It also subscribes to the event stream so each subsequent event written to the stream is applied to the read model store. Even with millions of events in a stream once the system has caught up it is only applying one event at a time. Only applying one event can be incredibly fast!</p>
+
+<p>And as in the graph database example above read models don't have to be in-memory. They can be pretty much anywhere. You can run graph databases, document databases, sql databases, and flat files side-by-side as read models for different uses.</p>
+
+<p>Serverless systems only run for the lifetime of each request and so need to start as fast as possible. Building the read model from scratch on-start can be treated as too slow and we'll decide to store the read model in dynamodb.</p>
+
+<h2 id="the-lambda">The lambda</h2>
+
+<p>This is kept as a port into the system</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="k">async </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">streamReader</span> <span class="o">=</span>
+    <span class="nx">streamReader</span> <span class="o">||</span>
+    <span class="nx">makeStreamRepository</span><span class="p">.</span><span class="k">for</span><span class="p">(</span>
+      <span class="nx">eventsTableName</span><span class="p">,</span>
+      <span class="nx">dynamoDbClient</span><span class="p">.</span><span class="nf">documentClient</span><span class="p">(),</span>
+      <span class="nx">guid</span>
+    <span class="p">);</span>
+
+  <span class="nx">readModelWriter</span> <span class="o">=</span>
+    <span class="nx">readModelWriter</span> <span class="o">||</span>
+    <span class="nx">makeReadModelRepository</span><span class="p">.</span><span class="k">for</span><span class="p">(</span>
+      <span class="nx">readModelsTableName</span><span class="p">,</span>
+      <span class="nx">dynamoDbClient</span><span class="p">.</span><span class="nf">documentClient</span><span class="p">(),</span>
+      <span class="nx">guid</span>
+    <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">writes</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">readModelUpdateHandler</span>
+    <span class="p">.</span><span class="nf">withStreamReader</span><span class="p">(</span><span class="nx">streamReader</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">withReadModelWriter</span><span class="p">(</span><span class="nx">readModelWriter</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">allowingModelsWithStatus</span><span class="p">(</span><span class="nx">terminalEventType</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">writeModelsFor</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="nx">writes</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>It initialises a stream reader and a model writer then curries a handler function which receives the event that triggered the lambda. Accepting a <code class="language-plaintext highlighter-rouge">terminalEventType</code> so destinations that shouldn't be shown to users yet can be filtered out. Finally waiting for any dynamodb writes to be gathered and passes those promises back to the executing environment so it can wait for them to complete.</p>
+
+<p>The handler is small.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">destinationReadModel</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./destinationReadModel.js</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">streamNames</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./streamNames</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">withStreamReader</span><span class="p">:</span> <span class="p">(</span><span class="nx">streamReader</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">withReadModelWriter</span><span class="p">:</span> <span class="p">(</span><span class="nx">modelWriter</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+      <span class="na">allowingModelsWithStatus</span><span class="p">:</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+        <span class="na">writeModelsFor</span><span class="p">:</span> <span class="k">async </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`processing trigger event: </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">event</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+
+          <span class="kd">const</span> <span class="nx">readPromises</span> <span class="o">=</span> <span class="nx">streamNames</span>
+            <span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">cs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">streamReader</span><span class="p">.</span><span class="nf">readStream</span><span class="p">({</span> <span class="na">streamName</span><span class="p">:</span> <span class="nx">cs</span> <span class="p">}));</span>
+
+          <span class="kd">const</span> <span class="nx">streamsOfEvents</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="nx">readPromises</span><span class="p">);</span>
+
+          <span class="kd">const</span> <span class="nx">writes</span> <span class="o">=</span> <span class="nx">streamsOfEvents</span>
+            <span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">streamOfWrappedEvents</span><span class="p">)</span> <span class="o">=&gt;</span>
+              <span class="nx">streamOfWrappedEvents</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">event</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">destinationReadModel</span><span class="p">.</span><span class="nx">apply</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">filter</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">status</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">modelWriter</span><span class="p">.</span><span class="nx">write</span><span class="p">);</span>
+
+          <span class="k">return</span> <span class="nx">writes</span><span class="p">;</span>
+        <span class="p">},</span>
+      <span class="p">}),</span>
+    <span class="p">}),</span>
+  <span class="p">}),</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>The triggering event could contain more than one dyanamodb update so:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">readPromises</span> <span class="o">=</span> <span class="nx">streamNames</span>
+  <span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">cs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">streamReader</span><span class="p">.</span><span class="nf">readStream</span><span class="p">({</span> <span class="na">streamName</span><span class="p">:</span> <span class="nx">cs</span> <span class="p">}));</span>
+
+<span class="kd">const</span> <span class="nx">streamsOfEvents</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="nx">readPromises</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Remember each event is appended onto the end of a stream of events that represents an instance of a particular domain concept. So each <code class="language-plaintext highlighter-rouge">destination</code> has its own stream of events that make up the history of <em>that destination</em>. This code reads the stream name from each of the events that triggered the lambda and reads all of the events from each of those streams from dynamodb.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">writes</span> <span class="o">=</span> <span class="nx">streamsOfEvents</span>
+  <span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">streamOfWrappedEvents</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">streamOfWrappedEvents</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">event</span><span class="p">))</span>
+  <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">destinationReadModel</span><span class="p">.</span><span class="nx">apply</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">filter</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">status</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">modelWriter</span><span class="p">.</span><span class="nx">write</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>each stream of events is applied to a <code class="language-plaintext highlighter-rouge">destinationReadModel</code> which are filtered to keep only those with the desired status. Those models are then written to dynamodb so other applications can query them.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">apply</span><span class="p">:</span> <span class="p">(</span><span class="nx">events</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">readModel</span> <span class="o">=</span> <span class="nx">events</span><span class="p">.</span><span class="nf">reduce</span><span class="p">(</span>
+      <span class="p">(</span><span class="nx">model</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">switch </span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">destinationProposed</span><span class="dl">"</span><span class="p">:</span>
+            <span class="nx">model</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+            <span class="nx">model</span><span class="p">.</span><span class="nx">geolocation</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">;</span>
+            <span class="nx">model</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">geolocationValidationSucceeded</span><span class="dl">"</span><span class="p">:</span>
+            <span class="nx">model</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">locationValidated</span><span class="dl">"</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">geolocationValidationFailed</span><span class="dl">"</span><span class="p">:</span>
+            <span class="nx">model</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">failed</span><span class="dl">"</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">model</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination</span><span class="dl">"</span> <span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span>
+      <span class="s2">`built readmodel </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span>
+        <span class="nx">readModel</span>
+      <span class="p">)}</span><span class="s2"> from events </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">events</span><span class="p">)}</span><span class="s2">`</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="nx">readModel</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Building the read model involves taking each event and updating a model based on the event type. Here you can see how this code is tolerant of events it isn't expecting - it will ignore them.</p>
+
+<p>There's no validation that the data being read from the events is present. Whether there should be validation at this stage is context dependent. Here we wrote the event producers and know that for there to be a <code class="language-plaintext highlighter-rouge">geolocationValidationSucceeded</code> event both name and geolocation have to be present. We can trust that the read model will be good enough for now.</p>
+
+<h1 id="whats-next">What's next?</h1>
+
+<p>Now that read models are being stored in dynamodb the next step is to generate a home page. Because the read models are writing to a dynamodb table they can be treated as a projection (read models that can be treated as an eventstream and subscribed to) and we can generate static HTML when the read models change.</p>
+
+<p>All the code for this post can be found <a href="https://github.com/pauldambra/visit-plannr/tree/code-blog-post-part-five">here on github</a>.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2019/11/serverless-lessons-learned.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Lessons learned
+      </h3>
+      <small>
+        30 Nov 2019
+      </small>
+  </div>
+</a>  <a href="/2018/07/serverless-6.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Six - Making a view
+      </h3>
+      <small>
+        01 Jul 2018
+      </small>
+  </div>
+</a>  <a href="/2018/02/serverless-4.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Four
+      </h3>
+      <small>
+        15 Mar 2018
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2018/06/serverless-5.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2018/06/serverless-5.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

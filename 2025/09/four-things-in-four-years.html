@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Four things in four years at PostHog</title>
+    <link rel="canonical" href="https://pauldambra.dev/2025/09/four-things-in-four-years.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2025/09/four-things-in-four-years.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Four things in four years at PostHog" />
+    <meta
+      property="og:description"
+      content="Four things I've learned in four years at PostHog"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Four things I've learned in four years at PostHog"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Four things in four years at PostHog",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"998",
+     "url":"https://pauldambra.dev/2025/09/four-things-in-four-years.html",
+     "datePublished":"2025-09-16",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2025/09/four-things-in-four-years.html"
+     },
+     "articleBody":"I've  been  at  PostHog  for  four  years.  After  having  the  best  four  years  of  my  career  at  Co-op  Digital,  I'm  privileged  to  have  then  also  had  the  best  four  years  of  my  career  at  PostHog.  Surely,  I've  learned  something  that  I  can  cram  into  a  cliche  format?!\n\n\n    Don't  look  for  a  family,  look  for  a  team\n    Talk  to  users  all  the  time\n    You  can  YOLO  and  strangle  your  figs  at  the  same  time\n    Trust  is  a  super  power\n\n\n\n\nDon't  look  for  a  family,  look  for  a  team\n\nThe  more  I've  experienced  this,  the  more  I'm  convinced  it's  genius.\n\nAt  home,  for  sure,  look  for  (and  build)  an  environment  where  you  are  unconditionally  accepted  and  celebrated,  But  at  work,  look  for  a  group  formed  around  a  shared  (probably  competitive)  purpose.\n\nA  team  is  somewhere  folks  expect  the  best  from  me  and  they  expect  me  to  own  my  part  in  achieving  that.  They  also  help  me  to  get  there.  But  I  have  to  own  it  for  me.\n\nBeing  surrounded  by  people  who  reinforce  your  good  behaviours  and  model  good  behaviours  you  can  learn  from  is  💯.  Enough  so,  that  I  can't  imagine  being  willing  to  accept  an  environment  without  that  now  I've  had  it.\n\nAn  old  colleague  would  share  a  video  of  Barcelona  football  team.  Multiple  times  someone  would  score  and  the  player  would  celebrate.  Soon  another  player  would  come  over,  tap  them  on  the  shoulder,  and  they'd  go  back  to  the  game.  They  knew  that  the  behaviours  that  correlated  with  success  were  important  and  they  had  little  rituals  to  reinforce  them.  In  this  case,  \"don't  celebrate  too  long,  we're  still  playing,  we  need  more  goals,  and  we  don't  get  them  by  celebrating\".\n\nAt  PostHog  the  company  values  are  used  the  same  way.  Like  the  Barcelona  shoulder  tap,  they're  not  just  aspirational  words  on  a  page.  They're  the  behaviours  we  see  correlate  with  success  and  reinforce  by  living  them,  and  by  holding  each  other  accountable  to  them.\n\nTalk  to  users  all  the  time\n\nI  have  never  once  regretted  talking  to  our  users.  Either  on  tooterweb,  in  support  tickets,  in  a  user  interview,  or  asking  for  email  /  screenshare  feedback.  It  is  hands-down  the  best  thing.  It  has  consistently  levelled  up  what  I've  been  able  to  do  at  PostHog.\n\nI  used  to  get  frustrated  with  teams  using  user  stories  that  would  write  \"as  a  user\"  and  would  push  them  to  have  a  particular  group  of  users  in  mind.  I  don't  like  the  trad  user  story  format.  But  if  you  are  using  it  try  and  think  of  the  group  of  users:  \"as  a  busy  shopper\"  or  \"as  an  owner  of  a  small  business\".  But  a  million  times  better  IMHO  is  \"Sam  wants…\"  or  \"Jane  couldn't…\".  Not  an  imaginary  Sam  or  Jane.  People  you  have  talked  to,  that  you  can  empathize  with,  and  follow-up  with.\n\nThe  important  counterpoint  is  that  just  building  everything  users  ask  you  for  is  not  the  goal.  Understanding  their  needs  and  problems  and  how  it  shapes  and  relates  to  your  instinct  for  the  product  is  the  goal.\n\nThe  classic  example  of  this  is  that  when  users  say  something  is  cluttered  they  are  only  rarely  asking  to  see  less  information,  instead  they  are  really  asking  to  see  different  information.\n\nYou  can  YOLO  and  strangle  your  figs  at  the  same  time\n\nTwo  of  the  things  I've  loved  about  working  at  PostHog…\n\nOne)  it  is  totally  fine  to  push  something  to  prod,  discover  its  a  mistake,  and  fix  forward  or  rollback.  So  long  as  it  is  done  with  purpose  -  it's  not  fine  to  be  careless  but  it  is  fine  and  desirable  to  be  bold.\n\nTwo)  it  is  also  totally  fine  to  change  something  slowly  over  multiple  releases.  Increasing  the  mix  of  traffic  to  a  new  feature  until  you  are  confident  it  is  ready  for  everyone.\n\nOften  people  talk  about  a  company  culture  as  if  you  have  to  choose  between  these  things,  but  you  don't.  You  can  drive  your  car  in  different  gears  on  different  slopes.  Choosing  the  approach  that  is  right  for  the  situation.\n\nTrust  is  a  superpower\n\nMy  first  pull  request  at  PostHog  was  before  I  started.  A  change  to  the  docs  to  increase  the  budget  for  an  engineering  laptop  purchase  because  the  cost  had  gone  up.  Then  buying  the  laptop.  All  before  I'd  met  anybody  or  had  my  first  day.\n\nThe  default  was  to  expect  me  to  do  the  right  thing  and  assume  that  I  would.\n\nSimilarly,  when  I  wasn't  sure  what  to  work  on  after  I'd  started.  I  booked  user  interviews  with  customers.  Talked  to  them,  and  then  decided  what  to  work  on.  No  approval  process,  no  fuss,  no  need  to  queue  on  anybody  else,  nothing  in  my  way.\n\nOr  in  my  second  week  when  the  kids  were  ill  and  I  said  I  wouldn't  be  able  to  work  that  day  but  would  \"catch  up  on  Saturday\".  Marius,  the  tech  lead  said:  \"that  sounds  stupid,  take  the  day  off\".  No  worries  that  I  would  hack  the  system  and  take  too  much  time  off.\n\nAnd,  honestly,  most  every  day  since  then.  It  is  incredibly  motivating  and  rewarding  to  be  trusted  to  do  the  right  thing.\n\n(yes,  \"do  the  right  thing\"  is  loose  and  open  to  interpretation,  but  that's  the  great  thing  about  trust,  i  can  interpret  what  the  right  thing  is)\n\nThe  thing  that  works  so  well  alongside  this  is  a  culture  of  feedback.  I've  been  told  when  I've  done  well,  and  when  I've  not.  And  then  trusted  to  take  that  information  and  do  the  right  thing  with  it.\n\nThings  I've  learned  that  didn't  make  the  cut  of  the  four  in  four  cliche  format\n\n\n    typescript  enums  are  useless,  just  use  string  union  types\n    writing  tests  is  the  best,  writing  the  fewest  tests  for  the  most  benefit  is  besterer\n    react  was  a  mistake,  but  there's  no  good  alternative  yet\n    a  one  word  copy  change  can  have  a  100x  impact  on  clickthrough  rate\n    giolitti  is  the  best  gelato  in  rome\n\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Tue Sep 16 2025</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Four things in four years at PostHog</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2025/09/four-things-in-four-years.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Four+things+in+four+years+at+PostHog&via=pauldambra&url=https://pauldambra.dev/2025/09/four-things-in-four-years.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I've been at PostHog for four years. After having the best four years of my career at Co-op Digital, I'm privileged to have then also had the best four years of my career at PostHog. Surely, I've learned something that I can cram into a cliche format?!</p>
+
+<ul>
+  <li>Don't look for a family, look for a team</li>
+  <li>Talk to users <em>all the time</em></li>
+  <li>You can YOLO and strangle your figs at the same time</li>
+  <li>Trust is a super power</li>
+</ul>
+
+<!--more-->
+
+<h1 id="dont-look-for-a-family-look-for-a-team">Don't look for a family, look for a team</h1>
+
+<p>The more I've experienced this, the more I'm convinced it's genius.</p>
+
+<p>At home, for sure, look for (and build) an environment where you are unconditionally accepted and celebrated, But at work, look for a group formed around a shared (probably competitive) purpose.</p>
+
+<p>A team is somewhere folks expect the best from me and they expect me to own my part in achieving that. They also help me to get there. But I have to own it for me.</p>
+
+<p>Being surrounded by people who reinforce your good behaviours and model good behaviours you can learn from is 💯. Enough so, that I can't imagine being willing to accept an environment without that now I've had it.</p>
+
+<p>An old colleague would share a video of Barcelona football team. Multiple times someone would score and the player would celebrate. Soon another player would come over, tap them on the shoulder, and they'd go back to the game. They knew that the behaviours that correlated with success were important and they had little rituals to reinforce them. In this case, "don't celebrate too long, we're still playing, we need more goals, and we don't get them by celebrating".</p>
+
+<p>At PostHog <a href="https://posthog.com/handbook/values">the company values</a> are used the same way. Like the Barcelona shoulder tap, they're not just aspirational words on a page. They're the behaviours we see correlate with success and reinforce by living them, and by holding each other accountable to them.</p>
+
+<h1 id="talk-to-users-all-the-time">Talk to users <em>all the time</em></h1>
+
+<p>I have never once regretted talking to our users. Either on tooterweb, in support tickets, in a user interview, or asking for email / screenshare feedback. It is hands-down the best thing. It has consistently levelled up what I've been able to do at PostHog.</p>
+
+<p>I used to get frustrated with teams using user stories that would write "as a user" and would push them to have a particular group of users in mind. <strong>I don't like the trad user story format</strong>. <em>But if you are</em> using it try and think of the group of users: "as a busy shopper" or "as an owner of a small business". But a million times better IMHO is "Sam wants…" or "Jane couldn't…". Not an imaginary Sam or Jane. People you have talked to, that you can empathize with, and follow-up with.</p>
+
+<p>The important counterpoint is that just building everything users ask you for is not the goal. Understanding their needs and problems and how it shapes and relates to your instinct for the product is the goal.</p>
+
+<p>The classic example of this is that when users say something is cluttered they are only rarely asking to see less information, instead they are really asking to see different information.</p>
+
+<h1 id="you-can-yolo-and-strangle-your-figs-at-the-same-time">You can YOLO and strangle your figs at the same time</h1>
+
+<p>Two of the things I've loved about working at PostHog…</p>
+
+<p>One) it is totally fine to push something to prod, discover its a mistake, and fix forward or rollback. So long as it is done with purpose - it's not fine to be careless but it is fine and desirable to be bold.</p>
+
+<p>Two) it is <em>also</em> totally fine to <a href="https://martinfowler.com/bliki/StranglerFigApplication.html">change something slowly over multiple releases</a>. Increasing the mix of traffic to a new feature until you are confident it is ready for everyone.</p>
+
+<p>Often people talk about a company culture as if you have to choose between these things, but you don't. You can drive your car in different gears on different slopes. Choosing the approach that is right for the situation.</p>
+
+<h1 id="trust-is-a-superpower">Trust is a superpower</h1>
+
+<p>My first pull request at PostHog was before I started. A change to the docs to increase the budget for an engineering laptop purchase because the cost had gone up. Then buying the laptop. All before I'd met anybody or had my first day.</p>
+
+<p>The default was to expect me to do the right thing and assume that I would.</p>
+
+<p>Similarly, when I wasn't sure what to work on after I'd started. I booked user interviews with customers. Talked to them, and then decided what to work on. No approval process, no fuss, no need to queue on anybody else, nothing in my way.</p>
+
+<p>Or in my second week when the kids were ill and I said I wouldn't be able to work that day but would "catch up on Saturday". Marius, the tech lead said: "that sounds stupid, take the day off". No worries that I would hack the system and take too much time off.</p>
+
+<p>And, honestly, most every day since then. It is incredibly motivating and rewarding to be trusted to do the right thing.</p>
+
+<p>(yes, "do the right thing" is loose and open to interpretation, but that's the great thing about trust, i can interpret what the right thing is)</p>
+
+<p>The thing that works so well alongside this is a culture of feedback. I've been told when I've done well, and when I've not. And then trusted to take that information and do the right thing with it.</p>
+
+<h1 id="things-ive-learned-that-didnt-make-the-cut-of-the-four-in-four-cliche-format">Things I've learned that didn't make the cut of the four in four cliche format</h1>
+
+<ul>
+  <li>typescript enums are useless, just use string union types</li>
+  <li>writing tests is the best, writing the fewest tests for the most benefit is besterer</li>
+  <li>react was a mistake, but there's no good alternative yet</li>
+  <li>a one word copy change can have a 100x impact on clickthrough rate</li>
+  <li>giolitti is the best gelato in rome</li>
+</ul>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2026/01/how-i-use-llms-3.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - three
+      </h3>
+      <small>
+        30 Jan 2026
+      </small>
+  </div>
+</a>  <a href="/2025/12/avoiding-madness.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Things that a different me would have been tipped into psychosis by
+      </h3>
+      <small>
+        03 Dec 2025
+      </small>
+  </div>
+</a>  <a href="/2025/10/how-i-use-llms-2.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs - two?
+      </h3>
+      <small>
+        24 Oct 2025
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2025/09/four-things-in-four-years.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2025/09/four-things-in-four-years.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

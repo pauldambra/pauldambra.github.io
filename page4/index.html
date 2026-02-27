@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Mindless Rambling Nonsense - page 4</title>
+    <link rel="canonical" href="https://pauldambra.dev/page4/" />
+    <meta property="og:url" content="https://pauldambra.dev/page4/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mindless Rambling Nonsense - page 4" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Blog",
+    "keywords": "software engineering agile refactoring c# ruby javascript",
+    "url": "https://pauldambra.github.io",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://pauldambra.github.io"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+    }
+  }
+</script>
+
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id1"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/06/serverless-5.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Part Five - Read Models</h1>
+    </a>
+    <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p><a href="/2018/02/serverless-4.html">Part Four</a> - Making streams of events</p>
+
+<p>OK, four months since part four. I got a puppy and have written the code for this part of the series in 2 minute blocks after sleepless nights. Not a productive way to do things!</p>
+
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/images/puppy.webm" type="video/webm" />
+  <source src="/images/puppy.mp4" type="video/mp4" />
+</video>
+
+<h1 id="getting-ready-to-make-some-html">Getting ready to make some HTML</h1>
+
+<p>Now that the API lets clients propose destinations to the visit plannr the home page for the service can be built. It's going to show the most recently updated destinations.</p>
+
+<p>In a CRUD SQL system the application would have been maintaining the most up-to-date state of each destination in SQL and you'd read them when the HTML is requested. But this application isn't storing the state of the destinations but the facts that it has been told about the destinations.</p>
+
+<blockquote>
+  <p>As an aside a lot of people don't realise that CRUD SQL stands for <strong><em>C</em></strong> an we <strong><em>R</em></strong> eally not <strong><em>U</em></strong> se SQL <strong><em>D</em></strong> atabases they may <strong><em>S</em></strong> eem familiar but all the ORM stuff is well over our <strong><em>Q</em></strong> uota for comp <strong><em>L</em></strong> icated dependencies.</p>
+</blockquote>
+
+<p>In an event driven system applications subscribe to be notified when new events occur. They can create read models as the events arrive. Those read models are what the application uses to, erm, read data. So they're used in places many applications make SQL queries. Now this visit plannr application needs a read model for recently updated destinations.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 10 Jun 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#read-model">
+    read model
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id2"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/03/harmful-dry.html">
+      <h1 class="overflow-hidden text-ellipsis">DRY - considered harmful</h1>
+    </a>
+    <h1 id="dry-or-wet">DRY or WET?</h1>
+
+<p>DRY, in software development, stands for Don't Repeat Yourself. This is often taken to mean remove any duplication of lines of code. See the anti-example <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">in the wiki page</a> comparing to WET code - which stands for Write Everything Twice. This reinforces the idea that this is about the amount you type.</p>
+
+<p>Below we're going to look at what the impact of removing duplication of lines of code does to some software, hopefully demonstrate that it isn't desirable as an absolute rule, and show what the better way might be.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 30 Mar 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#programming"
+        >in: programming</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dry">
+    dry
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#solid">
+    solid
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#refactoring">
+    refactoring
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#kotlin">
+    kotlin
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id3"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/02/serverless-4.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Part Four</h1>
+    </a>
+    <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p><a href="/2018/02/serverless-3.html">Part Three</a> - SAM Local and the first event producer</p>
+
+<p>In this post we start to see how we can build a stream of events that lets us create state. We'll do this by adding an event subscrber that waits until a user proposes a destination to visit and validates the location they've provided.</p>
+
+<p><img src="/images/second-slice-4.jpg" alt="the slice being built in this article" loading="lazy" /></p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 15 Mar 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id4"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/02/serverless-3.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Part Three</h1>
+    </a>
+    <p><a href="/2018/02/serverless-1.html">Part One</a> - describing event-driven and serverless systems</p>
+
+<p><a href="/2018/02/serverless-2.html">Part Two</a> - Infrastructure as code walking skeleton</p>
+
+<p>In this post we will look at how SAM local let's you develop locally and write the first lambda function. To take a <code class="language-plaintext highlighter-rouge">ProposeDestination</code> command and write a <code class="language-plaintext highlighter-rouge">DestinationProposed</code> event to the eventstream.</p>
+
+<p>"<a href="https://github.com/awslabs/aws-sam-local/blob/28eacbdd299917b2cceeb9444fe22bd57d33d97d/README.md">SAM Local</a> can be used to test functions locally, start a local API Gateway from a SAM template, validate a SAM template, and generate sample payloads for various event sources."</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 05 Feb 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id5"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/02/serverless-2.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Part Two</h1>
+    </a>
+    <p>After describing event-driven and serverless systems in <a href="/2018/02/serverless-1.html">part one</a> it is time to write some code. Well, almost. The first task is a <a href="http://alistair.cockburn.us/Walking+skeleton">walking skeleton</a>: some code that runs on production infrastructure to prove we could have a CI pipeline.</p>
+
+<p>I think I'll roll my AWS credentials pretty frequently now - since I can't imagine I'll get through this series without leaking my keys somehow</p>
+
+<p><code class="language-plaintext highlighter-rouge">¯\_(ツ)_/¯</code></p>
+
+<p>Putting authentication and authorisation to one side, because the chunk is too big otherwise, this task is to write a command channel to allow editors to propose destinations on the <code class="language-plaintext highlighter-rouge">visitplannr</code> system.</p>
+
+<p>This requires the set up of API Gateway, AWS Lambda, and DynamoDB infrastructure and showing some code running. But doesn't require DynamoDB table streams or more than one lambda.</p>
+
+<p>That feels like a meaningful slice.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 04 Feb 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id6"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/02/serverless-1.html">
+      <h1 class="overflow-hidden text-ellipsis">Serverless - Part One</h1>
+    </a>
+    <p>Anyone who knows me knows that I like to talk about Event-driven systems. And that I'm very excited about serverless systems in utility computing.</p>
+
+<p>I started my career in I.T. having to order network cables, care about fuses, and plan storage and compute capacity. It was slow, frustrating, and if you got it wrong it could take (best case scenario!) days to correct.</p>
+
+<p>Over a few articles I hope to communicate what serverless is, why you should find it exciting, and how to start using it.</p>
+
+<p>Let's start by defining our terms…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 03 Feb 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#serverless"
+        >in: serverless</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#events">
+    events
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#eventdriven">
+    eventdriven
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id7"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2018/01/direction.html">
+      <h1 class="overflow-hidden text-ellipsis">Is where we're going where we're going</h1>
+    </a>
+    <h1 id="velocity-is">Velocity is…</h1>
+
+<p>A way of measuring the progress being made by a software team. Not all teams use velocity. I've been on quite a few that do. So at least some teams still use it as a measure.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 29 Jan 2018</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#agile"
+        >in: agile</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#physics">
+    physics
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#software">
+    software
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#agile">
+    agile
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cargo-cult">
+    cargo-cult
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#rant">
+    rant
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id8"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2017/10/constructiphor.html">
+      <h1 class="overflow-hidden text-ellipsis">Constructiphor</h1>
+    </a>
+    <h1 id="on-twitter-i">On Twitter I…</h1>
+
+<p><a href="https://twitter.com/pauldambra/status/916712725060947974">…made a toot-storm</a> about using construction as a metaphor for software engineering.</p>
+
+<blockquote>
+  <p>I've never really got on with construction metaphors for software. The cost of mistakes and rework is high in construction</p>
+</blockquote>
+
+<p><img src="/images/toot.jpeg" alt="the toot itself" loading="lazy" /></p>
+
+<p>This isn't saying that Software isn't putting things together but rather I've seen people justify not 'being agile' by using construction metaphors.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 15 Oct 2017</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#metaphors"
+        >in: metaphors</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#metaphors">
+    metaphors
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#software">
+    software
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id9"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2017/testing-meaning.html">
+      <h1 class="overflow-hidden text-ellipsis">Testing Meaning in HTML!</h1>
+    </a>
+    <aside class="mb-2 ml-4 border-l-2 border-l-sky-700 pl-1">
+  <h1 class="text-base">
+    This post is part of a series on improving this blog #recursion
+  </h1>
+  <div class="flex flex-row">
+    <div class="flex-grow">
+      <a href="/2017/generating-static-amp.html">Previous Post</a>
+    </div>
+  </div>
+</aside>
+
+<p>One of the benefits of generating a site as a static artefact (here using <a href="https://jekyllrb.com/">Jekyll</a> but there are a gazillion tools) is that the finished product is a known quantity. Anything that's a known quantity can be tested!</p>
+
+<p>A previous post in this series looked at testing the generated HTML for technical correctness… Things like if the HTML is well-formed or that links go to real destinations.</p>
+
+<p>This post describes testing the <em>meaning</em> of the text in the generated HTML. Checking spelling, and keeping myself honest in my attempt to use more inclusive language.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 17 Aug 2017</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#continuous-delivery"
+        >in: continuous delivery</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#blog">
+    blog
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#recursion">
+    recursion
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#testing">
+    testing
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#jekyll">
+    jekyll
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#travisci">
+    travisci
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id10"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2017/07/retrosperiment.html">
+      <h1 class="overflow-hidden text-ellipsis">Retrosperiment</h1>
+    </a>
+    <p>(originally posted on the code computerlove blog. At the now unreachable link: https://lean.codecomputerlove.com/a-retrosperiment/)</p>
+
+<h1 id="experimenting-with-a-new-retro-format">Experimenting with a "new" retro format</h1>
+
+<p>For our team's most recent retro we decided to try a new format to see how it affected our discussion. We thought we'd share it here in case it has value for other teams.</p>
+
+<h2 id="what-is-it">What is it?</h2>
+
+<p>A retrospective is a practice from <a href="http://wiki.c2.com/?IterationRetrospective">XP described on the c2.wiki</a> as</p>
+
+<blockquote>
+  <p>A practice which has an XP team asking itself, at the end of each iteration : What went well ?
+What could be improved ?
+What could we experiment with ?</p>
+</blockquote>
+
+<p>We've recently had several discussions trying to focus on the real and perceived progress of our work and thought it would be beneficial to run the retro with a focus on the impact of our team's principles and practices. Specifically how they relate to delivery of value and speed of delivery.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 06 Jul 2017</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#agile"
+        >in: agile</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#agile">
+    agile
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#xp">
+    xp
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#retrospective">
+    retrospective
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+ 
+<div class="flex justify-center gap-x-2">
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page3/"
+      >&laquo; Prev</a
+    >
+    
+  </span>
+
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/index.html"
+      >1</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2"
+      >2</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page3"
+      >3</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <strong>4</strong>
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page5"
+      >5</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page6"
+      >6</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page7"
+      >7</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page8"
+      >8</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page9"
+      >9</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page10"
+      >10</a
+    >
+    
+  </span>
+  
+
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page5/"
+      >Next &raquo;</a
+    >
+    
+  </span>
+</div>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

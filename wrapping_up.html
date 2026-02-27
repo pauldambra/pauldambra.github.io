@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform - Wrapping Up</title>
+    <link rel="canonical" href="https://pauldambra.dev/wrapping_up.html" />
+    <meta property="og:url" content="https://pauldambra.dev/wrapping_up.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform - Wrapping Up" />
+    <meta
+      property="og:description"
+      content="wrapping up the blog series"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="wrapping up the blog series"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform - Wrapping Up",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"469",
+     "url":"https://pauldambra.dev/wrapping_up.html",
+     "datePublished":"2014-08-03",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/wrapping_up.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nThe  code  can  be  found  on  GitHub\n\nPrevious  Post\n\nI've  been  banging  this  drum  into  the  internet's  echo  chamber  for  five  months  now  and  enough  is  enough!\n\n\n\nMy  initial  to-do  list  was  to  build  a  site  that:\n\n\n    Displays  Web  pages\n        \n            part  1\n            part  2\n        \n    \n    Stores  data\n        \n            part  1\n            part  2\n        \n    \n    Edits  web  pages  /  Has  an  Admin  section\n        \n            on  page  editing\n            UX  part  1\n            UX  part  2\n        \n    \n    Has  templating\n        \n            Handlebars\n        \n    \n    Allows  more  than  one  author\n        \n            Logging  in\n        \n    \n    Has  Server  side  caching\n        \n            does  anything  not  have  server  side  caching  these  days?!  ExpressJS  does…\n        \n    \n    Can  be  used  by  someone  non-technical\n        \n            totally  subjective…  I  think  this  could  be  used  by  just-about-anyone  but  it  would  need  polish  and  user-testing  to  really  determine  that.\n        \n    \n\n\nAims\n\nNo  heavy  frameworks  need  apply\n\nMy  initial  aim  was  to  prove  to  myself  that  there's  a  lot  of  friction  using  a  big  framework  like  Django  when  building  a  CMS  site  and  that  can  be  avoided.  I  still  feel  that's  true  and  I  haven't  discovered  anything  in  this  process  that  changes  my  mind  (yeah,  confirmation  bias).\n\n\n    Implementing  login  was  a  pain  -  but  it  always  is…\n    I  switched  backwards  and  forwards  between  view  engines  as  I  came  to  terms  with  express\n\n\nThis  series  of  posts  has  12  instalments.  Each  of  which  represents  around  4  hours  of  work  including  typing  up  the  posts  so  turning  out  a  fairly  straight-forward  business  website  in  10  actual  days  would  be  gigantically  achievable.\n\nThat  doesn't  mean  you  can't  make  websites  with  a  big  framework  or  even  that  you  shouldn't…  it  does  mean  I  won't  and  I  hope  it  helps  demonstrate  why…\n\nNodeJS  is  super  fun,  development,  for  the  purposes  of\n\nI've  learnt  an  amazing  amount.  I'd  meant  to  explore  Selenium,  Browserstack,  Promises,  and  contenteditable  for  ages  -  this  series  was  the  push  to  do  that.\n\nAnd,  yes,  Node  is  great  to  work  with.  My  Node  style  isn't  there  yet  but  this  has  helped  bring  me  closer  to  writing  Node  code  I'm  happy  with.\n\n\nKilling  the  series\n\nBut  I'm  a  bit  bored  with  this  now  and  I've  got  more  children  than  when  I  started  the  series.  It  feels  like  a  drag  and  an  obligation  to  carry  on  which  definitely  isn't  why  I'm  blogging  (that's  because  I  don't  have  any  real  hobbies  any  more).\n\nSo  I'm  stopping  here…\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Aug 03 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform - Wrapping Up</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/wrapping_up.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Wrapping+Up&via=pauldambra&url=https://pauldambra.dev/wrapping_up.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/better-affordance-js.html">Previous Post</a>
+<!--alex ignore banging --->
+I've been banging this drum into the internet's echo chamber for five months now and enough is enough!</p>
+
+<!--more-->
+
+<p>My initial to-do list was to build a site that:</p>
+
+<ul>
+  <li>Displays Web pages
+    <ul>
+      <li><a href="/2014/03/websites-cms-displaying-pages.html">part 1</a></li>
+      <li><a href="/2014/03/website-cms-display-pages-part-2.html">part 2</a></li>
+    </ul>
+  </li>
+  <li>Stores data
+    <ul>
+      <li><a href="/Websites-CMS-Platform-Storing-Data.html">part 1</a></li>
+      <li><a href="/Websites-CMS-Platform-Storing-Data2.html">part 2</a></li>
+    </ul>
+  </li>
+  <li>Edits web pages / Has an Admin section
+    <ul>
+      <li><a href="/On-Page-Editing.html">on page editing</a></li>
+      <li><a href="/better-affordance.html">UX part 1</a></li>
+      <li><a href="/better-affordance-js.html">UX part 2</a></li>
+    </ul>
+  </li>
+  <li>Has templating
+    <ul>
+      <li><a href="/2014/03/website-cms-display-pages-part-2.html">Handlebars</a></li>
+    </ul>
+  </li>
+  <li>Allows more than one author
+    <ul>
+      <li><a href="/websites-CMS-platform-logging-in.html">Logging in</a></li>
+    </ul>
+  </li>
+  <li>Has Server side caching
+    <ul>
+      <li>does anything not have server side caching these days?! ExpressJS does…</li>
+    </ul>
+  </li>
+  <li>Can be used by someone non-technical
+    <ul>
+      <li>totally subjective… I think this could be used by just-about-anyone but it would need polish and user-testing to really determine that.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="aims">Aims</h1>
+
+<h3 id="no-heavy-frameworks-need-apply">No heavy frameworks need apply</h3>
+
+<p>My initial aim was to prove to myself that there's a lot of friction using a big framework like Django when building a CMS site and that can be avoided. I still feel that's true and I haven't discovered anything in this process that changes my mind (yeah, confirmation bias).</p>
+
+<ul>
+  <li>Implementing login was a pain - but it <em>always</em> is…</li>
+  <li>I switched backwards and forwards between view engines as I came to terms with express</li>
+</ul>
+
+<p>This series of posts has 12 instalments. Each of which represents around 4 hours of work <em>including typing up the posts</em> so turning out a fairly straight-forward business website in 10 actual days would be gigantically achievable.</p>
+
+<p>That doesn't mean you can't make websites with a big framework or even that you shouldn't… it does mean I won't and I hope it helps demonstrate why…</p>
+
+<h3 id="nodejs-is-super-fun-development-for-the-purposes-of">NodeJS is super fun, development, for the purposes of</h3>
+
+<p>I've learnt an amazing amount. I'd meant to explore Selenium, Browserstack, Promises, and contenteditable for ages - this series was the push to do that.</p>
+
+<p>And, yes, Node is great to work with. My Node style isn't there yet but this has helped bring me closer to writing Node code I'm happy with.</p>
+
+<!--alex ignore killing --->
+<h1 id="killing-the-series">Killing the series</h1>
+
+<p>But I'm a bit bored with this now and I've got more children than when I started the series. It feels like a drag and an obligation to carry on which definitely isn't why I'm blogging (that's because I don't have any real hobbies any more).</p>
+
+<p>So I'm stopping here…</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/On-Page-Editing.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - On Page Editing
+      </h3>
+      <small>
+        11 Jun 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/wrapping_up.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/wrapping_up.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

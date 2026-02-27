@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform - Promises</title>
+    <link rel="canonical" href="https://pauldambra.dev/Websites-CMS-Platform-promises.html" />
+    <meta property="og:url" content="https://pauldambra.dev/Websites-CMS-Platform-promises.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform - Promises" />
+    <meta
+      property="og:description"
+      content="using the bluebird promises library to improve node js code"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="using the bluebird promises library to improve node js code"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform - Promises",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1132",
+     "url":"https://pauldambra.dev/Websites-CMS-Platform-promises.html",
+     "datePublished":"2014-05-18",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/Websites-CMS-Platform-promises.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nThe  code  can  be  found  on  GitHub\n\nPrevious  Post\n\n\n    A  promise  represents  the  eventual  result  of  an  asynchronous  operation.\n\n\nThe  basic  idea  is  that  you  can  swap  in  a  promise  where  you  would  normally  pass  in  a  callback.\n\nThe  primary  interaction  is  that  you  call  a  method  which  returns  a  promise  which  will  eventually  return  a  result  (it  can  immediately  return  the  result  if  it's  available)  and  you  chain  a  call  to  .then()  onto  that  method  call.\n\nThe  call  to  then  is  equivalent  to  passing  in  the  callback  function.\n\nClear  as  mud?\n\n\n\nThere's  (much)  more  at  the  Promises  specification  website.\n\nBluebird\nThis  is  JavaScript  so  there  are  a  bazillion  npm  packages  that  could  be  used  to  switch  the  project's  code  to  using  promises.  A  (relatively  small)  bit  of  googling  research  suggested  that  the  Bluebird  library  was  a  good  bet.\n\nIn  their  words:\n\n\n    Bluebird  is  a  fully  featured  promise  library  with  focus  on  innovative  features  and  performance\n\n\nBefore\nHere's  the  code  from  the  previous  Post  which  shows  the  smelly,  arrow  anti-pattern\n\nvar  bcrypt  =  require('bcrypt');\nvar  SALT_WORK_FACTOR  =  10;\n\nmodule.exports  =  function(db)  {\n    return  {\n        create:  function(username,  password,  callback)  {\n                bcrypt.genSalt(SALT_WORK_FACTOR,  function(err,  salt)  {\n                        if  (err)  {\n                                callback(err);\n                                return;\n                        }\n                        bcrypt.hash(password,  salt,  function(err,  hash)  {\n                                if  (err)  {\n                                        callback(err);\n                                        return;\n                                }\n                                db.users.save({\n                                        username:username,\n                                        password:hash\n                                },  function(err,  result)  {\n                                        if(err)  {\n                                                callback(err.err);\n                                        }  else  {\n                                                callback('user  created');\n                                        }\n                                });\n                        });\n                });\n        }\n    };\n};\n\n\nThis  took  a  bit  of  faff  to  translate  to  promises  almost  entirely  as  a  result  of  this  being  the  first  ever  promises  code  I've  written  and  I  didn't  RTFM.\n\nI  did  have  this  code  covered  by  tests  so  I  could  leave  mocha  running  in  the  background  and  poke  the  code  with  a  stick  (Yay  TDD!)\n\nAfter\nThe  first  pass  at  implementing  promises  generated:\n\nvar  SALT_WORK_FACTOR  =  10;\n\nvar  bcrypt  =  require('bcrypt');\nvar  Promise  =  require('bluebird');\n\nvar  genSalt  =  Promise.promisify(bcrypt.genSalt);\nvar  genHash  =  Promise.promisify(bcrypt.hash);\n\nmodule.exports  =  function(db)  {\n        var  users  =  Promise.promisifyAll(db.users);\n\n    return  {\n        create:  function(username,  password,  callback)  {\n                genSalt(SALT_WORK_FACTOR).then(function(salt)  {\n\t                return  genHash(password,  salt);\n\t        }).then(function(hash)  {\n                        return  users.saveAsync({\n                                        username:username,\n                                        password:hash\n                        });\n                }).then(function()  {\n                        callback('user  created');\n                }).error(function  (e)  {\n                        callback(e.message);\n                });\n        }\n    };\n};\n\n\nAll  tests  still  pass  at  this  point  and  there's  fewer  levels  of  arrow  to  wade  through  but  it  still  feels  a  bit  pointy  and  not  massively  clear  so…\n\nvar  SALT_WORK_FACTOR  =  10;\n\nvar  bcrypt  =  require('bcrypt');\nvar  Promise  =  require('bluebird');\n\nvar  genSalt  =  Promise.promisify(bcrypt.genSalt);\nvar  genHash  =  Promise.promisify(bcrypt.hash);\n\nmodule.exports  =  function(db)  {\n        var  users  =  Promise.promisifyAll(db.users);\n\n    return  {\n        create:  function(username,  password,  callback)  {\n                var  hashPassword  =  function()  {\n                        return  genSalt(SALT_WORK_FACTOR).then(function(salt)  {\n                                return  genHash(password,  salt);\n                        });\n                };\n\n                var  persistUser  =  function(hashedPassword)  {\n                        return  users.saveAsync({\n                                        username:username,\n                                        password:hashedPassword\n                        });\n                };\n\n                hashPassword()\n                .then(persistUser)\n                .then(function()  {\n                        callback('user  created');\n                }).error(function  (e)  {\n                        callback(e.message);\n                });\n        }\n    };\n};\n\n\nskipping  over  the  setup  code  you  can  get  to  the  meat  of  the  module\n\nhashPassword()\n.then(persistUser)\n.then(function()  {\n        callback('user  created');\n}).error(function  (e)  {\n        callback(e.message);\n});\n\n\nWhich  is  a  huge  amount  clearer  than  the  starting  point!  I  do  like  a  method  to  be  a  sentence!  'Hash  password  then  persist  user'!\n\nA  very  high  count  of  exclamation  marks  in  this  post  but  that  was  much  easier  and  more  fun  than  I  anticipated  -  winner!\n\nAt  this  point  I  either  need  to  pass  through  the  code  to  implement  promises  more  widely…  or  I  could  choose  to  leave  everything  as  it  is  and  improve  each  code  file  as  it's  touched.\n\nAs  it  is  it's  nearly  midnight  and  my  alarm  goes  off  at  5:50am  so…\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun May 18 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform - Promises</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/Websites-CMS-Platform-promises.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Promises&via=pauldambra&url=https://pauldambra.dev/Websites-CMS-Platform-promises.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#promises">
+    promises
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#refactoring">
+    refactoring
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/websites-CMS-platform-logging-in.html">Previous Post</a></p>
+
+<blockquote>
+  <p>A promise represents the eventual result of an asynchronous operation.</p>
+</blockquote>
+
+<p>The basic idea is that you can swap in a promise where you would normally pass in a callback.</p>
+
+<p>The primary interaction is that you call a method which returns a promise which will eventually return a result (it <em>can</em> immediately return the result if it's available) and you chain a call to <code class="language-plaintext highlighter-rouge">.then()</code> onto that method call.</p>
+
+<p>The call to then is equivalent to passing in the callback function.</p>
+
+<p>Clear as mud?</p>
+
+<!--more-->
+
+<p>There's (much) more at the <a href="http://promisesaplus.com/">Promises specification website</a>.</p>
+
+<h1 id="bluebird">Bluebird</h1>
+<p>This is JavaScript so there are a bazillion npm packages that could be used to switch the project's code to using promises. A (relatively small) bit of <del>googling</del> research suggested that the <a href="https://www.npmjs.org/package/bluebird">Bluebird</a> library was a good bet.</p>
+
+<p>In their words:</p>
+
+<blockquote>
+  <p>Bluebird is a fully featured promise library with focus on innovative features and performance</p>
+</blockquote>
+
+<h1 id="before">Before</h1>
+<p>Here's the code from the <a href="/websites-CMS-platform-logging-in.html">previous Post</a> which shows the smelly, <a href="http://c2.com/cgi/wiki?ArrowAntiPattern">arrow anti-pattern</a></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bcrypt</span><span class="p">.</span><span class="nf">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nf">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">bcrypt</span><span class="p">.</span><span class="nf">hash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nf">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="k">return</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hash</span>
+                <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nf">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nf">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This took a bit of faff to translate to promises almost entirely as a result of this being the first ever promises code I've written and I didn't RTFM.</p>
+
+<p>I did have this code covered by tests so I could leave mocha running in the background and poke the code with a stick (Yay TDD!)</p>
+
+<h1 id="after">After</h1>
+<p>The first pass at implementing promises generated:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nb">Promise</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bluebird</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">genSalt</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">genSalt</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">genHash</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+	        <span class="k">return</span> <span class="nf">genHash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">);</span>
+	    <span class="p">}).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nf">saveAsync</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hash</span>
+            <span class="p">});</span>
+        <span class="p">}).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nf">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}).</span><span class="nf">error</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">callback</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>All tests still pass at this point and there's fewer levels of arrow to wade through but it still feels a bit pointy and not massively clear so…</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nb">Promise</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bluebird</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">genSalt</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">genSalt</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">genHash</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisify</span><span class="p">(</span><span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">promisifyAll</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">hashPassword</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nf">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nf">genHash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">};</span>
+
+        <span class="kd">var</span> <span class="nx">persistUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">hashedPassword</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nf">saveAsync</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hashedPassword</span>
+            <span class="p">});</span>
+        <span class="p">};</span>
+
+        <span class="nf">hashPassword</span><span class="p">()</span>
+        <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">persistUser</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nf">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}).</span><span class="nf">error</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">callback</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>skipping over the setup code you can get to the meat of the module</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">hashPassword</span><span class="p">()</span>
+<span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">persistUser</span><span class="p">)</span>
+<span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}).</span><span class="nf">error</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">callback</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Which is a huge amount clearer than the starting point! I do like a method to be a sentence! 'Hash password then persist user'!</p>
+
+<p>A very high count of exclamation marks in this post but that was much easier and more fun than I anticipated - winner!</p>
+
+<p>At this point I either need to pass through the code to implement promises more widely… or I could choose to leave everything as it is and improve each code file as it's touched.</p>
+
+<p>As it is it's nearly midnight and my alarm goes off at 5:50am so…</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/Websites-CMS-Platform-promises.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/Websites-CMS-Platform-promises.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

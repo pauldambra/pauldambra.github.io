@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Website != CMS Platform - Displaying pages - part 2</title>
+    <link rel="canonical" href="https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Website != CMS Platform - Displaying pages - part 2" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Website != CMS Platform - Displaying pages - part 2",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1064",
+     "url":"https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html",
+     "datePublished":"2014-03-23",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  without  a  CMS  is  comparable  to  building  one  with  a  known  CMS.  See  the  first  post  for  an  explanation  of  why\n\nPrevious  Post\n\n\n\nIn  his  awesome  book,  \"Don't  Make  Me  Think\"  (shameless  affiliate  link),  Steve  Krug  drives  home  the  message  that  time  spent  figuring  out  how  your  site  is  supposed  to  work  is  not  time  spent  deciding  to  engage  with  your  site.  So,  we're  not  going  to  do  any  ground-breaking  design  work  for  this  company  web  page.\n\n\n\nWhen  people  visit  the  site  they  should  understand  straight  away  how  they're  supposed  to  use  it.  An  image  search  for  'company  website'  shows  the  same  design  over  and  over  again  -  and,  I  expect,  you'll  be  instantly  familiar  with  it.\n\nA  logo,  a  navigation  bar,  a  large  carousel  or  image  area,  some  content  in  columns  below,  and  a  footer.\n\n){:  loading=\"lazy\"}{:loading=\"lazy\"}\n\nThere  are  relatively  few  company  websites  that  step  away  from  this  basic  design.  And  this  site  for  (the  hopefully  fake)  'Omniclopse'  isn't  going  to  stray  from  this  format.\n\nLayout\n\nThe  site  is  going  to  use  Twitter  Bootstrap  for  layout  and  custom  styling  will  be  written  with  SASS  instead  of  directly  as  CSS.\n\nTwitter  Bootstrap  because  I'm  familiar  with  it,  I  can  expect  others  to  be  familiar  with  it,  and  while  there  is  a  risk  that  the  site  ends  up  looking  like  every  other  site  built  with  Bootstrap  the  intention  is  specifically  not  to  worry  about  breaking  design  records  -  the  site  should  aim  to  use  a  visual  language  that  the  visitor  already  speaks.\n\nSASS  because  it  is  so  much  nicer  writing  SASS  than  CSS.\n\nI  like  my  HTML  templates  to  actually  be  HTML  so  when  Express  is  setup  the  default  Jade  view  engine  will  be  removed  and  a  Handlebars  view  engine  will  be  used  instead.\n\nI  haven't  used  a  Handlebars  view  engine  with  Express  before  so  I'll  need  to  do  a  touch  of  Google-Fu  to  find  one.\n\nSo!\n\nTo  grab  bootstrap  and  jQuery  (which  bootstrap  depends  on)  I'll  use  Bower.  If  you're  playing  along  you  can  download  them  directly  (but  that's  no  fun,  right).\n\nAt  the  terminal:  bower  install  bootstrap  -Sa\n\nWhich  downloads  bootstrap  into  the  project  and  adds  the  dependency  to  the  Bower  file.\n\n\n\nBower,  by  default,  adds  everything  into  a  bower_components  directory  so  we  tell  Express  about  that  in  the  Express  app  config:\n\napp.use(express.static('/libs',__dirname  +  '/bower_components'));\n\nView  Engine\n\nAt  the  terminal:  npm  install  express3-handlebars  --save\n\ninstalls  the  Express3  Handlebars  view  engine.\n\nAdd  the  view  engine's  config  to  the  server.js  file:\n\nvar  express  =  require(\"express\");\nvar  app  =  express();\nvar  exp3hbs  =  require(\"express3-handlebars\");\n\napp.use(\"/libs\",  express.static(__dirname  +  \"/bower_components\"));\napp.engine(\"handlebars\",  exp3hbs({  defaultLayout:  \"main\"  }));\napp.set(\"view  engine\",  \"handlebars\");\n\napp.get(\"/\",  function  (req,  res)  {\n    res.render(\"home\");\n});\n\napp.listen(1337);\n\nexports.app  =  app;\n\n\nThis  requires  two  layout  files  be  added  to  the  site:\n\n\n\nHere  main.handlebars  is  the  default  base  layout  and  home.handlebars  is  rendered  by  the  method  that  responds  to  the  root  route.\n\nAt  this  point  what  the  site  does  hasn't  changed  how  it  does  what  it  does  so  the  single  test  (useless  as  it  is)  still  passes.\n\nBuilding  out  the  Base  Template\n\nStarting  to  build  out  the  page  requires  setup  to  use  SASS.\n\nGulp\n\nThere  is  an  express  plugin  that  will  transpile  SASS  files  when  CSS  requests  are  served  but,  as  I  want  to  use  Gulp  for  some  linting  and  minification  tasks  later  on,  this  is  the  time  to  plug  Gulp  into  the  project  and  set  up  a  watch  task  to  transpile  SASS  to  CSS.\n\nSo  at  the  terminal:\n\nnpm  install  --save-dev  gulp\n\nnpm  install  --save-dev  gulp-sass\n\n\nThen  a  little  fangling  to  generate  the  gulp  file.\n\nvar  gulp  =  require(\"gulp\");\nvar  sass  =  require(\"gulp-sass\");\n\ngulp.task(\"sass\",  function  ()  {\n    gulp.src(\"./scss/*.scss\").pipe(sass()).pipe(gulp.dest(\"./public/css\"));\n});\n\ngulp.task(\"watch\",  function  ()  {\n    gulp.watch(\"./scss/*.scss\",  [\"sass\"]);\n});\n\ngulp.task(\"default\",  [\"sass\",  \"watch\"]);\n\n\nTyping  gulp  into  the  terminal  now  leaves  a  task  running  which  watches  for  changes  to  .scss  files  and  transpiles  them  to  .css  files\n\nThe  Omniclopse  Brand\n\nFor  the  imaginary  company  we're  making  a  site  for  we  can  generate  a  colour  palette\n\n\n\nThe  Page\n\nand  after  a  bit  of  fangling  to  build  out  the  (admittedly  ugly)  page:\n\n\n\nThe  code  for  this  page  can  be  found  tagged  on  github  and  at  this  point  there's  nothing  groundbreaking  (nor  should  there  be).  You  can  visit  the  site  here  on  Heroku.\n\nThere  are  bits  of  the  page  HTML  that  I'm  not  happy  with  but  that  can  be  changed  as  the  site  work  progresses.\n\nThe  single  test  in  the  project  still  passes  but  that  doesn't  really  prove  anything.  So  the  next  post  is  going  to  be  a  short  aside  about  using  Selenium  and  Browserstack.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Mar 23 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Website != CMS Platform - Displaying pages - part 2</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Website+%21%3D+CMS+Platform+-+Displaying+pages+-+part+2&via=pauldambra&url=https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/03/websites-cms-displaying-pages.html">Previous Post</a></p>
+
+<!--alex ignore her-him --->
+
+<p>In his awesome book, "Don't Make Me Think" <a href="https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/B00HJUBRPG/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1473701528&amp;sr=1-1&amp;keywords=Don%27t+Make+Me+Think%3A+A+Common+Sense+Approach+to+Web+Usability+%28Voices+That+Matter%29">(shameless affiliate link)</a>, Steve Krug drives home the message that time spent figuring out how your site is supposed to work is not time spent deciding to engage with your site. So, we're not going to do any ground-breaking design work for this company web page.</p>
+
+<!--more-->
+
+<p>When people visit the site they should understand straight away how they're supposed to use it. An image search for <a href="https://www.google.co.uk/search?q=company+website&amp;safe=off&amp;espv=210&amp;es_sm=119&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=dNwmU8XBKu6y0AW144GgBQ&amp;ved=0CAkQ_AUoAQ&amp;biw=1246&amp;bih=658#pws=0&amp;q=company+website&amp;safe=off&amp;tbm=isch">'company website'</a> shows the same design over and over again - and, I expect, you'll be instantly familiar with it.</p>
+
+<p>A logo, a navigation bar, a large carousel or image area, some content in columns below, and a footer.</p>
+
+<p><img src="http://fc06.deviantart.net/fs70/f/2011/136/f/4/cargo_company_website_layout__by_rizmax-d3ghbws.jpg" alt="A random image from Google images search for 'company website' (not an endorsement" />){: loading="lazy"}{:loading="lazy"}</p>
+
+<p>There are relatively few company websites that step away from this basic design. And this site for (the hopefully fake) 'Omniclopse' isn't going to stray from this format.</p>
+
+<h1 id="layout">Layout</h1>
+
+<p>The site is going to use <a href="http://getbootstrap.com/">Twitter Bootstrap</a> for layout and custom styling will be written with SASS instead of directly as CSS.</p>
+
+<p>Twitter Bootstrap because I'm familiar with it, I can expect others to be familiar with it, and while there is a risk that the site ends up looking like every other site built with Bootstrap the intention is specifically not to worry about breaking design records - the site should aim to use a visual language that the visitor already speaks.</p>
+
+<p>SASS because it is <b><i>so</i></b> much nicer writing SASS than CSS.</p>
+
+<p>I like my HTML templates to actually be HTML so when Express is setup the default Jade view engine will be removed and a Handlebars view engine will be used instead.</p>
+
+<p>I haven't used a Handlebars view engine with Express before so I'll need to do a touch of Google-Fu to find one.</p>
+
+<h1 id="so">So!</h1>
+
+<p>To grab bootstrap and jQuery (which bootstrap depends on) I'll use <a href="http://bower.io/">Bower</a>. If you're playing along you can download them directly (but that's no fun, right).</p>
+
+<p>At the terminal: <code class="language-plaintext highlighter-rouge">bower install bootstrap -Sa</code></p>
+
+<p>Which downloads bootstrap into the project and adds the dependency to the Bower file.</p>
+
+<p><img src="http://2.bp.blogspot.com/-baCBB1wk9v4/UydeKDfveOI/AAAAAAAANTI/biw5I8wKUGE/s1600/Screenshot+2014-03-17+20.41.27.png" alt="bower screenshot" loading="lazy" /></p>
+
+<p>Bower, by default, adds everything into a bower_components directory so we tell Express about that in the Express app config:</p>
+
+<p><code class="language-plaintext highlighter-rouge">app.use(express.static('/libs',__dirname + '/bower_components'));</code></p>
+
+<h1 id="view-engine">View Engine</h1>
+
+<p>At the terminal: <code class="language-plaintext highlighter-rouge">npm install express3-handlebars --save</code></p>
+
+<p>installs the <a href="https://github.com/ericf/express3-handlebars">Express3 Handlebars view engine</a>.</p>
+
+<p>Add the view engine's config to the server.js file:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nf">express</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">exp3hbs</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express3-handlebars</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="dl">"</span><span class="s2">/libs</span><span class="dl">"</span><span class="p">,</span> <span class="nx">express</span><span class="p">.</span><span class="nf">static</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/bower_components</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nf">engine</span><span class="p">(</span><span class="dl">"</span><span class="s2">handlebars</span><span class="dl">"</span><span class="p">,</span> <span class="nf">exp3hbs</span><span class="p">({</span> <span class="na">defaultLayout</span><span class="p">:</span> <span class="dl">"</span><span class="s2">main</span><span class="dl">"</span> <span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">view engine</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">handlebars</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="dl">"</span><span class="s2">home</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nf">listen</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="nx">app</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This requires two layout files be added to the site:</p>
+
+<p><img src="http://3.bp.blogspot.com/-lLif2FbDonw/Uyd6VGPgoTI/AAAAAAAANTY/7oLoCCYcqKg/s1600/Screenshot+2014-03-17+22.41.59.png" alt="layouts file tree" loading="lazy" /></p>
+
+<p>Here main.handlebars is the default base layout and home.handlebars is rendered by the method that responds to the root route.</p>
+
+<p>At this point what the site does hasn't changed how it does what it does so the single test (useless as it is) still passes.</p>
+
+<h1 id="building-out-the-base-template">Building out the Base Template</h1>
+
+<p>Starting to build out the page requires setup to use SASS.</p>
+
+<h4 id="gulp">Gulp</h4>
+
+<p>There is an express plugin that will transpile SASS files when CSS requests are served but, as I want to use Gulp for some linting and minification tasks later on, this is the time to <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started">plug Gulp into the project </a>and set up a watch task to transpile SASS to CSS.</p>
+
+<p>So at the terminal:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> gulp
+
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> gulp-sass
+</code></pre></div></div>
+
+<p>Then a little fangling to generate the gulp file.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">gulp</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">sass</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">gulp-sass</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nf">task</span><span class="p">(</span><span class="dl">"</span><span class="s2">sass</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">gulp</span><span class="p">.</span><span class="nf">src</span><span class="p">(</span><span class="dl">"</span><span class="s2">./scss/*.scss</span><span class="dl">"</span><span class="p">).</span><span class="nf">pipe</span><span class="p">(</span><span class="nf">sass</span><span class="p">()).</span><span class="nf">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nf">dest</span><span class="p">(</span><span class="dl">"</span><span class="s2">./public/css</span><span class="dl">"</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nf">task</span><span class="p">(</span><span class="dl">"</span><span class="s2">watch</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">gulp</span><span class="p">.</span><span class="nf">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">./scss/*.scss</span><span class="dl">"</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">sass</span><span class="dl">"</span><span class="p">]);</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nf">task</span><span class="p">(</span><span class="dl">"</span><span class="s2">default</span><span class="dl">"</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">sass</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">watch</span><span class="dl">"</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>Typing gulp into the terminal now leaves a task running which watches for changes to .scss files and transpiles them to .css files</p>
+
+<h3 id="the-omniclopse-brand">The Omniclopse Brand</h3>
+
+<p>For the imaginary company we're making a site for we can <a href="http://colorschemedesigner.com/">generate a colour palette</a></p>
+
+<p><img src="http://1.bp.blogspot.com/-BUSdRfoR_fc/UytGol1Ni5I/AAAAAAAAPMc/pqoQv7RgnbY/s1600/Screenshot+2014-03-20+19.44.18.png" alt="Yes, I am NOT a designer" loading="lazy" /></p>
+
+<h1 id="the-page">The Page</h1>
+
+<p>and after a bit of fangling to build out the (admittedly ugly) page:</p>
+
+<p><img src="http://3.bp.blogspot.com/-52O3oytmg_E/Uy7SVJgQ-JI/AAAAAAAAPg4/jNbYLNIcXI8/s1600/home-one.png" alt="screenshot of the built page" loading="lazy" /></p>
+
+<p>The code for this page can be found <a href="https://github.com/pauldambra/omniclopse/tree/v0.1">tagged on github</a> and at this point there's nothing groundbreaking (nor should there be). You can visit the site <a href="http://omniclopse-v0-1.herokuapp.com/">here on Heroku</a>.</p>
+
+<p>There are bits of the page HTML that I'm not happy with but that can be changed as the site work progresses.</p>
+
+<p>The single test in the project still passes but that doesn't really prove anything. So the next post is going to be a short aside about using Selenium and Browserstack.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2014/03/website-cms-display-pages-part-2.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

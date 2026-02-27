@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I do user interviews</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/02/how-i-do-user-interviews.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/02/how-i-do-user-interviews.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I do user interviews" />
+    <meta
+      property="og:description"
+      content="How I do user interviews"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I do user interviews"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I do user interviews",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1094",
+     "url":"https://pauldambra.dev/2026/02/how-i-do-user-interviews.html",
+     "datePublished":"2026-02-11",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/02/how-i-do-user-interviews.html"
+     },
+     "articleBody":"I've  been  lucky  to  watch  some  excellent  engineers,  product  managers,  and  user  researchers  carry  out  user  interviews.\n\nAnd  had  the  opportunity  at  PostHog  to  practice  that  skill.  I've  explained  all  this  a  couple  of  times  to  different  people,  so  thought  I'd  write  it  down.\n\n\n    set  expectations\n    write  down  quotes\n    show  &gt;  tell\n    compound  interest\n    sometimes  stop\n    be  a  Labrador\n    this  is  the  redesign  that  will  kill  the  the  Facebook\n\n\n\n\nset  expectations\n\nWhenever  I'm  starting  a  user  interview  I  try  to  set  very  clear  expectations  for  the  person.  I  will  say  something  like:\n\n\n    Thanks  for  your  time  today.  And  importantly  it's  your  time.  So,  while  I'm  mostly  interested  in  $feature_X  if  you  want  to  talk  about  other  parts  of  the  product,  that's  fine  -  we  can  cover  the  things  you're  interested  in.  I'd  really  love  you  to  share  your  screen  so  I  can  see  what  you're  doing  as  well  as  hear  you  talk  about  it.  To  start  out  can  you  show  me  how  you  use  $feature_X?\n\n\nYou  might  want  to  constrain  what  they  talk  about  to  a  specific  feature  or  topic.  So  your  intro  would  be  different.  But  I  find  it's  generally  better  to  hear  what  they're  thinking  and  feeling  even  if  it  doesn't  relate  to  what  I'm  focused  on.\n\nwrite  down  quotes\n\nI  had  the  great  privilege  of  working  with  user  interviewers  with  a  GDS  background  and  was  always  impressed  by  their  skill.\n\nOne  thing  I  learned  from  the  wonderful  Simon  Hurst  was  to  write  down  quotes  when  you're  taking  notes.  And  to  editorialise  them  later.\n\nYou're  aiming  to  capture  the  user's  statement  not  what  you  thought  about  it  at  the  time.\n\nThe  benefit  of  having  the  quote  is  that  you  don't  have  to  remember  what  they  said  later  when  you're  grouping.\n\nThis  is  also  a  great  way  to  introduce  colleagues  to  the  process.  They  can  shadow  your  user  interviews  and  capture  quotes  as  they  listen.\n\nOf  course,  if  you're  doing  these  remotely  it's  trivial  to  record  or  transcribe  the  interview.  But  I  still  think  there's  value  in  going  through  and  pulling  out  the  quotes  to  capture  them.  I  love  to  talk  to  a  team  and  find  that  they  know  their  users  by  name  and  can  refer  back  to  specific  quotes.\n\nYou  might  worry  about  acting  on  anecdotal  evidence,  and  you  should  test  and  measure  your  changes,  but  that  kind  of  human  understanding  will  guide  you  to  better  decisions.\n\nshow  &gt;  tell\n\nIt  is  super  powerful  to  get  users  to  show  you  what  they  mean.\n\nIf  you're  interviewing  someone  and  they  say  \"I  wish  your  software  let  me  do  Y\"  (sometimes  the  software  already  does  do  that).  The  amazing  Neil  Kakkar  would  ask  \"can  you  show  me  where  you'd  look  in  the  UI  to  do  that?\"\n\nWhether  the  feature  exists  or  not  already,  you  now  know  what  the  UI  for  discovering  it  might  look  like.\n\nOr  a  user  will  say  something  like  \"competitor  X  does  this  better.\"  the  important  response  is  to  ask  \"can  you  show  me  how  to  do  it  in  competitor  X?\".  Sometimes  you'll  see  that  it  really  is  better,  sometimes  that  it  is  just  more  familiar  to  them  in  the  other  UI.\n\nThe  insight  isn't  that  you  should  copy  what  the  competitor  does.  You  should  try  to  understand  why  they  prefer  it,  across  multiple  users  this  will  help  you  understand  how  to  position  that  feature  or  introduce  that  user  flow.\n\ncompound  interest\n\nSetting  up  and  running  user  interviews  can  take  a  lot  of  time.  And  so  people  often  skip  them.  But  1  interview  is  better  than  none.  2  is  better  than  1.  And  so  on.\n\nAnd  this  compounds  over  time.  Before  you  know  it  you've  met  tens  or  hundreds  of  users.\n\nThe  knowledge  you  accumulate  about  your  users  (individually  and  organisationally)  will  give  you  instincts  on  what  to  build  and  how  to  build  it.\n\nDecide  how  many  interviews  you  want  to  run  each  month.  And  stick  to  it…  there's  always  something  more  to  learn.\n\nsometimes  stop\n\nSometimes  you  think  it's  going  to  be  a  user  interview.  But  it  turns  out  this  is  a  user  that's  unhappy  with  the  product.  Or  doesn't  understand  the  platform  and  just  needs  help.  I  used  to  struggle  through  a  bunch  of  open  questions  trying  to  \"stay  in  interview  mode\".\n\nThen  I  observed  Annika  Schmid  on  one  call  recognise  it  for  what  it  was  and  shift  into  training/explaining  mode.  It  already  wasn't  going  to  be  a  great  user  interview.  So,  may  as  well  make  it  a  good  experience  for  the  user.\n\nbe  a  Labrador\n\nImportantly,  you  are  there  to  learn.  So,  you  need  to  be  as  interested  in  their  opinions  as  a  Labrador  is  in  cheese.\n\n\"I'd  love  to  know  more  about…\"\n\"Can  you  show  me…\"\n\"Oh  wow,  that's    not  how  we  expected  folk  to  use  this!  Can  you  dive  into…\"\n\nOne  thing  I've  picked  up  from  the  fabulous  Eric  Duong  is  the  phrase  \"out  of  interest…\"\n\nNot  just  in  user  interviews  but  in  every  customer  interaction.  You  can  drop  it  in…  \"Ah,  it  doesn't  work  like  that…  you  can  workaround  by  x,  y,  and  z…  out  of  interest  what  does  it  unlock  for  you  if  we  support  this?\"\n\nI  love  that  framing.  \"Out  of  interest  what  does  it  unlock  for  you  if  we  support  this?\"\n\nThat  user  might  not  commit  to  30  minutes  for  a  user  interview.  But  I  bet  they'll  spend  30  seconds  replying  to  a  slack  message.  And  since  these  things  compound  over  time,  you'll  learn  a  lot  from  accruing  all  these  tiny  insights.\n\nthis  is  the  redesign  that  will  kill  the  Facebook\n\nRelated  to  \"competitor  X  does  it  better\"  i  remember  at  least  three  occasions  where  Facebook  changed  their  UI  and  everyone  was  wild  in  the  comments  talking  about  how  it  would  kill  Facebook.\n\nTwitter  changing  the  star  to  a  heart  made  the  national  news.\n\nWith  enough  users  you'll  discover  that  you  will  get  negative  feedback  no  matter  what  you  do.  And  if  you  chase  every  user,  you'll  end  up  with  a  product  that  no  one  wants.\n\n\n\nEven  though,  if  you  don't  listen  to  the  users,  you'll  end  up  with  a  product  that  no  one  wants.\n\nGathering  all  this  feedback  isn't  so  that  you  can  just  make  all  the  changes  people  tell  you  they  want.  It's  to  get  an  instinct  for  how  and  why  they  use  your  product.  You  will  be  asked  for  conflicting  things  and  without  the  gut-feeling  for  what  users  want,  you'll  end  up  with  Homer's  car.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Wed Feb 11 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I do user interviews</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/02/how-i-do-user-interviews.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+do+user+interviews&via=pauldambra&url=https://pauldambra.dev/2026/02/how-i-do-user-interviews.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#how-do-i"
+      >
+        in: how-do-i
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#how-doi">
+    how-doi
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I've been lucky to watch some excellent engineers, product managers, and user researchers carry out user interviews.</p>
+
+<p>And had the opportunity at PostHog to practice that skill. I've explained all this a couple of times to different people, so thought I'd write it down.</p>
+
+<ul>
+  <li>set expectations</li>
+  <li>write down quotes</li>
+  <li>show &gt; tell</li>
+  <li>compound interest</li>
+  <li>sometimes stop</li>
+  <li>be a Labrador</li>
+  <li>this is the redesign that will kill the the Facebook</li>
+</ul>
+
+<!--more-->
+
+<h1 id="set-expectations">set expectations</h1>
+
+<p>Whenever I'm starting a user interview I try to set very clear expectations for the person. I will say something like:</p>
+
+<blockquote>
+  <p>Thanks for your time today. And importantly it's your time. So, while I'm mostly interested in $feature_X if you want to talk about other parts of the product, that's fine - we can cover the things you're interested in. I'd really love you to share your screen so I can see what you're doing as well as hear you talk about it. To start out can you show me how you use $feature_X?</p>
+</blockquote>
+
+<p>You might want to constrain what they talk about to a specific feature or topic. So your intro would be different. But I find it's generally better to hear what they're thinking and feeling even if it doesn't relate to what I'm focused on.</p>
+
+<h1 id="write-down-quotes">write down quotes</h1>
+
+<p>I had the great privilege of working with user interviewers with a <a href="https://www.gov.uk/government/organisations/government-digital-service/about">GDS</a> background and was always impressed by their skill.</p>
+
+<p>One thing I learned from the wonderful <a href="https://www.linkedin.com/in/simon-hurst-a144b426/">Simon Hurst</a> was to write down quotes when you're taking notes. And to editorialise them later.</p>
+
+<p>You're aiming to capture the user's statement not what you thought about it at the time.</p>
+
+<p>The benefit of having the quote is that you don't have to remember what they said later when you're grouping.</p>
+
+<p>This is also a great way to introduce colleagues to the process. They can shadow your user interviews and capture quotes as they listen.</p>
+
+<p>Of course, if you're doing these remotely it's trivial to record or transcribe the interview. But I still think there's value in going through and pulling out the quotes to capture them. I love to talk to a team and find that they know their users by name and can refer back to specific quotes.</p>
+
+<p>You might worry about acting on anecdotal evidence, and you should test and measure your changes, but that kind of human understanding will guide you to better decisions.</p>
+
+<h1 id="show--tell">show &gt; tell</h1>
+
+<p>It is super powerful to get users to show you what they mean.</p>
+
+<p>If you're interviewing someone and they say "I wish your software let me do Y" (sometimes the software already does do that). The amazing <a href="http://neilkakkar.com/">Neil Kakkar</a> would ask "can you show me where you'd look in the UI to do that?"</p>
+
+<p>Whether the feature exists or not already, you now know what the UI for discovering it might look like.</p>
+
+<p>Or a user will say something like "competitor X does this better." the important response is to ask "can you show me how to do it in competitor X?". Sometimes you'll see that it really is better, sometimes that it is just more familiar to them in the other UI.</p>
+
+<p>The insight isn't that you should copy what the competitor does. You should try to understand why they prefer it, across multiple users this will help you understand how to position that feature or introduce that user flow.</p>
+
+<h1 id="compound-interest">compound interest</h1>
+
+<p>Setting up and running user interviews can take a lot of time. And so people often skip them. But 1 interview is better than none. 2 is better than 1. And so on.</p>
+
+<p>And this compounds over time. Before you know it you've met tens or hundreds of users.</p>
+
+<p>The knowledge you accumulate about your users (individually and organisationally) will give you instincts on what to build and how to build it.</p>
+
+<p>Decide how many interviews you want to run each month. And stick to it… there's always something more to learn.</p>
+
+<h1 id="sometimes-stop">sometimes stop</h1>
+
+<p>Sometimes you think it's going to be a user interview. But it turns out this is a user that's unhappy with the product. Or doesn't understand the platform and just needs help. I used to struggle through a bunch of open questions trying to "stay in interview mode".</p>
+
+<p>Then I observed <a href="https://x.com/annikaze_">Annika Schmid</a> on one call recognise it for what it was and shift into training/explaining mode. It already wasn't going to be a great user interview. So, may as well make it a good experience for the user.</p>
+
+<h1 id="be-a-labrador">be a Labrador</h1>
+
+<p>Importantly, you are there to learn. So, you need to be as interested in their opinions as a Labrador is in cheese.</p>
+
+<p>"I'd love to know more about…"
+"Can you show me…"
+"Oh wow, that's  not how we expected folk to use this! Can you dive into…"</p>
+
+<p>One thing I've picked up from the fabulous <a href="https://github.com/EDsCODE">Eric Duong</a> is the phrase "out of interest…"</p>
+
+<p>Not just in user interviews but in every customer interaction. You can drop it in… "Ah, it doesn't work like that… you can workaround by x, y, and z… out of interest what does it unlock for you if we support this?"</p>
+
+<p>I love that framing. "Out of interest what does it unlock for you if we support this?"</p>
+
+<p>That user might not commit to 30 minutes for a user interview. But I bet they'll spend 30 seconds replying to a slack message. And since these things compound over time, you'll learn a lot from accruing all these tiny insights.</p>
+
+<h1 id="this-is-the-redesign-that-will-kill-the-facebook">this is the redesign that will kill the Facebook</h1>
+
+<p>Related to "competitor X does it better" i remember at least three occasions where Facebook changed their UI and everyone was wild in the comments talking about how it would kill Facebook.</p>
+
+<p>Twitter changing the star to a heart <a href="https://www.bbc.co.uk/news/newsbeat-34713811">made the national news</a>.</p>
+
+<p>With enough users you'll discover that you will get negative feedback no matter what you do. And if you chase every user, you'll end up with a product that no one wants.</p>
+
+<p><img src="/images/homers-car.webp" alt="Homer's car" loading="lazy" /></p>
+
+<p>Even though, if you don't listen to the users, you'll end up with a product that no one wants.</p>
+
+<p>Gathering all this feedback isn't so that you can just make all the changes people tell you they want. It's to get an instinct for how and why they use your product. You will be asked for conflicting things and without the gut-feeling for what users want, you'll end up with Homer's car.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/02/how-i-do-user-interviews.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/02/how-i-do-user-interviews.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

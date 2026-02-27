@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Testing With Browserstack and Selenium</title>
+    <link rel="canonical" href="https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Testing With Browserstack and Selenium" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Testing With Browserstack and Selenium",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"900",
+     "url":"https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html",
+     "datePublished":"2014-03-25",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nPrevious  Post\n\nBrowserstack\n\nI  love  Browserstack's  awesome  service.  It  allows  you  to  test  your  websites  on  different  browsers  and  operating  systems.  Helping  reduce  the  need  to  have  access  to  physical  devices  for  testing  and  reproducing  bugs.\n\nSelenium  WebDriver\n\nBrowserStack  allow  automation  using  a  Selenium  web  driver.  You  can  access  this  with  Python,  Ruby,  Java,  C#,  Perl,  PHP,  or  Node.js.  It  is  also  possible  to  test  publicly  or  locally  available  sites  using  BrowserStack.\n\n\n\nHowever,  after  a  couple  of  hours  trying  to  write  tests  following  the  documentation  and  attacking  Google  I  wasn't  getting  very  far.  I  was  able  to  run  tests  on  Browserstack  and  take  screenshots  to  prove  the  page  was  loaded  but  I  couldn't  assert  against  the  page.  Frustration  had  begun  to  build!\n\nI  haven't  used  Selenium  before  and  I  didn't  grok  how  to  assert  against  the  page.  I'm  sure  it  was  how  I  was  reading  the  documentation  but  I  wasn't  moving  forward.  And  then  I  discovered  nightwatch  (by  reading  to  the  end  of  the  documentation  but  still…)\n\nNightwatch\n\nNightwatch  is  awesome!  It  only  took  a  few  minutes  to  get  to  the  point  where  it  was  possible  to  run  tests  using  it.  The  API  is  terse  and  expressive  and  it  will  output  jUnit  results  so  can  be  plugged  into  a  CI  pipeline.\n\nA  nightwatch  test  for  the  front  page  looks  like:\n\nmodule.exports  =  {\n    \"Test  the  home  page\":  function  (browser)  {\n        browser\n            .url(\"http://omniclopse-v0-1.herokuapp.com/\")\n            .waitForElementVisible(\"body\",  1000)\n            .assert.elementPresent(\"#homeCarousel\")\n            //must  have  at  least  one  image\n            .assert.elementPresent(\"#homeCarousel  .item  img\")\n            .end();\n    },\n};\n\n\nThis  demonstrates  a  very  clear  API.  Load  the  page,  wait  till  the  body  is  visible,  then  assert  that  the  carousel  is  present.\n\nHow  to  run  the  tests\n\nRunning  this  at  the  terminal  using:\nnightwatch  -t  end-to-end-tests/*  -c  end-to-end-tests/settings.json\n\n{\n    \"src_folders\":  [\"./\"],\n\n    \"selenium\":  {\n        \"start_process\":  false,\n        \"host\":  \"hub.browserstack.com\",\n        \"port\":  80\n    },\n\n    \"test_settings\":  {\n        \"default\":  {\n            \"launch_url\":  \"http://hub.browserstack.com\",\n            \"selenium_port\":  80,\n            \"selenium_host\":  \"hub.browserstack.com\",\n            \"silent\":  true,\n            \"screenshots\":  {\n                \"enabled\":  false,\n                \"path\":  \"\"\n            },\n            \"desiredCapabilities\":  {\n                \"browserName\":  \"firefox\",\n                \"javascriptEnabled\":  true,\n                \"acceptSslCerts\":  true,\n                \"browserstack.user\":  \"username\",\n                \"browserstack.key\":  \"password\"\n            }\n        }\n    }\n}\n\n\nHere  the  settings  file  sets  the  location  of  the  tests  folder(s),  how  and  where  to  start  Selenium  and  the  capabilities  of  the  browser  to  use  for  tests.  Also  my,  fiendishly  obfuscated,  BrowserStack  credentials\n\nPassing  in  a  settings  file  like  this  means  that  different  browser  settings  can  be  setup  and  run  separately.  For  example:\n\nnightwatch  -t  end-to-end-tests/*  -c  end-to-end-tests/settingsWindowsFirefox.json\nnightwatch  -t  end-to-end-tests/*  -c  end-to-end-tests/settingsOSXFirefox.json\nnightwatch  -t  end-to-end-tests/*  -c  end-to-end-tests/settingsIPhone.json\nnightwatch  -t  end-to-end-tests/*  -c  end-to-end-tests/settingsAndroid.json\n\n\nWhich  would  allow  running  all  of  the  nightwatch  tests  against  different  operating  systems  and  browsers  on  BrowserStack.\n\nViewing  results\n\n\n\nSome  more  realistic  tests  for  the  home  page\n\nSwitching  out  the  test  for  carousel  by  id  and  instead  testing  by  class  (as  this  is  less  likely  to  change)  and  adding  in  some  other  tests  for  the  page  contents  gives:\n\nmodule.exports  =  {\n    \"Test  the  home  page\":  function  (browser)  {\n        browser\n            .url(\"http://omniclopse-v0-1.herokuapp.com/\")\n            .waitForElementVisible(\"body\",  1000)\n            .assert.elementPresent(\"header  img#brand\")\n            .assert.elementPresent(\"header  .navbar\")\n            .assert.elementPresent(\"header  .navbar  li  a\")\n            .assert.elementPresent(\".carousel\")\n            .assert.elementPresent(\".carousel  .item  img\")\n            .assert.elementPresent(\".row.info\")\n            .assert.elementPresent(\".row.info  .panel\")\n            .end();\n    },\n};\n\n\nTL;DR\n\nThe  combination  of  BrowserStack  and  Nightwatch  made  for  a  fantastic  experience.  This  is  definitely  going  to  be  something  I  wrap  into  my  day-to-day  work.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Tue Mar 25 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Testing With Browserstack and Selenium</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Testing+With+Browserstack+and+Selenium&via=pauldambra&url=https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#testing"
+      >
+        in: testing
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#browserstack">
+    browserstack
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#selenium">
+    selenium
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#testing">
+    testing
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#js">
+    js
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/03/website-cms-display-pages-part-2.html">Previous Post</a></p>
+
+<h1 id="browserstack">Browserstack</h1>
+
+<p>I love <a href="http://www.browserstack.com/">Browserstack's awesome service</a>. It allows you to test your websites on different browsers and operating systems. Helping reduce the need to have access to physical devices for testing and reproducing bugs.</p>
+
+<h1 id="selenium-webdriver">Selenium WebDriver</h1>
+
+<p>BrowserStack allow automation using a Selenium web driver. You can access this with Python, Ruby, Java, C#, Perl, PHP, or Node.js. It is also possible to test publicly or locally available sites using BrowserStack.</p>
+
+<!--more-->
+
+<p>However, after a couple of hours trying to write tests following <a href="http://www.browserstack.com/automate/node">the documentation</a> and attacking Google I wasn't getting very far. I was able to run tests on Browserstack and take screenshots to prove the page was loaded but I couldn't assert against the page. Frustration had begun to build!</p>
+
+<p>I haven't used Selenium before and I didn't grok how to assert against the page. I'm sure it was how I was reading the documentation but I wasn't moving forward. And then I discovered <a href="http://nightwatchjs.org/">nightwatch</a> (by reading to the end of the documentation but still…)</p>
+
+<h1 id="nightwatch">Nightwatch</h1>
+
+<p>Nightwatch is awesome! It only took a few minutes to get to the point where it was possible to run tests using it. The API is terse and expressive and it will output jUnit results so can be plugged into a CI pipeline.</p>
+
+<p>A nightwatch test for the front page looks like:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">Test the home page</span><span class="dl">"</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">browser</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">browser</span>
+      <span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://omniclopse-v0-1.herokuapp.com/</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">waitForElementVisible</span><span class="p">(</span><span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">#homeCarousel</span><span class="dl">"</span><span class="p">)</span>
+      <span class="c1">//must have at least one image</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">#homeCarousel .item img</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">end</span><span class="p">();</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This demonstrates a very clear API. Load the page, wait till the body is visible, then assert that the carousel is present.</p>
+
+<h2 id="how-to-run-the-tests">How to run the tests</h2>
+
+<p>Running this at the terminal using:
+<code class="language-plaintext highlighter-rouge">nightwatch -t end-to-end-tests/* -c end-to-end-tests/settings.json</code></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"src_folders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"./"</span><span class="p">],</span><span class="w">
+
+  </span><span class="nl">"selenium"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"start_process"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hub.browserstack.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+
+  </span><span class="nl">"test_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"launch_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hub.browserstack.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"selenium_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"selenium_host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hub.browserstack.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"silent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"screenshots"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"desiredCapabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"browserName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"javascriptEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"acceptSslCerts"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"browserstack.user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"browserstack.key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Here the settings file sets the location of the tests folder(s), how and where to start Selenium and the capabilities of the browser to use for tests. Also my, fiendishly obfuscated, BrowserStack credentials</p>
+
+<p>Passing in a settings file like this means that different browser settings can be setup and run separately. For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nightwatch <span class="nt">-t</span> end-to-end-tests/<span class="k">*</span> <span class="nt">-c</span> end-to-end-tests/settingsWindowsFirefox.json
+nightwatch <span class="nt">-t</span> end-to-end-tests/<span class="k">*</span> <span class="nt">-c</span> end-to-end-tests/settingsOSXFirefox.json
+nightwatch <span class="nt">-t</span> end-to-end-tests/<span class="k">*</span> <span class="nt">-c</span> end-to-end-tests/settingsIPhone.json
+nightwatch <span class="nt">-t</span> end-to-end-tests/<span class="k">*</span> <span class="nt">-c</span> end-to-end-tests/settingsAndroid.json
+</code></pre></div></div>
+
+<p>Which would allow running all of the nightwatch tests against different operating systems and browsers on BrowserStack.</p>
+
+<h2 id="viewing-results">Viewing results</h2>
+
+<p><img src="/images/run-nightwatch.png" alt="Results from the tests are displayed in the console" loading="lazy" /></p>
+
+<h2 id="some-more-realistic-tests-for-the-home-page">Some more realistic tests for the home page</h2>
+
+<p>Switching out the test for carousel by id and instead testing by class (as this is less likely to change) and adding in some other tests for the page contents gives:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">Test the home page</span><span class="dl">"</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">browser</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">browser</span>
+      <span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://omniclopse-v0-1.herokuapp.com/</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">waitForElementVisible</span><span class="p">(</span><span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">header img#brand</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">header .navbar</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">header .navbar li a</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">.carousel</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">.carousel .item img</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">.row.info</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">elementPresent</span><span class="p">(</span><span class="dl">"</span><span class="s2">.row.info .panel</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">end</span><span class="p">();</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>The combination of BrowserStack and Nightwatch made for a fantastic experience. This is definitely going to be something I wrap into my day-to-day work.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2017/testing-meaning.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Testing Meaning in HTML!
+      </h3>
+      <small>
+        17 Aug 2017
+      </small>
+  </div>
+</a>  <a href="/2017/testing-static-sites.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Testing Static HTML!
+      </h3>
+      <small>
+        19 Mar 2017
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2014/03/testing-with-browserstack-and-selenium.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

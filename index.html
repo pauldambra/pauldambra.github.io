@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Mindless Rambling Nonsense</title>
+    <link rel="canonical" href="https://pauldambra.dev/" />
+    <meta property="og:url" content="https://pauldambra.dev/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mindless Rambling Nonsense" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Blog",
+    "keywords": "software engineering agile refactoring c# ruby javascript",
+    "url": "https://pauldambra.github.io",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://pauldambra.github.io"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+        "https://twitter.com/pauldambra",
+        "https://github.com/pauldambra",
+        "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ]
+    }
+  }
+</script>
+
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id1"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2026/02/deca-hundy.html">
+      <h1 class="overflow-hidden text-ellipsis">I shipped 1000 PRs in a year, AMA</h1>
+    </a>
+    <p>I shipped 1000 PRs in the last 12 months at <a href="https://posthog.com">PostHog</a>. And someone asked me how I do it… let's see if i know.</p>
+
+<h3 id="preamble">preamble</h3>
+
+<ul>
+  <li>yes, yes, I know you don't think I should count PRs</li>
+  <li>when a measure becomes a target it stops being a useful measure</li>
+  <li>embrace yourself</li>
+</ul>
+
+<h3 id="advice">advice</h3>
+
+<ul>
+  <li>it is running not cycling</li>
+  <li>small steps ftw</li>
+  <li>practice like a jazz musician</li>
+  <li>love making things</li>
+  <li>one more iteration</li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 11 Feb 2026</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#how-do-i"
+        >in: how-do-i</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#how-doi">
+    how-doi
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id2"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2026/02/how-i-do-user-interviews.html">
+      <h1 class="overflow-hidden text-ellipsis">How I do user interviews</h1>
+    </a>
+    <p>I've been lucky to watch some excellent engineers, product managers, and user researchers carry out user interviews.</p>
+
+<p>And had the opportunity at PostHog to practice that skill. I've explained all this a couple of times to different people, so thought I'd write it down.</p>
+
+<ul>
+  <li>set expectations</li>
+  <li>write down quotes</li>
+  <li>show &gt; tell</li>
+  <li>compound interest</li>
+  <li>sometimes stop</li>
+  <li>be a Labrador</li>
+  <li>this is the redesign that will kill the the Facebook</li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 11 Feb 2026</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#how-do-i"
+        >in: how-do-i</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#how-doi">
+    how-doi
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id3"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2026/01/how-i-use-llms-3.html">
+      <h1 class="overflow-hidden text-ellipsis">How I use LLMs? - three</h1>
+    </a>
+    <p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number two, or entry number three, depending on how you want to count it.</p>
+
+<p><a href="/2025/07/how-i-use-llms.html">the first entry is here</a>
+<a href="/2026/01/how-i-use-llms-2.html">the second entry is here</a></p>
+
+<ul>
+  <li>XP pedant agent</li>
+  <li>primarily using LLMs</li>
+  <li>throw away way more work</li>
+  <li>be very strict with what i <em>do</em> type</li>
+  <li>i approach understanding code differently</li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 30 Jan 2026</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#self-reflection"
+        >in: self-reflection</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id4"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2025/12/avoiding-madness.html">
+      <h1 class="overflow-hidden text-ellipsis">Things that a different me would have been tipped into psychosis by</h1>
+    </a>
+    <p><img src="/images/prawn_face.png" alt="prawn face" loading="lazy" /></p>
+
+<p>There are a few memes (in the original sense) that have got stuck in my head. They feel like the beginning of madness. I'm going to track them, to see how many I accumulate</p>
+
+<ul>
+  <li>water isn't real</li>
+  <li>old people are time travellers</li>
+</ul>
+
+<p>Each of them feels like something that would tip a different me over the edge into madness.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 03 Dec 2025</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#self-reflection"
+        >in: self-reflection</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id5"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2025/10/how-i-use-llms-2.html">
+      <h1 class="overflow-hidden text-ellipsis">How I use LLMs - two?</h1>
+    </a>
+    <p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number one, or entry number two, depending on how you want to count it. So, here are the changes in how I'm using LLMs</p>
+
+<p>(we had a brownbag on this at work yesterday, so it's been on my mind)</p>
+
+<p><a href="/2025/07/how-i-use-llms.html">the first entry is here</a></p>
+
+<ul>
+  <li>manage context</li>
+  <li>track longer tasks in a structured file</li>
+  <li>smallest prompt that describes how you want to work</li>
+  <li>be sparing with auto-accept edits</li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 24 Oct 2025</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#self-reflection"
+        >in: self-reflection</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id6"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2025/09/four-things-in-four-years.html">
+      <h1 class="overflow-hidden text-ellipsis">Four things in four years at PostHog</h1>
+    </a>
+    <p>I've been at PostHog for four years. After having the best four years of my career at Co-op Digital, I'm privileged to have then also had the best four years of my career at PostHog. Surely, I've learned something that I can cram into a cliche format?!</p>
+
+<ul>
+  <li>Don't look for a family, look for a team</li>
+  <li>Talk to users <em>all the time</em></li>
+  <li>You can YOLO and strangle your figs at the same time</li>
+  <li>Trust is a super power</li>
+</ul>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 16 Sep 2025</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#self-reflection"
+        >in: self-reflection</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id7"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2025/07/how-i-use-llms.html">
+      <h1 class="overflow-hidden text-ellipsis">How I use LLMs?</h1>
+    </a>
+    <p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 24 Jul 2025</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#self-reflection"
+        >in: self-reflection</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id8"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2025/06/how-do-i-like-to-be-managed.html">
+      <h1 class="overflow-hidden text-ellipsis">How do I like to be managed?</h1>
+    </a>
+    <p>An amazing engineer colleague has taken on (booming, god-on-the-mountain voice) extra responsibilities. Unfortunately for them, one of those responsibilities is managing me.</p>
+
+<p>They asked me how I like to be managed. I thought it was a good question, so I pushed it into my background processing queue, got distracted, and never answered them.</p>
+
+<p>Periodically I feel guilty about that, so I thought I'd write it down here. Maybe it will help me decide what my answer is…</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 03 Jun 2025</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#self-reflection"
+        >in: self-reflection</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id9"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2025/05/year-notes.html">
+      <h1 class="overflow-hidden text-ellipsis">2024 Year Notes</h1>
+    </a>
+    <p>I remain super un-inspired to write over the last few years. Which is a shame - because it's a a great way to learn. And very uninspired to write about 2024 in particular. So, here are some very short year notes for 2024.</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 05 May 2025</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#year-notes"
+        >in: year-notes</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dear-diary">
+    dear-diary
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="post-item mb-5 flex flex-col p-2 hover:bg-slate-300/75 transition-colors"
+  id="id10"
+>
+  <div class="mb-2 max-h-96 overflow-hidden">
+    <a href="/2024/09/wwmd.html">
+      <h1 class="overflow-hidden text-ellipsis">What would mum do?</h1>
+    </a>
+    <p>Recently my mum died. And I don't know how to process what felt like a very quick and very slow experience all at the same time.</p>
+
+<p>I've been writing here for a long time, maybe writing here will help me… At least it helps shamelessly ask for <a href="https://www.justgiving.com/page/in-memory-of-denise-dambra">donations to Cancer Research</a></p>
+
+<p>Talking with my brother one thing that stood out was that we both want to remember to focus on the good things. There's a risk that otherwise we only remember the last few relatively horrible months. So, I wanted to spend some time to reflect about what things I want to be sure to remember.</p>
+
+<p>(I normally try to vary the starting words of my sentences… but no apologies for overusing sentences starting with mum in this one)</p>
+
+<p>#FuckCancer</p>
+
+
+  </div>
+  <div class="flex flex-row mt-2 border-t-2 border-t-slate-400">
+    <div>posted on: 12 Sep 2024</div>
+    <div class="flex-grow flex flex-col items-end">
+      <a href="/categories.html#dear-diary"
+        >in: dear-diary</a
+      >
+      <div class="tags">
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dear-diary">
+    dear-diary
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#personal">
+    personal
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</div>
+ 
+<div class="flex justify-center gap-x-2">
+  <span>
+     &laquo; Prev 
+  </span>
+
+  
+  <span>
+    
+    <strong>1</strong>
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2"
+      >2</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page3"
+      >3</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page4"
+      >4</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page5"
+      >5</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page6"
+      >6</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page7"
+      >7</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page8"
+      >8</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page9"
+      >9</a
+    >
+    
+  </span>
+  
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page10"
+      >10</a
+    >
+    
+  </span>
+  
+
+  <span>
+    
+    <a
+      class="no-underline hover:underline"
+      href="/page2/"
+      >Next &raquo;</a
+    >
+    
+  </span>
+</div>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

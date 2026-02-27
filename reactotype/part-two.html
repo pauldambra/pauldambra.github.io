@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Reactotype Part 2</title>
+    <link rel="canonical" href="https://pauldambra.dev/reactotype/part-two.html" />
+    <meta property="og:url" content="https://pauldambra.dev/reactotype/part-two.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Reactotype Part 2" />
+    <meta
+      property="og:description"
+      content="exploring ReactJS"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="exploring ReactJS"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Reactotype Part 2",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2315",
+     "url":"https://pauldambra.dev/reactotype/part-two.html",
+     "datePublished":"2015-02-19",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/reactotype/part-two.html"
+     },
+     "articleBody":"\n\nI  posted  about  my  impressions  of  working  with  React  slowly  building  an  HTML  table  and  banging  on  about  it.  I  ended  that  post  with  one  of  the  more  memorable  cliff-hangers  in  recent  time.\n\n\n    Sorting  and  Filtering  the  Table\n\n    That  we  will  leave  till  part  two…  because  I  introduced  a  relatively  artifical  constraint  that  I  didn't  want  the  filtering  control  to  be  a  part  of  the  table.\n\n    Imagine  that  there  will  be  many  tables  with  the  same  filter.  I  don't  want  to  bind  the  filter  to  any  one  table  or  insist  that  every  table  has  it.\n\n    At  first  I  expected  that  it  would  force  me  to  understand  React's  components  and  how  to  compose  them…  instead  I  stumbled  on  something  really  cool  #cliffhanger\n\n\nExciting!  Right?\n\nI  want  to  add  a  filter  control  and  I  don't  want  it  to  be  bound  to  a  particular  table  so  that  it  can  be  re-used.\n\n\n\nSo,  having  squeezed  the  table  to  make  space  for  a  column  for  filter  controls  I  needed  to  do  two  things\n\n\n    Add  the  filter  controls\n    Make  them  affect  the  table\n\n\n\n\nAdding  the  filter  controls\n\nOnce  I'd  made  a  static  HTML  version  of  the  filter  controls  and  knew  that  I  was  aiming  for  a  number  input  for  the  earliest  year  to  display  and  one  for  the  latest.\n\n&lt;div  className=\"col-xs-12\"&gt;\n    &lt;div  className=\"form-group\"&gt;\n        &lt;label  htmlFor=\"earliest\"&gt;Earliest&lt;/label&gt;\n        &lt;input\n            type=\"number\"\n            name=\"earliest\"\n            className=\"form-control\"\n        /&gt;\n    &lt;/div&gt;\n    &lt;div  className=\"form-group\"&gt;\n        &lt;label  htmlFor=\"latest\"&gt;Latest&lt;/label&gt;\n        &lt;input\n            type=\"number\"\n            name=\"latest\"\n            className=\"form-control\"\n        /&gt;\n    &lt;/div&gt;\n&lt;/div&gt;\n\n\nCopying  what  I  already  had  to  turn  this  into  a  React  component  was  a  very  short  job.  And  then  I  moved  onto  a  little  research  to  see  what  approaches  there  were  to  solve  my  problem  and  I  stumbled  on  a  JS  pub/sub  library  called  postal.js.\n\n\n    What  is  it?\n\n\n\n    Postal.js  is  an  in-memory  message  bus  -  very  loosely  inspired  by  AMQP  -  written  in  JavaScript.  Postal.js  runs  in  the  browser,  or  on  the  server  using  node.js.  It  takes  the  familiar  \"eventing-style\"  paradigm  (of  which  most  JavaScript  developers  are  familiar)  and  extends  it  by  providing  \"broker\"  and  subscriber  implementations  which  are  more  sophisticated  than  what  you  typically  find  in  event  emitting/aggregation.\n\n\n/**  @jsx  React.DOM  */\n\"use  strict\";\n\nvar  React  =  (window.React  =  require(\"react\"));\nvar  postal  =  (window.postal  =  require(\"postal\"));\n\nvar  FilterBox  =  React.createClass({\n    getInitialState:  function  ()  {\n        return  {\n            earliest:  this.props.initialEarliest,\n            latest:  this.props.initialLatest,\n        };\n    },\n    handleEarliestChange:  function  (event)  {\n        this.setState({  earliest:  parseInt(event.target.value,  10)  },  function  ()  {\n            postal.publish({\n                channel:  \"filters\",\n                topic:  \"year.bounds.change\",\n                data:  this.state,\n            });\n        });\n    },\n    handleLatestChange:  function  (event)  {\n        this.setState({  latest:  parseInt(event.target.value,  10)  },  function  ()  {\n            postal.publish({\n                channel:  \"filters\",\n                topic:  \"year.bounds.change\",\n                data:  this.state,\n            });\n        });\n    },\n    render:  function  ()  {\n        return  (\n            &lt;div  className=\"col-xs-12\"&gt;\n                &lt;div  className=\"form-group\"&gt;\n                    &lt;label  htmlFor=\"earliest\"&gt;Earliest&lt;/label&gt;\n                    &lt;input\n                        type=\"number\"\n                        name=\"earliest\"\n                        className=\"form-control\"\n                        defaultValue={this.state.earliest}\n                        min={this.props.initialEarliest}\n                        max={this.props.initialLatest}\n                        onChange={this.handleEarliestChange}\n                    /&gt;\n                &lt;/div&gt;\n                &lt;div  className=\"form-group\"&gt;\n                    &lt;label  htmlFor=\"latest\"&gt;Latest&lt;/label&gt;\n                    &lt;input\n                        type=\"number\"\n                        name=\"latest\"\n                        className=\"form-control\"\n                        defaultValue={this.state.latest}\n                        min={this.props.initialEarliest}\n                        max={this.props.initialLatest}\n                        onChange={this.handleLatestChange}\n                    /&gt;\n                &lt;/div&gt;\n            &lt;/div&gt;\n        );\n    },\n});\n\nmodule.exports  =  FilterBox;\n\n\nWhat  do  we  have?\n\nRender\n\nrender:  function()  {\n        return  (\n        \t&lt;div  className=\"col-xs-12\"&gt;\n        \t\t&lt;div  className=\"form-group\"&gt;\n        \t\t\t&lt;label  htmlFor=\"earliest\"&gt;Earliest&lt;/label&gt;\n        \t\t\t&lt;input  type=\"number\"\n        \t\t\t\t      name=\"earliest\"\n        \t\t\t\t      className=\"form-control\"\n        \t\t\t\t      defaultValue={this.state.earliest}\n        \t\t\t\t      min={this.props.initialEarliest}\n        \t\t\t\t      max={this.props.initialLatest}\n        \t\t\t\t      onChange={this.handleEarliestChange}/&gt;\n        \t\t&lt;/div&gt;\n        \t\t&lt;div  className=\"form-group\"&gt;\n        \t\t\t&lt;label  htmlFor=\"latest\"&gt;Latest&lt;/label&gt;\n        \t\t\t&lt;input  type=\"number\"\n        \t\t\t\t      name=\"latest\"\n        \t\t\t\t      className=\"form-control\"\n        \t\t\t\t      defaultValue={this.state.latest}\n        \t\t\t\t      min={this.props.initialEarliest}\n        \t\t\t\t      max={this.props.initialLatest}\n        \t\t\t\t      onChange={this.handleLatestChange}/&gt;\n        \t\t&lt;/div&gt;\n        \t&lt;/div&gt;\n        );\n}\n\n\nHere  we've  added  a  react  specific  attribute  defaultValue  to  set  the  starting  state  of  the  inputs,  added  min  and  max  validation  using  properties  passed  in  to  the  component  and  an  onChange  handler  specific  to  each  number  input.\n\nInitial  state\n\ngetInitialState:  function()  {\n        return  {\n                earliest:  this.props.initialEarliest,\n                latest:  this.props.initialLatest\n        };\n}\n\n\nHere  the  default  values  for  the  earliest  and  latest  state  are  set.\n\nEvent  Handlers\n\nThese  two  handlers  are  the  same  except  for  operating  on  a  different  property  of  the  state  object.\n\nYes,  yes,  remove  all  duplication.  But…  the  duplicate  methods  are  next  to  each  other  and  I've  half  a  mind  to  make  each  control  a  React  component  which  would  remove  this  duplication  so  why  do  that  work  twice.\n\n(I  got  all  excited  about  postal.js  and  wrote  this  post  before  finishing  the  component)\n\nhandleLatestChange:  function(event)  {\n\tthis.setState(\n\t\t{latest:  parseInt(event.target.value,  10)},\n\t\tfunction()  {\n\t\t\tpostal.publish({\n\t\t\t\tchannel:  'filters',\n\t\t\t\ttopic:  'year.bounds.change',\n\t\t\t\tdata:  this.state\n\t\t\t});\n\t\t}\n\t);\n}\n\n\nHere  when  an  event  is  received  the  function  calls  setState  on  the  React  component.  This  merges  the  object  provided  as  the  first  argument  with  the  component's  current  state.\n\nSince  that  update  doesn't  necessarily  occur  immediately  the  method  takes  a  callback  which  runs  after  the  update  completes.\n\nIn  this  case  the  callback  uses  postal  to  publish  a  message.  Postal  allows  you  to  hold  a  reference  to  a  channel  but  here  we're  using  a  convenience  method  that  allows  you  to  specify  the  channel.\n\npostal.publish({\n    channel:  \"filters\",\n    topic:  \"year.bounds.change\",\n    data:  this.state,\n});\n\n\nSo,  on  channel  'filters'  publish  a  message  with  the  topic  'year.bounds.change'  including  the  component's  state  as  the  message  data.\n\n(and  yes  the  first  thing  I  did  when  subscribing  was  type  in  one  of  those  magic  strings  incorrectly  so  there's  an  improvement  to  be  made  in  my  usage  there!)\n\nThis  gives  us  a  phenomenally  useless  pub/sub  mechanism  with  no  subscribers…\n\nSubscribing  is  even  harder\n\ncomponentWillMount:  function()  {\n\tpostal.subscribe({\n\t    channel:  \"filters\",\n\t    topic  :  \"year.bounds.change\",\n\t    callback:  function(data,  envelope)  {\n\t        this.filterData(data);\n\t    }\n\t}).context(this);\n\n\nPostal's  subscribe  helper  takes  an  object  with  the  same  properties  as  publish.  Here  for  messages  posted  to  a  given  channel  and  topic  it  will  call  the  provided  callback.\n\nThe  componentWillMount  method  of  the  React  component  is  called  once  before  initial  rendering  so  it  is  perfect  for  this  setup.\n\nMessy  Pay  Table  Reacting  to  Filtering\n\nvar  PayTable  =  React.createClass({\n    getInitialState:  function  ()  {\n        return  {\n            sortDirection:  \"descending\",\n            data:  this.props.payYears.sort(sortDescending),\n        };\n    },\n    preparePayData:  function  (data,  options)  {\n        if  (options.yearBounds)  {\n            data  =  data.filter(function  (element)  {\n                return  (\n                    element.year  &gt;=  options.yearBounds.earliest  &amp;&amp;\n                    element.year  &lt;=  options.yearBounds.latest\n                );\n            });\n        }\n        if  (options.sortDirection)  {\n            data  =  data.sort(\n                options.sortDirection  ===  \"descending\"  ?  sortDescending  :  sortAscending\n            );\n        }\n        this.setState({  data:  data  });\n    },\n    sortData:  function  ()  {\n        this.setState(\n            {\n                sortDirection:\n                    this.state.sortDirection  ===  \"descending\"\n                        ?  \"ascending\"\n                        :  \"descending\",\n            },\n            function  ()  {\n                this.preparePayData(this.props.payYears,  this.state);\n            }\n        );\n    },\n    filterData:  function  (filterBounds)  {\n        this.setState({  yearBounds:  filterBounds  },  function  ()  {\n            this.preparePayData(this.props.payYears,  this.state);\n        });\n    },\n    componentWillMount:  function  ()  {\n        postal\n            .subscribe({\n                channel:  \"filters\",\n                topic:  \"year.bounds.change\",\n                callback:  function  (d,  e)  {\n                    this.filterData(d);\n                },\n            })\n            .context(this);\n    },\n    render:  function  ()  {\n        return  (\n            &lt;table  className=\"table  table-striped\"&gt;\n                &lt;thead&gt;\n                    &lt;tr&gt;\n                        &lt;th\n                            onClick={this.sortData}\n                            className={this.state.sortDirection}\n                        &gt;\n                            Year\n                        &lt;/th&gt;\n                        &lt;th&gt;All&lt;/th&gt;\n                        &lt;th&gt;Full-time&lt;/th&gt;\n                        &lt;th&gt;Part-time&lt;/th&gt;\n                    &lt;/tr&gt;\n                &lt;/thead&gt;\n                &lt;tbody&gt;\n                    {this.state.data.map(function  (payYear)  {\n                        return  (\n                            &lt;PayRow\n                                key={payYear.year}\n                                payYear={payYear}\n                            /&gt;\n                        );\n                    })}\n                &lt;/tbody&gt;\n            &lt;/table&gt;\n        );\n    },\n});\n\n\nPayTable  now  has  a  preparePayData  method  which  has  the  responsibility  of  taking  some  data  and  the  component's  current  state  and  setting  the  state's  data  property  correctly.\n\nNow  all  the  filterData  and  sortData  methods  need  to  do  is  update  state  and  then  call  preparePayData.\n\n\n\nThe  point  here  is  how  useful  it  was  to  use  postal.js  to  hook  these  two  components  together.  I  lurve  this!\n\n\n\nNext  Up\n\nA  little  bit  of  tidying  up  and  add  a  chart  view.  #holidaycode\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Feb 19 2015</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Reactotype Part 2</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/reactotype/part-two.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Reactotype+Part+2&via=pauldambra&url=https://pauldambra.dev/reactotype/part-two.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#react"
+      >
+        in: react
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#react">
+    react
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#js">
+    js
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<!--alex ignore banging --->
+
+<p>I posted about my <a href="/reactotype/part-one.html">impressions of working with React</a> slowly building an HTML table and banging on about it. I ended that post with one of the more memorable cliff-hangers in recent time.</p>
+
+<blockquote>
+  <h1 id="sorting-and-filtering-the-table">Sorting and Filtering the Table</h1>
+
+  <p>That we will leave till part two… because I introduced a relatively artifical constraint that I didn't want the filtering control to be a part of the table.</p>
+
+  <p>Imagine that there will be many tables with the same filter. I don't want to bind the filter to any one table or insist that every table has it.</p>
+
+  <p>At first I expected that it would force me to understand React's components and how to compose them… instead I stumbled on something really cool #cliffhanger</p>
+</blockquote>
+
+<p>Exciting! Right?</p>
+
+<p>I want to add a filter control and I don't want it to be bound to a particular table so that it can be re-used.</p>
+
+<!--more-->
+
+<p>So, having squeezed the table to make space for a column for filter controls I needed to do two things</p>
+
+<ol>
+  <li>Add the filter controls</li>
+  <li>Make them affect the table</li>
+</ol>
+
+<p><img src="/images/reactotype_screenshot.png" alt="screenshot of the web page" loading="lazy" /></p>
+
+<h1 id="adding-the-filter-controls">Adding the filter controls</h1>
+
+<p>Once I'd made a static HTML version of the filter controls and knew that I was aiming for a number input for the earliest year to display and one for the latest.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"col-xs-12"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">htmlFor=</span><span class="s">"earliest"</span><span class="nt">&gt;</span>Earliest<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span>
+      <span class="na">type=</span><span class="s">"number"</span>
+      <span class="na">name=</span><span class="s">"earliest"</span>
+      <span class="na">className=</span><span class="s">"form-control"</span>
+    <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">htmlFor=</span><span class="s">"latest"</span><span class="nt">&gt;</span>Latest<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span>
+      <span class="na">type=</span><span class="s">"number"</span>
+      <span class="na">name=</span><span class="s">"latest"</span>
+      <span class="na">className=</span><span class="s">"form-control"</span>
+    <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Copying what I already had to turn this into a React component was a very short job. And then I moved onto a little research to see what approaches there were to solve my problem and I stumbled on a JS pub/sub library called <a href="https://github.com/postaljs/postal.js">postal.js</a>.</p>
+
+<blockquote>
+  <p>What is it?</p>
+</blockquote>
+
+<blockquote>
+  <p>Postal.js is an in-memory message bus - very loosely inspired by AMQP - written in JavaScript. Postal.js runs in the browser, or on the server using node.js. It takes the familiar "eventing-style" paradigm (of which most JavaScript developers are familiar) and extends it by providing "broker" and subscriber implementations which are more sophisticated than what you typically find in event emitting/aggregation.</p>
+</blockquote>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** @jsx React.DOM */</span>
+<span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">React</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">postal</span> <span class="o">=</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">postal</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">postal</span><span class="dl">"</span><span class="p">));</span>
+
+<span class="kd">var</span> <span class="nx">FilterBox</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+  <span class="na">getInitialState</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">earliest</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialEarliest</span><span class="p">,</span>
+      <span class="na">latest</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialLatest</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  <span class="na">handleEarliestChange</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">({</span> <span class="na">earliest</span><span class="p">:</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="p">},</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">postal</span><span class="p">.</span><span class="nf">publish</span><span class="p">({</span>
+        <span class="na">channel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="dl">"</span><span class="s2">year.bounds.change</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="na">handleLatestChange</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">({</span> <span class="na">latest</span><span class="p">:</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="p">},</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">postal</span><span class="p">.</span><span class="nf">publish</span><span class="p">({</span>
+        <span class="na">channel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="dl">"</span><span class="s2">year.bounds.change</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="na">render</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">col-xs-12</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">earliest</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Earliest</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">input</span>
+            <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">number</span><span class="dl">"</span>
+            <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">earliest</span><span class="dl">"</span>
+            <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-control</span><span class="dl">"</span>
+            <span class="nx">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">earliest</span><span class="p">}</span>
+            <span class="nx">min</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialEarliest</span><span class="p">}</span>
+            <span class="nx">max</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialLatest</span><span class="p">}</span>
+            <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleEarliestChange</span><span class="p">}</span>
+          <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">latest</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Latest</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">input</span>
+            <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">number</span><span class="dl">"</span>
+            <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">latest</span><span class="dl">"</span>
+            <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-control</span><span class="dl">"</span>
+            <span class="nx">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">latest</span><span class="p">}</span>
+            <span class="nx">min</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialEarliest</span><span class="p">}</span>
+            <span class="nx">max</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialLatest</span><span class="p">}</span>
+            <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleLatestChange</span><span class="p">}</span>
+          <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">FilterBox</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="what-do-we-have">What do we have?</h2>
+
+<h4 id="render">Render</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+    	<span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">col-xs-12</span><span class="dl">"</span><span class="o">&gt;</span>
+    		<span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+    			<span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">earliest</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Earliest</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>    			<span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">number</span><span class="dl">"</span>
+    				   <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">earliest</span><span class="dl">"</span>
+    				   <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-control</span><span class="dl">"</span>
+    				   <span class="nx">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">earliest</span><span class="p">}</span>
+    				   <span class="nx">min</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialEarliest</span><span class="p">}</span>
+    				   <span class="nx">max</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialLatest</span><span class="p">}</span>
+    				   <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleEarliestChange</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    		<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    		<span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+    			<span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">latest</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Latest</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>    			<span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">number</span><span class="dl">"</span>
+    				   <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">latest</span><span class="dl">"</span>
+    				   <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-control</span><span class="dl">"</span>
+    				   <span class="nx">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">latest</span><span class="p">}</span>
+    				   <span class="nx">min</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialEarliest</span><span class="p">}</span>
+    				   <span class="nx">max</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialLatest</span><span class="p">}</span>
+    				   <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleLatestChange</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    		<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    	<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we've added a react specific attribute <code class="language-plaintext highlighter-rouge">defaultValue</code> to set the starting state of the inputs, added min and max validation using properties passed in to the component and an onChange handler specific to each number input.</p>
+
+<h4 id="initial-state">Initial state</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">earliest</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialEarliest</span><span class="p">,</span>
+        <span class="na">latest</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialLatest</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here the default values for the earliest and latest state are set.</p>
+
+<h4 id="event-handlers">Event Handlers</h4>
+
+<p>These two handlers are the same except for operating on a different property of the state object.</p>
+
+<p>Yes, yes, remove all duplication. But… the duplicate methods are next to each other and I've half a mind to make each control a React component which would remove this duplication so why do that work twice.</p>
+
+<p>(I got all excited about postal.js and wrote this post before finishing the component)</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">handleLatestChange</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">(</span>
+		<span class="p">{</span><span class="na">latest</span><span class="p">:</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span>
+		<span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">postal</span><span class="p">.</span><span class="nf">publish</span><span class="p">({</span>
+				<span class="na">channel</span><span class="p">:</span> <span class="dl">'</span><span class="s1">filters</span><span class="dl">'</span><span class="p">,</span>
+				<span class="na">topic</span><span class="p">:</span> <span class="dl">'</span><span class="s1">year.bounds.change</span><span class="dl">'</span><span class="p">,</span>
+				<span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+			<span class="p">});</span>
+		<span class="p">}</span>
+	<span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here when an event is received the function calls <a href="https://web.archive.org/web/20150706092850/http://facebook.github.io/react/docs/component-api.html#setstate"><code class="language-plaintext highlighter-rouge">setState</code></a> on the React component. This merges the object provided as the first argument with the component's current state.</p>
+
+<p>Since that update doesn't necessarily occur immediately the method takes a callback which runs after the update completes.</p>
+
+<p>In this case the callback uses postal to publish a message. Postal allows you to hold a reference to a channel but here we're using a convenience method that allows you to specify the channel.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">postal</span><span class="p">.</span><span class="nf">publish</span><span class="p">({</span>
+  <span class="na">channel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">topic</span><span class="p">:</span> <span class="dl">"</span><span class="s2">year.bounds.change</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>So, on channel 'filters' publish a message with the topic 'year.bounds.change' including the component's state as the message data.</p>
+
+<p>(and yes the first thing I did when subscribing was type in one of those magic strings incorrectly so there's an improvement to be made in my usage there!)</p>
+
+<p>This gives us a phenomenally useless pub/sub mechanism with no subscribers…</p>
+
+<h1 id="subscribing-is-even-harder">Subscribing is even harder</h1>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentWillMount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">postal</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">({</span>
+	  <span class="na">channel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="na">topic</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">year.bounds.change</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">envelope</span><span class="p">)</span> <span class="p">{</span>
+	    <span class="k">this</span><span class="p">.</span><span class="nf">filterData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+	  <span class="p">}</span>
+	<span class="p">}).</span><span class="nf">context</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Postal's subscribe helper takes an object with the same properties as publish. Here for messages posted to a given channel and topic it will call the provided callback.</p>
+
+<p>The <a href="https://web.archive.org/web/20150706092850/http://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount"><code class="language-plaintext highlighter-rouge">componentWillMount</code></a> method of the React component is called once before initial rendering so it is perfect for this setup.</p>
+
+<h1 id="messy-pay-table-reacting-to-filtering">Messy Pay Table Reacting to Filtering</h1>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">PayTable</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+  <span class="na">getInitialState</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">sortDirection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">descending</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span><span class="nx">sortDescending</span><span class="p">),</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  <span class="na">preparePayData</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">yearBounds</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return </span><span class="p">(</span>
+          <span class="nx">element</span><span class="p">.</span><span class="nx">year</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">yearBounds</span><span class="p">.</span><span class="nx">earliest</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">element</span><span class="p">.</span><span class="nx">year</span> <span class="o">&lt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">yearBounds</span><span class="p">.</span><span class="nx">latest</span>
+        <span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">sortDirection</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">descending</span><span class="dl">"</span> <span class="p">?</span> <span class="nx">sortDescending</span> <span class="p">:</span> <span class="nx">sortAscending</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span> <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="na">sortData</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">(</span>
+      <span class="p">{</span>
+        <span class="na">sortDirection</span><span class="p">:</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">descending</span><span class="dl">"</span>
+            <span class="p">?</span> <span class="dl">"</span><span class="s2">ascending</span><span class="dl">"</span>
+            <span class="p">:</span> <span class="dl">"</span><span class="s2">descending</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nf">preparePayData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+  <span class="na">filterData</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">filterBounds</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">({</span> <span class="na">yearBounds</span><span class="p">:</span> <span class="nx">filterBounds</span> <span class="p">},</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nf">preparePayData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="na">componentWillMount</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">postal</span>
+      <span class="p">.</span><span class="nf">subscribe</span><span class="p">({</span>
+        <span class="na">channel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="dl">"</span><span class="s2">year.bounds.change</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">callback</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nf">filterData</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+        <span class="p">},</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nf">context</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="na">render</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">table table-striped</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">thead</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">th</span>
+              <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">sortData</span><span class="p">}</span>
+              <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">sortDirection</span><span class="p">}</span>
+            <span class="o">&gt;</span>
+              <span class="nx">Year</span>
+            <span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">All</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Full</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Part</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/thead</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">tbody</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">payYear</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return </span><span class="p">(</span>
+              <span class="o">&lt;</span><span class="nx">PayRow</span>
+                <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">year</span><span class="p">}</span>
+                <span class="nx">payYear</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">}</span>
+              <span class="sr">/</span><span class="err">&gt;
+</span>            <span class="p">);</span>
+          <span class="p">})}</span>
+        <span class="o">&lt;</span><span class="sr">/tbody</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/table</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">PayTable</code> now has a <code class="language-plaintext highlighter-rouge">preparePayData</code> method which has the responsibility of taking some data and the component's current state and setting the state's data property correctly.</p>
+
+<p>Now all the <code class="language-plaintext highlighter-rouge">filterData</code> and <code class="language-plaintext highlighter-rouge">sortData</code> methods need to do is update state and then call <code class="language-plaintext highlighter-rouge">preparePayData</code>.</p>
+
+<!--alex ignore hook --->
+
+<p>The point here is how useful it was to use postal.js to hook these two components together. I <em>lurve</em> this!</p>
+
+<p><img src="/images/reactotype.gif" alt="demo of the web page" loading="lazy" /></p>
+
+<h1 id="next-up">Next Up</h1>
+
+<p>A little bit of tidying up and add a chart view. #holidaycode</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/reactotype/part-three.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Reactotype Part 3
+      </h3>
+      <small>
+        20 Feb 2015
+      </small>
+  </div>
+</a>  <a href="/reactotype/part-one.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Reactotype Part 1
+      </h3>
+      <small>
+        17 Feb 2015
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/reactotype/part-two.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/reactotype/part-two.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

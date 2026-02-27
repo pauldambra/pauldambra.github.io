@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>There's more in them thar hills...</title>
+    <link rel="canonical" href="https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="There's more in them thar hills..." />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"There's more in them thar hills...",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"732",
+     "url":"https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html",
+     "datePublished":"2010-05-08",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html"
+     },
+     "articleBody":"…than  the  Factory  pattern.\n\nSo  anyway  I  learn  about  design  patterns  and  begin  to  use  the  factory  pattern.  And  much  like  many  other  people  I  settle  into  a  world  where  there  are  no  other  patterns.  All  is  comfortable  and  fluffy  and  instantiated  from  calling  code  much  as  it  was  in  days  gone  by.\n\n\n\nThen  comes  the  day  I  need  to  handle  the  responses  to  a  monthly  mailing  to  over  70,000  email  addresses  and  so  I  write  this  incredible  code.  Well  maybe  not  incredible…  what  would  be  the  right  word  -  oh  yeah  \"messy\".\n\nIt  all  started  out  really  nice  and  clean  but  then  I  realised  I  needed  to  handle  a  couple  of  more  cases  than  I'd  intended  when  I  began…  and  lots  and  lots  of  mail  servers  have  been  configured  to  return  non-standard  responses  to  unsuccessful  mailings  which  is  great  for  a  human  but  not  so  great  for  a  piece  of  software  trying  to  classify  that  response.\n\nSo  time  passes  and  I'm  correctly  responding  to  over  90%  of  the  returns  we  get  (all  of  which  stops  evil  companies  like  Yahoo  for  blocklisting  us  because  we're  mailing  to  non-existent  addresses)  but  my  code  has  got  really,  really  messy.\n\nReally  messy.\n\nOh,  it's  awful.\n\nI  decide  to  refactor  but  no  matter  what  I  think  of  I  can't  get  a  Factory  to  solve  my  problem.  Yeah,  yeah  I  know  but  if  you're  gonna  have  a  hammer  it  might  as  well  be  shiny.  Now,  I  could  go  ahead  and  invent  my  own  solution  but  as  far  as  I'm  concerned  writing  software  is  about  having  to  do  less  and  that  sounds  like  too  much  work.\n\nA  little  thought  later  and  I  decide  it's  time  to  add  the  command  pattern  to  my  arsenal.  After  all,  I'm  categorising  mail,  potentially  selecting  from  a  database,  potentially  updating  a  database,  potentially  replying  to  or  forwarding  an  email  and  then  deleting  that  mail.  Wrap  that  up  and  then  bash  out  the  various  alternatives  I  need.  Bazinga!\n\nI  also  like  to  be  sure  about  what  I'm  doing  before  I  start.  Well,  sometimes…  So  I  dig  out  Patterns  in  Java  Volume  1  and  do  a  little  reading  and  what  I  saw  was  such  a  great  idea  I  realised  I  had  to  do  everything  I  could  not  to  forget…\n\npublic  abstract  class  AbstractCommand  {\n\tpublic  final  static  CommandManager  manager  =  new  CommandManager();\n\tpublic  abstract  thePointOfThisClass();\n}\n\n\nNow  this  made  me  double  take…  You  might  be  saying  \"So  What?\"  but  I  said  \"What  the  what?\".\n\nSee  I  write  lots  of  code  like  this\n\npublic  class  MyClass  {  \n\tThingManager  thisThingManager  =  new  ThingManager();\n\tThing  thisThing  =  new  Thing();\n\tthisThingManager.doThisThingToThatOtherThing(thisThing);\n}\n\n\nI  dig  separation  of  responsibility  so  I  like  to  separate  out  a  \"manager\"  or  \"controller\"  class  from  the  other  classes  who  don't  need  the  logic  that  it  encapsulates.\n\nBut  that  pretty  tightly  couples  everything  together.  If  I  manage  to  strip  a  lot  of  code  out  of  something  (as  I  did  when  I  bought  the  excellent  Outlook  redemption  library  recently)  then  there's  more  to  change.\n\nHere  all  of  the  logic  for  the  command  is  bound  up  within  it  even  though  CommandManager  class  is  still  separate.  I  like  that  and  I  hadn't  realised  you  could  do  this  kind  of  thing  by  declaring  something  as  static…  I  like  to  find  a  nice  little  elegant  bit  of  sugar  like  that.\n\npublic  class  MyClass{\n        Thing  thisThing  =  new  Thing();\n        thisThing.DoThatThingToThisThing();\n}\n\n\nor  even  better  with  a  little  factory  magic  in  the  background\n\npublic  class  MyClass{\n\tThing.DoSomethingToThisThing(FactoryChoiceEnum.Choice);\n}\n\n\nSo  we've  got  one  line  of  code  and  with  reasonable  variable  names  it  doesn't  even  need  comments.  For  Example…\n\npublic  class  MyClass  {\n\tcurrentMailItem.DealWithThisMailItem(MailResponseEnum.Unsubscribe);\n}\n\n\nI  hope  that  you've  stumbled  on  this  post  and  it  solves  your  problem.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sat May 08 2010</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">There's more in them thar hills...</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=There%27s+more+in+them+thar+hills...&via=pauldambra&url=https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#software-engineering"
+      >
+        in: software-engineering
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design-patterns">
+    design-patterns
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#java">
+    java
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>…than the <a href="http://en.wikipedia.org/wiki/Factory_method_pattern">Factory pattern</a>.</p>
+
+<p>So anyway I learn about design patterns and begin to use the factory pattern. And much like many other people I settle into a world where there are no other patterns. All is comfortable and fluffy and instantiated from calling code much as it was in days gone by.</p>
+
+<!--more-->
+
+<p>Then comes the day I need to handle the responses to a monthly mailing to over 70,000 email addresses and so I write this incredible code. Well maybe not incredible… what would be the right word - oh yeah "messy".</p>
+
+<p>It all started out really nice and clean but then I realised I needed to handle a couple of more cases than I'd intended when I began… and lots and lots of mail servers have been configured to return non-standard responses to unsuccessful mailings which is great for a human but not so great for a piece of software trying to classify that response.</p>
+
+<p>So time passes and I'm correctly responding to over 90% of the returns we get (all of which stops evil companies like Yahoo for blocklisting us because we're mailing to non-existent addresses) but my code has got really, really messy.</p>
+
+<p>Really messy.</p>
+
+<p>Oh, it's awful.</p>
+
+<p>I decide to refactor but no matter what I think of I can't get a Factory to solve my problem. Yeah, yeah I know but if you're gonna have a hammer it might as well be <a href="http://en.wikipedia.org/wiki/Golden_hammer">shiny</a>. Now, I could go ahead and invent my own solution but as far as I'm concerned writing software is about having to do less and that sounds like too much work.</p>
+
+<p>A little thought later and I decide it's time to add the command pattern to my arsenal. After all, I'm categorising mail, potentially selecting from a database, potentially updating a database, potentially replying to or forwarding an email and then deleting that mail. Wrap that up and then bash out the various alternatives I need. <a href="http://www.urbandictionary.com/define.php?term=bazinga">Bazinga</a>!</p>
+
+<p>I also like to be sure about what I'm doing before I start. Well, sometimes… So I dig out <a href="http://www.amazon.com/Patterns-Catalog-Reusable-Design-Illustrated/dp/0471258393">Patterns in Java Volume 1</a> and do a little reading and what I saw was such a great idea I realised I had to do everything I could not to forget…</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractCommand</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">CommandManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CommandManager</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">abstract</span> <span class="nf">thePointOfThisClass</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Now this made me double take… You might be saying "So What?" but I said "What the what?".</p>
+
+<p>See I write lots of code like this</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span> <span class="o">{</span> 
+	<span class="nc">ThingManager</span> <span class="n">thisThingManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThingManager</span><span class="o">();</span>
+	<span class="nc">Thing</span> <span class="n">thisThing</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thing</span><span class="o">();</span>
+	<span class="n">thisThingManager</span><span class="o">.</span><span class="na">doThisThingToThatOtherThing</span><span class="o">(</span><span class="n">thisThing</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>I dig <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">separation of responsibility</a> so I like to separate out a "manager" or "controller" class from the other classes who don't need the logic that it encapsulates.</p>
+
+<p>But that pretty tightly couples everything together. If I manage to strip a lot of code out of something (as I did when I bought the excellent <a href="http://www.dimastr.com/redemption/">Outlook redemption library</a> recently) then there's more to change.</p>
+
+<p>Here all of the logic for the command is bound up within it even though <code class="language-plaintext highlighter-rouge">CommandManager</code> class is still separate. I like that and I hadn't realised you could do this kind of thing by declaring something as static… I like to find a nice little elegant bit of sugar like that.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span><span class="o">{</span>
+    <span class="nc">Thing</span> <span class="n">thisThing</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thing</span><span class="o">();</span>
+    <span class="n">thisThing</span><span class="o">.</span><span class="na">DoThatThingToThisThing</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>or even better with a little factory magic in the background</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span><span class="o">{</span>
+	<span class="nc">Thing</span><span class="o">.</span><span class="na">DoSomethingToThisThing</span><span class="o">(</span><span class="nc">FactoryChoiceEnum</span><span class="o">.</span><span class="na">Choice</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So we've got one line of code and with reasonable variable names it doesn't even need comments. For Example…</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+	<span class="n">currentMailItem</span><span class="p">.</span><span class="nf">DealWithThisMailItem</span><span class="p">(</span><span class="n">MailResponseEnum</span><span class="p">.</span><span class="n">Unsubscribe</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I hope that you've stumbled on this post and it solves your problem.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2010/05/theres-more-in-them-that-hills.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

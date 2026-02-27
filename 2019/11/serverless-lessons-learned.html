@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Serverless - Lessons learned</title>
+    <link rel="canonical" href="https://pauldambra.dev/2019/11/serverless-lessons-learned.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2019/11/serverless-lessons-learned.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Serverless - Lessons learned" />
+    <meta
+      property="og:description"
+      content="reflecting on time spent building serverless systems"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="reflecting on time spent building serverless systems"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Serverless - Lessons learned",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2713",
+     "url":"https://pauldambra.dev/2019/11/serverless-lessons-learned.html",
+     "datePublished":"2019-11-30",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2019/11/serverless-lessons-learned.html"
+     },
+     "articleBody":"At  the  2019  Manchester  Java  Unconference  I  attended  a  discussion  on  \"Cloud  Native  Functions\".  It  turned  out  nobody  in  the  group  had  used  \"cloud  native\"  but  I've  been  working  with  teams  using  serviceful  systems.\n\nI  have  a  bad  habit  of  talking  more  than  I  should  but,  despite  my  best  efforts,  the  group  expressed  interest  in  hearing  what  teams  at  Co-op  Digital  had  learned  in  the  last  ten  months  or  so  of  working  with  serviceful  systems  in  AWS.\n\nWe  defined  some  terms,  covered  some  pitfalls  and  gotchas,  some  successes,  and  most  of  all  our  key  learning:  that  once  you  can  deploy  one  serviceful  system  into  production  you  can  move  faster  than  you  ever  have  before.\n\nLet's  spend  a  little  while  defining  our  terms…\n\n\n\nCloud  Native  Functions\n\nThe  Cloud  Native  Computing  foundation  is  a  group  of  companies  seeking  to  define  open  standards  for  systems  built  to  run  on  \"the  cloud\".\n\n\n    Cloud  native  technologies  empower  organizations  to  build  and  run  scalable  applications  in  modern,  dynamic  environments  such  as  public,  private,  and  hybrid  clouds.  Containers,  service  meshes,  microservices,  immutable  infrastructure,  and  declarative  APIs  exemplify  this  approach.\n\n\n\n\nfrom:  https://github.com/cncf/foundation/blob/master/charter.md\n\nSeeking  to  build  \"a  constellation  of  high-quality  projects  that  orchestrate  containers  as  part  of  a  microservices  architecture.\"\n\nSo,  cloud  native  functions  are  (container  based)  systems  that  allow  you  to  run  functions  as  a  service  (Faas).\n\nFunction  as  as  a  Service  (FaaS)\n\nThese  are  compute  environments  that  let  someone  deploy  a  function  that  will  run  in  response  to  events  triggered  by  the  environment.\n\nAWS,  Azure,  and  Google  Cloud  Platform  all  have  a  FaaS  offering.  There  are  systems  like  kubeless  that  let  you  run  infrastructure  (or  rent  it  from  someone  else)  and  run  your  own  FaaS  environment  on  top  of  that.\n\nCNCF  has  a  landscape  view  at  time  of  writing  that  has  58  serverless  products  on  it.\n\nIf  I  only  convince  you  of  one  thing  in  this  post  I  want  it  to  be  this:  none  of  the  items  in  the  \"installable  platform\"  section  are  Serverless.  Doesn't  mean  they  aren't  potentially  valuable  to  someone  but…\n\nServerless\n\nThere's  quite  a  bit  of  definition  of  serverless  in  a  previous  post.\n\nBoil  it  down  to  this:  there  is  no  installation,  configuration,  or  maintenance  of  servers  for  the  owners,  and  builders  of  a  service  in  a  Serverless  system.\n\nIn  most  cases  your  team  (or  worse  a  different  team  in  your  organisation)  will  provision,  manage,  patch,  security  scan,  and  deploy  servers  either  physical  or  virtual.  Unless  you  sell  the  compute  those  servers  represent  then  you  don't  make  money  only  by  running  those  servers.\n\n\n\nIn  this  image  we  can  see  that  adding  containers  or  kubernetes  might  make  your  systems  \"Serverless\"  to  a  traditional  development  team,  one  that  has  no  access  to  or  responsibility  for  infrastructure.  But  it  increases  the  amount  of  infrastructure  to  provision,  patch,  and  scan  for  vulnerabilities  for  your  organisation.  It  increases  the  amount  of  things  to  manage  that  don't  directly  add  value.\n\nIt's  only  as  you  move  to  a  system  like  EC2  fargate  or  GCP  cloud  run  where  you  only  bring  the  containers  that  you  start  to  reduce  the  amount  of  infrastructure  management  you  need  to  carry  out.\n\nI'm  partly  excluding  managed  kubernetes  from  that  or  at  least  withholding  judgement.  A  little  because  I'm  not  familiar  enough  to  say  if  it  meets  this  definition  but  also  partly  because  in  Amazon  EKS  you  are  still  responsible  for  bring  the  machine  images  that  kubernetes  worker  nodes  run  on.  So  you're  still  responsible  for  the  scanning  and  patching  of  those  images.\n\n\n\nOn  the  right  you  then  have  what  most  people  think  of  when  you  say  Serverless  which  is  something  that  should  probably  be  called  \"Serverless  with  FaaS  compute\".  Serverless  has  existed  (if  not  named)  since  tools  like  S3  became  available.  FaaS  allows  you  to  more  obviously  include  your  business  logic  to  tie  together  the  various  available  serverless  services.\n\nHere  you  tradeoff  not  being  able  to  bring  your  own  application  framework  with  the  freedom  of  having  an  almost  zero  maintenance  load.  So  long  as  you  scan  your  dependencies,  and  perform  some  static  or  dynamic  analysis  of  your  code  you  can  offload  the  responsibility  for  the  rest  of  the  maintenance  and  management  of  the  system  to  the  utility  provider.\n\nServiceful  Systems\n\nSome  folk  don't  get  on  with  the  name  serverless.  Myself  it  is  because  of  the  confusion  between  FaaS  and  Serverless  making  it  hard  for  people  to  understand  how  to  approach  building  these  systems.  My  colleague  Chris  Sewart  introduced  me  to  the  idea  of  calling  it  \"serviceful\"  instead.  The  earliest  reference  for  the  name  I  can  find  is  Patrick  Debois  at  Serverlessconf.  A  30  minute  video  here:  https://www.youtube.com/watch?v=bYCPbKHivMA\n\n\n\nInstead  of  concentrating  on  not  having  servers.  Concentrate  on  making  best  use  of  services.  The  example  my  colleague  uses  is  that  if  you  want  a  file  system  you  almost  certainly  want  NFS  because  it's  an  excellent  file  system.  But  that  generally  speaking  you  don't  really  want  a  file  system  you  only  want  somewhere  it  is  easy  to  put  files.  As  a  result  you  should  use  S3  (if  you're  in  AWS)  because  that's  a  really  easy  way  to  store  files.\n\nIn  a  serviceful  system  you  should  default  to  consuming  the  service.  The  service  doesn't  come  with  the  provisioning  and  maintenance  burden  of  the  not-service.  Even  if  the  not-service  is  in  some  way  better  it  needs  to  be  a  lot  better  to  justify  its  cost.\n\n\n    Yes,  NFS  is  great  but  use  S3\n    Yes,  RabbitMQ  is  great  but  use  SQS\n    Yes,  ${MVC  Framework  of  choice}  is  great  but  use  API  Gateway  and  Lambda\n    etc\n    etc\n\n\nTechnical  debt  vs  Accidental  complexity\n\nTo  aid  some  of  the  below…\n\nTechnical  Debt\n\nMost  teams  call  an  awful  lot  of  things  \"technical  debt\".  I  like  to  restrict  it  to  one  particular  thing…  decisions  we  made  on  purpose  to  do  something  with  a  poor  level  of  technical  correctness  because  it  let's  us  get  to  production  faster.  Technical  debt  is  not  a  bad  thing  -  so  long  as  you  are  disciplined  about  replacing  the  bad  thing  with  a  better  version  once  you've  proven  the  need  for  it.\n\nAccidental  Complexity\n\nA  lot  of  teams  call  this  \"technical  debt\"  without  distinguishing  it  from  \"technical  debt\".  Accidental  complexity  (defined  by  Brooks  in  1986  in  the  \"No  Silver  Bullet\"  paper)  is  complexity  that  we  add  that  doesn't  need  to  be  in  the  system.  As  distinct  from  essential  complexity  that  does  need  to  be  in  the  system.\n\nE.g.  we  wrote  a  tax  processor  which  handles  complex  tax  rules…  and  we  wrote  our  own  queueing  software  to  do  it.  The  essential  complexity  of  the  tax  rules  might  be  swamped  by  the  accidental  complexity  of  the  home  grown  queue.\n\nOr  we  repurposed  the  existing  Oracle  analytical  DB  to  support  our  website  because  it  already  handled  the  complex  business  logic.  The  essential  business  logic  complexity  might  be  outweighed  by  the  workrarounds  needed  to  make  an  analytical  DB  look  like  an  online  transaction  processing  DB.\n\n(not  that  I've  been  burned  by  inheriting  decisions  that  look  like  either  of  those  two  ;))\n\nBlimey  charlie  that's  a  lot  of  definition  of  terms!\n\nLet's  see  if  it  helps…\n\nBackground  /  Context  for  my  experiences\n\nI  work  with  a  team  that  build  customer,  member,  and  offers  systems  for  the  Co-op.  At  one  point  the  team  was  200  people  from  3  different  consultancies.  It's  now  only  a  few  more  than  20.\n\n200  people  working  to  a  short  deadline  even  bringing  their  best  selves  every  day  can  introduce  an  awful  lot  of  technical  debt  and  accidental  complexity.\n\nDealing  with  that  debt  while  adding  to  and  fixing  our  systems  was  making  us  very  slow.  We  chose  the  principle  of  preferring  immutability  and  composability  at  every  level.  Choosing  serviceful  systems  has  enabled  that  and  meant  that  we  make  most  things  such  that  they  can  be  added  alongside  what  already  exists.  That  means  we  can  work  without  adding  to  the  already  high  maintenance  burden  of  the  serverful  systems  that  exist.\n\nThat  lets  us  deal  with  technical  debt  and  accidental  complexity  at  a  different  cadence  than  we  deal  with  our  sponsors'  and  users'  needs.  We  already  run  in  AWS  so  we  chose  to  use  AWS  lambda  for  FaaS  and  DynamoDB  for  (sort  of)  key-value  storage.  We  were  already  using  SQS  (queue),  SES  (email),  and  S3  (storage).\n\nEvent  driven  and  asynchronous  or  GTFO\n\nThe  first  thing  to  accept  is  that  this  is  an  event-driven  approach.  You  have  to  approach  the  design  of  your  system  as  lots  of  little  things  talking  to  each  other  by  raising  events  (albeit  implicitly).  If  you  can't  or  don't  want  to  then  you're  not  going  to  get  on  with  this  way  of  building  things.\n\nWhere  something  is  synchronous  (e.g.  an  API  call)  you  have  to  know  that  you  can  process  and  respond  in  a  short  enough  time  or  that  you  can  fake  a  synchronous  system.  For  example  if  you  can  always  succeed  (at  least  after  retry)  then  return  20x  to  the  calling  client,  put  their  request  into  SQS,  and  move  on.\n\nIn  most  cases  you  should  already  be  thinking  of  your  system  as  little,  independent  things  talking  to  each  other  by  sending  messages.  However,  it  was  fascinating  to  have  someone  in  the  JManc  discussion  group  that  worked  at  Elastic  on  ElasticSearch.  Such  a  different  development  context  and  you  could  see  that  things  that  were  absolutely  true  for  them  didn't  make  sense  for  me  and  vice  versa.\n\n(Always  important  to  remember  that  we  all  say  \"pattern\"  a  lot  and  that  means:  a  problem,  a  solution,  and  a  context.  Here  we  saw  how  a  change  of  context  meant  a  good  solution  in  one  context  was  a  bad  solution  in  the  other)\n\nEmpowering  if  you  empower\n\nWhen  I  joined  this  team  only  QAs  were  allowed  to  deploy  to  production  and  only  platform  engineers  made  any  infrastructure  changes.  It  was  inherited  behaviour  and  it  was  debilitating  for  productivity.  It  also  meant  that  folk  with  deep  expertise  in  important  tasks  were  snowed  under  with  trivial  tasks  that  didn't  require  their  expertise.  Because  they  were  siloed  the  different  groups  sat  separately  and  worked  separately  so  shared  very  little  understanding  of  each  others  needs  and  difficulties.\n\n\n\nThe  stability,  reduced  complexity,  and  reduced  attack  surface  of  Serviceful  systems  has  helped  give  us  the  confidence  to  collapse  those  silos.  Software  engineers  now  regularly  write  terraform,  platform  engineers  and  QAs  join  the  mob,  and  folk  sit  together.\n\nWe  also  noticed  people  starting  to  thank  each  other  as  they  got  to  know  each  other  and  understand  the  work  being  done.  Of  all  the  things  we've  achieved  together  this  is  the  one  I'm  most  proud  of.  So  while  I  wouldn't  argue  the  behaviours  are  unique  to  serviceful  systems  I  wouldn't  want  to  leave  out  the  contribution  they  made.\n\nCheap  and  fast  and  slow\n\nCheap\n\nCost  isn't  the  most  important  thing  -  developers  can  cost  much  more  than  infrastructure.  But  we've  been  building  entirely  servicefully  for  more  than  a  year  now  and  our  systems  do  more  than  they  used  to  but  at  worst  our  AWS  bill  has  been  flat  over  that  year.  We  use  cloudability  to  track  our  spending  and  that  predicts  a  10-20%  drop  in  bill  over  the  next  12  months  based  on  change  over  the  last  year.\n\n\n\nIn  fact  one  of  our  engineers  has  paid  his  salary  in  cost  reductions  on  our  inherited  Serverful  systems.  That  almost  certainly  means  we've  invested  upwards  of  $200,000  since  the  team  was  launched  that  could  have  been  avoided.  Engineers  are  more  expensive  than  infrastructure  so  let's  guess  that  we  invested  $1.5M  to  create  that  avoidable  $200k.  Arguably,  that's  going  on  for  $2M  invested  not  to  achieve  any  value  at  all.  At  best  it  was  scaffolding  that  enabled  the  valuable  work.  At  worst,  avoidable  in  its  entirety.\n\nServiceful  systems  were  less  mature  back  when  that  investment  was  being  made  so  it  may  well  have  been  the  right  investment  then…  but  they're  much  more  mature  now.  To  the  point  that  it  should  be  your  default  choice.  Your  context  might  force  a  different  choice.  But  my  assertion  is  that  teams  should  assume  they're  building  Servicefully  and  discover  where  they  can't.\n\nS3  and  dynamo  are  our  highest  serverless  cost.  Lambda  is  effectively  free  still  despite  running  production  workloads  and  underpinning  the  majority  of  our  scheduled  infrastructure  tasks.\n\nDynamoDB  was  rising  in  cost.  We  discovered  this  was  because  we  were  setting  tables  to  fixed  provisioned  capacities.  In  order  to  fix  a  performance  issue  we  set  Dynamo  to  \"on  demand\"  i.e.  serverless  mode.  Not  only  did  that  fix  our  performance  problems  but  also  reduced  cost  by  about  80%.  The  moral  of  the  tale  here  is  you  get  forensic  visibility  into  the  cost  of  what  you're  running.  But  you  have  to  make  sure  you're  using  a  service  like  cloudability  and  are  checking  what  you're  spending.\n\n\n\nYou  have  to  make  sure  you  are  looking  at  the  cost  profile  of  the  services…  AWS  Cognito  is  cheap  as  chips,  AWS  Cognito  with  Advanced  Security  suuuuupeeerrrrrr  expensive.\n\nAWS  API  Gateway  is  super  cheap  and  has  per  request  pricing.  While  Azure  API  Management  service  you  pay  to  reserve  capacity  so  at  much  lower  traffic  levels  (comparitively)  you  could  end  up  spending  more  than  running  an  API  gateway  yourself.  You  can't  assume  Serviceful  is  cheaper  but  when  you  cut  with  the  grain  there's  a  good  chance  it  is.\n\nand  fast\n\nThese  services  are  (in  our  experience,  in  AWS)  rock-solid,  stable,  and  fast.  But  they're  also  fast  to  build.  Once  you  know  how!  The  group  building  Offers  took  two  weeks  to  get  their  first  API  Gateway  &gt;  Lambda  &gt;  DynamoDB  system  into  production.  They  took  one  day  to  get  the  second  out.\n\nIt's  now  faster  for  the  team  to  create  two  competing  designs  of  a  thing  and  then  measure  them  than  to  research  which  might  perform  better.  As  you  build  capability  at  this  way  of  working  your  pace  can  grow  much  more  easily.\n\nand  slow\n\nBut  you  are  also  accepting  that  you  are  leaning  on  a  framework  that  you  can't  play  around  with.  We  use  a  number  of  existing  dependencies  that  live  inside  a  VPC  (a  private  network  in  AWS)  and  so  we  have  to  deploy  some  lambdas  inside  that  VPC.\n\nAt  the  time  of  our  first  implementations  cold  start  of  a  lambda  function  in  a  VPC  took  a  pretty  consistent  ten  seconds.  For  an  offline  batch  process  that  doesn't  really  matter  but  if  you  connect  that  up  to  an  API  that's  abysmal.\n\nSince  that  JManc  discussion  AWS  have  released  a  fix  to  that  performance  issue.  But  it's  a  great  example  of  how  you  may  have  to  accept  the  tradeoff  of  not  being  able  to  build  exactly  what  you  want  in  the  way  you  want  in  order  to  get  the  benefits  of  the  serviceful  approach.\n\nIt's  also  a  great  example  of  why  I'd  recommend  AWS  for  Serviceful/utility  hosting.  The  speed  at  which  they  iterate  and  improve  based  on  customer  feedback  is  startling.\n\nCommit  to  learning\n\nThis  is  a  relatively  new  way  of  making  systems  and  pushes  you  into  less  familiar  approaches.  If  you  start  down  this  road  you  should  make  a  point  of  introducing  protected  time  for  individual  and  group  learning.  We  definitely  missed  a  trick  here  and  it  took  longer  than  necessary  to  get  good  at  this.\n\nYou  should  have  protected  learning  time  anyway  but  especially  while  you  introduce  something  so  new  to  everyone.\n\nOne  of  the  things  that  helped  fantastically  was  the  team's  practice  of  preferring  to  mob  on  work.  That's  helped  keep  everyone  moving  their  understanding  along  at  the  same  rate.\n\nThe  next  steps  the  team  needs  to  take  are  to  start  to  formalise  and  describe  some  of  what  we  did  so  that  other  teams  can  start  to  take  advantage  of  it.\n\nThis  is  forking  awesome\n\nWe're  doing  more,  with  fewer  people,  at  greater  value,  and  lower  cost.  And  it's  been  a  genuinely  joyful  process.\n\nI'm  more  than  happy  to  stick  my  flag  in  the  ground  and  repeat  from  above  that  serviceful  systems  are  more  than  mature  enough  and  more  than  valuable  enough  that  you  should  have  to  justify  why  you're  not  using  them.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sat Nov 30 2019</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Serverless - Lessons learned</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2019/11/serverless-lessons-learned.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Serverless+-+Lessons+learned&via=pauldambra&url=https://pauldambra.dev/2019/11/serverless-lessons-learned.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#serverless"
+      >
+        in: serverless
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#serverless">
+    serverless
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#experience-report">
+    experience-report
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>At the 2019 Manchester Java Unconference I attended a discussion on "Cloud Native Functions". It turned out nobody in the group had used "cloud native" but I've been working with teams using serviceful systems.</p>
+
+<p>I have a bad habit of talking more than I should but, despite my best efforts, the group expressed interest in hearing what teams at Co-op Digital had learned in the last ten months or so of working with serviceful systems in AWS.</p>
+
+<p>We defined some terms, covered some pitfalls and gotchas, some successes, and most of all our key learning: that once you can deploy one serviceful system into production you can move faster than you ever have before.</p>
+
+<p>Let's spend a little while defining our terms…</p>
+
+<!--more-->
+
+<h1 id="cloud-native-functions">Cloud Native Functions</h1>
+
+<p><a href="https://www.cncf.io/">The Cloud Native Computing foundation</a> is a group of companies seeking to define open standards for systems built to run on "the cloud".</p>
+
+<blockquote>
+  <p>Cloud native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.</p>
+</blockquote>
+
+<!--alex ignore master --->
+
+<p>from: https://github.com/cncf/foundation/blob/master/charter.md</p>
+
+<p>Seeking to build "a constellation of high-quality projects that orchestrate containers as part of a microservices architecture."</p>
+
+<p>So, cloud native functions are (container based) systems that allow you to run functions as a service (Faas).</p>
+
+<h1 id="function-as-as-a-service-faas">Function as as a Service (FaaS)</h1>
+
+<p>These are compute environments that let someone deploy a function that will run in response to events triggered by the environment.</p>
+
+<p>AWS, Azure, and Google Cloud Platform all have a FaaS offering. There are systems like kubeless that let you run infrastructure (or rent it from someone else) and run your own FaaS environment on top of that.</p>
+
+<p><a href="https://landscape.cncf.io/serverless?fullscreen=yes&amp;zoom=150">CNCF has a landscape view</a> at time of writing that has 58 serverless products on it.</p>
+
+<p>If I only convince you of one thing in this post I want it to be this: none of the items in the "installable platform" section are Serverless. Doesn't mean they aren't potentially valuable to someone but…</p>
+
+<h1 id="serverless">Serverless</h1>
+
+<p>There's quite a bit of <a href="/2018/02/serverless-1.html">definition of serverless in a previous post</a>.</p>
+
+<p>Boil it down to this: there is no installation, configuration, or maintenance of servers for the owners, and builders of a service in a Serverless system.</p>
+
+<p>In most cases your team (or worse a different team in your organisation) will provision, manage, patch, security scan, and deploy servers either physical or virtual. Unless you sell the compute those servers represent then you don't make money only by running those servers.</p>
+
+<p><img src="/images/serverless-maintenance.png" alt="what you do and don't manage in a serverless system" loading="lazy" /></p>
+
+<p>In this image we can see that adding containers or kubernetes might make your systems "Serverless" to a traditional development team, one that has no access to or responsibility for infrastructure. But it increases the amount of infrastructure to provision, patch, and scan for vulnerabilities for your organisation. It <em>increases</em> the amount of things to manage that don't directly add value.</p>
+
+<p>It's only as you move to a system like EC2 fargate or GCP cloud run where you only bring the containers that you start to reduce the amount of infrastructure management you need to carry out.</p>
+
+<p>I'm partly excluding managed kubernetes from that or at least withholding judgement. A little because I'm not familiar enough to say if it meets this definition but also partly because in Amazon EKS you are still responsible for bring the machine images that kubernetes worker nodes run on. So you're still responsible for the scanning and patching of those images.</p>
+
+<!--alex ignore obvious --->
+
+<p>On the right you then have what most people think of when you say Serverless which is something that should probably be called "Serverless with FaaS compute". Serverless has existed (if not named) since tools like S3 became available. FaaS allows you to more obviously include your business logic to tie together the various available serverless services.</p>
+
+<p>Here you tradeoff not being able to bring your own application framework with the freedom of having an almost zero maintenance load. So long as you scan your dependencies, and perform some static or dynamic analysis of your code you can offload the responsibility for the rest of the maintenance and management of the system to the utility provider.</p>
+
+<h1 id="serviceful-systems">Serviceful Systems</h1>
+
+<p>Some folk don't get on with the name serverless. Myself it is because of the confusion between FaaS and Serverless making it hard for people to understand how to approach building these systems. My colleague Chris Sewart introduced me to the idea of calling it "serviceful" instead. <a href="https://twitter.com/JoeEmison/status/1147825424615059456">The earliest reference for the name I can find is Patrick Debois at Serverlessconf</a>. A 30 minute video here: <a href="https://www.youtube.com/watch?v=bYCPbKHivMA">https://www.youtube.com/watch?v=bYCPbKHivMA</a></p>
+
+<!--alex ignore easy --->
+
+<p>Instead of concentrating on not having servers. Concentrate on making best use of services. The example my colleague uses is that if you want a file system you almost certainly want NFS because it's an excellent file system. But that generally speaking you don't really want a file system you only want somewhere it is easy to put files. As a result you should use S3 (if you're in AWS) because that's a really easy way to store files.</p>
+
+<p>In a serviceful system you should default to consuming the service. The service doesn't come with the provisioning and maintenance burden of the not-service. Even if the not-service is in some way better it needs to be <em>a lot</em> better to justify its cost.</p>
+
+<ul>
+  <li>Yes, NFS is great but use S3</li>
+  <li>Yes, RabbitMQ is great but use SQS</li>
+  <li>Yes, ${MVC Framework of choice} is great but use API Gateway and Lambda</li>
+  <li>etc</li>
+  <li>etc</li>
+</ul>
+
+<h1 id="technical-debt-vs-accidental-complexity">Technical debt vs Accidental complexity</h1>
+
+<p>To aid some of the below…</p>
+
+<h2 id="technical-debt">Technical Debt</h2>
+
+<p>Most teams call an awful lot of things <a href="http://wiki.c2.com/?TechnicalDebt">"technical debt"</a>. I like to restrict it to one particular thing… decisions we made <em>on purpose</em> to do something with a poor level of technical correctness because it let's us get to production faster. Technical debt is not a bad thing - so long as you are disciplined about replacing the bad thing with a better version once you've proven the need for it.</p>
+
+<h2 id="accidental-complexity">Accidental Complexity</h2>
+
+<p>A lot of teams call this "technical debt" without distinguishing it from "technical debt". Accidental complexity (defined by Brooks in 1986 in the <a href="http://worrydream.com/refs/Brooks-NoSilverBullet.pdf">"No Silver Bullet"</a> paper) is complexity that we add that doesn't need to be in the system. As distinct from essential complexity that does need to be in the system.</p>
+
+<p>E.g. we wrote a tax processor which handles complex tax rules… and we wrote our own queueing software to do it. The essential complexity of the tax rules might be swamped by the accidental complexity of the home grown queue.</p>
+
+<p>Or we repurposed the existing Oracle analytical DB to support our website because it already handled the complex business logic. The essential business logic complexity might be outweighed by the workrarounds needed to make an analytical DB look like an online transaction processing DB.</p>
+
+<p>(not that I've been burned by inheriting decisions that look like either of those two ;))</p>
+
+<h1 id="blimey-charlie-thats-a-lot-of-definition-of-terms">Blimey charlie that's a lot of definition of terms!</h1>
+
+<p>Let's see if it helps…</p>
+
+<h1 id="background--context-for-my-experiences">Background / Context for my experiences</h1>
+
+<p>I work with a team that build customer, member, and offers systems for the Co-op. At one point the team was 200 people from 3 different consultancies. It's now only a few more than 20.</p>
+
+<p>200 people working to a short deadline even bringing their best selves every day can introduce an awful lot of technical debt and accidental complexity.</p>
+
+<p>Dealing with that debt while adding to and fixing our systems was making us very slow. We chose the principle of preferring immutability and composability at every level. Choosing serviceful systems has enabled that and meant that we make most things such that they can be added alongside what already exists. That means we can work <em>without adding to the already high maintenance burden of the serverful systems that exist</em>.</p>
+
+<p>That lets us deal with technical debt and accidental complexity at a different cadence than we deal with our sponsors' and users' needs. We already run in AWS so we chose to use AWS lambda for FaaS and DynamoDB for (sort of) key-value storage. We were already using SQS (queue), SES (email), and S3 (storage).</p>
+
+<h1 id="event-driven-and-asynchronous-or-gtfo">Event driven and asynchronous or GTFO</h1>
+
+<p>The first thing to accept is that this is an event-driven approach. You have to approach the design of your system as lots of little things talking to each other by raising events (albeit implicitly). If you can't or don't want to then you're not going to get on with this way of building things.</p>
+
+<p>Where something is synchronous (e.g. an API call) you have to know that you can process and respond in a short enough time or that you can fake a synchronous system. For example if you can always succeed (at least after retry) then return 20x to the calling client, put their request into SQS, and move on.</p>
+
+<p>In most cases you should already be thinking of your system as little, independent things talking to each other by sending messages. However, it was fascinating to have someone in the JManc discussion group that worked at Elastic on ElasticSearch. Such a different development context and you could see that things that were absolutely true for them didn't make sense for me and vice versa.</p>
+
+<p>(Always important to remember that we all say "pattern" a lot and that means: a problem, a solution, <em>and a context</em>. Here we saw how a change of context meant a good solution in one context was a bad solution in the other)</p>
+
+<h1 id="empowering-if-you-empower">Empowering if you empower</h1>
+
+<p>When I joined this team only QAs were allowed to deploy to production and only platform engineers made any infrastructure changes. It was inherited behaviour and it was debilitating for productivity. It also meant that folk with deep expertise in important tasks were snowed under with trivial tasks that didn't require their expertise. Because they were siloed the different groups sat separately and worked separately so shared very little understanding of each others needs and difficulties.</p>
+
+<!--alex ignore attack --->
+
+<p>The stability, reduced complexity, and reduced attack surface of Serviceful systems has helped give us the confidence to collapse those silos. Software engineers now regularly write terraform, platform engineers and QAs join the mob, and folk sit together.</p>
+
+<p>We also noticed people starting to thank each other as they got to know each other and understand the work being done. Of all the things we've achieved together this is the one I'm most proud of. So while I wouldn't argue the behaviours are unique to serviceful systems I wouldn't want to leave out the contribution they made.</p>
+
+<h1 id="cheap-and-fast-and-slow">Cheap and fast and slow</h1>
+
+<h2 id="cheap">Cheap</h2>
+
+<p>Cost isn't the most important thing - developers can cost much more than infrastructure. But we've been building entirely servicefully for more than a year now and our systems do more than they used to but at worst our AWS bill has been flat over that year. We use <a href="https://www.cloudability.com/">cloudability</a> to track our spending and that predicts a 10-20% drop in bill over the next 12 months based on change over the last year.</p>
+
+<!--alex ignore her-him --->
+
+<p>In fact <a href="https://twitter.com/IllCopeSomehow">one of our engineers</a> has paid his salary in cost reductions on our inherited Serverful systems. That almost certainly means we've invested upwards of $200,000 since the team was launched that could have been avoided. Engineers are more expensive than infrastructure so let's guess that we invested $1.5M to create that avoidable $200k. Arguably, that's going on for $2M invested not to achieve any value <em>at all</em>. At best it was scaffolding that enabled the valuable work. At worst, avoidable in its entirety.</p>
+
+<p>Serviceful systems were less mature back when that investment was being made so it may well have been the right investment then… but they're much more mature now. To the point that it should be your default choice. Your context might force a different choice. But my assertion is that teams should assume they're building Servicefully and discover where they can't.</p>
+
+<p>S3 and dynamo are our highest serverless cost. Lambda is effectively free still despite running production workloads and underpinning the majority of our scheduled infrastructure tasks.</p>
+
+<p>DynamoDB was rising in cost. We discovered this was because we were setting tables to fixed provisioned capacities. In order to fix a performance issue we set Dynamo to "on demand" i.e. serverless mode. Not only did that fix our performance problems but also reduced cost by about 80%. The moral of the tale here is you get forensic visibility into the cost of what you're running. But you have to make sure you're using a service like cloudability and are checking what you're spending.</p>
+
+<p><img src="/images/dynamo-cheap-perf.png" alt="https://twitter.com/pauldambra/status/1180157778419179523" loading="lazy" /></p>
+
+<p>You have to make sure you are looking at the cost profile of the services… AWS Cognito is cheap as chips, AWS Cognito with Advanced Security suuuuupeeerrrrrr expensive.</p>
+
+<p>AWS API Gateway is super cheap and has <em>per request</em> pricing. While Azure API Management service you pay to reserve capacity so at much lower traffic levels (comparitively) you could end up spending more than running an API gateway yourself. You can't assume Serviceful is cheaper but when you cut with the grain there's a good chance it is.</p>
+
+<h2 id="and-fast">and fast</h2>
+
+<p>These services are (in our experience, in AWS) rock-solid, stable, and fast. But they're also fast to build. Once you know how! The group building Offers took two weeks to get their first API Gateway &gt; Lambda &gt; DynamoDB system into production. They took one day to get the second out.</p>
+
+<p>It's now faster for the team to create two competing designs of a thing and then measure them than to research which might perform better. As you build capability at this way of working your pace can grow much more easily.</p>
+
+<h2 id="and-slow">and slow</h2>
+
+<p>But you are also accepting that you are leaning on a framework that you can't play around with. We use a number of existing dependencies that live inside a VPC (a private network in AWS) and so we have to deploy some lambdas inside that VPC.</p>
+
+<p>At the time of our first implementations cold start of a lambda function in a VPC took a pretty consistent ten seconds. For an offline batch process that doesn't really matter but if you connect that up to an API that's abysmal.</p>
+
+<p>Since that JManc discussion AWS have released a fix to that performance issue. But it's a great example of how you may have to accept the tradeoff of not being able to build exactly what you want in the way you want in order to get the benefits of the serviceful approach.</p>
+
+<p>It's also a great example of why I'd recommend AWS for Serviceful/utility hosting. The speed at which they iterate and improve based on customer feedback is startling.</p>
+
+<h1 id="commit-to-learning">Commit to learning</h1>
+
+<p>This is a relatively new way of making systems and pushes you into less familiar approaches. If you start down this road you should make a point of introducing protected time for individual and group learning. We definitely missed a trick here and it took longer than necessary to get good at this.</p>
+
+<p>You should have protected learning time anyway but especially while you introduce something so new to everyone.</p>
+
+<p>One of the things that helped fantastically was the team's practice of preferring to mob on work. That's helped keep everyone moving their understanding along at the same rate.</p>
+
+<p>The next steps the team needs to take are to start to formalise and describe some of what we did so that other teams can start to take advantage of it.</p>
+
+<h1 id="this-is-forking-awesome">This is forking awesome</h1>
+
+<p>We're doing more, with fewer people, at greater value, and lower cost. And it's been a genuinely joyful process.</p>
+
+<p>I'm more than happy to stick my flag in the ground and repeat from above that serviceful systems are more than mature enough and more than valuable enough that you should have to justify why you're not using them.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2018/07/serverless-6.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Six - Making a view
+      </h3>
+      <small>
+        01 Jul 2018
+      </small>
+  </div>
+</a>  <a href="/2018/06/serverless-5.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Five - Read Models
+      </h3>
+      <small>
+        10 Jun 2018
+      </small>
+  </div>
+</a>  <a href="/2018/02/serverless-4.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Serverless - Part Four
+      </h3>
+      <small>
+        15 Mar 2018
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2019/11/serverless-lessons-learned.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2019/11/serverless-lessons-learned.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

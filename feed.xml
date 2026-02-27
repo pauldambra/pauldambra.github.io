@@ -1,0 +1,1236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Mindless Rambling Nonsense</title>
+		<description>My thoughts are mindless and rambling so the best place for them is the internet</description>		
+		<link>https://pauldambra.dev</link>
+		<atom:link href="https://pauldambra.dev/feed.xml" rel="self" type="application/rss+xml" />
+		<updated>2026-02-27T17:25:17+00:00</updated>
+		
+			<item>
+				<title>I shipped 1000 PRs in a year, AMA</title>
+				<description>&lt;p&gt;I shipped 1000 PRs in the last 12 months at &lt;a href=&quot;https://posthog.com&quot;&gt;PostHog&lt;/a&gt;. And someone asked me how I do it… let&apos;s see if i know.&lt;/p&gt;
+
+&lt;h3 id=&quot;preamble&quot;&gt;preamble&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;yes, yes, I know you don&apos;t think I should count PRs&lt;/li&gt;
+  &lt;li&gt;when a measure becomes a target it stops being a useful measure&lt;/li&gt;
+  &lt;li&gt;embrace yourself&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;advice&quot;&gt;advice&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;it is running not cycling&lt;/li&gt;
+  &lt;li&gt;small steps ftw&lt;/li&gt;
+  &lt;li&gt;practice like a jazz musician&lt;/li&gt;
+  &lt;li&gt;love making things&lt;/li&gt;
+  &lt;li&gt;one more iteration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;yes-yes-i-know-you-dont-think-i-should-count-prs&quot;&gt;yes, yes, I know you don&apos;t think I should count PRs&lt;/h2&gt;
+
+&lt;p&gt;So, first something important…&lt;/p&gt;
+
+&lt;p&gt;Counting PRs is a very poor metric for measuring progress. Someone who ships 10 PRs has not provided a guaranteed ten times the value of someone who ships one PR.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m not telling you to count PRs. Or to worship the github tile graph.&lt;/p&gt;
+
+&lt;p&gt;But….&lt;/p&gt;
+
+&lt;p&gt;Yes, weighing yourself is a bad way of checking if your last meal was healthy. 
+Yes, merging a PR is a bad way of checking if you just provided any value.&lt;/p&gt;
+
+&lt;p&gt;But &lt;em&gt;not weighing yourself&lt;/em&gt; is a great way to put on weight without noticing.&lt;/p&gt;
+
+&lt;p&gt;And &lt;em&gt;not measuring what you ship&lt;/em&gt; is a great way to accidentally ship less value.&lt;/p&gt;
+
+&lt;p&gt;However………..&lt;/p&gt;
+
+&lt;h1 id=&quot;when-a-measure-becomes-a-target-it-stops-being-a-useful-measure-charles-goodhart-in-preparation-for-my-birth&quot;&gt;&quot;when a measure becomes a target it stops being a useful measure&quot;: Charles Goodhart in preparation for my birth&lt;/h1&gt;
+
+&lt;p&gt;Taking a look at how many PRs or lines of code people ship &lt;em&gt;is&lt;/em&gt; a measure of what people are doing. It&apos;s vague and lossy but it&apos;s a starting point.&lt;/p&gt;
+
+&lt;p&gt;And, yes, of course, someone could ship lots of PRs but they&apos;re no good or only ship one thing a week but it&apos;s super impactful.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;So even if you use it as a measure it should not be your only measure of progress&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;But, importantly, if you tell people &quot;number of PRs is related to promotion review&quot; then they &lt;em&gt;will damn well make sure they ship more PRs&lt;/em&gt; without that being related to actual value to users.&lt;/p&gt;
+
+&lt;p&gt;It is no longer a useful measure of progress &lt;em&gt;because&lt;/em&gt; it became a target.&lt;/p&gt;
+
+&lt;h1 id=&quot;embrace-yourself&quot;&gt;embrace yourself&lt;/h1&gt;
+
+&lt;p&gt;didn&apos;t that feel nice?&lt;/p&gt;
+
+&lt;p&gt;no, not like that&lt;/p&gt;
+
+&lt;p&gt;Throughout my career I&apos;ve been told I spin too many plates and to try and reduce my work in progress. I tried really hard to lower personal WIP and it was sooooo much effort.&lt;/p&gt;
+
+&lt;p&gt;My colleague Marius at PostHog said (roughly): &quot;you always apologise for spinning plates, but you&apos;re good at it. why don&apos;t you try to get better?&quot;&lt;/p&gt;
+
+&lt;p&gt;So, I&apos;ve done that. I&apos;ve accepted that I am easily distracted and that I will start many things. And I&apos;ve concentrated on getting better at making sure the plates I&apos;m spinning are moving forward. And throwing away the ones that are just distraction.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve &lt;em&gt;started&lt;/em&gt; more than 1000 PRs but recognised the ones that aren&apos;t going anywhere.&lt;/p&gt;
+
+&lt;p&gt;For &lt;em&gt;you this will look different&lt;/em&gt;. You might have to not listen to music with lyrics. You might need to make sure you go for a walk in the morning. Or plan blocks of the day with zero distractions.&lt;/p&gt;
+
+&lt;p&gt;My advice would be - stop listening to advice that makes you fight your nature. Just because someone else wants to work on one thing at a time doesn&apos;t mean you should. And just because I can have 23 open PRs right now and be on top of my work doesn&apos;t mean you should.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Ok, now that I&apos;ve told you to not listen to other people&apos;s advice.&lt;/p&gt;
+
+&lt;p&gt;I will dress in a robe, walk down from the holy mountain of the github tile graph, and hand down my advice of  what I believe contributes to my productivity:&lt;/p&gt;
+
+&lt;h1 id=&quot;it-is-running-not-cycling&quot;&gt;it is running not cycling&lt;/h1&gt;
+
+&lt;p&gt;I used to cycle a lot and having struggled up a big hill it was super cool to stop pedalling and coast down the other side. Then I started running, and having struggled up the big hill I discovered I still had to put in effort to run downhill. Even if gravity was helping me if I stopped moving my legs I stopped moving.&lt;/p&gt;
+
+&lt;p&gt;Delivering valuable software to users is running, not cycling. If you stop shipping your momentum is quickly lost.&lt;/p&gt;
+
+&lt;p&gt;It is up to you to move your legs. To bring the appropriate intensity and effort.&lt;/p&gt;
+
+&lt;p&gt;Want to ship a lot? Just do the work…&lt;/p&gt;
+
+&lt;h1 id=&quot;small-steps-ftw&quot;&gt;small steps ftw&lt;/h1&gt;
+
+&lt;p&gt;I have seen time and time again that small, concrete steps that you can explain, complete, and measure are the best way to make progress.&lt;/p&gt;
+
+&lt;p&gt;See &quot;But why regularly measure&quot; in &lt;a href=&quot;https://pauldambra.dev/2018/01/direction.html&quot;&gt;one of my earlier weblogs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you feel stuck with the coding, break it into a smaller piece. Not sure how to do the work? Figure out what the simple pieces are and start with those. If the remaining pieces are &quot;too big&quot;  or &quot;too hard&quot; figure out how to change the system so the solution changes and is smaller or easier.&lt;/p&gt;
+
+&lt;p&gt;Often, I will make one big PR that covers the whole change to prove it works. Then break that into smaller pieces that refer back to the whole. To make it easier to review or deploy.&lt;/p&gt;
+
+&lt;h1 id=&quot;practice-like-a-jazz-musician&quot;&gt;practice like a jazz musician&lt;/h1&gt;
+
+&lt;p&gt;When I was younger I was labouring under the misapprehension that I was going to change the world of music. And I was lucky to spend some time with some people who were amazing musicians.&lt;/p&gt;
+
+&lt;p&gt;They would practice frequently and deliberately. They were purposefully aiming to get better at the little things that made them better at the whole.&lt;/p&gt;
+
+&lt;p&gt;Later I spent time with folks talking about the craft of software engineering. Practising skills like TDD and refactoring.&lt;/p&gt;
+
+&lt;p&gt;The little things that make you better at the whole.&lt;/p&gt;
+
+&lt;p&gt;Ah, but Paul this new world of agentic software engineering makes skills like that outdated and unnecessary.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/andrej-karpathy-programming-is-changing-so-fast-v0-xs431byeeikd1.webp&quot; alt=&quot;Andrej Karpathy quote&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I love this quote from Andrej Karpathy&lt;/p&gt;
+
+&lt;p&gt;And I&apos;ve found the same… If the prompt is important then knowing what to prompt is important.&lt;/p&gt;
+
+&lt;p&gt;And when the prompt isn&apos;t enough to get the job done being able to sketch enough code to give a better start to the agent is important.&lt;/p&gt;
+
+&lt;p&gt;In both cases you actually have to know what you want. And practicing what good software, or good architecture looks like is still a differentiator.&lt;/p&gt;
+
+&lt;p&gt;I&apos;d add practicing writing good prompts and managing context well as new skills that it is worth practicing.&lt;/p&gt;
+
+&lt;p&gt;Be purposeful about improving your ability as a person that provides value through creating and changing software. Watch what you do, see what makes it better, double down on those things.&lt;/p&gt;
+
+&lt;p&gt;Avoid through practice and diligence ever doing the wrong thing harder.&lt;/p&gt;
+
+&lt;h1 id=&quot;love-making-things&quot;&gt;love making things&lt;/h1&gt;
+
+&lt;p&gt;I make things all the time. I am sad when I don&apos;t get to make things. This is a vocation for me.&lt;/p&gt;
+
+&lt;p&gt;Nobody points at the musician that plays music for the sheer joy of it and says:  &quot;ha, look at that loser. playing music even though they&apos;re not getting paid for it&quot;&lt;/p&gt;
+
+&lt;p&gt;So, in the evening when I&apos;ve finished getting the kids to bed. I sit and fiddle with software while I watch TV or listen to music.&lt;/p&gt;
+
+&lt;p&gt;I am incredibly lucky to have found something that gives me joy and makes me money.&lt;/p&gt;
+
+&lt;p&gt;Not a vocation for you - ok, cool. Live your life as you see fit. But one of the ways that &lt;em&gt;I&lt;/em&gt; am productive is that this is a joyful vocation. Also, if software is not your vocation, why the heck are you reading about how to ship 1000 PRs in twelve months?! Go, ride horses or fix gates or whatever the thing is that &lt;em&gt;does&lt;/em&gt; bring you joy 💖&lt;/p&gt;
+
+&lt;h1 id=&quot;one-more-iteration&quot;&gt;one more iteration&lt;/h1&gt;
+
+&lt;p&gt;It feels like it goes without saying that iteration is good… but…&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Iteration is the process of repeating a set of steps or instructions multiple times, often to reach a specific goal, solve a problem, or improve a result.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&quot;One more iteration&quot; is a phrase that Tim at work uses to push us to think about the quality of what we build…&lt;/p&gt;
+
+&lt;p&gt;OK, you did something. Stop and ask: &quot;am I really finished?&quot;&lt;/p&gt;
+
+&lt;p&gt;How do &lt;em&gt;I&lt;/em&gt; know if I&apos;m really finished?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;are people using it?&lt;/li&gt;
+  &lt;li&gt;do they like it?&lt;/li&gt;
+  &lt;li&gt;did it move the needle the way I expected?&lt;/li&gt;
+  &lt;li&gt;would I know if it was broken?&lt;/li&gt;
+  &lt;li&gt;now it is functional does it need to also be delightful?&lt;/li&gt;
+  &lt;li&gt;does it help me see what should come next?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I think this sits really wonderfully with &quot;small steps ftw&quot;. Iteration of large blocks of work is inherently slower than iteration of small steps.&lt;/p&gt;
+
+&lt;p&gt;The benefit of small steps is you can be nimble in response to what you learn.&lt;/p&gt;
+
+&lt;p&gt;Worse… Something that takes a month to put together will build up a lot of weight in your subconscious. It&apos;s hard to throw it away or change it because of the time you have sunk into it. Not only are you less nimble, you&apos;re less likely to correct your course.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-concrete-example-of-how-i-do-small-steps-and-iteration&quot;&gt;A concrete example of how i do small steps and iteration…&lt;/h3&gt;
+
+&lt;p&gt;A customer reported they were unhappy with filtering in our tool. It was multiple clicks to get to the point where they had type-ahead search. And that was frustrating for them.&lt;/p&gt;
+
+&lt;p&gt;Frustration is no bueno, so I started spinning a new plate. I mocked up a solution for them very quickly and shared a video.&lt;/p&gt;
+
+&lt;p&gt;They loved it.&lt;/p&gt;
+
+&lt;p&gt;BUT I OPTIMISE FOR ITERATION AND SO I DID NOT SIMPLY SHIP IT&lt;/p&gt;
+
+&lt;p&gt;I wrapped it in a flag and released it just for our team and that specific user that I was talking to&lt;/p&gt;
+
+&lt;p&gt;I got fast feedback that they did not like it. They liked the description, and they liked the demo. But what people think they will like and use is not always what they will actually like and use.&lt;/p&gt;
+
+&lt;p&gt;In practice by optimising for one journey through the filtering UX I had made other journeys harder. I wouldn&apos;t have known that if I didn&apos;t think about how to release this in a way that meant I could check if it was any good.&lt;/p&gt;
+
+&lt;p&gt;In the end, this took four attempts to get right.&lt;/p&gt;
+
+&lt;p&gt;And now I have rolled out the flag to all users. After an experiment over those multiple iterations showed folk came back and searched more using the new versions of this change.&lt;/p&gt;
+
+&lt;p&gt;But rolling out the flag isn&apos;t the end of the work. I&apos;m now working on tidying up the code that was there so that I could dual run and measure the change. I&apos;ve got to finish updating the documentation. I need to check that users behaviour really does change over coming weeks and react to that. So there are still more PRs to come from this work.&lt;/p&gt;
+
+&lt;h1 id=&quot;an-inspirational-sign-off&quot;&gt;An inspirational sign-off?&lt;/h1&gt;
+
+&lt;p&gt;The value here isn&apos;t that I shipped lots of PRs. The value is that I work in small steps, and I check direction in between them. That I can loop between what I learn and what I can do next to learn more.&lt;/p&gt;
+
+&lt;p&gt;How you do that might be different, perfect! But my advice: do that.&lt;/p&gt;
+</description>
+				<pubDate>Wed, 11 Feb 2026 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2026/02/deca-hundy.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2026/02/deca-hundy.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>How I do user interviews</title>
+				<description>&lt;p&gt;I&apos;ve been lucky to watch some excellent engineers, product managers, and user researchers carry out user interviews.&lt;/p&gt;
+
+&lt;p&gt;And had the opportunity at PostHog to practice that skill. I&apos;ve explained all this a couple of times to different people, so thought I&apos;d write it down.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;set expectations&lt;/li&gt;
+  &lt;li&gt;write down quotes&lt;/li&gt;
+  &lt;li&gt;show &amp;gt; tell&lt;/li&gt;
+  &lt;li&gt;compound interest&lt;/li&gt;
+  &lt;li&gt;sometimes stop&lt;/li&gt;
+  &lt;li&gt;be a Labrador&lt;/li&gt;
+  &lt;li&gt;this is the redesign that will kill the the Facebook&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;set-expectations&quot;&gt;set expectations&lt;/h1&gt;
+
+&lt;p&gt;Whenever I&apos;m starting a user interview I try to set very clear expectations for the person. I will say something like:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Thanks for your time today. And importantly it&apos;s your time. So, while I&apos;m mostly interested in $feature_X if you want to talk about other parts of the product, that&apos;s fine - we can cover the things you&apos;re interested in. I&apos;d really love you to share your screen so I can see what you&apos;re doing as well as hear you talk about it. To start out can you show me how you use $feature_X?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You might want to constrain what they talk about to a specific feature or topic. So your intro would be different. But I find it&apos;s generally better to hear what they&apos;re thinking and feeling even if it doesn&apos;t relate to what I&apos;m focused on.&lt;/p&gt;
+
+&lt;h1 id=&quot;write-down-quotes&quot;&gt;write down quotes&lt;/h1&gt;
+
+&lt;p&gt;I had the great privilege of working with user interviewers with a &lt;a href=&quot;https://www.gov.uk/government/organisations/government-digital-service/about&quot;&gt;GDS&lt;/a&gt; background and was always impressed by their skill.&lt;/p&gt;
+
+&lt;p&gt;One thing I learned from the wonderful &lt;a href=&quot;https://www.linkedin.com/in/simon-hurst-a144b426/&quot;&gt;Simon Hurst&lt;/a&gt; was to write down quotes when you&apos;re taking notes. And to editorialise them later.&lt;/p&gt;
+
+&lt;p&gt;You&apos;re aiming to capture the user&apos;s statement not what you thought about it at the time.&lt;/p&gt;
+
+&lt;p&gt;The benefit of having the quote is that you don&apos;t have to remember what they said later when you&apos;re grouping.&lt;/p&gt;
+
+&lt;p&gt;This is also a great way to introduce colleagues to the process. They can shadow your user interviews and capture quotes as they listen.&lt;/p&gt;
+
+&lt;p&gt;Of course, if you&apos;re doing these remotely it&apos;s trivial to record or transcribe the interview. But I still think there&apos;s value in going through and pulling out the quotes to capture them. I love to talk to a team and find that they know their users by name and can refer back to specific quotes.&lt;/p&gt;
+
+&lt;p&gt;You might worry about acting on anecdotal evidence, and you should test and measure your changes, but that kind of human understanding will guide you to better decisions.&lt;/p&gt;
+
+&lt;h1 id=&quot;show--tell&quot;&gt;show &amp;gt; tell&lt;/h1&gt;
+
+&lt;p&gt;It is super powerful to get users to show you what they mean.&lt;/p&gt;
+
+&lt;p&gt;If you&apos;re interviewing someone and they say &quot;I wish your software let me do Y&quot; (sometimes the software already does do that). The amazing &lt;a href=&quot;http://neilkakkar.com/&quot;&gt;Neil Kakkar&lt;/a&gt; would ask &quot;can you show me where you&apos;d look in the UI to do that?&quot;&lt;/p&gt;
+
+&lt;p&gt;Whether the feature exists or not already, you now know what the UI for discovering it might look like.&lt;/p&gt;
+
+&lt;p&gt;Or a user will say something like &quot;competitor X does this better.&quot; the important response is to ask &quot;can you show me how to do it in competitor X?&quot;. Sometimes you&apos;ll see that it really is better, sometimes that it is just more familiar to them in the other UI.&lt;/p&gt;
+
+&lt;p&gt;The insight isn&apos;t that you should copy what the competitor does. You should try to understand why they prefer it, across multiple users this will help you understand how to position that feature or introduce that user flow.&lt;/p&gt;
+
+&lt;h1 id=&quot;compound-interest&quot;&gt;compound interest&lt;/h1&gt;
+
+&lt;p&gt;Setting up and running user interviews can take a lot of time. And so people often skip them. But 1 interview is better than none. 2 is better than 1. And so on.&lt;/p&gt;
+
+&lt;p&gt;And this compounds over time. Before you know it you&apos;ve met tens or hundreds of users.&lt;/p&gt;
+
+&lt;p&gt;The knowledge you accumulate about your users (individually and organisationally) will give you instincts on what to build and how to build it.&lt;/p&gt;
+
+&lt;p&gt;Decide how many interviews you want to run each month. And stick to it… there&apos;s always something more to learn.&lt;/p&gt;
+
+&lt;h1 id=&quot;sometimes-stop&quot;&gt;sometimes stop&lt;/h1&gt;
+
+&lt;p&gt;Sometimes you think it&apos;s going to be a user interview. But it turns out this is a user that&apos;s unhappy with the product. Or doesn&apos;t understand the platform and just needs help. I used to struggle through a bunch of open questions trying to &quot;stay in interview mode&quot;.&lt;/p&gt;
+
+&lt;p&gt;Then I observed &lt;a href=&quot;https://x.com/annikaze_&quot;&gt;Annika Schmid&lt;/a&gt; on one call recognise it for what it was and shift into training/explaining mode. It already wasn&apos;t going to be a great user interview. So, may as well make it a good experience for the user.&lt;/p&gt;
+
+&lt;h1 id=&quot;be-a-labrador&quot;&gt;be a Labrador&lt;/h1&gt;
+
+&lt;p&gt;Importantly, you are there to learn. So, you need to be as interested in their opinions as a Labrador is in cheese.&lt;/p&gt;
+
+&lt;p&gt;&quot;I&apos;d love to know more about…&quot;
+&quot;Can you show me…&quot;
+&quot;Oh wow, that&apos;s  not how we expected folk to use this! Can you dive into…&quot;&lt;/p&gt;
+
+&lt;p&gt;One thing I&apos;ve picked up from the fabulous &lt;a href=&quot;https://github.com/EDsCODE&quot;&gt;Eric Duong&lt;/a&gt; is the phrase &quot;out of interest…&quot;&lt;/p&gt;
+
+&lt;p&gt;Not just in user interviews but in every customer interaction. You can drop it in… &quot;Ah, it doesn&apos;t work like that… you can workaround by x, y, and z… out of interest what does it unlock for you if we support this?&quot;&lt;/p&gt;
+
+&lt;p&gt;I love that framing. &quot;Out of interest what does it unlock for you if we support this?&quot;&lt;/p&gt;
+
+&lt;p&gt;That user might not commit to 30 minutes for a user interview. But I bet they&apos;ll spend 30 seconds replying to a slack message. And since these things compound over time, you&apos;ll learn a lot from accruing all these tiny insights.&lt;/p&gt;
+
+&lt;h1 id=&quot;this-is-the-redesign-that-will-kill-the-facebook&quot;&gt;this is the redesign that will kill the Facebook&lt;/h1&gt;
+
+&lt;p&gt;Related to &quot;competitor X does it better&quot; i remember at least three occasions where Facebook changed their UI and everyone was wild in the comments talking about how it would kill Facebook.&lt;/p&gt;
+
+&lt;p&gt;Twitter changing the star to a heart &lt;a href=&quot;https://www.bbc.co.uk/news/newsbeat-34713811&quot;&gt;made the national news&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;With enough users you&apos;ll discover that you will get negative feedback no matter what you do. And if you chase every user, you&apos;ll end up with a product that no one wants.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/homers-car.webp&quot; alt=&quot;Homer&apos;s car&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even though, if you don&apos;t listen to the users, you&apos;ll end up with a product that no one wants.&lt;/p&gt;
+
+&lt;p&gt;Gathering all this feedback isn&apos;t so that you can just make all the changes people tell you they want. It&apos;s to get an instinct for how and why they use your product. You will be asked for conflicting things and without the gut-feeling for what users want, you&apos;ll end up with Homer&apos;s car.&lt;/p&gt;
+</description>
+				<pubDate>Wed, 11 Feb 2026 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2026/02/how-i-do-user-interviews.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2026/02/how-i-do-user-interviews.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>How I use LLMs? - three</title>
+				<description>&lt;p&gt;I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don&apos;t think they&apos;re finished improving.&lt;/p&gt;
+
+&lt;p&gt;Let&apos;s &lt;del&gt;growth hack blog visitor numbers&lt;/del&gt; record how I use them today as a little reflection on where I think they work and where they don&apos;t. Something I can revisit as the tech (and my skill with it) improves&lt;/p&gt;
+
+&lt;p&gt;This is update number two, or entry number three, depending on how you want to count it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/2025/07/how-i-use-llms.html&quot;&gt;the first entry is here&lt;/a&gt;
+&lt;a href=&quot;/2026/01/how-i-use-llms-2.html&quot;&gt;the second entry is here&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;XP pedant agent&lt;/li&gt;
+  &lt;li&gt;primarily using LLMs&lt;/li&gt;
+  &lt;li&gt;throw away way more work&lt;/li&gt;
+  &lt;li&gt;be very strict with what i &lt;em&gt;do&lt;/em&gt; type&lt;/li&gt;
+  &lt;li&gt;i approach understanding code differently&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally&quot;&gt;First, a necessary but brief diversion into how I use tools generally&lt;/h1&gt;
+
+&lt;p&gt;I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don&apos;t begrudge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things&lt;/p&gt;
+
+&lt;p&gt;Because of that entry to the industry I&apos;m also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I&apos;m too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)&lt;/p&gt;
+
+&lt;p&gt;So, I &lt;em&gt;like&lt;/em&gt; having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: &quot;hey, why not like this?&quot;&lt;/p&gt;
+
+&lt;h1 id=&quot;xp-pedant-agent&quot;&gt;XP pedant agent&lt;/h1&gt;
+
+&lt;p&gt;I love the &lt;a href=&quot;https://wiki.c2.com/?XpSimplicityRules&quot;&gt;XP simplicity rules&lt;/a&gt; for guiding decision making…&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Passes all the tests.&lt;/li&gt;
+  &lt;li&gt;Expresses every idea that we need to express.&lt;/li&gt;
+  &lt;li&gt;Says everything OnceAndOnlyOnce.&lt;/li&gt;
+  &lt;li&gt;Has no superfluous parts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I like that they&apos;re in tension with each other.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve added them to my &lt;a href=&quot;https://github.com/pauldambra/dotfiles/blob/main/ai/CLAUDE.md&quot;&gt;AGENTS.md&lt;/a&gt; and if it forgets I can prompt it &quot;hey, apply the simplicity rules&quot;.&lt;/p&gt;
+
+&lt;p&gt;Often the change it makes is the one I would have manually made.&lt;/p&gt;
+
+&lt;h1 id=&quot;primarily-using-llms&quot;&gt;Primarily using LLMs&lt;/h1&gt;
+
+&lt;p&gt;Over the last three months particularly the capability of LLMs has transformed. I can now go whole days mostly prompting an LLM and writing only a fraction of the code myself. This is… fine.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve been working on super complex, tricky to find memory leak problems. I would not have had the patience to notice some of the things that the robot can when i provide it with context from my investigations.&lt;/p&gt;
+
+&lt;p&gt;And while it&apos;s working on the next step I can be improving my investigation, or catching up on Slack, or taking my kids to school.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t feel like I&apos;ve lost anything by not (always) typing out the code directly. And since &lt;a href=&quot;https://github.com/pauldambra/dotfiles/blob/main/ai/CLAUDE.md&quot;&gt;I taught the robot some extreme programming techniques&lt;/a&gt;, i find i don&apos;t need to re-work much at all.&lt;/p&gt;
+
+&lt;p&gt;I genuinely didn&apos;t think I&apos;d switch this much… and like all sticky tools I didn&apos;t have to think about it. The tool hooked me.&lt;/p&gt;
+
+&lt;p&gt;That said… i don&apos;t like vibe coding… I&apos;m not asleep at the wheel and do care about the diff that&apos;s being generated. So I feel slightly vindicated by this research from Anthropic https://www.anthropic.com/research/AI-assistance-coding-skills&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In a randomized controlled trial, we examined 1) how quickly software developers picked up a new skill (in this case, a Python library) with and without AI assistance; and 2) whether using AI made them less likely to understand the code they’d just written. 
+We found that using AI assistance led to a statistically significant decrease in mastery.
+…
+Importantly, using AI assistance didn’t guarantee a lower score. How someone used AI influenced how much information they retained.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;throw-away-way-more-work&quot;&gt;throw away way more work&lt;/h1&gt;
+
+&lt;p&gt;Since I didn&apos;t type it, I don&apos;t feel invested. I dump a prompt in. Come back, see what came out. And sometimes I just throw it away. It doesn&apos;t help as much as I expected, or a UI change doesn&apos;t look as good as I hoped.&lt;/p&gt;
+
+&lt;p&gt;Without feeling invested in the creation I am a little more rational about whether to throw it away.&lt;/p&gt;
+
+&lt;p&gt;It&apos;s cheap to do many things at once and keep the useful things.&lt;/p&gt;
+
+&lt;h1 id=&quot;be-very-strict-with-what-i-do-type&quot;&gt;be very strict with what I &lt;em&gt;do&lt;/em&gt; type&lt;/h1&gt;
+
+&lt;p&gt;This is an addition to &quot;manage context&quot;.&lt;/p&gt;
+
+&lt;p&gt;Sometimes I find myself writing a huge prompt. I have low tolerance for this. Or I find the task is spinning and churning and going nowhere. So, instead, when I recognise that I stop, I clear the prompt, and I spike the work. Then when I have a good enough sketch I point the robot at the changes and say &quot;hey, like this&quot;. I believe we do understand some problems better through trying to solve them.&lt;/p&gt;
+
+&lt;p&gt;The robot is still more stupid than it is clever. So, giving it code is a good way to clever it up.&lt;/p&gt;
+
+&lt;p&gt;It is still valuable to be a decent software engineer. But it might be more valuable to be a decent software engineer who dumps a sketch into an LLM. (if it isn&apos;t now, and they can keep improving, then it will be soon)&lt;/p&gt;
+
+&lt;h1 id=&quot;i-approach-understanding-code-differently&quot;&gt;I approach understanding code differently&lt;/h1&gt;
+
+&lt;p&gt;This one is difficult for me to accept, but it&apos;s snuck up on me and over the last few months changed how I work.&lt;/p&gt;
+
+&lt;p&gt;The cost of writing code is falling &lt;em&gt;and&lt;/em&gt; the cost of understanding code is falling.&lt;/p&gt;
+
+&lt;p&gt;When the cost of a thing fundamentally changes, you have to change your approach.&lt;/p&gt;
+
+&lt;p&gt;&quot;Hey robot, write a script to validate the blah does thingy (or not) when the wotsit is twanged&quot;&lt;/p&gt;
+
+&lt;p&gt;&quot;Hey robot, why does the clinkexpander accept a boolean?&quot;&lt;/p&gt;
+
+&lt;p&gt;&quot;Hey robot, how does the clinkexpander work?&quot;&lt;/p&gt;
+
+&lt;p&gt;&quot;Hey robot, what does the clinkexpander actually do?&quot;&lt;/p&gt;
+
+&lt;p&gt;Tasks that would have taken me hours or days or weeks in the past are genuinely done in minutes now.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve spent a big chunk of time recently feeding heap snapshots to the robot. I can only give huge thanks I&apos;ve not had to manually grok this myself.&lt;/p&gt;
+
+&lt;p&gt;Is the robot perfect? No. not even.&lt;/p&gt;
+
+&lt;p&gt;Is the robot a good software engineer? No. not even.&lt;/p&gt;
+
+&lt;p&gt;Is it silly to ignore the fact that the robot does not need to be perfect or good for it to be a fantastic tool?&lt;/p&gt;
+
+&lt;p&gt;yes, veryeven.&lt;/p&gt;
+
+&lt;p&gt;the game has changed. pandora&apos;s box is open. the robot is here to stay.&lt;/p&gt;
+
+&lt;p&gt;It reminds me of once… I used to work with someone who had worked mostly with signal processing baked into hardware. Very painful to discover a bug after release. We were sat together and I changed a field in a JSON response. He asked in a mid-panic: &quot;but how many bytes will that add to the payload?&quot;. Genuinely confused, I said: &quot;I&apos;ve barely ever had to care… I don&apos;t think it matters&quot;&lt;/p&gt;
+
+&lt;p&gt;We&apos;re on the verge of that kind of change. We&apos;re not there ffs but some point down the road someone is going to ask &quot;but isn&apos;t that AI slop&quot; and their colleague will answer, genuinely confused: &quot;yes, why?&quot;&lt;/p&gt;
+
+&lt;p&gt;Will some of that software be bad? yes
+always-has-been-dot-meme&lt;/p&gt;
+</description>
+				<pubDate>Fri, 30 Jan 2026 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2026/01/how-i-use-llms-3.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2026/01/how-i-use-llms-3.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>Things that a different me would have been tipped into psychosis by</title>
+				<description>&lt;p&gt;&lt;img src=&quot;/images/prawn_face.png&quot; alt=&quot;prawn face&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a few memes (in the original sense) that have got stuck in my head. They feel like the beginning of madness. I&apos;m going to track them, to see how many I accumulate&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;water isn&apos;t real&lt;/li&gt;
+  &lt;li&gt;old people are time travellers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Each of them feels like something that would tip a different me over the edge into madness.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;water-isnt-real&quot;&gt;Water isn&apos;t real&lt;/h1&gt;
+
+&lt;p&gt;I could be easily convinced that water isn&apos;t real.&lt;/p&gt;
+
+&lt;p&gt;Sit in a boat, look over the edge at the water.&lt;/p&gt;
+
+&lt;p&gt;It&apos;s obviously CGI. Can&apos;t possibly be real.&lt;/p&gt;
+
+&lt;h1 id=&quot;old-people-are-time-travellers&quot;&gt;Old people are time travellers&lt;/h1&gt;
+
+&lt;p&gt;Whenever I&apos;ve had a baby (a common thing I&apos;ve done) I&apos;ll be walking with the baby in the pram, and very sleep deprived.&lt;/p&gt;
+
+&lt;p&gt;An old person passing by will say something like: &quot;Oh, what a lovely baby&quot;. Some similar nice thing to that.&lt;/p&gt;
+
+&lt;p&gt;In my sleep deprived state it once occurred to me that a very lucrative business - if time travel existed - would be to let you travel back and see your grandparent as a baby.&lt;/p&gt;
+
+&lt;p&gt;Can&apos;t get that out of my head now. Whenever an old person is nice to me, i&apos;m a little odd with them… because at the back of my mind there&apos;s a voice saying &quot;that&apos;s exactly what a time traveller would say&quot;.&lt;/p&gt;
+</description>
+				<pubDate>Wed, 03 Dec 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/12/avoiding-madness.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/12/avoiding-madness.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>How I use LLMs - two?</title>
+				<description>&lt;p&gt;I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don&apos;t think they&apos;re finished improving.&lt;/p&gt;
+
+&lt;p&gt;Let&apos;s &lt;del&gt;growth hack blog visitor numbers&lt;/del&gt; record how I use them today as a little reflection on where I think they work and where they don&apos;t. Something I can revisit as the tech (and my skill with it) improves&lt;/p&gt;
+
+&lt;p&gt;This is update number one, or entry number two, depending on how you want to count it. So, here are the changes in how I&apos;m using LLMs&lt;/p&gt;
+
+&lt;p&gt;(we had a brownbag on this at work yesterday, so it&apos;s been on my mind)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/2025/07/how-i-use-llms.html&quot;&gt;the first entry is here&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;manage context&lt;/li&gt;
+  &lt;li&gt;track longer tasks in a structured file&lt;/li&gt;
+  &lt;li&gt;smallest prompt that describes how you want to work&lt;/li&gt;
+  &lt;li&gt;be sparing with auto-accept edits&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally&quot;&gt;First, a necessary but brief diversion into how I use tools generally&lt;/h1&gt;
+
+&lt;p&gt;REMINDER: I don&apos;t begruge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things.&lt;/p&gt;
+
+&lt;p&gt;You don&apos;t use LLMs, or not like this, cool… go make cool things.&lt;/p&gt;
+
+&lt;p&gt;Because of that entry to the industry I&apos;m also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I&apos;m too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)&lt;/p&gt;
+
+&lt;p&gt;So, I &lt;em&gt;like&lt;/em&gt; having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: &quot;hey, why not like this?&quot;&lt;/p&gt;
+
+&lt;h1 id=&quot;anything-removed-from-entry-one&quot;&gt;Anything removed from entry one?&lt;/h1&gt;
+
+&lt;h2 id=&quot;being-your-army-of-interns&quot;&gt;Being your army of interns&lt;/h2&gt;
+
+&lt;p&gt;I don&apos;t believe in having a personal WIP of one item in progress. So, I like that I can have a higher WIP without exhausting my own kreplets&lt;/p&gt;
+
+&lt;p&gt;But… I find the background work is best as tasks like&lt;/p&gt;
+
+&lt;p&gt;&quot;upgrade Jest to the next major version&quot;&lt;/p&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;p&gt;&quot;why is this component rendering too much&quot;&lt;/p&gt;
+
+&lt;p&gt;very, very constrained yak shavey tasks.&lt;/p&gt;
+
+&lt;p&gt;otherwise I find that the LLM needs a lot of attention to complete the task well, and so my kreplets are being used up - and because I&apos;m not doing the work I&apos;m learning more slowly.&lt;/p&gt;
+
+&lt;h1 id=&quot;manage-context&quot;&gt;Manage context&lt;/h1&gt;
+
+&lt;p&gt;I&apos;m pretty vicious about managing context. If I start a new task I&apos;ll clear the context completely. If I get even the slightest inkling that the LLM is going off on a tangent, I&apos;ll clear the context completely.&lt;/p&gt;
+
+&lt;p&gt;It isn&apos;t thinking despite all the cognitive biases that make us think it is. It&apos;s just churning out tokens based on the tokens in its context. So, if the context gets screwey so does the output.&lt;/p&gt;
+
+&lt;h1 id=&quot;longer-tasks-track-them-in-a-file&quot;&gt;Longer tasks, track them in a file&lt;/h1&gt;
+
+&lt;p&gt;If we&apos;re doing a big change or exploring something complex. I tell it to make a markdown file with a to-do list and what we&apos;re working on.&lt;/p&gt;
+
+&lt;p&gt;For example, i asked it to track down and edit every event listener in our front end. There are ~350 files it would need to touch. It regularly would partially edit around 30 of them and then we&apos;d hit a &quot;you&apos;re absolutely right&quot; loop.&lt;/p&gt;
+
+&lt;p&gt;So, clear the context. And step 1 &quot;make a file with a markdown table of every logic.ts file that has an event listener in it&quot;.&lt;/p&gt;
+
+&lt;p&gt;Some checks to be sure that was correct… and now step 2 &quot;for each line in the table {do the thing} and then update the table with the result&quot;.&lt;/p&gt;
+
+&lt;p&gt;That was &lt;em&gt;way&lt;/em&gt; better&lt;/p&gt;
+
+&lt;h1 id=&quot;smallest-prompt-i-can-get-away-with&quot;&gt;Smallest prompt I can get away with&lt;/h1&gt;
+
+&lt;p&gt;I&apos;m not doing evals with my prompts so it&apos;s a little like some pagan weather magic ritural but I did add a custom prompt in my home directory. Which I believe is helping.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Approach to work
+
+I like &quot;Simple code&quot; that means:
+
+* Passes all the tests.
+* Expresses every idea that we need to express.
+* Says everything OnceAndOnlyOnce.
+* has no superfluous parts
+
+These rules are in conflict with each other. Sometimes to express every idea we can&apos;t say everything only once. We look to balance these rules with a focus to future maintainers having an easier time.
+
+Also... it means we work in three stages
+
+* make it work
+* make it right
+* make it fast
+
+We should always pause and consider if the working code should be improved to make it simpler or to make it faster, but only once we&apos;re sure it works
+
+# tests
+
+* IMPORTANT prefer parameterized tests
+
+# validating this file has been read
+
+if i say &quot;cuckoo&quot;, you say &quot;Phil Haack has taught me well&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The cuckoo thing is useful to check if the file has been read at all.&lt;/p&gt;
+
+&lt;p&gt;But, otherwise, I can now periodically prompt: &quot;ok, review the work so far using the simplicity rules and suggest improvements&quot;&lt;/p&gt;
+
+&lt;p&gt;And it will write me a  mini-report that is much more like the type of self-review that I would write.&lt;/p&gt;
+
+&lt;p&gt;It was also an interesting exercise to try to write the smallest description of how I like to work.&lt;/p&gt;
+
+&lt;h1 id=&quot;sparing-with-auto-accept-edits&quot;&gt;Sparing with auto-accept edits&lt;/h1&gt;
+
+&lt;p&gt;Reviewing code is essential but boring. And even more so with an LLM that might go off the rails…&lt;/p&gt;
+
+&lt;p&gt;So, I will tend to manually accept edits on the task I give it. But, yesterday I asked it to update a major release of Jest. Turned on auto-accept and went and collected #4 from school, made flapjacks with her, and then checked in.&lt;/p&gt;
+
+&lt;p&gt;A little fangling but otherwise it was dull work I would have had to do. That has relatively little value (particularly compared to making flapjacks with #4 daughter)&lt;/p&gt;
+
+&lt;p&gt;Here&apos;s the PR: https://github.com/PostHog/posthog-js/pull/2413&lt;/p&gt;
+</description>
+				<pubDate>Fri, 24 Oct 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/10/how-i-use-llms-2.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/10/how-i-use-llms-2.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>Four things in four years at PostHog</title>
+				<description>&lt;p&gt;I&apos;ve been at PostHog for four years. After having the best four years of my career at Co-op Digital, I&apos;m privileged to have then also had the best four years of my career at PostHog. Surely, I&apos;ve learned something that I can cram into a cliche format?!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don&apos;t look for a family, look for a team&lt;/li&gt;
+  &lt;li&gt;Talk to users &lt;em&gt;all the time&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;You can YOLO and strangle your figs at the same time&lt;/li&gt;
+  &lt;li&gt;Trust is a super power&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;dont-look-for-a-family-look-for-a-team&quot;&gt;Don&apos;t look for a family, look for a team&lt;/h1&gt;
+
+&lt;p&gt;The more I&apos;ve experienced this, the more I&apos;m convinced it&apos;s genius.&lt;/p&gt;
+
+&lt;p&gt;At home, for sure, look for (and build) an environment where you are unconditionally accepted and celebrated, But at work, look for a group formed around a shared (probably competitive) purpose.&lt;/p&gt;
+
+&lt;p&gt;A team is somewhere folks expect the best from me and they expect me to own my part in achieving that. They also help me to get there. But I have to own it for me.&lt;/p&gt;
+
+&lt;p&gt;Being surrounded by people who reinforce your good behaviours and model good behaviours you can learn from is 💯. Enough so, that I can&apos;t imagine being willing to accept an environment without that now I&apos;ve had it.&lt;/p&gt;
+
+&lt;p&gt;An old colleague would share a video of Barcelona football team. Multiple times someone would score and the player would celebrate. Soon another player would come over, tap them on the shoulder, and they&apos;d go back to the game. They knew that the behaviours that correlated with success were important and they had little rituals to reinforce them. In this case, &quot;don&apos;t celebrate too long, we&apos;re still playing, we need more goals, and we don&apos;t get them by celebrating&quot;.&lt;/p&gt;
+
+&lt;p&gt;At PostHog &lt;a href=&quot;https://posthog.com/handbook/values&quot;&gt;the company values&lt;/a&gt; are used the same way. Like the Barcelona shoulder tap, they&apos;re not just aspirational words on a page. They&apos;re the behaviours we see correlate with success and reinforce by living them, and by holding each other accountable to them.&lt;/p&gt;
+
+&lt;h1 id=&quot;talk-to-users-all-the-time&quot;&gt;Talk to users &lt;em&gt;all the time&lt;/em&gt;&lt;/h1&gt;
+
+&lt;p&gt;I have never once regretted talking to our users. Either on tooterweb, in support tickets, in a user interview, or asking for email / screenshare feedback. It is hands-down the best thing. It has consistently levelled up what I&apos;ve been able to do at PostHog.&lt;/p&gt;
+
+&lt;p&gt;I used to get frustrated with teams using user stories that would write &quot;as a user&quot; and would push them to have a particular group of users in mind. &lt;strong&gt;I don&apos;t like the trad user story format&lt;/strong&gt;. &lt;em&gt;But if you are&lt;/em&gt; using it try and think of the group of users: &quot;as a busy shopper&quot; or &quot;as an owner of a small business&quot;. But a million times better IMHO is &quot;Sam wants…&quot; or &quot;Jane couldn&apos;t…&quot;. Not an imaginary Sam or Jane. People you have talked to, that you can empathize with, and follow-up with.&lt;/p&gt;
+
+&lt;p&gt;The important counterpoint is that just building everything users ask you for is not the goal. Understanding their needs and problems and how it shapes and relates to your instinct for the product is the goal.&lt;/p&gt;
+
+&lt;p&gt;The classic example of this is that when users say something is cluttered they are only rarely asking to see less information, instead they are really asking to see different information.&lt;/p&gt;
+
+&lt;h1 id=&quot;you-can-yolo-and-strangle-your-figs-at-the-same-time&quot;&gt;You can YOLO and strangle your figs at the same time&lt;/h1&gt;
+
+&lt;p&gt;Two of the things I&apos;ve loved about working at PostHog…&lt;/p&gt;
+
+&lt;p&gt;One) it is totally fine to push something to prod, discover its a mistake, and fix forward or rollback. So long as it is done with purpose - it&apos;s not fine to be careless but it is fine and desirable to be bold.&lt;/p&gt;
+
+&lt;p&gt;Two) it is &lt;em&gt;also&lt;/em&gt; totally fine to &lt;a href=&quot;https://martinfowler.com/bliki/StranglerFigApplication.html&quot;&gt;change something slowly over multiple releases&lt;/a&gt;. Increasing the mix of traffic to a new feature until you are confident it is ready for everyone.&lt;/p&gt;
+
+&lt;p&gt;Often people talk about a company culture as if you have to choose between these things, but you don&apos;t. You can drive your car in different gears on different slopes. Choosing the approach that is right for the situation.&lt;/p&gt;
+
+&lt;h1 id=&quot;trust-is-a-superpower&quot;&gt;Trust is a superpower&lt;/h1&gt;
+
+&lt;p&gt;My first pull request at PostHog was before I started. A change to the docs to increase the budget for an engineering laptop purchase because the cost had gone up. Then buying the laptop. All before I&apos;d met anybody or had my first day.&lt;/p&gt;
+
+&lt;p&gt;The default was to expect me to do the right thing and assume that I would.&lt;/p&gt;
+
+&lt;p&gt;Similarly, when I wasn&apos;t sure what to work on after I&apos;d started. I booked user interviews with customers. Talked to them, and then decided what to work on. No approval process, no fuss, no need to queue on anybody else, nothing in my way.&lt;/p&gt;
+
+&lt;p&gt;Or in my second week when the kids were ill and I said I wouldn&apos;t be able to work that day but would &quot;catch up on Saturday&quot;. Marius, the tech lead said: &quot;that sounds stupid, take the day off&quot;. No worries that I would hack the system and take too much time off.&lt;/p&gt;
+
+&lt;p&gt;And, honestly, most every day since then. It is incredibly motivating and rewarding to be trusted to do the right thing.&lt;/p&gt;
+
+&lt;p&gt;(yes, &quot;do the right thing&quot; is loose and open to interpretation, but that&apos;s the great thing about trust, i can interpret what the right thing is)&lt;/p&gt;
+
+&lt;p&gt;The thing that works so well alongside this is a culture of feedback. I&apos;ve been told when I&apos;ve done well, and when I&apos;ve not. And then trusted to take that information and do the right thing with it.&lt;/p&gt;
+
+&lt;h1 id=&quot;things-ive-learned-that-didnt-make-the-cut-of-the-four-in-four-cliche-format&quot;&gt;Things I&apos;ve learned that didn&apos;t make the cut of the four in four cliche format&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;typescript enums are useless, just use string union types&lt;/li&gt;
+  &lt;li&gt;writing tests is the best, writing the fewest tests for the most benefit is besterer&lt;/li&gt;
+  &lt;li&gt;react was a mistake, but there&apos;s no good alternative yet&lt;/li&gt;
+  &lt;li&gt;a one word copy change can have a 100x impact on clickthrough rate&lt;/li&gt;
+  &lt;li&gt;giolitti is the best gelato in rome&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Tue, 16 Sep 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/09/four-things-in-four-years.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/09/four-things-in-four-years.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>How I use LLMs?</title>
+				<description>&lt;p&gt;I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don&apos;t think they&apos;re finished improving.&lt;/p&gt;
+
+&lt;p&gt;Let&apos;s &lt;del&gt;growth hack blog visitor numbers&lt;/del&gt; record how I use them today as a little reflection on where I think they work and where they don&apos;t. Something I can revisit as the tech (and my skill with it) improves&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally&quot;&gt;First, a necessary but brief diversion into how I use tools generally&lt;/h1&gt;
+
+&lt;p&gt;I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don&apos;t begruge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things&lt;/p&gt;
+
+&lt;p&gt;Because of that entry to the industry I&apos;m also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I&apos;m too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)&lt;/p&gt;
+
+&lt;p&gt;So, I &lt;em&gt;like&lt;/em&gt; having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: &quot;hey, why not like this?&quot;&lt;/p&gt;
+
+&lt;h1 id=&quot;do-i-think-llms-do-good-work&quot;&gt;Do I think LLMs do good work?&lt;/h1&gt;
+
+&lt;p&gt;It&apos;s like having a startlingly talented, but very overconfident, inexperienced colleague&lt;/p&gt;
+
+&lt;p&gt;They will swing from correcting you on the intricacies of some detail of technology to doing blindingly stupid things like naming variables with one of your competitors company names in them&lt;/p&gt;
+
+&lt;p&gt;And just like the work of any colleague where you bear more responsibility. It is on you to own making sure the work is good. If you&apos;re helping someone with less experience than you the mistakes are yours, don&apos;t blame the colleague / LLM&lt;/p&gt;
+
+&lt;p&gt;And just like working with any colleague… you can do more together than you could before - &lt;strong&gt;once you know how to work together&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As an example, while I&apos;m writing this Claude Code is writing some tests for me. I just did a &quot;mean colleague&quot; trick. I went in and commented out the implementation - and the tests carried on passing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/07/over-confident-1.png&quot; alt=&quot;the over confident colleague&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The LLM fixed that and we shipped the PR.&lt;/p&gt;
+
+&lt;p&gt;I find faking timers in Jest super confusing and couldn&apos;t figure it out… the LLM could 🤝&lt;/p&gt;
+
+&lt;h1 id=&quot;things-im-totally-sold-on&quot;&gt;Things I&apos;m totally sold on&lt;/h1&gt;
+
+&lt;h2 id=&quot;research-for-me&quot;&gt;Research for me&lt;/h2&gt;
+
+&lt;p&gt;I tend to use ChatGPT for this but only out of habit. I not-very-fondly remember days of sweating over documentation and blog posts while trying to figure out something.&lt;/p&gt;
+
+&lt;p&gt;Or, even worse, searching for your problem and finding a single hit…&lt;/p&gt;
+
+&lt;p&gt;a stack overflow question…&lt;/p&gt;
+
+&lt;p&gt;with no answers…&lt;/p&gt;
+
+&lt;p&gt;from years ago…&lt;/p&gt;
+
+&lt;p&gt;that you asked and have no memory of&lt;/p&gt;
+
+&lt;p&gt;🫠&lt;/p&gt;
+
+&lt;p&gt;Now, I can delegate that to the LLM. It does that groundwork, responds to follow-ups. &lt;del&gt;Can&apos;t&lt;/del&gt; Doesn&apos;t care when I ask silly questions.&lt;/p&gt;
+
+&lt;p&gt;I can do something else with my time while the legwork is being done.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;You have to remember that confabulation exists. I ask it for sources and go check for myself. Because I&apos;m confirming and critiquing (instead of doing the groundwork) it&apos;s quicker and easier work.&lt;/p&gt;
+
+&lt;p&gt;Also…. OMG if it does maths for you, make sure to double check the numbers. It can quickly go off the rails.&lt;/p&gt;
+
+&lt;h1 id=&quot;simple-tasks&quot;&gt;Simple tasks&lt;/h1&gt;
+
+&lt;p&gt;As mentioned above… this morning I&apos;ve got a couple of tricky things to figure out… and I wanted to write some tests on a bit of code that had let me down in one of our SDKs.&lt;/p&gt;
+
+&lt;p&gt;So, in the background Claude can figure out why the tests weren&apos;t working and get them working. Then I check that work, together we correct it.&lt;/p&gt;
+
+&lt;p&gt;In reality that probably saved me an hour of work (maybe less but definitely not more).&lt;/p&gt;
+
+&lt;p&gt;Could I do that every day? That&apos;s heading for most of a working week each month.That&apos;s quality memes on Slack time, practically for free!&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-1&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;I&apos;m pretty good at context switching, my life forces me to be. If you&apos;re not, you should figure out a different way of doing this.&lt;/p&gt;
+
+&lt;p&gt;And you&apos;re responsible for this work… even though you didn&apos;t write it. You still need to engage your brain. The machine isn&apos;t thinking. And the more nuance in the task, the more opportunity for it to confidently do something very silly&lt;/p&gt;
+
+&lt;h1 id=&quot;things-im-partly-sold-on&quot;&gt;Things I&apos;m partly sold on&lt;/h1&gt;
+
+&lt;h2 id=&quot;explaining-complex-things&quot;&gt;Explaining complex things&lt;/h2&gt;
+
+&lt;p&gt;The LLM is your over-confident colleague with arcane knowledge. You can ask: &quot;Hey, I&apos;m trying to figure out why my kafka consumer is timing out sometimes. Explain how a nodejs consumer behaves during cooperative rebalance and why it might time out.&quot;&lt;/p&gt;
+
+&lt;p&gt;And it will confidently share exactly why that is happening. Digesting the docs and the 1000s of blog posts. It will draw diagrams and propose solutions. Amazing learning tool.&lt;/p&gt;
+
+&lt;p&gt;I often work with open source tools that do complicated things I don&apos;t fully understand. Being able to ask &quot;what does this arcane few lines of code do&quot;. To get a quick start on figuring something out is super useful.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-2&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;It will also sometimes confidently explain &lt;em&gt;absolute nonsense&lt;/em&gt;. And when you say &quot;but the nodejs consumer doesn&apos;t have that method&quot;. It will reply &quot;Thanks! You&apos;re absolutely right.&quot; And then explain something else just as confidently.&lt;/p&gt;
+
+&lt;h2 id=&quot;being-your-army-of-interns&quot;&gt;Being your army of interns&lt;/h2&gt;
+
+&lt;p&gt;You can run more than one instance of a tool. And give each of them a different task. In theory that&apos;s a multiplier since you can have more than one &quot;intern&quot; doing work for you at the same time.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve now got two copies of our main repo on disk so that I can happily have two totally separate streams of work.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-3&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;Starting lots of things is not as powerful as finishing lots of things!&lt;/p&gt;
+
+&lt;p&gt;Also, personally, I purposefully don&apos;t have a job as a tech lead at a company that employs inexperienced folk and then expects the tech lead to make sure things stay on track. I&apos;ve had that job, it&apos;s a valid company strategy, it&apos;s not my jam.&lt;/p&gt;
+
+&lt;p&gt;I enjoy when I&apos;m making software and I&apos;m not a massive fan of rounds of reviewing PRs with a colleague that I can&apos;t simply trust. And you can&apos;t simply trust these machines. So, there&apos;s a worfklow here that is a multiplier which I haven&apos;t quite figured out… but the risk is that I end up squashing the fun bits of my job, and accidentally shipping a bunch of rubbish (as opposed to my current approach of enjoying the process of shipping artisanal, hand-crafted rubbish)&lt;/p&gt;
+
+&lt;h4 id=&quot;warning-2&quot;&gt;Warning 2?&lt;/h4&gt;
+
+&lt;p&gt;They&apos;re not actually very good software engineers… particularly since most of the data they&apos;ve ingested about software engineering is &quot;blogs on how to start something from scratch&quot;. So, if that&apos;s not the task. Then I find it often harder to prompt an LLM to do than to do it myself&lt;/p&gt;
+
+&lt;p&gt;Case in point…&lt;/p&gt;
+
+&lt;p&gt;While I was typing this post Claude was doing the work to duplicate a data management section of the application. I wouldn&apos;t have to think to do this, so giving it to a machine that isn&apos;t thinking &lt;em&gt;should&lt;/em&gt; be OK.&lt;/p&gt;
+
+&lt;p&gt;But in the end I did the job myself…&lt;/p&gt;
+
+&lt;p&gt;There was just enough nuance that Claude was making a mess of it.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&apos;m not good enough at prompting.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&apos;m giving it a job it&apos;s not ready for.&lt;/p&gt;
+
+&lt;p&gt;But there&apos;a a lot of snake oil to be sold in the gaps there…&lt;/p&gt;
+
+&lt;p&gt;For example…&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/07/mistake.png&quot; alt=&quot;the over confident colleague 2&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I pasted in the error message after the first set of changes it made. It decided that the problem was TypeScript was out of synch. So, it did some stuff with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touch&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo&lt;/code&gt; insisting all along that typescript was confused.&lt;/p&gt;
+
+&lt;p&gt;So I checked and, actually, it was using packages without installing them. This over-confident thing is amazing and horrifying at the same time.&lt;/p&gt;
+
+&lt;h2 id=&quot;reviewing-your-prs&quot;&gt;Reviewing your PRs&lt;/h2&gt;
+
+&lt;p&gt;Machines don&apos;t get bored or distracted (yet). So having a PR reviewer that can look at 78 changes in a rename or move refactor that won&apos;t get blind to the one difference where there&apos;s a mistake or a typo is pretty powerful. I&apos;ve tried three reviewer tools. They&apos;re all about as good and bad as each other.&lt;/p&gt;
+
+&lt;p&gt;Personally, I really hate the summary of the PR they all do. But then I&apos;ve got colleagues that hate writing PR descriptions I bet the summary is useful for them.&lt;/p&gt;
+
+&lt;h3 id=&quot;warning-4&quot;&gt;Warning?&lt;/h3&gt;
+
+&lt;p&gt;It is not thinking, just pretending to. So when you get &quot;nit pick: the blah should be wired to the clink expander&quot; it is fine to just hit &quot;resolve conversation&quot; in GitHub. I think these are a nice pre-filter for human reviewers but they&apos;re nowhere near as useful as being able to tag a person you trust and respect.&lt;/p&gt;
+
+&lt;h1 id=&quot;things-im-not-sold-on&quot;&gt;Things I&apos;m not sold on&lt;/h1&gt;
+
+&lt;h2 id=&quot;writing-tests-with-an-llm&quot;&gt;Writing tests with an LLM&lt;/h2&gt;
+
+&lt;p&gt;I don&apos;t do TDD any more. Often I write tests after the implementation… shhh don&apos;t tell anyone. But for some types of tasks I do like to write a test or two first. Particularly &quot;someone says this is broken and needs fixing, is it?&quot;&lt;/p&gt;
+
+&lt;p&gt;Even pointing the LLM at existing tests I find they tend to churn out rubbish tests. I think that&apos;s probably because they&apos;ve ingested the internet and there are so many bad examples of writing tests on the internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;whatever-the-opposite-of-a-warning-is&quot;&gt;Whatever the opposite of a warning is?&lt;/h3&gt;
+
+&lt;p&gt;They don&apos;t get bored and have ingested the whole internet. So I find they&apos;re really good at &quot;i&apos;ve started writing parameterised tests, please add more examples to test edgecases in blah processing&quot; or &quot;look at the implementation file X and suggest missing tests or tests that can be removed in this test file&quot;.&lt;/p&gt;
+</description>
+				<pubDate>Thu, 24 Jul 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/07/how-i-use-llms.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/07/how-i-use-llms.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>How do I like to be managed?</title>
+				<description>&lt;p&gt;An amazing engineer colleague has taken on (booming, god-on-the-mountain voice) extra responsibilities. Unfortunately for them, one of those responsibilities is managing me.&lt;/p&gt;
+
+&lt;p&gt;They asked me how I like to be managed. I thought it was a good question, so I pushed it into my background processing queue, got distracted, and never answered them.&lt;/p&gt;
+
+&lt;p&gt;Periodically I feel guilty about that, so I thought I&apos;d write it down here. Maybe it will help me decide what my answer is…&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;I guess I should consider a few different things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;when I&apos;ve not been managed well&lt;/li&gt;
+  &lt;li&gt;when I&apos;ve been managed well&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;when-ive-not-been-managed-well&quot;&gt;When I&apos;ve not been managed well&lt;/h1&gt;
+
+&lt;h2 id=&quot;the-fool&quot;&gt;The fool&lt;/h2&gt;
+
+&lt;p&gt;Many years ago, I was working for a large Enterprise omni-clopse style technology services company. I was young and didn&apos;t know what I wanted from life.&lt;/p&gt;
+
+&lt;p&gt;Well, that&apos;s not quite true. I wanted to change the world of long, loud rock music. But I was kidding myself.&lt;/p&gt;
+
+&lt;p&gt;I had fallen into a job as an infrastructure engineer because I&apos;m pretty good at solving problems and I like computers.&lt;/p&gt;
+
+&lt;p&gt;The person managing me was… well… they were the worst manager I&apos;ve ever had. I didn&apos;t know that at the time. I&apos;d not had many managers before, so I didn&apos;t know what to expect.&lt;/p&gt;
+
+&lt;p&gt;There came a point where I wanted to be a software engineer. In a 1-2-1 they asked me about my goals, and I shared that. They gave me a long rambling speech about how I wouldn&apos;t enjoy that.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve been a software engineer for a long time now, and I love it.&lt;/p&gt;
+
+&lt;p&gt;I take responsibility for my mistakes… listening to them was a mistake, and that&apos;s on me. But I am pretty certain I would have been a software engineer years earlier if I hadn&apos;t listened to them.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-absent-manager&quot;&gt;The absent manager&lt;/h2&gt;
+
+&lt;p&gt;For a short while I was at a consulting company. My manager was on the same team as me. I think… it was never clear.&lt;/p&gt;
+
+&lt;p&gt;I don&apos;t remember a single 1-2-1 in the time I was there. Particularly, I don&apos;t once remember feeling pushed or supported. I didn&apos;t think I was doing super well&lt;/p&gt;
+
+&lt;p&gt;Again, I could have done something about this… I&apos;m not looking for someone at fault. But on reflection one of the reasons I left that job was a lack of feedback and a feeling I wasn&apos;t valued&lt;/p&gt;
+
+&lt;h1 id=&quot;when-ive-been-managed-well&quot;&gt;When I&apos;ve been managed well&lt;/h1&gt;
+
+&lt;h2 id=&quot;timely-feedback&quot;&gt;timely feedback&lt;/h2&gt;
+
+&lt;p&gt;In a 1-2-1 a long time ago, my manager said: &quot;I&apos;m too busy. And I value that when I see an email chain, and I see you&apos;ve replied, I can ignore it. Because I know it&apos;ll be sorted out.&quot;&lt;/p&gt;
+
+&lt;p&gt;I didn&apos;t think of myself that way. It was super clear about what was happening. And how I could continue or level it up.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m not in touch with them anymore, but that short feedback changed my approach more than any other moment I&apos;m aware of&lt;/p&gt;
+
+&lt;p&gt;And the reverse, a different manager said (paraphrasing) &quot;I need you to decide when to stop working on something.&quot; Really clear, timely example of what I was getting wrong, and how I could fix things.&lt;/p&gt;
+
+&lt;p&gt;I am… very easily distracted. One person described it as a &quot;curiosity-driven approach to work.&quot;&lt;/p&gt;
+
+&lt;p&gt;I used to apologise about this and try hard to avoid it. Until a colleague said: (paraphrasing) &quot;the thing is, you&apos;re good at it - why don&apos;t you just try and get better, instead of fighting yourself.&quot;&lt;/p&gt;
+
+&lt;p&gt;This has been transformative. I&apos;m more productive, more present as a parent, and less stressed about my behaviour (not the same as thinking I always get it right 🙈)&lt;/p&gt;
+
+&lt;h2 id=&quot;context-context-context&quot;&gt;context, context, context&lt;/h2&gt;
+
+&lt;p&gt;Another thing I value — the larger or faster the organization the more I miss it.&lt;/p&gt;
+
+&lt;p&gt;A more senior colleague often has context that you don&apos;t. Your manager is often that person. And sharing that with you is super valuable.&lt;/p&gt;
+
+&lt;p&gt;That might be how you&apos;re seen (&quot;your long to-do lists don&apos;t help people understand what you&apos;re working on&quot;).&lt;/p&gt;
+
+&lt;p&gt;It might be organizational context, for example, once I was worrying about the specifics of a deadline, a senior colleague said: &quot;We have to spend 90% of the marketing budget printing posters by the second week of the financial year. Nobody will care if your deadline moves, but some will really care if you know you&apos;ll miss it completely. Because they can&apos;t afford to reprint.&quot;&lt;/p&gt;
+
+&lt;p&gt;Suddenly, I didn&apos;t have to plan what week I would hit something. Just how confident I was for a &quot;yes/no&quot; decision. Way easier, and more helpful!&lt;/p&gt;
+
+&lt;p&gt;Or, when an exec at omniclopse was a shouty-man, throwing salesforce at every problem. Learning that they&apos;d been hired specifically to implement salesforce completely changed my understanding of their needs. They were trapped doing something they didn&apos;t want to do until they could point at implemented salesforce. And I was trapped with them until then…&lt;/p&gt;
+
+&lt;p&gt;That made my job so much easier.&lt;/p&gt;
+
+&lt;h2 id=&quot;experience--the-coach&quot;&gt;experience / the coach&lt;/h2&gt;
+
+&lt;p&gt;The person managing you has different experience to you.&lt;/p&gt;
+
+&lt;p&gt;A previous manager was a purposeful politician. Helping me understand that I had to give a Director level colleague &quot;something to say yes to&quot; instead of showing them why they were wrong (spoiler they were definitely wrong. I know I sometimes am… but not that time). By giving them something to say yes to, we could get past the loggerhead we were stuck at.&lt;/p&gt;
+
+&lt;p&gt;Another manager was great at coaching questions. Pushing you to see where you were missing something and to figure out how to address it. Long walks, with tough questions, that sometimes ended with ice-cream 🧑‍🍳👌&lt;/p&gt;
+
+&lt;h1 id=&quot;does-this-help-me-answer-their-question&quot;&gt;Does this help me answer their question?&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;timely feedback.
+    &lt;ul&gt;
+      &lt;li&gt;we&apos;re all works-in-progress and don&apos;t always see what we&apos;re getting right or wrong&lt;/li&gt;
+      &lt;li&gt;in-person feedback is the gold standard, but I prefer feedback sooner. so async is better than missed&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;similarly &quot;the coach&quot;
+    &lt;ul&gt;
+      &lt;li&gt;I worry that I&apos;m not great at reflecting on my work&lt;/li&gt;
+      &lt;li&gt;I also find impostor syndrome a real problem,&lt;/li&gt;
+      &lt;li&gt;and I&apos;m &quot;senior&quot; enough that people assume I know what I&apos;m doing&lt;/li&gt;
+      &lt;li&gt;So, I worry that I get less feedback than I otherwise would&lt;/li&gt;
+      &lt;li&gt;So, I love to hear critical feedback as much as positive&lt;/li&gt;
+      &lt;li&gt;I&apos;d rather be asked the uncomfortable question than miss the opportunity to improve&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;context, context, context
+    &lt;ul&gt;
+      &lt;li&gt;one colleague would refer to the &quot;Chief Reminding Officer&quot;&lt;/li&gt;
+      &lt;li&gt;it&apos;s easy to get lost in the forest even with a map in hand&lt;/li&gt;
+      &lt;li&gt;your manager often has a very different viewpoint (and worries they&apos;re too far from the forest)&lt;/li&gt;
+      &lt;li&gt;I&apos;d rather be reminded of the context more often than I need&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Tue, 03 Jun 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/06/how-do-i-like-to-be-managed.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>2024 Year Notes</title>
+				<description>&lt;p&gt;I remain super un-inspired to write over the last few years. Which is a shame - because it&apos;s a a great way to learn. And very uninspired to write about 2024 in particular. So, here are some very short year notes for 2024.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;why-dont-i-want-to-write-about-2024&quot;&gt;Why don&apos;t I want to write about 2024…&lt;/h1&gt;
+
+&lt;p&gt;2024 was in some ways great, genuinely so, life is good…&lt;/p&gt;
+
+&lt;p&gt;But it was over-shadowed by grief and the preparation for grief. You can find out about that in this post &lt;a href=&quot;https://pauldambra.dev/2024/09/wwmd.html&quot;&gt;https://pauldambra.dev/2024/09/wwmd.html&lt;/a&gt; (unless you&apos;d like to avoid grief)&lt;/p&gt;
+
+&lt;h1 id=&quot;goals-i-chose-for-2024&quot;&gt;Goals I chose for 2024&lt;/h1&gt;
+
+&lt;h3 id=&quot;work&quot;&gt;work&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate&lt;/li&gt;
+  &lt;li&gt;take more time to lift my head up and look at the horizon&lt;/li&gt;
+  &lt;li&gt;get better at digging into tricky problems&lt;/li&gt;
+  &lt;li&gt;get better at not being distracted by tricky problems if there is some higher value work I should be doing&lt;/li&gt;
+  &lt;li&gt;speak to customers for at least 5 hours over the year&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;home&quot;&gt;home&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;more time with my family (screens off, not watching telly)&lt;/li&gt;
+  &lt;li&gt;solidify my transactional Italian, figure out how to head towards conversational Italian&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week (and lose weight)&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;travel&quot;&gt;Travel&lt;/h2&gt;
+
+&lt;p&gt;Google doesn&apos;t support timeline in the web view anymore… 🤷
+So, no image of my travel&lt;/p&gt;
+
+&lt;p&gt;I visited&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sicily
+    &lt;ul&gt;
+      &lt;li&gt;to hack on a heatmaps product&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Valencia
+    &lt;ul&gt;
+      &lt;li&gt;for a team offsite&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Vienna
+    &lt;ul&gt;
+      &lt;li&gt;for a team onboarding&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mykonos
+    &lt;ul&gt;
+      &lt;li&gt;for the whole company offsite&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;it is wild to me to consider that much travel in a year that felt so small&lt;/p&gt;
+
+&lt;h2 id=&quot;work-1&quot;&gt;Work&lt;/h2&gt;
+
+&lt;p&gt;At one point I was outside The Christie in Manchester (a specialist cancer treatment hospital we are so lucky to have). I overheard a man on the phone, anxious, agitated, almost shouting: &quot;they&apos;ve said they can&apos;t see me! i can&apos;t come back another day. if i have to take more time off work i&apos;ll lose my job&quot;.&lt;/p&gt;
+
+&lt;p&gt;I am uncountably grateful to have a job where I was told to take whatever time I needed. Where colleagues picked up the slack. And that I enjoy so much.&lt;/p&gt;
+
+&lt;h1 id=&quot;me&quot;&gt;Me&lt;/h1&gt;
+
+&lt;p&gt;I lost 12kg in 2024. The unrelenting drudgery of not eating is so dull.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve continued enjoying cooking. Food has always been an expression of love in my life.&lt;/p&gt;
+
+&lt;h2 id=&quot;first-pasta-of-2024&quot;&gt;first pasta of 2024&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/05/first-pasta-2024.jpg&quot; alt=&quot;the first pasta I cooked in 2024&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;last-pasta-of-2024&quot;&gt;last pasta of 2024&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/05/last-pasta-2024.jpg&quot; alt=&quot;the last pasta I cooked in 2024&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;my-favourite-moment-of-2024&quot;&gt;My favourite moment of 2024?&lt;/h2&gt;
+
+&lt;p&gt;Cheesy, but it was when my dad said &quot;i&apos;d be happy to be served that pasta in Italy&quot;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025/05/dad-pasta-2024.jpg&quot; alt=&quot;the pasta my dad thought was good enough for italy&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;what-writing-this-taught-me-i-want-to-do-in-2025&quot;&gt;What writing this taught me I want to do in 2025&lt;/h1&gt;
+
+&lt;p&gt;OMG I have no idea… we&apos;re nearly 6 months through. I think I just need a year without life-grinding disruption.&lt;/p&gt;
+
+&lt;p&gt;Let&apos;s just carry everything forwards…&lt;/p&gt;
+
+&lt;h3 id=&quot;work-2&quot;&gt;work&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;continue becoming a better engineer and team-mate&lt;/li&gt;
+  &lt;li&gt;take more time to lift my head up and look at the horizon&lt;/li&gt;
+  &lt;li&gt;get better at digging into tricky problems&lt;/li&gt;
+  &lt;li&gt;get better at not being distracted by tricky problems if there is some higher value work I should be doing&lt;/li&gt;
+  &lt;li&gt;speak to customers for at least 5 hours over the year&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;home-1&quot;&gt;home&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;more time with my family (screens off, not watching telly)&lt;/li&gt;
+  &lt;li&gt;solidify my transactional Italian, figure out how to head towards conversational Italian&lt;/li&gt;
+  &lt;li&gt;train at the gym at least twice a week every week (and lose weight)&lt;/li&gt;
+  &lt;li&gt;visit Italy at least twice&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Mon, 05 May 2025 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2025/05/year-notes.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2025/05/year-notes.html
+				</guid>
+			</item>
+		
+			<item>
+				<title>What would mum do?</title>
+				<description>&lt;p&gt;Recently my mum died. And I don&apos;t know how to process what felt like a very quick and very slow experience all at the same time.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ve been writing here for a long time, maybe writing here will help me… At least it helps shamelessly ask for &lt;a href=&quot;https://www.justgiving.com/page/in-memory-of-denise-dambra&quot;&gt;donations to Cancer Research&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Talking with my brother one thing that stood out was that we both want to remember to focus on the good things. There&apos;s a risk that otherwise we only remember the last few relatively horrible months. So, I wanted to spend some time to reflect about what things I want to be sure to remember.&lt;/p&gt;
+
+&lt;p&gt;(I normally try to vary the starting words of my sentences… but no apologies for overusing sentences starting with mum in this one)&lt;/p&gt;
+
+&lt;p&gt;#FuckCancer&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;what-would-mum-do&quot;&gt;What would mum do?&lt;/h1&gt;
+
+&lt;p&gt;I couldn&apos;t give the eulogy at the funeral - I barely got through a poetry reading. My brother did an &lt;strong&gt;amazing&lt;/strong&gt; job. In his eulogy he explained that in trying to think of how to approach it and what to say he had asked himself: &quot;what would mum do?&quot;. Funnily enough… I&apos;d asked myself the same question.&lt;/p&gt;
+
+&lt;p&gt;I didn&apos;t know how to get through the reading. And I remembered her saying that when she read a poem at her dad&apos;s funeral she had prepared by reading it over and over. So, that in the moment, if it was too hard, then maybe she would get through it just from practice. So simple, but just right. So, that&apos;s what I did.&lt;/p&gt;
+
+&lt;p&gt;When it came to it… I looked up and realised the crematorium was full. I saw faces I&apos;d not seen for decades. My heart was hammering, and I don&apos;t remember a moment of it. But I&apos;m told it was read well. Thanks mum.&lt;/p&gt;
+
+&lt;p&gt;I&apos;m going to remember to ask myself that question.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-fearless-feminist-and-self-improver&quot;&gt;A fearless feminist and self-improver&lt;/h1&gt;
+
+&lt;p&gt;Mum chose the poem I read at the funeral. Honestly, I didn&apos;t like it… And I couldn&apos;t ask her why. So, what would mum do?&lt;/p&gt;
+
+&lt;p&gt;She had no option of what to study at school. Working-class girls from Manchester in the 60s were prepared to be housewives and nothing else. But, she went back to education later in life, getting a degree in her 50s. Ultimately having at least three careers however you cut it.&lt;/p&gt;
+
+&lt;p&gt;She would have learned about the poem and the poet. So, I learned about the poem and the poet. And discovered so many parallels for her life.&lt;/p&gt;
+
+&lt;p&gt;That Elizabeth Barrett Browning was a feminist and an abolitionist despite losing her family as a result. That her love with her husband was so deep as to be famous. That she spent a part of her life in Italy. That the poem communicates a profound love.&lt;/p&gt;
+
+&lt;p&gt;And, the poem made sense. I could completely understand why she&apos;d chosen it… to give us all one last, one &lt;em&gt;more&lt;/em&gt;, message of love. I knew how to read it.&lt;/p&gt;
+
+&lt;p&gt;Particularly, I want to remember the parallel that mum had always been a feminist.&lt;/p&gt;
+
+&lt;p&gt;Once when she worked at British Telecom (would have been the early 90s), the CEO was unexpectedly passing through the office and saying hello to people.&lt;/p&gt;
+
+&lt;p&gt;Mum: &quot;Can I ask you a question while you&apos;re here?&quot;&lt;br /&gt;
+CEO (surprised): &quot;of course&quot;&lt;br /&gt;
+Mum: &quot;Why are there no women on the board?&quot;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;From a house with no electric lights in Ancoats to fearlessly asking challenging questions of the powerful 💪&lt;/p&gt;
+
+&lt;p&gt;One lesson I know I have learned from her is to be a champion for what is right (however well I might be doing at that) and that there&apos;s always a return on investment from trying to be a better version of yourself.&lt;/p&gt;
+
+&lt;h1 id=&quot;show-a-genuine-interest-in-people&quot;&gt;Show a genuine interest in people&lt;/h1&gt;
+
+&lt;p&gt;Mum had a boundless optimism, and huge capacity for love and interest in people. In the last few months I lost count of the number of people from across decades of her life who have told us things like &quot;she saved me&quot;, or &quot;she was my honourary sister, gran, or mother&quot;. And she could talk for England… for those of you that know me - she made me look shy and retiring.&lt;/p&gt;
+
+&lt;p&gt;But (unlike me) she always asked questions.&lt;/p&gt;
+
+&lt;p&gt;An example…&lt;/p&gt;
+
+&lt;p&gt;In her final weeks while in hospital. There was a woman in the next bed who was silent and withdrawn. She wasn&apos;t interacting with other patients or hospital staff. To be kind… she looked like she&apos;d had a hard life. And, to be honest, I was a little afraid of her and tried not to make eye contact.&lt;/p&gt;
+
+&lt;p&gt;At some point I noticed mum had started asking her questions about herself. Little things at first, but with genuine interest in the replies. Genuine interest in the person. Within a few minutes there was a different person there. Engaged and talking - teaching the patients in the ward all about raising pigeons.&lt;/p&gt;
+
+&lt;p&gt;Sorry to all the friends who have put up with my info-dumping approach to conversations. I&apos;ll try and ask more questions - I promise.&lt;/p&gt;
+
+&lt;h1 id=&quot;theres-so-much-more&quot;&gt;There&apos;s so much more…&lt;/h1&gt;
+
+&lt;p&gt;There is so much more I could remember, and so many more lessons I could take - her optimism and positivity is already stamped on my approach to life. But these things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;what would mum do?&lt;/li&gt;
+  &lt;li&gt;be a champion for what you think is right&lt;/li&gt;
+  &lt;li&gt;be a better version of yourself&lt;/li&gt;
+  &lt;li&gt;show a genuine interest in people&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Those are things I want to carry with me.&lt;/p&gt;
+
+&lt;p&gt;I know that I am lucky to have had parents who loved and protected me, who never once gave me a moment to doubt there was always somewhere safe for me.&lt;/p&gt;
+
+&lt;p&gt;Shamelessly again I will take the opportunity to ask for &lt;a href=&quot;https://www.justgiving.com/page/in-memory-of-denise-dambra&quot;&gt;donations to Cancer Research at https://www.justgiving.com/page/in-memory-of-denise-dambra&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And then leave the final words to Elizabeth Barrett Browning&lt;/p&gt;
+
+&lt;p&gt;How do I love thee? Let me count the ways.&lt;br /&gt;
+I love thee to the depth and breadth and height&lt;br /&gt;
+My soul can reach, when feeling out of sight&lt;br /&gt;
+For the ends of being and ideal grace.&lt;br /&gt;
+I love thee to the level of every day’s&lt;br /&gt;
+Most quiet need, by sun and candle-light.&lt;br /&gt;
+I love thee freely, as men strive for right.&lt;br /&gt;
+I love thee purely, as they turn from praise.&lt;br /&gt;
+I love thee with the passion put to use&lt;br /&gt;
+In my old griefs, and with my childhood’s faith.&lt;br /&gt;
+I love thee with a love I seemed to lose&lt;br /&gt;
+With my lost saints. I love thee with the breath,&lt;br /&gt;
+Smiles, tears, of all my life; and, if God choose,&lt;br /&gt;
+I shall but love thee better after death.&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mum.jpg&quot; alt=&quot;mum meeting my #2 child&quot; /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Thu, 12 Sep 2024 08:00:00 +0000</pubDate>
+				
+				<link>
+					https://pauldambra.dev/2024/09/wwmd.html
+				</link>
+				<guid isPermaLink="true">
+					https://pauldambra.dev/2024/09/wwmd.html
+				</guid>
+			</item>
+		
+	</channel>
+</rss>

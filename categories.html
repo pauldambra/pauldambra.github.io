@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Categories</title>
+    <link rel="canonical" href="https://pauldambra.dev/categories.html" />
+    <meta property="og:url" content="https://pauldambra.dev/categories.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Categories" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+             
+
+<h1>Categories</h1>
+<div class="">
+  
+  <a class="text-black no-underline hover:underline" href="#amp">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    AMP
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#ci">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    CI
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#http">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    HTTP
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#structured-data">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    Structured Data
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#tortured-metaphors">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    Tortured Metaphors
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#agile">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    agile
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#c">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    c#
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#cms">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    cms
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#continuous-delivery">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    continuous delivery
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#continuous-integration">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    continuous-integration
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#cooking">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    cooking
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#databases">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    databases
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#dear-diary">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    dear-diary
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#design">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    design
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#discussion">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    discussion
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#energy">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    energy
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#hardware">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    hardware
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#how-do-i">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    how-do-i
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#kata">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    kata
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#life-events">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    life events
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#metaphors">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    metaphors
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#month-notes">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    month-notes
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#naming">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    naming
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#nosql">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    nosql
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#programming">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    programming
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#rant">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    rant
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#react">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    react
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#refactoring">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    refactoring
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#self-reflection">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    self-reflection
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#semantics">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    semantics
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#serverless">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    serverless
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#snark">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    snark
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#software-engineering">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    software-engineering
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#ssh">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    ssh
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#testing">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    testing
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#ux">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    ux
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#visualisation">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    visualisation
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#windows-mobile">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    windows-mobile
+  </a>
+  
+  <a class="text-black no-underline hover:underline" href="#year-notes">
+    <img class="inline-block w-6 h-6" src="/images/tag.svg" alt="tag-icon" />
+    year-notes
+  </a>
+  
+</div>
+<hr />
+ 
+<h2 id="amp">AMP</h2>
+<ul class="categories-list list-none">
+                                                                                         
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/generating-static-amp.html">
+      Generating static AMP pages
+      <small>22 Mar 2017</small>
+    </a>
+  </li>
+                                                                                                 
+</ul>
+
+<h2 id="ci">CI</h2>
+<ul class="categories-list list-none">
+                                                                                             
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2016/yarn.html">
+      Yarn!
+      <small>18 Oct 2016</small>
+    </a>
+  </li>
+                                                                                             
+</ul>
+
+<h2 id="http">HTTP</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                                 
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2011/09/unusbscribey-follow-up.html">
+      An unusbscribey follow up
+      <small>20 Sep 2011</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2011/08/how-to-design-unsubscribe-link.html">
+      How to design an unsubscribe link?!?
+      <small>05 Aug 2011</small>
+    </a>
+  </li>
+                       
+</ul>
+
+<h2 id="structured-data">Structured Data</h2>
+<ul class="categories-list list-none">
+                                                                                               
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/structured-data-with-jekyll.html">
+      Adding Structured Data to a Jekyll site
+      <small>20 Sep 2016</small>
+    </a>
+  </li>
+                                                                                           
+</ul>
+
+<h2 id="tortured-metaphors">Tortured Metaphors</h2>
+<ul class="categories-list list-none">
+                                                                                     
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/05/big-pile-of-soil.html">
+      Big Pile of Soil
+      <small>14 May 2017</small>
+    </a>
+  </li>
+                                                                                                     
+</ul>
+
+<h2 id="agile">agile</h2>
+<ul class="categories-list list-none">
+                                                                           
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/01/direction.html">
+      Is where we're going where we're going
+      <small>29 Jan 2018</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/07/retrosperiment.html">
+      Retrosperiment
+      <small>06 Jul 2017</small>
+    </a>
+  </li>
+                        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/real-vs-soft.html">
+      Real vs. Software Engineering
+      <small>29 Nov 2015</small>
+    </a>
+  </li>
+                                                                                   
+</ul>
+
+<h2 id="c">c#</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                                                 
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2009/12/c-background-worker.html">
+      c# Background Worker
+      <small>01 Dec 2009</small>
+    </a>
+  </li>
+         
+</ul>
+
+<h2 id="cms">cms</h2>
+<ul class="categories-list list-none">
+                                                                                                                       
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/wrapping_up.html">
+      Websites != CMS Platform - Wrapping Up
+      <small>03 Aug 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/better-affordance-js.html">
+      Websites != CMS Platform - Better Editable Affordance with JS for great good
+      <small>30 Jul 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/better-affordance.html">
+      Websites != CMS Platform - Better Editable Affordance
+      <small>20 Jul 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/On-Page-Editing.html">
+      Websites != CMS Platform - On Page Editing
+      <small>11 Jun 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/Websites-CMS-Platform-promises-part-2.html">
+      Websites != CMS Platform - Promises - part 2
+      <small>01 Jun 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/Websites-CMS-Platform-promises.html">
+      Websites != CMS Platform - Promises
+      <small>18 May 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/websites-CMS-platform-logging-in.html">
+      Websites != CMS Platform - Logging in to the site
+      <small>27 Apr 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/Websites-CMS-Platform-Storing-Data2.html">
+      Websites != CMS Platform - Storing Data - Part 2
+      <small>23 Apr 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/Websites-CMS-Platform-Storing-Data.html">
+      Websites != CMS Platform - Storing Data - Part 1
+      <small>12 Apr 2014</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2014/03/website-cms-display-pages-part-2.html">
+      Website != CMS Platform - Displaying pages - part 2
+      <small>23 Mar 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2014/03/websites-cms-displaying-pages.html">
+      Websites != CMS Platform - Displaying pages
+      <small>17 Mar 2014</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2014/02/websites-cms.html">
+      Websites != CMS Platform
+      <small>22 Feb 2014</small>
+    </a>
+  </li>
+                                         
+</ul>
+
+<h2 id="continuous-delivery">continuous delivery</h2>
+<ul class="categories-list list-none">
+                                                                               
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/testing-meaning.html">
+      Testing Meaning in HTML!
+      <small>17 Aug 2017</small>
+    </a>
+  </li>
+              
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/testing-static-sites.html">
+      Testing Static HTML!
+      <small>19 Mar 2017</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/using-travis-to-build-jekyll.html">
+      Using Travis CI to build a Jekyll site
+      <small>18 Sep 2016</small>
+    </a>
+  </li>
+                                                                                         
+</ul>
+
+<h2 id="continuous-integration">continuous-integration</h2>
+<ul class="categories-list list-none">
+                                                                                                                   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/rake-transforms.html">
+      Transforming web.config values with Rake
+      <small>06 Nov 2014</small>
+    </a>
+  </li>
+                                                                       
+</ul>
+
+<h2 id="cooking">cooking</h2>
+<ul class="categories-list list-none">
+                         
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/recipes/2023/07/zucchini-focaccia.html">
+      Zucchini focaccia
+      <small>24 Jul 2023</small>
+    </a>
+  </li>
+                  
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/recipes/2023/01/pasta-e-fasule.html">
+      Pasta e fasule
+      <small>08 Jan 2023</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/recipes/2022/09/pizza-dough.html">
+      Pizza dough
+      <small>04 Sep 2022</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/recipes/2022/09/pepper-salad.html">
+      Roast Pepper Salad
+      <small>04 Sep 2022</small>
+    </a>
+  </li>
+                                                                                                                                             
+</ul>
+
+<h2 id="databases">databases</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                     
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2013/11/astronomical-database-identfier.html">
+      Astronomical Database Identfier
+      <small>22 Nov 2013</small>
+    </a>
+  </li>
+                                     
+</ul>
+
+<h2 id="dear-diary">dear-diary</h2>
+<ul class="categories-list list-none">
+                     
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2024/09/wwmd.html">
+      What would mum do?
+      <small>12 Sep 2024</small>
+    </a>
+  </li>
+                                                                                                                                                                     
+</ul>
+
+<h2 id="design">design</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                         
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2012/09/obligatory-ios6-maps-post.html">
+      Obligatory iOS6 maps post
+      <small>23 Sep 2012</small>
+    </a>
+  </li>
+                                 
+</ul>
+
+<h2 id="discussion">discussion</h2>
+<ul class="categories-list list-none">
+                                                 
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2022/07/weather-vane-or-sign-post.html">
+      Are you a weather vane or a sign post
+      <small>17 Sep 2021</small>
+    </a>
+  </li>
+                                                                                                                                         
+</ul>
+
+<h2 id="energy">energy</h2>
+<ul class="categories-list list-none">
+                                               
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2022/08/solar-panels.html">
+      Five years of Solar Panels
+      <small>22 Aug 2022</small>
+    </a>
+  </li>
+                                                                                                                                           
+</ul>
+
+<h2 id="hardware">hardware</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                                           
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2010/08/odd-odd-odd-login-behaviour.html">
+      Odd, odd, odd login behaviour
+      <small>07 Aug 2010</small>
+    </a>
+  </li>
+               
+</ul>
+
+<h2 id="how-do-i">how-do-i</h2>
+<ul class="categories-list list-none">
+   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2026/02/deca-hundy.html">
+      I shipped 1000 PRs in a year, AMA
+      <small>11 Feb 2026</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2026/02/how-i-do-user-interviews.html">
+      How I do user interviews
+      <small>11 Feb 2026</small>
+    </a>
+  </li>
+                                                                                                                                                                                     
+</ul>
+
+<h2 id="kata">kata</h2>
+<ul class="categories-list list-none">
+                                                                                                                 
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/happy-numbers-kata.html">
+      Happy Numbers
+      <small>22 Nov 2014</small>
+    </a>
+  </li>
+                                                                         
+</ul>
+
+<h2 id="life-events">life events</h2>
+<ul class="categories-list list-none">
+                                                   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2021/09/emotional-advice.html">
+      Advice given on ending four years at Co-op
+      <small>17 Sep 2021</small>
+    </a>
+  </li>
+                                                                                                                                       
+</ul>
+
+<h2 id="metaphors">metaphors</h2>
+<ul class="categories-list list-none">
+                                                                             
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/10/constructiphor.html">
+      Constructiphor
+      <small>15 Oct 2017</small>
+    </a>
+  </li>
+                                                                                                             
+</ul>
+
+<h2 id="month-notes">month-notes</h2>
+<ul class="categories-list list-none">
+                             
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/03/mar-month-notes.html">
+      March 2023 Month Notes
+      <small>02 Apr 2023</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/03/feb-month-notes.html">
+      Feb 2023 Month Notes
+      <small>01 Mar 2023</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/02/jan-month-notes.html">
+      Jan 2023 Month Notes
+      <small>03 Feb 2023</small>
+    </a>
+  </li>
+                                                                                                                                                     
+</ul>
+
+<h2 id="naming">naming</h2>
+<ul class="categories-list list-none">
+                                                                                       
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/05/ubictionary.html">
+      Ubictionary
+      <small>10 May 2017</small>
+    </a>
+  </li>
+                                                                                                   
+</ul>
+
+<h2 id="nosql">nosql</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2014/01/comparing-mongodb-and-tokumx.html">
+      Comparing MongoDb and TokuMX
+      <small>23 Jan 2014</small>
+    </a>
+  </li>
+                                       
+</ul>
+
+<h2 id="programming">programming</h2>
+<ul class="categories-list list-none">
+                                                                 
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/03/harmful-dry.html">
+      DRY - considered harmful
+      <small>30 Mar 2018</small>
+    </a>
+  </li>
+                                                                                                                        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2009/05/anonymous-methods-when-invoking-in-vb.html">
+      Anonymous methods when invoking in VB net
+      <small>28 May 2009</small>
+    </a>
+  </li>
+   
+</ul>
+
+<h2 id="rant">rant</h2>
+<ul class="categories-list list-none">
+                               
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/03/the-cloud.html">
+      I saved 183 million dollars by not moving to the Cloud
+      <small>19 Mar 2023</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/03/office-365-mega-thread.html">
+      Office 365 mega-thread
+      <small>05 Mar 2023</small>
+    </a>
+  </li>
+                                                                                                                            
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2012/07/y-u-no-sell-downloads-hollywood.html">
+      Y U NO SELL DOWNLOADS HOLLYWOOD
+      <small>25 Jul 2012</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2012/02/is-there-really-just-ipad-market.html">
+      Is there really just an iPad market?
+      <small>07 Feb 2012</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2012/01/setting-up-mvc3-website-using-built-in.html">
+      Setting up an MVC3 website using built-in membership provider
+      <small>12 Jan 2012</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2011/06/get-with-programming.html">
+      Get with the program(ming)!
+      <small>10 Jun 2011</small>
+    </a>
+  </li>
+                
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2009/10/bing-is-not-search-engine.html">
+      Bing is not a search engine
+      <small>30 Oct 2009</small>
+    </a>
+  </li>
+       
+</ul>
+
+<h2 id="react">react</h2>
+<ul class="categories-list list-none">
+                                                                                                         
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/reactotype/part-three.html">
+      Reactotype Part 3
+      <small>20 Feb 2015</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/reactotype/part-two.html">
+      Reactotype Part 2
+      <small>19 Feb 2015</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/reactotype/part-one.html">
+      Reactotype Part 1
+      <small>17 Feb 2015</small>
+    </a>
+  </li>
+                                                                             
+</ul>
+
+<h2 id="refactoring">refactoring</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                                         
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2010/10/refactor-fun.html">
+      Refactor ==fun
+      <small>20 Oct 2010</small>
+    </a>
+  </li>
+                 
+</ul>
+
+<h2 id="self-reflection">self-reflection</h2>
+<ul class="categories-list list-none">
+       
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2026/01/how-i-use-llms-3.html">
+      How I use LLMs? - three
+      <small>30 Jan 2026</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2025/12/avoiding-madness.html">
+      Things that a different me would have been tipped into psychosis by
+      <small>03 Dec 2025</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2025/10/how-i-use-llms-2.html">
+      How I use LLMs - two?
+      <small>24 Oct 2025</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2025/09/four-things-in-four-years.html">
+      Four things in four years at PostHog
+      <small>16 Sep 2025</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2025/07/how-i-use-llms.html">
+      How I use LLMs?
+      <small>24 Jul 2025</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2025/06/how-do-i-like-to-be-managed.html">
+      How do I like to be managed?
+      <small>03 Jun 2025</small>
+    </a>
+  </li>
+                                                                                                                                                                         
+</ul>
+
+<h2 id="semantics">semantics</h2>
+<ul class="categories-list list-none">
+                                                     
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2021/07/tech-debts.html">
+      Tech Debts
+      <small>21 Jul 2021</small>
+    </a>
+  </li>
+                                                                                                                                     
+</ul>
+
+<h2 id="serverless">serverless</h2>
+<ul class="categories-list list-none">
+                                                           
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2019/11/serverless-lessons-learned.html">
+      Serverless - Lessons learned
+      <small>30 Nov 2019</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/07/serverless-6.html">
+      Serverless - Part Six - Making a view
+      <small>01 Jul 2018</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/06/serverless-5.html">
+      Serverless - Part Five - Read Models
+      <small>10 Jun 2018</small>
+    </a>
+  </li>
+      
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/02/serverless-4.html">
+      Serverless - Part Four
+      <small>15 Mar 2018</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/02/serverless-3.html">
+      Serverless - Part Three
+      <small>05 Feb 2018</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/02/serverless-2.html">
+      Serverless - Part Two
+      <small>04 Feb 2018</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2018/02/serverless-1.html">
+      Serverless - Part One
+      <small>03 Feb 2018</small>
+    </a>
+  </li>
+                                                                                                                 
+</ul>
+
+<h2 id="snark">snark</h2>
+<ul class="categories-list list-none">
+                           
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/06/pauls-law.html">
+      Paul's Law
+      <small>08 Jun 2023</small>
+    </a>
+  </li>
+                                                                                                                                                               
+</ul>
+
+<h2 id="software-engineering">software-engineering</h2>
+<ul class="categories-list list-none">
+                                                                                                   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/kill-if-with-objects.html">
+      Remove If With Objects
+      <small>07 Sep 2016</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/powershell-on-linux.html">
+      Powershell on Linux
+      <small>28 Aug 2016</small>
+    </a>
+  </li>
+            
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/fun-with-structs.html">
+      Fun With Structs
+      <small>01 Feb 2015</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/static-factory-methods.html">
+      Static Factory Methods FTW
+      <small>13 Sep 2014</small>
+    </a>
+  </li>
+                      
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2014/04/a-dto-by-any-other-name-would-implement.html">
+      A DTO by any other name would implement ISweetSmellEquality
+      <small>01 Apr 2014</small>
+    </a>
+  </li>
+                                      
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2010/05/theres-more-in-them-that-hills.html">
+      There's more in them thar hills...
+      <small>08 May 2010</small>
+    </a>
+  </li>
+             
+</ul>
+
+<h2 id="ssh">ssh</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                                       
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2011/04/ssh-without-password.html">
+      SSH without password
+      <small>11 Apr 2011</small>
+    </a>
+  </li>
+                   
+</ul>
+
+<h2 id="testing">testing</h2>
+<ul class="categories-list list-none">
+                                                                                                                                           
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2014/03/testing-with-browserstack-and-selenium.html">
+      Testing With Browserstack and Selenium
+      <small>25 Mar 2014</small>
+    </a>
+  </li>
+                                               
+</ul>
+
+<h2 id="ux">ux</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                       
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2013/03/automagical-search-ux.html">
+      Automagical search UX
+      <small>20 Mar 2013</small>
+    </a>
+  </li>
+                                   
+</ul>
+
+<h2 id="visualisation">visualisation</h2>
+<ul class="categories-list list-none">
+                                                                                   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2017/06/radarban.html">
+      Where we're going we don't need columns
+      <small>24 Jun 2017</small>
+    </a>
+  </li>
+                                                                                                       
+</ul>
+
+<h2 id="windows-mobile">windows-mobile</h2>
+<ul class="categories-list list-none">
+                                                                                                                                                                               
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2010/03/quack-quack-says-duck-now-with-added.html">
+      Quack Quack Says The Duck now with added threading
+      <small>29 Mar 2010</small>
+    </a>
+  </li>
+        
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2009/10/quack-quack-says-duck.html">
+      Quack Quack says the Duck
+      <small>04 Oct 2009</small>
+    </a>
+  </li>
+     
+</ul>
+
+<h2 id="year-notes">year-notes</h2>
+<ul class="categories-list list-none">
+                   
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2025/05/year-notes.html">
+      2024 Year Notes
+      <small>05 May 2025</small>
+    </a>
+  </li>
+      
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2024/01/year-notes.html">
+      2023 Year Notes
+      <small>01 Jan 2024</small>
+    </a>
+  </li>
+                  
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2023/01/year-notes.html">
+      2022 Year Notes
+      <small>15 Jan 2023</small>
+    </a>
+  </li>
+                  
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2021/01/year-notes.html">
+      2020 Year Notes
+      <small>03 Jan 2021</small>
+    </a>
+  </li>
+    
+  <li class="m1">
+    <a class="no-underline hover:underline" href="/2020/01/year-notes.html">
+      2019 Year Notes
+      <small>07 Jan 2020</small>
+    </a>
+  </li>
+                                                                                                                                 
+</ul>
+
+
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

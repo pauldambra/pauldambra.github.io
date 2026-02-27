@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>What would mum do?</title>
+    <link rel="canonical" href="https://pauldambra.dev/2024/09/wwmd.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2024/09/wwmd.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="What would mum do?" />
+    <meta
+      property="og:description"
+      content="A tribute to my mum"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="A tribute to my mum"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"What would mum do?",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1124",
+     "url":"https://pauldambra.dev/2024/09/wwmd.html",
+     "datePublished":"2024-09-12",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2024/09/wwmd.html"
+     },
+     "articleBody":"Recently  my  mum  died.  And  I  don't  know  how  to  process  what  felt  like  a  very  quick  and  very  slow  experience  all  at  the  same  time.\n\nI've  been  writing  here  for  a  long  time,  maybe  writing  here  will  help  me…  At  least  it  helps  shamelessly  ask  for  donations  to  Cancer  Research\n\nTalking  with  my  brother  one  thing  that  stood  out  was  that  we  both  want  to  remember  to  focus  on  the  good  things.  There's  a  risk  that  otherwise  we  only  remember  the  last  few  relatively  horrible  months.  So,  I  wanted  to  spend  some  time  to  reflect  about  what  things  I  want  to  be  sure  to  remember.\n\n(I  normally  try  to  vary  the  starting  words  of  my  sentences…  but  no  apologies  for  overusing  sentences  starting  with  mum  in  this  one)\n\n#FuckCancer\n\n\n\nWhat  would  mum  do?\n\nI  couldn't  give  the  eulogy  at  the  funeral  -  I  barely  got  through  a  poetry  reading.  My  brother  did  an  amazing  job.  In  his  eulogy  he  explained  that  in  trying  to  think  of  how  to  approach  it  and  what  to  say  he  had  asked  himself:  \"what  would  mum  do?\".  Funnily  enough…  I'd  asked  myself  the  same  question.\n\nI  didn't  know  how  to  get  through  the  reading.  And  I  remembered  her  saying  that  when  she  read  a  poem  at  her  dad's  funeral  she  had  prepared  by  reading  it  over  and  over.  So,  that  in  the  moment,  if  it  was  too  hard,  then  maybe  she  would  get  through  it  just  from  practice.  So  simple,  but  just  right.  So,  that's  what  I  did.\n\nWhen  it  came  to  it…  I  looked  up  and  realised  the  crematorium  was  full.  I  saw  faces  I'd  not  seen  for  decades.  My  heart  was  hammering,  and  I  don't  remember  a  moment  of  it.  But  I'm  told  it  was  read  well.  Thanks  mum.\n\nI'm  going  to  remember  to  ask  myself  that  question.\n\nA  fearless  feminist  and  self-improver\n\nMum  chose  the  poem  I  read  at  the  funeral.  Honestly,  I  didn't  like  it…  And  I  couldn't  ask  her  why.  So,  what  would  mum  do?\n\nShe  had  no  option  of  what  to  study  at  school.  Working-class  girls  from  Manchester  in  the  60s  were  prepared  to  be  housewives  and  nothing  else.  But,  she  went  back  to  education  later  in  life,  getting  a  degree  in  her  50s.  Ultimately  having  at  least  three  careers  however  you  cut  it.\n\nShe  would  have  learned  about  the  poem  and  the  poet.  So,  I  learned  about  the  poem  and  the  poet.  And  discovered  so  many  parallels  for  her  life.\n\nThat  Elizabeth  Barrett  Browning  was  a  feminist  and  an  abolitionist  despite  losing  her  family  as  a  result.  That  her  love  with  her  husband  was  so  deep  as  to  be  famous.  That  she  spent  a  part  of  her  life  in  Italy.  That  the  poem  communicates  a  profound  love.\n\nAnd,  the  poem  made  sense.  I  could  completely  understand  why  she'd  chosen  it…  to  give  us  all  one  last,  one  more,  message  of  love.  I  knew  how  to  read  it.\n\nParticularly,  I  want  to  remember  the  parallel  that  mum  had  always  been  a  feminist.\n\nOnce  when  she  worked  at  British  Telecom  (would  have  been  the  early  90s),  the  CEO  was  unexpectedly  passing  through  the  office  and  saying  hello  to  people.\n\nMum:  \"Can  I  ask  you  a  question  while  you're  here?\"\nCEO  (surprised):  \"of  course\"\nMum:  \"Why  are  there  no  women  on  the  board?\"\n\nFrom  a  house  with  no  electric  lights  in  Ancoats  to  fearlessly  asking  challenging  questions  of  the  powerful  💪\n\nOne  lesson  I  know  I  have  learned  from  her  is  to  be  a  champion  for  what  is  right  (however  well  I  might  be  doing  at  that)  and  that  there's  always  a  return  on  investment  from  trying  to  be  a  better  version  of  yourself.\n\nShow  a  genuine  interest  in  people\n\nMum  had  a  boundless  optimism,  and  huge  capacity  for  love  and  interest  in  people.  In  the  last  few  months  I  lost  count  of  the  number  of  people  from  across  decades  of  her  life  who  have  told  us  things  like  \"she  saved  me\",  or  \"she  was  my  honourary  sister,  gran,  or  mother\".  And  she  could  talk  for  England…  for  those  of  you  that  know  me  -  she  made  me  look  shy  and  retiring.\n\nBut  (unlike  me)  she  always  asked  questions.\n\nAn  example…\n\nIn  her  final  weeks  while  in  hospital.  There  was  a  woman  in  the  next  bed  who  was  silent  and  withdrawn.  She  wasn't  interacting  with  other  patients  or  hospital  staff.  To  be  kind…  she  looked  like  she'd  had  a  hard  life.  And,  to  be  honest,  I  was  a  little  afraid  of  her  and  tried  not  to  make  eye  contact.\n\nAt  some  point  I  noticed  mum  had  started  asking  her  questions  about  herself.  Little  things  at  first,  but  with  genuine  interest  in  the  replies.  Genuine  interest  in  the  person.  Within  a  few  minutes  there  was  a  different  person  there.  Engaged  and  talking  -  teaching  the  patients  in  the  ward  all  about  raising  pigeons.\n\nSorry  to  all  the  friends  who  have  put  up  with  my  info-dumping  approach  to  conversations.  I'll  try  and  ask  more  questions  -  I  promise.\n\nThere's  so  much  more…\n\nThere  is  so  much  more  I  could  remember,  and  so  many  more  lessons  I  could  take  -  her  optimism  and  positivity  is  already  stamped  on  my  approach  to  life.  But  these  things:\n\n\n    what  would  mum  do?\n    be  a  champion  for  what  you  think  is  right\n    be  a  better  version  of  yourself\n    show  a  genuine  interest  in  people\n\n\nThose  are  things  I  want  to  carry  with  me.\n\nI  know  that  I  am  lucky  to  have  had  parents  who  loved  and  protected  me,  who  never  once  gave  me  a  moment  to  doubt  there  was  always  somewhere  safe  for  me.\n\nShamelessly  again  I  will  take  the  opportunity  to  ask  for  donations  to  Cancer  Research  at  https://www.justgiving.com/page/in-memory-of-denise-dambra\n\nAnd  then  leave  the  final  words  to  Elizabeth  Barrett  Browning\n\nHow  do  I  love  thee?  Let  me  count  the  ways.\nI  love  thee  to  the  depth  and  breadth  and  height\nMy  soul  can  reach,  when  feeling  out  of  sight\nFor  the  ends  of  being  and  ideal  grace.\nI  love  thee  to  the  level  of  every  day’s\nMost  quiet  need,  by  sun  and  candle-light.\nI  love  thee  freely,  as  men  strive  for  right.\nI  love  thee  purely,  as  they  turn  from  praise.\nI  love  thee  with  the  passion  put  to  use\nIn  my  old  griefs,  and  with  my  childhood’s  faith.\nI  love  thee  with  a  love  I  seemed  to  lose\nWith  my  lost  saints.  I  love  thee  with  the  breath,\nSmiles,  tears,  of  all  my  life;  and,  if  God  choose,\nI  shall  but  love  thee  better  after  death.\n\n\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Sep 12 2024</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">What would mum do?</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2024/09/wwmd.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=What+would+mum+do%3F&via=pauldambra&url=https://pauldambra.dev/2024/09/wwmd.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#dear-diary"
+      >
+        in: dear-diary
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dear-diary">
+    dear-diary
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#personal">
+    personal
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>Recently my mum died. And I don't know how to process what felt like a very quick and very slow experience all at the same time.</p>
+
+<p>I've been writing here for a long time, maybe writing here will help me… At least it helps shamelessly ask for <a href="https://www.justgiving.com/page/in-memory-of-denise-dambra">donations to Cancer Research</a></p>
+
+<p>Talking with my brother one thing that stood out was that we both want to remember to focus on the good things. There's a risk that otherwise we only remember the last few relatively horrible months. So, I wanted to spend some time to reflect about what things I want to be sure to remember.</p>
+
+<p>(I normally try to vary the starting words of my sentences… but no apologies for overusing sentences starting with mum in this one)</p>
+
+<p>#FuckCancer</p>
+
+<!--more-->
+
+<h1 id="what-would-mum-do">What would mum do?</h1>
+
+<p>I couldn't give the eulogy at the funeral - I barely got through a poetry reading. My brother did an <strong>amazing</strong> job. In his eulogy he explained that in trying to think of how to approach it and what to say he had asked himself: "what would mum do?". Funnily enough… I'd asked myself the same question.</p>
+
+<p>I didn't know how to get through the reading. And I remembered her saying that when she read a poem at her dad's funeral she had prepared by reading it over and over. So, that in the moment, if it was too hard, then maybe she would get through it just from practice. So simple, but just right. So, that's what I did.</p>
+
+<p>When it came to it… I looked up and realised the crematorium was full. I saw faces I'd not seen for decades. My heart was hammering, and I don't remember a moment of it. But I'm told it was read well. Thanks mum.</p>
+
+<p>I'm going to remember to ask myself that question.</p>
+
+<h1 id="a-fearless-feminist-and-self-improver">A fearless feminist and self-improver</h1>
+
+<p>Mum chose the poem I read at the funeral. Honestly, I didn't like it… And I couldn't ask her why. So, what would mum do?</p>
+
+<p>She had no option of what to study at school. Working-class girls from Manchester in the 60s were prepared to be housewives and nothing else. But, she went back to education later in life, getting a degree in her 50s. Ultimately having at least three careers however you cut it.</p>
+
+<p>She would have learned about the poem and the poet. So, I learned about the poem and the poet. And discovered so many parallels for her life.</p>
+
+<p>That Elizabeth Barrett Browning was a feminist and an abolitionist despite losing her family as a result. That her love with her husband was so deep as to be famous. That she spent a part of her life in Italy. That the poem communicates a profound love.</p>
+
+<p>And, the poem made sense. I could completely understand why she'd chosen it… to give us all one last, one <em>more</em>, message of love. I knew how to read it.</p>
+
+<p>Particularly, I want to remember the parallel that mum had always been a feminist.</p>
+
+<p>Once when she worked at British Telecom (would have been the early 90s), the CEO was unexpectedly passing through the office and saying hello to people.</p>
+
+<p>Mum: "Can I ask you a question while you're here?"<br />
+CEO (surprised): "of course"<br />
+Mum: "Why are there no women on the board?"<br /></p>
+
+<p>From a house with no electric lights in Ancoats to fearlessly asking challenging questions of the powerful 💪</p>
+
+<p>One lesson I know I have learned from her is to be a champion for what is right (however well I might be doing at that) and that there's always a return on investment from trying to be a better version of yourself.</p>
+
+<h1 id="show-a-genuine-interest-in-people">Show a genuine interest in people</h1>
+
+<p>Mum had a boundless optimism, and huge capacity for love and interest in people. In the last few months I lost count of the number of people from across decades of her life who have told us things like "she saved me", or "she was my honourary sister, gran, or mother". And she could talk for England… for those of you that know me - she made me look shy and retiring.</p>
+
+<p>But (unlike me) she always asked questions.</p>
+
+<p>An example…</p>
+
+<p>In her final weeks while in hospital. There was a woman in the next bed who was silent and withdrawn. She wasn't interacting with other patients or hospital staff. To be kind… she looked like she'd had a hard life. And, to be honest, I was a little afraid of her and tried not to make eye contact.</p>
+
+<p>At some point I noticed mum had started asking her questions about herself. Little things at first, but with genuine interest in the replies. Genuine interest in the person. Within a few minutes there was a different person there. Engaged and talking - teaching the patients in the ward all about raising pigeons.</p>
+
+<p>Sorry to all the friends who have put up with my info-dumping approach to conversations. I'll try and ask more questions - I promise.</p>
+
+<h1 id="theres-so-much-more">There's so much more…</h1>
+
+<p>There is so much more I could remember, and so many more lessons I could take - her optimism and positivity is already stamped on my approach to life. But these things:</p>
+
+<ul>
+  <li>what would mum do?</li>
+  <li>be a champion for what you think is right</li>
+  <li>be a better version of yourself</li>
+  <li>show a genuine interest in people</li>
+</ul>
+
+<p>Those are things I want to carry with me.</p>
+
+<p>I know that I am lucky to have had parents who loved and protected me, who never once gave me a moment to doubt there was always somewhere safe for me.</p>
+
+<p>Shamelessly again I will take the opportunity to ask for <a href="https://www.justgiving.com/page/in-memory-of-denise-dambra">donations to Cancer Research at https://www.justgiving.com/page/in-memory-of-denise-dambra</a></p>
+
+<p>And then leave the final words to Elizabeth Barrett Browning</p>
+
+<p>How do I love thee? Let me count the ways.<br />
+I love thee to the depth and breadth and height<br />
+My soul can reach, when feeling out of sight<br />
+For the ends of being and ideal grace.<br />
+I love thee to the level of every day’s<br />
+Most quiet need, by sun and candle-light.<br />
+I love thee freely, as men strive for right.<br />
+I love thee purely, as they turn from praise.<br />
+I love thee with the passion put to use<br />
+In my old griefs, and with my childhood’s faith.<br />
+I love thee with a love I seemed to lose<br />
+With my lost saints. I love thee with the breath,<br />
+Smiles, tears, of all my life; and, if God choose,<br />
+I shall but love thee better after death.<br /></p>
+
+<p><img src="/images/mum.jpg" alt="mum meeting my #2 child" /></p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2025/05/year-notes.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        2024 Year Notes
+      </h3>
+      <small>
+        05 May 2025
+      </small>
+  </div>
+</a>  <a href="/2024/01/year-notes.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        2023 Year Notes
+      </h3>
+      <small>
+        01 Jan 2024
+      </small>
+  </div>
+</a>  <a href="/2023/03/mar-month-notes.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        March 2023 Month Notes
+      </h3>
+      <small>
+        02 Apr 2023
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2024/09/wwmd.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2024/09/wwmd.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

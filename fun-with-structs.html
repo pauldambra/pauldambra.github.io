@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Fun With Structs</title>
+    <link rel="canonical" href="https://pauldambra.dev/fun-with-structs.html" />
+    <meta property="og:url" content="https://pauldambra.dev/fun-with-structs.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Fun With Structs" />
+    <meta
+      property="og:description"
+      content="when and why to use a struct as a value object in C#"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="when and why to use a struct as a value object in C#"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Fun With Structs",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2660",
+     "url":"https://pauldambra.dev/fun-with-structs.html",
+     "datePublished":"2015-02-01",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/fun-with-structs.html"
+     },
+     "articleBody":"We  had  a  brief  conversation  at  work  the  other  day  about  extending  a  type  to  make  our  code  clearer…\n\npublic  class  MeaningfulName  :  MathsName\n{\n        public  MeaningfulName(double  w,  double  x,  double  y,  double  z)  :  base(w,  x,  y,  z)\n        {\n        }\n}\n\n\n\n\nWe're  porting  some  code  written  by  our  maths  wizards  and  there's  lots  of  convention  in  their  domain  specific  language  which  we  were  trying  to  capture  (because  we're  not  maths  wizards  and  (maybe  only  I)  get  easily  lost).\n\nIn  one  case  the  prospective  base  class  wasn't  a  class  but  a  struct  so  we  couldn't  do  this.  And  we  briefly  discussed  whether  we  should  convert  it  to  a  class.\n\nIn  that  conversation  I  stated  that  structs  weren't  value  objects.  You  see,  I've  checked  in  the  past.  After  a  job  interview  where  I  stated  that  they  were  value  objects  and  wrote  some  tests  afterwards  to  check…  I  wish  I  still  had  those  tests  because…\n\nLuckily,  I  have  colleagues  whose  opinions  I  trust  and  I  try  for  my  opinions  to  be  'strong  opinions  weakly  held'  (which  might  be  a  Greg  Young-ism).  So  while  I'm  having  a  lazy  day  I  wrote  some  tests  and  blew  my  mind!\n\nTLDR;\n\n\n    Don't  trust  my  memory\n    Do  test  your  assumptions!  Do  test  your  code!  Maybe  use  structs!\n    Clear  names  are  likely  to  be  much  more  important  than  C#  performance.\n\n\nA  struct  -  What  is  it?\n\nValue  Semantics\n\nQuoting  from  MSDN  \"A  variable  of  a  struct  type  directly  contains  the  data  of  the  struct,  whereas  a  variable  of  a  class  type  contains  a  reference  to  the  data,  the  latter  known  as  an  object.\"\n\n\npublic  class  NotValueSemantics\n{\n\tpublic  int  X  {  get;  private  set;  }\n\n\tpublic  NotValueSemantics(int  x)  \n\t{\n\t\tX  =  x;\n\t}\n}\n\nvar  first  =  new  NotValueSemantics(10);\nvar  second  =  first;\nsecond.X  =  100;\nConsole.WriteLine(first.X);  //writes  100\n\n\n\nin  the  example  above  the  line  var  second  =  first  adds  another  reference  to  the  memory  that  holds  the  first  Object  so  operations  on  second  affect  first.  The  assignment  of  100  to  second.X  is  reflected  in  first.X.\n\n\npublic  struct  ValueSemantics\n{\n\tpublic  int  X  {  get;  private  set;  }\n\n\tpublic  ValueSemantics(int  x)  :  this()\n\t{\n\t\tX  =  x;\n\t}\n}\n\nvar  first  =  new  ValueSemantics(10);\nvar  second  =  first;\nsecond.X  =  100;\nConsole.WriteLine(first.X);  //writes  *10*\n\n\n\nInstead  if  we  declare  it  as  a  struct  (other  than  requiring  a  call  through  to  the  base  parameterless  constructor)  the  difference  is  that  var  second  =  first  copies  the  data  not  a  reference  to  it.  As  a  result  operations  on  second  don't  affect  first  so  the  assignment  second.X  =  100;  is  not  reflected  in  first.X.\n\nAs  an  aside,  it  is  possible  to  \"break\"  this  difference  and  this  excellent  article  by  Jon  Skeet  shows  how.\n\nValue  Object\n\nThe  key  fact  about  a  value  object  is  that  its  properties  determine  what  it  is,  so  two  value  objects  are  equal  when  their  properties  are  equal.  Eric  Evans  in  Domain-driven  Design:  Tackling  Complexity  in  the  Heart  of  Software  says  \"you  don't  care  which  '4'  you  have  or  which  'Q'\".\n\nSo  here  are  the  tests  I  wrote  to  check  my  understanding  of  structs…\n\n[Test]  //this  test  passes!\npublic  void  structs_with_equal_properties_are_equal()\n{\n        var  a  =  new  ValueObject(1,  2);\n        var  b  =  new  ValueObject(1,  2);\n        Assert.AreEqual(a,b);\n}\n\n[Test]  //this  test  passes!\npublic  void  structs_with_different_properties_are_not_equal()\n{\n        var  a  =  new  ValueObject(1,  1);\n        var  b  =  new  ValueObject(1,  2);\n        Assert.AreNotEqual(a,  b);\n}\n\nprivate  struct  ValueObject\n{\n        public  int  X  {get;  private  set;}\n        public  int  Y  {get;  private  set;}\n\n        public  ValueObject(int  x,  int  y)\n                :  this()\n        {\n                X  =  x;\n                Y  =  y;\n        }\n}\n\n\nBoth  of  those  tests  pass.  I'd  have  confidently  put  money  on  those  tests  failing.  As  above  I'm  certain  I've  written  similar  tests  in  the  past  and  seen  them  fail  -  I  should  trust  my  memory  even  less  than  I  currently  do!\n\nSo  a  struct  in  C#  appears  to  be  a  pretty  cheap  way  (in  terms  of  typing)  to  define  a  value  object.\n\nThe  equivalent…  i.e.  a  class  which  acts  as  a  value  object.\n\npublic  class  ValueObject  :  IEquatable&lt;ValueObject&gt;\n{\n        public  int  X  {  get;  private  set;  }\n        public  int  Y  {  get;  private  set;  }\n\n        public  ValueObject(int  x,  int  y)\n        {\n                X  =  x;\n                Y  =  y;\n        }\n\n        public  bool  Equals(ValueObject  other)\n        {\n                if  (ReferenceEquals(null,  other))  return  false;\n                if  (ReferenceEquals(this,  other))  return  true;\n                return  X  ==  other.X  &amp;&amp;  Y  ==  other.Y;\n        }\n\n        public  override  bool  Equals(object  obj)\n        {\n                if  (ReferenceEquals(null,  obj))  return  false;\n                if  (ReferenceEquals(this,  obj))  return  true;\n                if  (obj.GetType()  !=  this.GetType())  return  false;\n                return  Equals((ValueObject)  obj);\n        }\n\n        public  override  int  GetHashCode()\n        {\n                unchecked\n                {\n                        return  (X*397)  ^  Y;\n                }\n        }\n\n        public  static  bool  operator  ==(ValueObject  left,  ValueObject  right)\n        {\n                return  Equals(left,  right);\n        }\n\n        public  static  bool  operator  !=(ValueObject  left,  ValueObject  right)\n        {\n                return  !Equals(left,  right);\n        }\n}\n\n\nMuch  more  code  to  read  than  the  equivalent  struct!  Although  I  used  resharper's  code  generation  to  add  the  equality  methods  so  actually  not  that  much  more  of  the  typing.\n\nThe  section  on  differences  between  structs  and  classes  on  MSDN  is  unusually  clear  for  MS  documentation  and  worth  a  read.\n\nSo…\nI've  learned  something  and  that  has  value.  However,  the  team  still  has  the  problem  of  wanting  to  improve  clarity.  What  solutions  might  there  be.\n\nI  can  think  of  three.\n\n1)  Don't  do  anything\n\nMaybe  leave  it  as  structs  and  use  variable  names  and  some  method  &amp;  class  extractiion  refactorings  to  make  what  is  happening  clearer  instead  of  leaning  on  the  types  to  do  that.\n\nThis  would  be  fine.  My  feeling  is  that  the  code  in  question  leads  itself  to  errors  because  it  has  multiple  things  with  the  same  type  but  different  semantics  being  used  close  together.  It  feels  like  it  will  be  easier  to  introduce  bugs  as  it  is  -  but  we  should  always  be  careful  so  this  is  an  option.\n\n2)  Use  a  wrapper  class\n\nThis  can  be  a  really  useful  way  of  extending  a  sealed  object  or  struct.\n\npublic  class  MeaningfulName  \n{\n\tprivate  MathsName  _mathsThing;\n\n\tpublic  MeaningfulName(double  w,  double  x,  double  y,  double  z  )\t\n\t{\n\t\t_mathsThing  =  new  MathsName(w,  x,  y,  z)\n\t}\n\n\tpublic  double  DoAMathsThing(double  a)  \n\t{\n\t\treturn  _mathsThing.DoAMathsThing(a);\n\t}\n}\n\n\nIf  there  was  a  requirement  to  extend  the  functionality  of  MathsName  and  we  didn't  own  that  object  then  this  would  be  a  good  solution  but  this  wrapper  would  be  calling  the  wrapped  method  with  no  alterations.  And  MathsName  has  a  lot  of  methods  :(\n\nSo  lots  of  the  typing  to  implement  but  even  more  importantly  it's  possible  that  someone  can  alter  MathsName  without  realising  that  they  need  to  alter  MeaningfulName  too  so  there's  the  potential  for  bugs.  It's  better  to  help  people  fall  into  the  pit  of  success  and  this  solution  doesn't  do  that.\n\n3)  Change  it  to  a  class\n\nThere'd  not  be  very  much  of  the  typing.  Only  the  addition  of  the  equality  methods  (and  probably  some  equality  tests  for  safety).  The  struct  in  question  is  relatively  well  covered  anyway  so  the  change  would  be  safe.\n\nBut  we  create  tens  of  thousands  of  these  structs  and  pass  them  around.  What  would  the  impact  of  converting  this  to  a  class  be.\n\nClass  vs.  Struct  -  the  big  fight\n———-\n\nI  created  a  console  application  that  creates  a  bunch  of  objects  and  structs  and  then  calls  a  method  on  them.  You  can  see  the  full  program  here.\n\npublic  class  ValueClass  :  IEquatable&lt;ValueClass&gt;\n{\n        public  double  Z  {  get;  private  set;  }\n        public  double  Y  {  get;  private  set;  }\n        public  double  X  {  get;  private  set;  }\n        public  double  W  {  get;  private  set;  }\n\n        public  ValueClass(double  w,  double  x,  double  y,  double  z)\n        {\n                W  =  w;  X  =  x;  Y  =  y;  Z  =  z;\n        }\n\n        public  static  ValueClass  operator  +(ValueClass  left,  ValueClass  right)\n        {\n                return  new  ValueClass(left.W  +  right.W,  left.X  +  right.X,  left.Y  +  right.Y,  left.Z  +  right.Z);\n        }\n\n        //snip  equality  members\n}\n\npublic  struct  ValueStruct\n{\n        public  double  Z  {  get;  private  set;  }\n        public  double  Y  {  get;  private  set;  }\n        public  double  X  {  get;  private  set;  }\n        public  double  W  {  get;  private  set;  }\n\n        public  ValueStruct(double  w,  double  x,  double  y,  double  z)  :  this()\n        {\n                W  =  w;  X  =  x;  Y  =  y;  Z  =  z;\n        }\n\n        public  static  ValueStruct  operator  +(ValueStruct  left,  ValueStruct  right)\n        {\n                return  new  ValueStruct(left.W  +  right.W,  left.X  +  right.X,  left.Y  +  right.Y,  left.Z  +  right.Z);\n        }\n}\n\n\nand  then  doing  something  like\n\nprivate  static  void  AddObjectsTogether()\n{\n        var  endValues  =  new  List&lt;ValueClass&gt;(Capacity);\n\n        foreach  (var  value  in  CreateABunchOfObjects())\n        {\n                endValues.Add(value  +  MakeRandomValueClass());\n        }\n}\n\n\nProfiling\n\nFirst  I  profiled  the  application  running  with  a  Capacity  of  25  million.  The  code  spent  a  little  less  than  10%  of  its  time  dealing  with  the  structs  and  a  little  more  than  12%  of  its  time  dealing  with  classes.  Running  with  a  capacity  of  250,000  showed  the  reverse.\n\nWhat  this  told  me  was  I  don't  really  understand  profiling…  Doh!\n\nAnd  you  can  create  seventy  five  million  structs  in  2.8  seconds  and  seventy  five  million  object  in  2.3  seconds.  That's  orders  of  magnitude  higher  than  I  care  about.\n\nMemory\n\nWhen  running  the  program  to  generate  the  structs  it  ran  for  about  five  seconds,  preallocated  around  790MB  memory  and  kept  that  amount  of  memory  in  use  until  the  end\n\n\nWhen  running  the  program  to  generate  objects  it  ran  for  about  thirty  seconds,  used  slightly  more  memory,  but  didn't  preallocate  the  memory.\n\n\nWhen  running  the  program  to  generate  both  it  ran  for  about  thirty  seconds,  used  slightly  more  memory,  but  didn't  preallocate  the  memory.\n\n\nWhat  this  told  me  was  I've  no  idea  about  memory  profiling…  Doh!\n\nBut  that  there's  some  tradeoff  to  be  made  where  if  you  are  creating  primarily  structs  the  compiler  can  preallocate  memory  to  speed  things  up  but  if  you  aren't  then  it  cannot  -  maybe?!  That  needs  some  research…\n\nPerformance\n\nI  definitely  need  to  learn  how  to  profile  programs.\n\nThe  speed-up  when  dealing  primarily  with  structs  is  intriguing  but:\n\n\n    it  came  with  more  constant  memory  usage  -  easier  to  budget  for  but  possible  requires  more  overall\n    I  don't  think  the  real  code  that  led  to  this  is  primarily  structs  so  this  might  be  a  red  herring\n\n\nOverall\n\nA  much  longer  and  more  rambling  post  than  anyone  deserved  to  read!\n\nDo  test  your  assumptions!  Do  test  your  code!  Maybe  use  structs!\n\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Feb 01 2015</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Fun With Structs</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/fun-with-structs.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Fun+With+Structs&via=pauldambra&url=https://pauldambra.dev/fun-with-structs.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#software-engineering"
+      >
+        in: software-engineering
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>We had a brief conversation at work the other day about extending a type to make our code clearer…</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MeaningfulName</span> <span class="p">:</span> <span class="n">MathsName</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">MeaningfulName</span><span class="p">(</span><span class="kt">double</span> <span class="n">w</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">z</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<!--more-->
+<!--alex ignore easy --->
+<p>We're porting some code written by our maths wizards and there's lots of convention in their domain specific language which we were trying to capture (because we're not maths wizards and (maybe only I) get easily lost).</p>
+
+<p>In one case the prospective base class wasn't a class but a struct so we couldn't do this. And we briefly discussed whether we should convert it to a class.</p>
+
+<p>In that conversation I stated that structs weren't value objects. You see, I've checked in the past. After a job interview where I stated that they were value objects and wrote some tests afterwards to check… I wish I still had those tests because…</p>
+
+<p>Luckily, I have colleagues whose opinions I trust and I try for my opinions to be 'strong opinions weakly held' (which might be a Greg Young-ism). So while I'm having a lazy day I wrote some tests and blew my mind!</p>
+
+<h2 id="tldr">TLDR;</h2>
+
+<ul>
+  <li>Don't trust my memory</li>
+  <li>Do test your assumptions! Do test your code! Maybe use structs!</li>
+  <li>Clear names are likely to be much more important than C# performance.</li>
+</ul>
+
+<h2 id="a-struct---what-is-it"><a href="http://www.youtube.com/watch?v=TxWN8AhNER0">A struct - What is it?</a></h2>
+
+<h4 id="value-semantics">Value Semantics</h4>
+
+<p><a href="https://msdn.microsoft.com/en-gb/library/aa664472(v=vs.71).aspx">Quoting from MSDN</a> "A variable of a struct type directly contains the data of the struct, whereas a variable of a class type contains a reference to the data, the latter known as an object."</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">NotValueSemantics</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="kt">int</span> <span class="n">X</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+	<span class="k">public</span> <span class="nf">NotValueSemantics</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> 
+	<span class="p">{</span>
+		<span class="n">X</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">first</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">NotValueSemantics</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">second</span> <span class="p">=</span> <span class="n">first</span><span class="p">;</span>
+<span class="n">second</span><span class="p">.</span><span class="n">X</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">X</span><span class="p">);</span> <span class="c1">//writes 100</span>
+
+</code></pre></div></div>
+
+<p>in the example above the line <code class="language-plaintext highlighter-rouge">var second = first</code> adds another reference to the memory that holds the <code class="language-plaintext highlighter-rouge">first</code> Object so operations on <code class="language-plaintext highlighter-rouge">second</code> affect <code class="language-plaintext highlighter-rouge">first</code>. The assignment of 100 to <code class="language-plaintext highlighter-rouge">second.X</code> is reflected in <code class="language-plaintext highlighter-rouge">first.X</code>.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">public</span> <span class="k">struct</span> <span class="nc">ValueSemantics</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="kt">int</span> <span class="n">X</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+	<span class="k">public</span> <span class="nf">ValueSemantics</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">X</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">first</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueSemantics</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">second</span> <span class="p">=</span> <span class="n">first</span><span class="p">;</span>
+<span class="n">second</span><span class="p">.</span><span class="n">X</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">X</span><span class="p">);</span> <span class="c1">//writes *10*</span>
+
+</code></pre></div></div>
+
+<p>Instead if we declare it as a struct (other than requiring a call through to the base parameterless constructor) the difference is that <code class="language-plaintext highlighter-rouge">var second = first</code> copies the data not a reference to it. As a result operations on <code class="language-plaintext highlighter-rouge">second</code> don't affect <code class="language-plaintext highlighter-rouge">first</code> so the assignment <code class="language-plaintext highlighter-rouge">second.X = 100;</code> is not reflected in <code class="language-plaintext highlighter-rouge">first.X</code>.</p>
+
+<p>As an aside, it is possible to "break" this difference and <a href="http://jonskeet.uk/csharp/parameters.html">this excellent article by Jon Skeet</a> shows how.</p>
+
+<h4 id="value-object">Value Object</h4>
+
+<p>The key fact about a <a href="http://martinfowler.com/bliki/ValueObject.html">value object</a> is that its properties determine <em>what it is</em>, so two value objects are equal when their properties are equal. Eric Evans in <a href="http://www.amazon.co.uk/Domain-driven-Design-Tackling-Complexity-Software/dp/0321125215">Domain-driven Design: Tackling Complexity in the Heart of Software</a> says "you don't care which '4' you have or which 'Q'".</p>
+
+<p>So here are the tests I wrote to check my understanding of structs…</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Test</span><span class="p">]</span> <span class="c1">//this test passes!</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">structs_with_equal_properties_are_equal</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueObject</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">b</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueObject</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+    <span class="n">Assert</span><span class="p">.</span><span class="nf">AreEqual</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="n">Test</span><span class="p">]</span> <span class="c1">//this test passes!</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">structs_with_different_properties_are_not_equal</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueObject</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">b</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueObject</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+    <span class="n">Assert</span><span class="p">.</span><span class="nf">AreNotEqual</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">struct</span> <span class="nc">ValueObject</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">X</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;}</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Y</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;}</span>
+
+    <span class="k">public</span> <span class="nf">ValueObject</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+        <span class="p">:</span> <span class="k">this</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">X</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">Y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Both of those tests pass. I'd have confidently put money on those tests failing. As above I'm certain I've written similar tests in the past and seen them fail - I should trust my memory even less than I currently do!</p>
+
+<p>So a struct in C# appears to be a pretty cheap way (in terms of typing) to define a value object.</p>
+
+<p>The equivalent… i.e. a class which acts as a value object.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">ValueObject</span> <span class="p">:</span> <span class="n">IEquatable</span><span class="p">&lt;</span><span class="n">ValueObject</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">X</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Y</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ValueObject</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">X</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">Y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">Equals</span><span class="p">(</span><span class="n">ValueObject</span> <span class="n">other</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nf">ReferenceEquals</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span> <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nf">ReferenceEquals</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span> <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">X</span> <span class="p">==</span> <span class="n">other</span><span class="p">.</span><span class="n">X</span> <span class="p">&amp;&amp;</span> <span class="n">Y</span> <span class="p">==</span> <span class="n">other</span><span class="p">.</span><span class="n">Y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="kt">bool</span> <span class="nf">Equals</span><span class="p">(</span><span class="kt">object</span> <span class="n">obj</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nf">ReferenceEquals</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">obj</span><span class="p">))</span> <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nf">ReferenceEquals</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">obj</span><span class="p">))</span> <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="nf">GetType</span><span class="p">()</span> <span class="p">!=</span> <span class="k">this</span><span class="p">.</span><span class="nf">GetType</span><span class="p">())</span> <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">Equals</span><span class="p">((</span><span class="n">ValueObject</span><span class="p">)</span> <span class="n">obj</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="kt">int</span> <span class="nf">GetHashCode</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">unchecked</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">X</span><span class="p">*</span><span class="m">397</span><span class="p">)</span> <span class="p">^</span> <span class="n">Y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="k">operator</span> <span class="p">==(</span><span class="n">ValueObject</span> <span class="n">left</span><span class="p">,</span> <span class="n">ValueObject</span> <span class="n">right</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">Equals</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="k">operator</span> <span class="p">!=(</span><span class="n">ValueObject</span> <span class="n">left</span><span class="p">,</span> <span class="n">ValueObject</span> <span class="n">right</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">!</span><span class="nf">Equals</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Much more code to read than the equivalent struct! Although I used resharper's code generation to add the equality methods so actually not that much more of the typing.</p>
+
+<p>The <a href="https://msdn.microsoft.com/en-us/library/aa664471(v=vs.71).aspx">section on differences between structs and classes on MSDN</a> is unusually clear for MS documentation and worth a read.</p>
+
+<h2 id="so">So…</h2>
+<p>I've learned something and that has value. However, the team still has the problem of wanting to improve clarity. What solutions might there be.</p>
+
+<p>I can think of three.</p>
+
+<h4 id="1-dont-do-anything">1) Don't do anything</h4>
+
+<p>Maybe leave it as structs and use variable names and some method &amp; class extractiion refactorings to make what is happening clearer instead of leaning on the types to do that.</p>
+
+<p>This would be fine. My feeling is that the code in question leads itself to errors because it has multiple things with the same type but different semantics being used close together. It feels like it will be easier to introduce bugs as it is - but we should always be careful so this is an option.</p>
+
+<h4 id="2-use-a-wrapper-class">2) Use a wrapper class</h4>
+
+<p>This can be a really useful way of extending a sealed object or struct.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MeaningfulName</span> 
+<span class="p">{</span>
+	<span class="k">private</span> <span class="n">MathsName</span> <span class="n">_mathsThing</span><span class="p">;</span>
+
+	<span class="k">public</span> <span class="nf">MeaningfulName</span><span class="p">(</span><span class="kt">double</span> <span class="n">w</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">z</span> <span class="p">)</span>	
+	<span class="p">{</span>
+		<span class="n">_mathsThing</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MathsName</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">public</span> <span class="kt">double</span> <span class="nf">DoAMathsThing</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">)</span> 
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">_mathsThing</span><span class="p">.</span><span class="nf">DoAMathsThing</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If there was a requirement to extend the functionality of <code class="language-plaintext highlighter-rouge">MathsName</code> and we didn't own that object then this would be a good solution but this wrapper would be calling the wrapped method with no alterations. And <code class="language-plaintext highlighter-rouge">MathsName</code> has a lot of methods :(</p>
+
+<p>So lots of the typing to implement but even more importantly it's possible that someone can alter <code class="language-plaintext highlighter-rouge">MathsName</code> without realising that they need to alter <code class="language-plaintext highlighter-rouge">MeaningfulName</code> too so there's the potential for bugs. It's better to help people fall into the pit of success and this solution doesn't do that.</p>
+
+<h4 id="3-change-it-to-a-class">3) Change it to a class</h4>
+
+<p>There'd not be very much of the typing. Only the addition of the equality methods (and probably some equality tests for safety). The struct in question is relatively well covered anyway so the change would be safe.</p>
+
+<p>But we create tens of thousands of these structs and pass them around. What would the impact of converting this to a class <em>be</em>.
+<!--alex ignore fight --->
+Class vs. Struct - the big fight
+———-</p>
+
+<p>I created a console application that creates a bunch of objects and structs and then calls a method on them. You can <a href="https://gist.github.com/pauldambra/e3fb07f73e151152fa3c">see the full program here</a>.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">ValueClass</span> <span class="p">:</span> <span class="n">IEquatable</span><span class="p">&lt;</span><span class="n">ValueClass</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Z</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Y</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">X</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">W</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ValueClass</span><span class="p">(</span><span class="kt">double</span> <span class="n">w</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">z</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">W</span> <span class="p">=</span> <span class="n">w</span><span class="p">;</span> <span class="n">X</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span> <span class="n">Y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span> <span class="n">Z</span> <span class="p">=</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="n">ValueClass</span> <span class="k">operator</span> <span class="p">+(</span><span class="n">ValueClass</span> <span class="n">left</span><span class="p">,</span> <span class="n">ValueClass</span> <span class="n">right</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ValueClass</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">W</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">W</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">X</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">Y</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">Z</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">Z</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//snip equality members</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">struct</span> <span class="nc">ValueStruct</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Z</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Y</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">X</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">W</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ValueStruct</span><span class="p">(</span><span class="kt">double</span> <span class="n">w</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">z</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">W</span> <span class="p">=</span> <span class="n">w</span><span class="p">;</span> <span class="n">X</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span> <span class="n">Y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span> <span class="n">Z</span> <span class="p">=</span> <span class="n">z</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="n">ValueStruct</span> <span class="k">operator</span> <span class="p">+(</span><span class="n">ValueStruct</span> <span class="n">left</span><span class="p">,</span> <span class="n">ValueStruct</span> <span class="n">right</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ValueStruct</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">W</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">W</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">X</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">Y</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">Z</span> <span class="p">+</span> <span class="n">right</span><span class="p">.</span><span class="n">Z</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>and then doing something like</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">AddObjectsTogether</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">endValues</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ValueClass</span><span class="p">&gt;(</span><span class="n">Capacity</span><span class="p">);</span>
+
+    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="k">value</span> <span class="k">in</span> <span class="nf">CreateABunchOfObjects</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">endValues</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">value</span> <span class="p">+</span> <span class="nf">MakeRandomValueClass</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="profiling">Profiling</h4>
+
+<p>First I profiled the application running with a <code class="language-plaintext highlighter-rouge">Capacity</code> of 25 million. The code spent a little less than 10% of its time dealing with the structs and a little more than 12% of its time dealing with classes. Running with a capacity of 250,000 showed the reverse.</p>
+
+<p>What this told me was I don't really understand profiling… Doh!</p>
+
+<p><em>And</em> you can create <em>seventy five million</em> structs in 2.8 seconds and <em>seventy five million</em> object in 2.3 seconds. That's orders of magnitude higher than I care about.</p>
+
+<h4 id="memory">Memory</h4>
+
+<p>When running the program to generate the structs it ran for about five seconds, preallocated around 790MB memory and kept that amount of memory in use until the end
+<img src="/images/structs.png" alt="just generating structs" class="img-responsive center-block" /></p>
+
+<p>When running the program to generate objects it ran for about <em>thirty</em> seconds, used slightly more memory, but didn't preallocate the memory.
+<img src="/images/objects.png" alt="just generating classes" class="img-responsive center-block" /></p>
+
+<p>When running the program to generate both it ran for about <em>thirty</em> seconds, used slightly more memory, but didn't preallocate the memory.
+<img src="/images/both.png" alt="just generating classes" class="img-responsive center-block" /></p>
+
+<p>What this told me was I've no idea about memory profiling… Doh!</p>
+
+<p>But that there's some tradeoff to be made where if you are creating primarily structs the compiler can preallocate memory to speed things up but if you aren't then it cannot - maybe?! That needs some research…</p>
+
+<h2 id="performance">Performance</h2>
+
+<p>I definitely need to learn how to profile programs.</p>
+
+<p>The speed-up when dealing <em>primarily</em> with structs is intriguing but:</p>
+
+<ul>
+  <li>it came with more constant memory usage - easier to budget for but possible requires more overall</li>
+  <li>I don't think the real code that led to this is primarily structs so this might be a red herring</li>
+</ul>
+
+<h2 id="overall">Overall</h2>
+
+<p>A much longer and more rambling post than anyone deserved to read!</p>
+
+<p>Do test your assumptions! Do test your code! Maybe use structs!</p>
+
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/fun-with-structs.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/fun-with-structs.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

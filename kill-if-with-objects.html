@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Remove If With Objects</title>
+    <link rel="canonical" href="https://pauldambra.dev/kill-if-with-objects.html" />
+    <meta property="og:url" content="https://pauldambra.dev/kill-if-with-objects.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Remove If With Objects" />
+    <meta
+      property="og:description"
+      content="refactoring at the right time is super fun"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="refactoring at the right time is super fun"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Remove If With Objects",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1662",
+     "url":"https://pauldambra.dev/kill-if-with-objects.html",
+     "datePublished":"2016-09-07",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/kill-if-with-objects.html"
+     },
+     "articleBody":"Today  I  had  super-fun  spotting  the  opportunity  for  a  refactoring  and  figuring  out  how  to  apply  it.  I  wanted  to  think  it  through  while  it  was  fresh  in  my  mind  to  try  to  cement  any  learning  opportunity\n\nThe  refactoring  in  question  is  \"Replace  Conditional  Dispatcher  with  Command\".\n\nQuoting  that  source  the  opportunity  for  this  refactoring  is  when:\n\n\n    Conditional  logic  is  used  to  dispatch  requests  and  execute  actions.\n\n\nAnd  the  solution  is:  \n\n\n    Create  a  Command  for  each  action.  Store  the  Commands  in  a  collection  and\nreplace  the  conditional  logic  with  code  to  fetch  and  execute  Commands.\n\n\nIt's  one  of  those  subtle  changes  that  has  real  power  to  tidy  up  and  add  to  the  expressiveness  of  your  code.\n\nIf  (pun  intended)  you  aren't  familiar  with  it  I'd  definitely  recommend  trying  it  on  for  size  by  looking  for  an  opportunity  to  apply  it  in  your  systems.\n\n\n\nSome  Context\n\nIn  this  instance  we  have  a  seam  in  our  system  that  will  over  time  become  an  anti-corruption  (or  defuckulation)  layer.  However,  we're  not  building  the  full  ACL  as  we'd  have  to  solve  lots  of  the  other  problems  in  the  system  first  to  know  what  should  go  into  it.\n\nWhen  one  system  \"publishes\"  some  data  this  class  will  be  responsible  for  applying  any  translation  and  saving  it  in  a  second.\n\nThe  initial  implementation  looked  like  this\n\n    public  class  ThingsPublisher  :  MagicSystemHook\n    {\n        private  readonly  IThingRepository  _thingRepository;\n\n        public  ThingsPublisher(IThingRepository  thingRepository)\n        {\n            _thingRepository  =  thingRepository;\n        }\n\n        public  override  void  OnPublish(IEnumerable&lt;Thing&gt;  publishedThings)\n        {\n            foreach  (var  thing  in  publishedThings\n                                                        .Where(pt  =&gt;  pt.Type  ==  \"WhatWeDidFirst\"))\n            {\n                var  convertedThing  =  thing.Convert();\n                _thingRepository.Upsert(convertedThing);\n            }\n        }\n    }\n\n\nThen  over  a  few  weeks  we  added  a  few  more  types  that  we  needed  to  handle  and  uncovered  some  more  detail  in  the  requirements  and  ended  up  with  something  more  like  this\n\n    public  class  ThingsPublisher  :  MagicSystemHook\n    {\n        private  readonly  IThingRepository  _thingRepository;\n\n        private  static  readonly  string[]  _typesWeCareAbout  =\n        {\n            \"WhatWeDidFirst\",\n            \"WhatWeDidSecond\",\n            \"ATypeThatComesAlongWithWhatWeDidSecond\",\n            \"AModificationToWhatWeDidSecond\",\n            \"WhatWeDidThird\"\n        };\n\n        private  readonly  KeyValuePair&lt;string,  string&gt;[]  _replacements  =\n        {\n            new  KeyValuePair&lt;string,  string&gt;(@\"/some-pattern/\",  \"/its-pair/\"),\n            new  KeyValuePair&lt;string,  string&gt;(@\"/another-pattern/\",  \"/and-its-pair/\"),\n            new  KeyValuePair&lt;string,  string&gt;(@\"/fiddly-detailed-pattern/\",  \"/with-its-pair/\"),\n        };\n\n        public  ThingsPublisher(IThingRepository  thingRepository)\n        {\n            _thingRepository  =  thingRepository;\n        }\n\n        public  override  void  OnPublish(IEnumerable&lt;Thing&gt;  publishedThings)\n        {\n            foreach  (var  thing  in  publishedThings.Where(WeCareAboutIt))\n            {\n                var  convertedThing  =  ConvertThing(thing);\n\n                if  (thing.Replaceable.StartsWith(\"one-expectation\")  ||  thing.Replaceable.StartsWith(\"another-expectation\"))\n                {\n                    _thingRepository.Upsert(convertedThing);\n                }\n            }\n        }\n\n        private  ConvertedThing  ConvertThing(Thing  thing)\n        {\n            //  omitted  for  brevity\n            //  uses  _replacements\n            return  new  ConvertedThing();\n        }\n\n        private  static  bool  WeCareAboutIt(Thing  t)  =&gt;  _typesWeCareAbout.Contains(t.Type);\n    }\n\n\nAt  this  point\n\nIt's  worth  being  clear  (and  not  only  because  I  was  partially  responsible  for  it)  that  I'm  not  saying  that  this  code  is  wrong.\n\nWe  were  learning  about  and  from  the  system  as  we  went  so  trying  to  write  the  \"right\"  code  would  have  definitely  been  wasteful  previously.\n\nWhen  we  hit  this  class  to  modify  it  today,  however,  there  were  a  few  signals  that  set  off  my  spidey-senses:\n\n\n    we  were  making  the  fourth  change\n    it  didn't  pass  the  squint  test\n    say  what  you  see\n        \n            when  we  were  talking  about  it  neither  my  colleague  nor  I  could  clearly  express  what  we  thought  it  did\n            when  we  were  expressing  what  it  did  we  were  talking  about  things  implicit  in  the  code  not  things  explicit\n        \n    \n\n\nFourth  Change\n\nI  like  to  have  several  examples  within  a  system  before  I  start  to  look  for  an  abstraction.  Or  put  another  way  \"A  little  duplication  is  better  than  the  wrong  abstraction\".\n\nThe  Squint  Test\n\nSandi  Metz  proposed  the  squint  test  (see  this  talk)  as  a  quick  way  to  see  if  the  shape  of  your  code  or  the  grouping  of  colours  in  your  editor  suggests  any  problems  with  your  code.  Amusingly  there's  a  package  for  Atom  to  save  you  having  to  actually  squint.\n\nSay  what  you  see\n\nIf  you  are  talking  about  the  code  and  you  aren't  using  the  words  on  the  screen.  Or  if  you  can't  succinctly  explain  what  the  conditionals  are.  Then  you  should  be  looking  at  whether  there's  information  in  your  brain  or  elsewhere  in  the  system  that  would  help  clarify  what  is  happening.  It's  really  easy  to  not  be  aware  of  what  you  have  to  know  to  understand  some  code  -  it's  why  i  &lt;3  code  reviews.\n\nThe  Refactored  Code\n\nAs  we  talked  about  it  we  both  realised  that  what  we  had  was  difficult  to  express  because  we'd  accidentally  discovered  a  new  concept.  Something  that  was  unconsciously  in  our  brains  when  we  wrote  it  and  hadn't  made  its  way  into  the  computer.\n\n    public  class  ThingsPublisher  :  MagicSystemHook\n    {\n        private  readonly  IThingRepository  _thingRepository;\n\n        private  interface  IMightSaveThings\n        {\n            void  MaybeSave(ConvertedThing  convertedThing,  IThingRepository  thingRepository);\n        }\n\n        private  class  SaveUnchangedThing  :  IMightSaveThings\n        {\n            public  void  MaybeSave(ConvertedThing  convertedThing,  IThingRepository  thingRepository)\n            {\n                thingRepository.Upsert(convertedThing);\n            }\n        }\n\n        private  class  FilterAmendAndSaveThings  :  IMightSaveThings\n        {\n            private  readonly  Regex  _thirdPartyPattern;\n            private  readonly  string  _replacementPattern;\n\n            public  FilterAmendAndSaveThings(string  thirdPartyPattern,  string  replacementPattern)\n            {\n                _thirdPartyPattern  =  new  Regex(thirdPartyPattern);\n                _replacementPattern  =  replacementPattern;\n            }\n\n            public  void  MaybeSave(ConvertedThing  convertedThing,  IThingRepository  thingRepository)\n            {\n                if  (!_thirdPartyPattern.IsMatch(convertedThing.Replaceable))  return;\n\n                convertedThing.Replaceable  =  _thirdPartyPattern.Replace(convertedThing.Replaceable,  _replacementPattern);\n                thingRepository.Upsert(convertedThing);\n            }\n        }\n\n        private  static  readonly  Dictionary&lt;string,  IMightSaveThings&gt;  _typeRules  =  new  Dictionary&lt;string,  IMightSaveThings&gt;\n        {\n            {\"WhatWeDidFirst\",  new  SaveUnchangedThing()},\n            {\"WhatWeDidSecond\",  new  FilterAmendAndSaveThings(@\"/some-pattern/\",  \"/its-pair/\")},\n            {\"ATypeThatComesAlongWithWhatWeDidSecond\",new  FilterAmendAndSaveThings(@\"/another-pattern/\",  \"/and-its-pair/\")},\n            {\"AModificationToWhatWeDidSecond\",new  FilterAmendAndSaveThings(@\"/fiddly-detailed-pattern/\",  \"/with-its-pair/\")},\n            {\"WhatWeDidThird\",  new  SaveUnchangedThing()}\n        };\n\n        public  ThingsPublisher(IThingRepository  thingRepository)\n        {\n            _thingRepository  =  thingRepository;\n        }\n\n        public  override  void  OnPublish(IEnumerable&lt;Thing&gt;  publishedThings)\n        {\n            foreach  (var  thing  in  publishedThings)\n            {\n                if  (!_typeRules.ContainsKey(thing.Type))\n                    continue;\n\n                var  typeRule  =  _typeRules[thing.Type];\n                var  convertedThing  =  ConvertThing(thing);\n                typeRule.MaybeSave(convertedThing,  _thingRepository);\n            }\n        }\n\n        private  static  ConvertedThing  ConvertThing(Thing  thing)\n        {\n            //  omitted  for  brevity\n            //much  simpler  factory  method\n            return  new  ConvertedThing();\n        }\n    }\n\n\nSo  now\n\nthere  are  concepts  explicitly  in  the  code  that  were  hidden  or  accidental  beforehand\n\n\n    we  only  have  rules  for  some  types  and  now  those  rules  are  listed  alongside  the  types  in  the  _typeRules  dictionary\n    generally  speaking  the  rule  is  that  a  thing  might  be  saved.  I.e.  the  rule  is  of  type  IMightSaveThings\n    for  some  types  we  save  it  without  changing  it\n        \n            these  we  always  save  so  maybe  the  name  could  be  even  better\n        \n    \n    other  types  we  don't  always  save,  and  when  we  do  save  them  we  change  them  first\n\n\nThe  beauty  in  this  code  is  that  not  only  should  it  be  easier  to  grok  for  somebody  new  to  it  (or  us  in  a  few  weeks)  now  if  we  need  to  add  additional  rules  that  don't  break  the  MaybeSave  contract  we  can  do  that  in  one  place.  And  changes  that  break  the  contract  do  so  visibly  and  prompt  us  to  think  about  what  the  change  means  for  the  code.\n\nAnd  we  didn't  only  improve  the  code…  we  had  a  lot  of  fun  (within  context)  realising  it  and  fixing  it.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Wed Sep 07 2016</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Remove If With Objects</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/kill-if-with-objects.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Remove+If+With+Objects&via=pauldambra&url=https://pauldambra.dev/kill-if-with-objects.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#software-engineering"
+      >
+        in: software-engineering
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#refactoring">
+    refactoring
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>Today I had super-fun spotting the opportunity for a refactoring and figuring out how to apply it. I wanted to think it through while it was fresh in my mind to try to cement any learning opportunity</p>
+
+<p>The refactoring in question is <a href="https://www.industriallogic.com/xp/refactoring/conditionDispatcherWithCommand.html">"Replace Conditional Dispatcher with Command"</a>.</p>
+
+<p>Quoting that source the opportunity for this refactoring is when:
+<!--alex ignore execute ---></p>
+<blockquote>
+  <p>Conditional logic is used to dispatch requests and execute actions.</p>
+</blockquote>
+
+<p>And the solution is: 
+<!--alex ignore execute ---></p>
+<blockquote>
+  <p>Create a Command for each action. Store the Commands in a collection and
+replace the conditional logic with code to fetch and execute Commands.</p>
+</blockquote>
+
+<p>It's one of those subtle changes that has real power to tidy up and add to the expressiveness of your code.</p>
+
+<p>If (pun intended) you aren't familiar with it I'd definitely recommend trying it on for size by looking for an opportunity to apply it in your systems.</p>
+
+<!--more-->
+
+<h1 id="some-context">Some Context</h1>
+
+<p>In this instance we have a seam in our system that will over time become an anti-corruption (or defuckulation) layer. However, we're not building the full ACL as we'd have to solve lots of the other problems in the system first to know what should go into it.</p>
+
+<p>When one system "publishes" some data this class will be responsible for applying any translation and saving it in a second.</p>
+
+<p>The initial implementation looked like this</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">public</span> <span class="k">class</span> <span class="nc">ThingsPublisher</span> <span class="p">:</span> <span class="n">MagicSystemHook</span>
+  <span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IThingRepository</span> <span class="n">_thingRepository</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">ThingsPublisher</span><span class="p">(</span><span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">_thingRepository</span> <span class="p">=</span> <span class="n">thingRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPublish</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">publishedThings</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">thing</span> <span class="k">in</span> <span class="n">publishedThings</span>
+                            <span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">pt</span> <span class="p">=&gt;</span> <span class="n">pt</span><span class="p">.</span><span class="n">Type</span> <span class="p">==</span> <span class="s">"WhatWeDidFirst"</span><span class="p">))</span>
+      <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">convertedThing</span> <span class="p">=</span> <span class="n">thing</span><span class="p">.</span><span class="nf">Convert</span><span class="p">();</span>
+        <span class="n">_thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then over a few weeks we added a few more types that we needed to handle and uncovered some more detail in the requirements and ended up with something more like this</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">public</span> <span class="k">class</span> <span class="nc">ThingsPublisher</span> <span class="p">:</span> <span class="n">MagicSystemHook</span>
+  <span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IThingRepository</span> <span class="n">_thingRepository</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">_typesWeCareAbout</span> <span class="p">=</span>
+    <span class="p">{</span>
+      <span class="s">"WhatWeDidFirst"</span><span class="p">,</span>
+      <span class="s">"WhatWeDidSecond"</span><span class="p">,</span>
+      <span class="s">"ATypeThatComesAlongWithWhatWeDidSecond"</span><span class="p">,</span>
+      <span class="s">"AModificationToWhatWeDidSecond"</span><span class="p">,</span>
+      <span class="s">"WhatWeDidThird"</span>
+    <span class="p">};</span>
+
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;[]</span> <span class="n">_replacements</span> <span class="p">=</span>
+    <span class="p">{</span>
+      <span class="k">new</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;(</span><span class="s">@"/some-pattern/"</span><span class="p">,</span> <span class="s">"/its-pair/"</span><span class="p">),</span>
+      <span class="k">new</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;(</span><span class="s">@"/another-pattern/"</span><span class="p">,</span> <span class="s">"/and-its-pair/"</span><span class="p">),</span>
+      <span class="k">new</span> <span class="n">KeyValuePair</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;(</span><span class="s">@"/fiddly-detailed-pattern/"</span><span class="p">,</span> <span class="s">"/with-its-pair/"</span><span class="p">),</span>
+    <span class="p">};</span>
+
+    <span class="k">public</span> <span class="nf">ThingsPublisher</span><span class="p">(</span><span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">_thingRepository</span> <span class="p">=</span> <span class="n">thingRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPublish</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">publishedThings</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">thing</span> <span class="k">in</span> <span class="n">publishedThings</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">WeCareAboutIt</span><span class="p">))</span>
+      <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">convertedThing</span> <span class="p">=</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">thing</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">thing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">.</span><span class="nf">StartsWith</span><span class="p">(</span><span class="s">"one-expectation"</span><span class="p">)</span> <span class="p">||</span> <span class="n">thing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">.</span><span class="nf">StartsWith</span><span class="p">(</span><span class="s">"another-expectation"</span><span class="p">))</span>
+        <span class="p">{</span>
+          <span class="n">_thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="n">ConvertedThing</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">Thing</span> <span class="n">thing</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// omitted for brevity</span>
+      <span class="c1">// uses _replacements</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">ConvertedThing</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">WeCareAboutIt</span><span class="p">(</span><span class="n">Thing</span> <span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">_typesWeCareAbout</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Type</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="at-this-point">At this point</h1>
+
+<p>It's worth being clear (and not only because I was partially responsible for it) that I'm not saying that this code is <em>wrong</em>.</p>
+
+<p>We were learning about and from the system as we went so trying to write the "right" code would have definitely been wasteful previously.</p>
+
+<p>When we hit this class to modify it today, however, there were a few signals that set off my spidey-senses:
+<!--alex ignore clearly ---></p>
+<ul>
+  <li>we were making the fourth change</li>
+  <li>it didn't pass the squint test</li>
+  <li>say what you see
+    <ul>
+      <li>when we were talking about it neither my colleague nor I could clearly express what we thought it did</li>
+      <li>when we were expressing what it did we were talking about things implicit in the code not things explicit</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="fourth-change">Fourth Change</h2>
+
+<p>I like to have several examples within a system before I start to look for an abstraction. Or put another way "A little duplication is better than the wrong abstraction".</p>
+
+<h2 id="the-squint-test">The Squint Test</h2>
+
+<p>Sandi Metz proposed the squint test (<a href="https://www.youtube.com/watch?v=8bZh5LMaSmE">see this talk</a>) as a quick way to see if the shape of your code or the grouping of colours in your editor suggests any problems with your code. Amusingly there's a <a href="https://atom.io/packages/squint-test">package for Atom</a> to save you having to actually squint.</p>
+
+<h2 id="say-what-you-see">Say what you see</h2>
+<!--alex ignore easy --->
+<p>If you are talking about the code and you aren't using the words on the screen. Or if you can't succinctly explain what the conditionals are. Then you should be looking at whether there's information in your brain or elsewhere in the system that would help clarify what is happening. It's really easy to not be aware of what you have to know to understand some code - it's why i &lt;3 code reviews.</p>
+
+<h1 id="the-refactored-code">The Refactored Code</h1>
+
+<p>As we talked about it we both realised that what we had was difficult to express because we'd accidentally discovered a new concept. Something that was unconsciously in our brains when we wrote it and hadn't made its way into the computer.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">public</span> <span class="k">class</span> <span class="nc">ThingsPublisher</span> <span class="p">:</span> <span class="n">MagicSystemHook</span>
+  <span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IThingRepository</span> <span class="n">_thingRepository</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">interface</span> <span class="nc">IMightSaveThings</span>
+    <span class="p">{</span>
+      <span class="k">void</span> <span class="nf">MaybeSave</span><span class="p">(</span><span class="n">ConvertedThing</span> <span class="n">convertedThing</span><span class="p">,</span> <span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">class</span> <span class="nc">SaveUnchangedThing</span> <span class="p">:</span> <span class="n">IMightSaveThings</span>
+    <span class="p">{</span>
+      <span class="k">public</span> <span class="k">void</span> <span class="nf">MaybeSave</span><span class="p">(</span><span class="n">ConvertedThing</span> <span class="n">convertedThing</span><span class="p">,</span> <span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="n">thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">class</span> <span class="nc">FilterAmendAndSaveThings</span> <span class="p">:</span> <span class="n">IMightSaveThings</span>
+    <span class="p">{</span>
+      <span class="k">private</span> <span class="k">readonly</span> <span class="n">Regex</span> <span class="n">_thirdPartyPattern</span><span class="p">;</span>
+      <span class="k">private</span> <span class="k">readonly</span> <span class="kt">string</span> <span class="n">_replacementPattern</span><span class="p">;</span>
+
+      <span class="k">public</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="kt">string</span> <span class="n">thirdPartyPattern</span><span class="p">,</span> <span class="kt">string</span> <span class="n">replacementPattern</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="n">_thirdPartyPattern</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Regex</span><span class="p">(</span><span class="n">thirdPartyPattern</span><span class="p">);</span>
+        <span class="n">_replacementPattern</span> <span class="p">=</span> <span class="n">replacementPattern</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">public</span> <span class="k">void</span> <span class="nf">MaybeSave</span><span class="p">(</span><span class="n">ConvertedThing</span> <span class="n">convertedThing</span><span class="p">,</span> <span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">_thirdPartyPattern</span><span class="p">.</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+
+        <span class="n">convertedThing</span><span class="p">.</span><span class="n">Replaceable</span> <span class="p">=</span> <span class="n">_thirdPartyPattern</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">.</span><span class="n">Replaceable</span><span class="p">,</span> <span class="n">_replacementPattern</span><span class="p">);</span>
+        <span class="n">thingRepository</span><span class="p">.</span><span class="nf">Upsert</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">IMightSaveThings</span><span class="p">&gt;</span> <span class="n">_typeRules</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">IMightSaveThings</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+      <span class="p">{</span><span class="s">"WhatWeDidFirst"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">SaveUnchangedThing</span><span class="p">()},</span>
+      <span class="p">{</span><span class="s">"WhatWeDidSecond"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="s">@"/some-pattern/"</span><span class="p">,</span> <span class="s">"/its-pair/"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s">"ATypeThatComesAlongWithWhatWeDidSecond"</span><span class="p">,</span><span class="k">new</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="s">@"/another-pattern/"</span><span class="p">,</span> <span class="s">"/and-its-pair/"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s">"AModificationToWhatWeDidSecond"</span><span class="p">,</span><span class="k">new</span> <span class="nf">FilterAmendAndSaveThings</span><span class="p">(</span><span class="s">@"/fiddly-detailed-pattern/"</span><span class="p">,</span> <span class="s">"/with-its-pair/"</span><span class="p">)},</span>
+      <span class="p">{</span><span class="s">"WhatWeDidThird"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">SaveUnchangedThing</span><span class="p">()}</span>
+    <span class="p">};</span>
+
+    <span class="k">public</span> <span class="nf">ThingsPublisher</span><span class="p">(</span><span class="n">IThingRepository</span> <span class="n">thingRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">_thingRepository</span> <span class="p">=</span> <span class="n">thingRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPublish</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">publishedThings</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">thing</span> <span class="k">in</span> <span class="n">publishedThings</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">_typeRules</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="n">thing</span><span class="p">.</span><span class="n">Type</span><span class="p">))</span>
+          <span class="k">continue</span><span class="p">;</span>
+
+        <span class="kt">var</span> <span class="n">typeRule</span> <span class="p">=</span> <span class="n">_typeRules</span><span class="p">[</span><span class="n">thing</span><span class="p">.</span><span class="n">Type</span><span class="p">];</span>
+        <span class="kt">var</span> <span class="n">convertedThing</span> <span class="p">=</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">thing</span><span class="p">);</span>
+        <span class="n">typeRule</span><span class="p">.</span><span class="nf">MaybeSave</span><span class="p">(</span><span class="n">convertedThing</span><span class="p">,</span> <span class="n">_thingRepository</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="n">ConvertedThing</span> <span class="nf">ConvertThing</span><span class="p">(</span><span class="n">Thing</span> <span class="n">thing</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// omitted for brevity</span>
+      <span class="c1">//much simpler factory method</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">ConvertedThing</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="so-now">So now</h1>
+
+<p>there are concepts explicitly in the code that were hidden or accidental beforehand</p>
+
+<ul>
+  <li>we only have rules for some types <em>and</em> now those rules are listed alongside the types in the <code class="language-plaintext highlighter-rouge">_typeRules</code> dictionary</li>
+  <li>generally speaking the rule is that a thing might be saved. I.e. the rule is of type <code class="language-plaintext highlighter-rouge">IMightSaveThings</code></li>
+  <li>for some types we save it without changing it
+    <ul>
+      <li>these we always save so maybe the name could be even better</li>
+    </ul>
+  </li>
+  <li>other types we don't always save, and when we do save them we change them first</li>
+</ul>
+
+<p>The beauty in this code is that not only should it be easier to grok for somebody new to it (or us in a few weeks) now if we need to add additional rules that don't break the <code class="language-plaintext highlighter-rouge">MaybeSave</code> contract we can do that in one place. And changes that break the contract do so visibly and prompt us to think about what the change means for the code.</p>
+
+<p>And we didn't only improve the code… we had a lot of fun (within context) realising it and fixing it.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/kill-if-with-objects.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/kill-if-with-objects.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

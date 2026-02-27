@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Reactotype Part 1</title>
+    <link rel="canonical" href="https://pauldambra.dev/reactotype/part-one.html" />
+    <meta property="og:url" content="https://pauldambra.dev/reactotype/part-one.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Reactotype Part 1" />
+    <meta
+      property="og:description"
+      content="exploring ReactJS"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="exploring ReactJS"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Reactotype Part 1",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2865",
+     "url":"https://pauldambra.dev/reactotype/part-one.html",
+     "datePublished":"2015-02-17",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/reactotype/part-one.html"
+     },
+     "articleBody":"part  one  because  I've  got  a  feeling  this  is  a  topic  about  which  I'll  be  able  to  bang  on.\n\nReact  JS  was  made  by  Facebook  to  be  the  V  in  MVC.  In  other  words,  it  only  deals  with  the  UI.  It's  sold  as  being  fast  -  both  for  performance  and  development.  A  contentious  part  of  React  is  that  it  mushes  JS  and  HTML  together…  More  specifically,  you  put  HTML  inside  the  JS  and  not  vice  versa.\n\n\n\nI've  played  with  it  very  briefly  while  prototyping  an  Imgur  comment  generator  and  saw  a  talk  on  it  recently  at  MancJS.\n\nSo  I  already  had  a  few  thoughts:\n\n\n    I  found  I  grokked  things  quicker  with  React  than  Angular  when  I  built  the  commenturion  examples.  And  I  had  zero  React  experience  and  reasonable  Angular  when  I  built  those.\n    (It  might  be  that)  you  have  to  do  things  the  React  way\n        \n            I  don't  think  this  distinguishes  it  from  other  things\n        \n    \n    JS  &amp;  Code  &amp;  HTML  all  mushed  up  together…\n        \n            I'm  not  sure  if  it  feels  wrong  because  it's  unfamiliar  or  because  it  is  wrong\n        \n    \n\n\nWhy\n\nWe're  using  Angular  in  an  application  at  work  and,  it's  allowed  us  to  move  fast  but,  I  do  feel  like  there's  a  lot  more  of  the  typing  to  make  things  happen.  And  I  still  don't  get  directives  even  after  several  half-hearted  attempts  to  understand  them.\n\nIt  seems  like  the  cool-kids  hold  the  position  we  should  ditch  everything  for  React.  And  both  my  toe-dipped-in-the-water  and  the  talk  I  saw  suggested  there  was  something  worth  investigating.  So  I  thought  I'd  use  my  #holidaycode  time  to  investigate.\n\nWhat\n\nMost  of  my  front-end  work  for  the  last  eight  months  and  most  for  the  foreseeable  future  is  data-visualisation  heavy  so,  that's  what  I  wanted  to  riff  on.\n\nI  grabbed  some  data  on  the  gender  pay  gap  in  the  UK  from  the  Annual  Survey  of  Hours  and  Earnings,  2014  Provisional  Results.  And  decided  to  use  a  simplified  version  of  the  source  for  Figure  8.  Showing  the  gender  pay  gap  for  median  gross  hourly  earnings  (excluding  overtime),  UK,  April  1997  to  2014\n\nNow  to  represent  as  a  table  and  a  chart  so  a  good  starting  point.  Plus  I've  got  three  daughters  so,  it's  a  subject  close  to  my  heart.\n\nHow\n\nAs  I  sat  down  and  thought  about  what  this  would  mean  (writing  a  build  script  to  mush  the  jsx  into  js,  grabbing  bootstrap  et  al  from  the  interweb,  etc)  I  was  overcome  with  ennui  (which  is  a  lot  to  cope  with  for  something  that  should  be  #holidaycode  levels  of  fun).  I've  done  that  set  up  so  many  times  it  seemed  like  wasted  time.\n\nSetup\n\nI  remembered  Yeoman.io  and  a  quick  search  found  a  ReactJS  with  Gulp  yeoman  generator  was  available  so  I  grabbed  them:\n\nmkdir  reactotype  &amp;&amp;  cd  reactotype\nnpm  install  -g  yo\nnpm  install  -g  generator-react-gulp-browserify\nyo  react-gulp-browserify\n\n\nFast,  simple,  easy,  and…\n\nThe  gulp  setup  was  sooooo  much  better  than  I  could  have  managed  myself.  Browserify  &amp;  reactify  so  that  I  can  use  CommonJS  modules  and  it  all  ends  up  in  the  browser  correctly.\n\nAnd  gulp  webserver!  I  love  finding  new  (to  me),  awesome  (to  me)  things\n\ngulp.task('serve',  function  ()  {\n        gulp.src('./dist')\n                .pipe($.webserver({\n                        livereload:  true,\n                        port:  9000\n                }));\n});\n\n\nSeems  like  overkill  when  I  can  do  python  -m  SimpleHTTPServer  since  I'm  only  making  static  HTML  with  some  JS  but…  I  have  to  remember  to  type  that  in  and  it  means  I  need  a  terminal  window  for  running  that.  This  way  I  can  gulp  watch  and  it  re-smooshes  file  changes  and  serves  them  up  for  me.\n\nSimple!  And  simple  is  my  favourite  thing  (that  I  find  hard  to  achieve).\n\nI  like  Gulp  for  the  same  reason  that  I  prefer  Rake  to  MSBuild.  I  can  read  &amp;  write  code  so  I  can  figure  out  what  it's  doing  (or  force  it  do  something  undesirable  if  I  don't  know  the  sensible  thing).  Whereas  with  Grunt  or  MSBuild  unless  you  know  the  JSON/XML  magic  incantation  you're  stuck.\n\nApproach\nI  started  with  a  static  HTML  file  and  bit-by-bit  added  features  using  React.  First  rendering  the  table,  then  sorting  it,  then  allowing  sorting  and  filtering  by  year.\n\nAll  the  code  is  up  on  Github.\n\nSo  I  created  a  module  which  gives  out  a  list  of  PayYears.\n\n{'year':  '1997',  'all':  27.5,  'fulltime':  17.4,  'parttime':  0.6  }  \n\n\nA  PayYear  has  a  year,  the  percentage  pay  gap  between  genders  for  all  employment,  for  fulltime  and  for  parttime.\n\nRendering  the  table\n\n/**  @jsx  React.DOM  */\n'use  strict';\n\nvar  React  =  window.React  =  require('react');\n\nvar  PayRow  =  React.createClass({\n        render:  function()  {\n                return  (\n                        &lt;tr&gt;\n                                &lt;td&gt;{this.props.payYear.year}&lt;/td&gt;\n                                &lt;td&gt;{this.props.payYear.all}&lt;/td&gt;\n                                &lt;td&gt;{this.props.payYear.fulltime}&lt;/td&gt;\n                                &lt;td&gt;{this.props.payYear.parttime}&lt;/td&gt;\n                        &lt;/tr&gt;\n                );\n        }\n});\n\nvar  PayTable  =  React.createClass({\n        render:  function()  {\n                return  (\n                        &lt;table  className=\"table  table-striped\"&gt;\n                                &lt;thead&gt;\n                                        &lt;tr&gt;\n                                                &lt;th&gt;Year&lt;/th&gt;\n                                                &lt;th&gt;All&lt;/th&gt;\n                                                &lt;th&gt;Full-time&lt;/th&gt;\n                                                &lt;th&gt;Part-time&lt;/th&gt;\n                                        &lt;/tr&gt;\n                                &lt;/thead&gt;\n                                &lt;tbody&gt;\n                                        {this.props.payYears.map(function(payYear)  {\n                                            return  &lt;PayRow  key={payYear.year}  payYear={payYear}  /&gt;;\n                                        })}\n                                &lt;/tbody&gt;\n                        &lt;/table&gt;\n                );\n        }\n});\n\nmodule.exports  =  PayTable;\n\n\nSo…\n/**  @jsx  React.DOM  */\nThis  is  so  that  the  JSX  magic  can  turn  this  into  real  Javascript.  JSX  is  the  thing  that  let's  you  mix  HTML  into  your  JS.\n\nLooking  at  the  code  that  creates  a  table  row.\n\nvar  PayRow  =  React.createClass({\n        render:  function()  {\n                return  (\n                        &lt;tr&gt;\n                                &lt;td&gt;{this.props.payYear.year}&lt;/td&gt;\n                                &lt;td&gt;{this.props.payYear.all}&lt;/td&gt;\n                                &lt;td&gt;{this.props.payYear.fulltime}&lt;/td&gt;\n                                &lt;td&gt;{this.props.payYear.parttime}&lt;/td&gt;\n                        &lt;/tr&gt;\n                );\n        }\n});\n\n\ncreateClass  is  a  helper  to  construct  an  instance  of  a  component  class  for  you.  That  class  has  a  render  function  which  returns  HTML.\n\nCall  JS,  get  HTML.  Looks  funky  but  is  straightforward.\n\nIt's  saying  that  in  order  to  have  a  PayRow  you  have  to  have  something  providing  this.props.payYear,  which  has  to  have  a  minimum  set  of  properties,  and  you  spit  out  a  table  row  as  HTML.\n\nThat's  pretty  straightforward.\n\nHaving  said  what  a  row  of  the  table  is  we  can  say  what  the  table  is\n\nvar  PayTable  =  React.createClass({\n        render:  function()  {\n                return  (\n                        &lt;table  className=\"table  table-striped\"&gt;\n                                &lt;thead&gt;\n                                        &lt;tr&gt;\n                                                &lt;th&gt;Year&lt;/th&gt;\n                                                &lt;th&gt;All&lt;/th&gt;\n                                                &lt;th&gt;Full-time&lt;/th&gt;\n                                                &lt;th&gt;Part-time&lt;/th&gt;\n                                        &lt;/tr&gt;\n                                &lt;/thead&gt;\n                                &lt;tbody&gt;\n                                        {this.props.payYears.map(function(payYear)  {\n                                            return  &lt;PayRow  key={payYear.year}  payYear={payYear}  /&gt;;\n                                        })}\n                                &lt;/tbody&gt;\n                        &lt;/table&gt;\n                );\n        }\n});\n\n\nSo  this  says  that  to  render  a  table  you  need  a  bunch  of  HTML  and  then  take  this.props.payYears  and  map  it  into  a  set  of  PayRows  that  make  up  the  table  body.\n\nOh,  and  cause  I  only  skimmed  the  docs,  at  first  I  missed  that  you  have  to  add  classes  to  HTML  in  JSX  using  className  (since  class  is  a  reserved  word  in  JS).  \n\nElsewhere  in  the  code  we  call  React.render(&lt;PayTable  payYears={data}  /&gt;,  document.getElementById('idOfContainer'));  and  this  spits  the  generated  HTML  into  the  page.\n\nThat's  not  weird…  really.  If  you  can  HTML  &amp;  JS  then  you  can  follow  what  is  happening.  Other  than  glossing  over  the  magic  JSX  incantation,  and  what  React.createClass  does  there's  nothing  new  or  complex  here.  It's  only  mashing  one  or  more  JS  data  structures  into  HTML  templates.\n\nSorting\n\nThis  was  probably  the  hardest  bit  for  me  to  wrap  my  head  around.  Because  this  isn't  a  framework  this  isn't  provided  for  me.  So,  the  horror,  I  had  to  write  the  code.\n\nThe  only  part  to  change  was  the  PayTable  code.\n\nfunction  sortAscending(a,b)  {\n    if  (a.year  &lt;  b.year)\n          return  -1;\n    if  (a.year  &gt;  b.year)\n        return  1;\n    return  0;\n};\n\nfunction  sortDescending(a,b)  {\n    if  (a.year  &gt;  b.year)\n          return  -1;\n    if  (a.year  &lt;  b.year)\n        return  1;\n    return  0;\n};\n\nvar  PayTable  =  React.createClass({\n        getInitialState:  function()  {\n                return  {\n                        sortDirection:  'descending',\n                        data:  this.props.payYears.sort(sortDescending)\n                };\n        },\n        sortData:  function()  {\n                if(this.state.sortDirection==='descending')  {\n                        this.setState({  \n                                sortDirection:  'ascending',\n                                data:  this.props.payYears.sort(sortAscending)\n                        });\n                }  else  {\n                        this.setState({  \n                                sortDirection:  'descending',\n                                data:  this.props.payYears.sort(sortDescending)\n                        });\n                }\n        },\n        render:  function()  {\n                return  (\n                        &lt;table  className=\"table  table-striped\"&gt;\n                                &lt;thead&gt;\n                                        &lt;tr&gt;\n                                                &lt;th  onClick={this.sortData}\n                                                        className={this.state.sortDirection}\n                                                &gt;\n                                                        Year\n                                                &lt;/th&gt;\n                                                &lt;th&gt;All&lt;/th&gt;\n                                                &lt;th&gt;Full-time&lt;/th&gt;\n                                                &lt;th&gt;Part-time&lt;/th&gt;\n                                        &lt;/tr&gt;\n                                &lt;/thead&gt;\n                                &lt;tbody&gt;\n                                        {this.state.data.map(function(payYear)  {\n                                            return  &lt;PayRow  key={payYear.year}  payYear={payYear}  /&gt;;\n                                        })}\n                                &lt;/tbody&gt;\n                        &lt;/table&gt;\n                );\n        }\n});\n\n\nFirst  I  had  to  come  to  terms  with  properties  and  state.  So…\n\nProperties\n\nPassed  in  to  the  component  when  you  create  it.  Should  be  immutable  (this  is  JS  so  they  aren't  immutable  but  you're  supposed  to  treat  them  as  immutable).\n\nState\n\nNot  passed  in.  Not  immutable.  It's  the,  erm,  well,  the  state.\n\nSo  in  addition  to  a  render  function  we  add  a  getInitialState  function.  This  provides  the  initial  state  of  the  component.  It  should  be  idempotent  -  i.e.  no  matter  how  many  times  the  component  is  created,  all  other  things  being  equal,  the  initial  state  is  the  same.\n\nI've  spotted  a  \"problem\"  with  this…  In  the  docs  it  is  described  as  an  antipattern  to  assign  a  foo  property  to  foo  state.  You  can  do  it  but  instead  you  should  have  an  intialFoo  property  that  is  assigned  to  the  foo  state.  That  change  of  calling  out  that  the  link  between  the  two  is  that  the  property  is  the  initial  value  and  shouldn't  be  mutated  within  the  component's  state  seems  important  to  being  in  the  React  mindset.\n\nAnyhoo,  having  decided  that  a  user  would  be  able  to  click  on  the  Year  column  header  and  that  interaction  would  sort  the  column  and  that  the  Year  header  would  have  a  visual  affordance  to  show  the  data  is  sortable  and  in  which  direction  it  currently  is.  This  means  that  the  initial  state  is  the  direction  of  the  sort  and  the  sorted  data.\n\nOn  the  table  header  we  assign  an  onClick  handler  that  calls  a  sortData  function.  That  function  checks  the  current  direction  of  sorting  and  uses  that  to  pick  the  new  direction  and  resort  the  data.  Those  two  new  items  are  assigned  to  the  component's  state.\n\nIn  order  to  sort  the  data  we  call  sort  with  a  comparator  function.  So  I  wrote  two  comparators  sortAscending  and  sortDescending.\n\nOnClick  is  the  work  of  the  devil,  though\n\nWell,  in  a  world  where  the  JS  that  the  onclick  handler  calls  could  be  anywhere  so  maintaining  the  code  is  made  harder,  I  totally  agree.  But  here…  the  sortData  function  is  six  lines  away.  And  will  always  be  in  the  same  file,  nearby.\n\nUnless  someone  takes  the  time  to  move  that  behaviour  out  into  some  pure  JS  (which  could  well  be  a  good  thing)  and  then  the  JSX  is  coupled  to  the  JS  object  rather  than  the  JS  object  being  coupled  to  the  HTML  (by  needing  to  know  the  identifier  of  the  element  whose  events  it  reacts  to.\n\nAnd,  why  should  &lt;th  onClick={this.sortData}&gt;  be  different  from  &lt;th  ng-click=\"sortData\"&gt;?!  Except,  I  suppose,  that  in  the  Angularified  example  I  have  to  know  where  to  go  to  find  the  sortData  function  because  it's  in  a  controller/directive  somewhere  whereas  in  the  React  version  it's  nearby  or  explicitly  called.\n\nI  don't  know,  right  now,  where  I  stand  on  this.\n\nBut\n\nOther  than  the  dance  to  get  how  to  coordinate  state  so  that  the  table  would  update  this  felt  pretty  easy  and  almost  none  of  the  typing.  I  could  grok  enough  of  React  to  do  this  in  one  sitting.\n\nAs  a  result  I  (think  I)  could  explain  it  to  people  and  have  a  good  expectation  that  they  would  be  able  to  work  with  it,  extend  it,  use  the  idea  elsewhere.\n\nThat's  the  thing  I've  really  enjoyed  about  working  with  React  (on  this  admittedly  small  example).  It  seems  like  the  application  is  going  to  be  simpler  and  that  stuff  that  acts  together  has  to  live  together.\n\nSorting  and  Filtering  the  Table\n\nThat  we  will  leave  till  part  two…  because  I  introduced  a  relatively  artificial  constraint  that  I  didn't  want  the  filtering  control  to  be  a  part  of  the  table.\n\nImagine  that  there  will  be  many  tables  with  the  same  filter.  I  don't  want  to  bind  the  filter  to  any  one  table  or  insist  that  every  table  has  it.\n\nAt  first  I  expected  that  it  would  force  me  to  understand  React's  components  and  how  to  compose  them…  instead  I  stumbled  on  something  really  cool  #cliffhanger\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Tue Feb 17 2015</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Reactotype Part 1</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/reactotype/part-one.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Reactotype+Part+1&via=pauldambra&url=https://pauldambra.dev/reactotype/part-one.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#react"
+      >
+        in: react
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#react">
+    react
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#js">
+    js
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<h4 id="part-one-because-ive-got-a-feeling-this-is-a-topic-about-which-ill-be-able-to-bang-on">part one because I've got a feeling this is a topic about which I'll be able to bang on.</h4>
+
+<p><a href="http://facebook.github.io/react/index.html">React JS</a> was made by Facebook to be the V in MVC. In other words, it only deals with the UI. It's sold as being fast - both for performance and development. A contentious part of React is that it mushes JS and HTML together… More specifically, you put HTML <em>inside</em> the JS and not vice versa.</p>
+
+<!--more-->
+
+<p>I've played with it <a href="https://pauldambra.github.io/commenturion/">very briefly while prototyping an Imgur comment generator</a> and saw a talk on it recently at MancJS.</p>
+
+<p>So I already had a few thoughts:</p>
+
+<ul>
+  <li>I found I grokked things quicker with React than Angular when I built the commenturion examples. And I had zero React experience and reasonable Angular when I built those.</li>
+  <li>(It might be that) you have to do things the React way
+    <ul>
+      <li>I don't think this distinguishes it from other things</li>
+    </ul>
+  </li>
+  <li>JS &amp; Code &amp; HTML all mushed up together…
+    <ul>
+      <li>I'm not sure if it feels wrong because it's unfamiliar or because it is wrong</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="why">Why</h1>
+
+<p>We're using Angular in an application at work and, it's allowed us to move fast but, I do feel like there's a lot more of the typing to make things happen. And I still don't get directives even after several half-hearted attempts to understand them.</p>
+
+<p>It seems like the cool-kids hold the position we should ditch everything for React. And both my toe-dipped-in-the-water and the talk I saw suggested there was something worth investigating. So I thought I'd use my #holidaycode time to investigate.</p>
+
+<h1 id="what">What</h1>
+
+<p>Most of my front-end work for the last eight months and most for the foreseeable future is data-visualisation heavy so, that's what I wanted to riff on.
+<!--alex ignore gross --->
+I grabbed some data on the gender pay gap in the UK from the <a href="http://www.ons.gov.uk/ons/dcp171778_385428.pdf">Annual Survey of Hours and Earnings, 2014 Provisional Results.</a> And decided to use a simplified version of <a href="http://www.ons.gov.uk/ons/rel/ashe/annual-survey-of-hours-and-earnings/2014-provisional-results/chd-8-gpg.xls">the source for Figure 8</a>. Showing the gender pay gap for median gross hourly earnings (excluding overtime), UK, April 1997 to 2014
+<!--alex ignore daughters-sons --->
+Now to represent as a table and a chart so a good starting point. Plus I've got three daughters so, it's a subject close to my heart.</p>
+
+<h1 id="how">How</h1>
+
+<p>As I sat down and thought about what this would mean (writing a build script to mush the jsx into js, grabbing bootstrap et al from the interweb, etc) I was overcome with ennui (which is a lot to cope with for something that should be #holidaycode levels of fun). I've done that set up so many times it seemed like wasted time.</p>
+
+<h4 id="setup">Setup</h4>
+
+<p>I remembered <a href="http://yeoman.io">Yeoman.io</a> and a quick search found a ReactJS with Gulp yeoman generator was available so I grabbed them:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>reactotype <span class="o">&amp;&amp;</span> <span class="nb">cd </span>reactotype
+npm <span class="nb">install</span> <span class="nt">-g</span> yo
+npm <span class="nb">install</span> <span class="nt">-g</span> generator-react-gulp-browserify
+yo react-gulp-browserify
+</code></pre></div></div>
+
+<p>Fast, simple, easy, and…</p>
+
+<p>The <a href="https://github.com/pauldambra/reactotype/blob/776d915fb9138532df21b2ac97518ba90f152543/gulpfile.js">gulp setup</a> was <em>sooooo</em> much better than I could have managed myself. Browserify &amp; reactify so that I can use CommonJS modules and it all ends up in the browser correctly.</p>
+
+<p>And <a href="https://www.npmjs.com/package/gulp-webserver">gulp webserver</a>! I love finding new (to me), awesome (to me) things</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">gulp</span><span class="p">.</span><span class="nf">task</span><span class="p">(</span><span class="dl">'</span><span class="s1">serve</span><span class="dl">'</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">gulp</span><span class="p">.</span><span class="nf">src</span><span class="p">(</span><span class="dl">'</span><span class="s1">./dist</span><span class="dl">'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nf">webserver</span><span class="p">({</span>
+            <span class="na">livereload</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">port</span><span class="p">:</span> <span class="mi">9000</span>
+        <span class="p">}));</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Seems like overkill when I can do <code class="language-plaintext highlighter-rouge">python -m SimpleHTTPServer</code> since I'm only making static HTML with some JS but… I have to remember to type that in and it means I need a terminal window for running that. This way I can <code class="language-plaintext highlighter-rouge">gulp watch</code> and it re-smooshes file changes and serves them up for me.
+<!--alex ignore simple --->
+Simple! And simple is my favourite thing (that I find hard to achieve).</p>
+
+<p>I like Gulp for the same reason that I prefer Rake to MSBuild. I can read &amp; write code so I can figure out what it's doing (or force it do something undesirable if I don't know the sensible thing). Whereas with Grunt or MSBuild unless you know the JSON/XML magic incantation you're stuck.</p>
+
+<h1 id="approach">Approach</h1>
+<p>I started with a static HTML file and <a href="https://github.com/pauldambra/reactotype/tags">bit-by-bit</a> added features using React. First rendering the table, then sorting it, then allowing sorting and filtering by year.</p>
+
+<p>All the code is up <a href="https://github.com/pauldambra/reactotype">on Github</a>.</p>
+
+<p>So I created a module which gives out a list of <code class="language-plaintext highlighter-rouge">PayYear</code>s.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">'</span><span class="s1">year</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1997</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">all</span><span class="dl">'</span><span class="p">:</span> <span class="mf">27.5</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fulltime</span><span class="dl">'</span><span class="p">:</span> <span class="mf">17.4</span><span class="p">,</span> <span class="dl">'</span><span class="s1">parttime</span><span class="dl">'</span><span class="p">:</span> <span class="mf">0.6</span> <span class="p">}</span> 
+</code></pre></div></div>
+
+<p>A <code class="language-plaintext highlighter-rouge">PayYear</code> has a year, the percentage pay gap between genders for all employment, for fulltime and for parttime.</p>
+
+<h1 id="rendering-the-table">Rendering the table</h1>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** @jsx React.DOM */</span>
+<span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">React</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">PayRow</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return </span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">year</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">all</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">fulltime</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">parttime</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">PayTable</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return </span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">table table-striped</span><span class="dl">"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">thead</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Year</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">All</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Full</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Part</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                    <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/thead</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">tbody</span><span class="o">&gt;</span>
+                    <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payYear</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">PayRow</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">year</span><span class="p">}</span> <span class="nx">payYear</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>                    <span class="p">})}</span>
+                <span class="o">&lt;</span><span class="sr">/tbody</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/table</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">PayTable</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>So…
+<code class="language-plaintext highlighter-rouge">/** @jsx React.DOM */</code>
+This is so that the <a href="http://facebook.github.io/react/docs/jsx-in-depth.html">JSX magic</a> can turn this into real Javascript. JSX is the thing that let's you mix HTML into your JS.</p>
+
+<p>Looking at the code that creates a table row.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">PayRow</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return </span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">year</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">all</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">fulltime</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">td</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">parttime</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><a href="https://web.archive.org/web/20150706092850/http://facebook.github.io/react/docs/top-level-api.html#react.createclass"><code class="language-plaintext highlighter-rouge">createClass</code></a> is a helper to construct an instance of a component class for you. That class has a render function which returns HTML.</p>
+
+<p>Call JS, get HTML. Looks funky but is straightforward.
+<!--alex ignore spit --->
+It's saying that in order to have a PayRow you have to have something providing <code class="language-plaintext highlighter-rouge">this.props.payYear</code>, which has to have a minimum set of properties, and you spit out a table row as HTML.</p>
+
+<p>That's pretty straightforward.</p>
+
+<p>Having said what a row of the table is we can say what the table is</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">PayTable</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return </span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">table table-striped</span><span class="dl">"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">thead</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Year</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">All</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Full</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Part</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                    <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/thead</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">tbody</span><span class="o">&gt;</span>
+                    <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payYear</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">PayRow</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">year</span><span class="p">}</span> <span class="nx">payYear</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>                    <span class="p">})}</span>
+                <span class="o">&lt;</span><span class="sr">/tbody</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/table</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>So this says that to render a table you need a bunch of HTML and then take <code class="language-plaintext highlighter-rouge">this.props.payYears</code> and map it into a set of <code class="language-plaintext highlighter-rouge">PayRow</code>s that make up the table body.</p>
+
+<p>Oh, and cause I only skimmed the docs, at first I missed that you have to add classes to HTML in JSX using className (since class is a reserved word in JS). 
+<!--alex ignore spits --->
+Elsewhere in the code we call <code class="language-plaintext highlighter-rouge">React.render(&lt;PayTable payYears={data} /&gt;, document.getElementById('idOfContainer'));</code> and this spits the generated HTML into the page.</p>
+
+<p>That's not weird… <em>really</em>. If you can HTML &amp; JS then you can follow what is happening. Other than glossing over the magic JSX incantation, and what React.createClass does there's nothing new or complex here. It's only mashing one or more JS data structures into HTML templates.</p>
+
+<h1 id="sorting">Sorting</h1>
+
+<p>This was probably the hardest bit for me to wrap my head around. Because this isn't a framework this isn't provided for me. So, the horror, I had to write the code.</p>
+
+<p>The only part to change was the PayTable code.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">sortAscending</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">year</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">year</span><span class="p">)</span>
+     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">year</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">year</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nf">sortDescending</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">year</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">year</span><span class="p">)</span>
+     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">year</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">year</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">PayTable</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createClass</span><span class="p">({</span>
+    <span class="na">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">sortDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">descending</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span><span class="nx">sortDescending</span><span class="p">)</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+    <span class="na">sortData</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">sortDirection</span><span class="o">===</span><span class="dl">'</span><span class="s1">descending</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">({</span> 
+                <span class="na">sortDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ascending</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span><span class="nx">sortAscending</span><span class="p">)</span>
+            <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nf">setState</span><span class="p">({</span> 
+                <span class="na">sortDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">descending</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">payYears</span><span class="p">.</span><span class="nf">sort</span><span class="p">(</span><span class="nx">sortDescending</span><span class="p">)</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return </span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">table table-striped</span><span class="dl">"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">thead</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="nx">th</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">sortData</span><span class="p">}</span>
+                            <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">sortDirection</span><span class="p">}</span>
+                        <span class="o">&gt;</span>
+                            <span class="nx">Year</span>
+                        <span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">All</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Full</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                        <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Part</span><span class="o">-</span><span class="nx">time</span><span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
+</span>                    <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/thead</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">tbody</span><span class="o">&gt;</span>
+                    <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payYear</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">PayRow</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">.</span><span class="nx">year</span><span class="p">}</span> <span class="nx">payYear</span><span class="o">=</span><span class="p">{</span><span class="nx">payYear</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>                    <span class="p">})}</span>
+                <span class="o">&lt;</span><span class="sr">/tbody</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/table</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>First I had to come to terms with properties and state. So…</p>
+
+<h4 id="properties">Properties</h4>
+
+<p>Passed in to the component when you create it. Should be immutable (this is JS so they aren't immutable but you're supposed to treat them as immutable).</p>
+
+<h4 id="state">State</h4>
+
+<p>Not passed in. Not immutable. It's the, erm, well, the state.</p>
+
+<p>So in addition to a <code class="language-plaintext highlighter-rouge">render</code> function we add a <a href="https://web.archive.org/web/20150706092850/http://facebook.github.io/react/docs/component-specs.html#getinitialstate"><code class="language-plaintext highlighter-rouge">getInitialState</code> function</a>. This provides the initial state of the component. It should be idempotent - i.e. no matter how many times the component is created, all other things being equal, the initial state is the same.</p>
+
+<p>I've spotted a "problem" with this… In the docs it is described as an <a href="https://web.archive.org/web/20151123203904/http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html">antipattern to assign a foo property to foo state</a>. You can do it but instead you should have an intialFoo property that is assigned to the foo state. That change of calling out that the link between the two is that the property is the initial value and shouldn't be mutated within the component's state seems important to being in the React mindset.</p>
+
+<p>Anyhoo, having decided that a user would be able to click on the Year column header and that interaction would sort the column and that the Year header would have a visual affordance to show the data is sortable and in which direction it currently is. This means that the initial state is the direction of the sort and the sorted data.</p>
+
+<p>On the table header we assign an onClick handler that calls a <code class="language-plaintext highlighter-rouge">sortData</code> function. That function checks the current direction of sorting and uses that to pick the new direction and resort the data. Those two new items are assigned to the component's state.</p>
+
+<p>In order to sort the data we call sort with a comparator function. So I wrote two comparators <code class="language-plaintext highlighter-rouge">sortAscending</code> and <code class="language-plaintext highlighter-rouge">sortDescending</code>.
+<!--alex ignore devil ---></p>
+<h1 id="onclick-is-the-work-of-the-devil-though">OnClick is the work of the devil, though</h1>
+
+<p>Well, in a world where the JS that the onclick handler calls could be anywhere so maintaining the code is made harder, I totally agree. But here… the <code class="language-plaintext highlighter-rouge">sortData</code> function is six lines away. And will always be in the same file, nearby.</p>
+
+<p>Unless someone takes the time to move that behaviour out into some pure JS (which could well be a good thing) and then the JSX is coupled to the JS object rather than the JS object being coupled to the HTML (by needing to know the identifier of the element whose events it reacts to.</p>
+
+<p>And, why should <code class="language-plaintext highlighter-rouge">&lt;th onClick={this.sortData}&gt;</code> be different from <code class="language-plaintext highlighter-rouge">&lt;th ng-click="sortData"&gt;</code>?! Except, I suppose, that in the Angularified example I have to know where to go to find the <code class="language-plaintext highlighter-rouge">sortData</code> function because it's in a controller/directive somewhere whereas in the React version it's nearby or explicitly called.</p>
+
+<p>I don't know, right now, where I stand on this.</p>
+
+<h1 id="but">But</h1>
+<!--alex ignore easy --->
+<p>Other than the dance to <em>get</em> how to coordinate state so that the table would update this felt pretty easy and almost none of the typing. I could grok enough of React to do this in one sitting.</p>
+
+<p>As a result I (think I) could explain it to people and have a good expectation that they would be able to work with it, extend it, use the idea elsewhere.</p>
+
+<p>That's the thing I've really enjoyed about working with React (on this admittedly small example). It seems like the application is going to be simpler and that stuff that acts together has to live together.</p>
+
+<h1 id="sorting-and-filtering-the-table">Sorting and Filtering the Table</h1>
+
+<p>That we will leave till part two… because I introduced a relatively artificial constraint that I didn't want the filtering control to be a part of the table.</p>
+
+<p>Imagine that there will be many tables with the same filter. I don't want to bind the filter to any one table or insist that every table has it.</p>
+
+<p>At first I expected that it would force me to understand React's components and how to compose them… instead I stumbled on something really cool #cliffhanger</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/reactotype/part-three.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Reactotype Part 3
+      </h3>
+      <small>
+        20 Feb 2015
+      </small>
+  </div>
+</a>  <a href="/reactotype/part-two.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Reactotype Part 2
+      </h3>
+      <small>
+        19 Feb 2015
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/reactotype/part-one.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/reactotype/part-one.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>
