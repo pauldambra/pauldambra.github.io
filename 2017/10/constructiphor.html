@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Constructiphor</title>
+    <link rel="canonical" href="https://pauldambra.dev/2017/10/constructiphor.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2017/10/constructiphor.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Constructiphor" />
+    <meta
+      property="og:description"
+      content="Construction might not be the best metaphor"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Construction might not be the best metaphor"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Constructiphor",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"691",
+     "url":"https://pauldambra.dev/2017/10/constructiphor.html",
+     "datePublished":"2017-10-15",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2017/10/constructiphor.html"
+     },
+     "articleBody":"On  Twitter  I…\n\n…made  a  toot-storm  about  using  construction  as  a  metaphor  for  software  engineering.\n\n\n    I've  never  really  got  on  with  construction  metaphors  for  software.  The  cost  of  mistakes  and  rework  is  high  in  construction\n\n\n\n\nThis  isn't  saying  that  Software  isn't  putting  things  together  but  rather  I've  seen  people  justify  not  'being  agile'  by  using  construction  metaphors.\n\n\n\nFor  example\n\n\n    we  have  to  agree  up  front  what  we're  going  to  do  so  that  we  know  we're  building  the  right  thing…  now  go  plan  19  sprints\n\n\n(guess  whether  the  client  was  certain  they  knew  what  they  wanted)\n\nSo,  why,  do  we  have  to  agree  up  front  what  we're  doing?\n\nThe  builders  pouring  the  foundations  in  the  image  in  that  toot  were  really  careful  they  got  things  right  before  they  started  pouring  concrete.  If  you  pour  that  concrete  and  it's  wrong,  it's  a  big  deal.  Doing  it  twice  would  be  an  expensive  problem.  It  isn't  inconceivable  that  you  make  a  mistake  where  it  might  be  impossible  to  recover  from  the  cost.\n\nThe  bricklayers  that  built  on  top  of  the  foundations  couldn't  start  before  the  foundations  were  ready.  Once  they  could  start  they  went  really,  really  slowly  until  the  first  few  rows  were  in  and  true.  After  that  it  is  amazing  how  fast  they  can  add  new  rows  of  bricks.\n\n\n    They  have  to  work  in  series.\n    They  have  to  be  incredibly  intolerant  of  mistakes\n\n\nIn  short  they  have  to  agree  up  front  what  they're  doing.\n\nIn  comparison  I  could  run  infrastructure  scripts  to  create  complex  utility  computing  environments,  test  the  results,  tear  down  the  infrastructure,  and  repeat.  All  for  the  cost  of  the  compute  time.  AWS  recently  started  billing  by  the  second  so  if  that  only  takes  minutes  to  run  it's  even  cheaper  than  before.\n\n\n\nI  can  reset  the  state  of  the  software  to  just  about  any  point  in  history  to  see  what  it  was  like.  I  can  experiment  with  swingeing  changes  cheaply  and  without  impacting  other  people's  work.\n\n\n    We  don't  have  to  work  in  series\n    We  can  be  tolerant  of  mistakes\n\n\nSo,  we  don't  have  to  agree  up  front  what  we're  doing?\n\nAlso…\n\n…I  saw  a  few  folks  tweet  that  Allan  Kelly  makes  the  point  that  renting  compute  in  the  70s  cost  the  equivalent  of  1.25  million  dollars  monthly  but  a  similar  amount  of  compute  can  now  be  bought  for  something  more  like  $35.\n\nIn  the  context  of  the  70s  pricing  planning  was  cheap.  But  planning  is  now  comparatively  expensive.\n\n\n\nThat's  all  the  confirmation  bias  I  need  :)\n\nAnd  so…\n\n…  in  construction  the  cost  of  the  work,  or  the  cost  of  the  work  being  wrong  is  higher  than  the  cost  of  planning  the  work.  Measure  twice,  cut  once  is  still  good  advice.\n\nThat  was  true  in  Software  but  isn't  anymore.\n\nBecause  the  cost  of  planning  is  comparatively  expensive  it  is  now  the  item  to  minimise.  Software  systems  can  be  put  together  by  taking  many  small,  cheap,  reversible  steps.  What  Deng  Xiaoping  would  have  described  as  \"crossing  the  river  by  feeling  the  stones.\"\n\nIf  your  software  development  still  spends  a  high  proportion  of  time  planning  then  you  need  to  be  sure  that  is  an  unavoidable  aspect  of  what  you  are  doing  and  not  a  signal  that  you're  falling  into  obsolescence.\n\nFor  example  if  you're  writing  the  software  that  determines  whether  to  insert  or  remove  the  control  rods  in  a  nuclear  reactor  then,  yes,  you  probably  need  to  be  very  sure  you  know  every  edge  case  is  handled  correctly  or  successfully  passed  off  to  a  human  before  it  goes  into  production.\n\nWhat  can  I  do..?\n\nFor  most  software  development  now  we  need  to  be  asking  what  the  measurable  outcome  is,  ensure  we're  measuring  it,  and  start  doing  as  fast  as  possible.\n\nThe  harder  work  then  is  using  user  research  to  determine  what  direction  to  head  in.  Followed  by  more  user  research  and  the  telemetry  coming  out  of  the  application  to  stay  on  course  or  make  appropriate  corrections.\n\nCut  once,  Measure  twice.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Oct 15 2017</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Constructiphor</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2017/10/constructiphor.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Constructiphor&via=pauldambra&url=https://pauldambra.dev/2017/10/constructiphor.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#metaphors"
+      >
+        in: metaphors
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#metaphors">
+    metaphors
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#software">
+    software
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<h1 id="on-twitter-i">On Twitter I…</h1>
+
+<p><a href="https://twitter.com/pauldambra/status/916712725060947974">…made a toot-storm</a> about using construction as a metaphor for software engineering.</p>
+
+<blockquote>
+  <p>I've never really got on with construction metaphors for software. The cost of mistakes and rework is high in construction</p>
+</blockquote>
+
+<p><img src="/images/toot.jpeg" alt="the toot itself" loading="lazy" /></p>
+
+<p>This isn't saying that Software isn't putting things together but rather I've seen people justify not 'being agile' by using construction metaphors.</p>
+
+<!--more-->
+
+<p>For example</p>
+
+<blockquote>
+  <p>we have to agree up front what we're going to do so that we know we're building the right thing… now go plan 19 sprints</p>
+</blockquote>
+
+<p>(guess whether the client was certain they knew what they wanted)</p>
+
+<h3 id="so-why-do-we-have-to-agree-up-front-what-were-doing">So, why, do we have to agree up front what we're doing?</h3>
+
+<p>The builders pouring the foundations in the image in that toot were <em>really</em> careful they got things right before they started pouring concrete. If you pour that concrete and it's wrong, it's a big deal. Doing it <em>twice</em> would be an expensive problem. It isn't inconceivable that you make a mistake where it might be impossible to recover from the cost.</p>
+
+<p>The bricklayers that built on top of the foundations couldn't start before the foundations were ready. Once they could start they went <em>really</em>, <em>really</em> slowly until the first few rows were in and true. After that it is amazing how fast they can add new rows of bricks.</p>
+
+<ul>
+  <li>They have to work in series.</li>
+  <li>They have to be incredibly intolerant of mistakes</li>
+</ul>
+
+<p>In short they have to agree up front what they're doing.</p>
+
+<p>In comparison I could run infrastructure scripts to create complex utility computing environments, test the results, tear down the infrastructure, and repeat. All for the cost of the compute time. AWS recently started billing by the second so if that only takes minutes to run it's even cheaper than before.</p>
+
+<!--alex ignore just --->
+
+<p>I can reset the state of the software to just about any point in history to see what it was like. I can experiment with swingeing changes cheaply and without impacting other people's work.</p>
+
+<ul>
+  <li>We don't have to work in series</li>
+  <li>We can be tolerant of mistakes</li>
+</ul>
+
+<p>So, we don't have to agree up front what we're doing?</p>
+
+<h1 id="also">Also…</h1>
+
+<p>…I saw a few folks tweet that <a href="https://twitter.com/allankellynet">Allan Kelly</a> makes the point that renting compute in the 70s cost the equivalent of 1.25 million dollars monthly but a similar amount of compute can now be bought for something more like $35.</p>
+
+<p>In the context of the 70s pricing planning was cheap. But planning is now comparatively expensive.</p>
+
+<p><img src="/images/agilecam.jpg" alt="seen at https://twitter.com/ojuncu/status/913688587576778752" loading="lazy" /></p>
+
+<p>That's all the confirmation bias I need :)</p>
+
+<h1 id="and-so">And so…</h1>
+
+<p>… in construction the cost of the work, or the cost of the work being wrong is higher than the cost of planning the work. Measure twice, cut once is still good advice.</p>
+
+<p>That <em>was</em> true in Software but isn't anymore.</p>
+
+<p>Because the cost of planning is comparatively expensive it is now the item to minimise. Software systems can be put together by taking many small, cheap, reversible steps. What Deng Xiaoping would have described as "crossing the river by feeling the stones."</p>
+
+<p>If <em>your</em> software development still spends a high proportion of time planning then you need to be sure that is an unavoidable aspect of what you are doing and not a signal that you're falling into obsolescence.</p>
+
+<p>For example if you're writing the software that determines whether to insert or remove the control rods in a nuclear reactor then, yes, you probably need to be very sure you know every edge case is handled correctly or successfully passed off to a human before it goes into production.</p>
+
+<h1 id="what-can-i-do">What can I do..?</h1>
+
+<p>For most software development now we need to be asking what the measurable outcome is, ensure we're measuring it, and <em>start doing</em> as fast as possible.</p>
+
+<p>The harder work then is using user research to determine what direction to head in. Followed by more user research and the telemetry coming out of the application to stay on course or make appropriate corrections.</p>
+
+<p>Cut once, Measure twice.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2017/10/constructiphor.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2017/10/constructiphor.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

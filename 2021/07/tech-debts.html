@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Tech Debts</title>
+    <link rel="canonical" href="https://pauldambra.dev/2021/07/tech-debts.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2021/07/tech-debts.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Tech Debts" />
+    <meta
+      property="og:description"
+      content="There are four things we call tech debt"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="There are four things we call tech debt"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Tech Debts",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"2777",
+     "url":"https://pauldambra.dev/2021/07/tech-debts.html",
+     "datePublished":"2021-07-21",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2021/07/tech-debts.html"
+     },
+     "articleBody":"Here  is  something  I  had  to  write  down  at  work.  Something  I've  tried  to  say  (with  varying  success)  more  than  once.  That  I'm  publishing  here  so  I  can  refer  back  to  it  in  future  and  in  case  it  is  useful  for  someone  else\n\nWhen  I  am  thinking  about  this,  I  am  thinking  about  three  things\n\nTwo  of  the  agile  principles\n\n\n    \n        \n            Continuous  attention  to  technical  excellence  and  good  design  enhances  agility.\n        \n    \n    \n        \n            Simplicity–the  art  of  maximising  the  amount  of  work  not  done–is  essential.\n        \n    \n\n\nAnd  the  XP  Rule\n\n\n    \n        \n            Refactor  Mercilessly\n        \n    \n\n\n\n\nOwning  software  is  like  having  a  garden\n\n\n\nIn  managing  a  garden,  you  need  to\n\n\n    frequently  and  persistently  weed\n\n\n\n    \"Argh,  the  young  apple  tree  is  being  choked  by  bindweed  again.\"\n\n\n\n    look  at  the  consequences  of  your  decisions  as  the  plants  grow\n\n\n\n    \"hmmm,  the  apple  tree  is  healthier  now  that  I  moved  it,  but  it  means  it's  grown  a  low  branch  across  the  path.\"\n\n\n\n    deal  with  the  consequences  of  decisions  made  before  it  was  your  garden\n\n\n\n    \"I  would  never  have  put  an  apple  tree  that  near  to  the  path.\"\n\n\n\n    delay  work  based  on  your  context\n\n\n\n    x:  \"The  apple  tree  is  growing  too  large  but,  I  can't  prune  it  until  late  winter.\"  \ny:  \"It  could  make  the  tree  ill.  But,  we  could  tie  the  branch  back  until  we  prune  it.\"\n\n\nWith  tech  debt,  too,  there  are  four  things,  not  one\n\nPeople  say  tech  debt  and  mean  more  than  one  thing.\n\n\n    Mess\n    Things  we  did  that  we  no  longer  like\n    Things  someone  else  did  that  I  do  not  like\n    Classical  technical  debt\n\n\nThat  means  we  can  think  we  agree  when  we're  talking  about  different  things.  I  have  seen  multiple  people  and  teams  (including  myself)  struggle  with  this.\n\nTL;DR\n\nYou  don't  need  permission  for  making  incremental  improvements  in  the  course  of  work.  That's  engineering.  It  should  be  included  if  and  when  you  estimate.  When  estimating  think  of  both  the  ideal  day  and  the  most  horrible  day.  We  tend  to  think  of  the  ideal  but  rarely  experience  it.  Meaning  our  estimates  fall  short\n\nAny  technical  improvement  that  can  be  done  in  the  course  of  your  work,  should  be  done.\n\nWe  don't  budget  time  for  writing  tests  or  searching  StackOverflow.  Many  small  changes  will  have  a  large  cumulative  impact.  The  waves  shape  the  beach  by  moving  the  sand  a  tiny  amount.\n\nThe  team  should  work  with  the  Principal  Engineer  to  determine  the  direction  of  travel  and  then  follow  it.  This  is  particularly  true  for  category  one  below:  mess\n\nAny  technical  improvement  that  can't  be  done  in  the  course  of  work  should  be  described,  proposed,  and  measured.\n\nAnything  else  is  often  \"something  the  team  wants  to  do\".  See  categories  2  and  3  below.  They  should  be  described  and  capture  the  impact  of  doing  or  of  not  doing  that  work.  They  can  then  be  prioritised,  and  reported  on.  In  other  words,  it  is  treated  the  same  as  a  request  from  outside  of  the  team.\n\nThe  team  should  work  with  the  Principal  Engineer  and  the  Product  Manager.  To  determine  how  to  measure  the  desired  improvement.  And  how  to  propose  it  for  prioritisation\n\nAnd  you  should  switch  between  those  two  modes\n\nSometimes  you  start  what  you  think  is  a  quick  task.  And  discover  it  isn't.  You  should  stop,  write  it  down  and  treat  it  as  a  separate  piece  of  work.\n\nThe  four  things  we  call  technical  debt\n\n1.  Mess\n\n\n\nFoote  and  Yoder  propose  that  all  architectures  become  a  big  ball  of  mud.  It's  a  great  paper.  I  suggest  that  software  always  ends  up  looking  like  the  home  of  a  hoarder.\n\n\n\nWhat  is  it?\n\nPeople  solve  problems  by  adding  things  far  more  than  they  do  by  removing  them.  That's  what  hoarders  do.  Nobody  set  out  to  create  the  room  in  the  image.  They  kept  adding  things  that  they  thought  were  useful.  The  hoarder  is  used  to  it.  It  becomes  their  normal.  Anyone  new  to  the  hoarder's  home  can't  imagine  how  they  can  live  there.\n\nAt  some  point,  the  software  industry  started  calling  this  technical  debt.  It  isn't.  It's  mess.  The  only  response  to  mess.  Is  to  accept  it  is  inevitable  and  to  tidy  up  at  a  faster  rate  than  we  add  mess.\n\nIn  the  physical  world  when  the  mess  is  particularly  bad  we  have  no  choice  but  to  stop  everything,  hire  a  skip,  and  throw  everything  away.  Sometimes  this  is  the  right  choice  for  software  but  we  aren't  constrained  by  mess  in  the  same  way  that  we  are  in  the  physical  world.\n\nHow  do  we  react?\n\nIn  the  software  world  we  deal  with  this  mess  by  refactoring.  One  of  the  XP  rules  is  to  refactor  mercilessly.  Modern  IDEs  have  tooling  to  help  make  this  safe.  A  great  guide  to  this  is  to  use  code  smells  as  a  guide  to  what  to  do  next.\n\nThis  is  a  constant  activity.  You  consider  this  for  every  task  you  complete.  You  are,  however,  allowed  to  be  pragmatic.  You  may  say:  \"I  won't  fix  that  now  because  I  know  folk  are  waiting  for  this  bug  fix  so  we  can  start  making  money  again\".  But  you  watch  for  always  choosing  the  pragmatic  path.  The  road  to  hell  is  paved  with  good  intentions.\n\nSome  people  have  had  success  putting  \"golden\"  tickets  in  the  backlog  and  everyone  has  to  play  a  golden  ticket  in  ever  iteration.  One  person  may  use  theirs  to  learn,  another  to  go  back  and  refactor  to  remove  the  code  smell  that  had  bugged  them  in  some  recent  work.\n\nYou  may  not  know  where  to  start.  If  you  haven't  been  tidying  enough  you  should  start  anywhere  rather  than  worry  about  which  is  the  best  bit  of  tidying.  You  will  learn  what  to  do  by  trying  to  do  it.\n\nWhat  to  watch  out  for?\n\nIf  you  find  yourself  pulling  new  tickets  into  your  iteration,  time-box,  or  sprint  that  is  a  good  signal  that  you  are  rushing  through  implementing  without  tidying.\n\nIt  is  tempting  to  try  to  put  value  on  individual  pieces  of  tidying.  But  the  value  is  in  the  constant  application  of  effort.  Not  in  any  one  individual  piece  of  tidying.\n\nWhat  we  would  have  to  put  value  on  is  if  we  want  to  treat  tidying  as  a  task  separate  to  our  work.  \"I  want  to  stop  doing  other  things  for  M  days,  in  order  to  tidy  up.  I  believe  this  is  necessary  because  X,  Y,  and  Z\".  Here  you  have  to  put  value  on  it  because  you  are  asking  other  people  to  stop  and  wait  while  you  tidy.\n\nYou  may  not  know  where  to  start.  If  you  haven't  been  tidying  enough  you  should  start  anywhere  rather  than  worry  about  which  is  the  best  bit  of  tidying.  You  will  learn  what  to  do  by  trying  to  do  it.\n\nRelated  XP  values\n\n\"courage\"  to  make  the  changes  you  believe  will  improve  the  code,  no  matter  how  big  they  are.  Modern  tooling  makes  large  changes  safe.  If  you  find  you  can't  make  large  changes  safely,  that's  a  new  signal  of  how  to  improve  your  testing.\n\nAnd  \"respect\".  Firstly,  respect  that  your  team  mates  are  right  to  try  and  tidy  this  *now.*  And  secondly,  respect  for  others  working  in  or  with  the  team.  Tidying  might  mean  they're  waiting  longer  than  they  expect.  Tell  them  what  is  happening.\n\n2  Things  we  did  that  we  no  longer  like\n\nI  loved  that  coat.  A  genuine  first  world  war  camel  hair  trench  coat.  It  kept  me  dry  and  warm  through  many  an  Oldham  winter  snowstorm.  I  thought  it  was  great.  As  time  passed  I  had  to  come  to  terms  with  the  fact  that  when  it  was  wet  it  smelled  like  a  dead  dog.\n\nWhat  I  had  thought  was  a  great  coat,  was  actually  a  smelly  coat.  It  served  me  well  until  I  realised  it  stank.\n\n\n\nWhat  is  it?\n\nWe  are  always  growing  and  learning.  Decisions  we  make  that  we  are  proud  of  eventually  become  decisions  we  wish  we  hadn't  made.  Sometimes  it  is    easy  to  change  the  decision.  Other  times  it  is  hard.\n\nIt  is  tempting  for  this  to  be  treated  as  concrete  (\"Monoliths  are  bad  now\")  when  it  is  often  preference  (\"We  would  like  to  use  Webpack  that  we  don't  understand  instead  of  Gulp  that  we  don't  understand\")\n\nHow  do  we  react?\n\nIn  one  of  two  ways.\n\n1)  slowly  applying  a  direction  of  travel\n\nWe  choose  a  direction  \"we  will  more  carefully  apply  the  interface  segregation  principle\".  Maybe  we  run  sessions  to  get  or  keep  the  team  aligned  on  the  direction.  And  then  we  fix  the  thing  as  it  falls  in  front  of  us.\n\nIn  this  specific  case:\n\n\n    every  time  we  edit  a  file,\n    if  the  interface  is  too  large,\n    we  use  our  brains  and  our  IDE  tools  to  break  it  into  smaller  interfaces\n\n\nAs  these  are  in  the  moment  changes  we  don't  even  tell  people  we're  doing  it.  It's  a  part  of  the  work\n\n2)  clearing  the  slate\n\nSometimes  the  change  is  too  large  to  be  done  in  tiny  pieces  or  would  take  so  long  to  complete  in  small  pieces  you  may  as  well  never  start.\n\nIn  this  case:\n\n\n    we  figure  out  why  it  is  a  problem\n        \n            e.g.  every  time  we  make  a  particular  ten  minute  config  change  (X  times  per  year)  we  lose  3  hours  of  time  for  at  least  two  people.\n        \n    \n    and  we  say  what  happens  if  we  fix  it\n        \n            e.g.  If  we  spend  10  days  fixing  this  we  will  save  15  days  this  year,  and  20  days  every  year  after  that\n        \n    \n\n\nSimilarly  to  the  need  for  respect  for  other  people's  time  when  dealing  with  mess.  When  clearing  the  slate  we  are  asking  other  people  to  wait  while  the  engineering  team  seemingly  achieves  nothing.  We  don't  always  have  to  be  right  that  we  should  stop  and  spend  time  changing  our  minds  but  we  do  have  to  be  careful\n\nWhat  to  watch  out  for?\n\nWatch  out  for  fads!  Yes,  SvelteJS  might  be  getting  lots  of  social  media  traction  but  do  we  want  to  invest  tens  of  thousands  of  pounds  changing  JS  frameworks.\n\nWatch  out  for  swapping  a  known  set  of  problems  for  almost  the  same  problems  in  different  clothes.  You  may  hate  Dropwizard  and  wish  we  were  using  Spring.  Or  think  we  shouldn't  use  Jenkins  because  GoCD  is  better.  etc  etc.  There's  much  more  to  adopting  a  technology  than  the  text  files.\n\nReplacing  \"Things  we  did  that  we  no  longer  like\"  with  \"things  we  now  like\"  can  cause  your  products  and  systems  to  stand  still  while  you  do  the  work.  Watch  out  for  replacing  things  without  knowing  when  to  stop  or  how  to  measure  it\n\nEqually,  watch  out  for  never  replacing  decisions  you've  outgrown.  There's  a  lot  of  room  for  manoeuvre  between  \"never  replace  existing  tech\"  and  \"OMG  we  should  use  Rust!\"\n\n3.  Things  someone  else  did  that  I  do  not  like\n\nJessica  Kerr  talks  about  \"downhill  invention,  uphill  analysis\"  from  Vehicles  by  Valentino  Braitenberg.  Explaining  that  it  is  easier  to  think  about  how  to  replace  a  system  than  it  is  to  think  about  how  it  works.  And,  so,  we  naturally  tend  to  think  that  systems  we  inherit  are  bad,  and  the  ones  that  we  replace  them  with  are  good\n\n\n\nWhat  is  it?\n\nBecause  of  how  the  brain  works,  the  people  that  made  a  thing  in  a  particular  way  are  often  too  slow  to  accept  they  should  have  made  it  a  different  way  (see  Things  we  did  that  we  no  longer  like).  And,  people  that  are  fresh  to  the  thing  are  often  too  quick  to  suggest  that  it  should  have  been  made  in  a  different  way.  Not  being  present  when  the  context  forced  your  hand,  or  when  mistakes  were  made,  mean  you  are  less  willing  to  accept  the  current  state.\n\nHow  do  we  react?\n\nIt  is  good  to  take  advantage  of  fresh  perspectives.  At  a  minimum  we  use  this  to  help  set  long-term  direction.  E.g.  \"I  found  it  very  confusing  to  onboard  and  there  are  four  different  ways  of  deploying  the  applications.  I  can't  see  a  reason  for  having  more  than  one.  But  the  work  to  reduce  the  number  of  ways  we  have  looks  complicated\"\n\nAnd  we  should  also  be  looking  for  low-hanging  fruit.  E.g.  \"I  see  we're  using  CloudFront  but  not  setting  cache-control  headers.  I've  seen  cache-control  headers  have  positive  impact  in  multiple  systems.  I  reckon  I  could  add  them  in  less  than  two  days\"\n\nWhat  to  watch  out  for?\n\nWe  always  under-estimate  the  effort  required  to  replace  something  and  over-estimate  the  effort  required  to  understand  it.\n\nAlso  watch  out  for  justifications  based  on  something  being  best  or  current  practice.  All  practice  is  context  dependent.  One  person's  best  practice  is  another's  terrible  idea.  Use  tools  like  Wardley  Mapping  and  Cynefin  to  help  determine  what  practice  to  apply.\n\n4.  Classical  Technical  Debt\n\nTechnical  debt  is  the  purposeful  decision  to  defer  some  necessary  work  in  order  to  meet  a  deadline.  The  debt  metaphor  is  well  chosen  for  descriptive  purposes.  As  the  impact  of  the  debt  gets  worse  over  time,  particularly  if  we  pay  back  the  minimum  charge  or  less.  But,  engineers  always  talk  about  debt  as  if  it  is  bad.  Businesses  don't  think  of  debt  as  bad.  There  is  always  debt  in  running  a  business  and  you  are  always  choosing  what  debt  to  ignore.\n\nTech  debt  has  been  short  hand  for  so  long  now  that  everyone  means  a  different  thing  but  thinks  they  agree.  It  may  be  better  to  talk  about  whether  we  are  keeping  scope  and  delaying  implementation  or  reducing  scope  and  managing  consequences.\n\n\n\nWhat  is  it?\n\nTechnical  debt  is  a  purposeful  choice  to  make  a  version  of  something  that  is  working  from  the  perspective  of  the  customer.  But  that  is  either  made  badly  or  missing  necessary  work  that  means  it  is  hard  to  maintain  or  change.\n\nIt  is  only  bad  when  the  work  to  add  technical  debt  is  more  common  than  work  to  remove  it.  Think  of  each  piece  of  debt  as  a  new  credit  card  and  not  a  single  purchase  on  one  card.\n\nIt  isn't  reducing  scope  with  no  intention  to  pay  back  the  debt.\n\nHow  do  we  react?\n\nWe  track  it.  Ideally  we  keep  a  ticket  in  Jira  or  whatever  equivalent  is  in  use.  That  ticket  is  assigned  to  the  business  person  that  made  the  decision  to  incur  the  debt.  As  the  cost  of  the  debt  becomes  apparent  the  ticket  is  kept  up-to-date  so  prioritisation  can  occur.\n\nTechnical  debt  is  deferred  work  not  avoided  work.  If  you  already  can't  pay  off  your  monthly  debt  bills  you  should  think  very  hard  about  taking  on  more  debt.  At  some  point  you  have  to  defer  spending  instead  of  accruing  debt.\n\nWhat  to  watch  out  for?\n\nTreating  technical  debt  as  avoiding  work  instead  of  deferring  work.  It  is  common  to  say  \"if  we  do  X  this  way  that  accrues  technical  debt\".  People  hear  \"I  want  to  gold  plate  this  but  you  can  invest  less  and  still  have  it\".  Better  to  talk  about  whether  to  delay  the  implementation  (and  to  when!).  Or  whether  to  cut  scope  with  no  inferred  expectation  the  thing  will  still  be  done.\n\nRepeating  the  tl;dr\n\nAvoid  saying  technical  debt.  Instead,  say  what  you  mean.\n\nSubsequently:\n\nAny  technical  improvement  that  can  be  done  in  the  course  of  your  work,  should  be  done.\n\nWe  don't  budget  time  for  writing  tests  or  searching  StackOverflow.  Many  small  changes  will  have  a  large  cumulative  impact  without  needing  others  working  in  or  with  the  team  to  wait.\n\nAny  technical  improvement  that  can't  be  done  in  the  course  of  work  should  be  described,  proposed,  and  measured.\n\nAnything  else  is  often  \"something  the  team  wants  to  do\".  See  categories  2  and  3.  They  should  be  described  and  capture  the  impact  of  doing  or  of  not  doing  that  work.  They  can  then  be  prioritised,  and  reported  on.  In  other  words  it  is  treated  the  same  as  a  request  from  outside  of  the  team.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Wed Jul 21 2021</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Tech Debts</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2021/07/tech-debts.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Tech+Debts&via=pauldambra&url=https://pauldambra.dev/2021/07/tech-debts.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#semantics"
+      >
+        in: semantics
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#meaning">
+    meaning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#pedantry">
+    pedantry
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>Here is something I had to write down at work. Something I've tried to say (with varying success) more than once. That I'm publishing here so I can refer back to it in future and in case it is useful for someone else</p>
+
+<p>When I am thinking about this, I am thinking about three things</p>
+
+<p><a href="https://agilemanifesto.org/principles.html">Two of the agile principles</a></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>Continuous attention to technical excellence and good design enhances agility.</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Simplicity–the art of maximising the amount of work not done–is essential.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>And the XP Rule</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p><a href="http://www.extremeprogramming.org/rules/refactor.html">Refactor Mercilessly</a></p>
+    </blockquote>
+  </li>
+</ul>
+
+<!--more-->
+
+<h1 id="owning-software-is-like-having-a-garden">Owning software is like having a garden</h1>
+
+<p><img src="/images/tree.jpg" alt="/images/tree.jpg" loading="lazy" /></p>
+
+<p>In managing a garden, you need to</p>
+
+<ol>
+  <li>frequently and persistently weed</li>
+</ol>
+
+<blockquote>
+  <p>"Argh, the young apple tree is being choked by bindweed again."</p>
+</blockquote>
+
+<ol>
+  <li>look at the consequences of your decisions as the plants grow</li>
+</ol>
+
+<blockquote>
+  <p>"hmmm, the apple tree is healthier now that I moved it, but it means it's grown a low branch across the path."</p>
+</blockquote>
+
+<ol>
+  <li>deal with the consequences of decisions made before it was your garden</li>
+</ol>
+
+<blockquote>
+  <p>"I would never have put an apple tree that near to the path."</p>
+</blockquote>
+
+<ol>
+  <li>delay work based on your context</li>
+</ol>
+
+<blockquote>
+  <p>x: "The apple tree is growing too large but, I can't prune it until late winter." <br />
+y: "It could make the tree ill. But, we could tie the branch back until we prune it."</p>
+</blockquote>
+
+<h1 id="with-tech-debt-too-there-are-four-things-not-one">With tech debt, too, there are four things, not one</h1>
+
+<p>People say tech debt and mean more than one thing.</p>
+
+<ol>
+  <li>Mess</li>
+  <li>Things we did that we no longer like</li>
+  <li>Things someone else did that I do not like</li>
+  <li>Classical technical debt</li>
+</ol>
+
+<p>That means we can think we agree when we're talking about different things. I have seen multiple people and teams (including myself) struggle with this.</p>
+
+<h1 id="tldr">TL;DR</h1>
+
+<p>You don't need permission for making incremental improvements in the course of work. That's engineering. It should be included <em>if</em> and when you estimate. When estimating think of both the ideal day <strong>and</strong> the most horrible day. We tend to think of the ideal but rarely experience it. Meaning our estimates fall short</p>
+
+<h3 id="any-technical-improvement-that-can-be-done-in-the-course-of-your-work-should-be-done">Any technical improvement that can be done in the course of your work, should be done.</h3>
+
+<p>We don't budget time for writing tests or searching StackOverflow. Many small changes will have a large cumulative impact. The waves shape the beach by moving the sand a tiny amount.</p>
+
+<p>The team should work with the Principal Engineer to determine the direction of travel and then follow it. This is particularly true for category one below: mess</p>
+
+<h3 id="any-technical-improvement-that-cant-be-done-in-the-course-of-work-should-be-described-proposed-and-measured">Any technical improvement that can't be done in the course of work should be described, proposed, and measured.</h3>
+
+<p>Anything else is often "something the team wants to do". See categories 2 and 3 below. They should be described and capture the impact of doing or of not doing that work. They can then be prioritised, and reported on. In other words, it is treated the same as a request from outside of the team.</p>
+
+<p>The team should work with the Principal Engineer and the Product Manager. To determine how to measure the desired improvement. And how to propose it for prioritisation</p>
+
+<h3 id="and-you-should-switch-between-those-two-modes">And you should switch between those two modes</h3>
+
+<p>Sometimes you start what you think is a quick task. And discover it isn't. You should stop, write it down and treat it as a separate piece of work.</p>
+
+<h1 id="the-four-things-we-call-technical-debt">The four things we call technical debt</h1>
+
+<h1 id="1-mess">1. Mess</h1>
+
+<!--alex ignore ball-->
+
+<p><a href="http://www.laputan.org/mud/">Foote and Yoder propose that all architectures become a big ball of mud.</a> It's a great paper. I suggest that software always ends up looking like the home of a hoarder.</p>
+
+<p><img src="/images/Hoarding_living_room.jpeg" alt="a picture of a hoarders room, very messy, with piles of things" loading="lazy" /></p>
+
+<h2 id="what-is-it">What is it?</h2>
+
+<p><a href="https://www.sciencealert.com/here-s-why-our-brains-always-want-to-solve-problems-by-adding-not-taking-away">People solve problems by adding things far more than they do by removing them.</a> That's what hoarders do. Nobody set out to create the room in the image. They kept adding things that they thought were useful. The hoarder is used to it. It becomes their normal. Anyone new to the hoarder's home can't imagine how they can live there.</p>
+
+<p>At some point, the software industry started calling this technical debt. It isn't. It's mess. The only response to mess. Is to accept it is inevitable and to tidy up at a faster rate than we add mess.</p>
+
+<p>In the physical world when the mess is particularly bad we have no choice but to stop everything, hire a skip, and throw everything away. Sometimes this is the right choice for software but we aren't constrained by mess in the same way that we are in the physical world.</p>
+
+<h2 id="how-do-we-react">How do we react?</h2>
+
+<p>In the software world we deal with this mess by refactoring. One of the XP rules is to <a href="http://www.extremeprogramming.org/rules/refactor.html">refactor mercilessly</a>. Modern IDEs have tooling to help make this safe. A great guide to this is to use <a href="https://refactoring.guru/refactoring/smells">code smells</a> as a guide to what to do next.</p>
+
+<p>This is a constant activity. You consider this for every task you complete. You are, however, allowed to be pragmatic. You may say: "I won't fix that <em>now</em> because I know folk are waiting for this bug fix so we can start making money again". But you watch for <em>always</em> choosing the pragmatic path. The road to hell is paved with good intentions.</p>
+
+<p>Some people have had success putting "golden" tickets in the backlog and everyone has to play a golden ticket in ever iteration. One person may use theirs to learn, another to go back and refactor to remove the code smell that had bugged them in some recent work.</p>
+
+<p>You may not know where to start. If you haven't been tidying enough you should start anywhere rather than worry about which is the best bit of tidying. You will learn what to do by trying to do it.</p>
+
+<h2 id="what-to-watch-out-for">What to watch out for?</h2>
+
+<p>If you find yourself pulling new tickets into your iteration, time-box, or sprint that is a good signal that you are rushing through implementing without tidying.</p>
+
+<p>It is tempting to try to put value on individual pieces of tidying. But the value is in the constant application of effort. Not in any one individual piece of tidying.</p>
+
+<p>What we would have to put value on is if we want to treat tidying as a task separate to our work. "I want to stop doing other things for M days, in order to tidy up. I believe this is necessary because X, Y, and Z". Here you have to put value on it because you are asking other people to stop and wait while you tidy.</p>
+
+<p>You may not know where to start. If you haven't been tidying enough you should start anywhere rather than worry about which is the best bit of tidying. You will learn what to do by trying to do it.</p>
+
+<h2 id="related-xp-values">Related XP values</h2>
+
+<p>"courage" to make the changes you believe will improve the code, no matter how big they are. Modern tooling makes large changes safe. If you find you can't make large changes safely, that's a new signal of how to improve your testing.</p>
+
+<p>And "respect". Firstly, respect that your team mates are right to try and tidy <em>this</em> <strong>*now</strong>.* And secondly, respect for others working in or with the team. Tidying might mean they're waiting longer than they expect. Tell them what is happening.</p>
+
+<h2 id="2-things-we-did-that-we-no-longer-like">2 Things we did that we no longer like</h2>
+
+<p>I loved that coat. A genuine first world war camel hair trench coat. It kept me dry and warm through many an Oldham winter snowstorm. I thought it was great. As time passed I had to come to terms with the fact that when it was wet it smelled like a dead dog.</p>
+
+<p>What I had thought was a great coat, was actually a smelly coat. It served me well until I realised it stank.</p>
+
+<p><img src="/images/bad_history.jpeg" alt="a very old picture of a very young me wearing an original world war one camelhair coat" loading="lazy" /></p>
+
+<h2 id="what-is-it-1">What is it?</h2>
+
+<p>We are always growing and learning. Decisions we make that we are proud of eventually become decisions we wish we hadn't made. Sometimes it is <!--alex ignore easy--> easy to change the decision. Other times it is hard.</p>
+
+<p>It is tempting for this to be treated as concrete ("Monoliths are bad now") when it is often preference ("We would like to use Webpack that we don't understand instead of Gulp that we don't understand")</p>
+
+<h2 id="how-do-we-react-1">How do we react?</h2>
+
+<p>In one of two ways.</p>
+
+<h3 id="1-slowly-applying-a-direction-of-travel">1) slowly applying a direction of travel</h3>
+
+<p>We choose a direction "we will more carefully apply the interface segregation principle". Maybe we run sessions to get or keep the team aligned on the direction. And then we fix the thing as it falls in front of us.</p>
+
+<p>In this specific case:</p>
+
+<ul>
+  <li>every time we edit a file,</li>
+  <li>if the interface is too large,</li>
+  <li>we use our brains and our IDE tools to break it into smaller interfaces</li>
+</ul>
+
+<p>As these are in the moment changes we don't even tell people we're doing it. It's a part of the work</p>
+
+<h3 id="2-clearing-the-slate">2) clearing the slate</h3>
+
+<p>Sometimes the change is too large to be done in tiny pieces or would take so long to complete in small pieces you may as well never start.</p>
+
+<p>In this case:</p>
+
+<ul>
+  <li>we figure out why it is a problem
+    <ul>
+      <li>e.g. every time we make a particular ten minute config change (X times per year) we lose 3 hours of time for at least two people.</li>
+    </ul>
+  </li>
+  <li>and we say what happens if we fix it
+    <ul>
+      <li>e.g. If we spend 10 days fixing this we will save 15 days this year, and 20 days every year after that</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Similarly to the need for respect for other people's time when dealing with mess. When clearing the slate we are asking other people to wait while the engineering team seemingly achieves nothing. We don't always have to be right that we should stop and spend time changing our minds but we do have to be careful</p>
+
+<h2 id="what-to-watch-out-for-1">What to watch out for?</h2>
+
+<p>Watch out for fads! Yes, SvelteJS might be getting lots of social media traction but do we want to invest tens of thousands of pounds changing JS frameworks.</p>
+
+<p>Watch out for swapping a known set of problems for almost the same problems in different clothes. You may hate Dropwizard and wish we were using Spring. Or think we shouldn't use Jenkins because GoCD is better. etc etc. There's much more to adopting a technology than the text files.</p>
+
+<p>Replacing "Things we did that we no longer like" with "things we now like" can cause your products and systems to stand still while you do the work. Watch out for replacing things without knowing when to stop or how to measure it</p>
+
+<p>Equally, watch out for <em>never</em> replacing decisions you've outgrown. There's a lot of room for manoeuvre between "never replace existing tech" and "OMG we should use Rust!"</p>
+
+<h1 id="3-things-someone-else-did-that-i-do-not-like">3. Things someone else did that I do not like</h1>
+
+<p><a href="https://www.youtube.com/watch?v=Lp-Xqj8wSMg">Jessica Kerr talks about "downhill invention, uphill analysis"</a> from <a href="https://mitpress.mit.edu/books/vehicles">Vehicles by Valentino Braitenberg</a>. Explaining that it is easier to think about how to replace a system than it is to think about how it works. And, so, we naturally tend to think that systems we inherit are bad, and the ones that we replace them with are good</p>
+
+<p><img src="/images/actual_different_styles_meme_by_zeurel-d38c306.png" alt="the different styles of the same thing meme, one thing drawn in multiple styles" loading="lazy" /></p>
+
+<h2 id="what-is-it-2">What is it?</h2>
+
+<p>Because of how the brain works, the people that made a thing in a particular way are often too slow to accept they should have made it a different way (see <a href="">Things we did that we no longer like</a>). And, people that are fresh to the thing are often too quick to suggest that it should have been made in a different way. Not being present when the context forced your hand, or when mistakes were made, mean you are less willing to accept the current state.</p>
+
+<h2 id="how-do-we-react-2">How do we react?</h2>
+
+<p>It is good to take advantage of fresh perspectives. At a minimum we use this to help set long-term direction. E.g. "I found it very confusing to onboard and there are four different ways of deploying the applications. I can't see a reason for having more than one. But the work to reduce the number of ways we have looks complicated"</p>
+
+<p>And we should also be looking for low-hanging fruit. E.g. "I see we're using CloudFront but not setting cache-control headers. I've seen cache-control headers have positive impact in multiple systems. I reckon I could add them in less than two days"</p>
+
+<h2 id="what-to-watch-out-for-2">What to watch out for?</h2>
+
+<p>We always under-estimate the effort required to replace something and over-estimate the effort required to understand it.</p>
+
+<p>Also watch out for justifications based on something being best or current practice. All practice is context dependent. One person's best practice is another's terrible idea. Use tools like <a href="https://medium.com/wardleymaps">Wardley Mapping</a> and <a href="https://lizkeogh.com/cynefin-for-everyone/">Cynefin</a> to help determine what practice to apply.</p>
+
+<h1 id="4-classical-technical-debt">4. Classical Technical Debt</h1>
+
+<p><a href="https://wiki.c2.com/?TechnicalDebt">Technical debt</a> is the purposeful decision to defer some necessary work in order to meet a deadline. The debt metaphor is well chosen for descriptive purposes. As the impact of the debt gets worse over time, particularly if we pay back the minimum charge or less. But, engineers always talk about debt as if it is bad. Businesses don't think of debt as bad. There is always debt in running a business and you are always choosing what debt to ignore.</p>
+
+<p>Tech debt has been short hand for so long now that everyone means a different thing but thinks they agree. It may be better to talk about whether we are keeping scope and delaying implementation or reducing scope and managing consequences.</p>
+
+<p><img src="/images/credit-card-1104961_1280.webp" alt="several credit cards and a bill behind them" loading="lazy" /></p>
+
+<h2 id="what-is-it-3">What is it?</h2>
+
+<p>Technical debt is a purposeful choice to make a version of something that is working from the perspective of the customer. But that is either made badly or missing necessary work that means it is hard to maintain or change.</p>
+
+<p>It is only bad when the work to add technical debt is more common than work to remove it. Think of each piece of debt as a new credit card and not a single purchase on one card.</p>
+
+<p>It isn't reducing scope with no intention to pay back the debt.</p>
+
+<h2 id="how-do-we-react-3">How do we react?</h2>
+
+<p>We track it. Ideally we keep a ticket in Jira or whatever equivalent is in use. That ticket is assigned to the business person that made the decision to incur the debt. As the cost of the debt becomes apparent the ticket is kept up-to-date so prioritisation can occur.</p>
+
+<p>Technical debt is deferred work not avoided work. If you already can't pay off your monthly debt bills you should think very hard about taking on more debt. At some point you have to defer spending instead of accruing debt.</p>
+
+<h2 id="what-to-watch-out-for-3">What to watch out for?</h2>
+
+<p>Treating technical debt as avoiding work instead of deferring work. It is common to say "if we do X this way that accrues technical debt". People hear "I want to gold plate this but you can invest less and still have it". Better to talk about whether to delay the implementation (and to when!). Or whether to cut scope with no inferred expectation the thing will still be done.</p>
+
+<h1 id="repeating-the-tldr">Repeating the tl;dr</h1>
+
+<p>Avoid saying technical debt. Instead, say what you mean.</p>
+
+<p>Subsequently:</p>
+
+<h2 id="any-technical-improvement-that-can-be-done-in-the-course-of-your-work-should-be-done-1">Any technical improvement that can be done in the course of your work, should be done.</h2>
+
+<p>We don't budget time for writing tests or searching StackOverflow. Many small changes will have a large cumulative impact without needing others working in or with the team to wait.</p>
+
+<h2 id="any-technical-improvement-that-cant-be-done-in-the-course-of-work-should-be-described-proposed-and-measured-1">Any technical improvement that can't be done in the course of work should be described, proposed, and measured.</h2>
+
+<p>Anything else is often "something the team wants to do". See categories 2 and 3. They should be described and capture the impact of doing or of not doing that work. They can then be prioritised, and reported on. In other words it is treated the same as a request from outside of the team.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2021/07/tech-debts.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2021/07/tech-debts.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

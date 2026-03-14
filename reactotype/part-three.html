@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Reactotype Part 3</title>
+    <link rel="canonical" href="https://pauldambra.dev/reactotype/part-three.html" />
+    <meta property="og:url" content="https://pauldambra.dev/reactotype/part-three.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Reactotype Part 3" />
+    <meta
+      property="og:description"
+      content="exploring ReactJS"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="exploring ReactJS"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Reactotype Part 3",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1500",
+     "url":"https://pauldambra.dev/reactotype/part-three.html",
+     "datePublished":"2015-02-20",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/reactotype/part-three.html"
+     },
+     "articleBody":"At  the  end  of  the  last  post  I  realised  I'd  sacrificed  some  good  practice  in  the  rush  to  make  it  work  (i.e.  worked  normally  like  all  those  other  guilty  software  engineers  everywhere  everyday.)\n\n\n\nSo  earlier  today  I  played  with  the  kids  to  tire  them  out  enough  that  I  could  distract  them  with  television  and  write  some  #holidaycode  because  I  am  a  good(-ish)  parent.\n\nI  managed  to\n\n\n    switch  from  using  magic  strings  in  the  messagebus  channel  and  topic  identifiers\n    remove  some  duplication\n    and  get  some  tests  around  ReactJS\n\n\n\n\nMessagebus  channels  and  topics\n\nIn  the  last  post  we  (I)  used  magic  strings  to  identify  the  channel  and  topic  that  messages  were  being  published  to.\n\nI'm  not  completely  sold  on  this  particular  structure:\n\nvar  messageBusStructure  =  {\n\tchannels:  {\n\t\tfilters:  'filters'\n\t},\n\ttopics:  {\n\t\tfilters:  {\n\t\t\tyearBoundsChange:  'year.bounds.change'\n\t\t}\n\t}\n};\n\n\nbut  the  general  idea  holds  since  it  should  mean  that  the  postal  publish/subscribe  code  is  less  prone  to  typing  errors.\n\npostal.subscribe({\n\tchannel:  bus.channels.filters,\n\ttopic  :  bus.topics.filters.yearBoundsChange,\n\tcallback:  function(d,  e)  {\n\t\tthis.filterData(d);\n\t}\n}).context(this);\n\n//is  better  than\n\npostal.subscribe({\n\tchannel:  \"filters\",\n\ttopic  :  \"year.bounds.change\",\n\tcallback:  function(d,  e)  {\n        \tthis.filterData(d);\n    \t}\n}).context(this);\n\n\nRemove  duplication  with  fire\n\nThen  I  componentised  (ugh,  is  that  a  word?!)  the  input  controls  being  used  in  the  FilterBox  so  I  could  remove  the  duplication  of  handling  their  events.\n\nvar  YearFilterInput  =  React.createClass({\n\tpublishOnChange:  function(event)  {\n\t\tvar  eventData  =  {};\n\t\teventData[this.props.name.toLowerCase()]  =\n\t\t\tparseInt(event.target.value,  10);\n\n\t\tpostal.publish({\n\t\t\tchannel:  bus.channels.filters,\n\t\t\ttopic  :  bus.topics.filters.yearBoundsChange,\n\t\t\tdata:  eventData\n\t\t});\n\t},\n\trender:  function()  {\n\t\treturn  (\n\t\t\t\t&lt;div  className=\"form-group\"&gt;\n\t\t\t\t\t&lt;label  htmlFor={this.props.name}&gt;{this.props.name}&lt;/label&gt;\n\t\t\t\t\t&lt;input  type=\"number\"\n\t\t\t\t\t\t      name={this.props.name}\n\t\t\t\t\t\t      className=\"form-control\"\n\t\t\t\t\t\t      defaultValue={this.props.default}\n\t\t\t\t\t\t      min={this.props.initialEarliest}\n\t\t\t\t\t\t      max={this.props.initialLatest}\n\t\t\t\t\t\t      onChange={this.publishOnChange}/&gt;\n\t\t\t\t&lt;/div&gt;\n\t\t);\n\t}\n});\n\nvar  FilterBox  =  React.createClass({\n\trender:  function()  {\n\t\treturn  (\n\t\t\t&lt;div  className=\"col-xs-12\"&gt;\n\t\t\t\t&lt;YearFilterInput  name=\"Earliest\"\n\t\t\t\t\t\t\t\t  default={this.props.initialEarliest}\n\t\t\t\t\t\t\t\t  initialEarliest={this.props.initialEarliest}\n\t\t\t\t\t\t\t\t  initialLatest={this.props.initialLatest}  /&gt;\n\t\t\t\t&lt;YearFilterInput  name=\"Latest\"\n\t\t\t\t\t\t\t\t  default={this.props.initialLatest}\n\t\t\t\t\t\t\t\t  initialEarliest={this.props.initialEarliest}\n\t\t\t\t\t\t\t\t  initialLatest={this.props.initialLatest}  /&gt;\n\t\t\t&lt;/div&gt;\n\t\t);\n\t}\n});\n\n\nThis  changed  the  structure  of  the  data  that  forms  the  message.\n\npublishOnChange:  function(event)  {\n\tvar  eventData  =  {};\n\teventData[this.props.name.toLowerCase()]  =\n\t\tparseInt(event.target.value,  10);\n\n\tpostal.publish({\n\t\tchannel:  bus.channels.filters,\n\t\ttopic  :  bus.topics.filters.yearBoundsChange,\n\t\tdata:  eventData\n\t});\n}\n\n\nNow,  since  the  component  only  knows  about  itself,  the  eventdata  is  an  object  with  this  component's  identifier  as  a  property  and  the  new  integer  value  of  the  input  control  as  the  value  for  the  property.\n\nI  didn't  want  to  read  both  Year  filter  values  in  order  to  send  the  (currently)  two  filter  inputs  as  the  last  version  of  the  code  did.  There's  little  point  it  being  a  component  if  it  has  to  know  about  other  components  on  the  page  to  work.\n\nThat  does  mean  that  the  PayTable  subscriber  to  this  message  had  to  change  how  it  handled  the  message.\n\nReact  Add-ons  (which  it  turns  out  is  an  awesome  thing)  has  an  update  helper  which  is  used  to  merge  the  newly  received  filterBounds  into  the  existing  state.\n\n//the  paytable  now  does\nvar  newState  =  React.addons.update(this.state,  {$merge:  filterBounds});\n\n\nWhere  previously  the  code  replaced  the  state  with  the  message  body  because  we'd  coupled  everything  up  and  implicitly  the  message  body  was  known  to  match  the  state.\n\nThis  should  be  better  since,  if  I  go  on  to  fangle  this  much,  it  should  handle  change  better  as  the  PayTable  makes  fewer  assumptions  about  the  message  payload.\n\nTesting\n\nIt  was  already  getting  to  be  a  pain  going  to  the  site  and  changing  values  in  the  boxes  to  check  that  things  were  working  the  way  I  expected…  which  means  we  need  tests!\n\nFacebook  have  created  Jest  which  is  (I  think)  a  wrapper  around  Jasmine.  I  tend  to  use  Mocha…  and  to  be  honest  I  didn't  want  to  learn  another  new  thing  right  now  if  I  could  avoid  it.  So  I  wondered  if  anyone  else  had  solved  the  problem  (and  eventually  realised  they  had.)\n\nThe  steps  I  ended  up  taking  were:\n\n1.  Install  Mocha\n\nnpm  install  --save-dev  mocha\nnpm  install  --save-dev  gulp-mocha\nnpm  install  --save-dev  should\n\n\n2.  Add  a  gulp  task  to  run  tests\n\ngulp.task('test',  function()  {\n        //this  require  line  took  me  a  while  to  figure  out!\n        //more  below!\n\trequire('./tests/compiler.js');\n\treturn  gulp.src(['tests/*Spec.js'],  {  read:  false  })\n\t.pipe(mocha({\n\t\treporter:  'spec',\n\t\tglobals:  {\n\t\t\tshould:  require('should')\n\t\t}\n\t}));\n});\n\n\nIf  you  don't  Gulp  this  says  grab  all  of  the  javascript  files  in  the  tests  folder  whose  names  end  with  Spec  and  pass  them  into  Mocha.\n\n3.  Actually  have  some  tests\n\nI  had  to  npm  install  jsdom  since  React  has  to  have  a  DOM  to  work  against.  And  then  figure  out  (read  largely  copy  from  other  people  on  the  Google)  how  to  have  React  render  into  that  DOM.  The  secret-sauce  was  in  the  React.addons.TestUtils  which  continues  the  React.addons  reign  of  awesome.\n\nThe  end  result  (snipped  a  little  for  clarity)  was:\n\n'use  strict';\n\nvar  jsdom  =  require('jsdom');\nvar  React  =  require('react/addons');\nvar  postal  =  require('postal');\nvar  bus  =  require('../app/scripts/messageBus');\nvar  FilterBox  =  require('../app/scripts/filterBox');\nvar  TestUtils  =  React.addons.TestUtils;\n\nvar  handlerReceived;\n\nbefore(function()  {\n\tpostal.subscribe({\n\t\tchannel:  bus.channels.filters,\n\t\ttopic  :  bus.topics.filters.yearBoundsChange,\n\t\tcallback:  function(data)  {\n\t\t\thandlerReceived  =  data;\n\t\t}\n\t});\n});\n\ndescribe('the  filter  box',  function()  {\n\tvar  filterBoxInputs;\n\n\tbeforeEach(function()  {\n\t\thandlerReceived  =  null;\n\n\t\t//fake  a  DOM  for  React  to  use\n\t\tglobal.document  =  jsdom.jsdom('&lt;!doctype  html&gt;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;');\n\t\tglobal.window  =  document.parentWindow;\n\n\t\tvar  filterBox  =  TestUtils.renderIntoDocument(\n\t\t\t&lt;FilterBox  initialEarliest={1990}  initialLatest={2010}/&gt;\n\t\t);\n\n\t\tfilterBoxInputs  =  TestUtils.scryRenderedDOMComponentsWithTag(filterBox,  'input');\n\t});\n\n\tdescribe('has  a  single  earliest  year  input  that',  function()  {\n\t\tvar  earliestInput;\n\n\t\tbeforeEach(function()  {\n\t\t\tvar  matchedInputs  =  filterBoxInputs.filter(function(element)  {\n\t\t\t\treturn  element.props  !=  undefined\n\t\t\t\t\t\t&amp;&amp;  element.props.name  ===  'Earliest';\n\t\t\t});\n\t\t\tmatchedInputs.length.should.be.exactly(1);\n\t\t\tearliestInput  =  matchedInputs[0];\n\t\t});\n\n\t\tit('publishes  an  event  when  value  changes',  function()  {\n\t\t\tTestUtils.Simulate.change(earliestInput,  {target:  {value:  '1991'}});\n\t\t\thandlerReceived.should.match({earliest:1991});\n\t\t});\n\n\t\tit('sets  initial  earliest  on  render',  function()  {\n\t\t\tearliestInput.props.value.should.be.exactly(1990);\n\t\t});\n\t});\n\n\tdescribe('has  a  single  latest  year  input  that',  function()  {\n\t\t//  ..snip\n\t});\n});\n\n\nSo,  only  once,  we  subscribe  to  the  message  we're  expecting  our  React  component  to  publish  and  store  the  message  body.\n\nvar  handlerReceived;\n\nbefore(function()  {\n\tpostal.subscribe({\n\t\tchannel:  bus.channels.filters,\n\t\ttopic  :  bus.topics.filters.yearBoundsChange,\n\t\tcallback:  function(data)  {\n\t\t\thandlerReceived  =  data;\n\t\t}\n\t});\n});\n\n\nand  then  need  to  have  a  setup  for  each  test:\n\nvar  filterBoxInputs;\n\nbeforeEach(function()  {\n\thandlerReceived  =  null;\n\n\t//fake  a  DOM  for  React  to  use\n\tglobal.document  =  jsdom.jsdom('&lt;!doctype  html&gt;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;');\n\tglobal.window  =  document.parentWindow;\n\n\tvar  filterBox  =  TestUtils.renderIntoDocument(\n\t\t&lt;FilterBox  initialEarliest={1990}  initialLatest={2010}/&gt;\n\t);\n\n\tfilterBoxInputs  =  TestUtils.scryRenderedDOMComponentsWithTag(filterBox,  'input');\n});\n\n\nHere  the  handlerReceived  is  reset  each  time  and  then  the  global  document  and  window  variables  that  a  browser  would  provide  are  setup.\n\nTestUtils  does  the  magic  of  rendering  the  component  into  that  document.  I  guess  it  should  be  possible  to  compile  the  jsx  to  js  and  then  use  the  actual  React.render  to  put  that  into  the  document  but  that  seems  like  a  lot  of  work  compared  to  TestUtils.renderIntoDocument.\n\nThen  a  second  use  of  TestUtils,  with  my  first  meeting  of  the  word  \"scry\"  outside  of  fantasy  novels,  where  TestUtils.scryRenderedDOMComponentsWithTag  grabs  input  elements  out  of  the  rendered  React  component.\n\nWell,  no,  it  grabs  any  React  components  that  shadow  input  controls.  Not  DOM  elements  as  you  might  get  from  document.getElementById  but  the  React  equivalent.\n\nFor  each  input  in  the  Filter  box,  as  it  stands,  I  want  to  run  the  same  tests  and  since  there  are  only  two  inputs  right  now  I'm  happy  to  stand  that  duplication  until  I  need  to  remove  it.  So  there  are  two  describe  blocks  that  are  almost  the  same:\n\ndescribe('has  a  single  earliest  year  input  that',  function()  {\n\tvar  earliestInput;\n\n\tbeforeEach(function()  {\n\t\tvar  matchedInputs  =  filterBoxInputs.filter(function(element)  {\n\t\t\treturn  element.props  !=  undefined\n\t\t\t\t\t&amp;&amp;  element.props.name  ===  'Earliest';\n\t\t});\n\t\tmatchedInputs.length.should.be.exactly(1);\n\t\tearliestInput  =  matchedInputs[0];\n\t});\n\n\tit('publishes  an  event  when  value  changes',  function()  {\n\t\tTestUtils.Simulate.change(earliestInput,  {target:  {value:  '1991'}});\n\t\thandlerReceived.should.match({earliest:1991});\n\t});\n\n\tit('sets  initial  earliest  on  render',  function()  {\n\t\tearliestInput.props.value.should.be.exactly(1990);\n\t});\n});\n\n\nIn  this  block's  beforeEach  it  grabs  any  input  with  the  desired  name,  asserts  there  is  only  one,  and  stores  that  component  so  that  it  can  be  asserted  against.\n\nOne  test  is  straightforward  and  asserts  that  the  default  value  matches  expectation.\n\nIn  the  other  test  TestUtils.Simulate.change  saves  our  bacon  and  handles  the  work  of  changing  the  value  of  the  input  box.  A  little  bit  magic-incantation-y  but  readable  enough  that  I  can  live  with  it.\n\nThat  change  should  have  caused  a  message  to  be  published  and  the  test  is  subscribed  to  those  messages  so  it  can  assert  that  the  message  body  was  received  and  matches  expectation.\n\nBut…  But…  Mocha  can  JSX?\n\nNo,  I  found  this  blog  post  which  borrowed  code  from  the  Khan  Academy  which  can  be  passed  to  mocha  as  a  compiler  so  that  it  can  JSX  when  it  needs  to…\n\nvar  fs  =  require('fs'),\n        ReactTools  =  require('react-tools'),\n        origJs  =  require.extensions['.js'];\n\nrequire.extensions['.js']  =  function(module,  filename)  {\n    //  optimization:  external  code  never  needs  compilation.\n    if  (filename.indexOf('node_modules/')  &gt;=  0)  {\n        return  (origJs  ||  require.extensions['.js'])(module,  filename);\n    }\n    var  content  =  fs.readFileSync(filename,  'utf8');\n    var  compiled  =  ReactTools.transform(content,  {harmony:  true});\n    return  module._compile(compiled,  filename);\n};\n\n\nThis  required  the  final  NPM  of  the  day  adding  in  react-tools  so  that  the  JSX  transformer  was  available.\n\nAnd..\n\nTa-da\n\n\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Fri Feb 20 2015</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Reactotype Part 3</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/reactotype/part-three.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Reactotype+Part+3&via=pauldambra&url=https://pauldambra.dev/reactotype/part-three.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#react"
+      >
+        in: react
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#react">
+    react
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#js">
+    js
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>At the end of the last post I realised I'd sacrificed some good practice in the rush to make it work (i.e. worked normally like all those other guilty software engineers everywhere everyday.)</p>
+
+<!--alex ignore kids --->
+
+<p>So earlier today I played with the kids to tire them out enough that I could distract them with television and write some #holidaycode because I am a good(-ish) parent.</p>
+
+<p>I managed to</p>
+
+<ul>
+  <li>switch from using magic strings in the messagebus channel and topic identifiers</li>
+  <li>remove some duplication</li>
+  <li>and get some tests around ReactJS</li>
+</ul>
+
+<!--more-->
+
+<h1 id="messagebus-channels-and-topics">Messagebus channels and topics</h1>
+
+<p>In the last post we (I) used magic strings to identify the channel and topic that messages were being published to.</p>
+
+<p>I'm not completely sold on this particular structure:</p>
+
+<pre><code class="language-JS">var messageBusStructure = {
+	channels: {
+		filters: 'filters'
+	},
+	topics: {
+		filters: {
+			yearBoundsChange: 'year.bounds.change'
+		}
+	}
+};
+</code></pre>
+
+<p>but the general idea holds since it should mean that the postal publish/subscribe code is less prone to typing errors.</p>
+
+<pre><code class="language-JS">postal.subscribe({
+	channel: bus.channels.filters,
+	topic : bus.topics.filters.yearBoundsChange,
+	callback: function(d, e) {
+		this.filterData(d);
+	}
+}).context(this);
+
+//is better than
+
+postal.subscribe({
+	channel: "filters",
+	topic : "year.bounds.change",
+	callback: function(d, e) {
+    	this.filterData(d);
+  	}
+}).context(this);
+</code></pre>
+
+<h1 id="remove-duplication-with-fire">Remove duplication with fire</h1>
+
+<p>Then I componentised (ugh, is that a word?!) the input controls being used in the FilterBox so I could remove the duplication of handling their events.</p>
+
+<pre><code class="language-JS">var YearFilterInput = React.createClass({
+	publishOnChange: function(event) {
+		var eventData = {};
+		eventData[this.props.name.toLowerCase()] =
+			parseInt(event.target.value, 10);
+
+		postal.publish({
+			channel: bus.channels.filters,
+			topic : bus.topics.filters.yearBoundsChange,
+			data: eventData
+		});
+	},
+	render: function() {
+		return (
+				&lt;div className="form-group"&gt;
+					&lt;label htmlFor={this.props.name}&gt;{this.props.name}&lt;/label&gt;
+					&lt;input type="number"
+						   name={this.props.name}
+						   className="form-control"
+						   defaultValue={this.props.default}
+						   min={this.props.initialEarliest}
+						   max={this.props.initialLatest}
+						   onChange={this.publishOnChange}/&gt;
+				&lt;/div&gt;
+		);
+	}
+});
+
+var FilterBox = React.createClass({
+	render: function() {
+		return (
+			&lt;div className="col-xs-12"&gt;
+				&lt;YearFilterInput name="Earliest"
+								 default={this.props.initialEarliest}
+								 initialEarliest={this.props.initialEarliest}
+								 initialLatest={this.props.initialLatest} /&gt;
+				&lt;YearFilterInput name="Latest"
+								 default={this.props.initialLatest}
+								 initialEarliest={this.props.initialEarliest}
+								 initialLatest={this.props.initialLatest} /&gt;
+			&lt;/div&gt;
+		);
+	}
+});
+</code></pre>
+
+<p>This changed the structure of the data that forms the message.</p>
+
+<pre><code class="language-JS">publishOnChange: function(event) {
+	var eventData = {};
+	eventData[this.props.name.toLowerCase()] =
+		parseInt(event.target.value, 10);
+
+	postal.publish({
+		channel: bus.channels.filters,
+		topic : bus.topics.filters.yearBoundsChange,
+		data: eventData
+	});
+}
+</code></pre>
+
+<p>Now, since the component only knows about itself, the eventdata is an object with this component's identifier as a property and the new integer value of the input control as the value for the property.</p>
+
+<p>I didn't want to read both Year filter values in order to send the (currently) two filter inputs as the last version of the code did. There's little point it being a component if it has to know about other components on the page to work.</p>
+
+<p>That does mean that the <code class="language-plaintext highlighter-rouge">PayTable</code> subscriber to this message had to change how it handled the message.</p>
+
+<p><a href="http://facebook.github.io/react/docs/addons.html">React Add-ons</a> (which it turns out is an awesome thing) has an update helper which is used to <a href="http://facebook.github.io/react/docs/update.html#shallow-merge">merge</a> the newly received filterBounds into the existing state.</p>
+
+<pre><code class="language-JS">//the paytable now does
+var newState = React.addons.update(this.state, {$merge: filterBounds});
+</code></pre>
+
+<p>Where previously the code replaced the state with the message body because we'd coupled everything up and implicitly the message body was known to match the state.</p>
+
+<p>This <em>should</em> be better since, if I go on to fangle this much, it should handle change better as the <code class="language-plaintext highlighter-rouge">PayTable</code> makes fewer assumptions about the message payload.</p>
+
+<h1 id="testing">Testing</h1>
+
+<p>It was already getting to be a pain going to the site and changing values in the boxes to check that things were working the way I expected… which means we need tests!</p>
+
+<p>Facebook have created Jest which is (I think) a wrapper around Jasmine. I tend to use Mocha… and to be honest I didn't want to learn another new thing right now if I could avoid it. So I wondered if anyone else had solved the problem (and eventually realised they had.)</p>
+
+<p>The steps I ended up taking were:</p>
+
+<h1 id="1-install-mocha">1. Install Mocha</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> gulp-mocha
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> should
+</code></pre></div></div>
+
+<h1 id="2-add-a-gulp-task-to-run-tests">2. Add a gulp task to run tests</h1>
+
+<pre><code class="language-JS">gulp.task('test', function() {
+    //this require line took me a while to figure out!
+    //more below!
+	require('./tests/compiler.js');
+	return gulp.src(['tests/*Spec.js'], { read: false })
+	.pipe(mocha({
+		reporter: 'spec',
+		globals: {
+			should: require('should')
+		}
+	}));
+});
+</code></pre>
+
+<p>If you don't Gulp this says grab all of the javascript files in the tests folder whose names end with Spec and pass them into Mocha.</p>
+
+<h1 id="3-actually-have-some-tests">3. Actually have some tests</h1>
+
+<p>I had to <code class="language-plaintext highlighter-rouge">npm install</code> <a href="https://github.com/tmpvar/jsdom">jsdom</a> since React has to have a DOM to work against. And then figure out (read largely copy from other people on the Google) how to have React render into that DOM. The secret-sauce was in the <a href="http://facebook.github.io/react/docs/test-utils.html">React.addons.TestUtils</a> which continues the React.addons reign of awesome.</p>
+
+<p>The end result (snipped a little for clarity) was:</p>
+
+<pre><code class="language-JS">'use strict';
+
+var jsdom = require('jsdom');
+var React = require('react/addons');
+var postal = require('postal');
+var bus = require('../app/scripts/messageBus');
+var FilterBox = require('../app/scripts/filterBox');
+var TestUtils = React.addons.TestUtils;
+
+var handlerReceived;
+
+before(function() {
+	postal.subscribe({
+		channel: bus.channels.filters,
+		topic : bus.topics.filters.yearBoundsChange,
+		callback: function(data) {
+			handlerReceived = data;
+		}
+	});
+});
+
+describe('the filter box', function() {
+	var filterBoxInputs;
+
+	beforeEach(function() {
+		handlerReceived = null;
+
+		//fake a DOM for React to use
+		global.document = jsdom.jsdom('&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;');
+		global.window = document.parentWindow;
+
+		var filterBox = TestUtils.renderIntoDocument(
+			&lt;FilterBox initialEarliest={1990} initialLatest={2010}/&gt;
+		);
+
+		filterBoxInputs = TestUtils.scryRenderedDOMComponentsWithTag(filterBox, 'input');
+	});
+
+	describe('has a single earliest year input that', function() {
+		var earliestInput;
+
+		beforeEach(function() {
+			var matchedInputs = filterBoxInputs.filter(function(element) {
+				return element.props != undefined
+						&amp;&amp; element.props.name === 'Earliest';
+			});
+			matchedInputs.length.should.be.exactly(1);
+			earliestInput = matchedInputs[0];
+		});
+
+		it('publishes an event when value changes', function() {
+			TestUtils.Simulate.change(earliestInput, {target: {value: '1991'}});
+			handlerReceived.should.match({earliest:1991});
+		});
+
+		it('sets initial earliest on render', function() {
+			earliestInput.props.value.should.be.exactly(1990);
+		});
+	});
+
+	describe('has a single latest year input that', function() {
+		// ..snip
+	});
+});
+</code></pre>
+
+<p>So, only once, we subscribe to the message we're expecting our React component to publish and store the message body.</p>
+
+<pre><code class="language-JS">var handlerReceived;
+
+before(function() {
+	postal.subscribe({
+		channel: bus.channels.filters,
+		topic : bus.topics.filters.yearBoundsChange,
+		callback: function(data) {
+			handlerReceived = data;
+		}
+	});
+});
+</code></pre>
+
+<p>and then need to have a setup for each test:</p>
+
+<pre><code class="language-JS">var filterBoxInputs;
+
+beforeEach(function() {
+	handlerReceived = null;
+
+	//fake a DOM for React to use
+	global.document = jsdom.jsdom('&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;');
+	global.window = document.parentWindow;
+
+	var filterBox = TestUtils.renderIntoDocument(
+		&lt;FilterBox initialEarliest={1990} initialLatest={2010}/&gt;
+	);
+
+	filterBoxInputs = TestUtils.scryRenderedDOMComponentsWithTag(filterBox, 'input');
+});
+</code></pre>
+
+<p>Here the handlerReceived is reset each time and then the global document and window variables that a browser would provide are setup.</p>
+
+<p>TestUtils does the magic of rendering the component into that document. I guess it should be possible to compile the jsx to js and then use the actual <code class="language-plaintext highlighter-rouge">React.render</code> to put that into the document but that seems like a lot of work compared to <code class="language-plaintext highlighter-rouge">TestUtils.renderIntoDocument</code>.</p>
+
+<p>Then a second use of <code class="language-plaintext highlighter-rouge">TestUtils</code>, with my first meeting of the word "scry" outside of fantasy novels, where <code class="language-plaintext highlighter-rouge">TestUtils.scryRenderedDOMComponentsWithTag</code> grabs input elements out of the rendered React component.</p>
+
+<p>Well, no, it grabs any React components that shadow input controls. Not DOM elements as you might get from <code class="language-plaintext highlighter-rouge">document.getElementById</code> but the React equivalent.</p>
+
+<p>For each input in the Filter box, as it stands, I want to run the same tests and since there are only two inputs right now I'm happy to stand that duplication until I need to remove it. So there are two describe blocks that are almost the same:</p>
+
+<pre><code class="language-JS">describe('has a single earliest year input that', function() {
+	var earliestInput;
+
+	beforeEach(function() {
+		var matchedInputs = filterBoxInputs.filter(function(element) {
+			return element.props != undefined
+					&amp;&amp; element.props.name === 'Earliest';
+		});
+		matchedInputs.length.should.be.exactly(1);
+		earliestInput = matchedInputs[0];
+	});
+
+	it('publishes an event when value changes', function() {
+		TestUtils.Simulate.change(earliestInput, {target: {value: '1991'}});
+		handlerReceived.should.match({earliest:1991});
+	});
+
+	it('sets initial earliest on render', function() {
+		earliestInput.props.value.should.be.exactly(1990);
+	});
+});
+</code></pre>
+
+<p>In this block's <code class="language-plaintext highlighter-rouge">beforeEach</code> it grabs any input with the desired name, asserts there is only one, and stores that component so that it can be asserted against.</p>
+
+<p>One test is straightforward and asserts that the default value matches expectation.</p>
+
+<p>In the other test <code class="language-plaintext highlighter-rouge">TestUtils.Simulate.change</code> saves our bacon and handles the work of changing the value of the input box. A little bit magic-incantation-y but readable enough that I can live with it.</p>
+
+<p>That change should have caused a message to be published and the test is subscribed to those messages so it can assert that the message body was received and matches expectation.</p>
+
+<h1 id="but-but-mocha-can-jsx">But… But… Mocha can JSX?</h1>
+
+<p>No, I found <a href="http://www.hammerlab.org/2015/02/14/testing-react-web-apps-with-mocha/">this blog post</a> which borrowed <a href="https://github.com/Khan/react-components/blob/7afcf35c921a2f984ddff71dead25217f8de3532/test/compiler.js">code from the Khan Academy</a> which can be passed to mocha as a compiler so that it can JSX when it needs to…</p>
+
+<pre><code class="language-JS">var fs = require('fs'),
+    ReactTools = require('react-tools'),
+    origJs = require.extensions['.js'];
+
+require.extensions['.js'] = function(module, filename) {
+  // optimization: external code never needs compilation.
+  if (filename.indexOf('node_modules/') &gt;= 0) {
+    return (origJs || require.extensions['.js'])(module, filename);
+  }
+  var content = fs.readFileSync(filename, 'utf8');
+  var compiled = ReactTools.transform(content, {harmony: true});
+  return module._compile(compiled, filename);
+};
+</code></pre>
+
+<p>This required the final NPM of the day adding in react-tools so that the JSX transformer was available.</p>
+
+<p>And..</p>
+
+<h1 id="ta-da">Ta-da</h1>
+
+<p><img src="/images/tada.png" alt="passing tests" loading="lazy" /></p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/reactotype/part-two.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Reactotype Part 2
+      </h3>
+      <small>
+        19 Feb 2015
+      </small>
+  </div>
+</a>  <a href="/reactotype/part-one.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Reactotype Part 1
+      </h3>
+      <small>
+        17 Feb 2015
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/reactotype/part-three.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/reactotype/part-three.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

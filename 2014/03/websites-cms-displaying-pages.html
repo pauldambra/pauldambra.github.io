@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform - Displaying pages</title>
+    <link rel="canonical" href="https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform - Displaying pages" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform - Displaying pages",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"517",
+     "url":"https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html",
+     "datePublished":"2014-03-17",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  without  a  CMS  is  comparable  to  building  one  with  a  known  CMS.  See  the  first  post  for  an  explanation  of  why\n\nPrevious  Post\nNext  Post\n\nSetup\n\n\n\nSo,  it's  relatively  easy  to  get  an  Hello  World  page  displaying…\n\n\n\nThe  steps  I  take  when  I'm  setting  up  a  new  project  look  like:\n\n\n\nI  should  probably  start  using  Yeoman  but  I  don't  start  enough  projects  to  feel  the  need  to  automate  this  step  of  the  setup.\n\nI  already  know  I  want  to  use  express  for  the  server,  that  I  want  to  test  express  using  mocha,  and  to  use  the  awesome  supertest  module,  so  I  can  run:\n\nnpm  install  --save  express\n\nnpm  install  --save-dev  supertest\n\nnpm  install  --save-dev  mocha\n\n\nBefore  I  carry  on  I  grab  the  Node  .gitignore  file\n\nwget  https://raw.github.com/github/gitignore/master/Node.gitignore\n\nmv  Node.gitignore  .gitignore\n\n\nand  can  make  an  empty  but  initialised  commit\n\nThe  First  Test\n\nvar  request  =  require(\"supertest\");\n\nvar  server  =  require(\"../server\").app;\n\ndescribe(\"GET  /\",  function  ()  {\n    it(\"respond  with  html\",  function  (done)  {\n        request(server)\n            .get(\"/\")\n\n            .set(\"Accept\",  \"text/html\")\n\n            .expect(\"Content-Type\",  /html/)\n\n            .expect(200,  done);\n    });\n});\n\n\nThere's  quite  a  lot  going  on  there  if  you  haven't  used  Mocha  or  Supertest  then  head  off  and  read  about  them.  How  they  work  is  out  of  the  scope  of  this  post.  But  what  we're  asserting  here  is  that  if  you  ask  our  server  application  for  the  root  route  then  you  get  some  HTML  and  HTTP  status  200.\n\nThe  simplest  express  server  that  makes  this  test  pass  is:\n\nvar  app  =  require(\"express\")();\n\napp.get(\"/\",  function  (req,  res)  {\n    res.send(\"Hello  World\");\n});\n\napp.listen(1337);\n\nexports.app  =  app;\n\n\nRunning  node  server  at  the  terminal  I  can  point  my  browser  at  it:\n\n\n\nAll  of  which  has  us  set  up  to  test  our  server  and  ready  to  display  something  meaningful  with  very  little  work  at  all.\n\nIn  the  next  part  of  the  series  we'll  look  at  adding  a  basic  template  and  making  this  look  a  little  more  like  a  real  website\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Mon Mar 17 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform - Displaying pages</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Displaying+pages&via=pauldambra&url=https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website without a CMS is comparable to building one with a known CMS. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p><a href="/2014/02/websites-cms.html">Previous Post</a>
+<a href="/2014/03/website-cms-display-pages-part-2.html">Next Post</a></p>
+
+<h1 id="setup">Setup</h1>
+
+<!--alex ignore easy --->
+
+<p>So, it's relatively easy to get an Hello World page displaying…</p>
+
+<!--more-->
+
+<p>The steps I take when I'm setting up a new project look like:</p>
+
+<p><img src="http://1.bp.blogspot.com/-bOVBV3wcEbE/Uya7PQnFeMI/AAAAAAAANOA/Hz_2p5XZpOY/s1600/Screenshot+2014-03-17+09.05.33.png" alt="project setup steps" loading="lazy" /></p>
+
+<p>I should probably start using <a href="http://yeoman.io/">Yeoman</a> but I don't start enough projects to feel the need to automate this step of the setup.</p>
+
+<p>I already know I want to use express for the server, that I want to test express using mocha, and to use the awesome <a href="https://github.com/visionmedia/supertest">supertest</a> module, so I can run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save</span> express
+
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> supertest
+
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
+</code></pre></div></div>
+
+<p>Before I carry on I grab the Node .gitignore file</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.github.com/github/gitignore/master/Node.gitignore
+
+<span class="nb">mv </span>Node.gitignore .gitignore
+</code></pre></div></div>
+
+<p>and can make an empty but initialised commit</p>
+
+<h1 id="the-first-test">The First Test</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">supertest</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">../server</span><span class="dl">"</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET /</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">respond with html</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">text/html</span><span class="dl">"</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="sr">/html/</span><span class="p">)</span>
+
+      <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>There's quite a lot going on there if you haven't used Mocha or Supertest then head off and read about them. How they work is out of the scope of this post. But what we're asserting here is that if you ask our server application for the root route then you get some HTML and HTTP status 200.</p>
+
+<p>The simplest express server that makes this test pass is:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">)();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello World</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nf">listen</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="nx">app</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">node server</code> at the terminal I can point my browser at it:</p>
+
+<p><img src="http://2.bp.blogspot.com/-8RKwf5NLHDc/UybPd8r9L0I/AAAAAAAANQA/rb_3_4W-22c/s1600/Screenshot+2014-03-17+10.32.47.png" alt="screenshot of hello world response" loading="lazy" /></p>
+
+<p>All of which has us set up to test our server and ready to display something meaningful with very little work at all.</p>
+
+<p>In <a href="/2014/03/website-cms-display-pages-part-2.html">the next part of the series</a> we'll look at adding a basic template and making this look a little more like a real website</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2014/03/websites-cms-displaying-pages.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

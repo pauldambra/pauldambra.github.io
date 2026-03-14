@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>I shipped 1000 PRs in a year, AMA</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/02/deca-hundy.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/02/deca-hundy.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="I shipped 1000 PRs in a year, AMA" />
+    <meta
+      property="og:description"
+      content="How I approach pace of work"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I approach pace of work"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"I shipped 1000 PRs in a year, AMA",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1855",
+     "url":"https://pauldambra.dev/2026/02/deca-hundy.html",
+     "datePublished":"2026-02-11",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/02/deca-hundy.html"
+     },
+     "articleBody":"I  shipped  1000  PRs  in  the  last  12  months  at  PostHog.  And  someone  asked  me  how  I  do  it…  let's  see  if  i  know.\n\npreamble\n\n\n    yes,  yes,  I  know  you  don't  think  I  should  count  PRs\n    when  a  measure  becomes  a  target  it  stops  being  a  useful  measure\n    embrace  yourself\n\n\nadvice\n\n\n    it  is  running  not  cycling\n    small  steps  ftw\n    practice  like  a  jazz  musician\n    love  making  things\n    one  more  iteration\n\n\n\n\nyes,  yes,  I  know  you  don't  think  I  should  count  PRs\n\nSo,  first  something  important…\n\nCounting  PRs  is  a  very  poor  metric  for  measuring  progress.  Someone  who  ships  10  PRs  has  not  provided  a  guaranteed  ten  times  the  value  of  someone  who  ships  one  PR.\n\nI'm  not  telling  you  to  count  PRs.  Or  to  worship  the  github  tile  graph.\n\nBut….\n\nYes,  weighing  yourself  is  a  bad  way  of  checking  if  your  last  meal  was  healthy.  \nYes,  merging  a  PR  is  a  bad  way  of  checking  if  you  just  provided  any  value.\n\nBut  not  weighing  yourself  is  a  great  way  to  put  on  weight  without  noticing.\n\nAnd  not  measuring  what  you  ship  is  a  great  way  to  accidentally  ship  less  value.\n\nHowever………..\n\n\"when  a  measure  becomes  a  target  it  stops  being  a  useful  measure\":  Charles  Goodhart  in  preparation  for  my  birth\n\nTaking  a  look  at  how  many  PRs  or  lines  of  code  people  ship  is  a  measure  of  what  people  are  doing.  It's  vague  and  lossy  but  it's  a  starting  point.\n\nAnd,  yes,  of  course,  someone  could  ship  lots  of  PRs  but  they're  no  good  or  only  ship  one  thing  a  week  but  it's  super  impactful.\n\nSo  even  if  you  use  it  as  a  measure  it  should  not  be  your  only  measure  of  progress\n\nBut,  importantly,  if  you  tell  people  \"number  of  PRs  is  related  to  promotion  review\"  then  they  will  damn  well  make  sure  they  ship  more  PRs  without  that  being  related  to  actual  value  to  users.\n\nIt  is  no  longer  a  useful  measure  of  progress  because  it  became  a  target.\n\nembrace  yourself\n\ndidn't  that  feel  nice?\n\nno,  not  like  that\n\nThroughout  my  career  I've  been  told  I  spin  too  many  plates  and  to  try  and  reduce  my  work  in  progress.  I  tried  really  hard  to  lower  personal  WIP  and  it  was  sooooo  much  effort.\n\nMy  colleague  Marius  at  PostHog  said  (roughly):  \"you  always  apologise  for  spinning  plates,  but  you're  good  at  it.  why  don't  you  try  to  get  better?\"\n\nSo,  I've  done  that.  I've  accepted  that  I  am  easily  distracted  and  that  I  will  start  many  things.  And  I've  concentrated  on  getting  better  at  making  sure  the  plates  I'm  spinning  are  moving  forward.  And  throwing  away  the  ones  that  are  just  distraction.\n\nI've  started  more  than  1000  PRs  but  recognised  the  ones  that  aren't  going  anywhere.\n\nFor  you  this  will  look  different.  You  might  have  to  not  listen  to  music  with  lyrics.  You  might  need  to  make  sure  you  go  for  a  walk  in  the  morning.  Or  plan  blocks  of  the  day  with  zero  distractions.\n\nMy  advice  would  be  -  stop  listening  to  advice  that  makes  you  fight  your  nature.  Just  because  someone  else  wants  to  work  on  one  thing  at  a  time  doesn't  mean  you  should.  And  just  because  I  can  have  23  open  PRs  right  now  and  be  on  top  of  my  work  doesn't  mean  you  should.\n\n\n\nOk,  now  that  I've  told  you  to  not  listen  to  other  people's  advice.\n\nI  will  dress  in  a  robe,  walk  down  from  the  holy  mountain  of  the  github  tile  graph,  and  hand  down  my  advice  of    what  I  believe  contributes  to  my  productivity:\n\nit  is  running  not  cycling\n\nI  used  to  cycle  a  lot  and  having  struggled  up  a  big  hill  it  was  super  cool  to  stop  pedalling  and  coast  down  the  other  side.  Then  I  started  running,  and  having  struggled  up  the  big  hill  I  discovered  I  still  had  to  put  in  effort  to  run  downhill.  Even  if  gravity  was  helping  me  if  I  stopped  moving  my  legs  I  stopped  moving.\n\nDelivering  valuable  software  to  users  is  running,  not  cycling.  If  you  stop  shipping  your  momentum  is  quickly  lost.\n\nIt  is  up  to  you  to  move  your  legs.  To  bring  the  appropriate  intensity  and  effort.\n\nWant  to  ship  a  lot?  Just  do  the  work…\n\nsmall  steps  ftw\n\nI  have  seen  time  and  time  again  that  small,  concrete  steps  that  you  can  explain,  complete,  and  measure  are  the  best  way  to  make  progress.\n\nSee  \"But  why  regularly  measure\"  in  one  of  my  earlier  weblogs\n\nIf  you  feel  stuck  with  the  coding,  break  it  into  a  smaller  piece.  Not  sure  how  to  do  the  work?  Figure  out  what  the  simple  pieces  are  and  start  with  those.  If  the  remaining  pieces  are  \"too  big\"    or  \"too  hard\"  figure  out  how  to  change  the  system  so  the  solution  changes  and  is  smaller  or  easier.\n\nOften,  I  will  make  one  big  PR  that  covers  the  whole  change  to  prove  it  works.  Then  break  that  into  smaller  pieces  that  refer  back  to  the  whole.  To  make  it  easier  to  review  or  deploy.\n\npractice  like  a  jazz  musician\n\nWhen  I  was  younger  I  was  labouring  under  the  misapprehension  that  I  was  going  to  change  the  world  of  music.  And  I  was  lucky  to  spend  some  time  with  some  people  who  were  amazing  musicians.\n\nThey  would  practice  frequently  and  deliberately.  They  were  purposefully  aiming  to  get  better  at  the  little  things  that  made  them  better  at  the  whole.\n\nLater  I  spent  time  with  folks  talking  about  the  craft  of  software  engineering.  Practising  skills  like  TDD  and  refactoring.\n\nThe  little  things  that  make  you  better  at  the  whole.\n\nAh,  but  Paul  this  new  world  of  agentic  software  engineering  makes  skills  like  that  outdated  and  unnecessary.\n\n\n\nI  love  this  quote  from  Andrej  Karpathy\n\nAnd  I've  found  the  same…  If  the  prompt  is  important  then  knowing  what  to  prompt  is  important.\n\nAnd  when  the  prompt  isn't  enough  to  get  the  job  done  being  able  to  sketch  enough  code  to  give  a  better  start  to  the  agent  is  important.\n\nIn  both  cases  you  actually  have  to  know  what  you  want.  And  practicing  what  good  software,  or  good  architecture  looks  like  is  still  a  differentiator.\n\nI'd  add  practicing  writing  good  prompts  and  managing  context  well  as  new  skills  that  it  is  worth  practicing.\n\nBe  purposeful  about  improving  your  ability  as  a  person  that  provides  value  through  creating  and  changing  software.  Watch  what  you  do,  see  what  makes  it  better,  double  down  on  those  things.\n\nAvoid  through  practice  and  diligence  ever  doing  the  wrong  thing  harder.\n\nlove  making  things\n\nI  make  things  all  the  time.  I  am  sad  when  I  don't  get  to  make  things.  This  is  a  vocation  for  me.\n\nNobody  points  at  the  musician  that  plays  music  for  the  sheer  joy  of  it  and  says:    \"ha,  look  at  that  loser.  playing  music  even  though  they're  not  getting  paid  for  it\"\n\nSo,  in  the  evening  when  I've  finished  getting  the  kids  to  bed.  I  sit  and  fiddle  with  software  while  I  watch  TV  or  listen  to  music.\n\nI  am  incredibly  lucky  to  have  found  something  that  gives  me  joy  and  makes  me  money.\n\nNot  a  vocation  for  you  -  ok,  cool.  Live  your  life  as  you  see  fit.  But  one  of  the  ways  that  I  am  productive  is  that  this  is  a  joyful  vocation.  Also,  if  software  is  not  your  vocation,  why  the  heck  are  you  reading  about  how  to  ship  1000  PRs  in  twelve  months?!  Go,  ride  horses  or  fix  gates  or  whatever  the  thing  is  that  does  bring  you  joy  💖\n\none  more  iteration\n\nIt  feels  like  it  goes  without  saying  that  iteration  is  good…  but…\n\n\n    Iteration  is  the  process  of  repeating  a  set  of  steps  or  instructions  multiple  times,  often  to  reach  a  specific  goal,  solve  a  problem,  or  improve  a  result.\n\n\n\"One  more  iteration\"  is  a  phrase  that  Tim  at  work  uses  to  push  us  to  think  about  the  quality  of  what  we  build…\n\nOK,  you  did  something.  Stop  and  ask:  \"am  I  really  finished?\"\n\nHow  do  I  know  if  I'm  really  finished?\n\n\n    are  people  using  it?\n    do  they  like  it?\n    did  it  move  the  needle  the  way  I  expected?\n    would  I  know  if  it  was  broken?\n    now  it  is  functional  does  it  need  to  also  be  delightful?\n    does  it  help  me  see  what  should  come  next?\n\n\nI  think  this  sits  really  wonderfully  with  \"small  steps  ftw\".  Iteration  of  large  blocks  of  work  is  inherently  slower  than  iteration  of  small  steps.\n\nThe  benefit  of  small  steps  is  you  can  be  nimble  in  response  to  what  you  learn.\n\nWorse…  Something  that  takes  a  month  to  put  together  will  build  up  a  lot  of  weight  in  your  subconscious.  It's  hard  to  throw  it  away  or  change  it  because  of  the  time  you  have  sunk  into  it.  Not  only  are  you  less  nimble,  you're  less  likely  to  correct  your  course.\n\nA  concrete  example  of  how  i  do  small  steps  and  iteration…\n\nA  customer  reported  they  were  unhappy  with  filtering  in  our  tool.  It  was  multiple  clicks  to  get  to  the  point  where  they  had  type-ahead  search.  And  that  was  frustrating  for  them.\n\nFrustration  is  no  bueno,  so  I  started  spinning  a  new  plate.  I  mocked  up  a  solution  for  them  very  quickly  and  shared  a  video.\n\nThey  loved  it.\n\nBUT  I  OPTIMISE  FOR  ITERATION  AND  SO  I  DID  NOT  SIMPLY  SHIP  IT\n\nI  wrapped  it  in  a  flag  and  released  it  just  for  our  team  and  that  specific  user  that  I  was  talking  to\n\nI  got  fast  feedback  that  they  did  not  like  it.  They  liked  the  description,  and  they  liked  the  demo.  But  what  people  think  they  will  like  and  use  is  not  always  what  they  will  actually  like  and  use.\n\nIn  practice  by  optimising  for  one  journey  through  the  filtering  UX  I  had  made  other  journeys  harder.  I  wouldn't  have  known  that  if  I  didn't  think  about  how  to  release  this  in  a  way  that  meant  I  could  check  if  it  was  any  good.\n\nIn  the  end,  this  took  four  attempts  to  get  right.\n\nAnd  now  I  have  rolled  out  the  flag  to  all  users.  After  an  experiment  over  those  multiple  iterations  showed  folk  came  back  and  searched  more  using  the  new  versions  of  this  change.\n\nBut  rolling  out  the  flag  isn't  the  end  of  the  work.  I'm  now  working  on  tidying  up  the  code  that  was  there  so  that  I  could  dual  run  and  measure  the  change.  I've  got  to  finish  updating  the  documentation.  I  need  to  check  that  users  behaviour  really  does  change  over  coming  weeks  and  react  to  that.  So  there  are  still  more  PRs  to  come  from  this  work.\n\nAn  inspirational  sign-off?\n\nThe  value  here  isn't  that  I  shipped  lots  of  PRs.  The  value  is  that  I  work  in  small  steps,  and  I  check  direction  in  between  them.  That  I  can  loop  between  what  I  learn  and  what  I  can  do  next  to  learn  more.\n\nHow  you  do  that  might  be  different,  perfect!  But  my  advice:  do  that.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Wed Feb 11 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">I shipped 1000 PRs in a year, AMA</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/02/deca-hundy.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=I+shipped+1000+PRs+in+a+year%2C+AMA&via=pauldambra&url=https://pauldambra.dev/2026/02/deca-hundy.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#how-do-i"
+      >
+        in: how-do-i
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#how-doi">
+    how-doi
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I shipped 1000 PRs in the last 12 months at <a href="https://posthog.com">PostHog</a>. And someone asked me how I do it… let's see if i know.</p>
+
+<h3 id="preamble">preamble</h3>
+
+<ul>
+  <li>yes, yes, I know you don't think I should count PRs</li>
+  <li>when a measure becomes a target it stops being a useful measure</li>
+  <li>embrace yourself</li>
+</ul>
+
+<h3 id="advice">advice</h3>
+
+<ul>
+  <li>it is running not cycling</li>
+  <li>small steps ftw</li>
+  <li>practice like a jazz musician</li>
+  <li>love making things</li>
+  <li>one more iteration</li>
+</ul>
+
+<!--more-->
+
+<h2 id="yes-yes-i-know-you-dont-think-i-should-count-prs">yes, yes, I know you don't think I should count PRs</h2>
+
+<p>So, first something important…</p>
+
+<p>Counting PRs is a very poor metric for measuring progress. Someone who ships 10 PRs has not provided a guaranteed ten times the value of someone who ships one PR.</p>
+
+<p>I'm not telling you to count PRs. Or to worship the github tile graph.</p>
+
+<p>But….</p>
+
+<p>Yes, weighing yourself is a bad way of checking if your last meal was healthy. 
+Yes, merging a PR is a bad way of checking if you just provided any value.</p>
+
+<p>But <em>not weighing yourself</em> is a great way to put on weight without noticing.</p>
+
+<p>And <em>not measuring what you ship</em> is a great way to accidentally ship less value.</p>
+
+<p>However………..</p>
+
+<h1 id="when-a-measure-becomes-a-target-it-stops-being-a-useful-measure-charles-goodhart-in-preparation-for-my-birth">"when a measure becomes a target it stops being a useful measure": Charles Goodhart in preparation for my birth</h1>
+
+<p>Taking a look at how many PRs or lines of code people ship <em>is</em> a measure of what people are doing. It's vague and lossy but it's a starting point.</p>
+
+<p>And, yes, of course, someone could ship lots of PRs but they're no good or only ship one thing a week but it's super impactful.</p>
+
+<p><em>So even if you use it as a measure it should not be your only measure of progress</em></p>
+
+<p>But, importantly, if you tell people "number of PRs is related to promotion review" then they <em>will damn well make sure they ship more PRs</em> without that being related to actual value to users.</p>
+
+<p>It is no longer a useful measure of progress <em>because</em> it became a target.</p>
+
+<h1 id="embrace-yourself">embrace yourself</h1>
+
+<p>didn't that feel nice?</p>
+
+<p>no, not like that</p>
+
+<p>Throughout my career I've been told I spin too many plates and to try and reduce my work in progress. I tried really hard to lower personal WIP and it was sooooo much effort.</p>
+
+<p>My colleague Marius at PostHog said (roughly): "you always apologise for spinning plates, but you're good at it. why don't you try to get better?"</p>
+
+<p>So, I've done that. I've accepted that I am easily distracted and that I will start many things. And I've concentrated on getting better at making sure the plates I'm spinning are moving forward. And throwing away the ones that are just distraction.</p>
+
+<p>I've <em>started</em> more than 1000 PRs but recognised the ones that aren't going anywhere.</p>
+
+<p>For <em>you this will look different</em>. You might have to not listen to music with lyrics. You might need to make sure you go for a walk in the morning. Or plan blocks of the day with zero distractions.</p>
+
+<p>My advice would be - stop listening to advice that makes you fight your nature. Just because someone else wants to work on one thing at a time doesn't mean you should. And just because I can have 23 open PRs right now and be on top of my work doesn't mean you should.</p>
+
+<hr />
+
+<p>Ok, now that I've told you to not listen to other people's advice.</p>
+
+<p>I will dress in a robe, walk down from the holy mountain of the github tile graph, and hand down my advice of  what I believe contributes to my productivity:</p>
+
+<h1 id="it-is-running-not-cycling">it is running not cycling</h1>
+
+<p>I used to cycle a lot and having struggled up a big hill it was super cool to stop pedalling and coast down the other side. Then I started running, and having struggled up the big hill I discovered I still had to put in effort to run downhill. Even if gravity was helping me if I stopped moving my legs I stopped moving.</p>
+
+<p>Delivering valuable software to users is running, not cycling. If you stop shipping your momentum is quickly lost.</p>
+
+<p>It is up to you to move your legs. To bring the appropriate intensity and effort.</p>
+
+<p>Want to ship a lot? Just do the work…</p>
+
+<h1 id="small-steps-ftw">small steps ftw</h1>
+
+<p>I have seen time and time again that small, concrete steps that you can explain, complete, and measure are the best way to make progress.</p>
+
+<p>See "But why regularly measure" in <a href="https://pauldambra.dev/2018/01/direction.html">one of my earlier weblogs</a></p>
+
+<p>If you feel stuck with the coding, break it into a smaller piece. Not sure how to do the work? Figure out what the simple pieces are and start with those. If the remaining pieces are "too big"  or "too hard" figure out how to change the system so the solution changes and is smaller or easier.</p>
+
+<p>Often, I will make one big PR that covers the whole change to prove it works. Then break that into smaller pieces that refer back to the whole. To make it easier to review or deploy.</p>
+
+<h1 id="practice-like-a-jazz-musician">practice like a jazz musician</h1>
+
+<p>When I was younger I was labouring under the misapprehension that I was going to change the world of music. And I was lucky to spend some time with some people who were amazing musicians.</p>
+
+<p>They would practice frequently and deliberately. They were purposefully aiming to get better at the little things that made them better at the whole.</p>
+
+<p>Later I spent time with folks talking about the craft of software engineering. Practising skills like TDD and refactoring.</p>
+
+<p>The little things that make you better at the whole.</p>
+
+<p>Ah, but Paul this new world of agentic software engineering makes skills like that outdated and unnecessary.</p>
+
+<p><img src="/images/andrej-karpathy-programming-is-changing-so-fast-v0-xs431byeeikd1.webp" alt="Andrej Karpathy quote" loading="lazy" /></p>
+
+<p>I love this quote from Andrej Karpathy</p>
+
+<p>And I've found the same… If the prompt is important then knowing what to prompt is important.</p>
+
+<p>And when the prompt isn't enough to get the job done being able to sketch enough code to give a better start to the agent is important.</p>
+
+<p>In both cases you actually have to know what you want. And practicing what good software, or good architecture looks like is still a differentiator.</p>
+
+<p>I'd add practicing writing good prompts and managing context well as new skills that it is worth practicing.</p>
+
+<p>Be purposeful about improving your ability as a person that provides value through creating and changing software. Watch what you do, see what makes it better, double down on those things.</p>
+
+<p>Avoid through practice and diligence ever doing the wrong thing harder.</p>
+
+<h1 id="love-making-things">love making things</h1>
+
+<p>I make things all the time. I am sad when I don't get to make things. This is a vocation for me.</p>
+
+<p>Nobody points at the musician that plays music for the sheer joy of it and says:  "ha, look at that loser. playing music even though they're not getting paid for it"</p>
+
+<p>So, in the evening when I've finished getting the kids to bed. I sit and fiddle with software while I watch TV or listen to music.</p>
+
+<p>I am incredibly lucky to have found something that gives me joy and makes me money.</p>
+
+<p>Not a vocation for you - ok, cool. Live your life as you see fit. But one of the ways that <em>I</em> am productive is that this is a joyful vocation. Also, if software is not your vocation, why the heck are you reading about how to ship 1000 PRs in twelve months?! Go, ride horses or fix gates or whatever the thing is that <em>does</em> bring you joy 💖</p>
+
+<h1 id="one-more-iteration">one more iteration</h1>
+
+<p>It feels like it goes without saying that iteration is good… but…</p>
+
+<blockquote>
+  <p>Iteration is the process of repeating a set of steps or instructions multiple times, often to reach a specific goal, solve a problem, or improve a result.</p>
+</blockquote>
+
+<p>"One more iteration" is a phrase that Tim at work uses to push us to think about the quality of what we build…</p>
+
+<p>OK, you did something. Stop and ask: "am I really finished?"</p>
+
+<p>How do <em>I</em> know if I'm really finished?</p>
+
+<ul>
+  <li>are people using it?</li>
+  <li>do they like it?</li>
+  <li>did it move the needle the way I expected?</li>
+  <li>would I know if it was broken?</li>
+  <li>now it is functional does it need to also be delightful?</li>
+  <li>does it help me see what should come next?</li>
+</ul>
+
+<p>I think this sits really wonderfully with "small steps ftw". Iteration of large blocks of work is inherently slower than iteration of small steps.</p>
+
+<p>The benefit of small steps is you can be nimble in response to what you learn.</p>
+
+<p>Worse… Something that takes a month to put together will build up a lot of weight in your subconscious. It's hard to throw it away or change it because of the time you have sunk into it. Not only are you less nimble, you're less likely to correct your course.</p>
+
+<h3 id="a-concrete-example-of-how-i-do-small-steps-and-iteration">A concrete example of how i do small steps and iteration…</h3>
+
+<p>A customer reported they were unhappy with filtering in our tool. It was multiple clicks to get to the point where they had type-ahead search. And that was frustrating for them.</p>
+
+<p>Frustration is no bueno, so I started spinning a new plate. I mocked up a solution for them very quickly and shared a video.</p>
+
+<p>They loved it.</p>
+
+<p>BUT I OPTIMISE FOR ITERATION AND SO I DID NOT SIMPLY SHIP IT</p>
+
+<p>I wrapped it in a flag and released it just for our team and that specific user that I was talking to</p>
+
+<p>I got fast feedback that they did not like it. They liked the description, and they liked the demo. But what people think they will like and use is not always what they will actually like and use.</p>
+
+<p>In practice by optimising for one journey through the filtering UX I had made other journeys harder. I wouldn't have known that if I didn't think about how to release this in a way that meant I could check if it was any good.</p>
+
+<p>In the end, this took four attempts to get right.</p>
+
+<p>And now I have rolled out the flag to all users. After an experiment over those multiple iterations showed folk came back and searched more using the new versions of this change.</p>
+
+<p>But rolling out the flag isn't the end of the work. I'm now working on tidying up the code that was there so that I could dual run and measure the change. I've got to finish updating the documentation. I need to check that users behaviour really does change over coming weeks and react to that. So there are still more PRs to come from this work.</p>
+
+<h1 id="an-inspirational-sign-off">An inspirational sign-off?</h1>
+
+<p>The value here isn't that I shipped lots of PRs. The value is that I work in small steps, and I check direction in between them. That I can loop between what I learn and what I can do next to learn more.</p>
+
+<p>How you do that might be different, perfect! But my advice: do that.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/02/deca-hundy.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/02/deca-hundy.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

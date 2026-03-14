@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Retrosperiment</title>
+    <link rel="canonical" href="https://pauldambra.dev/2017/07/retrosperiment.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2017/07/retrosperiment.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Retrosperiment" />
+    <meta
+      property="og:description"
+      content="A retrospective experiment"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="A retrospective experiment"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Retrosperiment",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"438",
+     "url":"https://pauldambra.dev/2017/07/retrosperiment.html",
+     "datePublished":"2017-07-06",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2017/07/retrosperiment.html"
+     },
+     "articleBody":"(originally  posted  on  the  code  computerlove  blog.  At  the  now  unreachable  link:  https://lean.codecomputerlove.com/a-retrosperiment/)\n\nExperimenting  with  a  \"new\"  retro  format\n\nFor  our  team's  most  recent  retro  we  decided  to  try  a  new  format  to  see  how  it  affected  our  discussion.  We  thought  we'd  share  it  here  in  case  it  has  value  for  other  teams.\n\nWhat  is  it?\n\nA  retrospective  is  a  practice  from  XP  described  on  the  c2.wiki  as\n\n\n    A  practice  which  has  an  XP  team  asking  itself,  at  the  end  of  each  iteration  :  What  went  well  ?\nWhat  could  be  improved  ?\nWhat  could  we  experiment  with  ?\n\n\nWe've  recently  had  several  discussions  trying  to  focus  on  the  real  and  perceived  progress  of  our  work  and  thought  it  would  be  beneficial  to  run  the  retro  with  a  focus  on  the  impact  of  our  team's  principles  and  practices.  Specifically  how  they  relate  to  delivery  of  value  and  speed  of  delivery.\n\n\n\nWe  first  drew  axes  on  a  white-board\n\n\n\nSince  any  and  all  software  communication  must  take  the  form  of  some  set  of  quadrants…\n\n\n\nThen  the  whole  team  wrote  on  post-it  notes  what  they  thought  our  principles  and  practices  were  and  put  them  on  the  board.\n\nThe  faster  that  practice  helps  us  move  the  further  right  the  post-it  goes.  The  more  value  it  lets  us  deliver  the  higher  it  goes.\n\nSo  what  did  this  look  like  in  practice?\n\n\n\nThis  let  us  see  straight  away  where  we  had  different  opinions  across  the  team\n\n\n    feature  flags\n    estimates\n    road-maps\n    Slack  /  comms\n\n\nAnd  where,  when  we  agreed  roughly  on  position,  we  needed  to  focus  on  if  we  could  speed-up  or  get  more  value\n\nThis  was  a  very  different  discussion  than  we  would  usually  have.  Anchored  more  in  what  we  could  change  and  how  we  might  change  it  than  how  we  feel  about  things…\n\n\n\nIt's  still  important  to  address  the  team's  morale  and  individual  concerns  but  this  list  of  discussion  points  felt  more  focused,  as  we'd  hoped,  on  what  we  can  change  to  deliver  more  value  faster.\n\nRetroception\n\nAfter  a  retrospective  of  the  retrospective  format  the  team  members  felt  that  it  might  have  been  useful  to  constrain  the  number  of  things  we  were  allowed  to  put  on  the  board.  Or  to  dot  vote  on  the  items  before  discussing  them  to  allow  us  more  time  to  dig  in  to  the  discussion.\n\nWhy  not  try  it  and  let  me  know  if  it  works  for  you  too?\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Jul 06 2017</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Retrosperiment</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2017/07/retrosperiment.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Retrosperiment&via=pauldambra&url=https://pauldambra.dev/2017/07/retrosperiment.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#agile"
+      >
+        in: agile
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#agile">
+    agile
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#xp">
+    xp
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#retrospective">
+    retrospective
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>(originally posted on the code computerlove blog. At the now unreachable link: https://lean.codecomputerlove.com/a-retrosperiment/)</p>
+
+<h1 id="experimenting-with-a-new-retro-format">Experimenting with a "new" retro format</h1>
+
+<p>For our team's most recent retro we decided to try a new format to see how it affected our discussion. We thought we'd share it here in case it has value for other teams.</p>
+
+<h2 id="what-is-it">What is it?</h2>
+
+<p>A retrospective is a practice from <a href="http://wiki.c2.com/?IterationRetrospective">XP described on the c2.wiki</a> as</p>
+
+<blockquote>
+  <p>A practice which has an XP team asking itself, at the end of each iteration : What went well ?
+What could be improved ?
+What could we experiment with ?</p>
+</blockquote>
+
+<p>We've recently had several discussions trying to focus on the real and perceived progress of our work and thought it would be beneficial to run the retro with a focus on the impact of our team's principles and practices. Specifically how they relate to delivery of value and speed of delivery.</p>
+
+<!--more-->
+
+<p>We first drew axes on a white-board</p>
+
+<p><img src="/images/the-graph.png" alt="The axes of the retro graph" loading="lazy" /></p>
+
+<p>Since any and all software communication must take the form of some set of quadrants…</p>
+
+<p><img src="/images/the-quadrants.png" alt="the quadrants this describes" loading="lazy" /></p>
+
+<p>Then the whole team wrote on post-it notes what they thought our principles and practices were and put them on the board.</p>
+
+<p>The faster that practice helps us move the further right the post-it goes. The more value it lets us deliver the higher it goes.</p>
+
+<h2 id="so-what-did-this-look-like-in-practice">So what did this look like in practice?</h2>
+
+<p><img src="/images/the-chart-1.png" alt="the post-its" loading="lazy" /></p>
+
+<p>This let us see straight away where we had different opinions across the team</p>
+
+<ul>
+  <li>feature flags</li>
+  <li>estimates</li>
+  <li>road-maps</li>
+  <li>Slack / comms</li>
+</ul>
+
+<p>And where, when we agreed roughly on position, we needed to focus on if we could speed-up or get more value</p>
+
+<p>This was a very different discussion than we would usually have. Anchored more in what we could change and how we might change it than how we feel about things…</p>
+
+<p><img src="/images/the-discussion.png" alt="the discussion" loading="lazy" /></p>
+
+<p>It's still important to address the team's morale and individual concerns but this list of discussion points felt more focused, as we'd hoped, on what we can change to deliver more value faster.</p>
+
+<h1 id="retroception">Retroception</h1>
+
+<p>After a retrospective of the retrospective format the team members felt that it might have been useful to constrain the number of things we were allowed to put on the board. Or to dot vote on the items before discussing them to allow us more time to dig in to the discussion.</p>
+
+<p>Why not try it and let me know if it works for you too?</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2018/01/direction.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Is where we're going where we're going
+      </h3>
+      <small>
+        29 Jan 2018
+      </small>
+  </div>
+</a>  <a href="/2017/06/radarban.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Where we're going we don't need columns
+      </h3>
+      <small>
+        24 Jun 2017
+      </small>
+  </div>
+</a>  <a href="/real-vs-soft.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Real vs. Software Engineering
+      </h3>
+      <small>
+        29 Nov 2015
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2017/07/retrosperiment.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2017/07/retrosperiment.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

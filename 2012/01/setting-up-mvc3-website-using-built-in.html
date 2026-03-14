@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Setting up an MVC3 website using built-in membership provider</title>
+    <link rel="canonical" href="https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Setting up an MVC3 website using built-in membership provider" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Setting up an MVC3 website using built-in membership provider",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1387",
+     "url":"https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html",
+     "datePublished":"2012-01-12",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html"
+     },
+     "articleBody":"Oh  wait…  this  is  awful.  AWRUCHKA.  Right  dry  heaving  done  with.\n\nIt's  a  good  job  so  few  websites  want  to  authenticate  users  and  collect  data  on  them  otherwise  we'd  constantly  have  to  write  the  same  code  ove…  what's  that?  Oh  my!  Everyone  is  going  through  this.\n\n\n\nJesus  no  wonder  people  bang  on  about  RoR.  It  makes  this  easier  in  comparison\n\nAnyway  -  I'll  forget  how  to  do  this  before  I  have  to  do  it  again\n\nSo\n\n\n    fire  up  a  new  MVC3  web  application\n    Jump  into  nuget  and  Install-Package  System.Web.Providers \n    Sort  out  a  connection  string  for  SQL  CE\n    Add  a  key  to  make  sure  the  login  link  always  points  to  LogOn\n\n\nNow  my  web.config  looks  like  this  (edited  out  parts  I  haven't  touched  for  something  approximating  brevity)\n\n&lt;?xml  version=\"1.0\"  encoding=\"utf-8\"?&gt;\n&lt;!--\n    For  more  information  on  how  to  configure  your  ASP.NET  application,  please  visit\n    http://go.microsoft.com/fwlink/?LinkId=152368\n    --&gt;\n&lt;configuration&gt;\n    &lt;connectionStrings&gt;\n        &lt;add  name=\"users\"  connectionString=\"Data  Source=|DataDirectory|users.sdf;\"\n            providerName=\"System.Data.SqlServerCe.4.0\"/&gt;\n        &lt;/connectionStrings&gt;\n    &lt;appSettings&gt;\n        &lt;add  key=\"webpages:Version\"  value=\"1.0.0.0\"  /&gt;\n        &lt;add  key=\"ClientValidationEnabled\"  value=\"true\"  /&gt;\n        &lt;add  key=\"UnobtrusiveJavaScriptEnabled\"  value=\"true\"  /&gt;\n        &lt;add  key=\"loginUrl\"  value=\"~/Account/LogOn\"  /&gt;\n    &lt;/appSettings&gt;\n    &lt;system.web&gt;\n        &lt;authentication  mode=\"Forms\"&gt;\n            &lt;forms  loginUrl=\"~/Account/LogOn\"  timeout=\"2880\"  /&gt;\n        &lt;/authentication&gt;\n        &lt;membership  defaultProvider=\"DefaultMembershipProvider\"&gt;\n            &lt;providers&gt;\n                &lt;clear  /&gt;\n                &lt;add  name=\"DefaultMembershipProvider\"  type=\"System.Web.Providers.DefaultMembershipProvider,  System.Web.Providers,  Version=1.0.0.0,  Culture=neutral,  PublicKeyToken=31bf3856ad364e35\"  connectionStringName=\"users\"  enablePasswordRetrieval=\"false\"  enablePasswordReset=\"true\"  requiresQuestionAndAnswer=\"false\"  requiresUniqueEmail=\"false\"  maxInvalidPasswordAttempts=\"5\"  minRequiredPasswordLength=\"6\"  minRequiredNonalphanumericCharacters=\"0\"  passwordAttemptWindow=\"10\"  applicationName=\"/\"  /&gt;\n            &lt;/providers&gt;\n        &lt;/membership&gt;\n        &lt;profile  defaultProvider=\"DefaultProfileProvider\"&gt;\n            &lt;providers&gt;\n                &lt;clear  /&gt;\n                &lt;add  name=\"DefaultProfileProvider\"  type=\"System.Web.Providers.DefaultProfileProvider,  System.Web.Providers,  Version=1.0.0.0,  Culture=neutral,  PublicKeyToken=31bf3856ad364e35\"  connectionStringName=\"users\"  applicationName=\"/\"  /&gt;\n            &lt;/providers&gt;\n        &lt;/profile&gt;\n        &lt;roleManager  enabled=\"false\"  defaultProvider=\"DefaultRoleProvider\"&gt;\n            &lt;providers&gt;\n                &lt;clear  /&gt;\n                &lt;add  name=\"AspNetWindowsTokenRoleProvider\"  type=\"System.Web.Security.WindowsTokenRoleProvider\"  applicationName=\"/\"  /&gt;\n                &lt;add  name=\"DefaultRoleProvider\"  type=\"System.Web.Providers.DefaultRoleProvider,  System.Web.Providers,  Version=1.0.0.0,  Culture=neutral,  PublicKeyToken=31bf3856ad364e35\"  connectionStringName=\"users\"  applicationName=\"/\"  /&gt;\n            &lt;/providers&gt;\n        &lt;/roleManager&gt;\n        &lt;sessionState  mode=\"InProc\"  customProvider=\"DefaultSessionProvider\"&gt;\n            &lt;providers&gt;\n                &lt;add  name=\"DefaultSessionProvider\"  type=\"System.Web.Providers.DefaultSessionStateProvider,  System.Web.Providers,  Version=1.0.0.0,  Culture=neutral,  PublicKeyToken=31bf3856ad364e35\"  connectionStringName=\"DefaultConnection\"  applicationName=\"/\"  /&gt;\n            &lt;/providers&gt;\n        &lt;/sessionState&gt;\n    &lt;/system.web&gt;\n&lt;/configuration&gt;\n\n\nNow  start  a  debug  session  for  the  web  app.  Click  logon.  Click  Register.  Fill  in  the  form.  Register.  Click  Logoff  and  stop  the  debug  session  in  Visual  Studio\n\nYou  can  see  the  new  SQL  CE  database  and  have  a  look  at  the  schema.  The  Memberships  and  Users  tables  have  a  new  row.  The  new  user.\n\n\n\n\n\n\n\n\n\nHurrah  -  all  the  information  you'll  ever  need  is  collected.\n\nWhat?!  You  want  to  know  more  than  name  and  email.  Now  that's  a  turn  up  for  the  books.\n\nIt  turns  out  you  can  store  key-value  pairs  in  the  profiles  table.  I  think  that  anyone  that  wrote  ASP  dot  Net  websites  will  be  old-hand  at  this  but  I've  never  had  to  do  that  or  this…\n\nWhile  you  can  do  magic  up  a  key-value  pair  whenever  you  feel  the  need  to  in  your  code  it's  probably  better  to  use  one  of  these  new  fangled  Class  thing-a-ma-bobs\n\n\nusing  System;\nusing  System.Web.Profile;\n\nnamespace  AcrHack.Models\n{\n        public  class  CustomProfile  :  ProfileBase\n        {\n                //magic  string\n                public  static  string  ADDRESS  =  \"address\";\n\n                public  string  Address\n                {\n                        get  {  return  this[ADDRESS]  as  String;  }\n                        set  {  this[ADDRESS]  =  value;  }\n                }\n        }\n}\n\n\nNow  a  quick  edit  to  the  web  config  above  so  that  the  providers  opening  tag  becomes\n\n&lt;profile  defaultprovider=\"DefaultProfileProvider\"  inherits=\"AcrHack.Models.CustomProfile\"/&gt;\n\n\nwhich  makes  the  Profile  Provider  aware  of  the  new  Profile  class\n\nNext  step  is  to  find  the  RegisterModel  (this  could  be  the  CreateModel  or  some  other  model)  and  add  an  Address  field\n\npublic  class  RegisterModel\n{\n        [Required]\n        [Display(Name  =  \"User  name\")]\n        public  string  UserName  {  get;  set;  }\n\n        [Required]\n        [DataType(DataType.EmailAddress)]\n        [Display(Name  =  \"Email  address\")]\n        public  string  Email  {  get;  set;  }\n\n        [Required]\n        [StringLength(100,  ErrorMessage  =  \"The  {0}  must  be  at  least  {2}  characters  long.\",  MinimumLength  =  6)]\n        [DataType(DataType.Password)]\n        [Display(Name  =  \"Password\")]\n        public  string  Password  {  get;  set;  }\n\n        [DataType(DataType.Password)]\n        [Display(Name  =  \"Confirm  password\")]\n        [Compare(\"Password\",  ErrorMessage  =  \"The  password  and  confirmation  password  do  not  match.\")]\n        public  string  ConfirmPassword  {  get;  set;  }\n\n        //Added  Address  field\n        [Required]\n        public  string  Address  {  get;  set;  }\n}\n\n\nand  edit  the  Register  method  in  the  controller\n\n\n[HttpPost]\npublic  ActionResult  Register(RegisterModel  model)\n{\n        if  (ModelState.IsValid)\n        {\n                //  Attempt  to  register  the  user\n                MembershipCreateStatus  createStatus;\n                Membership.CreateUser(model.UserName,  model.Password,  model.Email,  null,  null,  true,  null,  out  createStatus);\n\n                if  (createStatus  ==  MembershipCreateStatus.Success)\n                {\n                        FormsAuthentication.SetAuthCookie(model.UserName,  false);\n                        //Changes  here\n                        //Create  loads  or  creates  a  profile  based  on  searching  for  username\n                        var  userProfile  =  ProfileBase.Create(model.UserName)  as  CustomProfile;\n                        userProfile.Address  =  model.Address;\n                        userProfile.Save();\n                        //End  of  changes\n                        return  RedirectToAction(\"Index\",  \"Home\");\n                }\n                else\n                {\n                        ModelState.AddModelError(\"\",  ErrorCodeToString(createStatus));\n                }\n        }\n\n        //  If  we  got  this  far,  something  failed,  redisplay  form\n        return  View(model);\n}\n\n\nand  finally  edit  the  view  to  add  an  editor  field  for  the  new  property.  (I'll  leave  that  as  an  exercise  for  the  reader)\n\nNow  we  can  go  back  to  the  Register  page\n\n\n\nRegister  and  then  have  a  look  in  the  profile  table.\n\n\n\nTa  da!\n\nSo  there's  a  mechanism  for  extending  the  default  profile.\n\nHonestly,  it  feels  messy  and  since  at  this  point  if  there's  a  need  for  any  data  access  layer  then  since  there'll  be  a  link  on  user  name  or  user  id  anyway  it's  likely  a  better  idea  to  have  the  additional  data  in  the  DAL  and  fangle  the  authentication  and  user  models  together  in  a  ViewModel.\n\n\n\nHaving  gone  away  and  checked  some  code  committed  on  another  project  by  the  lovely  OrangeTentacle  that's  what  he's  done.  So  having  figured  it  out  for  myself  I'll  probably  go  and  crib  off  that  much  tidier  code\n\nAdditional  Reading:\n\nSimple.Web.Providers  announcement\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Jan 12 2012</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Setting up an MVC3 website using built-in membership provider</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Setting+up+an+MVC3+website+using+built-in+membership+provider&via=pauldambra&url=https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#rant"
+      >
+        in: rant
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#mvc">
+    mvc
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#visual-studio">
+    visual-studio
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#membership-provider">
+    membership-provider
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>Oh wait… this is awful. AWRUCHKA. Right dry heaving done with.</p>
+
+<p>It's a good job so few websites want to authenticate users and collect data on them otherwise we'd constantly have to write the same code ove… what's that? Oh my! Everyone is going through this.</p>
+
+<!--more-->
+
+<p>Jesus no wonder people bang on about RoR. It makes this <em>easier</em> in comparison</p>
+
+<p>Anyway - I'll forget how to do this before I have to do it again</p>
+
+<p>So</p>
+
+<ul>
+  <li>fire up a new MVC3 web application</li>
+  <li>Jump into nuget and Install-Package System.Web.Providers </li>
+  <li>Sort out a connection string for SQL CE</li>
+  <li>Add a key to make sure the login link always points to <code class="language-plaintext highlighter-rouge">LogOn</code></li>
+</ul>
+
+<p>Now my <code class="language-plaintext highlighter-rouge">web.config</code> looks like this (edited out parts I haven't touched for something approximating brevity)</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="c">&lt;!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=152368
+  --&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+  <span class="nt">&lt;connectionStrings&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"users"</span> <span class="na">connectionString=</span><span class="s">"Data Source=|DataDirectory|users.sdf;"</span>
+      <span class="na">providerName=</span><span class="s">"System.Data.SqlServerCe.4.0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/connectionStrings&gt;</span>
+  <span class="nt">&lt;appSettings&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">"webpages:Version"</span> <span class="na">value=</span><span class="s">"1.0.0.0"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">"ClientValidationEnabled"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">"UnobtrusiveJavaScriptEnabled"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">"loginUrl"</span> <span class="na">value=</span><span class="s">"~/Account/LogOn"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/appSettings&gt;</span>
+  <span class="nt">&lt;system.web&gt;</span>
+    <span class="nt">&lt;authentication</span> <span class="na">mode=</span><span class="s">"Forms"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;forms</span> <span class="na">loginUrl=</span><span class="s">"~/Account/LogOn"</span> <span class="na">timeout=</span><span class="s">"2880"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/authentication&gt;</span>
+    <span class="nt">&lt;membership</span> <span class="na">defaultProvider=</span><span class="s">"DefaultMembershipProvider"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;providers&gt;</span>
+        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"DefaultMembershipProvider"</span> <span class="na">type=</span><span class="s">"System.Web.Providers.DefaultMembershipProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"</span> <span class="na">connectionStringName=</span><span class="s">"users"</span> <span class="na">enablePasswordRetrieval=</span><span class="s">"false"</span> <span class="na">enablePasswordReset=</span><span class="s">"true"</span> <span class="na">requiresQuestionAndAnswer=</span><span class="s">"false"</span> <span class="na">requiresUniqueEmail=</span><span class="s">"false"</span> <span class="na">maxInvalidPasswordAttempts=</span><span class="s">"5"</span> <span class="na">minRequiredPasswordLength=</span><span class="s">"6"</span> <span class="na">minRequiredNonalphanumericCharacters=</span><span class="s">"0"</span> <span class="na">passwordAttemptWindow=</span><span class="s">"10"</span> <span class="na">applicationName=</span><span class="s">"/"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/providers&gt;</span>
+    <span class="nt">&lt;/membership&gt;</span>
+    <span class="nt">&lt;profile</span> <span class="na">defaultProvider=</span><span class="s">"DefaultProfileProvider"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;providers&gt;</span>
+        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"DefaultProfileProvider"</span> <span class="na">type=</span><span class="s">"System.Web.Providers.DefaultProfileProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"</span> <span class="na">connectionStringName=</span><span class="s">"users"</span> <span class="na">applicationName=</span><span class="s">"/"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/providers&gt;</span>
+    <span class="nt">&lt;/profile&gt;</span>
+    <span class="nt">&lt;roleManager</span> <span class="na">enabled=</span><span class="s">"false"</span> <span class="na">defaultProvider=</span><span class="s">"DefaultRoleProvider"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;providers&gt;</span>
+        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"AspNetWindowsTokenRoleProvider"</span> <span class="na">type=</span><span class="s">"System.Web.Security.WindowsTokenRoleProvider"</span> <span class="na">applicationName=</span><span class="s">"/"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"DefaultRoleProvider"</span> <span class="na">type=</span><span class="s">"System.Web.Providers.DefaultRoleProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"</span> <span class="na">connectionStringName=</span><span class="s">"users"</span> <span class="na">applicationName=</span><span class="s">"/"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/providers&gt;</span>
+    <span class="nt">&lt;/roleManager&gt;</span>
+    <span class="nt">&lt;sessionState</span> <span class="na">mode=</span><span class="s">"InProc"</span> <span class="na">customProvider=</span><span class="s">"DefaultSessionProvider"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;providers&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"DefaultSessionProvider"</span> <span class="na">type=</span><span class="s">"System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"</span> <span class="na">connectionStringName=</span><span class="s">"DefaultConnection"</span> <span class="na">applicationName=</span><span class="s">"/"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/providers&gt;</span>
+    <span class="nt">&lt;/sessionState&gt;</span>
+  <span class="nt">&lt;/system.web&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+
+<p>Now start a debug session for the web app. Click logon. Click Register. Fill in the form. Register. Click Logoff and stop the debug session in Visual Studio</p>
+
+<p>You can see the new SQL CE database and have a look at the schema. The Memberships and Users tables have a new row. The new user.</p>
+
+<p><img src="http://4.bp.blogspot.com/-w1VYrhrRydw/Tw7Aak9b3tI/AAAAAAAAAWw/dQllCHJ7Qjo/s1600/new-sdf-file.PNG" alt="ssms screenshots" loading="lazy" /></p>
+
+<p><img src="http://2.bp.blogspot.com/-y4bJjVXY8js/Tw7AcoHn8lI/AAAAAAAAAW4/hnLZO6ShvaQ/s1600/schema.PNG" alt="ssms screenshots" loading="lazy" /></p>
+
+<p><img src="http://2.bp.blogspot.com/-tkP3-E66KgQ/Tw7Ad9z8n1I/AAAAAAAAAXA/Vcu-JkjCZrc/s1600/memberships.PNG" alt="ssms screenshots" loading="lazy" /></p>
+
+<p><img src="http://1.bp.blogspot.com/-Q83_Po9kXN4/Tw7AfVHsCcI/AAAAAAAAAXI/AvdnqwrMTvA/s1600/users-table.PNG" alt="ssms screenshots" loading="lazy" /></p>
+
+<p>Hurrah - all the information you'll ever need is collected.</p>
+
+<p>What?! You want to know more than name and email. Now <em>that's</em> a turn up for the books.</p>
+
+<p>It turns out you can store key-value pairs in the profiles table. I think that anyone that wrote ASP dot Net websites will be old-hand at this but I've never had to do that or this…</p>
+
+<p>While you can do magic up a key-value pair whenever you feel the need to in your code it's probably better to use one of these new fangled Class thing-a-ma-bobs</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Web.Profile</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">AcrHack.Models</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">CustomProfile</span> <span class="p">:</span> <span class="n">ProfileBase</span>
+    <span class="p">{</span>
+        <span class="c1">//magic string</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">ADDRESS</span> <span class="p">=</span> <span class="s">"address"</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Address</span>
+        <span class="p">{</span>
+            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="n">ADDRESS</span><span class="p">]</span> <span class="k">as</span> <span class="n">String</span><span class="p">;</span> <span class="p">}</span>
+            <span class="k">set</span> <span class="p">{</span> <span class="k">this</span><span class="p">[</span><span class="n">ADDRESS</span><span class="p">]</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now a quick edit to the web config above so that the providers opening tag becomes</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;profile</span> <span class="na">defaultprovider=</span><span class="s">"DefaultProfileProvider"</span> <span class="na">inherits=</span><span class="s">"AcrHack.Models.CustomProfile"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>which makes the Profile Provider aware of the new Profile class</p>
+
+<p>Next step is to find the <code class="language-plaintext highlighter-rouge">RegisterModel</code> (this could be the <code class="language-plaintext highlighter-rouge">CreateModel</code> or some other model) and add an Address field</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">RegisterModel</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">Required</span><span class="p">]</span>
+    <span class="p">[</span><span class="nf">Display</span><span class="p">(</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"User name"</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="p">[</span><span class="n">Required</span><span class="p">]</span>
+    <span class="p">[</span><span class="nf">DataType</span><span class="p">(</span><span class="n">DataType</span><span class="p">.</span><span class="n">EmailAddress</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">Display</span><span class="p">(</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"Email address"</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Email</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="p">[</span><span class="n">Required</span><span class="p">]</span>
+    <span class="p">[</span><span class="nf">StringLength</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="n">ErrorMessage</span> <span class="p">=</span> <span class="s">"The {0} must be at least {2} characters long."</span><span class="p">,</span> <span class="n">MinimumLength</span> <span class="p">=</span> <span class="m">6</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">DataType</span><span class="p">(</span><span class="n">DataType</span><span class="p">.</span><span class="n">Password</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">Display</span><span class="p">(</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"Password"</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Password</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="p">[</span><span class="nf">DataType</span><span class="p">(</span><span class="n">DataType</span><span class="p">.</span><span class="n">Password</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">Display</span><span class="p">(</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"Confirm password"</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">Compare</span><span class="p">(</span><span class="s">"Password"</span><span class="p">,</span> <span class="n">ErrorMessage</span> <span class="p">=</span> <span class="s">"The password and confirmation password do not match."</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">ConfirmPassword</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">//Added Address field</span>
+    <span class="p">[</span><span class="n">Required</span><span class="p">]</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Address</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>and edit the Register method in the controller</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">[</span><span class="n">HttpPost</span><span class="p">]</span>
+<span class="k">public</span> <span class="n">ActionResult</span> <span class="nf">Register</span><span class="p">(</span><span class="n">RegisterModel</span> <span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ModelState</span><span class="p">.</span><span class="n">IsValid</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Attempt to register the user</span>
+        <span class="n">MembershipCreateStatus</span> <span class="n">createStatus</span><span class="p">;</span>
+        <span class="n">Membership</span><span class="p">.</span><span class="nf">CreateUser</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">UserName</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">Password</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">Email</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">out</span> <span class="n">createStatus</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">createStatus</span> <span class="p">==</span> <span class="n">MembershipCreateStatus</span><span class="p">.</span><span class="n">Success</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">FormsAuthentication</span><span class="p">.</span><span class="nf">SetAuthCookie</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">UserName</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+            <span class="c1">//Changes here</span>
+            <span class="c1">//Create loads or creates a profile based on searching for username</span>
+            <span class="kt">var</span> <span class="n">userProfile</span> <span class="p">=</span> <span class="n">ProfileBase</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">UserName</span><span class="p">)</span> <span class="k">as</span> <span class="n">CustomProfile</span><span class="p">;</span>
+            <span class="n">userProfile</span><span class="p">.</span><span class="n">Address</span> <span class="p">=</span> <span class="n">model</span><span class="p">.</span><span class="n">Address</span><span class="p">;</span>
+            <span class="n">userProfile</span><span class="p">.</span><span class="nf">Save</span><span class="p">();</span>
+            <span class="c1">//End of changes</span>
+            <span class="k">return</span> <span class="nf">RedirectToAction</span><span class="p">(</span><span class="s">"Index"</span><span class="p">,</span> <span class="s">"Home"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">ModelState</span><span class="p">.</span><span class="nf">AddModelError</span><span class="p">(</span><span class="s">""</span><span class="p">,</span> <span class="nf">ErrorCodeToString</span><span class="p">(</span><span class="n">createStatus</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// If we got this far, something failed, redisplay form</span>
+    <span class="k">return</span> <span class="nf">View</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><em>and</em> finally edit the view to add an editor field for the new property. (I'll leave that as an exercise for the reader)</p>
+
+<p>Now we can go back to the Register page</p>
+
+<p><img src="http://2.bp.blogspot.com/-TZWnNTSKRvY/Tw7HgUSY_jI/AAAAAAAAAXQ/zFssEVG51_4/s1600/new+registration+form+bit.PNG" alt="register page" loading="lazy" /></p>
+
+<p>Register and then have a look in the profile table.</p>
+
+<p><img src="http://4.bp.blogspot.com/-oKVRwA7UVxM/Tw7Hnkm1AfI/AAAAAAAAAXY/hHvXOXRF3ug/s1600/persistedproperty.PNG" alt="profile table" loading="lazy" /></p>
+
+<p>Ta da!</p>
+
+<p>So there's a mechanism for extending the default profile.</p>
+
+<p>Honestly, it feels messy and since at this point if there's a need for any data access layer then since there'll be a link on user name or user id anyway it's likely a better idea to have the additional data in the DAL and fangle the authentication and user models together in a <code class="language-plaintext highlighter-rouge">ViewModel</code>.</p>
+
+<!--alex ignore he-she her-him--->
+
+<p>Having gone away and checked some code committed on another project by the lovely <a href="http://www.orangetentacle.co.uk/">OrangeTentacle</a> that's what he's done. So having figured it out for myself I'll probably go and crib off that much tidier code</p>
+
+<p>Additional Reading:</p>
+
+<p><a href="http://www.hanselman.com/blog/IntroducingSystemWebProvidersASPNETUniversalProvidersForSessionMembershipRolesAndUserProfileOnSQLCompactAndSQLAzure.aspx"><code class="language-plaintext highlighter-rouge">Simple.Web.Providers</code> announcement</a></p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2018/01/direction.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Is where we're going where we're going
+      </h3>
+      <small>
+        29 Jan 2018
+      </small>
+  </div>
+</a>  <a href="/2013/11/astronomical-database-identfier.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Astronomical Database Identfier
+      </h3>
+      <small>
+        22 Nov 2013
+      </small>
+  </div>
+</a>  <a href="/2009/10/bing-is-not-search-engine.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Bing is not a search engine
+      </h3>
+      <small>
+        30 Oct 2009
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2012/01/setting-up-mvc3-website-using-built-in.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

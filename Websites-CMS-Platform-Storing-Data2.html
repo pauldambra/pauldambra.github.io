@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform - Storing Data - Part 2</title>
+    <link rel="canonical" href="https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html" />
+    <meta property="og:url" content="https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform - Storing Data - Part 2" />
+    <meta
+      property="og:description"
+      content="storing data using mongo, mongojs and express"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="storing data using mongo, mongojs and express"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform - Storing Data - Part 2",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1054",
+     "url":"https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html",
+     "datePublished":"2014-04-23",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nThe  code  can  be  found  on  GitHub\n\nPrevious  Post\n\nThe  first  step  is  always  (or  at  least  should  be)  to  take  a  step  back  and  decide  what  to  actually  do…\n\n\n\nIn  the  last  post  the  decision  was  made  to  store  one  document  per  page,  and  to  have  a  unique  index  on  the  documents  name  property.  This  fits  with  a  PUT  request\n\nCallers  of  a  PUT  method  should  anticipate  the  calls  are  idempotent  and  made  to  the  URL  of  a  given  resource.  That  is  we'll  be  sending  data  to  /pages/pageName  and  not  /pages  and  repeatedly  sending  the  same  document  for  storage  means  that  the  document  should  be  updated  not  duplicated.\n\nTests\nThis  feature  requires  a  set  of  conditions  are  tested:\n\n\tyou  can't  PUT  an  empty  page\n\tif  you  PUT  a  new  page  you  receive  a  201\n\tif  you  PUT  an  existing  page  you  receive  a  200\n\tthe  inserted  or  updated  resource  URL  is  in  the  location  header  of  the  response\n\n\ndescribe('PUTing  pages',  function()  {\n        it('should  400  when  no  body');\n\n        describe('with  new  name',  function(){\n            it('respond  with  201  status');\n        });\n\n        describe('with  existing  name',  function(){\n            it('respond  with  200  status');\n    });\n});\n\n\nAfter  a  little  backwards  and  forwards  the  tests  ended  up  as:\n\nvar  request  =  require('supertest');\nvar  should  =  require('should');\n\nvar  server;\nvar  db;\n\nbeforeEach(function()  {\n        //set  environment  to  test  and  init  things\n        process.env.NODE_ENV  =  'test';  \n        db  =  require('../server/db');\n        server  =  require('../server').app;\n});\n\ndescribe('PUTing  pages',  function()  {\n        it('should  400  when  no  body',  function(done)  {\n                request(server)\n                    .put('/pages/newPage')\n                    .set('Accept',  'text/json')\n                    .expect('Content-Type',  /json/)\n                    .expect(400,  done);\n        });\n\n        describe('with  a  new  page  name',  function(){\n            beforeEach(function()  {\n                db.pages.remove({},  false,  function(err,  doc)  {});\n            });\n\n            it('should  respond  with  201  status',  function(done){\n                request(server)\n                    .put('/pages/newPage')\n                    .send({name:'newPage',  url:'/somewhere'})\n                    .set('Accept',  'text/json')\n                    .expect('Content-Type',  /json/)\n                    .expect('location',  '/somewhere')\n                    .expect(201,  done);\n            });\n\n        });\n\n        describe('with  an  existing  page  name',  function(){\n            beforeEach(function()  {\n                db.pages.remove({},  false,  function(err,  doc)  {});\n                db.pages.insert({name:'existingPage'},  function(err,  docs){});\n            });\n\n            it('should  respond  with  200  status',  function(done){\n                request(server)\n                    .put('/pages/existingPage')\n                    .send({name:'existingPage',  url:'/somewhereElse'})\n                    .set('Accept',  'text/json')\n                    .expect('Content-Type',  /json/)\n                    .expect('location',  '/somewhereElse')\n                    .expect(200,  done);\n            });\n\n        });\n});\n\n\nand  an  alteration  to  the  server  file  to  make  those  tests  pass:\n\napp.put('/pages/:page',  function(req,  res,  next)  {\n        var  pageName  =  req.params.page;\n        if(!req.body  ||  Object.getOwnPropertyNames(req.body).length  ===  0)  {\n                return  res.json(400,  {});\n        }\n        db.pages.findAndModify({\n                query:  {  name:  pageName  },\n                update:  {  $set:  req.body  },\n                upsert:  true,\n                new:  true\n        },  function(err,  doc,  lastErrorObject)  {\n                if(err)  {\n                        next(err);\n                }  else  {\n                        res.location(doc.url  ||  '/');\n                        if(lastErrorObject.updatedExisting)  {\n                                res.json(200,  {});  \n                        }  else  {\n                                res.json(201,{});  \n                        }\n                }\n        });\n});\n\n\nAgain  this  code  feels  a  bit  ugly  to  me…  there's  a  lot  bunched  up  together  -  but  it  can  be  revisited  as  it's  covered  by  tests.  Importantly  it  works  and  allows  storage  of  new  pages  and  edits  to  existing  pages\n\nAnd,  yes,  I  know  that  any  unauthorised  user  can  edit  with  this…  authentication  is  still  to  come!\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Wed Apr 23 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform - Storing Data - Part 2</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Storing+Data+-+Part+2&via=pauldambra&url=https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#express">
+    express
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#mongodb">
+    mongodb
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#nosql">
+    nosql
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/Websites-CMS-Platform-Storing-Data.html">Previous Post</a></p>
+
+<p>The first step is always (or at least should be) to take a step back and decide what to actually do…</p>
+
+<!--more-->
+
+<p>In the last post the decision was made to store one document per page, and to have a unique index on the documents name property. This fits with a PUT request</p>
+
+<p><a href="http://stackoverflow.com/a/630475/222163">Callers of a PUT method should anticipate the calls are idempotent and made to the URL of a given resource</a>. That is we'll be sending data to <code class="language-plaintext highlighter-rouge">/pages/pageName</code> and not <code class="language-plaintext highlighter-rouge">/pages</code> and repeatedly sending the same document for storage means that the document should be updated not duplicated.</p>
+
+<h2 id="tests">Tests</h2>
+<p>This feature requires a set of conditions are tested:</p>
+<ul>
+	<li>you can't PUT an empty page</li>
+	<li>if you PUT a new page you receive a 201</li>
+	<li>if you PUT an existing page you receive a 200</li>
+	<li>the inserted or updated resource URL is in the location header of the response</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">PUTing pages</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should 400 when no body</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">with new name</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">respond with 201 status</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">with existing name</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">respond with 200 status</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>After a little backwards and forwards the tests ended up as:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">supertest</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">should</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">server</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">db</span><span class="p">;</span>
+
+<span class="nf">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//set environment to test and init things</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">;</span> 
+    <span class="nx">db</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../server/db</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">server</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../server</span><span class="dl">'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">PUTing pages</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should 400 when no body</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="dl">'</span><span class="s1">/pages/newPage</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">text/json</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">,</span> <span class="sr">/json/</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">with a new page name</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nf">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">db</span><span class="p">.</span><span class="nx">pages</span><span class="p">.</span><span class="nf">remove</span><span class="p">({},</span> <span class="kc">false</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{});</span>
+      <span class="p">});</span>
+
+      <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should respond with 201 status</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+        <span class="nf">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="dl">'</span><span class="s1">/pages/newPage</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">send</span><span class="p">({</span><span class="na">name</span><span class="p">:</span><span class="dl">'</span><span class="s1">newPage</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span><span class="dl">'</span><span class="s1">/somewhere</span><span class="dl">'</span><span class="p">})</span>
+          <span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">text/json</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">,</span> <span class="sr">/json/</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="dl">'</span><span class="s1">location</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">/somewhere</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
+      <span class="p">});</span>
+
+    <span class="p">});</span>
+
+    <span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">with an existing page name</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nf">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">db</span><span class="p">.</span><span class="nx">pages</span><span class="p">.</span><span class="nf">remove</span><span class="p">({},</span> <span class="kc">false</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{});</span>
+        <span class="nx">db</span><span class="p">.</span><span class="nx">pages</span><span class="p">.</span><span class="nf">insert</span><span class="p">({</span><span class="na">name</span><span class="p">:</span><span class="dl">'</span><span class="s1">existingPage</span><span class="dl">'</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">docs</span><span class="p">){});</span>
+      <span class="p">});</span>
+
+      <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should respond with 200 status</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+        <span class="nf">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="dl">'</span><span class="s1">/pages/existingPage</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">send</span><span class="p">({</span><span class="na">name</span><span class="p">:</span><span class="dl">'</span><span class="s1">existingPage</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span><span class="dl">'</span><span class="s1">/somewhereElse</span><span class="dl">'</span><span class="p">})</span>
+          <span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">text/json</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">,</span> <span class="sr">/json/</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="dl">'</span><span class="s1">location</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">/somewhereElse</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
+      <span class="p">});</span>
+
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>and an alteration to the server file to make those tests pass:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="dl">'</span><span class="s1">/pages/:page</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pageName</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">page</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span> <span class="o">||</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">getOwnPropertyNames</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nf">json</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="p">{});</span>
+    <span class="p">}</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">pages</span><span class="p">.</span><span class="nf">findAndModify</span><span class="p">({</span>
+        <span class="na">query</span><span class="p">:</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="nx">pageName</span> <span class="p">},</span>
+        <span class="na">update</span><span class="p">:</span> <span class="p">{</span> <span class="na">$set</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span> <span class="p">},</span>
+        <span class="na">upsert</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">new</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">,</span> <span class="nx">lastErrorObject</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nf">location</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">url</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">lastErrorObject</span><span class="p">.</span><span class="nx">updatedExisting</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nf">json</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{});</span> 
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nf">json</span><span class="p">(</span><span class="mi">201</span><span class="p">,{});</span> 
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Again this code feels a bit ugly to me… there's a lot bunched up together - but it can be revisited as it's covered by tests. Importantly it works and allows storage of new pages and edits to existing pages</p>
+
+<p>And, yes, I know that any unauthorised user can edit with this… authentication is still to come!</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/Websites-CMS-Platform-Storing-Data2.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

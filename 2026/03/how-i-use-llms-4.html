@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I use LLMs? - four</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/03/how-i-use-llms-4.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/03/how-i-use-llms-4.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I use LLMs? - four" />
+    <meta
+      property="og:description"
+      content="How I use LLMs - four"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I use LLMs - four"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I use LLMs? - four",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"672",
+     "url":"https://pauldambra.dev/2026/03/how-i-use-llms-4.html",
+     "datePublished":"2026-03-10",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/03/how-i-use-llms-4.html"
+     },
+     "articleBody":"I  remain  very  cynical  about  the  current  high-water  mark  for  LLMs  and  augmented  coding…  but  at  the  same  time  I  use  them  every  day  and  I  don't  think  they're  finished  improving.\n\nLet's  growth  hack  blog  visitor  numbers  record  how  I  use  them  today  as  a  little  reflection  on  where  I  think  they  work  and  where  they  don't.  Something  I  can  revisit  as  the  tech  (and  my  skill  with  it)  improves\n\nThis  is  update  number  three,  or  entry  number  four,  depending  on  how  you  want  to  count  it.\n\n\n    the  first  entry  is  here\n    the  second  entry  is  here\n    the  third  entry  is  here\n\n\nin  today's  edition  of  AI  hot  takes\n\n\n    basically  never  braincode\n    it's  still  about  your  brain\n    hot  take\n\n\n\n\nFirst,  a  necessary  but  brief  diversion  into  how  I  use  tools  generally\n\nI  was  largely  self-taught  as  a  developer  and  (after  vbscript  😱)  I  started  with  DotNet.  I  found  JetBrains  Resharper  early  on  and  never  looked  back.  The  assistance  in  the  IDE  to  write,  refactor,  and  improve  code  was  game-changing.  I  don't  begrudge  anybody  any  tool  they  want  to  use  to  level-up.  Wanna  use  a  graphical  git  client,  or  emacs,  or  anything  else…  go  for  it,  go  make  cool  things\n\nBecause  of  that  entry  to  the  industry  I'm  also  not  super  keen  on  VSCode  (you  love  it?  great,  see  above,  you  do  you,  go  make  cool  things).  I'm  too  used  to  clever  interventions  helping  me  and  VSCode  is  too  barebones  (and  so  much  slower  than  SublimeText)\n\nSo,  I  like  having  tools  directly  involved  in  my  workflow.  I  learned  LINQ  more  quickly  and  more  thoroughly  because  I  had  resharper  prompting  me  inline,  at  write-time:  \"hey,  why  not  like  this?\"\n\nbasically  never  braincode\n\nRecent  improvements  to  agents  and  their  UX  has  meant  I  only  have  to  actively  write  code  when  I  choose  to.  It  would  be  possible  to  completely  work  via  agents.\n\nIt  really  is  only  necessary  to  \"braincode\"  when  it  is  easier  for  me  to  sketch  a  solution  than  to  prompt  an  LLM  to  write  it.  Even  then  I  would  quickly  fall  back  to  \"hey  agent,  here's  what  i  mean.  finish  this  off\"\n\nHaving  the  agent  in  slack  is  chef's-kiss-dot-reacji.  Someone  says  \"hey,  should  the  foo  be  wider\"  and  you  reply  \"@agent,  make  the  foo  wider\"  Like  having  a  super  eager  and  precocious  intern  sat  waiting  for  the  next  task.\n\nit's  still  about  your  brain\n\nYou'll  see  a  lot  of  people  saying  variations  on  \"it  was  never  about  the  code\"  or  \"it  was  always  about  what  you  chose  to  make  not  how  you  made  it\".  And  tbh  I  90%  agree  with  them.  The  code  was  a  hard  part  but  it  wasn't  the  only  hard  part.\n\nWe've  automated  a  big  chunk  of  code  understanding  and  generation  but  we  still  need  to  choose  the  direction.  Reaching  through  the  system  of  systems  you  can  affect  to  try  and  deliver  value.\n\nAstronaut-with-pistol-dot-meme\n\nhot  take\n\nCode  is  no  longer  for  humans.\n\nWe  are  seeing  the  end  of  the  era  of  code  needing  to  be  in  a  format  that  humans  can  directly  parse.  Languages  are  already  abstractions  on  top  of  what  is  really  being  executed.  The  format  being  determined  by  the  available  technology  to  let  humans  create  code.  And  by  the  needs  of  the  humans  at  understanding  the  code.\n\nIn  a  world  where  we  can  say  \"hey  robot,  how  does  the  Foo  component  manage  the  ClinkExpander  interactions\".  It  no  longer  matters  what  the  underlying  code  looks  like.\n\nMy  expectation  is  that  there  are  already  folk  working  on  a  storage  format  that  is  accessible  to  agents  but  loses  the  trade-offs  it  had  to  make  for  human  readability.  Maybe  a  binary  DAG  format  since  we  don't    really  need  the  translation  from  an  abstract  syntax  tree  in  memory  into  text  anymore.\n\nIf  the  agents  keep  getting  better,  my  expectation  is  that  I  need  to  be  able  to  ask  for  representations  of  the  code  that  help  me  and  them  interact  with  it  way  more  than  I  need  a  flat  text  file.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Tue Mar 10 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I use LLMs? - four</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/03/how-i-use-llms-4.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+use+LLMs%3F+-+four&via=pauldambra&url=https://pauldambra.dev/2026/03/how-i-use-llms-4.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I remain very cynical about the current high-water mark for LLMs and augmented coding… but at the same time I use them every day and I don't think they're finished improving.</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number three, or entry number four, depending on how you want to count it.</p>
+
+<ul>
+  <li><a href="/2025/07/how-i-use-llms.html">the first entry is here</a></li>
+  <li><a href="/2026/01/how-i-use-llms-2.html">the second entry is here</a></li>
+  <li><a href="/2026/01/how-i-use-llms-3.html">the third entry is here</a></li>
+</ul>
+
+<h2 id="in-todays-edition-of-ai-hot-takes">in today's edition of AI hot takes</h2>
+
+<ul>
+  <li>basically never braincode</li>
+  <li>it's still about your brain</li>
+  <li>hot take</li>
+</ul>
+
+<!--more-->
+
+<h1 id="first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally">First, a necessary but brief diversion into how I use tools generally</h1>
+
+<p>I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don't begrudge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things</p>
+
+<p>Because of that entry to the industry I'm also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I'm too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)</p>
+
+<p>So, I <em>like</em> having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: "hey, why not like this?"</p>
+
+<h1 id="basically-never-braincode">basically never braincode</h1>
+
+<p>Recent improvements to agents and their UX has meant I only have to actively write code when I choose to. It would be possible to completely work via agents.</p>
+
+<p>It really is only necessary to "braincode" when it is easier for me to sketch a solution than to prompt an LLM to write it. Even then I would quickly fall back to "hey agent, here's what i mean. finish this off"</p>
+
+<p>Having the agent in slack is chef's-kiss-dot-reacji. Someone says "hey, should the foo be wider" and you reply "@agent, make the foo wider" Like having a super eager and precocious intern sat waiting for the next task.</p>
+
+<h1 id="its-still-about-your-brain">it's still about your brain</h1>
+
+<p>You'll see a lot of people saying variations on "it was never about the code" or "it was always about what you chose to make not how you made it". And tbh I 90% agree with them. The code was <em>a</em> hard part but it wasn't the only hard part.</p>
+
+<p>We've automated a big chunk of code understanding and generation but we still need to choose the direction. Reaching through the system of systems you can affect to try and deliver value.</p>
+
+<p>Astronaut-with-pistol-dot-meme</p>
+
+<h1 id="hot-take">hot take</h1>
+
+<p>Code is no longer for humans.</p>
+
+<p>We are seeing the end of the era of code needing to be in a format that humans can directly parse. Languages are already abstractions on top of what is really being executed. The format being determined by the available technology to let humans create code. And by the needs of the humans at understanding the code.</p>
+
+<p>In a world where we can say "hey robot, how does the Foo component manage the ClinkExpander interactions". It no longer matters what the underlying code looks like.</p>
+
+<p>My expectation is that there are already folk working on a storage format that is accessible to agents but loses the trade-offs it had to make for human readability. Maybe a binary DAG format since we don't  really need the translation from an abstract syntax tree in memory into text anymore.</p>
+
+<p>If the agents keep getting better, my expectation is that I need to be able to ask for representations of the code that help me and them interact with it way more than I need a flat text file.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2026/01/how-i-use-llms-3.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - three
+      </h3>
+      <small>
+        30 Jan 2026
+      </small>
+  </div>
+</a>  <a href="/2025/12/avoiding-madness.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Things that a different me would have been tipped into psychosis by
+      </h3>
+      <small>
+        03 Dec 2025
+      </small>
+  </div>
+</a>  <a href="/2025/10/how-i-use-llms-2.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs - two?
+      </h3>
+      <small>
+        24 Oct 2025
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/03/how-i-use-llms-4.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/03/how-i-use-llms-4.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

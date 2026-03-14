@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Is there really just an iPad market?</title>
+    <link rel="canonical" href="https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Is there really just an iPad market?" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Is there really just an iPad market?",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1168",
+     "url":"https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html",
+     "datePublished":"2012-02-07",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html"
+     },
+     "articleBody":"Disclaimer:  I  use  and  love  an  iPad  (1).  I've  got  an  iPhone,  mac  mini,  a  MBP  and  an  iMac.  But  I'm  not  an  out  and  out  fanboy  -  I'm  a  windows  admin  and  nascent  C#  developer.  I  try  to  use  Linux  where  it  fits  and  find  more  places  it  fits  all  the  time.  And  I've  been  developing  an  Android  application.\n\nTL;DR  The  transformer  prime  is  a  beautiful  computer  but  it  might  be  true  there's  an  iPad  market  and  not  a  tablet  market.\n\nUPDATE\n\nAnd  then  today  Google  release  Chrome  for  Ice  Cream  Sandwich.  BEST.  TABLET.  BROWSER.  EVAR.\n\n\n\nI  am  fickle  and  this  is  enough  to  sway  me  to  an  evens  opinion  between  the  two  OSs.  The  keyboard  keeps  switching  back  to  upper  case  But  it  is  chrome  beta\n\nOne  brill  feature  is  when  the  browser  isn't  certain  what  link  you  meant  to  click\n\n\n\nA  pop-up  is  launched  to  give  you  a  larger  target.  As  always  with  Chrome  impeccable  attention  to  detail\n\n\nI  wanted  to  make  a  \"proper\",  \"empirical\"  comparison  between  Android  and  iOS.  So  I  got  a  Transformer  Prime.\n\nActually  this  is  anecdotal  and  written  at  5am  &lt;=  YMMV\n\nThe  prime  is  more  powerful  than  the  sum  of  the  capabilities  of  all  computers  I  was  within  a  mile  of  before  my  twelfth  birthday.\n\nAs  such  I  ran  it  through  a  full  suite  of  tests\n\nWatching  parrots  talking  on  YouTube  with  my  kidsResult:  beautiful  screen,  speakers  have  a  tendency  to  buzz,  youngest  thinks  parrot  and  pirate  are  synonymsReading  using  KindleResult:  The  wide  aspect  screen  makes  a  great  portrait  reader.  The  screen  really  is  beautifulTyping  stuff  into  stuffAndroid  autocorrect  isn't  as  good  as  iOS.  iOS  correct  is  so  good  that  people  stop  checking  it  and  so  you  get  \"damn  you  autocorrect\".  With  Android  I  have  to  break  out  of  my  flow  to  pay  attention  to  what  it  is  suggesting.Sending  emailsWhy  can't  I  edit  the  body  of  the  mail  I'm  replying  to  when  in  HTML?Do  I  keep  missing  the  space  bar  because  of  the  task  bar  at  the  bottom  of  the  screenspoiler:  yes\n\nA)  iOS  is  a  consumer  operating  system  in  a  way  that  Android  isn't\n\n\n\nThe  first  time  I  was  handed  an  iPad  I  fell  in  love.  I  immediately  grokked  how  to  use  it.  I  bought  one.  My  kids  use  it  (18  months  and  4  year  old).  They've  tried  but  they  haven't  broken  it.  I've  seen  children  and  adults  with  little  or  no  experience  of  computers  pick  iOS  up  super-fast.\n\n\n\nI  handed  the  Transformer  to  my  18  month  old  and  with  two-screen  presses  she  had  turned  off  wifi.  This  device  isn't  kid  proof  in  the  way  that  an  iPad  is.  My  eldest  when  she  under  three  taught  my  Dad  how  to  use  YouTube  on  iOS.\n\nBut  a  lot  of  this  ease  of  use  isn't  specific  to  iOS.  Touch-screen  visual  metaphors  more  closely  mimic  how  we  interact  with  the  physical  world  -  so  a  touchscreen  OS  doesn't  need  explanation  in  the  way  that  a  traditional  desktop  OS  does.  And neither  Apple  nor  Google  invented  touch-screen  gestures.  Although  that's  not  say  they  haven't  patented  them.\n\nSecond)  visual  metaphors  are  really  important\n\nThe  first  time  I  picked  up  an  Android  device  I  had  to  have  it  explained  to  me  so  I  could  navigate.  At  that  point  in  time  iOS  won  out  with  it's  one  big  button  approach.\n\nBut  that  was  Honeycomb  and  in  ICS  Google  (or  whichever  genius  did  it)  have  sorted  the  problem  I  had…\n\n\n\nIn  Honeycomb  my  eyes  didn't  immediately  get  that  metaphor.  I  read  it  as  Left,  Up,  Windows.  Not   as;  Back,  Home,  \"Windows\"  i.e.  multi-tasking.  So  I  had  a  tiny  barrier  to  using  the  system.  And  in  the  MTV-diseased,  Radio-1-attention-span  world  a  tiny  usability  barrier  is  actually  a  big  usability  barrier  (you  know  what  I  mean  -  don't  confound  user's  expectations)\n\nI  wanted  to  change  application  and  my  brain  only  knew  how  to  do  that  in  iOS  mode. \n\n\n    Go  back  to  the  desktop  2)  pick  an  application  3)????  4)  Profit  &lt;  meme  apology  /&gt;\n\n\nIn  ICS  the  home  icon  is  much,  much,  much,  much  clearer.  So  the  barrier  to  understanding  of  a  new  user  and  specifically  to  an  iOS  user  is  lower.\n\nBut  once  I  was  over  that  initial  hump  I  do  like  the  back  button.  Although  it  can  take  a  second  to  figure  out  where  it  will  take  you.  I've  found  three  use-cases\n\nHorizontally  through  an  applications  activitiesVertically  between  applicationsIn  the  browser  it  appears  to  function  as  a  traditional  back  button  and  only  jumps  out  of  the  browser  back  to  the  previous  app  when  it  hits  the  earliest  page  in  the  current  tab's  history  &lt;=  I  might  be  wrong  here  since  I  do  still  find  it  confusing\n\nUsing  a  tablet  or  phone  you  are  interrupted  by  tweets,  emails  and  the  like  and  I  do  enjoy  that  in  Android  I  can  jump  out  of  what  I'm  doing;  check  out  the  picture  of  a  cat  smoking  a  pipe  and  then  quickly  return  to  my  previous  task.\n\nSo  in  my  scientific  and  empirical appraisal of  ease-of-use  iOS  wins.  The  first  iPad2  I  bought  for  the  organisation  I  work  for  I  gave  to  a  member  of  staff  and  said  \"You  can  have  this  for  a  week  or  two  to  try  it  out.\".  Two  days  later  they  came  to  work  and  said  \"Erm,  I  know  you  won't  believe  me  but  my  laptop  is  broken  can  I  keep  the  iPad?\"\n\n** IT  departments  want  their  staff  constrained  but  enabled.  **\n\nYou  constrain  them  because  you  don't  want  them  hacking  away  and  inventing  methods  of  doing  things  because  that's  when  they  delete  all  the  files  or  map  a  share  to  some  level  of  hell  and  release  a  demonic  file-type  that  ruins  your  afternoon.  On  the  flip-side  constrain  them  too  much  and  they  will  figure  out  the  most convoluted  and  surprising  mechanism  for  completing  a  task  (almost  always  in  Excel  with  VB  macros)  and  then  expect  you  to  support  the  jawless  hound  they've  created  because  (and  here  I'm  stretching  the  metaphor):  \"My  dogs  tongue  keeps  getting  muddy\"\n\nI'm  really  not  sure  which  tablet  OS  (and  yes  there  are  only  two  players)  has  hit  the  right  mix  of  constraining  and  enabling.\n\nSo  guess  what  YMMV.  Get  the  tablet  that  fits  yours  or  your  user's  needs.  There's  not  much  between  them  -  they're  both  usable.  Why  don't  we  all  make  web  apps  (spoiler:  I  don't  know)  If  you  already  use  and  like  Android  and  you  want  to  buy  a  tablet  -  definitely  get  the  transformer  prime. \n\nI'm  not  really  sold  on  the  clip-on  keyboard  but  then  I  tend  to  plan  my  daily  typing  amount  in  advance  and  if  I'll  go  over  an  arbitrary  amount  of  typing  I  take  a  laptop.\n\nThe  transformer  is  a  gorgeous  piece  of  hardware.  Now  to  hack  iOS  onto  it…  what's  that  you  can't  do  that  kind  of  thing  with  iOS…\n\n\n\nKids  are  awake.  Blog  post  ends.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Tue Feb 07 2012</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Is there really just an iPad market?</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Is+there+really+just+an+iPad+market%3F&via=pauldambra&url=https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#rant"
+      >
+        in: rant
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#ios">
+    iOS
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#android">
+    android
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>Disclaimer: I use and love an iPad (1). I've got an iPhone, mac mini, a MBP and an iMac. But I'm not an out and out fanboy - I'm a windows admin and nascent C# developer. I try to use Linux where it fits and find more places it fits all the time. And I've been developing an Android application.</p>
+
+<p>TL;DR The transformer prime is a beautiful computer but it might be true there's an iPad market and not a tablet market.</p>
+
+<h2 id="update">UPDATE</h2>
+
+<p>And then today Google release Chrome for Ice Cream Sandwich. BEST. TABLET. BROWSER. EVAR.</p>
+
+<!--more-->
+
+<p>I am fickle and this is enough to sway me to an evens opinion between the two OSs. The keyboard keeps switching back to upper case But it is chrome beta</p>
+
+<p>One brill feature is when the browser isn't certain what link you meant to click</p>
+
+<p><img src="http://4.bp.blogspot.com/-uzlphZanh9k/TzF8dUNmjRI/AAAAAAAAAbs/BjhbqhoQIE4/s1600/Screenshot_2012-02-07-19-24-21.jpg" alt="link zoom" loading="lazy" /></p>
+
+<p>A pop-up is launched to give you a larger target. As always with Chrome impeccable attention to detail</p>
+
+<hr />
+<p>I wanted to make a "proper", "empirical" comparison between Android and iOS. So I got a Transformer Prime.</p>
+
+<p>Actually this is anecdotal and written at 5am &lt;= YMMV</p>
+
+<p>The prime is more powerful than the sum of the capabilities of all computers I was within a mile of before my twelfth birthday.</p>
+
+<p>As such I ran it through a full suite of tests</p>
+
+<ol><li>Watching parrots talking on YouTube with my kids</li><ol><li>Result: beautiful screen, speakers have a tendency to buzz, youngest thinks parrot and pirate are synonyms</li></ol><li>Reading using Kindle</li><ol><li>Result: The wide aspect screen makes a great portrait reader. The screen really is beautiful</li></ol><li>Typing stuff into stuff</li><ol><li>Android autocorrect isn't as good as iOS. iOS correct is so good that people stop checking it and so you get "damn you autocorrect". With Android I have to break out of my flow to pay attention to what it is suggesting.</li></ol><li>Sending emails</li><ol><li>Why can't I edit the body of the mail I'm replying to when in HTML?</li><li>Do I keep missing the space bar because of the task bar at the bottom of the screen</li><ol><li>spoiler: yes</li></ol></ol></ol>
+
+<p>A) iOS is a consumer operating system in a way that Android isn't</p>
+
+<!--alex ignore kids adults --->
+
+<p>The first time I was handed an iPad I fell in love. I immediately grokked how to use it. I bought one. My kids use it (18 months and 4 year old). They've tried but they haven't broken it. I've seen children and adults with little or no experience of computers pick iOS up super-fast.</p>
+
+<!--alex ignore he-she dad-mom --->
+
+<p>I handed the Transformer to my 18 month old and with two-screen presses she had turned off wifi. <b>This device isn't kid proof in the way that an iPad is.</b> My eldest when she under three taught my Dad how to use YouTube on iOS.</p>
+
+<p>But a lot of this ease of use isn't specific to iOS. Touch-screen visual metaphors more closely mimic how we interact with the physical world - so a touchscreen OS doesn't need explanation in the way that a traditional desktop OS does. And neither Apple nor Google invented touch-screen gestures. Although that's not say they haven't patented them.</p>
+
+<p>Second) visual metaphors are really important</p>
+
+<p>The first time I picked up an Android device I had to have it explained to me so I could navigate. At that point in time iOS won out with it's one big button approach.</p>
+
+<p>But that was Honeycomb and in ICS Google (or whichever genius did it) have sorted the problem I had…</p>
+
+<p><img src="http://2.bp.blogspot.com/-2M-IxfjEhzk/TzDA6T-sHCI/AAAAAAAAAac/4vc6orMDJGI/s1600/android-icons.jpg" alt="android UI" loading="lazy" /></p>
+
+<p>In Honeycomb my eyes didn't immediately get that metaphor. I read it as Left, Up, Windows. Not  as; Back, Home, "Windows" i.e. multi-tasking. So I had a tiny barrier to using the system. And in the MTV-diseased, Radio-1-attention-span world a tiny usability barrier is actually a big usability barrier (you know what I mean - don't confound user's expectations)</p>
+
+<p>I wanted to change application and my brain only knew how to do that in iOS mode. </p>
+
+<ol>
+  <li>Go back to the desktop 2) pick an application 3)???? 4) Profit &lt; meme apology /&gt;</li>
+</ol>
+
+<p>In ICS the home icon is much, much, much, much clearer. So the barrier to understanding of a new user and specifically to an iOS user is lower.</p>
+
+<p>But once I was over that initial hump I do like the back button. Although it can take a second to figure out where it will take you. I've found three use-cases</p>
+
+<ul><li>Horizontally through an applications activities</li><li>Vertically between applications</li><li>In the browser it appears to function as a traditional back button and only jumps out of the browser back to the previous app when it hits the earliest page in the current tab's history &lt;= I might be wrong here since I do still find it confusing</li></ul>
+
+<p>Using a tablet or phone you are interrupted by tweets, emails and the like and I do enjoy that in Android I can jump out of what I'm doing; check out the picture of a cat smoking a pipe and then quickly return to my previous task.</p>
+
+<p>So in my scientific and empirical appraisal of ease-of-use iOS wins. The first iPad2 I bought for the organisation I work for I gave to a member of staff and said "You can have this for a week or two to try it out.". Two days later they came to work and said "Erm, I know you won't believe me but my laptop is broken can I keep the iPad?"</p>
+
+<p>** <b>IT departments want their staff constrained but enabled. **</b></p>
+
+<p>You constrain them because you don't want them hacking away and inventing methods of doing things because that's when they delete all the files or map a share to some level of hell and release a demonic file-type that ruins your afternoon. On the flip-side constrain them too much and they will figure out the most convoluted and surprising mechanism for completing a task (almost always in Excel with VB macros) and then expect you to support the jawless hound they've created because (and here I'm stretching the metaphor): "My dogs tongue keeps getting muddy"</p>
+
+<p>I'm really not sure which tablet OS (and yes there are only two players) has hit the right mix of constraining and enabling.</p>
+
+<p>So guess what YMMV. Get the tablet that fits yours or your user's needs. There's not much between them - they're both usable. Why don't we all make web apps (spoiler: I don't know) If you already use and like Android and you want to buy a tablet - definitely get the transformer prime. </p>
+
+<p>I'm not really sold on the clip-on keyboard but then I tend to plan my daily typing amount in advance and if I'll go over an arbitrary amount of typing I take a laptop.</p>
+
+<p>The transformer is a gorgeous piece of hardware. Now to hack iOS onto it… what's that you can't do that kind of thing with iOS…</p>
+
+<!--alex ignore kids --->
+
+<p>Kids are awake. Blog post ends.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2018/01/direction.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Is where we're going where we're going
+      </h3>
+      <small>
+        29 Jan 2018
+      </small>
+  </div>
+</a>  <a href="/2013/11/astronomical-database-identfier.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Astronomical Database Identfier
+      </h3>
+      <small>
+        22 Nov 2013
+      </small>
+  </div>
+</a>  <a href="/2009/10/bing-is-not-search-engine.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Bing is not a search engine
+      </h3>
+      <small>
+        30 Oct 2009
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2012/02/is-there-really-just-ipad-market.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

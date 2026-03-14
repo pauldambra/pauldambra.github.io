@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Using Travis CI to build a Jekyll site</title>
+    <link rel="canonical" href="https://pauldambra.dev/using-travis-to-build-jekyll.html" />
+    <meta property="og:url" content="https://pauldambra.dev/using-travis-to-build-jekyll.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Using Travis CI to build a Jekyll site" />
+    <meta
+      property="og:description"
+      content="using Travis CI to build a Jekyll site"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="using Travis CI to build a Jekyll site"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Using Travis CI to build a Jekyll site",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1262",
+     "url":"https://pauldambra.dev/using-travis-to-build-jekyll.html",
+     "datePublished":"2016-09-18",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/using-travis-to-build-jekyll.html"
+     },
+     "articleBody":"&lt;aside  class=\"\"mb-2  ml-4  border-l-2  border-l-sky-700  pl-1\"\"&gt;\n\t&lt;h1  class=\"text-base\"&gt;This  post  is  part  of  a  series  on  improving  this  blog  #recursion&lt;/h1&gt;\n\t&lt;div  class=\"flex  flex-row\"&gt;\n\t\t&lt;div  class=\"flex-grow\"&gt;&lt;/div&gt;\n\t\t&lt;div  class=\"flex-grow  content-end\"&gt;\n\t\t\tNext  Post\n\t\t&lt;/div&gt;\n\t&lt;/div&gt;\n&lt;/aside&gt;\n\nI  recently  had  a  conversation  where  I  said  that  I  couldn't  build  an  AMP  version  of  my  blog  because  I  use  Github  Pages  to  build  and  serve  it.  Github  don't  allow  any  Jekyll  plugins  to  run.\n\nLater  that  day  my  subconscious  prompted  me  to  realise  that,  since  Github  pages  will  serve  static  HTML  quite  happily,  I  could  use  Travis  CI  to  build  a  Github  repository  that  held  the  source  for  the  blog  and  push  the  static  output  to  a  second  repository  that  Github  would  publish  as  is.\n\n\n\nTravis  CI\n\n\n\nTravis  is  an  online  continuous  integration  system  that  hooks  very  neatly  into  Github.  It's  free  for  open  source  projects  and  adds  build  status  to  commits.  It  can  be  set  to  automatically  build  pull  requests  and  adds  output  to  those  PRs  so  that  people  can  see  if  it  is  safe  to  merge  a  request  without  building  it  locally  themselves\n\n\n\nTravis  is  configured  by  placing  a  YAML  file  in  the  root  of  the  project.  You  can  place  commands  directly  into  the  config  file  but  I  prefer  to  put  those  commands  in  a  script  file  -  that  way  you  can  run  them  locally  to  confirm  the  steps  should  work  before  pushing  the  YAML  file  to  Github  for  Travis  to  detect.\n\nContinuous  integration  is  the  process  of  automating  build  and  verification  of  your  software.  It's  they  way  you  avoid  having  to  say  \"Works  on  my  machine.  ¯_(ツ)_/¯\".  I  &lt;3  CI  so  being  able  to  fold  it  into  my  hobby  workflow  like  this  is  super  satisfying.\n\nDesired  outcome\n\n\n\nI  decided  to  have  one  repository  called  blog_source  which  would  build  the  static  site  into  a  folder.  And  a  second  repository  (the  original  one  pauldambra.github.io)  that  would  host  the  actual  site.  Previously  I  pushed  the  jekyll  source  to  that  repository  for  Github  to  build  now  I'll  be  pushing  HTML  for  Github  to  host.\n\nThe  process  will  be:\n\n\n    git  init  the  output  repository  in  a  known  folder,\n    pull  the  current  state,\n    write  the  new  output  over  the  top,\n    commit  those  changes  and  push  to  the  remote.\n\n\nThat  push  makes  any  changes  visible  in  short  order  online.\n\nI  was  introduced  to  this  \"release  repository\"  mechanism  for  deploying  code  in  a  previous  job.  It  is  particularly  effective  for  projects  that  build  some  static  output  that  can  be  run  as-is  like  this  static  HTML  site  or  a  NodeJS  project  after  transpilation.\n\nYou  can  extend  it  nicely  by  pushing  a  version  that  can  be  hosted  in  a  CI  environment  and  have  acceptance  tests  run  against  it.  Which,  if  they  pass,  cause  that  version  to  be  tagged  in  the  git  repository  allowing  it  to  be  used  further  down  your  deployment  pipeline.\n\nInitial  steps\n\n#!  /bin/bash\n\nset  -e\n\nDEPLOY_REPO=\"https://${DEPLOY_BLOG_TOKEN}@github.com/pauldambra/pauldambra.github.io.git\"\n\nfunction  main  {\n\tclean\n\tget_current_site\n\tbuild_site\n}\n\nfunction  clean  {\n\techo  \"cleaning  _site  folder\"\n\tif  [  -d  \"_site\"  ];  then  rm  -Rf  _site;  fi\n}\n\nfunction  get_current_site  {\n\techo  \"getting  latest  site\"\n\tgit  clone  --depth  1  $DEPLOY_REPO  _site\n}\n\nfunction  build_site  {\n\techo  \"building  site\"\n\tbundle  exec  jekyll  build\n}\n\nmain\n\n\nThese  first  steps  are  relatively  straightforward.\n\n\n    if  the  output  folder  exists  delete  it\n    then  clone  the  latest  revision  of  the  output  repository  into  it\n    finally  run  the  jekyll  build\n        \n            I'm  accepting  the  default  output  location  of  _site  to  simplify  things\n        \n    \n\n\nThe  only  'complicated'  bit  here  is  the  DEPLOY_BLOG_TOKEN  environment  variable  that  is  being  used  to  authenticate  against  Github.\n\nGithub  Personal  Access  Tokens\n\nPersonal  access  tokens  act  in-place  of  passwords  for  github  resources.  You  can  limit  what  permissions  those  tokens  have.  Generating  different  tokens  for  different  uses  so  you  can  delete  them  if  you  suspect  they  have  been  compromised.\n\n\n\nSince  they  act  like  passwords  you  should  be  very  careful  with  them…\nTravis  allows  you  to  encrypt  variables  before  adding  them  to  the  .travis.yml  file  so  that  secure  information  doesn't  need  to  be  committed  into  the  repository  or  stored  in  plain  text  by  the  CI  system.\n\nThe  Travis  CLI  encrypts  the  key  in  the  context  of  the  repository  in  which  Travis  is  going  to  run  so  that  it  can  only  be  decrypted  in  that  context.\n\nThis  secure  variable  will  be  used  in  the  blog_source  build  so  that's  the  encryption  context.\n\ntravis  encrypt  DEPLOY_BLOG_TOKEN=SOME_SECRET_VALUE  -r  pauldambra/blog_source    --add\n\n\nHere  we  provide  the  name  that  should  be  available  in  Travis  and  its  value.  With  -r  specify  the  repository  context  to  operate  in  and  with  --add  instruct  the  CLI  to  add  the  token  to  the  .travis.yml  file.\n\nThe  .travis.yml  file\n\nThe  definition  for  the  Travis  YAML  is  online.  It  lets  you  define  the  build  environment  and  what  commands  will  be  run  at  each  stage  of  the  lifecycle  of  your  travis  jobs.\n\nlanguage:  ruby\ncache:  bundler\ninstall:\n    -  bundle  install\nscript:\n    -  \"./build.sh\"\nenv:\n    global:\n        secure:  aGrEaTbIgLoNgEnCrYpTeDvAlUe\n\n\nHere  we  tell  Travis  that\n\n\n    this  is  a  Ruby  project\n    to  cache  the  bundler  output  (most  of  the  run  turns  out  to  be  building  nokogiri)\n    that  the  install  setup  is  to  run  bundle  install\n    that  the  build  step  is  to  run  ./build.sh\n    and  finally  to  add  the  secure  variable  to  the  environment.\n\n\nDeploying  the  built  output\n\n\n\nThe  final  step  in  the  script  is  to  push  the  changed  code  to  the  output  repository,  when  we're  on  master  and  not  in  a  pull  request.\n\nfunction  deploy  {\n\techo  \"deploying  changes\"\n\n\tif  [  -z  \"$TRAVIS_PULL_REQUEST\"  ];  then\n\t        echo  \"except  don't  publish  site  for  pull  requests\"\n\t        exit  0\n\tfi\n\n\tif  [  \"$TRAVIS_BRANCH\"  !=  \"master\"  ];  then\n\t        echo  \"except  we  should  only  publish  the  master  branch.  stopping  here\"\n\t        exit  0\n\tfi\n\n\tcd  _site\n\tgit  config  --global  user.name  \"Travis  CI\"\n        git  config  --global  user.email  paul.dambra+travis@gmail.com\n\tgit  add  -A\n\tgit  status\n\tgit  commit  -m  \"Lastest  site  built  on  successful  travis  build  $TRAVIS_BUILD_NUMBER  auto-pushed  to  github\"\n\tgit  push  $DEPLOY_REPO  master:master\n}\n\n\n\n\nTravis  adds  several  convenience  environment  variables  two  of  which  which  can  be  checked  here  to  confirm  that  we  don't  want  to  deploy  pull  requests  or  branches  other  than  master.\n\nThen  the  script  ensures  that  the  commit  is  identified  and  has  a  message  that  can  be  tracked  back  to  this  Travis  build.  Before  pushing  to  Github.\n\nFinally\n\n\n\nThis  process  turned  out  to  be  straightforward  and  Travis  is  a  joy  to  work  with.  Next  up  it's  time  to  add  some  plugins  to  the  site  so  that  an  AMP  version  can  be  published\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Sep 18 2016</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Using Travis CI to build a Jekyll site</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/using-travis-to-build-jekyll.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Using+Travis+CI+to+build+a+Jekyll+site&via=pauldambra&url=https://pauldambra.dev/using-travis-to-build-jekyll.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#continuous-delivery"
+      >
+        in: continuous delivery
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#travisci">
+    travisci
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#jekyll">
+    jekyll
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#recursion">
+    recursion
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#blog">
+    blog
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>&lt;aside class=""mb-2 ml-4 border-l-2 border-l-sky-700 pl-1""&gt;
+	&lt;h1 class="text-base"&gt;This post is part of a series on improving this blog #recursion&lt;/h1&gt;
+	&lt;div class="flex flex-row"&gt;
+		&lt;div class="flex-grow"&gt;&lt;/div&gt;
+		&lt;div class="flex-grow content-end"&gt;
+			<a href="/structured-data-with-jekyll.html">Next Post</a>
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/aside&gt;</p>
+
+<p>I recently had a conversation where I said that I couldn't build an AMP version of my blog because I use Github Pages to build and serve it. Github don't allow any Jekyll plugins to run.</p>
+
+<p>Later that day my subconscious prompted me to realise that, since Github pages will serve static HTML quite happily, I could use Travis CI to build a Github repository that held the source for the blog and push the static output to a second repository that Github would publish as is.</p>
+
+<!--more-->
+
+<h1 id="travis-ci">Travis CI</h1>
+
+<!--alex ignore hooks --->
+
+<p><a href="https://travis-ci.org/">Travis</a> is an online continuous integration system that hooks very neatly into Github. It's free for open source projects and adds build status to commits. It can be set to automatically build pull requests and adds output to those PRs so that people can see if it is safe to merge a request without building it locally themselves</p>
+
+<p><img src="/images/integrates-with-github.png" alt="Travis integrates with Github" loading="lazy" /></p>
+
+<p>Travis is configured by placing a YAML file in the root of the project. You can place commands directly into the config file but I prefer to put those commands in a script file - that way you can run them locally to confirm the steps <em>should</em> work before pushing the YAML file to Github for Travis to detect.</p>
+
+<p>Continuous integration is the process of automating build and verification of your software. It's they way you avoid having to say "Works on my machine. ¯_(ツ)_/¯". I &lt;3 CI so being able to fold it into my hobby workflow like this is super satisfying.</p>
+
+<h1 id="desired-outcome">Desired outcome</h1>
+
+<!--alex ignore host-hostess --->
+
+<p>I decided to have one repository called <code class="language-plaintext highlighter-rouge">blog_source</code> which would build the static site into a folder. And a second repository (the original one <code class="language-plaintext highlighter-rouge">pauldambra.github.io</code>) that would host the actual site. Previously I pushed the jekyll source to that repository for Github to build now I'll be pushing HTML for Github to host.</p>
+
+<p>The process will be:</p>
+
+<ul>
+  <li>git init the output repository in a known folder,</li>
+  <li>pull the current state,</li>
+  <li>write the new output over the top,</li>
+  <li>commit those changes and push to the remote.</li>
+</ul>
+
+<p>That push makes any changes visible in short order online.</p>
+
+<p>I was introduced to this "release repository" mechanism for deploying code in a previous job. It is particularly effective for projects that build some static output that can be run as-is like this static HTML site or a NodeJS project after transpilation.</p>
+
+<p>You can extend it nicely by pushing a version that can be hosted in a CI environment and have acceptance tests run against it. Which, if they pass, cause that version to be tagged in the git repository allowing it to be used further down your deployment pipeline.</p>
+
+<h1 id="initial-steps">Initial steps</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/bash</span>
+
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nv">DEPLOY_REPO</span><span class="o">=</span><span class="s2">"https://</span><span class="k">${</span><span class="nv">DEPLOY_BLOG_TOKEN</span><span class="k">}</span><span class="s2">@github.com/pauldambra/pauldambra.github.io.git"</span>
+
+<span class="k">function </span>main <span class="o">{</span>
+	clean
+	get_current_site
+	build_site
+<span class="o">}</span>
+
+<span class="k">function </span>clean <span class="o">{</span>
+	<span class="nb">echo</span> <span class="s2">"cleaning _site folder"</span>
+	<span class="k">if</span> <span class="o">[</span> <span class="nt">-d</span> <span class="s2">"_site"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then </span><span class="nb">rm</span> <span class="nt">-Rf</span> _site<span class="p">;</span> <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">function </span>get_current_site <span class="o">{</span>
+	<span class="nb">echo</span> <span class="s2">"getting latest site"</span>
+	git clone <span class="nt">--depth</span> 1 <span class="nv">$DEPLOY_REPO</span> _site
+<span class="o">}</span>
+
+<span class="k">function </span>build_site <span class="o">{</span>
+	<span class="nb">echo</span> <span class="s2">"building site"</span>
+	bundle <span class="nb">exec </span>jekyll build
+<span class="o">}</span>
+
+main
+</code></pre></div></div>
+
+<p>These first steps are relatively straightforward.</p>
+
+<ul>
+  <li>if the output folder exists delete it</li>
+  <li>then clone the latest revision of the output repository into it</li>
+  <li>finally run the jekyll build
+    <ul>
+      <li>I'm accepting the default output location of _site to simplify things</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The only 'complicated' bit here is the DEPLOY_BLOG_TOKEN environment variable that is being used to authenticate against Github.</p>
+
+<h1 id="github-personal-access-tokens">Github Personal Access Tokens</h1>
+
+<p>Personal access tokens act in-place of passwords for github resources. You can limit what permissions those tokens have. Generating different tokens for different uses so you can delete them if you suspect they have been compromised.</p>
+
+<p><img src="/images/personal-access-tokens.png" alt="personal access token setup screen" loading="lazy" /></p>
+
+<p>Since they act like passwords you should be very careful with them…
+Travis allows you to encrypt variables before adding them to the .travis.yml file so that secure information doesn't need to be committed into the repository or stored in plain text by the CI system.</p>
+
+<p>The <a href="https://github.com/travis-ci/travis.rb">Travis CLI</a> encrypts the key in the context of the repository in which Travis is going to run so that it can only be decrypted in that context.</p>
+
+<p>This secure variable will be used in the blog_source build so that's the encryption context.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>travis encrypt <span class="nv">DEPLOY_BLOG_TOKEN</span><span class="o">=</span>SOME_SECRET_VALUE <span class="nt">-r</span> pauldambra/blog_source  <span class="nt">--add</span>
+</code></pre></div></div>
+
+<p>Here we provide the name that should be available in Travis and its value. With <code class="language-plaintext highlighter-rouge">-r</code> specify the repository context to operate in and with <code class="language-plaintext highlighter-rouge">--add</code> instruct the CLI to add the token to the .travis.yml file.</p>
+
+<h1 id="the-travisyml-file">The .travis.yml file</h1>
+
+<p>The definition for <a href="https://docs.travis-ci.com/user/customizing-the-build">the Travis YAML is online</a>. It lets you define the build environment and what commands will be run at each stage of the lifecycle of your travis jobs.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s">ruby</span>
+<span class="na">cache</span><span class="pi">:</span> <span class="s">bundler</span>
+<span class="na">install</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">bundle install</span>
+<span class="na">script</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">./build.sh"</span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">global</span><span class="pi">:</span>
+    <span class="na">secure</span><span class="pi">:</span> <span class="s">aGrEaTbIgLoNgEnCrYpTeDvAlUe</span>
+</code></pre></div></div>
+
+<p>Here we tell Travis that</p>
+
+<ul>
+  <li>this is a Ruby project</li>
+  <li>to cache the bundler output (most of the run turns out to be building nokogiri)</li>
+  <li>that the install setup is to run <code class="language-plaintext highlighter-rouge">bundle install</code></li>
+  <li>that the build step is to run <code class="language-plaintext highlighter-rouge">./build.sh</code></li>
+  <li>and finally to add the secure variable to the environment.</li>
+</ul>
+
+<h1 id="deploying-the-built-output">Deploying the built output</h1>
+
+<!--alex ignore master --->
+
+<p>The final step in the script is to push the changed code to the output repository, when we're on master and not in a pull request.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>deploy <span class="o">{</span>
+	<span class="nb">echo</span> <span class="s2">"deploying changes"</span>
+
+	<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$TRAVIS_PULL_REQUEST</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+	    </span><span class="nb">echo</span> <span class="s2">"except don't publish site for pull requests"</span>
+	    <span class="nb">exit </span>0
+	<span class="k">fi
+
+	if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$TRAVIS_BRANCH</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"master"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+	    </span><span class="nb">echo</span> <span class="s2">"except we should only publish the master branch. stopping here"</span>
+	    <span class="nb">exit </span>0
+	<span class="k">fi
+
+	</span><span class="nb">cd </span>_site
+	git config <span class="nt">--global</span> user.name <span class="s2">"Travis CI"</span>
+    git config <span class="nt">--global</span> user.email paul.dambra+travis@gmail.com
+	git add <span class="nt">-A</span>
+	git status
+	git commit <span class="nt">-m</span> <span class="s2">"Lastest site built on successful travis build </span><span class="nv">$TRAVIS_BUILD_NUMBER</span><span class="s2"> auto-pushed to github"</span>
+	git push <span class="nv">$DEPLOY_REPO</span> master:master
+<span class="o">}</span>
+</code></pre></div></div>
+
+<!--alex ignore master --->
+
+<p>Travis adds several convenience environment variables two of which which can be checked here to confirm that we don't want to deploy pull requests or branches other than master.</p>
+
+<p>Then the script ensures that the commit is identified and has a message that can be tracked back to this Travis build. Before pushing to Github.</p>
+
+<h1 id="finally">Finally</h1>
+
+<p><img src="/images/travis.png" alt="travis build history" loading="lazy" /></p>
+
+<p>This process turned out to be straightforward and Travis is a joy to work with. Next up it's time to add some plugins to the site so that an AMP version can be published</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/using-travis-to-build-jekyll.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/using-travis-to-build-jekyll.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

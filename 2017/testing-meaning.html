@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Testing Meaning in HTML!</title>
+    <link rel="canonical" href="https://pauldambra.dev/2017/testing-meaning.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2017/testing-meaning.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Testing Meaning in HTML!" />
+    <meta
+      property="og:description"
+      content="Testing the meaning of what you generate"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Testing the meaning of what you generate"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Testing Meaning in HTML!",
+     "genre":"",
+     "keywords":"jekyll static html testing",
+     "wordCount":"1009",
+     "url":"https://pauldambra.dev/2017/testing-meaning.html",
+     "datePublished":"2017-08-17",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2017/testing-meaning.html"
+     },
+     "articleBody":"\n    \n        This  post  is  part  of  a  series  on  improving  this  blog  #recursion\n    \n    \n        \n            Previous  Post\n        \n    \n\n\nOne  of  the  benefits  of  generating  a  site  as  a  static  artefact  (here  using  Jekyll  but  there  are  a  gazillion  tools)  is  that  the  finished  product  is  a  known  quantity.  Anything  that's  a  known  quantity  can  be  tested!\n\nA  previous  post  in  this  series  looked  at  testing  the  generated  HTML  for  technical  correctness…  Things  like  if  the  HTML  is  well-formed  or  that  links  go  to  real  destinations.\n\nThis  post  describes  testing  the  meaning  of  the  text  in  the  generated  HTML.  Checking  spelling,  and  keeping  myself  honest  in  my  attempt  to  use  more  inclusive  language.\n\n\n\nTest  the  markdown  itself\n\nSince  the  HTML  is  generated  from  markdown.  Is  that  markdown  valid?\n\nnode_modules/.bin/remark  .  --use  lint  --frail\n\n\nRemark  is  a  tool  that  allows  the  use  of  more  than  one  plugin  for  processing  markdown.\n\nHere  the  --use  lint  adds  the  linting  plugin.  --frail  set  it  to  exit  with  a  non-zero  code  on  warnings  as  well  as  errors.\n\nThis  doesn't  help  test  the  meaning.  But,  it  does  help  ensure  that  other  errors  that  are  found  are  located  in  the  meaning  and  not  in  a  typo.  There  are  still  old  posts  I  grabbed  from  Blogger  that  are  very  messy  HTML.  Periodically  I'll  switch  one  to  MarkDown  and  this  helps  catch  errors  fast.\n\nEven  better  -  test  the  spelling  in  the  markdown\n\nAfter  yet  another  occasion  where  I  proofread  a  post,  published  it,  read  it,  and  immediately  saw  a  spelling  mistake.  It  was  time  to  automate  the  solution.\n\n    node_modules/.bin/mdspell  _posts/**.md  \\\n        --en-gb  \\\n        --ignore-numbers  \\\n        --ignore-acronyms  \\\n        --report\n\n\nMarkDown  spellcheck  is  a  tool  for  doing  exactly  that.\n\nHere  it\n\n\n    grabs  all  the  .md  files\n    sets  the  dictionary  to  --en-gb\n    ignores  numbers  and  acronyms\n    and  is  set  to  run  in  report  mode\n\n\nThe  tool  has  a  report  mode  which  outputs  spelling  errors  and  then  exits  with  a  non-zero  code.  And  an  interactive  mode  that  pauses  on  each  potential  mistake  allowing  you  to  choose  to  ignore,  add  to  a  dictionary,  or  to  correct.\n\n\n\nThe  interactive  spelling  mode  can  be  pretty  slow  at  checking  the  dictionary.  There  is  an  open  issue  about  this.\n\nAs  you  train  this  tool,  it  populates  a  .spelling  file  so  that  you  don't  have  to  keep  teaching  it  the  domain-specific  language  you  use.  Mine's  already  hundreds  of  lines  long.\n\nTesting  for  inconsiderate  language…\n\nAlex  is  a  tool  for  catching  inconsiderate  or  insensitive  language.\n\nThere  is  very  little  cost  to  modifying  your  language  (replacing  \"guys\"  with  \"everyone\"  or  \"his\"  with  \"their\").  And  compared  to  the  cost  of  excluding  even  one  person,  I  consider  it  a  worthwhile  thing  to  try  to  improve.\n\nAlex  is  run  using  this  command:  npx  alex  _posts  --why\n\n\n    _posts  tells  alex  which  directory  to  start  in\n    --why  tries  to  output  a  source  for  the  warning\n\n\n\n\nhe-she  rule\n\n_posts/2014-06-01-promises-part-2.md\n    197:160-197:162    warning    `he`  may  be  insensitive,  use  `they`,  `it`  instead                        he-she                    retext-equality\n\n\nIn  that  text  I  am  referring  to  a  man.  So,  I  could  ignore  the  warning.  By  adding  an  HTML  comment  to  the  markDown  &lt;!--alex  ignore  he-she--&gt;.  In  each  case  replacing  he-she  with  the  reported  rule  in  the  output.\n\nOr  spend  the  (literal)  second  to  convert  that  reference  to  they.\n\nA  file  with  more  errors\n\n_posts/2010-05-08-theres-more-in-them-that-hills.md\n        17:123-17:130    warning    Don’t  use  “bitchin”,  it’s  profane                                                      bitchin                  retext-profanities\n        17:153-17:160    warning    Don’t  use  “bitchin”,  it’s  profane                                                      bitchin                  retext-profanities\n        19:229-19:235    warning    Be  careful  with  “failed”,  it’s  profane  in  some  cases                failed                    retext-profanities\n        25:4-25:7    warning    Reconsider  using  “God”,  it  may  be  profane                                                      god                          retext-profanities\n        31:360-31:365    warning    `idiot`  may  be  insensitive,  use  `foolish`,  `ludicrous`,  `silly`  instead\nSource:  http://www.autistichoya.com/p/ableist-words-and-terms-to-avoid.html\n\n\nHere's  another  example  of  the  importance  of  context  but  also  the  unthinking  use  of  language.\n\nI  wrote  that  post  in  2010.  I  don't  use  that  voice  any  more.  But,  I'm  ok  with  bitchin'  in  the  context  it  was  used  in.  But  it  isn't  about  what  I'm  ok  with.  I  don't  know  the  reader  and  can  rephrase  without  it.\n\nNext  failed  is  profane  in  some  cases…  in  this  post  it's  talking  about  software  failing  to  send  emails.  I  think  it's  ok.  But  I  can  also  see  how  to  rephrase  the  sentence.  This  is  about  trying  to  include  as  many  people  as  possible.  It  takes  seconds  to  rephrase  the  sentence.\n\nThen  a  warning  about  \"Oh  God  it's  awful\"  -  and  there  I'm  talking  about  software  I  wrote  :/  If  you've  worked  with  me,  you  may  recognise  the  feeling  :p\n\nI  feel  relatively  strongly  that  blasphemy  is  allowed.  We  should  have  freedom  from  religion  as  well  as  freedom  of  religion.  I  also  feel  strongly  that  I  don't  go  out  of  my  way  to  blaspheme.\n\nSo  I  might  choose  to  set  Alex  not  to  warn  me  about  the  word  'god'\n\nI  can  set  my  .alexrc  file  to  contain\n\n{\n    \"allow\":  [\n        \"god\"\n    ]\n}\n\n\nOr  to  rephrase  the  sentence.  There's  always  another  way  to  make  yourself  clear.\n\nI  use  words  like  Idiot  less  and  less  since  it  takes  little  effort  to  replace  them.  On  reading  the  paragraph  it  was  in  so  many  years  after  writing  it  doesn't  add  anything  to  the  post  at  all.  So  I  remove  the  entire  paragraph.\n\nAnd  so…\n\nThese  are  small  changes  that  help  make  writing  more  accessible.  I  am  an  imperfect  human  and  find  great  value  in  automation  that  helps  me  avoid  mistakes.\n\nUpdate  2021:  This  has  been  in  my  drafts  for  four  years.  I  am  going  to  publish  it  with  minimal  editing  in  the  interest  of  progress  over  perfection\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Aug 17 2017</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Testing Meaning in HTML!</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2017/testing-meaning.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Testing+Meaning+in+HTML%21&via=pauldambra&url=https://pauldambra.dev/2017/testing-meaning.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#continuous-delivery"
+      >
+        in: continuous delivery
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#blog">
+    blog
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#recursion">
+    recursion
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#testing">
+    testing
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#jekyll">
+    jekyll
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#travisci">
+    travisci
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<aside class="mb-2 ml-4 border-l-2 border-l-sky-700 pl-1">
+  <h1 class="text-base">
+    This post is part of a series on improving this blog #recursion
+  </h1>
+  <div class="flex flex-row">
+    <div class="flex-grow">
+      <a href="/2017/generating-static-amp.html">Previous Post</a>
+    </div>
+  </div>
+</aside>
+
+<p>One of the benefits of generating a site as a static artefact (here using <a href="https://jekyllrb.com/">Jekyll</a> but there are a gazillion tools) is that the finished product is a known quantity. Anything that's a known quantity can be tested!</p>
+
+<p>A previous post in this series looked at testing the generated HTML for technical correctness… Things like if the HTML is well-formed or that links go to real destinations.</p>
+
+<p>This post describes testing the <em>meaning</em> of the text in the generated HTML. Checking spelling, and keeping myself honest in my attempt to use more inclusive language.</p>
+
+<!--more-->
+
+<h1 id="test-the-markdown-itself">Test the markdown itself</h1>
+
+<p>Since the HTML is generated from markdown. Is that markdown valid?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node_modules/.bin/remark . --use lint --frail
+</code></pre></div></div>
+
+<p><a href="https://github.com/wooorm/remark">Remark</a> is a tool that allows the use of more than one plugin for processing markdown.</p>
+
+<p>Here the <code class="language-plaintext highlighter-rouge">--use lint</code> adds the linting plugin. <code class="language-plaintext highlighter-rouge">--frail</code> set it to exit with a non-zero code on warnings as well as errors.</p>
+
+<p>This doesn't help test the meaning. But, it does help ensure that other errors that are found are located in the meaning and not in a typo. There are still old posts I grabbed from Blogger that are very messy HTML. Periodically I'll switch one to MarkDown and this helps catch errors fast.</p>
+
+<h1 id="even-better---test-the-spelling-in-the-markdown">Even better - test the spelling in the markdown</h1>
+
+<p>After <em>yet another</em> occasion where I proofread a post, published it, read it, and immediately saw a spelling mistake. It was time to automate the solution.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  node_modules/.bin/mdspell _posts/**.md \
+    --en-gb \
+    --ignore-numbers \
+    --ignore-acronyms \
+    --report
+</code></pre></div></div>
+
+<p><a href="https://github.com/lukeapage/node-markdown-spellcheck">MarkDown spellcheck</a> is a tool for doing exactly that.</p>
+
+<p>Here it</p>
+
+<ul>
+  <li>grabs all the <code class="language-plaintext highlighter-rouge">.md</code> files</li>
+  <li>sets the dictionary to <code class="language-plaintext highlighter-rouge">--en-gb</code></li>
+  <li>ignores numbers and acronyms</li>
+  <li>and is set to run in <code class="language-plaintext highlighter-rouge">report</code> mode</li>
+</ul>
+
+<p>The tool has a <code class="language-plaintext highlighter-rouge">report</code> mode which outputs spelling errors and then exits with a non-zero code. And an <code class="language-plaintext highlighter-rouge">interactive</code> mode that pauses on each potential mistake allowing you to choose to ignore, add to a dictionary, or to correct.</p>
+
+<p><img src="/images/interactive-spelling.png" alt="example interactive spelling output" loading="lazy" /></p>
+
+<p>The interactive spelling mode can be pretty slow at checking the dictionary. There is <a href="https://github.com/lukeapage/node-markdown-spellcheck/issues/33">an open issue about this</a>.</p>
+
+<p>As you train this tool, it populates a <code class="language-plaintext highlighter-rouge">.spelling</code> file so that you don't have to keep teaching it the domain-specific language you use. <a href="https://github.com/pauldambra/blog_source/blob/c71413210bde13f195e4b4adac28caa74f35761a/.spelling">Mine's already hundreds of lines long</a>.</p>
+
+<h1 id="testing-for-inconsiderate-language">Testing for inconsiderate language…</h1>
+
+<p><a href="http://alexjs.com/">Alex</a> is a tool for catching inconsiderate or insensitive language.</p>
+
+<p>There is very little cost to modifying your language (replacing "guys" with "everyone" or "his" with "their"). And compared to the cost of excluding even one person, I consider it a worthwhile thing to try to improve.</p>
+
+<p>Alex is run using this command: <code class="language-plaintext highlighter-rouge">npx alex _posts --why</code></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">_posts</code> tells alex which directory to start in</li>
+  <li><code class="language-plaintext highlighter-rouge">--why</code> tries to output a source for the warning</li>
+</ul>
+
+<!--alex ignore heshe-->
+
+<h2 id="he-she-rule">he-she rule</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_posts/2014-06-01-promises-part-2.md
+  197:160-197:162  warning  `he` may be insensitive, use `they`, `it` instead            he-she          retext-equality
+</code></pre></div></div>
+
+<p>In that text I am referring to a man. So, I <em>could</em> ignore the warning. By adding an HTML comment to the markDown <code class="language-plaintext highlighter-rouge">&lt;!--alex ignore he-she--&gt;</code>. In each case replacing <code class="language-plaintext highlighter-rouge">he-she</code> with the reported rule in the output.</p>
+
+<p>Or spend the (literal) second to convert that reference to <code class="language-plaintext highlighter-rouge">they</code>.</p>
+
+<h2 id="a-file-with-more-errors">A file with more errors</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_posts/2010-05-08-theres-more-in-them-that-hills.md
+    17:123-17:130  warning  Don’t use “bitchin”, it’s profane                           bitchin         retext-profanities
+    17:153-17:160  warning  Don’t use “bitchin”, it’s profane                           bitchin         retext-profanities
+    19:229-19:235  warning  Be careful with “failed”, it’s profane in some cases        failed          retext-profanities
+    25:4-25:7  warning  Reconsider using “God”, it may be profane                           god             retext-profanities
+    31:360-31:365  warning  `idiot` may be insensitive, use `foolish`, `ludicrous`, `silly` instead
+Source: http://www.autistichoya.com/p/ableist-words-and-terms-to-avoid.html
+</code></pre></div></div>
+
+<p>Here's another example of the importance of context but also the unthinking use of language.</p>
+
+<p>I wrote that post in 2010. I don't use that voice any more. But, I'm ok with <code class="language-plaintext highlighter-rouge">bitchin'</code> in the context it was used in. But it isn't about what I'm ok with. I don't know the reader and can rephrase without it.</p>
+
+<p>Next <code class="language-plaintext highlighter-rouge">failed is profane in some cases</code>… in this post it's talking about software failing to send emails. I think it's ok. But I can also see how to rephrase the sentence. This is about trying to include as many people as possible. It takes seconds to rephrase the sentence.</p>
+
+<p>Then a warning about "Oh God it's awful" - and there I'm talking about software I wrote :/ If you've worked with me, you may recognise the feeling :p</p>
+
+<p>I feel relatively strongly that blasphemy is allowed. We should have freedom <em>from</em> religion as well as freedom <em>of</em> religion. I also feel strongly that I don't go out of my way to blaspheme.</p>
+
+<p>So I might choose to set Alex not to warn me about the word 'god'</p>
+
+<p>I can set my <code class="language-plaintext highlighter-rouge">.alexrc</code> file to contain</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "allow": [
+    "god"
+  ]
+}
+</code></pre></div></div>
+
+<p>Or to rephrase the sentence. There's always another way to make yourself clear.</p>
+
+<p>I use words like <code class="language-plaintext highlighter-rouge">Idiot</code> less and less since it takes little effort to replace them. On reading the paragraph it was in so many years after writing it doesn't add anything to the post at all. So I remove the entire paragraph.</p>
+
+<h1 id="and-so">And so…</h1>
+
+<p>These are small changes that help make writing more accessible. I am an imperfect human and find great value in automation that helps me avoid mistakes.</p>
+
+<p>Update 2021: This has been in my drafts for four years. I am going to publish it with minimal editing in the interest of progress over perfection</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2017/testing-meaning.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2017/testing-meaning.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

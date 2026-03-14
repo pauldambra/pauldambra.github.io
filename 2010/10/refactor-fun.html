@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Refactor ==fun</title>
+    <link rel="canonical" href="https://pauldambra.dev/2010/10/refactor-fun.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2010/10/refactor-fun.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Refactor ==fun" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Refactor ==fun",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"819",
+     "url":"https://pauldambra.dev/2010/10/refactor-fun.html",
+     "datePublished":"2010-10-20",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2010/10/refactor-fun.html"
+     },
+     "articleBody":"I've  been  using  JetBrains  Resharper  for  a  while  after  a  recommendation  along  the  lines  of  \"I  can't  stand  to  write  code  without  it  now\"  and…\n\nI  can't  stand  to  write  code  without  it  now!\n\n\n\nI've  got  a  program  that  (in  a  moderately  clunky  way)  gets  all  of  the  emails  in  a  couple  of  mailboxes  and  checks  to  see  if  they  are  non-delivery  reports,  reports  of  address  changes  (which  our  customers  consistently  send  in  reply  to  newsletters),  unsubscribe  requests  (despite  a  link  in  the  mail)  and  so  on…\n\n\n\nThe  class  that  handled  the  matching  of  text  against  rules  had  grown  to  be  a  real  behemoth  if  not  actually  a  spaghetti  monster  it  was  at  the  minimum  a  noodle  demon.  I  won't  post  the  code  here  the  internet  isn't  big  enough!\n\nBut  it  consisted  of  an  enum,  five  List&lt;string&gt;  and  then  a  set  of  methods  that  took  an  email  object  compared  the  body  and  subject  to  the  5  phrase  lists  and  returned  an  appropriate  result  from  the  enum.\n\nI  realised  that  I  didn't  want  a  list  per  result…\n\n_badAddresses.add(\"no  user  by  that  name\");\n_outOfOffice.add(\"on  my  hols\");\n\n\nit  was  getting  difficult  to  manage,  there  was  no  checking  for  duplication  of  the  strings,  there  was  no  apparent  way  to  keep  the  enum  return  and  phrase  list  linked  and  all  the  looping  was  getting  confusing.\n\nSo  I  went  through  two  stages  and  Resharper  helped  by  being  awesome  at  supporting  my  laziness.\n\nFirst  I  combined  the  many  lists  into  one  Dictionary&lt;string,  phrasecheckresult&gt;  to  link  my  candidate  strings  with  my  enum  result  types.\n\nI  used  a  little  of  Notepad++'s  Find  and  replace  magic  to  wholesale  convert  my  list  initialisation  into  a  Dictionary  initialisation  and  ended  up  with\n\n_phraseMap  =  new  Dictionary&lt;string,  phrasecheckresult&gt;\n{\n        {\"554  qq  sorry,  no  valid  recipients}\",  PhraseCheckResult.BadAddress},\n        {\"user  doesn't  have  a  yahoo.co.uk  account\",  PhraseCheckResult.BadAddress},\n        {\"account  has  been  disabled  or  discontinued\",  PhraseCheckResult.BadAddress},\n        {\"550  recipient\",  PhraseCheckResult.BadAddress},\n        {\"is  invalid\",  PhraseCheckResult.BadAddress},\n        {\"user  invalid\",  PhraseCheckResult.BadAddress}\n};\n\n\n\n\ncut  short  for  brevity  as  there  are  nearly  300  phrases  now…  Using  an  object  initialiser  meant  I  had  nowhere  to  go  when  the  program  failed  at  runtime  adding  duplicate  keys  to  the  dictionary.  Catching  the  exception  didn't  help  since  I  couldn't  see  what  key  was  duplicated  to  tidy  up  my  code.\n\nSo  I  highlighted  all  the  rows  of  initialisation  and  what  did  I  see?\n\n\n\nResharper's  context  menu  lets  me  switch  the  object  initialiser  out  to  a  series  of  .Add()  calls.  I  could  quickly  find  the  duplicates  and  then  switch  back  to  an  object  initialiser.  Yay!\n\nI  should  be  writing  unit  tests  but  then  that's  always  being  put  off  to  the  next  project  and  could  I  check  if  I've  added  a  key  already  during  an  object  initialisers  run?  I  guess  not  but…\n\nSecond  I  wrote  a  couple  of  if  braces  that  checked  the  subject  and  body  and  returned  the  appropriate  results…  up  pops  Resharper  and  suggests  I  can  convert  that  to  a  Linq  expression  and  I  get  the  end  result  of…\n\npublic  enum  PhraseCheckResult\n{\n        None,  BadAddress,  ChangeAddress,  OutOfOffice,  Unsubscribe,  Delete\n}\n\nprivate  static  Dictionary&lt;string,  PhraseCheckResult&gt;  _phraseMap;\n\npublic  PhraseCheckResult  CheckItemAgainstLists(OutlookItem  itemIn)\n{\n        return  _phraseMap.SingleOrDefault(\n                i  =&gt;\n                itemIn.Subject.ToLower().Contains(i.Key.ToLower())  ||  itemIn.Body.ToLower().Contains(i.Key.ToLower())).\n                Value;\n}\n\npublic  ProcessPhraseList()\n{\n        _phraseMap  =  new  Dictionary&lt;string,  PhraseCheckResult&gt;\n        {\n                  {\"554  qq  sorry,  no  valid  recipients}\",  PhraseCheckResult.BadAddress},\n                  {\"user  doesn't  have  a  yahoo.co.uk  account\",  PhraseCheckResult.BadAddress}\n        };\n}\n\n\nA  little  shift  around  of  the  enum  was  necessary  to  put  None  as  the  first  option.  That  way  when  the  SingleOrDefault  method  doesn't  find  any  of  the  candidate  strings  in  the  mail  item  the  default  action  to  take  is  to  do  nothing  and  a  person  can  look  at  it.  If  you  wanted  to  always  delete  unidentified  messages  you  could  shift  Delete  to  be  first  in  the  enum  and  your  program's  behaviour  would  change.  Bonza!\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Wed Oct 20 2010</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Refactor ==fun</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2010/10/refactor-fun.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Refactor+%3D%3Dfun&via=pauldambra&url=https://pauldambra.dev/2010/10/refactor-fun.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#refactoring"
+      >
+        in: refactoring
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#c">
+    c#
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#refactoring">
+    refactoring
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dictionary">
+    dictionary
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I've been using <a href="http://www.jetbrains.com/resharper/">JetBrains Resharper</a> for a while after a recommendation along the lines of "I can't stand to write code without it now" and…</p>
+
+<p>I can't stand to write code without it now!</p>
+
+<!--more-->
+
+<p>I've got a program that (in a moderately clunky way) gets all of the emails in a couple of mailboxes and checks to see if they are non-delivery reports, reports of address changes (which our customers consistently send in reply to newsletters), unsubscribe requests (despite a link in the mail) and so on…</p>
+
+<!--alex ignore demon-->
+
+<p>The class that handled the matching of text against rules had grown to be a real behemoth if not actually a spaghetti monster it was at the minimum a noodle demon. I won't post the code here the internet isn't big enough!</p>
+
+<p>But it consisted of an enum, five <code class="language-plaintext highlighter-rouge">List&lt;string&gt;</code> and then a set of methods that took an email object compared the body and subject to the 5 phrase lists and returned an appropriate result from the enum.</p>
+
+<p>I realised that I didn't want a list per result…</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_badAddresses</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="s">"no user by that name"</span><span class="p">);</span>
+<span class="n">_outOfOffice</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="s">"on my hols"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>it was getting difficult to manage, there was no checking for duplication of the strings, there was no apparent way to keep the enum return and phrase list linked and all the looping was getting confusing.</p>
+
+<p>So I went through two stages and Resharper helped by being awesome at supporting my laziness.</p>
+
+<p>First I combined the many lists into one D<code class="language-plaintext highlighter-rouge">ictionary&lt;string, phrasecheckresult&gt;</code> to link my candidate strings with my enum result types.</p>
+
+<p>I used a little of Notepad++'s Find and replace magic to wholesale convert my list initialisation into a Dictionary initialisation and ended up with</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_phraseMap</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">phrasecheckresult</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="p">{</span><span class="s">"554 qq sorry, no valid recipients}"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"user doesn't have a yahoo.co.uk account"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"account has been disabled or discontinued"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"550 recipient"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"is invalid"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"user invalid"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<!--alex ignore failed-->
+
+<p>cut short for brevity as there are nearly 300 phrases now… Using an object initialiser meant I had nowhere to go when the program failed at runtime adding duplicate keys to the dictionary. Catching the exception didn't help since I couldn't see what key was duplicated to tidy up my code.</p>
+
+<p>So I highlighted all the rows of initialisation and what did I see?</p>
+
+<p><img src="http://1.bp.blogspot.com/_u8J81ttOSD8/TL8LrjgRXsI/AAAAAAAAAL4/U86PBLyzzZM/s400/ResharperToAddCall.jpg" alt="what did i see?" loading="lazy" /></p>
+
+<p>Resharper's context menu lets me switch the object initialiser out to a series of .Add() calls. I could quickly find the duplicates and then switch back to an object initialiser. Yay!</p>
+
+<p>I <em>should</em> be writing unit tests but then that's always being put off to the next project and could I check if I've added a key already during an object initialisers run? I guess not but…</p>
+
+<p>Second I wrote a couple of if braces that checked the subject and body and returned the appropriate results… up pops Resharper and suggests I can convert that to a Linq expression and I get the end result of…</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">enum</span> <span class="n">PhraseCheckResult</span>
+<span class="p">{</span>
+    <span class="n">None</span><span class="p">,</span> <span class="n">BadAddress</span><span class="p">,</span> <span class="n">ChangeAddress</span><span class="p">,</span> <span class="n">OutOfOffice</span><span class="p">,</span> <span class="n">Unsubscribe</span><span class="p">,</span> <span class="n">Delete</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">static</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">&gt;</span> <span class="n">_phraseMap</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="n">PhraseCheckResult</span> <span class="nf">CheckItemAgainstLists</span><span class="p">(</span><span class="n">OutlookItem</span> <span class="n">itemIn</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_phraseMap</span><span class="p">.</span><span class="nf">SingleOrDefault</span><span class="p">(</span>
+        <span class="n">i</span> <span class="p">=&gt;</span>
+        <span class="n">itemIn</span><span class="p">.</span><span class="n">Subject</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">().</span><span class="nf">Contains</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">Key</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">())</span> <span class="p">||</span> <span class="n">itemIn</span><span class="p">.</span><span class="n">Body</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">().</span><span class="nf">Contains</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">Key</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">())).</span>
+        <span class="n">Value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="nf">ProcessPhraseList</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">_phraseMap</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+         <span class="p">{</span><span class="s">"554 qq sorry, no valid recipients}"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">},</span>
+         <span class="p">{</span><span class="s">"user doesn't have a yahoo.co.uk account"</span><span class="p">,</span> <span class="n">PhraseCheckResult</span><span class="p">.</span><span class="n">BadAddress</span><span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>A little shift around of the enum was necessary to put None as the first option. That way when the SingleOrDefault method doesn't find any of the candidate strings in the mail item the default action to take is to do nothing and a person can look at it. If you wanted to always delete unidentified messages you could shift Delete to be first in the enum and your program's behaviour would change. Bonza!</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2018/03/harmful-dry.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        DRY - considered harmful
+      </h3>
+      <small>
+        30 Mar 2018
+      </small>
+  </div>
+</a>  <a href="/kill-if-with-objects.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Remove If With Objects
+      </h3>
+      <small>
+        07 Sep 2016
+      </small>
+  </div>
+</a>  <a href="/Websites-CMS-Platform-promises.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Promises
+      </h3>
+      <small>
+        18 May 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2010/10/refactor-fun.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2010/10/refactor-fun.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

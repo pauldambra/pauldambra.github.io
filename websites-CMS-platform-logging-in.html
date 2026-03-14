@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform - Logging in to the site</title>
+    <link rel="canonical" href="https://pauldambra.dev/websites-CMS-platform-logging-in.html" />
+    <meta property="og:url" content="https://pauldambra.dev/websites-CMS-platform-logging-in.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform - Logging in to the site" />
+    <meta
+      property="og:description"
+      content="user management and logging in with nodejs mongo and passport"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="user management and logging in with nodejs mongo and passport"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform - Logging in to the site",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1050",
+     "url":"https://pauldambra.dev/websites-CMS-platform-logging-in.html",
+     "datePublished":"2014-04-27",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/websites-CMS-platform-logging-in.html"
+     },
+     "articleBody":"This  post  is  part  of  a  series  where  I'm  hoping  to  prove  to  myself  that  building  a  dynamic  website  with  NodeJS  is  much  more  fun  than  using  a  CMS  platform.  See  the  first  post  for  an  explanation  of  why\n\nThe  code  can  be  found  on  GitHub\n\nPrevious  Post\n\nThis  was  the  first  part  of  the  process  which  felt  'hard'  so  where  I've  felt  the  absence  of  a  CMS  platform  but  it's  also  only  the  second  time  I've  ever  implemented  authentication  using  NodeJS.  And  still  only  boiled  down  to  a  few  hours  work.\n\n\n\nPassport\nWith  an  eye  to  future  expansion  of  what  authentication  the  site  may  do  the  choice  of  technology  for  managing  login  is  a  Node  module  called  PassPort.  PassportJS  is  a  flexible  and  modular  authentication  middleware  foor  NodeJs.\n\nInitially  the  site  will  only  support  logging  in  using  users  stored  in  the  database  but  Passport  once  setup  is  extendable  to  allow  login  via  oauth,  openid,  twitter,  facebook,  and  more.  Passport  uses  Strategies  to  manage  the  login  process.\n\nTests\nIn  order  to  test  login  the  site  will  need  to  allow  creation  of  users,  GETing  /login,  POSTing  to  /login  and  GETing  /logout\n\nThere's  no  need  to  support  registration  now  but  it's  so  similar  to  login  and  creation  that  implementation  would  be  trivial.\n\ndescribe('creating  users',  function()  {\n    it('should  be  possible  to  create  a  user');\n    it('should  not  be  possible  to  create  a  duplicate  user');\n})\n\ndescribe('GET  request  to  /login',function()  {\n    it('should  send  back  the  login  page');\n    //how  to  test  this?!\n    it('should  follow  302  when  login  is  invalid  and  show  flash  message');\n});\n\ndescribe('logging  in  by  POSTing  to  /login',  function()  {\n        it('without  valid  username  cannot  login');\n        it('without  valid  password  cannot  login');\n        it('with  valid  credentials  can  login');\n});\n\ndescribe('logging  out  by  GETing  /logout',  function()  {\n    it('should  log  out  the  logged  in  user');\n    it('should  throw  no  errors  if  there  is  no  user  logged  in');\n});\n\n\nFirstly  in  order  to  create  users  it's  necessary  to  npm  install  --save  bcrypt  and  then  (borrowing  liberally  from  StackOverflow)  create  a  module  that  hashes  and  salts  a  given  password  and  saves  a  user  with  that  hash  into  the  database.\n\nvar  bcrypt  =  require('bcrypt');\nvar  SALT_WORK_FACTOR  =  10;\n\nmodule.exports  =  function(db)  {\n    return  {\n        create:  function(username,  password,  callback)  {\n                bcrypt.genSalt(SALT_WORK_FACTOR,  function(err,  salt)  {\n                        if  (err)  {\n                                callback(err);\n                                return;\n                        }\n                        bcrypt.hash(password,  salt,  function(err,  hash)  {\n                                if  (err)  {\n                                        callback(err);\n                                        return;\n                                }\n                                db.users.save({\n                                        username:username,\n                                        password:hash\n                                },  function(err,  result)  {\n                                        if(err)  {\n                                                callback(err.err);\n                                        }  else  {\n                                                callback('user  created');\n                                        }\n                                });\n                        });\n                });\n        }\n    };\n};\n\n\nThis  function  takes  a  database  parameter  so  that  the  tests  and  the  command  line  runner  that  exercise  it  can  pass  in  different  databases.  It  also  demonstrates  the  smelliness  of  nested  callbacks  that  I've  put  off  dealing  with  three  times  now…  hitting  the  same  problem  three  times  is  a  definite  flag  it's  time  to  deal  with  it!\n\n(but  not  right  now)\n\nas  an  aside  -  a  colleague  spotted  how  smelly  this  code  is  in  a  screenshot  on  twitter  from  across  a  room!\n\nLogging  in  Tests\nThe  test  setup  for  the  logging  in  tests  is  slightly  different  as  it's  necessary  to  grab  the  underlying  SuperAgent  instance  that  SuperTest  wraps.  SuperAgent  will  manage  its  cookies  so  you  can  extend  the  example  below  to  allow  tests  of  behaviour  once  logged  in.\n\nvar  request  =  require('supertest');\nvar  expect  =  require('chai').expect;\n\nvar  server;\nvar  agent;\nvar  db;\nvar  login;\n\nbeforeEach(function()  {\n        //set  environment  to  test  and  init  things\n        process.env.NODE_ENV  =  'test';  \n        db  =  require('../server/db').db;\n        server  =  require('../server').app;\n        agent  =  request.agent(server);\n});\n\n\nHaving  access  to  the  agent  and  the  server  application  then  allows  test  that  look  like\n\n        it('without  valid  username  cannot  login',  function(done)  {\n                agent\n                    .post('/login')\n                    .send({  username:  'not  a  real  user',  password:  'password'  })\n                    .end(function(err,  res)  {\n                        expect(res.status).to.equal(302);\n                        expect(res.header.location).to.equal('/login');\n                        done();\n                    });\n        });\n\n\nNot  hugely  different  in  syntax  to  the  SuperTest  tests  but  necessary  in  order  to  interact  with  the  session.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Apr 27 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform - Logging in to the site</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/websites-CMS-platform-logging-in.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform+-+Logging+in+to+the+site&via=pauldambra&url=https://pauldambra.dev/websites-CMS-platform-logging-in.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#mongodb">
+    mongodb
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#nosql">
+    nosql
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#express">
+    express
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>This post is part of a series where I'm hoping to prove to myself that building a dynamic website with NodeJS is much more fun than using a CMS platform. <a href="/2014/02/websites-cms.html">See the first post for an explanation of why</a></p>
+
+<p>The code can be found on <a href="https://github.com/pauldambra/omniclopse">GitHub</a></p>
+
+<p><a href="/Websites-CMS-Platform-Storing-Data2.html">Previous Post</a></p>
+
+<p>This was the first part of the process which felt 'hard' so where I've felt the absence of a CMS platform but it's also only the second time I've ever implemented authentication using NodeJS. And still only boiled down to a few hours work.</p>
+
+<!--more-->
+
+<h2 id="passport">Passport</h2>
+<p>With an eye to future expansion of what authentication the site may do the choice of technology for managing login is a <a href="http://passportjs.org/">Node module called PassPort</a>. PassportJS is a flexible and modular authentication middleware foor NodeJs.</p>
+
+<p>Initially the site will only support logging in using users stored in the database but Passport once setup is extendable to allow login via oauth, openid, twitter, facebook, and more. Passport uses Strategies to manage the login process.</p>
+
+<h2 id="tests">Tests</h2>
+<p>In order to test login the site will need to allow creation of users, GETing /login, POSTing to /login and GETing /logout</p>
+
+<p>There's no need to support registration now but it's <em>so</em> similar to login and creation that implementation would be trivial.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">creating users</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should be possible to create a user</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should not be possible to create a duplicate user</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">})</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">GET request to /login</span><span class="dl">'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should send back the login page</span><span class="dl">'</span><span class="p">);</span>
+  <span class="c1">//how to test this?!</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should follow 302 when login is invalid and show flash message</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">logging in by POSTing to /login</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">without valid username cannot login</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">without valid password cannot login</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">with valid credentials can login</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nf">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">logging out by GETing /logout</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should log out the logged in user</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should throw no errors if there is no user logged in</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Firstly in order to create users it's necessary to <code class="language-plaintext highlighter-rouge">npm install --save bcrypt</code> and then (borrowing liberally from StackOverflow) create a module that hashes and salts a given password and saves a user with that hash into the database.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bcrypt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">SALT_WORK_FACTOR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">create</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bcrypt</span><span class="p">.</span><span class="nf">genSalt</span><span class="p">(</span><span class="nx">SALT_WORK_FACTOR</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nf">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nx">bcrypt</span><span class="p">.</span><span class="nf">hash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nf">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="k">return</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span>
+                    <span class="na">username</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+                    <span class="na">password</span><span class="p">:</span><span class="nx">hash</span>
+                <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nf">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nf">callback</span><span class="p">(</span><span class="dl">'</span><span class="s1">user created</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This function takes a database parameter so that the tests and the command line runner that exercise it can pass in different databases. It also demonstrates the smelliness of nested callbacks that I've put off dealing with three times now… hitting the same problem three times is a definite flag it's time to deal with it!</p>
+
+<p>(but not <em>right</em> now)</p>
+
+<p>as an aside - <a href="https://twitter.com/LemoncogFoReal">a colleague</a> spotted how smelly this code is <a href="https://twitter.com/LemoncogFoReal/status/468024884741013504">in a screenshot on twitter from across a room!</a></p>
+
+<h1 id="logging-in-tests">Logging in Tests</h1>
+<p>The test setup for the logging in tests is slightly different as it's necessary to grab the underlying SuperAgent instance that SuperTest wraps. SuperAgent will manage its cookies so you can extend the example below to allow tests of behaviour once logged in.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">supertest</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">chai</span><span class="dl">'</span><span class="p">).</span><span class="nx">expect</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">server</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">agent</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">db</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">login</span><span class="p">;</span>
+
+<span class="nf">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//set environment to test and init things</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">;</span> 
+    <span class="nx">db</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../server/db</span><span class="dl">'</span><span class="p">).</span><span class="nx">db</span><span class="p">;</span>
+    <span class="nx">server</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../server</span><span class="dl">'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+    <span class="nx">agent</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nf">agent</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Having access to the agent and the server application then allows test that look like</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">without valid username cannot login</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">agent</span>
+          <span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">/login</span><span class="dl">'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">send</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="dl">'</span><span class="s1">not a real user</span><span class="dl">'</span><span class="p">,</span> <span class="na">password</span><span class="p">:</span> <span class="dl">'</span><span class="s1">password</span><span class="dl">'</span> <span class="p">})</span>
+          <span class="p">.</span><span class="nf">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">expect</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nf">equal</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
+            <span class="nf">expect</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">.</span><span class="nx">location</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nf">equal</span><span class="p">(</span><span class="dl">'</span><span class="s1">/login</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nf">done</span><span class="p">();</span>
+          <span class="p">});</span>
+    <span class="p">});</span>
+</code></pre></div></div>
+
+<p>Not hugely different in syntax to the SuperTest tests but necessary in order to interact with the session.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/websites-CMS-platform-logging-in.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/websites-CMS-platform-logging-in.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

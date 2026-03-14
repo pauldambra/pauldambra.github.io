@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>I saved 183 million dollars by not moving to the Cloud</title>
+    <link rel="canonical" href="https://pauldambra.dev/2023/03/the-cloud.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2023/03/the-cloud.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="I saved 183 million dollars by not moving to the Cloud" />
+    <meta
+      property="og:description"
+      content="A response to all the don't move to the cloud articles"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="A response to all the don't move to the cloud articles"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"I saved 183 million dollars by not moving to the Cloud",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"414",
+     "url":"https://pauldambra.dev/2023/03/the-cloud.html",
+     "datePublished":"2023-03-19",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2023/03/the-cloud.html"
+     },
+     "articleBody":"The  average  human  brain  has  2.5  petabytes  of  memory  (source:  random  google  result).  2.5  Petabytes  is  equal  to  2,500,000  Gigabytes.  Or  2,500  terabytes.  The  u-12tb1.112xlarge  instance  on  AWS  has  13TB  of  memory.\n\nSo,  conclusively,  193  u-12tb1.112xlarge  instances  are  equivalent  to  one  brain.  Or  your  brain  could  run  in  AWS  for  15,305,472.00  USD  per  month.  Therefore,  I've  saved  183  million  dollars  by  not  moving  my  brain  to  the  cloud  in  the  last  year  alone.\n\nThere  seem  to  be  a  fashion  for  writing  articles  claiming  that  some  company  has  saved  hundreds  of  millions  of  dollars  by  not  moving  to  the  cloud.\n\nI  managed  phyisical  servers  for  more  than  a  decade.  For  the  UK  Magistrates  Courts  and  for  the  British  Mountaineering  Council.  I  was  pretty  good  at  it.  But,  I  absolutely  jumped  at  the  chance  to  move  to  the  cloud.  Why?\n\n\n\nI  really  don't  miss  running  my  own  kit  (colocated  or  directly  owned).\n\nI  don't  miss  cycling  around  Manchester  on  a  Bank  Holiday  weekend  because  I'd  miscalculated  how  much  network  cabling  I'd  need  for  an  upgrade.\n\nI  don't  miss  keeping  a  spreadsheet  of  storage  so  I  knew  when  to  order  disks,  negotiating  with  suppliers  for  cost  of  new  disks,  because  I  was  buying  a  slightly  smaller  bulk  than  AWS.\n\nI  don't  miss  having  to  explain  to  folk  in  datacenter  support  that  they  could  take  the  disks  out  of  my  failed  server  and  put  them  in  a  new  server  if  they  had  one  available.\n\nI  don't  miss  the  day  the  single  point  of  failure  in  the  rack  failed  and  everything  was  offline  while  I  waited  for  a  new  doohickey  to  be  shipped  to  me  because  it  didn't  make  sense  to  keep  spares  of  everything  on  hand.\n\nI  don't  miss  trying  to  figure  out  if  some  new  generation  of  server  hardware  would  work  for  or  would  fit  in  my  rack  as  manufacturers  stopped  making  the  kit  we  did  use.\n\nI  don't  miss  hacking  at  a  multi-thousand  pound  HP  Proliant  server  with  a  breadknife  because  it  was  the  only  way  to  make  the  thing  fit  together  due  to  a  manufacturing  error.  And  I  couldn't  wait  for  a  replacement.\n\nHowever,\n\nThe  problem  with  all  those  articles  isn't  that  they  say  you  should  or  shouldn't  run  in  the  cloud.  But  that  they  make  bold  claims  about  what  everyone  should  do.\n\nI'm  not  going  to  say  every  workload  should  run  in  the  cloud  (cliche  nod  to  StackOverflow)  but  it  certainly  isn't  free  to  get  all  of  the  benefits.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sun Mar 19 2023</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">I saved 183 million dollars by not moving to the Cloud</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2023/03/the-cloud.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=I+saved+183+million+dollars+by+not+moving+to+the+Cloud&via=pauldambra&url=https://pauldambra.dev/2023/03/the-cloud.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#rant"
+      >
+        in: rant
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cloud">
+    cloud
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#experience">
+    experience
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#context">
+    context
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>The average human brain has 2.5 petabytes of memory (source: random google result). 2.5 Petabytes is equal to 2,500,000 Gigabytes. Or 2,500 terabytes. The u-12tb1.112xlarge instance on AWS has 13TB of memory.</p>
+
+<p>So, conclusively, 193 u-12tb1.112xlarge instances are equivalent to one brain. Or your brain could run in AWS for 15,305,472.00 USD per month. Therefore, I've saved 183 million dollars by not moving my brain to the cloud in the last year alone.</p>
+
+<p>There seem to be a fashion for writing <a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">articles</a> <a href="https://tech.ahrefs.com/how-ahrefs-saved-us-400m-in-3-years-by-not-going-to-the-cloud-8939dd930af8">claiming</a> that some company has saved hundreds of millions of dollars by not moving to the cloud.</p>
+
+<p>I managed phyisical servers for more than a decade. For the UK Magistrates Courts and for the British Mountaineering Council. I was pretty good at it. But, I absolutely jumped at the chance to move to the cloud. Why?</p>
+
+<!--more-->
+
+<h2 id="i-really-dont-miss-running-my-own-kit-colocated-or-directly-owned">I <em>really</em> don't miss running my own kit (colocated or directly owned).</h2>
+
+<p>I don't miss cycling around Manchester on a Bank Holiday weekend because I'd miscalculated how much network cabling I'd need for an upgrade.</p>
+
+<p>I don't miss keeping a spreadsheet of storage so I knew when to order disks, negotiating with suppliers for cost of new disks, because I was buying a slightly smaller bulk than AWS.</p>
+
+<p>I don't miss having to explain to folk in datacenter support that they could take the disks out of my failed server and put them in a new server if they had one available.</p>
+
+<p>I don't miss the day the single point of failure in the rack failed and everything was offline while I waited for a new doohickey to be shipped to me because it didn't make sense to keep spares of everything on hand.</p>
+
+<p>I don't miss trying to figure out if some new generation of server hardware would work for or would fit in my rack as manufacturers stopped making the kit we did use.</p>
+
+<p>I don't miss hacking at a multi-thousand pound HP Proliant server with a breadknife because it was the only way to make the thing fit together due to a manufacturing error. And I couldn't wait for a replacement.</p>
+
+<h2 id="however">However,</h2>
+
+<p>The problem with all those articles isn't that they say you should or shouldn't run in the cloud. But that they make bold claims about what <em>everyone</em> should do.</p>
+
+<p>I'm not going to say every workload should run in the cloud (cliche nod to StackOverflow) but it certainly isn't free to get all of the benefits.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2018/01/direction.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Is where we're going where we're going
+      </h3>
+      <small>
+        29 Jan 2018
+      </small>
+  </div>
+</a>  <a href="/2013/11/astronomical-database-identfier.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Astronomical Database Identfier
+      </h3>
+      <small>
+        22 Nov 2013
+      </small>
+  </div>
+</a>  <a href="/2009/10/bing-is-not-search-engine.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Bing is not a search engine
+      </h3>
+      <small>
+        30 Oct 2009
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2023/03/the-cloud.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2023/03/the-cloud.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

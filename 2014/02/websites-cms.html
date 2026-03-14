@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Websites != CMS Platform</title>
+    <link rel="canonical" href="https://pauldambra.dev/2014/02/websites-cms.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2014/02/websites-cms.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Websites != CMS Platform" />
+    <meta
+      property="og:description"
+      content="a blog about software engineering"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a blog about software engineering"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Websites != CMS Platform",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1015",
+     "url":"https://pauldambra.dev/2014/02/websites-cms.html",
+     "datePublished":"2014-02-22",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2014/02/websites-cms.html"
+     },
+     "articleBody":"I  was  once  complaining  about  having  difficulty  setting  up  a  very  slightly  unusual  feature  in  a  Drupal  site  that  was  taking  forever  to  achieve.  The  framework  made  so  many  assumptions  about  what  I  should  do  that  it  wouldn't  let  me  do  what  I  wanted  to.\n\n\n\nA  freelancer  commented  that  if  he  was  quoting  on  a  project  that  had  a  requirement  that  it  use  a  given  CMS  he  didn't  quote  any  less  than  building  from  scratch.  He  had  found  it  didn't  make  enough  difference  to  the  effort  he'd  spend…\n\nThis  stuck  with  me  and  matches  my  experience  so  far.  (yeah,  yeah,  confirmation  bias.  I  know)\n\n\n\nI  spent  this  past  week  doing  maintenance  work  on  a  Django  website.  The  ceremony  involved  in  the  Django  part  has  outweighed  the  time  spent  designing  the  new  HTML  and  creating  the  new  page  significantly.\n\nSome  of  that  delay  is  that  I'm  new  to  Django  (and  Python),  sure,  but  at  points,  even  when  I'd  come  to  understand  what  Django  wanted,  I  still  had  to  spend  time  poking  it  with  a  stick  before  it  would  allow  me  to  display  HTML  in  a  browser.\n\nSo?\n\nMy  position  is  that  a  CMS  can  be  overkill.  They  speed  up  the  initial  setup  for  a  website  but  then  can  slow  down  subsequent  features.  I'd  argue  you  can  provide  the  features  of  most  CMS  with  relatively  little  effort  by  embracing  modularity  and  the  capabilities  of  modern  JS.\n\nEdit/Addendum\n\nAs  Dan  points  out  in  the  comments  Django  !=  CMS  either.  I  call  out  above  that  I'm  not  experienced  with  Django.  I've  worked  with  it  twice.  And  both  times  Django  had  been  used  to  build  a  CMS.\n\nImportantly,  both  times  I  was  able  to  deliver  almost  every  necessary  change  by  editing  JS  files.\n\nI'm  not  saying  that  Django  is  bad  per  se  (although  I  really  didn't  enjoy  working  with  it).  I'm  not  even  saying  that  having  a  system  to  manage  content  on  a  website  is  bad  -  I  can't  be  I'm  suggesting  building  one!\n\nMaybe  that  \"heavy-weight\"  web  frameworks  may  not  be  appropriate  to  build  that  system  -  on  a  large  .Net  project  recently  I'd  argue  most  of  the  functionality  the  customer  wanted  was  built  with  JS.\n\nI'm  primarily  a  .Net  developer.  I  love  C#  -  I  think  the  language  is  powerful  and  expressive.  I  think  MS  are  really  pushing  things  with  new  language  development.  I  grok  how  to  build  websites  using  it  but  I'm  getting  to  the  point  where  even  my  BFF  language  isn't  necessarily  my  first  choice.\n\nReally  all  I'm  saying  is  that  I've  discovered  I  heart  JS  for  making  web  things  because  I've  found  it  gets  out  of  the  way  and  lets  me  build  things.\n\n\n\nThe  basic  idea  for  this  blog  series  had  been  bouncing  around  in  my  head  for  a  while…  and  the  recent  work  with  Django  was  the  kick  I  needed  to  actually  bother  to  write  it.\n\nNever  say  never  but  sometimes  say  no\n\nSo  I  wondered  if  I  really  could  build  an  editable  website\n\nProof,  in  other  words,  if  proof  be  need  be.\n\nWhat  is  it?!\n\nWikipedia  has  a  reasonable  definition  of  a  Web  CMS  (right  now  at  least)  as:\n\n\n    A  web  content  management  system  (WCMS)1  is  a  software  system  that  provides  website  authoring,  collaboration,  and  administration  tools  designed  to  allow  users  with  little  knowledge  of  web  programming  languages  or  markup  languages  to  create  and  manage  website  content  with  relative  ease.  A  robust  WCMS  provides  the  foundation  for  collaboration,  offering  users  the  ability  to  manage  documents  and  output  for  multiple  author  editing  and  participation.\n\n\n\n    Most  systems  use  a  content  repository  or  a  database  to  store  page  content,  metadata,  and  other  information  assets  that  might  be  needed  by  the  system.\n\n\n\n    A  presentation  layer  (template  engine)  displays  the  content  to  website  visitors  based  on  a  set  of  templates,  which  are  sometimes  XSLT  files.  Most  systems  use  server  side  caching  to  improve  performance.  This  works  best  when  the  WCMS  is  not  changed  often  but  visits  happen  regularly.\n\n\n\n\n\n    Administration  is  also  typically  done  through  browser-based  interfaces,  but  some  systems  require  the  use  of  a  fat  client\n\n\n\n    A  WCMS  allows  non-technical  users  to  make  changes  to  a  website  with  little  training.  A  WCMS  typically  requires  a  systems  administrator  and/or  a  web  developer  to  set  up  and  add  features,  but  it  is  primarily  a  website  maintenance  tool  for  non-technical  staff.\n\n\nI'm  not  trying  to  build  a  CMS…  something  that  could  be  packaged  and  distributed.  I'm  only  interested  in  how  long  it  would  actually  take  me  to  build  a  web  site  that:\n\n\n    Displays  Web  pages\n        \n            part  1\n                \n                    part  2\n                \n            \n        \n    \n    Stores  data\n        \n            part  1\n            part  2\n        \n    \n    Edits  web  pages  /  Has  an  Admin  section\n        \n            on  page  editing\n            UX  part  1\n            UX  part  2\n        \n    \n    Has  templating\n        \n            Handlebars\n        \n    \n    Allows  more  than  one  author\n        \n            Logging  in\n        \n    \n    Has  Server  side  caching\n        \n            does  anything  not  have  server  side  caching  these  days?!\n        \n    \n    Can  be  used  by  someone  non-technical\n        \n            totally  subjective…\n        \n    \n\n\n(edited  with  links  to  the  completed  work)\n\nSo  I'm  going  to  imagineer  a  fake  company  called  Omniclopse  and  build  them  a  website  from  scratch.  I'll  try  to  provide  what  would  be  provided  by  a  modern  CMS  and  see  how  much  effort  that  takes.  And  I'll  blog  about  it  as  I  go.\n\nI  may  learn  that  it  isn't  quick  to  build  those  things  (or  that  I'm  not  very  good  at  them)  but  then  a  negative  result  is  still  a  result…\n\nI  don't  know  what  rate  I'll  manage  to  post  at  since  I  have  one  kid  with  a  broken  leg  and  one  about  to  be  born  (and  another  not  providing  any  more  than  the  usual  amount  of  rewarding  distraction)  but  I'd  like  to  practice  using  NodeJS,  Mongo,  and  Angular.  And  to  practice  estimating  my  work  before  I  begin.\n\nRead  the  next  post\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sat Feb 22 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Websites != CMS Platform</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2014/02/websites-cms.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Websites+%21%3D+CMS+Platform&via=pauldambra&url=https://pauldambra.dev/2014/02/websites-cms.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#cms"
+      >
+        in: cms
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cms">
+    cms
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#design">
+    design
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#web">
+    web
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#series">
+    series
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I was once complaining about having difficulty setting up a very slightly unusual feature in a Drupal site that was taking forever to achieve. The framework made so many assumptions about what I should do that it wouldn't let me do what I wanted to.</p>
+
+<!--alex ignore he-she --->
+
+<p>A freelancer commented that if he was quoting on a project that had a requirement that it use a given CMS he didn't quote any less than building from scratch. He had found it didn't make enough difference to the effort he'd spend…</p>
+
+<p>This stuck with me and matches my experience so far. (yeah, yeah, confirmation bias. I know)</p>
+
+<!--more-->
+
+<p>I spent this past week doing maintenance work on a Django website. The ceremony involved in the Django part has outweighed the time spent designing the new HTML and creating the new page significantly.</p>
+
+<p>Some of that delay is that I'm new to Django (and Python), sure, but at points, even when I'd come to understand what Django wanted, I still had to spend time poking it with a stick before it would allow me to display HTML in a browser.</p>
+
+<h1 id="so">So?</h1>
+
+<p>My position is that a CMS can be overkill. They speed up the initial setup for a website but then can slow down subsequent features. I'd argue you can provide the features of most CMS with relatively little effort by embracing modularity and the capabilities of modern JS.</p>
+
+<h3 id="editaddendum">Edit/Addendum</h3>
+
+<p>As <a href="https://plus.google.com/u/0/+DanielDrummond">Dan</a> points out in the comments Django != CMS either. I call out above that I'm not experienced with Django. I've worked with it twice. And both times Django had been used to build a CMS.</p>
+
+<p>Importantly, both times I was able to deliver almost every necessary change by editing JS files.</p>
+
+<p>I'm not saying that Django is bad per se (although <i>I</i> <em>really</em> didn't enjoy working with it). I'm not even saying that having a system to manage content on a website is bad - I can't be I'm suggesting building one!</p>
+
+<p>Maybe that "heavy-weight" web frameworks may not be appropriate to build that system - on a large .Net project recently I'd argue most of the functionality the customer wanted was built with JS.</p>
+
+<p>I'm primarily a .Net developer. I love C# - I think the language is powerful and expressive. I think MS are really pushing things with new language development. I grok how to build websites using it but I'm getting to the point where even my BFF language isn't necessarily my first choice.</p>
+
+<p>Really all I'm saying is that I've discovered I heart JS for making web things because I've found it gets out of the way and lets me build things.</p>
+
+<p><img src="/images/ABC.png" alt="always be punning" loading="lazy" /></p>
+
+<p>The basic idea for this blog series had been bouncing around in my head for a while… and the recent work with Django was the kick I needed to actually bother to write it.</p>
+
+<h4 id="never-say-never-but-sometimes-say-no">Never say never but sometimes say no</h4>
+
+<p>So I wondered if I really could build an editable website</p>
+
+<p>Proof, in other words, if proof be need be.</p>
+
+<h1 id="what-is-it">What is it?!</h1>
+
+<p>Wikipedia has a reasonable definition of a Web CMS (right now at least) as:</p>
+
+<blockquote>
+  <p>A web content management system (WCMS)<sup><a href="http://en.m.wikipedia.org/wiki/Web_content_management_system#cite_note-1">1</a></sup> is a software system that provides website authoring, collaboration, and administration tools designed to allow users with little knowledge of web programming languages or markup languages to create and manage website content with relative ease. A robust WCMS provides the foundation for collaboration, offering users the ability to manage documents and output for multiple author editing and participation.</p>
+</blockquote>
+
+<blockquote>
+  <p>Most systems use a content repository or a database to store page content, metadata, and other information assets that might be needed by the system.</p>
+</blockquote>
+
+<blockquote>
+  <p>A presentation layer (template engine) displays the content to website visitors based on a set of templates, which are sometimes XSLT files. Most systems use server side caching to improve performance. This works best when the WCMS is not changed often but visits happen regularly.</p>
+</blockquote>
+
+<p><!--alex ignore fat ---></p>
+
+<blockquote>
+  <p>Administration is also typically done through browser-based interfaces, but some systems require the use of a fat client</p>
+</blockquote>
+
+<blockquote>
+  <p>A WCMS allows non-technical users to make changes to a website with little training. A WCMS typically requires a systems administrator and/or a web developer to set up and add features, but it is primarily a website maintenance tool for non-technical staff.</p>
+</blockquote>
+
+<p>I'm not trying to build a CMS… something that could be packaged and distributed. I'm only interested in how long it would actually take me to build a web site that:</p>
+
+<ul>
+  <li>Displays Web pages
+    <ul>
+      <li><a href="/2014/03/websites-cms-displaying-pages.html">part 1</a>
+        <ul>
+          <li><a href="/2014/03/website-cms-display-pages-part-2.html">part 2</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Stores data
+    <ul>
+      <li><a href="/Websites-CMS-Platform-Storing-Data.html">part 1</a></li>
+      <li><a href="/Websites-CMS-Platform-Storing-Data2.html">part 2</a></li>
+    </ul>
+  </li>
+  <li>Edits web pages / Has an Admin section
+    <ul>
+      <li><a href="/On-Page-Editing.html">on page editing</a></li>
+      <li><a href="/better-affordance.html">UX part 1</a></li>
+      <li><a href="/better-affordance-js.html">UX part 2</a></li>
+    </ul>
+  </li>
+  <li>Has templating
+    <ul>
+      <li><a href="/2014/03/website-cms-display-pages-part-2.html">Handlebars</a></li>
+    </ul>
+  </li>
+  <li>Allows more than one author
+    <ul>
+      <li><a href="/websites-CMS-platform-logging-in.html">Logging in</a></li>
+    </ul>
+  </li>
+  <li>Has Server side caching
+    <ul>
+      <li>does anything not have server side caching these days?!</li>
+    </ul>
+  </li>
+  <li>Can be used by someone non-technical
+    <ul>
+      <li>totally subjective…</li>
+    </ul>
+  </li>
+</ul>
+
+<p>(edited with links to the completed work)</p>
+
+<p>So I'm going to imagineer a fake company called Omniclopse and build them a website from scratch. I'll try to provide what would be provided by a modern CMS and see how much effort that takes. And I'll blog about it as I go.</p>
+
+<p>I may learn that it isn't quick to build those things (or that I'm not very good at them) but then a negative result is still a result…</p>
+
+<p>I don't know what rate I'll manage to post at since I have one kid with a broken leg and one about to be born (and another not providing any more than the usual amount of rewarding distraction) but I'd like to practice using NodeJS, Mongo, and Angular. And to practice estimating my work before I begin.</p>
+
+<p><a href="/2014/03/websites-cms-displaying-pages.html">Read the next post</a></p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/wrapping_up.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Wrapping Up
+      </h3>
+      <small>
+        03 Aug 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance-js.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance with JS for great good
+      </h3>
+      <small>
+        30 Jul 2014
+      </small>
+  </div>
+</a>  <a href="/better-affordance.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        Websites != CMS Platform - Better Editable Affordance
+      </h3>
+      <small>
+        20 Jul 2014
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2014/02/websites-cms.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2014/02/websites-cms.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

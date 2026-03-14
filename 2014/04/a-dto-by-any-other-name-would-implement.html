@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>A DTO by any other name would implement ISweetSmellEquality</title>
+    <link rel="canonical" href="https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="A DTO by any other name would implement ISweetSmellEquality" />
+    <meta
+      property="og:description"
+      content="a discussion of the practice of calling the objects passed between application layers DTOs"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="a discussion of the practice of calling the objects passed between application layers DTOs"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://twitter.com/pauldambra" rel="noopener">
+          <img
+            src="/images/twitter-32.png"
+            alt="pauldambra on twitter"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"A DTO by any other name would implement ISweetSmellEquality",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"820",
+     "url":"https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html",
+     "datePublished":"2014-04-01",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html"
+     },
+     "articleBody":"I've  been  thinking  about  what  people  call  the  objects  they  pass  around  and  whether  they  are  the  right  names  and  why…  and  when…  and  I  feel  like  the  dog  running  behind  the  television  to  see  where  the  onscreen  dog  went  -  on  the  verge  of  a  paradigm  shifting  change  in  perspective  but  not  quite  getting  it  (and  possibly  a  bit  smelly)\n\n\n\nDTO\n\nThe  most  common  is  DTO  or  Data  Transfer  Object.  Fowler  has  a  definition  \"An  object  that  carries  data  between  processes  in  order  to  reduce  the  number  of  method  calls.\"  He  extends  this  clarifying  it  should  be  an  object  that  can  be  serialised.\n\nThis  out-of-date  article  from  Microsoft  also  defines  this  as  an  object  that  is  used  to  reduce  the  number  of  calls  to  a  remote  interface  in  a  distributed  system.  I  suppose    Android's  Intent  are  an  example  of  serializable  objects  that  communicate  between  processes  without  using  the  web  -  although  I  don't  know  enough  Android  to  be  sure  about  that.\n\nHowever,  in  this  MSDN  article  DTOs  are  defined  specifically  as  objects  with  properties  but  no  methods  used  to  isolate  presentation  from  the  domain  -  what  Fowler  calls  \"localDTO\".\n\nLocalDTO  i.e.  using  DTO  to  describe  objects  passed  between  layers  of  a  single  application  is  so  common  that  Fowler  has  subsequently  written  to  clarify:\n\n\n    Some  people  argue  for  them  as  part  of  a  Service  Layer  API  because  they  ensure  that  service  layer  clients  aren't  dependent  upon  an  underlying  Domain  Model.  While  that  may  be  handy,  I  don't  think  it's  worth  the  cost  of  all  of  that  data  mapping.  As  my  contributor  Randy  Stafford  says  in  P  of  EAA  \"Don't  underestimate  the  cost  of  [using  DTOs]….  It's  significant,  and  it's  painful  -  perhaps  second  only  to  the  cost  and  pain  of  object-relational  mapping\".\n\n\nA  relatively  brief  online  search  suggests  there  are  more  definitions  that  describe  a  DTO  as  between  remote  processes  as  opposed  to  between  layers  of  an  application  (here  for  example  or  here).\n\nOf  the  ten  hits  for  \"Data  Transfer  Object\"  on  Google  right  now  eight  agree  with  Fowler's  definition,  one  is  Fowler's  Value  Object  page,  and  one  is  a  J2EE  definition  for  a  transfer  object  which  specifies  that  it  can  be  used  for  transferring  data  between  tiers  -  in  PoEAA  Fowler  tells  us  that  the  Java  community  have  since  moved  away  from  calling  these  classes  Transfer  Objects.\n\nSo  it  appears  that  while  it  is  common  to  call  objects  passed  between  application  tiers  (at  least  in  MS  circles)  DTOs  it  isn't  technically  correct  but  grew  out  of  an  out-of-date  J2EE  usage  of  DTO  including  in  its  definition    moving  data  between  tiers.\n\nDomain  Model\n\nIn  the  quote  above  local  DTOs  are  used  instead  of  passing  Domain  Models.  Fowler  defines  a  Domain  Model  as  \"An  object  model  of  the  domain  that  incorporates  both  behaviour  and  data.\"  In  Patterns  of  Enterprise  Application  Architecture  (shameless  affiliate  link)  he  expands  and  in  describing  a  Domain  Model  says:\n\n\n\n    As  a  result  I  see  two  styles  of  Domain  Model  in  the  field.  A  simple  Domain  Model  looks  very  much  like  the  database  design  with  mostly  one  domain  object  for  each  database  table.  A  rich  Domain  Model  can  look  different  from  the  database  design,  with  inheritance,  strategies,  and  other  Gang  of  Four  patterns,  and  complex  webs  of  small  interconnected  objects.\n\n\nFurther  Fowler  describes  the  anemic  domain  model  where  the  domain  model  objects  have  little  or  no  behaviour.  This  anemic  model  seems  to  be  a  good  fit  for  the  local  DTOs  described  above.  The  solution  to  this  anti-pattern  seems  to  be  to  have  read  Eric  Evan's  DDD  (shameless  affiliate  link)  and  where  to  implement  as  rich  a  domain  model  as  appropriate  for  the  application  being  built.\n\nValue  Object\n\nI  have  a  tendency  to  call  local  DTOs  \"value  objects\"  but  using  Evan's  definition  this  isn't  strictly  true.  I  had  missed  that  a  value  object  isn't  only  about  representing  the  value.  It's  more  than  that.  Value  objects  should  be  immutable  and  any  two  value  objects  are  only  equal  when  their  properties  are  equal.  As  such  they  don't  map  to  the  local  DTOs  described  above.\n\nHowever,  I've  been  experimenting  recently  with  passing  structs  around  as  immutable  value  objects  when  traversing  layers  (and  at  a  colleague's  suggestion  have  amended  my  R#  auto  property  shortcut  to  create  a  private  setter).  I  prefer  these  immutable  objects  as  responses  from  queries  into  the  domain  but  I  haven't  done  any  reading  around  whether  that's  a  bad  idea  lots  of  people  have  already  had.\n\nIn  conclusion…\n\n…it  seems  that  I  really  need  to  read  DDD  and  maybe  that  the  job  isn't  to  find  the  correct  name  for  an  object  passed  between  tiers  but  to  start  passing  the  domain  model  and  lose  the  \"DTOs\"  entirely\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Tue Apr 01 2014</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">A DTO by any other name would implement ISweetSmellEquality</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=A+DTO+by+any+other+name+would+implement+ISweetSmellEquality&via=pauldambra&url=https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#software-engineering"
+      >
+        in: software-engineering
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#learning">
+    learning
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#dto">
+    dto
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#cargo-cult">
+    cargo-cult
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#domain">
+    domain
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I've been thinking about what people call the objects they pass around and whether they are the right names and why… and when… and I feel like the dog running behind the television to see where the onscreen dog went - on the verge of a paradigm shifting change in perspective but not quite getting it (and possibly a bit smelly)</p>
+
+<!--more-->
+
+<h1 id="dto">DTO</h1>
+<!--alex ignore he-she --->
+<p>The most common is DTO or Data Transfer Object. <a href="http://martinfowler.com/eaaCatalog/dataTransferObject.html">Fowler has a definition</a> "An object that carries data between processes in order to reduce the number of method calls." He extends this clarifying it should be an object that can be serialised.</p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/ms978717.aspx">This out-of-date article from Microsoft</a> also defines this as an object that is used to reduce the number of calls to a remote interface in a distributed system. I suppose  <a href="https://developer.android.com/reference/android/content/Intent">Android's Intent</a> are an example of serializable objects that communicate between processes without using the web - although I don't know enough Android to be sure about that.</p>
+
+<p>However, in <a href="http://msdn.microsoft.com/en-us/magazine/ee236638.aspx#id0080022">this MSDN article</a> DTOs are defined specifically as objects with properties but no methods used to isolate presentation from the domain - what Fowler calls "localDTO".</p>
+
+<p>LocalDTO i.e. using DTO to describe objects passed between layers of a single application is so common that <a href="http://martinfowler.com/bliki/LocalDTO.html">Fowler has subsequently written</a> to clarify:
+<!--alex ignore randy ---></p>
+<blockquote>
+  <p>Some people argue for them as part of a <a href="http://martinfowler.com/eaaCatalog/serviceLayer.html">Service Layer</a> API because they ensure that service layer clients aren't dependent upon an underlying <a href="http://martinfowler.com/eaaCatalog/domainModel.html">Domain Model</a>. While that may be handy, I don't think it's worth the cost of all of that data mapping. As my contributor Randy Stafford says in <a href="http://martinfowler.com/books/eaa.html">P of EAA</a> "Don't underestimate the cost of [using DTOs]…. It's significant, and it's painful - perhaps second only to the cost and pain of object-relational mapping".</p>
+</blockquote>
+
+<p>A relatively brief online search suggests there are more definitions that describe a DTO as between remote processes as opposed to between layers of an application (<a href="https://web.archive.org/web/20200731184340/http://www.servicedesignpatterns.com/RequestAndResponseManagement/DataTransferObject">here for example</a> or <a href="http://c2.com/cgi/wiki?DataTransferObject">here</a>).</p>
+
+<p>Of the ten hits for "Data Transfer Object" on Google right now eight agree with Fowler's definition, one is Fowler's Value Object page, and one is a J2EE definition for a transfer object which specifies that it can be used for transferring data between tiers - in PoEAA Fowler tells us that the Java community have since moved away from calling these classes Transfer Objects.</p>
+
+<p>So it appears that while it is common to call objects passed between application tiers (at least in MS circles) DTOs it isn't technically correct but grew out of an <a href="http://www.adam-bien.com/roller/abien/entry/value_object_vs_data_transfer">out-of-date J2EE usage of DTO including in its definition</a>  moving data between tiers.</p>
+
+<h1 id="domain-model">Domain Model</h1>
+<!--alex ignore he-she simple --->
+<p>In the quote above local DTOs are used instead of passing Domain Models. <a href="http://martinfowler.com/eaaCatalog/domainModel.html">Fowler defines a Domain Model</a> as "An object model of the domain that incorporates both behaviour and data." In Patterns of Enterprise Application Architecture <a href="http://www.amazon.co.uk/gp/product/B008OHVDFM/ref=as_li_ss_tl?ie=UTF8&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B008OHVDFM&amp;linkCode=as2&amp;tag=mindlramblnon-21">(shameless affiliate link)</a> he expands and in describing a Domain Model says:</p>
+
+<!--alex ignore simple --->
+<blockquote>
+  <p>As a result I see two styles of Domain Model in the field. A simple Domain Model looks very much like the database design with mostly one domain object for each database table. A rich Domain Model can look different from the database design, with inheritance, strategies, and other Gang of Four patterns, and complex webs of small interconnected objects.</p>
+</blockquote>
+
+<p>Further Fowler describes the <a href="http://www.martinfowler.com/bliki/AnemicDomainModel.html">anemic domain model</a> where the domain model objects have little or no behaviour. This anemic model seems to be a good fit for the local DTOs described above. The solution to this anti-pattern seems to be to have read Eric Evan's DDD <a href="http://www.amazon.co.uk/gp/product/B00794TAUG/ref=as_li_ss_tl?ie=UTF8&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B00794TAUG&amp;linkCode=as2&amp;tag=mindlramblnon-21">(shameless affiliate link)</a> and where to implement as rich a domain model as appropriate for the application being built.</p>
+
+<h1 id="value-object">Value Object</h1>
+
+<p>I have a tendency to call local DTOs "value objects" but using <a href="http://martinfowler.com/bliki/EvansClassification.html">Evan's definition</a> this isn't strictly true. I had missed that a value object isn't only about representing the value. <a href="http://martinfowler.com/bliki/ValueObject.html">It's more than that</a>. Value objects should be immutable and any two value objects are only equal when their properties are equal. As such they don't map to the local DTOs described above.</p>
+
+<p>However, I've been experimenting recently with passing structs around as immutable value objects when traversing layers (and at <a href="https://twitter.com/tomliversidge">a colleague</a>'s suggestion have amended my R# auto property shortcut to create a private setter). I prefer these immutable objects as responses from queries into the domain but I haven't done any reading around whether that's a bad idea lots of people have already had.</p>
+
+<h1 id="in-conclusion">In conclusion…</h1>
+
+<p>…it seems that I really need to read DDD and maybe that the job isn't to find the correct name for an object passed between tiers but to start passing the domain model and lose the "DTOs" entirely</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2014/04/a-dto-by-any-other-name-would-implement.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>
