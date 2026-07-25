@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I use LLMs? - five</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/06/how-i-use-llms-5.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/06/how-i-use-llms-5.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I use LLMs? - five" />
+    <meta
+      property="og:description"
+      content="How I use LLMs - five"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I use LLMs - five"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://bsky.app/profile/pauldambra.dev" rel="noopener">
+          <img
+            src="/images/bluesky-32.svg"
+            alt="pauldambra.dev on Bluesky"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I use LLMs? - five",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1628",
+     "url":"https://pauldambra.dev/2026/06/how-i-use-llms-5.html",
+     "datePublished":"2026-06-04",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/06/how-i-use-llms-5.html"
+     },
+     "articleBody":"I  have  lost  roughly  60%  of  my  cynicism  about  the  current  high-water  mark  for  LLMs  and  augmented  coding…  I  am  certain  this  last  9  months  has  been  a  significant  generational  change  in  how  we  can  approach  work.\n\nOh  no,  I'm  AI  pilled\n\nLet's  growth  hack  blog  visitor  numbers  record  how  I  use  them  today  as  a  little  reflection  on  where  I  think  they  work  and  where  they  don't.  Something  I  can  revisit  as  the  tech  (and  my  skill  with  it)  improves\n\nThis  is  update  number  four,  or  entry  number  five,  depending  on  how  you  want  to  count  it.\n\n\n    part  1  -  structured  tone  of  fascination  +  scepticism\n    part  2  -  learning  how  to  manage  and  control  them\n    part  3  -  reluctant  acceptance  but  also  thankfulness  (?)  of  what  they  do  for  you  when  you  let  go  of  control\n    part  4  -  realising  even  though  it's  no  longer  \"braincode\"  +  no  longer  for  humans,  it  still  comes  from  human  brains\n\n\nsomeone  at  work  named  the  episodes  for  me,  i  love  it\n\nso  now…  part  5  -  yee  haw,  paul  is  AI  pilled\n\nin  today's  edition  of  AI  hot  takes\n\n\n    the  agent  is  my  to-do  list\n    no  longer  focused  on  the  code,  5%  focus  down  from  95%\n    i  don't  use  these  tools,  i  hire  them  into  my  team\n    genuine  frustration  when  they  lack  autonomy\n    stop  making  me  tell  you  when  to  run\n    skills  skills  skill  skills\n\n\n\n\nFirst,  a  necessary  but  brief  diversion  into  how  I  use  tools  generally\n\nI  was  largely  self-taught  as  a  developer  and  (after  vbscript  😱)  I  started  with  DotNet.  I  found  JetBrains  Resharper  early  on  and  never  looked  back.  The  assistance  in  the  IDE  to  write,  refactor,  and  improve  code  was  game-changing.  I  don't  begrudge  anybody  any  tool  they  want  to  use  to  level-up.  Wanna  use  a  graphical  git  client,  or  emacs,  or  anything  else…  go  for  it,  go  make  cool  things\n\nBecause  of  that  entry  to  the  industry  I'm  also  not  super  keen  on  VSCode  (you  love  it?  great,  see  above,  you  do  you,  go  make  cool  things).  I'm  too  used  to  clever  interventions  helping  me  and  VSCode  is  too  barebones  (and  so  much  slower  than  SublimeText)\n\nSo,  I  like  having  tools  directly  involved  in  my  workflow.  I  learned  LINQ  more  quickly  and  more  thoroughly  because  I  had  resharper  prompting  me  inline,  at  write-time:  \"hey,  why  not  like  this?\"\n\nthe  agent  is  my  to-do  list\n\nwhy  write  something  down  in  a  to-do  list  when  i  can  open  a  new  conversation  and  write  exactly  the  same  text  as  a  prompt?!  i  immediately  switch  away  and  carry  on  with  my  day,  like  with  a  to-do  list.\n\nbut  my  agent  is  connected  to  our  code  and  to  all  of  our  analytics,  so  almost  every  time  when  I  switch  back  it  has  context  and  challenge.  or  a  PR\n\nto-do  list  on  steroids\n\nno  longer  focused  on  the  code,  5%  focus  down  from  95%\n\nLast  time  I  said:\n\n\n    Recent  improvements  to  agents  and  their  UX  has  meant  I  only  have  to  actively  write  code  when  I  choose  to.  It  would  be  possible  to  completely  work  via  agents.\n\n\nI  can  literally  never  write  a  line  of  code  manually  anymore  and  it  is  so  ok.\n\nBecause  the  cost  of  understanding  the  code  is  basically  zero  now.  The  importance  of  the  code  being  understandable  is  dropping.\n\nIt  still  has  to  be  correct  and  fast  but  if  I  can't  quickly  grok  it.  I  can  just  ask  an  LLM  to  explain  it,  or  write  some  tests  to  exercise  it.  What  might  have  taken  hours  in  the  past,  I've  worked  on  code  that  took  me  days  to  understand,  will  now  take  seconds.\n\nWriting  code  is  now  far  from  the  highest  leverage  thing  I  could  do  with  my  time\n\n\"Oh  but  Paul  some  code  is  very  important!\"\n\nYep,  and  cool,  the  literal  code  might  still  be  the  highest  leverage  thing  you  can  do.  But  it  isn't  the  highest  leverage  thing  I  could  do  any  more.  And  I'd  argue  for  many  people  that's  true  too.\n\nAnd  that  is  truly  magical  because  now  I  can  care  about  and  achieve  a  bunch  of  stuff  all  at  the  same  time  and  that  would  have  been  impossible  for  2025  Paul.\n\ni  don't  use  these  tools,  i  hire  them  into  my  team\n\nIf  I  am  nailing  two  pieces  of  wood  together  it  is  up  to  me  to  figure  out  how  to  do  it.  To  choose  the  hammer.  To  choose  the  nail.  To  pick  the  place  and  the  angle  that  the  nail  goes  in.  To  make  sure  I  don't  hit  my  thumb.\n\nIf  I  hire  a  carpenter  then  I  make  them  a  brew  and  tell  them  I'm  here  if  they  need  me.\n\nSo,  the  mindset  shift  I'm  suggesting  is  that  I  am  hiring  a  junior  engineer  or  product  manager  or  whatever.  And  I  am  responsible  for  giving  them  context  and  guard  rails.  And  then  I  let  them  do  their  work.  I'm  still  responsible  for  if  the  work  is  valuable,  but  I'm  not  literally  hitting  the  nail  any  more.\n\nIt  changes  so  much  about  how  I  interact  with  the  thing.  And  it  lets  me  completely  change  how  I  work.  I've  moved  into  an  executive  role  and  I  can  still  sling  lots  of  code  cos  I  don't  hold  the  hammer,  I  hire  the  carpenter.\n\ngenuine  frustration  when  they  lack  autonomy\n\nWe  run  a  bunch  of  AI  review  tools  on  our  PRs.  And  they  have  varying  quality.  They  get  better  over  time  bit  by  bit.  And  they  are  earning  their  keep  (just  about  -  although  they're  pretty  expensive  tbh)\n\nBut  over  the  last  months  since  part  4  I've  noticed  a  new  expectation  from  me…  they  post  their  comment  and  I  think  \"ugh,  now  i  have  to  read  and  act  on  that…  such  bullshit\"\n\nBy  comparison,  I  have  a  \"PR  Shepherd\"  skill.  I've  had  Claude  do  research  about  XP  on  the  C2  wiki.  I've  had  it  interview  me  about  software  engineering  to  see  what  I  care  about  in  how  work  is  done.  And  I've  had  it  review  the  public  history  of  my  PR  reviews  to  see  what  I  care  about  in  reviewing.\n\nAnd  when  I  run  that  skill  it  does  a  bunch  of  reviews  in  parallel,  and  anything  that  has  a  single  solution,  it  just  does.  You  can  see  an  example  here  -  I  have  it  run  and  publicly  comment  on  all  of  my  PRs.  It  now  feels  rude  to  have  a  human  review  before  I've  had  the  robot  find  things.  In  the  same  way  that  for  the  longest  time  it's  been  rude  to  make  a  human  lint  your  code  when  a  tool  could  do  it.\n\nSo,  increasingly,  the  word  machine  can  no  longer  earn  its  keep  by  only  turning  one  set  of  words  into  another.  It  needs  to  turn  that  set  of  words  into  action.  Just  like  if  I  hire  a  junior  engineer  and  they  asked  me  \"should  i  fix  this  obvious  bug\"  i  would  be  frustrated.\n\nstop  making  me  tell  you  when  to  run\n\nthis  has  a  side  effect…  i  don't  want  to  have  to  remember  to  ask  an  LLM  for  a  whole  bunch  of  stuff.  same  way  i  don't  want  to  have  to  ask  my  colleagues  about  a  bunch  of  stuff.\n\ni  want  to  say  \"hey,  we  should  check  the  clink  expander  every  two  hours  and  route  fanglers  appropriately\"  and  that  just  happens\n\ni  think  the  next  great  frontier  is  long-running  and  trigger-driven  agents.  and  i  am  so  excited  for  it\n\nskills  skills  skill  skills\n\nI  mention  \"PR  shepherd\"  above.  It  does  all  the  mechanical  work  of  getting  a  PR  through  review.  It  checks  if  a  PR  is  open,  opens  it  if  not.  marks  it  ready  for  review,  runs  a  swarm  of  parallel  reviewers  and  responds  to  them,  checks  external  reviews  and  responds  to  them.  It  defers  to  me  when  it  has  to,  otherwise  it  checks  CI  until  it's  green.  It  took  me  about  an  hour  in  total  so  far  prompting  to  create  it.  And  has  saved  me  multiples  of  that.\n\nSoooo  much  time  back.\n\nI  have  \"Paul  pair\".  Every  time  the  robot  finishes  work  or  is  about  to  ask  me  a  question  it  has  an  instruction  to  run  the  \"Paul  pair\"  skill.  Which  reminds  it  what  I  care  about  and  to  only  interrupt  me  with  important  things.  It's  mecha  paul.  Saving  meat  paul  from  repeating  the  thing  i  was  obviously  going  to  repeat.\n\nI  have  an  executive  coach  (admittedly  not  a  skill).  It  checks  granola  and  slack  and  github  and  the  org  chart  etc  etc  and  once  a  week  tells  me  if  I'm  working  on  what  I've  said  is  important.  Tells  me  what  I'm  missing,  what  patterns  it  sees,  what  the  top  3  things  I  should  do  to  get  back  on  track.  It's  not  always  right,  but  it  doesn't  have  to  be  -  it's  on  me  to  manage  my  work  and  attention  regardless  of  what  advice  i  receive.\n\nIf  you  have  never  done  it  then  stop  what  you're  doing.  Open  a  new  session  with  your  favourite  robot  and  type  \"look  at  our  conversations  and  tell  me  what  repeated  interactions  we  could  automate\"\n\nThen  sit  back  and  prepare  to  have  your  mind  blown.\n\nHere  are  all  my  public  skills\n\npaul,  you  sound  irredeemably  AI  pilled\n\nyep,  I  am.  sorry,  it's  happened.  there's  no  going  back.  i've  been  sucked  into  the  bubble.  this  is  the  future.\n\n\"but  LLMs  gets  things  wrong  sometimes!\"\n\nyep,  and  this  might  shock  you.  so  do  human  colleagues.  even  incredible  colleagues  can  do  silly  things.  yes,  reader,  even  I  have  once  or  twice  shipped  a  bug\n\nit's  not  about  the  LLM  being  perfect.  it  doesn't  have  to  be  perfect.  it's  about  the  LLM  being  useful.  And  it  really  f-in  is.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Thu Jun 04 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I use LLMs? - five</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/06/how-i-use-llms-5.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+use+LLMs%3F+-+five&via=pauldambra&url=https://pauldambra.dev/2026/06/how-i-use-llms-5.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>I have lost roughly 60% of my cynicism about the current high-water mark for LLMs and augmented coding… I am certain this last 9 months has been a significant generational change in how we can approach work.</p>
+
+<p>Oh no, I'm AI pilled</p>
+
+<p>Let's <del>growth hack blog visitor numbers</del> record how I use them today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number four, or entry number five, depending on how you want to count it.</p>
+
+<ul>
+  <li><a href="/2025/07/how-i-use-llms.html">part 1 - structured tone of fascination + scepticism</a></li>
+  <li><a href="/2025/10/how-i-use-llms-2.html">part 2 - learning how to manage and control them</a></li>
+  <li><a href="/2026/01/how-i-use-llms-3.html">part 3 - reluctant acceptance but also thankfulness (?) of what they do for you when you let go of control</a></li>
+  <li><a href="/2026/03/how-i-use-llms-4.html">part 4 - realising even though it's no longer "braincode" + no longer for humans, it still comes from human brains</a></li>
+</ul>
+
+<p>someone at work named the episodes for me, i love it</p>
+
+<p>so now… part 5 - yee haw, paul is AI pilled</p>
+
+<h2 id="in-todays-edition-of-ai-hot-takes">in today's edition of AI hot takes</h2>
+
+<ul>
+  <li>the agent is my to-do list</li>
+  <li>no longer focused on the code, 5% focus down from 95%</li>
+  <li>i don't use these tools, i hire them into my team</li>
+  <li>genuine frustration when they lack autonomy</li>
+  <li>stop making me tell you when to run</li>
+  <li>skills skills skill skills</li>
+</ul>
+
+<!--more-->
+
+<h1 id="first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally">First, a necessary but brief diversion into how I use tools generally</h1>
+
+<p>I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don't begrudge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things</p>
+
+<p>Because of that entry to the industry I'm also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I'm too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)</p>
+
+<p>So, I <em>like</em> having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: "hey, why not like this?"</p>
+
+<h1 id="the-agent-is-my-to-do-list">the agent is my to-do list</h1>
+
+<p>why write something down in a to-do list when i can open a new conversation and write exactly the same text as a prompt?! i immediately switch away and carry on with my day, like with a to-do list.</p>
+
+<p>but my agent is connected to our code and to all of our analytics, so almost every time when I switch back it has context and challenge. or a PR</p>
+
+<p>to-do list on steroids</p>
+
+<h1 id="no-longer-focused-on-the-code-5-focus-down-from-95">no longer focused on the code, 5% focus down from 95%</h1>
+
+<p>Last time I said:</p>
+
+<blockquote>
+  <p>Recent improvements to agents and their UX has meant I only have to actively write code when I choose to. It would be possible to completely work via agents.</p>
+</blockquote>
+
+<p>I can literally never write a line of code manually anymore and it is so ok.</p>
+
+<p>Because the cost of understanding the code is basically zero now. The importance of the code being understandable is dropping.</p>
+
+<p>It still has to be correct and fast but if I can't quickly grok it. I can just ask an LLM to explain it, or write some tests to exercise it. What might have taken hours in the past, I've worked on code that took me days to understand, will now take seconds.</p>
+
+<p>Writing code is now far from the highest leverage thing I could do with my time</p>
+
+<p>"Oh but Paul some code is very important!"</p>
+
+<p>Yep, and cool, the literal code might still be the highest leverage thing <em>you</em> can do. But it isn't the highest leverage thing I could do any more. And I'd argue for many people that's true too.</p>
+
+<p>And that is truly magical because now I can care about and achieve a bunch of stuff all at the same time and that would have been impossible for 2025 Paul.</p>
+
+<h1 id="i-dont-use-these-tools-i-hire-them-into-my-team">i don't use these tools, i hire them into my team</h1>
+
+<p>If I am nailing two pieces of wood together it is up to me to figure out how to do it. To choose the hammer. To choose the nail. To pick the place and the angle that the nail goes in. To make sure I don't hit my thumb.</p>
+
+<p>If I hire a carpenter then I make them a brew and tell them I'm here if they need me.</p>
+
+<p>So, the mindset shift I'm suggesting is that I am hiring a junior engineer or product manager or whatever. And I am responsible for giving them context and guard rails. And then I let them do their work. I'm still responsible for if the work is valuable, but I'm not literally hitting the nail any more.</p>
+
+<p>It changes so much about how I interact with the thing. And it lets me completely change how I work. I've moved into an executive role and I can still sling lots of code cos I don't hold the hammer, I hire the carpenter.</p>
+
+<h1 id="genuine-frustration-when-they-lack-autonomy">genuine frustration when they lack autonomy</h1>
+
+<p>We run a bunch of AI review tools on our PRs. And they have varying quality. They get better over time bit by bit. And they are earning their keep (just about - although they're pretty expensive tbh)</p>
+
+<p>But over the last months since part 4 I've noticed a new expectation from me… they post their comment and I think "ugh, now i have to read and act on that… such bullshit"</p>
+
+<p>By comparison, I have a "PR Shepherd" skill. I've had Claude do research about XP on the C2 wiki. I've had it interview me about software engineering to see what I care about in how work is done. And I've had it review the public history of my PR reviews to see what I care about in reviewing.</p>
+
+<p>And when I run that skill it does a bunch of reviews in parallel, and anything that has a single solution, it just does. You can see <a href="https://github.com/PostHog/posthog/pull/61611">an example here</a> - I have it run and publicly comment on all of my PRs. It now feels rude to have a human review before I've had the robot find things. In the same way that for the longest time it's been rude to make a human lint your code when a tool could do it.</p>
+
+<p>So, increasingly, the word machine can no longer earn its keep by only turning one set of words into another. It needs to turn that set of words into action. Just like if I hire a junior engineer and they asked me "should i fix this obvious bug" i would be frustrated.</p>
+
+<h1 id="stop-making-me-tell-you-when-to-run">stop making me tell you when to run</h1>
+
+<p>this has a side effect… i don't want to have to remember to ask an LLM for a whole bunch of stuff. same way i don't want to have to ask my colleagues about a bunch of stuff.</p>
+
+<p>i want to say "hey, we should check the clink expander every two hours and route fanglers appropriately" and that just happens</p>
+
+<p>i think the next great frontier is long-running and trigger-driven agents. and i am so excited for it</p>
+
+<h1 id="skills-skills-skill-skills">skills skills skill skills</h1>
+
+<p>I mention "PR shepherd" above. It does all the mechanical work of getting a PR through review. It checks if a PR is open, opens it if not. marks it ready for review, runs a swarm of parallel reviewers and responds to them, checks external reviews and responds to them. It defers to me when it has to, otherwise it checks CI until it's green. It took me about an hour in total so far prompting to create it. And has saved me multiples of that.</p>
+
+<p>Soooo much time back.</p>
+
+<p>I have "Paul pair". Every time the robot finishes work or is about to ask me a question it has an instruction to run the "Paul pair" skill. Which reminds it what I care about and to only interrupt me with important things. It's mecha paul. Saving meat paul from repeating the thing i was obviously going to repeat.</p>
+
+<p>I have an executive coach (admittedly not a skill). It checks granola and slack and github and the org chart etc etc and once a week tells me if I'm working on what I've said is important. Tells me what I'm missing, what patterns it sees, what the top 3 things I should do to get back on track. It's not always right, but it doesn't have to be - it's on me to manage my work and attention regardless of what advice i receive.</p>
+
+<p>If you have never done it then stop what you're doing. Open a new session with your favourite robot and type "look at our conversations and tell me what repeated interactions we could automate"</p>
+
+<p>Then sit back and prepare to have your mind blown.</p>
+
+<p><a href="https://github.com/pauldambra/dotfiles/tree/main/ai/skills">Here are all my public skills</a></p>
+
+<h1 id="paul-you-sound-irredeemably-ai-pilled">paul, you sound irredeemably AI pilled</h1>
+
+<p>yep, I am. sorry, it's happened. there's no going back. i've been sucked into the bubble. this is the future.</p>
+
+<p>"but LLMs gets things wrong sometimes!"</p>
+
+<p>yep, and this might shock you. so do human colleagues. even incredible colleagues can do silly things. yes, reader, even I have once or twice shipped a bug</p>
+
+<p>it's not about the LLM being perfect. it doesn't have to be perfect. it's about the LLM being useful. And it really f-in is.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2026/07/how-i-use-llms-6.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - six
+      </h3>
+      <small>
+        25 Jul 2026
+      </small>
+  </div>
+</a>  <a href="/2026/03/how-i-use-llms-4.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - four
+      </h3>
+      <small>
+        10 Mar 2026
+      </small>
+  </div>
+</a>  <a href="/2026/01/how-i-use-llms-3.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - three
+      </h3>
+      <small>
+        30 Jan 2026
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/06/how-i-use-llms-5.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/06/how-i-use-llms-5.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

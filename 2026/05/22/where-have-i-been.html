@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Where have I been?</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/05/22/where-have-i-been.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/05/22/where-have-i-been.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Where have I been?" />
+    <meta
+      property="og:description"
+      content="A list of the places I've been on work off-sites"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="A list of the places I've been on work off-sites"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://bsky.app/profile/pauldambra.dev" rel="noopener">
+          <img
+            src="/images/bluesky-32.svg"
+            alt="pauldambra.dev on Bluesky"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"Where have I been?",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"718",
+     "url":"https://pauldambra.dev/2026/05/22/where-have-i-been.html",
+     "datePublished":"2026-05-22",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/05/22/where-have-i-been.html"
+     },
+     "articleBody":"At  a  recent  company  offsite  a  bunch  of  people  asked  me  how  many  of  the  off-sites  I'd  been  on.  I  didn't  remember  so  I  made  this  list  since  if  I  don't  remember  now  I  have  no  chance  of  remembering  in  5  or  10  years.\n\n\n\n2021\n\n\n    \n        \n            Place\n            Type\n            Note\n            Hackathon\n        \n    \n    \n        \n            London\n            my  onboarding\n            Jams  said  \"just  do  the  right  thing\"  which  was  a  good  signal  this  company  was  cool\n             \n        \n        \n            Milan\n            working,  not  a  company  trip\n            i  just  had  to  go  to  Italy  for  my  soul  after  covid\n             \n        \n    \n\n\n2022\n\n\n    \n        \n            Place\n            Type\n            Note\n            Hackathon\n        \n    \n    \n        \n            Barcelona\n            all  engineering  offsite\n            got  hard  feedback,  realised  I  had  to  up  my  game\n             \n        \n        \n            Iceland\n            all  company  offsite\n            my  first  posthog  hackathon,  realised  just  how  talented  everyone  was\n            writing  session  replay  ingestion  to  s3.  it  was  a  bad  implementation.\n        \n        \n            Cambridge\n            onboarding\n            the  one  where  i  felt  i  could  talk  about  posthog  well\n             \n        \n        \n            Montesilvano\n            working,  not  a  company  trip\n            I  just  needed  time  alone\n             \n        \n        \n            Rome\n            small  team  offsite\n            this  was  the  turning  point  for  me  being  successful  and  feeling  at  home  at  PostHog.  I  got  amazing,  direct,  constructive  feedback.  life-changing,  no  cap\n            in-app  notifications  on  top  of  the  activity  log\n        \n        \n            Cambridge\n            onboarding\n            the  one  where  we  got  locked  in  one  of  the  Cambridge  colleges  after  maybe  breaking  in\n             \n        \n        \n            Lisbon\n            work-blast\n            the  one  where  Ben  and  I  wanted  to  prove  network  logging  was  quick  to  build  -  it  was.  Kaarl  told  me  my  schema  design  was  good,  I  was  so  in  awe  of  his  clickhouse  brain  i  thought  i'd  faint\n            network  request  logging  in  replay\n        \n    \n\n\n2023\n\n\n    \n        \n            Place\n            Type\n            Note\n            Hackathon\n        \n    \n    \n        \n            Aruba\n            all  company  offsite\n            the  one  where  we  celebrated  turning  into  a  juggernaut\n            bug  reporting  tool  in  PostHog\n        \n        \n            Cambridge\n            onboarding\n            the  one  where  i  made  pizza  with  bread  flour,  no  bueno\n             \n        \n        \n            Glossop,  UK\n            onboarding\n            the  one  where  i  couldn't  travel  and  so  the  team  braved  Glossop,  i  made  some  pretty  good  pizza\n             \n        \n        \n            Bologna\n            small  team  offsite\n            the  one  where  posthog  3000  was  born,  we  presented  each  other's  ideas.  It  was  silly,  laughed  so  much\n            Sampling  for  session  replay\n        \n    \n\n\n2024\n\n\n    \n        \n            Place\n            Type\n            Note\n            Hackathon\n        \n    \n    \n        \n            Trapani\n            work  blast\n            Ben  and  I  wanted  to  prove  Heatmaps  was  quick  to  ship,  it  was\n            Heatmaps\n        \n        \n            Vienna\n            onboarding\n            the  best  beetroot  i've  had  to  date,  my  favourite  part  of  italy\n             \n        \n        \n            Cambridge\n            onboarding\n            manoel  did  amazing  bbq  steak\n             \n        \n        \n            Valencia\n            small  team  offsite\n            the  one  where  i  realised  i  could  push  people  more\n            AI  summarisation  of  survey  responses\n        \n    \n\n\n2025\n\n\n    \n        \n            Place\n            Type\n            Note\n            Hackathon\n        \n    \n    \n        \n            Cambridge\n            onboarding\n            very  cold,  we  saw  a  fox,  Ben  improv'd  the  architecture  diagram\n             \n        \n        \n            Budapest\n            onboarding\n            great  coffee,  so  many  irish  bars\n             \n        \n        \n            Tulum,  Mexico\n            all  company  offsite  2025\n            the  one  where  i  realised  just  how  much  we'd  grown\n            CSP  violation  reporting…  that  has  started  to  make  bank  now\n        \n        \n            Munich\n            onboarding\n            my  first  ever  visit  to  germany,  how?!\n             \n        \n        \n            Palermo\n            small  team  offsite\n            the  one  where  we  experimented  with  combining  small  team  offsites  (and  it  changed  things  a  lot)\n            letting  people  add  screenshots  to  action  and  event  definitions\n        \n        \n            London\n            xmas  hackathon  and  onboarding\n            the  one  where  Tue  got  very  excited  about  a  smash  burger\n            tooling  to  make  session  replay  support  easier\n        \n    \n\n\n2026\n\n\n    \n        \n            Place\n            Type\n            Note\n            Hackathon\n        \n    \n    \n        \n            Lisbon\n            analytics  platform  small  team  offsite\n            the  one  where  we  figured  out  how  to  make  a  query  performance  team\n            adding  AI  summary  to  insight  subscriptions\n        \n        \n            Barbados\n            all  company  offsite\n            my  first  all  team  offsite  as  an  exec.  lots  of  great  feedback  and  pina  coladas\n            creating  an  AI  user  researcher\n        \n    \n\n\nIt  turns  out  I've  been  away  from  home  for  roughly  26  weeks  in  the  time  I've  been  at  PostHog.  Or  roughly  10%  of  the  weeks  I've  worked  here.  Wouldn't  change  it  for  the  world.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Fri May 22 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">Where have I been?</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/05/22/where-have-i-been.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=Where+have+I+been%3F&via=pauldambra&url=https://pauldambra.dev/2026/05/22/where-have-i-been.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#life"
+      >
+        in: life
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#life">
+    life
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#diary">
+    diary
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>At a recent company offsite a bunch of people asked me how many of the off-sites I'd been on. I didn't remember so I made this list since if I don't remember now I have no chance of remembering in 5 or 10 years.</p>
+
+<!--more-->
+
+<h2 id="2021">2021</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Type</th>
+      <th>Note</th>
+      <th>Hackathon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>London</td>
+      <td><em>my</em> onboarding</td>
+      <td>Jams said "just do the right thing" which was a good signal this company was cool</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Milan</td>
+      <td>working, not a company trip</td>
+      <td>i just had to go to Italy for my soul after covid</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2022">2022</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Type</th>
+      <th>Note</th>
+      <th>Hackathon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Barcelona</td>
+      <td>all engineering offsite</td>
+      <td>got hard feedback, realised I had to up my game</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Iceland</td>
+      <td>all company offsite</td>
+      <td>my first posthog hackathon, realised just how talented everyone was</td>
+      <td>writing session replay ingestion to s3. it was a bad implementation.</td>
+    </tr>
+    <tr>
+      <td>Cambridge</td>
+      <td>onboarding</td>
+      <td>the one where i felt i could talk about posthog well</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Montesilvano</td>
+      <td>working, not a company trip</td>
+      <td>I just needed time alone</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Rome</td>
+      <td>small team offsite</td>
+      <td>this was the turning point for me being successful and feeling at home at PostHog. I got amazing, direct, constructive feedback. life-changing, no cap</td>
+      <td>in-app notifications on top of the activity log</td>
+    </tr>
+    <tr>
+      <td>Cambridge</td>
+      <td>onboarding</td>
+      <td>the one where we got locked in one of the Cambridge colleges after maybe breaking in</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Lisbon</td>
+      <td>work-blast</td>
+      <td>the one where Ben and I wanted to prove network logging was quick to build - it was. Kaarl told me my schema design was good, I was so in awe of his clickhouse brain i thought i'd faint</td>
+      <td>network request logging in replay</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2023">2023</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Type</th>
+      <th>Note</th>
+      <th>Hackathon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aruba</td>
+      <td>all company offsite</td>
+      <td>the one where we celebrated turning into a juggernaut</td>
+      <td>bug reporting tool in PostHog</td>
+    </tr>
+    <tr>
+      <td>Cambridge</td>
+      <td>onboarding</td>
+      <td>the one where i made pizza with bread flour, no bueno</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Glossop, UK</td>
+      <td>onboarding</td>
+      <td>the one where i couldn't travel and so the team braved Glossop, i made some pretty good pizza</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Bologna</td>
+      <td>small team offsite</td>
+      <td>the one where posthog 3000 was born, we presented each other's ideas. It was silly, laughed so much</td>
+      <td>Sampling for session replay</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2024">2024</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Type</th>
+      <th>Note</th>
+      <th>Hackathon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Trapani</td>
+      <td>work blast</td>
+      <td>Ben and I wanted to prove Heatmaps was quick to ship, it was</td>
+      <td>Heatmaps</td>
+    </tr>
+    <tr>
+      <td>Vienna</td>
+      <td>onboarding</td>
+      <td>the best beetroot i've had to date, my favourite part of italy</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Cambridge</td>
+      <td>onboarding</td>
+      <td>manoel did amazing bbq steak</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Valencia</td>
+      <td>small team offsite</td>
+      <td>the one where i realised i could push people more</td>
+      <td>AI summarisation of survey responses</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2025">2025</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Type</th>
+      <th>Note</th>
+      <th>Hackathon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cambridge</td>
+      <td>onboarding</td>
+      <td>very cold, we saw a fox, Ben improv'd the architecture diagram</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Budapest</td>
+      <td>onboarding</td>
+      <td>great coffee, so many irish bars</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Tulum, Mexico</td>
+      <td>all company offsite 2025</td>
+      <td>the one where i realised just how much we'd grown</td>
+      <td>CSP violation reporting… that has started to make bank now</td>
+    </tr>
+    <tr>
+      <td>Munich</td>
+      <td>onboarding</td>
+      <td>my first ever visit to germany, how?!</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Palermo</td>
+      <td>small team offsite</td>
+      <td>the one where we experimented with combining small team offsites (and it changed things a lot)</td>
+      <td>letting people add screenshots to action and event definitions</td>
+    </tr>
+    <tr>
+      <td>London</td>
+      <td>xmas hackathon and onboarding</td>
+      <td>the one where Tue got very excited about a smash burger</td>
+      <td>tooling to make session replay support easier</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2026">2026</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Type</th>
+      <th>Note</th>
+      <th>Hackathon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lisbon</td>
+      <td>analytics platform small team offsite</td>
+      <td>the one where we figured out how to make a query performance team</td>
+      <td>adding AI summary to insight subscriptions</td>
+    </tr>
+    <tr>
+      <td>Barbados</td>
+      <td>all company offsite</td>
+      <td>my first all team offsite as an exec. lots of great feedback and pina coladas</td>
+      <td>creating an AI user researcher</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It turns out I've been away from home for roughly 26 weeks in the time I've been at PostHog. Or roughly 10% of the weeks I've worked here. Wouldn't change it for the world.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"></div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/05/22/where-have-i-been.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/05/22/where-have-i-been.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>

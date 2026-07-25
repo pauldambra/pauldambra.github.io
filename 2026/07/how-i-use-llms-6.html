@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/images/icons/icon-152x152.png" />
+    <!-- theme-color defines the top bar color-->
+    <meta name="theme-color" content="#575757" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'report-sample' 'self' https://app.posthog.com/static/array.js https://www.googletagmanager.com/gtag/js; style-src 'report-sample' 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://app.posthog.com; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://pauldambra.report-uri.com/r/d/csp/enforce; worker-src 'self';"
+    />
+    <!-- Add to home screen for Safari on iOS-->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MiRaNo" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+
+    <!-- Add to home screen for Windows-->
+    <meta
+      name="msapplication-TileImage"
+      content="/images/icons/icon-152x152.png"
+    />
+    <meta name="msapplication-TileColor" content="#575757" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>How I use LLMs? - six</title>
+    <link rel="canonical" href="https://pauldambra.dev/2026/07/how-i-use-llms-6.html" />
+    <meta property="og:url" content="https://pauldambra.dev/2026/07/how-i-use-llms-6.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I use LLMs? - six" />
+    <meta
+      property="og:description"
+      content="How I use LLMs - six"
+    />
+    <meta
+      property="og:image"
+      content="https://pauldambra.dev/images/cardboard.jpg"
+    />
+    <meta name="twitter:creator" content="@pauldambra" />
+    <meta property="fb:app_id" content="1029758320473951" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="How I use LLMs - six"
+    />
+    <meta property="fb:pages" content="1029758320473951" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mindless Rambling Nonsense"
+      href="https://pauldambra.dev/feed.xml"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="prefetch" href="/images/cardboard.jpg" />
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <meta name="msvalidate.01" content="54691C3C7B863CEE60F0305D6EDFF7A8" />
+    <meta
+      name="google-site-verification"
+      content="hLKEdujpXNQ9PSZWEcQkwxCgL2z1tWxVedeaUmttH7c"
+    />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YwZdW7eDzRlzm3YiNvZpAR5oGhmc9nYeVwuUq5mef3b', {
+        api_host: 'https://ph.pauldambra.dev',
+        defaults: '2026-01-30'
+    })
+</script>
+
+  </head>
+  <body class="flex flex-col h-screen">
+    <header class="flex flex-col px-8 pt-4 text-white text-xl" role="banner">
+  <div class="flex flex-col sm:flex-row">
+    <div class="no-underline hover:underline">
+      <a href="/">Mindless Rambling Nonsense</a>
+    </div>
+    <div class="flex-grow my-2 sm:m-0"></div>
+    <div class="flex justify-start items-end flex-col text-sm">
+      <div class="flex items-center">
+        <div class="mr-4">Paul D'Ambra</div>
+        <a href="https://github.com/pauldambra" rel="noopener">
+          <img
+            src="/images/GitHub-Mark-Light-32px.png"
+            alt="pauldambra on github"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4">Fangler</div>
+        <a href="https://bsky.app/profile/pauldambra.dev" rel="noopener">
+          <img
+            src="/images/bluesky-32.svg"
+            alt="pauldambra.dev on Bluesky"
+            width="32"
+            height="32"
+          />
+        </a>
+      </div>
+      <div class="flex items-center">
+        <div class="mr-4"></div>
+        <a rel="me" href="https://mastodon.me.uk/@pauldambra">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow"></div>
+  <div
+    class="flex align-middle items-start px-2 py-4 text-white space-x-4 text-lg"
+  >
+    <nav role="navigation">
+      <a class="underline" href="/">Blog Posts</a>
+      <a class="underline ml-5" href="/weeknotes.html">Week Notes</a>
+      <a class="underline ml-5" href="/kids-games.html">Kids games</a>
+    </nav>
+  </div>
+</header>
+
+    <main role="main" class="bg-white p-4 w-11/12 m-auto flex-auto flex-grow">
+      
+
+<script type="application/ld+json">
+  {
+     "@context":"http://schema.org",
+     "@type":"BlogPosting",
+     "headline":"How I use LLMs? - six",
+     "genre":"",
+     "keywords":"",
+     "wordCount":"1040",
+     "url":"https://pauldambra.dev/2026/07/how-i-use-llms-6.html",
+     "datePublished":"2026-07-25",
+     "author":{
+        "@type":"Person",
+        "name":"Paul D'Ambra",
+        "sameAs":[
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+        ]
+     },
+     "publisher":{
+  "@type": "Organization",
+      "name": "Paul D'Ambra",
+      "sameAs": [
+          "https://twitter.com/pauldambra",
+          "https://github.com/pauldambra",
+          "https://plus.google.com/u/0/+PaulDAmbraPlus"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "contentUrl": "https://pauldambra.dev/images/logo.png",
+          "url": "https://pauldambra.dev"
+      }
+     },
+     "image":{
+        "@type":"ImageObject",
+        "contentUrl":"https://pauldambra.dev/images/cardboard.jpg",
+        "url":"https://pauldambra.dev",
+        "height":"450",
+        "width":"1000"
+     },
+     "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://pauldambra.dev/2026/07/how-i-use-llms-6.html"
+     },
+     "articleBody":"Let's  growth  hack  blog  visitor  numbers  and  keep  on  recording  how  I  use  agents/LLMs  today  as  a  little  reflection  on  where  I  think  they  work  and  where  they  don't.  Something  I  can  revisit  as  the  tech  (and  my  skill  with  it)  improves\n\nThis  is  update  number  five,  or  entry  number  six,  depending  on  how  you  want  to  count  it.\n\n\n    part  1  -  structured  tone  of  fascination  +  scepticism\n    part  2  -  learning  how  to  manage  and  control  them\n    part  3  -  reluctant  acceptance  but  also  thankfulness  (?)  of  what  they  do  for  you  when  you  let  go  of  control\n    part  4  -  realising  even  though  it's  no  longer  \"braincode\"  +  no  longer  for  humans,  it  still  comes  from  human  brains\n    part  5  -  oh  no,  am  i  AI  pilled\n\n\nsomeone  at  work  named  the  episodes  for  me,  i  love  it\n\nso  now…  part  6  -  i  think  maybe  everything  changed\n\nin  today's  edition  of  AI  hot  takes\n\n\n    saying  \"slop\"  considered  harmful\n    ship  value,  not  craft\n    don't  read  code\n    manage  loops  and  context  -  fuck  prompts\n    if  you  make  me  copy  &amp;  paste  a  prompt  you've  lost  me\n\n\n\n\nFirst,  a  necessary  but  brief  diversion  into  how  I  use  tools  generally\n\nI  was  largely  self-taught  as  a  developer  and  (after  vbscript  😱)  I  started  with  DotNet.  I  found  JetBrains  Resharper  early  on  and  never  looked  back.  The  assistance  in  the  IDE  to  write,  refactor,  and  improve  code  was  game-changing.  I  don't  begrudge  anybody  any  tool  they  want  to  use  to  level-up.  Wanna  use  a  graphical  git  client,  or  emacs,  or  anything  else…  go  for  it,  go  make  cool  things\n\nBecause  of  that  entry  to  the  industry  I'm  also  not  super  keen  on  VSCode  (you  love  it?  great,  see  above,  you  do  you,  go  make  cool  things).  I'm  too  used  to  clever  interventions  helping  me  and  VSCode  is  too  barebones  (and  so  much  slower  than  SublimeText)\n\nSo,  I  like  having  tools  directly  involved  in  my  workflow.  I  learned  LINQ  more  quickly  and  more  thoroughly  because  I  had  resharper  prompting  me  inline,  at  write-time:  \"hey,  why  not  like  this?\"\n\nsaying  \"slop\"  considered  harmful\n\nI've  noticed  a  habit  for  folk  reporting  a  bug  with  a  system  to  say  things  like:  \"ugh,  the  clink  expander  doesn't  work.  why  even  ship  this  slop?!\"\n\nmy  friends,  if  you  think  there  were  no  bugs  prior  to  December  2025  then  you  were  not  paying  attention.\n\nthrough  most  of  2025  if  you  were  just  shipping  AI  generated  code  without  thorough  checking  then  you  were  going  to  be  in  for  a  bad  time…  but  the  world  changed  in  Dec  2025  and  several  times  again  through  2026.\n\nthe  code  written  by  LLMs  is  now  at  least  as  good  as  that  written  by  the  worst  junior  developers  i've  worked  with  over  ~20  years.  and  sometimes  much  better.\n\nthose  junior  developers  all  managed  to  ship  value  despite  being  inexperienced.\n\nand  the  goal  is  shipping  value\n\nship  value,  not  craft\n\ni  have  long  considered  myself  a  software  crafts  person.  attended  user  group  meetups;  run  brownbags  at  work;  practised  deliberately  and  consistently;  learned  about  XP,  agile,  tdd,  and  more.\n\nwhy…  because  i  believe  that  software  gets  harder  to  change  and  extend  over  time  otherwise\n\nand  that's  important  because  i  have  always  been  focused  on  shipping  value  to  people\n\na  problem  has  a  solution  in  a  context\n\nas  agents  have  improved  the  context  has  changed  gigantically\n\nthe  problem  of  needing  to  ship  value  remains  but  the  solution  of  software  craft  doesn't  fit  any  more\n\nsoftware  needs  to  be  easy  to  change  and  extend  by  agents  way  more  than  by  humans\n\nwe  would  slow  down  when  software  files  became  complex  because  they  broke  our  meat  brains…  but  our  meat  doesn't  need  to  parse  it  any  more,  our  agents  will\n\nif  software  is  for  agents  not  humans,  then  one  change  (whether  you  like  or  not)  is…\n\ndon't  read  code\n\nto  quote  a  (frankly  fantastic)  colleague:\n\n\n    I'm  sure  when  the  first  FORTRAN  compiler  was  released,  for  a  time,  engineers  still  read  the  machine  code  output  that  it  produced  to  make  sure  it  was  up  to  scratch.\n\n\n\n    Who  does  that  still?  Compiler  developers  and  nobody  else.\n\n\n\n    It  will  be  like  that  for  generative  LLMs  producing  code  also.\n\n\n\n    Imagine  someone  making  the  argument  that  if  you  don't  read,  understand  and  verify  all  the  assembly  that  GCC  outputs  then  they're  not  a  real  engineer  or  they're  somehow  not  doing  their  job.\n\n\nI  think  about  this  like  I  am  working  with  a  team  of  developers.  Not  in  the  team.  with  the  team.\n\nIf  I  hire  them  to  make  an  API  for  me.  I'll  write  tests  directly  against  their  API  maybe.  Against  my  use  of  it  for  sure.  I'm  very,  very  unlikely  to  look  at  their  code.  When  I'm  using  agents.  I'm  working  with  them,  not  in  them.  So,  the  code  they  write  is  simply  unimportant  if  it  works.\n\nI  have  always  asked  three  questions:\n\n\n    how  do  you  know  the  software  doesn't  do  it  today\n    how  will  you  know  the  software  does  do  it  in  this  change\n    how  will  you  know  the  software  still  does  it  the  day  after  the  deployment\n\n\nthe  answer  has  always  been  \"writing  tests,  gathering  metrics,  and  talking  to  users\"\n\nthis  becomes  so  much  more  important  in  this  new  world\n\ndeciding  what  to  build  and  whether  it  was  good  idea  once  you've  finished  is  where  you  should  spend  your  time.  reading  code  used  to  support  that,  but  not  any  more\n\nif  you  make  me  copy  &amp;  paste  a  prompt  you've  lost  me\n\ni  noticed  i  now  find  tools  that  expect  me  to  copy  their  output  to  the  next  LLM  annoying\n\nthe  future  is  a  world  of  agents  interacting.  not  people  passing  text  between  agents.\n\ndifferent  people  will  want  to  grab  output  from  the  loop  of  genies  at  different  points.  your  org  might  require  you  use  a  particular  system  or  an  air-gapped  network  or  whatevs  and  you'll  need  to  break  the  loop  and  move  data  yourself  in  some  way.\n\nbut  lots  of  systems  will  be  a  set  of  agents  triggered  by  timers  or  external  signals  passing  data  and  prompts  between  themselves…  and  it's  gonna  be  super  cool.\n"
+  }
+</script>
+
+<article>
+<header class="flex flex-col border-b-black border-b-2 bg-white text-black">
+  <div class="heading">
+    <div class="date">Sat Jul 25 2026</div>
+    <h1 class="title leading-10 pt-2 mb-0 mt-1">How I use LLMs? - six</h1>
+  </div>
+  <div class="meta flex-grow flex flex-row">
+    <div class="share-this flex self-end space-x-2">
+      <a
+        id="facebook-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://www.facebook.com/dialog/share?app_id=305449093152216&href=https://pauldambra.dev/2026/07/how-i-use-llms-6.html"
+      >
+        <img
+          class="w-8"
+          src="/images/facebook-black-32.png"
+          alt="share on facebook"
+          width="32"
+          height="32"
+        />
+      </a>
+      <a
+        id="twitter-share-link"
+        class="social-share"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/intent/tweet?text=How+I+use+LLMs%3F+-+six&via=pauldambra&url=https://pauldambra.dev/2026/07/how-i-use-llms-6.html"
+      >
+        <img
+          class="w-8"
+          src="/images/twitter-black-32.png"
+          alt="share on twitter"
+          width="32"
+          height="32"
+        />
+      </a>
+    </div>
+    <div class="more-like-this text-right content-end flex-grow">
+      <a
+        class="post-metadata"
+        href="/categories.html#self-reflection"
+      >
+        in: self-reflection
+      </a>
+      <div>
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#self-reflection">
+    self-reflection
+  </a>
+</span>
+
+<span class="text-slate-500">
+  <img class="w-6 h-6 inline-block" src="/images/tag.svg" alt="tag-icon" />
+  <a class="no-underline hover:underline" href="/tags.html#working-out-loud">
+    working-out-loud
+  </a>
+</span>
+
+</div>
+    </div>
+  </div>
+</header>
+
+	<div class="post">
+		<p>Let's <del>growth hack blog visitor numbers</del> and keep on recording how I use agents/LLMs today as a little reflection on where I think they work and where they don't. Something I can revisit as the tech (and my skill with it) improves</p>
+
+<p>This is update number five, or entry number six, depending on how you want to count it.</p>
+
+<ul>
+  <li><a href="/2025/07/how-i-use-llms.html">part 1 - structured tone of fascination + scepticism</a></li>
+  <li><a href="/2025/10/how-i-use-llms-2.html">part 2 - learning how to manage and control them</a></li>
+  <li><a href="/2026/01/how-i-use-llms-3.html">part 3 - reluctant acceptance but also thankfulness (?) of what they do for you when you let go of control</a></li>
+  <li><a href="/2026/03/how-i-use-llms-4.html">part 4 - realising even though it's no longer "braincode" + no longer for humans, it still comes from human brains</a></li>
+  <li><a href="/2026/06/how-i-use-llms-5.html">part 5 - oh no, am i AI pilled</a></li>
+</ul>
+
+<p>someone at work named the episodes for me, i love it</p>
+
+<p>so now… part 6 - i think maybe everything changed</p>
+
+<h2 id="in-todays-edition-of-ai-hot-takes">in today's edition of AI hot takes</h2>
+
+<ul>
+  <li>saying "slop" considered harmful</li>
+  <li>ship value, not craft</li>
+  <li>don't read code</li>
+  <li>manage loops and context - fuck prompts</li>
+  <li>if you make me copy &amp; paste a prompt you've lost me</li>
+</ul>
+
+<!--more-->
+
+<h1 id="first-a-necessary-but-brief-diversion-into-how-i-use-tools-generally">First, a necessary but brief diversion into how I use tools generally</h1>
+
+<p>I was largely self-taught as a developer and (after vbscript 😱) I started with DotNet. I found JetBrains Resharper early on and never looked back. The assistance in the IDE to write, refactor, and improve code was game-changing. I don't begrudge anybody any tool they want to use to level-up. Wanna use a graphical git client, or emacs, or anything else… go for it, go make cool things</p>
+
+<p>Because of that entry to the industry I'm also not super keen on VSCode (you love it? great, see above, you do you, go make cool things). I'm too used to clever interventions helping me and VSCode is too barebones (and so much slower than SublimeText)</p>
+
+<p>So, I <em>like</em> having tools directly involved in my workflow. I learned LINQ more quickly and more thoroughly because I had resharper prompting me inline, at write-time: "hey, why not like this?"</p>
+
+<h1 id="saying-slop-considered-harmful">saying "slop" considered harmful</h1>
+
+<p>I've noticed a habit for folk reporting a bug with a system to say things like: "ugh, the clink expander doesn't work. why even ship this slop?!"</p>
+
+<p>my friends, if you think there were no bugs prior to December 2025 then you were not paying attention.</p>
+
+<p>through most of 2025 if you were just shipping AI generated code without thorough checking then you were going to be in for a bad time… but the world changed in Dec 2025 and several times again through 2026.</p>
+
+<p>the code written by LLMs is now at least as good as that written by the worst junior developers i've worked with over ~20 years. and sometimes much better.</p>
+
+<p>those junior developers all managed to ship value despite being inexperienced.</p>
+
+<p>and the goal is shipping value</p>
+
+<h1 id="ship-value-not-craft">ship value, not craft</h1>
+
+<p>i have long considered myself a software crafts person. attended user group meetups; run brownbags at work; practised deliberately and consistently; learned about XP, agile, tdd, and more.</p>
+
+<p>why… because i believe that software gets harder to change and extend over time otherwise</p>
+
+<p>and that's important because i have always been focused on shipping value to people</p>
+
+<p>a problem has a solution in a context</p>
+
+<p>as agents have improved the context has changed gigantically</p>
+
+<p>the problem of needing to ship value remains but the solution of software craft doesn't fit any more</p>
+
+<p>software needs to be easy to change and extend <strong>by agents</strong> way more than by humans</p>
+
+<p>we would slow down when software files became complex because they broke our meat brains… but our meat doesn't need to parse it any more, our agents will</p>
+
+<p>if software is for agents not humans, then one change (whether you like or not) is…</p>
+
+<h1 id="dont-read-code">don't read code</h1>
+
+<p>to quote a (frankly fantastic) colleague:</p>
+
+<blockquote>
+  <p>I'm sure when the first FORTRAN compiler was released, for a time, engineers still read the machine code output that it produced to make sure it was up to scratch.</p>
+</blockquote>
+
+<blockquote>
+  <p>Who does that still? Compiler developers and nobody else.</p>
+</blockquote>
+
+<blockquote>
+  <p>It will be like that for generative LLMs producing code also.</p>
+</blockquote>
+
+<blockquote>
+  <p>Imagine someone making the argument that if you don't read, understand and verify all the assembly that GCC outputs then they're not a real engineer or they're somehow not doing their job.</p>
+</blockquote>
+
+<p>I think about this like I am working with a team of developers. Not <em>in</em> the team. <strong>with</strong> the team.</p>
+
+<p>If I hire them to make an API for me. I'll write tests directly against their API maybe. Against my use of it for sure. I'm very, very unlikely to look at their code. When I'm using agents. I'm working with them, not in them. So, the code they write is simply unimportant if it works.</p>
+
+<p>I have always asked three questions:</p>
+
+<ul>
+  <li>how do you know the software doesn't do it today</li>
+  <li>how will you know the software does do it in this change</li>
+  <li>how will you know the software still does it the day after the deployment</li>
+</ul>
+
+<p>the answer has always been "writing tests, gathering metrics, and talking to users"</p>
+
+<p>this becomes so much more important in this new world</p>
+
+<p>deciding what to build and whether it was good idea once you've finished is where you should spend your time. reading code used to support that, but not any more</p>
+
+<h1 id="if-you-make-me-copy--paste-a-prompt-youve-lost-me">if you make me copy &amp; paste a prompt you've lost me</h1>
+
+<p>i noticed i now find tools that expect me to copy their output to the next LLM annoying</p>
+
+<p>the future is a world of agents interacting. not people passing text between agents.</p>
+
+<p>different people will want to grab output from the loop of genies at different points. your org might require you use a particular system or an air-gapped network or whatevs and you'll need to break the loop and move data yourself in some way.</p>
+
+<p>but lots of systems will be a set of agents triggered by timers or external signals passing data and prompts between themselves… and it's gonna be super cool.</p>
+
+	</div>
+	<div class="mt-8">
+  
+  <h1>More like this...</h1>
+   
+  <div class="grid grid-cols-3 gap-4"> <a href="/2026/06/how-i-use-llms-5.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - five
+      </h3>
+      <small>
+        04 Jun 2026
+      </small>
+  </div>
+</a>  <a href="/2026/03/how-i-use-llms-4.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - four
+      </h3>
+      <small>
+        10 Mar 2026
+      </small>
+  </div>
+</a>  <a href="/2026/01/how-i-use-llms-3.html">
+  <div class="article-tile inline-block w-full border p-4 text-ellipsis align-top relative">
+      <h3>
+        How I use LLMs? - three
+      </h3>
+      <small>
+        30 Jan 2026
+      </small>
+  </div>
+</a> </div> 
+  
+</div>
+
+</article>
+    </main>
+    <footer class="w-full h-4 bg-black text-white py-8 px-4">
+  <a class="no-underline text-white" href="https://pauldambra.dev/feed.xml">
+    <img class="inline w-6 h-6" src="/images/rss.svg" alt="the rss feed" />
+    <span>Subscribe to RSS feed</span>
+  </a>
+</footer>
+ 
+    <script>
+      var tsl = document.getElementById("twitter-share-link");
+      tsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "twitter",
+          socialAction: "tweet",
+          socialTarget: "https://pauldambra.dev/2026/07/how-i-use-llms-6.html",
+        });
+      });
+
+      var fsl = document.getElementById("facebook-share-link");
+      fsl.addEventListener("click", function () {
+        ga("send", {
+          hitType: "social",
+          socialNetwork: "facebook",
+          socialAction: "share",
+          socialTarget: "https://pauldambra.dev/2026/07/how-i-use-llms-6.html",
+        });
+      });
+    </script>
+    
+
+    <script defer src="/register-service-worker.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Khula&display=swap"
+      rel="stylesheet"
+    />
+  </body>
+</html>
